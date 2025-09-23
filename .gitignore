@@ -1,0 +1,108 @@
+# Logs and debugging
+*.log
+*.out
+*.err
+logs/
+debug*.log
+
+# Weights & Biases (wandb) - Large logging directory (60MB in your case)
+wandb/
+.wandb/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Model checkpoints and weights (typically large)
+*.pth
+*.pt
+*.bin
+*.safetensors
+checkpoints/
+*.ckpt
+
+# Large datasets and output files
+# Keep small result files but exclude large datasets
+output/asl_test/train_ssvp.json
+output/asl_test/rgb_df_wcontext.json
+output/asl_test/rgb_videos_df_ssh.json
+
+# Video files (typically large)
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+
+# HuggingFace cache (can be large)
+.cache/
+*/.cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environment files
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# SLURM output files
+slurm-*.out
+*.o[0-9]*
+*.e[0-9]*
+
+# Large JSON result files (keep small ones for reference)
+# Uncomment specific patterns if needed:
+# new_outputs/*.json
+# *_results.json
+
+# Conda/pip
+*.egg-info/
+.conda/
+.pip/
