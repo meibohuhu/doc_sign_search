@@ -12,6 +12,8 @@ export PYTHONPATH=/local1/mhu/LLaVANeXT_RC:$PYTHONPATH
 
 # VIDEO_FOLDER="/local1/mhu/LLaVANeXT_RC/how2sign/video/test_raw_videos/raw_videos/"
 VIDEO_FOLDER="/local1/mhu/LLaVANeXT_RC/how2sign/video/test_raw_videos/segmented_clips/"
+# VIDEO_FOLDER="/local1/mhu/LLaVANeXT_RC/how2sign/video/test_raw_videos/test_videos/"
+
 
 echo "📁 Using video folder: $VIDEO_FOLDER"
 echo "📝 Processing test samples..."
@@ -42,7 +44,7 @@ fi
 python -m playground.demo.simpleQA_metrics \
     --model-path lmms-lab/llava-onevision-qwen2-7b-ov \
     --question-file /local1/mhu/LLaVANeXT_RC/output/asl_test/segmented_videos.json \
-    --image_size 336 \
+    --image_size 512 \
     --video-folder "$VIDEO_FOLDER" \
     --answers-file llava_base_results.json \
     --out_dir /local1/mhu/LLaVANeXT_RC/new_outputs/ \
