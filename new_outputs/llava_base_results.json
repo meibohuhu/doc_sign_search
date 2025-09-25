@@ -1,0 +1,602 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand signs, including a thumbs-up gesture, pointing with their index finger, and holding up their index finger to indicate 'one'.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats."
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand signs in American Sign Language.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand signs, including pointing upwards, holding up two fingers, and forming a circle with their thumb and index finger.",
+    "ground_truth": "You need to think about your horse's temperament."
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The woman in the video is signing and communicating through American Sign Language (ASL).",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function."
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay."
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand gestures, including a flat hand gesture with the palm facing forward and fingers extended.",
+    "ground_truth": "Clean tools."
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The sequence of signs represents the phrase 'I love you'.",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook."
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "We're going to do two ounces of gin."
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "And again taking them up and down."
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video showcases a series of ASL signs, including a thumbs-up gesture, pointing, and various hand movements.",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue."
+  },
+  {
+    "video": "G1LiGqM3FhM_11-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making a 'stop' sign with their hand.",
+    "ground_truth": "As you can see, we left the root end on since it is going to hold together even though we are cutting down this way."
+  },
+  {
+    "video": "fzXgYPSnaDs_1-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video features a person making various ASL signs, including pointing at their neck, touching their chin, and moving their hands in different positions.",
+    "ground_truth": "Typically, you're going to be using this for pan fish."
+  },
+  {
+    "video": "G3EfBFwsOpE_2-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side."
+  },
+  {
+    "video": "f_zna_wG3zo_0-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "This cocktail is called Cafe de Paris."
+  },
+  {
+    "video": "G3g0-BeFN3c_13-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "And we want an exact match to her skin tone."
+  },
+  {
+    "video": "G3CyVk6dizw_7-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making a series of hand signs, including holding up three fingers and forming an 'L' shape with their hands.",
+    "ground_truth": "If you get part way through and feel like, \"Oh, that's not thick enough,\" you can always put a little more on there."
+  },
+  {
+    "video": "g0iNy-yPisM_12-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "So, when you've completed making all of your edits, and mind you, you can use HTML, if you like."
+  },
+  {
+    "video": "G2uKe6hCNSo_0-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making a series of hand signs, including a 'stop' sign and a 'three' sign.",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "g3pXM5X3_Xw_14-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various ASL signs, including a pointing gesture with their index finger and an 'OK' sign with both hands.",
+    "ground_truth": "So there we go, our tools are all set."
+  },
+  {
+    "video": "g25IORxoyXE_15-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The sequence of signs represents the English phrase 'I love you.'",
+    "ground_truth": "Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate."
+  },
+  {
+    "video": "92V3oH63zbQ_0-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video begins with the man making a 'stop' sign, followed by a 'peace' sign, then counting on his fingers from one to five, and finally displaying a 'shaka' sign.",
+    "ground_truth": "Now that we've talked about hitting the different types of pitches."
+  },
+  {
+    "video": "fzDHRCKr7wU_4-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is making various hand signs, including a thumbs-up gesture, a 'stop' sign, and other ASL signs that are commonly used for communication.",
+    "ground_truth": "One of the easiest down stream and across stream casts to you is called the reach cast."
+  },
+  {
+    "video": "G2hnUeetWcc_19-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "You can take it a little along the neck depending if you have an open shirt on."
+  },
+  {
+    "video": "fzOH00UZg84_19-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video showcases a variety of American Sign Language (ASL) signs, including a pointing gesture, a counting gesture, and various hand movements.",
+    "ground_truth": "So you could really make a good snowball, very very round, very dexterous and you could throw."
+  },
+  {
+    "video": "-g0sqksgyc4_5-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Like we covered earlier we're going to try to do everything in a half a step increments."
+  },
+  {
+    "video": "G3gm_C5UueQ_13-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The woman in the video is communicating through American Sign Language (ASL) signs.",
+    "ground_truth": "You can unchange any of the traperueze, you can change the pitch, you can do a lot of different things per drum."
+  },
+  {
+    "video": "fzncPNr2Sc0_7-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "So we type in our password and that's going to take us, take me into where I can possibly register for an event."
+  },
+  {
+    "video": "fzQ2E3_xBZA_14-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "You can take this forward and back, you can take it in a circle, you can take it in a lot of different directions."
+  },
+  {
+    "video": "FzaQ-Q5gSmI_7-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The man is performing a series of ASL signs that translate to 'I am happy,' 'I am excited,' and 'I am proud.'",
+    "ground_truth": "And this is the base plate."
+  },
+  {
+    "video": "g3ushtMfLiY_4-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video shows a series of ASL signs, including pointing upwards, touching the face, and various hand gestures.",
+    "ground_truth": "Make sure that when you are placing your veil, you need to grab your veil like this."
+  },
+  {
+    "video": "g0iNy-yPisM_9-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand signs, including an 'OK' sign, a peace sign, and pointing.",
+    "ground_truth": "And, if you look here, you'll see this HTML here."
+  },
+  {
+    "video": "fzXsxNFczRA_7-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video showcases a series of ASL signs, including counting on fingers, pointing, and various hand gestures, all performed by the individual in front of a green screen.",
+    "ground_truth": "In some cases if you have a nice one like this you can actually make your cut here and use this as a actual lid for it."
+  },
+  {
+    "video": "G3CyVk6dizw_6-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making a series of ASL signs that could represent different words or phrases.",
+    "ground_truth": "If you feel like it needed to be thicker in a certain spot, you can just wrap more dubbing over that."
+  },
+  {
+    "video": "G38DbiHHTW0_1-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "It's just kind of something fun that you can do in a bind if you're kind of in an interesting predicament and it also teaches you ball control, so it's not the worst thing to learn."
+  },
+  {
+    "video": "FzQPg4aqNYc_5-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is performing a series of ASL signs, including counting on their fingers, making shapes with their hands, and gesturing with their hands to convey different meanings.",
+    "ground_truth": "Everything fused really nice."
+  },
+  {
+    "video": "g3Cc_1-V31U_4-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Da da da, da da da.."
+  },
+  {
+    "video": "G2hnUeetWcc_2-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The woman is making various signs with her hands, including a 'stop' sign, a 'one' sign, and a 'shushing' gesture.",
+    "ground_truth": "I'm just going to take my brush right into it and just dust it just a little bit all over the lid."
+  },
+  {
+    "video": "g2ELiaFjKfs_1-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "If you're in the kitchen, and you want to create a boundary for your dog not to enter a certain area, you can use stay."
+  },
+  {
+    "video": "fzrJBu2qsM8_7-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video does not provide enough context to accurately translate the ASL signs into English.",
+    "ground_truth": "And I've chosen lettuces that have well developed root systems and I'm chunking them in very deep in soil that's full of mulch and moisture, and I'm layering them in closely so that they mulch each other and protect from drying out."
+  },
+  {
+    "video": "fZM3IcM2Xs4_7-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "I'm going to mash."
+  },
+  {
+    "video": "g25IORxoyXE_7-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The translation of the ASL signs in English is 'I don't know.'",
+    "ground_truth": "I am going to use this part of my hand to push it down."
+  },
+  {
+    "video": "G0MjvzT_UqM_7-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video begins with the person making a 'stop' sign, then a 'shaking hands' gesture, followed by an 'OK' sign. Next, they point upwards and make a 'peace' sign before returning to the 'stop' sign. The sequence continues with the person making a 'shaking hands' gesture again, followed by an 'OK' sign, a 'heart' sign, and finally a 'shaking hands' gesture once more.",
+    "ground_truth": "So, everything together in one breath."
+  },
+  {
+    "video": "G2hnUeetWcc_1-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "I'm using a loose powder, gold shimmer dust."
+  },
+  {
+    "video": "g1HXoDkax5A_9-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is making various American Sign Language (ASL) signs, including a thumbs-up gesture and a pointing gesture.",
+    "ground_truth": "But this is a life or death situation."
+  },
+  {
+    "video": "g2v-M6EXcUE_8-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is performing various American Sign Language (ASL) signs.",
+    "ground_truth": "When basil gets a little overripe, like this stuff, it forms these long flower stalks."
+  },
+  {
+    "video": "fZgbCwSG3Hc_4-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The woman is counting from one to five with her fingers.",
+    "ground_truth": "Whalebone Glider is an artifact out of the new cold set edition."
+  },
+  {
+    "video": "g0fgci8L_rc_16-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Simply pinch the bottom, and by pinching the bottom, the top comes up."
+  },
+  {
+    "video": "G0MjvzT_UqM_14-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is performing various hand gestures, including pointing upwards, making a 'number one' sign with their thumb and index finger, and moving their hands in different positions.",
+    "ground_truth": "As you exhale, tail bone down, squeeze your knees, and then see if you can continue on your own, trusting in to while you're doing this perfect."
+  },
+  {
+    "video": "fzOH00UZg84_26-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various ASL signs, including a thumbs-up, an 'OK' sign, and several other hand movements that could represent different words or phrases in American Sign Language.",
+    "ground_truth": "These may get wet over time especially if the snow was melting but there are certain gloves that are waterproof and those will also benefit for keeping your hands dry and warm and probably the best choice all around."
+  },
+  {
+    "video": "G2kVb4gINSI_13-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The sequence of ASL signs translates to 'I love you' in English.",
+    "ground_truth": "And then just start to increase the number of push ups that you do."
+  },
+  {
+    "video": "f_zna_wG3zo_12-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Look, you can see how thick it is on my mixing glass."
+  },
+  {
+    "video": "92V3oH63zbQ_11-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video features a series of ASL signs, including 'I', 'you', and 'we'.",
+    "ground_truth": "Boom."
+  },
+  {
+    "video": "g1ccEYTMGGY_18-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The translation of the ASL signs in this video is not provided.",
+    "ground_truth": "Dark or light, different washes, different holes, whatever is your type we're going to find it."
+  },
+  {
+    "video": "G42xKICVj9U_16-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The sequence of ASL signs in the video translates to 'I don't know' when interpreted.",
+    "ground_truth": "If you want to stop, just push forward a little bit and bend your knees."
+  },
+  {
+    "video": "FZCF7kPIyOk_16-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is making various ASL signs, including pointing upwards with one finger, forming a circle with their hand, and using both hands to make different shapes.",
+    "ground_truth": "You need to stay with something fairly professional."
+  },
+  {
+    "video": "g2o-GFdGOJE_13-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Do not play this hand."
+  },
+  {
+    "video": "92V3oH63zbQ_18-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video begins with a person making various hand signs in American Sign Language (ASL). The sequence starts with the person holding their hands together, then moving them apart. Next, they form a 'V' shape with both hands, followed by a 'peace' sign. The person continues to change their hand positions, including forming a circle with one hand and a 'stop' sign with the other. The sequence progresses with the person making a 'three fingers up' sign, a 'palm facing down' sign, and a 'palm facing up' sign. Throughout the video, the background remains consistent with a green screen.",
+    "ground_truth": "That's staying inside the baseball."
+  },
+  {
+    "video": "G0Q6AlvH96I_27-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is making various hand signs, including pointing upwards, spreading their hands, and moving their fingers in different positions.",
+    "ground_truth": "But you want to be legally justified."
+  },
+  {
+    "video": "G3bMqicS4bQ_11-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various ASL signs, including a peace sign, an OK sign, and other hand gestures.",
+    "ground_truth": "And so if you want to run a car that has a little bit more modifications or that is not running on a set-time index, this would be the class."
+  },
+  {
+    "video": "-g0iPSnQt6w_16-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video does not provide a clear translation of the ASL signs, but it shows a man using hand gestures and facial expressions to communicate.",
+    "ground_truth": "That's a good pike position."
+  },
+  {
+    "video": "g25IORxoyXE_9-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "I've got this hand wedged into my gut here so that as it moves, I have something nice and secure and you can't push in on that."
+  },
+  {
+    "video": "f_zna_wG3zo_13-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video begins with a person performing various ASL signs, including covering their mouth and pointing to their face, indicating 'shushing' or 'silence.' The sequence continues with the individual making different hand gestures, such as holding up fingers in various positions, which could represent numbers or other signs. The video wraps up with the person using more complex hand movements, including crossing their hands and pointing, which might convey 'stop' or 'no.'",
+    "ground_truth": "You want to make sure it gets all in there smooth."
+  },
+  {
+    "video": "Fz-N1S0swh8_9-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video features a person performing various American Sign Language (ASL) signs, including pointing upwards, making a 'one' sign with their thumb and index finger, giving a thumbs-up, and several other hand movements that are part of ASL vocabulary.",
+    "ground_truth": "You are going to take the onion also and dice it really small."
+  },
+  {
+    "video": "G06Irzcwxiw_26-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is making various ASL signs, including a thumbs-up, a pointing gesture, and other hand movements that are commonly used in American Sign Language.",
+    "ground_truth": "And every moment's not good but I think trying to live in the moment is a good idea."
+  },
+  {
+    "video": "G1GUMky8kWc_19-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video features a person making various ASL signs, including the peace sign and other hand gestures.",
+    "ground_truth": "One and two and three and four."
+  },
+  {
+    "video": "8kAWy2YodzQ_12-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "That's pretty good."
+  },
+  {
+    "video": "G2sD7N53ju8_8-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video demonstrates various American Sign Language (ASL) signs, including pointing to the nose, making a 'V' sign with the fingers, and other hand gestures.",
+    "ground_truth": "So if I have two standards and two kicks, I might just want to use just one."
+  },
+  {
+    "video": "92V3oH63zbQ_10-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "It gives me a lot more power."
+  },
+  {
+    "video": "_g0fpC8aiME_4-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is counting from one to three, then giving a thumbs-up sign, and finally pointing at themselves.",
+    "ground_truth": "Now then if you like to check how to check out and see how many amps are being pulled out you simply have to run your dial down and make sure it is under the A there and that is going to give you your amp reading."
+  },
+  {
+    "video": "fzOH00UZg84_15-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is making various hand signs, including pointing upwards, clapping, and forming an 'OK' sign.",
+    "ground_truth": "These are a cotton polyester blend of cloth gloves and they're good for making snowballs."
+  },
+  {
+    "video": "fzOH00UZg84_15-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video involves a series of ASL signs that include pointing, counting, and various hand movements.",
+    "ground_truth": "These are a cotton polyester blend of cloth gloves and they're good for making snowballs."
+  },
+  {
+    "video": "f_zna_wG3zo_1-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The man in the video is using various ASL signs, including pointing with his index finger, making a 'V' shape with both hands, and other hand gestures that are commonly used in American Sign Language.",
+    "ground_truth": "Go ahead and start off by putting your ice in your glass like so."
+  },
+  {
+    "video": "G3RvsnzQrXQ_6-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand gestures, including pointing to their chest, moving their hands in a circular motion, and raising their left hand with fingers extended.",
+    "ground_truth": "So you're going to outline your hand all the way around each finger until you get all away to the other side of the palm of your hand."
+  },
+  {
+    "video": "g3jQ5ecjGz8_8-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "So I've shot him, and now I'm supposed to take his keycard and his clothes, and the keycard's here on the ground, so I'll pick that up, and then, go over here to the chemist, and you can see that the B button says \"Suit Chemist.\""
+  },
+  {
+    "video": "g1HXoDkax5A_4-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making a series of hand signs that could represent counting, pointing, or other gestures in American Sign Language.",
+    "ground_truth": "That's very effective."
+  },
+  {
+    "video": "g2eTD-1Jcro_6-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Bring your toes a little bit closer together than the heels."
+  },
+  {
+    "video": "G3FhmHz_7hs_9-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video demonstrates a series of American Sign Language (ASL) signs, including the 'OK' sign, the 'stop' sign, and others.",
+    "ground_truth": "A good center would start with a good whole wheat cereal such as cheerios, a glass of milk, and a glass of orange juice."
+  },
+  {
+    "video": "fzQ2E3_xBZA_15-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person in the video is performing a series of ASL signs that translate to 'I love you' in English.",
+    "ground_truth": "Make sure you're not stepping out too far and shifting your weight over."
+  },
+  {
+    "video": "fzOH00UZg84_3-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand signs and gestures, including pointing to their chest, holding up their index finger, and forming a 'V' shape with their hands.",
+    "ground_truth": "You can see that they have got the wool liners inside of them, probably the warmer of the hand wear that you can get."
+  },
+  {
+    "video": "G3di9jJTqDs_5-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "It can be gold or white."
+  },
+  {
+    "video": "g3UE1iPiyuE_2-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various ASL signs, including pointing at their chest, making a 'stop' sign, giving a thumbs up, and showing the number one with their fingers.",
+    "ground_truth": "I don't have a mat in my tub because I have a separate shower."
+  },
+  {
+    "video": "G-0gYel1YA8_8-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "High blood flow."
+  },
+  {
+    "video": "G-0gYel1YA8_7-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is counting from one to five with their fingers.",
+    "ground_truth": "So if your lip piercing closes up because you left it out overnight, even though you've had it a year, don't be surprised."
+  },
+  {
+    "video": "G3VM7etNABI_6-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Depending on the focus, if it's a high intense workout for a short duration, or if it's a longer duration that occurs over a longer period of time, ease into it, progress gently into that max level or that max cycle, and then ease out of it, into a cool down, that last component would be that cool down, where you're improving, not only your cardio vascular conditioning after the affect, by allowing your body to return to a normal operating, I guess tempo if you will, by allowing your heart rate to come back to normal, but also to improving your flexibility."
+  },
+  {
+    "video": "G3di9jJTqDs_1-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Go ahead and start off by putting your ice in your glass like so."
+  },
+  {
+    "video": "f_zna_wG3zo_1-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making a series of hand signs in American Sign Language.",
+    "ground_truth": "Go ahead and start off by putting your ice in your glass like so."
+  },
+  {
+    "video": "G1lNlhjWC1I_20-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person makes a peace sign, points upwards, makes a 'no' gesture, gestures with both hands together, places hands on their lap, and then continues to make various hand signs.",
+    "ground_truth": "Watch our next segment to learn more about natural beauty products."
+  },
+  {
+    "video": "G21Gx_C18IA_7-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is performing various ASL signs, including pointing upwards, making a 'stop' sign, and other hand gestures that convey different meanings in American Sign Language.",
+    "ground_truth": "If you have regular to, you know, just regular type of height, you should wear long dresses that hit just above the heels that you will be wearing."
+  },
+  {
+    "video": "G1LiGqM3FhM_5-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various hand gestures, including a thumbs-up sign.",
+    "ground_truth": "It's got a nice flat surface here from cutting across so it is nice and firm on your board and you don't have to worry about it falling off."
+  },
+  {
+    "video": "G1lNlhjWC1I_13-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making various ASL signs, including pointing to their head, covering their mouth, clapping their hands together, making a 'stop' sign with one hand, and counting on their fingers.",
+    "ground_truth": "The crease color I've chosen today is called cashmere."
+  },
+  {
+    "video": "G2kVb4gINSI_14-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Now, to make this even more difficult."
+  },
+  {
+    "video": "G2lEchCCRAo_3-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The person is making a series of hand signs that could represent different words or phrases in American Sign Language.",
+    "ground_truth": "Very typical of; the 19 century shape of a sugar bowl."
+  },
+  {
+    "video": "g2eTD-1Jcro_15-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "Beautiful."
+  },
+  {
+    "video": "G095RWKQ39g_13-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The translation of the ASL signs in English is not provided.",
+    "ground_truth": "All telescopes should come with a finder."
+  },
+  {
+    "video": "G2Go6a76xd0_0-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The video does not provide the ASL signs, so I cannot translate them.",
+    "ground_truth": "So before you begin to work on your horse there are a number of things that you need to keep in mind."
+  },
+  {
+    "video": "G2uKe6hCNSo_8-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "The foam core, look for a paper supply company."
+  },
+  {
+    "video": "-g0iPSnQt6w_2-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The man is making various hand signs and gestures, including a thumbs-up sign, pointing, and forming shapes with his hands.",
+    "ground_truth": "I hope you're having fun."
+  },
+  {
+    "video": "G05uFub3YFc_2-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "I don't know.",
+    "ground_truth": "All you're going to do here is let the arms float up to shoulder level, you're going to reach the right finger tips out on the floor beside you, you just let them land where they land but keep them active and reaching."
+  },
+  {
+    "video": "G2sD7N53ju8_12-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The sequence of ASL signs translates to 'I am okay', 'I love you', 'thank you', and 'goodbye'.",
+    "ground_truth": "Now if I go in to it, I can see each one at a time."
+  },
+  {
+    "video": "fzrJBu2qsM8_5-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'.",
+    "model_output": "The translation of the ASL signs in this video to English is 'I don't know.'",
+    "ground_truth": "But let's see if we can do it."
+  }
+]

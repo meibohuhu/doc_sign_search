@@ -1,0 +1,17 @@
+{
+  "bleu_scores": {
+    "bleu1": 4.965136357325194e-06,
+    "bleu2": 0.0,
+    "bleu3": 0.0,
+    "bleu4": 0.0
+  },
+  "rouge_l_f1": 0.0,
+  "total_samples": 6,
+  "evaluation_summary": {
+    "bleu_1": 4.965136357325194e-06,
+    "bleu_2": 0.0,
+    "bleu_3": 0.0,
+    "bleu_4": 0.0,
+    "rouge_l_f1": 0.0
+  }
+}

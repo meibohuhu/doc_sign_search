@@ -1,0 +1,2 @@
+# Requirements for Gemini 2.5 Pro integration
+google-generativeai>=0.8.0

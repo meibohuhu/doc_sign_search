@@ -29,7 +29,7 @@ fi
 
 # # Run the inference with the metrics-enabled model
 # python -m playground.demo.simpleQA_metrics \
-#     --model-path lmms-lab/llava-onevision-qwen2-0.5b-ov \
+#     --model-path lmms-lab/llava-onevision-qwen2-7b-ov \
 #     --question-file /local1/mhu/LLaVANeXT_RC/output/asl_test/rgb_vid_df_test.json \
 #     --image_size 336 \
 #     --video-folder "$VIDEO_FOLDER" \
@@ -40,11 +40,11 @@ fi
 
 # Run the inference with the metrics-enabled model
 python -m playground.demo.simpleQA_metrics \
-    --model-path lmms-lab/llava-onevision-qwen2-0.5b-ov \
+    --model-path lmms-lab/llava-onevision-qwen2-7b-ov \
     --question-file /local1/mhu/LLaVANeXT_RC/output/asl_test/segmented_videos.json \
     --image_size 336 \
     --video-folder "$VIDEO_FOLDER" \
-    --answers-file llava_base_results_0923.json \
+    --answers-file llava_base_results.json \
     --out_dir /local1/mhu/LLaVANeXT_RC/new_outputs/ \
     --enable_evaluation \
     $MAX_SAMPLES_ARG

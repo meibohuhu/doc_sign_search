@@ -1,0 +1,37 @@
+[
+  {
+    "video": "55555.mp4",
+    "image": null,
+    "prompt": "How many people are in this video? Count the number of people and answer with a number word only.",
+    "model_output": "Nine",
+    "ground_truth": "Eight"
+  },
+  {
+    "video": "44444.mp4",
+    "image": null,
+    "prompt": "How many people are in this video? Count the number of people and answer with a number word only.",
+    "model_output": "Five",
+    "ground_truth": "Five"
+  },
+  {
+    "video": "33333.mp4",
+    "image": null,
+    "prompt": "How many people are in this video? Count the number of people and answer with a number word only.",
+    "model_output": "Twelve",
+    "ground_truth": "Fourteen"
+  },
+  {
+    "video": "11111.mp4",
+    "image": null,
+    "prompt": "How many people are in this video? Count the number of people and answer with a number word only.",
+    "model_output": "Six",
+    "ground_truth": "Six"
+  },
+  {
+    "video": "22222.mp4",
+    "image": null,
+    "prompt": "How many people are in this video? Count the number of people and answer with a number word only.",
+    "model_output": "Three",
+    "ground_truth": "Three"
+  }
+]

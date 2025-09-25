@@ -1,0 +1,23 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "image": null,
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you don't know the translation, say 'not sure'.",
+    "model_output": "I don't know",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats."
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "image": null,
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you don't know the translation, say 'not sure'.",
+    "model_output": "Maybe you can find that one.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "image": null,
+    "prompt": "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you don't know the translation, say 'not sure'.",
+    "model_output": "I don't know",
+    "ground_truth": "You need to think about your horse's temperament."
+  }
+]

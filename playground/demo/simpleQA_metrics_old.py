@@ -1,5 +1,4 @@
 # mhu update 09/22/2025 add evaluation metrics integration
-## change to use decord to load video
 import os
 os.environ["DISABLE_FLASH_ATTN"] = "1"
 
@@ -140,18 +139,6 @@ def extract_frames(video_path, num_frames=2):
     cap.release()
     return frames
 
-# Function to extract frames from video using decord (official pattern)
-## https://github.com/LLaVA-VL/LLaVA-NeXT/blob/main/docs/LLaVA_OneVision_Tutorials.ipynb
-def load_video(video_path, max_frames_num):
-    if type(video_path) == str:
-        vr = VideoReader(video_path, ctx=cpu(0))
-    else:
-        vr = VideoReader(video_path[0], ctx=cpu(0))
-    total_frame_num = len(vr)
-    uniform_sampled_frames = np.linspace(0, total_frame_num - 1, max_frames_num, dtype=int)
-    frame_idx = uniform_sampled_frames.tolist()
-    spare_frames = vr.get_batch(frame_idx).asnumpy()
-    return spare_frames  # (frames, height, width, channels)
 
 def eval_model(args):
 
@@ -162,11 +149,6 @@ def eval_model(args):
     ## tokenizer, model, image_processor, max_length = load_pretrained_model(model_path, args.model_base, args.model_name, device_map=device_map,  attn_implementation="eager")
     os.environ["DISABLE_FLASH_ATTN"] = "1"
     
-    # Use official LLaVA-OneVision model loading pattern
-    llava_model_args = {
-        "multimodal": True,
-    }
-    
     # Auto-detect model name if not provided
     if not hasattr(args, 'model_name') or not args.model_name:
         args.model_name = get_model_name_from_path(model_path)
@@ -174,7 +156,7 @@ def eval_model(args):
     try:
         tokenizer, model, image_processor, max_length = load_pretrained_model(
             model_path, args.model_base, args.model_name, 
-            device_map=device_map, attn_implementation="sdpa", **llava_model_args
+            device_map=device_map, attn_implementation="eager"
         )
     except ValueError as e:
         if "image_newline" in str(e) or "shape" in str(e):
@@ -224,26 +206,18 @@ def eval_model(args):
                 video_file = source["video"]
                 video = os.path.join(args.video_folder, video_file)
 
-                # video_frames = extract_frames(video, 8)
+                video_frames = extract_frames(video, 32)
+                # if not video_frames:
+                #     print(f"Warning: No frames extracted from: {video}")
+                #     results.append({
+                #         "video": video_file,
+                #         "prompt": source.get("conversations", [{}])[0].get("value", ""),
+                #         "model_output": "ERROR: No frames extracted"
+                #     })
+                #     continue
                     
-                # image_tensors = process_images(video_frames, image_processor, model.config)
-                # image_sizes = [frame.size for frame in video_frames]
-                print(f"Video path: {video}")
-            
-                # Load video using official pattern
-                video_frames = load_video(video, 10)  # Load 8 frames
-                print(f"Video frames shape: {video_frames.shape}")
-                
-                # Process frames using official pattern
-                image_tensors = []
-                frames = image_processor.preprocess(video_frames, return_tensors="pt")["pixel_values"].half().cuda()
-                image_tensors.append(frames)
-                
-                # Convert frames to PIL Images for image_sizes
-                pil_frames = [Image.fromarray(frame) for frame in video_frames]
-                image_sizes = [frame.size for frame in pil_frames]
-
-
+                image_tensors = process_images(video_frames, image_processor, model.config)
+                image_sizes = [frame.size for frame in video_frames]
 
             elif 'image' in source:
                 image_file = source["image"]
@@ -259,17 +233,19 @@ def eval_model(args):
                     img = Image.open(os.path.join(args.image_folder, image_file)).convert("RGB")
                     image_sizes = [img.size]
                     image_tensors = process_images([img], image_processor, model.config)
+                    
             image_tensors = [_image.to(dtype=torch.float16, device=device) for _image in image_tensors]
             conv_template = "qwen_1_5"
             # fq=source['conversations'][0]['value'].replace('<image>\n','')
             # fq=fq.replace('\n<image>','')
             
-            # fq = "What do the ASL) signs in this video mean? Give me the English translation only - do not describe the hand movements. Respond in one sentence. If not sure, say 'I don't know'"
-            fq = "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'."
-            ## Respond in one sentence. If not sure, say 'I don't know'.
-
-
+            fq = "What do the American Sign Language (ASL) signs in this video mean? Give me the English translation only - do not describe the hand movements. Respond in one sentence. If not sure, say 'I don't know'."
             # fq = "How many people are in this video? Answer with a number word only."
+
+            # fq = "What do the American Sign Language (ASL) signs in this video mean? Give me the English translation only - do not describe the hand movements. Respond in one sentence. If unclear, say 'I don't know'."
+            # fq = "What do he American Sign Language (ASL) signs in this video mean? DON't provide description for gestures.Provide your translation in one clear sentence, If you cannot understand the signs, respond with 'I don't know'."            # fq = "Translate the American Sign Language (ASL) signs from gesture in this video to English. If you can understand the signs, respond with one clear sentence. If you cannot understand the signs, respond with 'don't know'."
+            # fq = "Translate the American Sign Language (ASL) signs in this video to English. Provide your translation in one clear sentence. If you cannot understand the signs, respond with 'I don't know'."
+
 
             fqs = f"{DEFAULT_IMAGE_TOKEN}\n{fq}"
             first_answer=source['conversations'][1]['value']
@@ -295,8 +271,12 @@ def eval_model(args):
                 image_sizes=image_sizes,
                 do_sample=True,
                 temperature=0.7,
-                max_new_tokens=4096,
-                modalities=["video"],
+                max_new_tokens=4096, 
+                top_k=None,
+                top_p=None,
+                use_cache=True,
+    
+
             )
             # cont = model.generate(
             #     input_ids,
