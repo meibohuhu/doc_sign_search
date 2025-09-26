@@ -146,7 +146,7 @@ def eval_model(args):
         image_file=None
         
         # Prepare the prompt for ASL translation
-        # fq = "Translate the ASL signs in this video to English. Provide only the English translation in one sentence."   ## If you cannot understand the signs, respond with 'I don't know'.
+        fq = "Translate the ASL signs in this video to English. Provide only the English translation in one sentence."   ## If you cannot understand the signs, respond with 'I don't know'.
         fq = "How many people are in this video? Count the number of people and answer with a number word only. If you cannot understand the signs, respond with 'NULL'"
 
         try:

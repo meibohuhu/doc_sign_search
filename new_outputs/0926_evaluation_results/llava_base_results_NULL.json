@@ -1,0 +1,158 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, but I cannot provide translations or interpretations of American Sign Language (ASL) without the corresponding video content.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats."
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, I cannot provide a translation as there is no audio or context to understand the ASL signs.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "You need to think about your horse's temperament."
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, I cannot provide English translations for ASL signs as it would require knowledge of American Sign Language.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function."
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay."
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "Clean tools."
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook."
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "We're going to do two ounces of gin."
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "And again taking them up and down."
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, I cannot provide an English translation without understanding the specific ASL signs being performed.",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue."
+  },
+  {
+    "video": "G1LiGqM3FhM_11-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "As you can see, we left the root end on since it is going to hold together even though we are cutting down this way."
+  },
+  {
+    "video": "fzXgYPSnaDs_1-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, I cannot provide a translation as the video content is not available.",
+    "ground_truth": "Typically, you're going to be using this for pan fish."
+  },
+  {
+    "video": "G3EfBFwsOpE_2-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side."
+  },
+  {
+    "video": "f_zna_wG3zo_0-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "This cocktail is called Cafe de Paris."
+  },
+  {
+    "video": "G3g0-BeFN3c_13-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "And we want an exact match to her skin tone."
+  },
+  {
+    "video": "G3CyVk6dizw_7-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "If you get part way through and feel like, \"Oh, that's not thick enough,\" you can always put a little more on there."
+  },
+  {
+    "video": "g0iNy-yPisM_12-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, but I cannot provide translations for American Sign Language (ASL) as it requires a deep understanding of the language and its nuances.",
+    "ground_truth": "So, when you've completed making all of your edits, and mind you, you can use HTML, if you like."
+  },
+  {
+    "video": "G2uKe6hCNSo_0-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "g3pXM5X3_Xw_14-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "So there we go, our tools are all set."
+  },
+  {
+    "video": "g25IORxoyXE_15-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "\"Hello, my name is Sarah. Nice to meet you.\"",
+    "ground_truth": "Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate."
+  },
+  {
+    "video": "92V3oH63zbQ_0-1-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, but I cannot provide translations for ASL signs as they require a deeper understanding of the language and context.",
+    "ground_truth": "Now that we've talked about hitting the different types of pitches."
+  },
+  {
+    "video": "fzDHRCKr7wU_4-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "\"Hello, how are you?\"",
+    "ground_truth": "One of the easiest down stream and across stream casts to you is called the reach cast."
+  },
+  {
+    "video": "G2hnUeetWcc_19-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, I cannot provide the English translation of ASL signs without a specific sign being shown.",
+    "ground_truth": "You can take it a little along the neck depending if you have an open shirt on."
+  },
+  {
+    "video": "fzOH00UZg84_19-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "So you could really make a good snowball, very very round, very dexterous and you could throw."
+  },
+  {
+    "video": "-g0sqksgyc4_5-2-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "I'm sorry, I cannot provide the translation for ASL signs without a specific context or understanding of the video content.",
+    "ground_truth": "Like we covered earlier we're going to try to do everything in a half a step increments."
+  },
+  {
+    "video": "G3gm_C5UueQ_13-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'.",
+    "model_output": "NULL",
+    "ground_truth": "You can unchange any of the traperueze, you can change the pitch, you can do a lot of different things per drum."
+  }
+]

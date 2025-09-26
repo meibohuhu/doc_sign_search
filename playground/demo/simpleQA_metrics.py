@@ -265,12 +265,9 @@ def eval_model(args):
             # fq=fq.replace('\n<image>','')
             
             # Prepare the prompt for ASL translation
-            fq = "Translate the ASL signs in this video to English in one sentence only. Do not describe the signs. Don't supass one sentences. Don's say 'The video shows a person performing a series of signs.'"
+            fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'."
             # fq = "How many people are in this video? Count the number of people and answer with a number word only."
 
-
-
-            # fq = "How many people are in this video? Answer with a number word only."
 
             fqs = f"{DEFAULT_IMAGE_TOKEN}\n{fq}"
             first_answer=source['conversations'][1]['value']

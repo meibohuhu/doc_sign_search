@@ -18,7 +18,7 @@ PYTHON_PATH="/home/ztao/anaconda3/envs/qwen25_vl_sign/bin/python"
 # Set video folder
 # VIDEO_FOLDER="/local1/mhu/LLaVANeXT_RC/how2sign/video/test_raw_videos/segmented_clips/"
 
-VIDEO_FOLDER="/local1/mhu/LLaVANeXT_RC/how2sign/video/test_raw_videos/test_videos/"
+VIDEO_FOLDER="/local1/mhu/LLaVANeXT_RC/how2sign/video/test_raw_videos/segmented_clips/"
 
 echo "📁 Using video folder: $VIDEO_FOLDER"
 
@@ -43,8 +43,8 @@ fi
 # Run Gemini 2.5 Pro inference
 $PYTHON_PATH -m playground.demo.gemini25_metrics \
     --api-key "$GEMINI_API_KEY" \
-    --question-file /local1/mhu/LLaVANeXT_RC/output/asl_test/segmented_videos_test.json \
-    --image_size 1024 \
+    --question-file /local1/mhu/LLaVANeXT_RC/output/asl_test/segmented_videos.json \
+    --image_size 512 \
     --video-folder "$VIDEO_FOLDER" \
     --answers-file gemini25_results.json \
     --out_dir /local1/mhu/LLaVANeXT_RC/new_outputs/ \

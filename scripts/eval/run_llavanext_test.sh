@@ -34,7 +34,7 @@ fi
 $PYTHON_PATH -m playground.demo.llavanext_metrics \
     --model-path lmms-lab/LLaVA-Video-7B-Qwen2-Video-Only \
     --question-file /local1/mhu/LLaVANeXT_RC/output/asl_test/segmented_videos.json \
-    --image_size 336 \
+    --image_size 512 \
     --video-folder "$VIDEO_FOLDER" \
     --answers-file llavanext_results.json \
     --out_dir /local1/mhu/LLaVANeXT_RC/new_outputs/ \

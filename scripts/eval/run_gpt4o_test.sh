@@ -46,7 +46,7 @@ $PYTHON_PATH -m playground.demo.gpt4o_metrics \
     --out_dir /local1/mhu/LLaVANeXT_RC/new_outputs/ \
     --enable_evaluation \
     --temperature 0.7 \
-    --max_new_tokens 512 \
+    --max_new_tokens 2048 \
     $MAX_SAMPLES_ARG
 
 echo "✅ Inference completed!"

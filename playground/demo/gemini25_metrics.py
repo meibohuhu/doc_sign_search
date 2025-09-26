@@ -129,7 +129,7 @@ def encode_image(image_path):
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 
-def call_gemini_api(model, content, images=None, max_tokens=2048, temperature=0.7):
+def call_gemini_api(model, content, images=None, max_tokens=4096, temperature=0.7):
     """Call Gemini 2.5 Pro API with content and images"""
     try:
         # Configure generation parameters
@@ -247,8 +247,8 @@ def eval_model(args):
         image_file=None
         
         # Prepare the prompt for person counting
-        fq = "How many people are in this video? Count the number of people and answer with a number word only."
-        # fq = "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you don't know the translation, say 'not sure'."
+        # fq = "How many people are in this video? Count the number of people and answer with a number word only."
+        fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you don't understand, DON'T respond."
 
         try:
             if 'video' in source:
@@ -279,14 +279,14 @@ def eval_model(args):
                     # else:  # Large videos (>20MB)
                     #     num_frames = 1  # Only 1 frame for large videos
                         
-                    print(f"Using num_frames: {2}")
+                    # print(f"Using num_frames: {2}")
                 except Exception as e:
                     print(f"Could not check video size: {e}")
                     num_frames = 1  # Further reduced default
             
                 # Extract frames from video
                 try:
-                    frames = extract_video_frames(video_path, 4)
+                    frames = extract_video_frames(video_path, 8)
                     if not frames:
                         print("No frames extracted from video")
                         results.append({

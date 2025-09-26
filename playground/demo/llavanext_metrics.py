@@ -169,9 +169,8 @@ def eval_model(args):
         
         # Prepare the prompt for person counting
         # fq = "How many people are in this video? Count the number of people and answer with a number word only."
-        #  fq = "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'."
-
-        fq = "Translate the ASL signs in this video to English. Provide only the translation in one sentence. "
+        fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot understand the signs, respond with 'NULL'."
+        ## If you cannot determine the meaning, respond with 'NULL'
         try:
             if 'video' in source:
                 video_file = source["video"]
@@ -208,7 +207,7 @@ def eval_model(args):
             
                 # Load video frames using LLaVA-NeXT pattern
                 try:
-                    video_frames, frame_time, video_time = load_video(video_path, max_frames_num, fps=1, force_sample=True)
+                    video_frames, frame_time, video_time = load_video(video_path, 10, fps=1, force_sample=True)
                     print(f"Extracted {len(video_frames)} frames successfully!")
                     print(f"Video time: {video_time:.2f}s, Frame times: {frame_time}")
                     

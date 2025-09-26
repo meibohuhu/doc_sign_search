@@ -28,8 +28,8 @@ import os, json  # make sure these imports exist
 
 # Import evaluation metrics
 import sys
-sys.path.append('/local1/mhu/LLaVANeXT_RC/evaluation/uni_sign')
-from SLRT_metrics import translation_performance
+sys.path.append('/local1/mhu/LLaVANeXT_RC/evaluation')
+from common_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
 
 
 def resolve_image_size(model, args):
@@ -181,7 +181,7 @@ def eval_model(args):
         image_file=None
         
         # Prepare the prompt for ASL translation
-        fq = "Translate the ASL signs in this video to English. Provide only the translation in one sentence. If you cannot understand the signs, respond with 'I don't know'."
+        fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. "
 
         # fq = "How many people are in this video? Count the number of people and answer with a number word only."
 
@@ -355,40 +355,18 @@ def eval_model(args):
         json.dump(results, f, indent=2, ensure_ascii=False)
     print("All outputs saved successfully!")
     
-    # Calculate evaluation metrics
+    # Calculate comprehensive evaluation metrics (same as simpleQA_metrics.py)
     if args.enable_evaluation and references and predictions:
-        print("\n" + "="*50)
-        print("EVALUATION METRICS")
-        print("="*50)
-        
         try:
-            bleu_dict, rouge_score = translation_performance(references, predictions)
+            # Use comprehensive evaluation
+            results = comprehensive_evaluation(references, predictions)
             
-            print(f"\nBLEU Scores:")
-            for k, v in bleu_dict.items():
-                print(f"  {k}: {v:.4f}")
+            # Print results
+            print_evaluation_results(results, "GPT-4o")
             
-            print(f"\nROUGE-L F1 Score: {rouge_score:.4f}")
-            
-            # Save evaluation metrics to a separate file
-            eval_results = {
-                "bleu_scores": bleu_dict,
-                "rouge_l_f1": rouge_score,
-                "total_samples": len(references),
-                "evaluation_summary": {
-                    "bleu_1": bleu_dict.get("bleu1", 0),
-                    "bleu_2": bleu_dict.get("bleu2", 0),
-                    "bleu_3": bleu_dict.get("bleu3", 0),
-                    "bleu_4": bleu_dict.get("bleu4", 0),
-                    "rouge_l_f1": rouge_score
-                }
-            }
-            
+            # Save evaluation metrics
             eval_file = os.path.join(args.out_dir, "evaluation_metrics.json")
-            with open(eval_file, "w", encoding="utf-8") as f:
-                json.dump(eval_results, f, indent=2, ensure_ascii=False)
-            
-            print(f"\nEvaluation metrics saved to: {eval_file}")
+            save_evaluation_results(results, eval_file, "GPT-4o")
             
         except Exception as e:
             print(f"Error calculating evaluation metrics: {e}")
