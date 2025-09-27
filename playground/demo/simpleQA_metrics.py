@@ -29,10 +29,10 @@ warnings.filterwarnings("ignore")
 
 import os, json  # make sure these imports exist
 
-# Import evaluation metrics
+# Import evaluation metrics using SSVP-SLT style implementation
 import sys
 sys.path.append('/local1/mhu/LLaVANeXT_RC/evaluation')
-from common_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
+from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
 
 
 ### mhu update 09/22/2025 comment: for base model: python simpleQA_metrics.py --model-path lmms-lab/llava-onevision-qwen2-0.5b-ov --image_size 336

@@ -25,10 +25,10 @@ from qwen_vl_utils import process_vision_info
 
 import os, json  # make sure these imports exist
 
-# Import evaluation metrics
+# Import evaluation metrics using SSVP-SLT style implementation
 import sys
 sys.path.append('/local1/mhu/LLaVANeXT_RC/evaluation')
-from common_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
+from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
 
 
 def resolve_image_size(model, args):
@@ -146,8 +146,9 @@ def eval_model(args):
         image_file=None
         
         # Prepare the prompt for ASL translation
-        fq = "Translate the ASL signs in this video to English. Provide only the English translation in one sentence."   ## If you cannot understand the signs, respond with 'I don't know'.
-        fq = "How many people are in this video? Count the number of people and answer with a number word only. If you cannot understand the signs, respond with 'NULL'"
+        # fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot understand the signs, respond with 'NULL'."
+        fq = "Translate the ASL signs in this video to English. Provide only the English translation in one sentence. If you cannot understand the signs, respond with nothing."   ## If you cannot understand the signs, respond with 'I don't know'.
+        # fq = "How many people are in this video? Count the number of people and answer with a number word only. If you cannot understand the signs, respond with 'NULL'"
 
         try:
             if 'video' in source:

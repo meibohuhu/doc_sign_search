@@ -26,10 +26,10 @@ from openai import OpenAI
 
 import os, json  # make sure these imports exist
 
-# Import evaluation metrics
+# Import evaluation metrics using SSVP-SLT style implementation
 import sys
 sys.path.append('/local1/mhu/LLaVANeXT_RC/evaluation')
-from common_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
+from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
 
 
 def resolve_image_size(model, args):
