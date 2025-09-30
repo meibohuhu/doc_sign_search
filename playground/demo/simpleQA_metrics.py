@@ -27,12 +27,25 @@ warnings.filterwarnings("ignore")
 # import sys
 # sys.path.insert(0,"/home/vp1837/ASL-AI/ASL_research/LLaVA-NeXT/")
 
-import os, json  # make sure these imports exist
+# import os, json  # make sure these imports exist
 
-# Import evaluation metrics using SSVP-SLT style implementation
+# # Import evaluation metrics using SSVP-SLT style implementation
+# import sys
+# sys.path.append('/local1/mhu/LLaVANeXT_RC/evaluation')
+# from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
+
+# Set up Python path for imports
 import sys
-sys.path.append('/local1/mhu/LLaVANeXT_RC/evaluation')
-from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
+sys.path.append('../../')  # Add project root for imports
+sys.path.append('../../evaluation')  # Add evaluation directory for common_evaluation
+
+# Import evaluation metrics
+try:
+    from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
+except ImportError:
+    # Fallback: try importing from evaluation directory directly
+    sys.path.append(os.path.join(os.path.dirname(__file__), '../../evaluation'))
+    from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results, save_evaluation_results
 
 
 ### mhu update 09/22/2025 comment: for base model: python simpleQA_metrics.py --model-path lmms-lab/llava-onevision-qwen2-0.5b-ov --image_size 336
@@ -265,7 +278,7 @@ def eval_model(args):
             # fq=fq.replace('\n<image>','')
             
             # Prepare the prompt for ASL translation
-            fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, respond with 'NULL'."
+            fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with 'NULL'."
             # fq = "How many people are in this video? Count the number of people and answer with a number word only."
 
 

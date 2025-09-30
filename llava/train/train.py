@@ -1159,8 +1159,9 @@ class LazySupervisedDataset(Dataset):
 
         elif "video" in sources[0]:
             video_file = self.list_data_dict[i]["video"]
+            video_id = self.list_data_dict[i]["id"]  # Get the subdirectory ID
             video_folder = self.data_args.video_folder
-            video_file = os.path.join(video_folder, video_file)
+            video_file = os.path.join(video_folder, video_id, video_file)
             suffix = video_file.split(".")[-1]
             if not os.path.exists(video_file):
                 print("File {} not exist!".format(video_file))

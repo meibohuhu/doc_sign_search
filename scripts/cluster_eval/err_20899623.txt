@@ -1,0 +1,53 @@
+/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/cuda/__init__.py:61: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:945: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:945: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:11<00:35, 11.85s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:24<00:24, 12.15s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:36<00:12, 12.26s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:47<00:00, 11.85s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:47<00:00, 11.96s/it]
+Some weights of LlavaQwenForCausalLM were not initialized from the model checkpoint at Qwen/Qwen2-7B-Instruct and are newly initialized: ['model.image_newline']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+/home/mh2803/projects/sign_language_llm/llava/train/train.py:1488: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  mm_projector_weights = torch.load(model_args.mm_projector_path, map_location="cpu")
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/transformers/deepspeed.py:23: FutureWarning: transformers.deepspeed module is deprecated and will be removed in a future version. Please import deepspeed modules directly from transformers.integrations
+  warnings.warn(
+/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 8 worker processes in total. Our suggested max number of worker in current system is 3, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+Gradient accumulation steps mismatch: GradientAccumulationPlugin has 1, DeepSpeed config has 5. Using DeepSpeed's value.
+  0%|          | 0/6156 [00:00<?, ?it/s]E0930 09:54:06.745000 1828036 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: -9) local_rank: 0 (pid: 1828099) of binary: /home/mh2803/miniconda3/envs/mh_llava/bin/python
+Traceback (most recent call last):
+  File "/home/mh2803/miniconda3/envs/mh_llava/bin/torchrun", line 33, in <module>
+    sys.exit(load_entry_point('torch==2.5.1', 'console_scripts', 'torchrun')())
+  File "/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/mh2803/miniconda3/envs/mh_llava/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+========================================================
+train/train_mem.py FAILED
+--------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+--------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-09-30_09:54:06
+  host      : skl-a-25.rc.rit.edu
+  rank      : 0 (local_rank: 0)
+  exitcode  : -9 (pid: 1828099)
+  error_file: <N/A>
+  traceback : Signal 9 (SIGKILL) received by PID 1828099
+========================================================
+[2025-09-30T09:54:39.798] error: Detected 2 oom_kill events in StepId=20899623.batch. Some of the step tasks have been OOM Killed.

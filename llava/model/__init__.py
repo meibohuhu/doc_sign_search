@@ -4,11 +4,13 @@ import os
 from llava.model.language_model.llava_qwen import LlavaQwenForCausalLM, LlavaQwenConfig
 from llava.model.language_model.llava_mistral import LlavaMistralForCausalLM, LlavaMistralConfig
 from llava.model.language_model.llava_mixtral import LlavaMixtralForCausalLM, LlavaMixtralConfig
+from llava.model.language_model.llava_llama import LlavaLlamaForCausalLM, LlavaConfig
 
 AVAILABLE_MODELS = {
     "llava_qwen": "LlavaQwenForCausalLM, LlavaQwenConfig",
     "llava_mistral": "LlavaMistralForCausalLM, LlavaMistralConfig",
     "llava_mixtral": "LlavaMixtralForCausalLM, LlavaMixtralConfig",
+    "llava_llama": "LlavaLlamaForCausalLM, LlavaConfig",
     # "llava_qwen_moe": "LlavaQwenMoeForCausalLM, LlavaQwenMoeConfig",    
 }
 

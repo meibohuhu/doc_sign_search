@@ -64,6 +64,7 @@ output/asl_test/rgb_videos_df_ssh.json
 
 # Environment files
 .env
+.env*
 .venv
 env/
 venv/
@@ -106,3 +107,23 @@ slurm-*.out
 *.egg-info/
 .conda/
 .pip/
+
+# Accidental pip install files (from commands like pip install package=version)
+=[0-9]*
+
+# Large dataset directories
+dailymoth-70h/
+
+# Output directories
+output_cluster/
+# new_outputs/
+
+
+# Archive files (typically large)
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
+*.gz

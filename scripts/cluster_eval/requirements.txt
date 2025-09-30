@@ -1,0 +1,27 @@
+# PyTorch with CUDA 12.4
+pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+
+# Flash Attention (required for training efficiency)
+pip install flash-attn==2.7.4.post1 --no-build-isolation
+
+# Transformers (use specific version for training)
+pip install transformers==4.51.3
+pip install accelerate
+
+# Training frameworks
+pip install deepspeed
+pip install peft
+
+# Data processing
+pip install decord  # For video processing (used in train.py)
+pip install av  # Alternative video processor
+pip install pillow  # Image processing
+
+# Utilities
+pip install ujson
+pip install wandb
+pip install pyyaml  # For YAML config loading
+pip install einops  # Often needed for vision models
+
+# Optional but recommended
+pip install tensorboard  # For logging
