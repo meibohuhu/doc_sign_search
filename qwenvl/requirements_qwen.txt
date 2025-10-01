@@ -1,0 +1,31 @@
+# Qwen2.5-VL Training Environment Requirements
+# Python 3.10
+# CUDA 12.4
+
+# PyTorch with CUDA 12.4 support
+--index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0
+torchvision==0.21.0
+torchaudio==2.6.0
+
+# Flash Attention (requires compilation)
+flash-attn==2.7.4.post1
+
+# Transformers and Accelerate
+# Note: Install from git first, then pin to stable version
+# git+https://github.com/huggingface/transformers
+transformers==4.51.3
+accelerate
+
+# Qwen VL Utils
+qwen-vl-utils[decord]
+
+# Training frameworks
+deepspeed
+peft
+
+# Utilities
+ujson
+liger_kernel
+datasets
+wandb
