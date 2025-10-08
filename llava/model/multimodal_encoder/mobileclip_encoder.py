@@ -65,10 +65,23 @@ class MobileCLIPVisionTower(nn.Module):
         # Features from penultimate layer
         image_features = image_forward_outs["image_embeddings"]
 
-        # Reshape 4D tensor to 3D
-        B, C, H, W = image_features.shape
-        image_features = image_features.reshape(B, C, H*W)
-        image_features = image_features.transpose(1, 2)
+        # Handle different tensor shapes
+        if len(image_features.shape) == 4:
+            # Standard 4D tensor [B, C, H, W]
+            B, C, H, W = image_features.shape
+            image_features = image_features.reshape(B, C, H*W)
+            image_features = image_features.transpose(1, 2)
+        elif len(image_features.shape) == 3:
+            # 3D tensor [B, C, L] - already in the right format
+            B, C, L = image_features.shape
+            image_features = image_features.transpose(1, 2)  # [B, L, C]
+        elif len(image_features.shape) == 2:
+            # 2D tensor [B, C] - need to add sequence dimension
+            B, C = image_features.shape
+            image_features = image_features.unsqueeze(1)  # [B, 1, C]
+        else:
+            raise ValueError(f"Unexpected image_features shape: {image_features.shape}")
+            
         return image_features
 
     def forward(self, images):
@@ -109,7 +122,7 @@ class MobileCLIPVisionTower(nn.Module):
 
     @property
     def hidden_size(self):
-        return self.config["image_cfg"]["embed_dim"]
+        return self.config["embed_dim"]
 
     @property
     def num_patches_per_side(self):

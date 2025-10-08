@@ -2,7 +2,7 @@
     "embed_dim": 768,
     "image_cfg": {
         "image_size": 1024,
-        "model_name": "fastvithd",
+        "model_name": "fastvit_sa36",
         "embed_dim": 3072,
         "patch_size": 64
     },

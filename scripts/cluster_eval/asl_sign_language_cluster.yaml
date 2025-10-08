@@ -1,0 +1,3 @@
+datasets:
+  - json_path: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/train_ssvp_small.json
+    sampling_strategy: "all"

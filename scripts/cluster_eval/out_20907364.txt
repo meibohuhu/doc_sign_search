@@ -1,0 +1,114 @@
+🎬 Testing Base Qwen2VL Model (No LoRA)
+========================================
+
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Testing Base Qwen2VL Model (No LoRA)
+==================================================
+Model: Qwen/Qwen2.5-VL-3B-Instruct
+Test Data: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+🚀 Loading base model...
+✅ Base model loaded successfully!
+📋 Processing 10 samples
+🎬 Starting evaluation on 10 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/g3kFAmcBpFc_13-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g3kFAmcBpFc_13-3-rgb_front.mp4
+Ground truth: Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.
+Prediction: The woman is talking about her experience with a new product and expressing her excitement about it.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/FZLxEwsoc1c_8-8-rgb_front.mp4
+🔍 Video exists: True
+Video: FZLxEwsoc1c_8-8-rgb_front.mp4
+Ground truth: That's basically the explanation of a nap.
+Prediction: I'm going to be talking about the importance of being kind.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/G2Go6a76xd0_2-5-rgb_front.mp4
+🔍 Video exists: True
+Video: G2Go6a76xd0_2-5-rgb_front.mp4
+Ground truth: You need to think about your horse's temperament.
+Prediction: The woman is talking about her hair and how she likes it.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/G3k86AVFwVs_6-5-rgb_front.mp4
+🔍 Video exists: True
+Video: G3k86AVFwVs_6-5-rgb_front.mp4
+Ground truth: Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.
+Prediction: I don't know what you're talking about.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/fZq8wTAYtmw_10-8-rgb_front.mp4
+🔍 Video exists: True
+Video: fZq8wTAYtmw_10-8-rgb_front.mp4
+Ground truth: That is how, essentially, you write a very, very well crafted drama screenplay.
+Prediction: I am going to show you how to make the sign for "no".
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/g3pXM5X3_Xw_5-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g3pXM5X3_Xw_5-3-rgb_front.mp4
+Ground truth: Clean tools.
+Prediction: I'm going to show you how to sign "I love you."
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/G3CyVk6dizw_0-5-rgb_front.mp4
+🔍 Video exists: True
+Video: G3CyVk6dizw_0-5-rgb_front.mp4
+Ground truth: ALVIN DEDEUX: Okay, now, we're going to dub this hook.
+Prediction: I am going to show you how to make the sign for "I".
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/f_zna_wG3zo_2-10-rgb_front.mp4
+🔍 Video exists: True
+Video: f_zna_wG3zo_2-10-rgb_front.mp4
+Ground truth: We're going to do two ounces of gin.
+Prediction: I'm going to show you how to do it.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/_G0RrDVpOZ4_7-5-rgb_front.mp4
+🔍 Video exists: True
+Video: _G0RrDVpOZ4_7-5-rgb_front.mp4
+Ground truth: And again taking them up and down.
+Prediction: The woman is making an American sign language sign for "I am."
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/g3ZluRtRXVc_3-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g3ZluRtRXVc_3-3-rgb_front.mp4
+Ground truth: It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue.
+Prediction: The woman is making a sign for the letter "A".
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/base_qwen2vl_results_20251007_171654.json
+
+📊 Calculating evaluation metrics...
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Base-Qwen2VL-3B (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1289
+  Precision:        0.1389
+  Recall:           0.1339
+  ROUGE-L F1:       0.1233
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1669
+  BLEU2: 0.0601
+  BLEU3: 0.0242
+  BLEU4: 0.0132
+
+📋 Summary:
+  Total Samples:    10
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/base_model_evaluation_metrics_20251007_171654.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/base_model_evaluation_metrics_20251007_171654.json
+
+🎯 Summary:
+   Total samples: 10
+   Successful: 10
+   Success rate: 100.0%
+🎉 Base model test completed!

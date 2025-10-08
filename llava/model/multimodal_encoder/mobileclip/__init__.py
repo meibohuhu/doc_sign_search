@@ -6,6 +6,7 @@ import os
 import json
 from typing import Any
 
+import torch
 import torch.nn as nn
 from timm.models import create_model
 
@@ -41,9 +42,11 @@ class MCi(nn.Module):
         self.projection_dim = None
         if "projection_dim" in kwargs:
             self.projection_dim = kwargs.get("projection_dim")
+            # Remove projection_dim from kwargs to avoid passing it to create_model
+            kwargs = {k: v for k, v in kwargs.items() if k != "projection_dim"}
 
-        # Create model
-        self.model = create_model(model_name, projection_dim=self.projection_dim)
+        # Create model without projection_dim
+        self.model = create_model(model_name, **kwargs)
 
         # Build out projection head.
         if self.projection_dim is not None:
@@ -54,14 +57,44 @@ class MCi(nn.Module):
 
     def forward(self, x: Any, *args, **kwargs) -> Any:
         """A forward function of the model."""
+        # Check if return_image_embeddings is requested
+        return_image_embeddings = kwargs.pop('return_image_embeddings', False)
+        
+        # Forward through the base model
         x = self.model(x, *args, **kwargs)
-        return x
+        
+        # If return_image_embeddings is requested, return a dict with both logits and embeddings
+        if return_image_embeddings:
+            # We need to get the intermediate features before the classification head
+            # Hook into the model to get the conv_exp output
+            if hasattr(self.model, 'conv_exp'):
+                # Forward through the network to get intermediate features
+                with torch.no_grad():
+                    # Get embeddings from conv_exp layer (before classification head)
+                    # Return whatever format the model naturally produces
+                    embeddings = self.model.conv_exp(self.model.forward_tokens(self.model.forward_embeddings(x)))
+                return {
+                    "logits": x,
+                    "image_embeddings": embeddings
+                }
+            else:
+                # Fallback: return logits as embeddings
+                return {
+                    "logits": x,
+                    "image_embeddings": x
+                }
+        else:
+            return x
 
     @staticmethod
     def _get_in_feature_dimension(image_classifier: nn.Module) -> int:
         """Return the input feature dimension to the image classification head."""
         in_features = None
-        if isinstance(image_classifier, nn.Sequential):
+        
+        # Handle ClassifierHead from newer timm versions
+        if hasattr(image_classifier, 'fc') and isinstance(image_classifier.fc, nn.Linear):
+            in_features = image_classifier.fc.in_features
+        elif isinstance(image_classifier, nn.Sequential):
             # Classifier that uses nn.Sequential usually has global pooling and
             # multiple linear layers. Find the first linear layer and get its
             # in_features

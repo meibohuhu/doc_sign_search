@@ -1755,7 +1755,7 @@ def train(attn_implementation=None):
     trainer = LLaVATrainer(model=model, tokenizer=tokenizer, args=training_args, **data_module)
 
     if list(pathlib.Path(training_args.output_dir).glob("checkpoint-*")):
-        trainer.train(resume_from_checkpoint=False)
+        trainer.train(resume_from_checkpoint=True)
     else:
         trainer.train()
     trainer.save_state()
