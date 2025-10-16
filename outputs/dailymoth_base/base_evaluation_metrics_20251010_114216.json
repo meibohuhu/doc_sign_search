@@ -1,0 +1,32 @@
+{
+  "model_name": "Qwen2VL-BASE-DailyMoth",
+  "evaluation_style": "SSVP-SLT",
+  "evaluation_metrics": {
+    "exact_match": 0.0,
+    "f1_score": 0.025698257325407155,
+    "precision": 0.027297633169519293,
+    "recall": 0.025661803597746658,
+    "bleu_scores": {
+      "bleu1": 0.08274319791278421,
+      "bleu2": 0.008300316392592466,
+      "bleu3": 0.002531249348433698,
+      "bleu4": 0.0012172211079195317
+    },
+    "rouge_l_f1": 0.030087625624592655,
+    "bleurt_score": 0.0,
+    "total_samples": 281
+  },
+  "summary": {
+    "exact_match": 0.0,
+    "f1_score": 0.025698257325407155,
+    "precision": 0.027297633169519293,
+    "recall": 0.025661803597746658,
+    "rouge_l_f1": 0.030087625624592655,
+    "bleurt_score": 0.0,
+    "bleu_1": 0.08274319791278421,
+    "bleu_2": 0.008300316392592466,
+    "bleu_3": 0.002531249348433698,
+    "bleu_4": 0.0012172211079195317,
+    "total_samples": 281
+  }
+}

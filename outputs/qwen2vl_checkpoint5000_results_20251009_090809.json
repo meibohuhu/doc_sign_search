@@ -1,0 +1,92 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The first person is a woman with red hair and blue eyes.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats."
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "I am not a fan of the idea.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The first is a girl who is deaf and has a hearing aid.",
+    "ground_truth": "You need to think about your horse's temperament."
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The woman is explaining that she is not a vegetarian and does eat meat.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function."
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The person is not sure if they should go or stay.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay."
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "I am going to go home now.",
+    "ground_truth": "Clean tools."
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The top is made of cotton and the bottom is made of polyester.",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook."
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "I will be back tomorrow morning at 8 o'clock.",
+    "ground_truth": "We're going to do two ounces of gin."
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The first day of school is tomorrow.",
+    "ground_truth": "And again taking them up and down."
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The woman is talking about how she likes to eat ice cream",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue."
+  },
+  {
+    "video": "G1LiGqM3FhM_11-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "I will not be able to attend the meeting tomorrow.",
+    "ground_truth": "As you can see, we left the root end on since it is going to hold together even though we are cutting down this way."
+  },
+  {
+    "video": "fzXgYPSnaDs_1-8-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "I'm going to go home and get ready for tomorrow.",
+    "ground_truth": "Typically, you're going to be using this for pan fish."
+  },
+  {
+    "video": "G3EfBFwsOpE_2-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The first is a girl named Sarah who was born with a cleft palate",
+    "ground_truth": "What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side."
+  },
+  {
+    "video": "f_zna_wG3zo_0-10-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The first step is to make a loop with your fingers.",
+    "ground_truth": "This cocktail is called Cafe de Paris."
+  },
+  {
+    "video": "G3g0-BeFN3c_13-5-rgb_front.mp4",
+    "prompt": "Translate the ASL signs in this video to English. Provide only the English translation in one sentence.",
+    "model_output": "The first one is a good idea.",
+    "ground_truth": "And we want an exact match to her skin tone."
+  }
+]

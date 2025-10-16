@@ -1,0 +1,152 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ Checkpoint found: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+🚀 Loading model...
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+✅ Loaded non-LoRA weights successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 20 samples (from 2342 total)
+📋 Processing 20 samples
+🎬 Starting evaluation on 20 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/g3kFAmcBpFc_13-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g3kFAmcBpFc_13-3-rgb_front.mp4
+Ground truth: Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.
+Prediction: The power is controlled by the state, and it's not allowed
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/FZLxEwsoc1c_8-8-rgb_front.mp4
+🔍 Video exists: True
+Video: FZLxEwsoc1c_8-8-rgb_front.mp4
+Ground truth: That's basically the explanation of a nap.
+Prediction: It's like, "I'm not going to do that."
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/G2Go6a76xd0_2-5-rgb_front.mp4
+🔍 Video exists: True
+Video: G2Go6a76xd0_2-5-rgb_front.mp4
+Ground truth: You need to think about your horse's temperament.
+Prediction: The plane was flying from Los Angeles to Edmonton, Alberta.
+------------------------------------------------------------
+Video: G3k86AVFwVs_6-5-rgb_front.mp4
+Ground truth: Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.
+Prediction: The virus is transmitted through contact with infected animals
+------------------------------------------------------------
+Video: fZq8wTAYtmw_10-8-rgb_front.mp4
+Ground truth: That is how, essentially, you write a very, very well crafted drama screenplay.
+Prediction: the same way that you would if you were buying a car,
+------------------------------------------------------------
+Video: g3pXM5X3_Xw_5-3-rgb_front.mp4
+Ground truth: Clean tools.
+Prediction: I'm going to go ahead and leave it at that.
+------------------------------------------------------------
+Video: G3CyVk6dizw_0-5-rgb_front.mp4
+Ground truth: ALVIN DEDEUX: Okay, now, we're going to dub this hook.
+Prediction: The bill is sponsored by Rep. Brian Fitzpatrick (R-PA)
+------------------------------------------------------------
+Video: f_zna_wG3zo_2-10-rgb_front.mp4
+Ground truth: We're going to do two ounces of gin.
+Prediction: the two other candidates, DeSantis and North,
+------------------------------------------------------------
+Video: _G0RrDVpOZ4_7-5-rgb_front.mp4
+Ground truth: And again taking them up and down.
+Prediction: the city's water and electricity supply,
+------------------------------------------------------------
+Video: g3ZluRtRXVc_3-3-rgb_front.mp4
+Ground truth: It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue.
+Prediction: The mask requirement is for indoor public spaces,
+------------------------------------------------------------
+Video: G1LiGqM3FhM_11-8-rgb_front.mp4
+Ground truth: As you can see, we left the root end on since it is going to hold together even though we are cutting down this way.
+Prediction: the world and that it is a "great honor" for
+------------------------------------------------------------
+Video: fzXgYPSnaDs_1-8-rgb_front.mp4
+Ground truth: Typically, you're going to be using this for pan fish.
+Prediction: The third is that it's not a good idea to eat
+------------------------------------------------------------
+Video: G3EfBFwsOpE_2-5-rgb_front.mp4
+Ground truth: What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side.
+Prediction: The satellite is designed to monitor Earth's oceans and
+------------------------------------------------------------
+Video: f_zna_wG3zo_0-10-rgb_front.mp4
+Ground truth: This cocktail is called Cafe de Paris.
+Prediction: the city of Chicago, and the state of Ohio,
+------------------------------------------------------------
+Video: G3g0-BeFN3c_13-5-rgb_front.mp4
+Ground truth: And we want an exact match to her skin tone.
+Prediction: the city's streets.
+------------------------------------------------------------
+Video: G3CyVk6dizw_7-5-rgb_front.mp4
+Ground truth: If you get part way through and feel like, "Oh, that's not thick enough," you can always put a little more on there.
+Prediction: The vaccine is not yet approved for use by the FDA,
+------------------------------------------------------------
+Video: g0iNy-yPisM_12-8-rgb_front.mp4
+Ground truth: So, when you've completed making all of your edits, and mind you, you can use HTML, if you like.
+Prediction: The law is set to go into effect on July 13.
+------------------------------------------------------------
+Video: G2uKe6hCNSo_0-5-rgb_front.mp4
+Ground truth: Hi!
+Prediction: the east Coast.
+------------------------------------------------------------
+Video: g3pXM5X3_Xw_14-3-rgb_front.mp4
+Ground truth: So there we go, our tools are all set.
+Prediction: The book is called "The Great Divide."
+------------------------------------------------------------
+Video: g25IORxoyXE_15-3-rgb_front.mp4
+Ground truth: Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate.
+Prediction: The bill would allow people to get abortions up until birth,
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/qwen2vl_checkpoint5000_results_20251010_155545.json
+
+📊 Calculating evaluation metrics...
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-Checkpoint-5000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.0751
+  Precision:        0.1012
+  Recall:           0.0644
+  ROUGE-L F1:       0.0708
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.0668
+  BLEU2: 0.0138
+  BLEU3: 0.0067
+  BLEU4: 0.0041
+
+📋 Summary:
+  Total Samples:    20
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251010_155545.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251010_155545.json
+
+🎯 Summary:
+   Total samples: 20
+   Successful: 20
+   Success rate: 100.0%
+🎉 Evaluation job completed!

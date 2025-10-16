@@ -33,7 +33,7 @@
     },
 
     "gradient_accumulation_steps": "auto",
-    "gradient_clipping": "auto",
+    "gradient_clipping": 1.0,
     "steps_per_print": 1000,
     "train_batch_size": "auto",
     "train_micro_batch_size_per_gpu": "auto",

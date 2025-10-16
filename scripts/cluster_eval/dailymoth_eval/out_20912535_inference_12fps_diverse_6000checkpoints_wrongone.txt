@@ -1,0 +1,152 @@
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==============================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+✅ Checkpoint found: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+🚀 Loading model...
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 22 samples (from 4185 total)
+📋 Processing 22 samples
+🎬 Starting evaluation on 22 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000004-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000004-2022.6.14.mp4
+Ground truth: by raging floodwaters that were powerful enough
+Prediction: The first one is that you should not be afraid of
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000007-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000007-2022.6.14.mp4
+Ground truth: and several tourists had to be evacuated.
+Prediction: The first thing you need is a small piece of paper,
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000011-2022.6.14.mp4
+🔍 Video exists: True
+❌ Error processing sample: index 111 is out of bounds for dimension 0 with size 111
+Video: 0000015-2022.6.14.mp4
+Ground truth: A community near the gates of Yellowstone,
+Prediction: The first thing you need is a pair of scissors,
+------------------------------------------------------------
+Video: 0000020-2022.6.14.mp4
+Ground truth: News reports said
+Prediction: and that is why it is important to have
+------------------------------------------------------------
+Video: 0000025-2022.6.14.mp4
+Ground truth: a man carrying a handgun entered a sports complex
+Prediction: The first thing you need is a good pair of scissors,
+------------------------------------------------------------
+❌ Error processing sample: index 107 is out of bounds for dimension 0 with size 107
+Video: 0000035-2022.6.14.mp4
+Ground truth: and found the gunman in the gymnasium and shot at him.
+Prediction: The first finger is the index finger,
+------------------------------------------------------------
+Video: 0000040-2022.6.14.mp4
+Ground truth: Nobody was injured, only the gunman was killed.
+Prediction: The first is that you should not use your phone while
+------------------------------------------------------------
+Video: 0000041-2022.6.14.mp4
+Ground truth: The war in Ukraine is now
+Prediction: I'm going to show you how to do it.
+------------------------------------------------------------
+Video: 0000056-2022.6.14.mp4
+Ground truth: that Google’s artificially intelligent chatbot named LaMDA
+Prediction: The first thing you should do is make sure that
+------------------------------------------------------------
+Video: 0000058-2022.6.14.mp4
+Ground truth: and is self-aware.
+Prediction: I'm going to show you how to do it.
+------------------------------------------------------------
+Video: 0000060-2022.6.14.mp4
+Ground truth: to see if the robot would use discriminatory or hate speech,
+Prediction: The first finger is the index finger,
+------------------------------------------------------------
+Video: 0000063-2022.6.14.mp4
+Ground truth: Lemonie posted a paper that is sort of a transcript
+Prediction: The first step is to make a fist with your right hand and
+------------------------------------------------------------
+Video: 0000064-2022.6.14.mp4
+Ground truth: of different questions he asked LaMDA.
+Prediction: The first step is to make a "V" shape with your fingers.
+------------------------------------------------------------
+Video: 0000067-2022.6.14.mp4
+Ground truth: to help me focus on helping others.”
+Prediction: The first step is to make a fist with your right hand and
+------------------------------------------------------------
+Video: 0000073-2022.6.14.mp4
+Ground truth: that he was placed on paid administrative leave,
+Prediction: The first is that you should not be afraid of failure.
+------------------------------------------------------------
+Video: 0000074-2022.6.14.mp4
+Ground truth: so he decided to go public.
+Prediction: The first step is to make a "C" shape with your hands,
+------------------------------------------------------------
+Video: 0000076-2022.6.14.mp4
+Ground truth: there is no evidence to support Lemoine’s claims.
+Prediction: The first step is to make a fist with your right hand and
+------------------------------------------------------------
+Video: 0000079-2022.6.14.mp4
+Ground truth: believe that Lemoine is exaggerating.
+Prediction: The first step is to make sure that you have
+------------------------------------------------------------
+Video: 0000082-2022.6.14.mp4
+Ground truth: “spaz” in it.
+Prediction: The first thing you need is a good pair of shoes.
+------------------------------------------------------------
+Video: 0000083-2022.6.14.mp4
+Ground truth: The term is considered derogatory
+Prediction: The first one is the "I" sign, which means "I am."
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/qwen2vl_dailymoth_results_20251009_132211.json
+
+📊 Calculating evaluation metrics...
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-DailyMoth (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1138
+  Precision:        0.0982
+  Recall:           0.1454
+  ROUGE-L F1:       0.1019
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.0948
+  BLEU2: 0.0150
+  BLEU3: 0.0066
+  BLEU4: 0.0038
+
+📋 Summary:
+  Total Samples:    20
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251009_132211.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251009_132211.json
+
+🎯 Summary:
+   Total samples: 22
+   Successful: 20
+   Success rate: 90.9%
+🎉 DailyMoth-70h evaluation job completed!

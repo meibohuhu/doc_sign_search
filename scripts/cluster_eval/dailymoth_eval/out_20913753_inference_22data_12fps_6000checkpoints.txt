@@ -1,0 +1,160 @@
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==============================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+✅ Checkpoint found: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+🚀 Loading model...
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+✅ Loaded non-LoRA weights successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 22 samples (from 4185 total)
+📋 Processing 22 samples
+🎬 Starting evaluation on 22 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000004-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000004-2022.6.14.mp4
+Ground truth: by raging floodwaters that were powerful enough
+Prediction: the area was destroyed and there were many dead animals,
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000007-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000007-2022.6.14.mp4
+Ground truth: and several tourists had to be evacuated.
+Prediction: The government said it will not allow the group to enter.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000011-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000011-2022.6.14.mp4
+Ground truth: crested at 13.88 feet,
+Prediction: The 138-foot tall statue is located
+------------------------------------------------------------
+Video: 0000015-2022.6.14.mp4
+Ground truth: A community near the gates of Yellowstone,
+Prediction: the U.S. and Canada, and that it is a "major threat"
+------------------------------------------------------------
+Video: 0000020-2022.6.14.mp4
+Ground truth: News reports said
+Prediction: in the U.S.
+------------------------------------------------------------
+Video: 0000025-2022.6.14.mp4
+Ground truth: a man carrying a handgun entered a sports complex
+Prediction: One of the suspects was a 31-year-old man who is a former soldier
+------------------------------------------------------------
+Video: 0000034-2022.6.14.mp4
+Ground truth: Police officers were at the scene in two minutes
+Prediction: Police said they found 56 bodies,
+------------------------------------------------------------
+Video: 0000035-2022.6.14.mp4
+Ground truth: and found the gunman in the gymnasium and shot at him.
+Prediction: The FBI said they found a gun at the home of Goyomar.
+------------------------------------------------------------
+Video: 0000040-2022.6.14.mp4
+Ground truth: Nobody was injured, only the gunman was killed.
+Prediction: The judge said he would issue an order to stop the trial.
+------------------------------------------------------------
+Video: 0000041-2022.6.14.mp4
+Ground truth: The war in Ukraine is now
+Prediction: The U.S. is now at war with
+------------------------------------------------------------
+Video: 0000056-2022.6.14.mp4
+Ground truth: that Google’s artificially intelligent chatbot named LaMDA
+Prediction: the Georgia state capitol building, and that it was a "coup."
+------------------------------------------------------------
+Video: 0000058-2022.6.14.mp4
+Ground truth: and is self-aware.
+Prediction: the U.S. Capitol and that he was
+------------------------------------------------------------
+Video: 0000060-2022.6.14.mp4
+Ground truth: to see if the robot would use discriminatory or hate speech,
+Prediction: the two men were seen walking away from the scene and
+------------------------------------------------------------
+Video: 0000063-2022.6.14.mp4
+Ground truth: Lemonie posted a paper that is sort of a transcript
+Prediction: Levine said he would not be able to attend the funeral
+------------------------------------------------------------
+Video: 0000064-2022.6.14.mp4
+Ground truth: of different questions he asked LaMDA.
+Prediction: the U.S. Department of Agriculture (USDA)
+------------------------------------------------------------
+Video: 0000067-2022.6.14.mp4
+Ground truth: to help me focus on helping others.”
+Prediction: the military and the government.
+------------------------------------------------------------
+Video: 0000073-2022.6.14.mp4
+Ground truth: that he was placed on paid administrative leave,
+Prediction: the U.S. Attorney's Office in Atlanta,
+------------------------------------------------------------
+Video: 0000074-2022.6.14.mp4
+Ground truth: so he decided to go public.
+Prediction: and the other was a woman.
+------------------------------------------------------------
+Video: 0000076-2022.6.14.mp4
+Ground truth: there is no evidence to support Lemoine’s claims.
+Prediction: the U.S. and European Union's sanctions on Russia.
+------------------------------------------------------------
+Video: 0000079-2022.6.14.mp4
+Ground truth: believe that Lemoine is exaggerating.
+Prediction: and that he was a loyal member of the Liberal Party.
+------------------------------------------------------------
+Video: 0000082-2022.6.14.mp4
+Ground truth: “spaz” in it.
+Prediction: the Supreme Court, Stephen Paddock,
+------------------------------------------------------------
+Video: 0000083-2022.6.14.mp4
+Ground truth: The term is considered derogatory
+Prediction: The judge said he is concerned that the U.S. government
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/qwen2vl_dailymoth_results_20251010_090414.json
+
+📊 Calculating evaluation metrics...
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-DailyMoth (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1284
+  Precision:        0.1128
+  Recall:           0.1566
+  ROUGE-L F1:       0.1091
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1392
+  BLEU2: 0.0254
+  BLEU3: 0.0119
+  BLEU4: 0.0070
+
+📋 Summary:
+  Total Samples:    22
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251010_090414.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251010_090414.json
+
+🎯 Summary:
+   Total samples: 22
+   Successful: 22
+   Success rate: 100.0%
+🎉 DailyMoth-70h evaluation job completed!

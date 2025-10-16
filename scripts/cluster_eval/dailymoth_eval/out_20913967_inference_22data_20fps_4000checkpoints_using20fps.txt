@@ -1,0 +1,160 @@
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==============================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+✅ Checkpoint found: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+🚀 Loading model...
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+✅ Loaded non-LoRA weights successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 22 samples (from 4185 total)
+📋 Processing 22 samples
+🎬 Starting evaluation on 22 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000004-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000004-2022.6.14.mp4
+Ground truth: by raging floodwaters that were powerful enough
+Prediction: the water and then ran out of the building,
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000007-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000007-2022.6.14.mp4
+Ground truth: and several tourists had to be evacuated.
+Prediction: and that they were not allowed to enter.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000011-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000011-2022.6.14.mp4
+Ground truth: crested at 13.88 feet,
+Prediction: the top 138 fastest-growing occupations,
+------------------------------------------------------------
+Video: 0000015-2022.6.14.mp4
+Ground truth: A community near the gates of Yellowstone,
+Prediction: a city near the border of Ukraine,
+------------------------------------------------------------
+Video: 0000020-2022.6.14.mp4
+Ground truth: News reports said
+Prediction: The jury said,
+------------------------------------------------------------
+Video: 0000025-2022.6.14.mp4
+Ground truth: a man carrying a handgun entered a sports complex
+Prediction: A man with a gun charged into the building and
+------------------------------------------------------------
+Video: 0000034-2022.6.14.mp4
+Ground truth: Police officers were at the scene in two minutes
+Prediction: Police responded within five minutes and
+------------------------------------------------------------
+Video: 0000035-2022.6.14.mp4
+Ground truth: and found the gunman in the gymnasium and shot at him.
+Prediction: the French government in Gijon, Spain.
+------------------------------------------------------------
+Video: 0000040-2022.6.14.mp4
+Ground truth: Nobody was injured, only the gunman was killed.
+Prediction: There was no other person injured.
+------------------------------------------------------------
+Video: 0000041-2022.6.14.mp4
+Ground truth: The war in Ukraine is now
+Prediction: In Ukraine,
+------------------------------------------------------------
+Video: 0000056-2022.6.14.mp4
+Ground truth: that Google’s artificially intelligent chatbot named LaMDA
+Prediction: that George's actual cause of death was
+------------------------------------------------------------
+Video: 0000058-2022.6.14.mp4
+Ground truth: and is self-aware.
+Prediction: the brain and body,
+------------------------------------------------------------
+Video: 0000060-2022.6.14.mp4
+Ground truth: to see if the robot would use discriminatory or hate speech,
+Prediction: and that he saw the driver and tried to stop him,
+------------------------------------------------------------
+Video: 0000063-2022.6.14.mp4
+Ground truth: Lemonie posted a paper that is sort of a transcript
+Prediction: LeMone was a former member of the National Football League
+------------------------------------------------------------
+Video: 0000064-2022.6.14.mp4
+Ground truth: of different questions he asked LaMDA.
+Prediction: and other related laws,
+------------------------------------------------------------
+Video: 0000067-2022.6.14.mp4
+Ground truth: to help me focus on helping others.”
+Prediction: a military hospital.
+------------------------------------------------------------
+Video: 0000073-2022.6.14.mp4
+Ground truth: that he was placed on paid administrative leave,
+Prediction: and was sentenced to death,
+------------------------------------------------------------
+Video: 0000074-2022.6.14.mp4
+Ground truth: so he decided to go public.
+Prediction: and that he was not responsible for the shooting.
+------------------------------------------------------------
+Video: 0000076-2022.6.14.mp4
+Ground truth: there is no evidence to support Lemoine’s claims.
+Prediction: and no evidence of election fraud.
+------------------------------------------------------------
+Video: 0000079-2022.6.14.mp4
+Ground truth: believe that Lemoine is exaggerating.
+Prediction: He said he was not a leader or an actor.
+------------------------------------------------------------
+Video: 0000082-2022.6.14.mp4
+Ground truth: “spaz” in it.
+Prediction: the Spanish-speaking community.
+------------------------------------------------------------
+Video: 0000083-2022.6.14.mp4
+Ground truth: The term is considered derogatory
+Prediction: The driver said he was driving at a normal speed and
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/qwen2vl_dailymoth_results_20251010_113239.json
+
+📊 Calculating evaluation metrics...
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-DailyMoth (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1615
+  Precision:        0.1775
+  Recall:           0.1599
+  ROUGE-L F1:       0.1934
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2289
+  BLEU2: 0.0565
+  BLEU3: 0.0236
+  BLEU4: 0.0135
+
+📋 Summary:
+  Total Samples:    22
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251010_113239.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251010_113239.json
+
+🎯 Summary:
+   Total samples: 22
+   Successful: 22
+   Success rate: 100.0%
+🎉 DailyMoth-70h evaluation job completed!

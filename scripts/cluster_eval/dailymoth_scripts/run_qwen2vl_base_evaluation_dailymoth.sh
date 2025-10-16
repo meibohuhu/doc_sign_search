@@ -1,0 +1,63 @@
+#!/bin/bash -l
+# Qwen2.5-VL-3B-Instruct BASE Model Evaluation on DailyMoth-70h Dataset
+# Baseline comparison without fine-tuning
+
+#SBATCH --job-name=qwen2vl_base_eval_dailymoth
+#SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
+#SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
+#SBATCH --ntasks 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=16
+#SBATCH --time=04:00:00
+#SBATCH --gpus-per-node=a100:1
+#SBATCH --partition tier3
+#SBATCH --mem=64g
+
+spack load /lhqcen5
+spack load cuda@12.4.0/obxqih4
+
+# Set up environment paths
+export PATH="/home/mh2803/miniconda3/envs/qwenvl/bin:$PATH"
+export PYTHONPATH="/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src:/home/mh2803/projects/sign_language_llm/evaluation:$PYTHONPATH"
+export OMP_NUM_THREADS=8
+
+# GPU optimization settings
+export CUDA_VISIBLE_DEVICES=0
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True,max_split_size_mb:128
+export TORCH_USE_CUDA_DSA=1
+export TORCH_CUDNN_V8_API_ENABLED=1
+export CUDA_LAUNCH_BLOCKING=1
+
+# Change to project directory
+cd /home/mh2803/projects/sign_language_llm
+
+# Configuration for DailyMoth-70h dataset
+MODEL_BASE="Qwen/Qwen2.5-VL-3B-Instruct"
+VIDEO_FOLDER="/home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/"
+QUESTION_FILE="/home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json"
+OUT_DIR="/home/mh2803/projects/sign_language_llm/outputs/dailymoth_base/"
+
+echo "🎬 Qwen2.5-VL-3B-Instruct BASE Model Evaluation on DailyMoth-70h"
+echo "======================================================================"
+echo "Model: $MODEL_BASE (pretrained, NO fine-tuning)"
+echo "Video Folder: $VIDEO_FOLDER"
+echo "Question File: $QUESTION_FILE"
+echo "Output Dir: $OUT_DIR"
+echo ""
+
+# Create output directory if it doesn't exist
+mkdir -p "$OUT_DIR"
+
+# Run evaluation on full test set (4185 samples)
+# Adjust --max-samples as needed or remove it to process all samples
+/home/mh2803/miniconda3/envs/qwenvl/bin/python scripts/cluster_eval/qwen2vl_base_evaluation_dailymoth.py \
+    --model-base "$MODEL_BASE" \
+    --video-folder "$VIDEO_FOLDER" \
+    --question-file "$QUESTION_FILE" \
+    --out-dir "$OUT_DIR" \
+    --max-samples 2000 \
+    --enable-evaluation \
+    --video-fps 12
+
+echo "🎉 BASE model evaluation job completed!"
+

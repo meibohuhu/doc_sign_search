@@ -1,0 +1,134 @@
+[
+  {
+    "video": "0000004-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the water and then ran out of the building,",
+    "ground_truth": "by raging floodwaters that were powerful enough"
+  },
+  {
+    "video": "0000007-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they were not allowed to enter.",
+    "ground_truth": "and several tourists had to be evacuated."
+  },
+  {
+    "video": "0000011-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the top 138 fastest-growing occupations,",
+    "ground_truth": "crested at 13.88 feet,"
+  },
+  {
+    "video": "0000015-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a city near the border of Ukraine,",
+    "ground_truth": "A community near the gates of Yellowstone,"
+  },
+  {
+    "video": "0000020-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The jury said,",
+    "ground_truth": "News reports said"
+  },
+  {
+    "video": "0000025-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A man with a gun charged into the building and",
+    "ground_truth": "a man carrying a handgun entered a sports complex"
+  },
+  {
+    "video": "0000034-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Police responded within five minutes and",
+    "ground_truth": "Police officers were at the scene in two minutes"
+  },
+  {
+    "video": "0000035-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the French government in Gijon, Spain.",
+    "ground_truth": "and found the gunman in the gymnasium and shot at him."
+  },
+  {
+    "video": "0000040-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "There was no other person injured.",
+    "ground_truth": "Nobody was injured, only the gunman was killed."
+  },
+  {
+    "video": "0000041-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In Ukraine,",
+    "ground_truth": "The war in Ukraine is now"
+  },
+  {
+    "video": "0000056-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "that George's actual cause of death was",
+    "ground_truth": "that Google’s artificially intelligent chatbot named LaMDA"
+  },
+  {
+    "video": "0000058-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the brain and body,",
+    "ground_truth": "and is self-aware."
+  },
+  {
+    "video": "0000060-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he saw the driver and tried to stop him,",
+    "ground_truth": "to see if the robot would use discriminatory or hate speech,"
+  },
+  {
+    "video": "0000063-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "LeMone was a former member of the National Football League",
+    "ground_truth": "Lemonie posted a paper that is sort of a transcript"
+  },
+  {
+    "video": "0000064-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other related laws,",
+    "ground_truth": "of different questions he asked LaMDA."
+  },
+  {
+    "video": "0000067-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a military hospital.",
+    "ground_truth": "to help me focus on helping others.”"
+  },
+  {
+    "video": "0000073-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and was sentenced to death,",
+    "ground_truth": "that he was placed on paid administrative leave,"
+  },
+  {
+    "video": "0000074-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was not responsible for the shooting.",
+    "ground_truth": "so he decided to go public."
+  },
+  {
+    "video": "0000076-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and no evidence of election fraud.",
+    "ground_truth": "there is no evidence to support Lemoine’s claims."
+  },
+  {
+    "video": "0000079-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he was not a leader or an actor.",
+    "ground_truth": "believe that Lemoine is exaggerating."
+  },
+  {
+    "video": "0000082-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Spanish-speaking community.",
+    "ground_truth": "“spaz” in it."
+  },
+  {
+    "video": "0000083-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The driver said he was driving at a normal speed and",
+    "ground_truth": "The term is considered derogatory"
+  }
+]

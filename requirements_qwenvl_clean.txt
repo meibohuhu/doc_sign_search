@@ -1,0 +1,59 @@
+# Core ML/DL libraries
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+torchaudio==2.6.0+cu124
+transformers @ git+https://github.com/huggingface/transformers@f22cb1e8689905091acb07e238b670aadde1e4ee
+
+# Training and optimization
+accelerate==1.10.1
+deepspeed==0.17.6
+peft==0.17.1
+flash_attn==2.7.4.post1
+liger_kernel==0.6.2
+
+# Qwen2VL specific
+qwen-vl-utils==0.0.14
+
+# Video processing
+decord==0.6.0
+av==15.1.0
+opencv-python==4.12.0.88
+
+# Data processing
+datasets==4.1.1
+numpy==2.1.2
+pandas==2.3.3
+pillow==11.0.0
+
+# Evaluation
+evaluate==0.4.6
+bert-score==0.3.13
+rouge_score==0.1.2
+sacrebleu==2.5.1
+
+# Utilities
+tqdm==4.67.1
+safetensors==0.6.2
+einops==0.8.1
+tokenizers==0.22.1
+huggingface-hub==1.0.0rc2
+
+# NVIDIA CUDA libraries
+nvidia-cublas-cu12==12.4.5.8
+nvidia-cuda-cupti-cu12==12.4.127
+nvidia-cuda-nvrtc-cu12==12.4.127
+nvidia-cuda-runtime-cu12==12.4.127
+nvidia-cudnn-cu12==9.1.0.70
+nvidia-cufft-cu12==11.2.1.3
+nvidia-curand-cu12==10.3.5.147
+nvidia-cusolver-cu12==11.6.1.9
+nvidia-cusparse-cu12==12.3.1.170
+nvidia-cusparselt-cu12==0.6.2
+nvidia-nccl-cu12==2.21.5
+nvidia-nvjitlink-cu12==12.4.127
+nvidia-nvtx-cu12==12.4.127
+
+# Other dependencies
+triton==3.2.0
+trl==0.23.0
+wandb==0.22.1

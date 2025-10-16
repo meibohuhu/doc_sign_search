@@ -1,0 +1,32 @@
+{
+  "model_name": "Qwen2VL-Checkpoint-5000",
+  "evaluation_style": "SSVP-SLT",
+  "evaluation_metrics": {
+    "exact_match": 0.0,
+    "f1_score": 0.06708722109533469,
+    "precision": 0.08388888888888889,
+    "recall": 0.06185897435897436,
+    "bleu_scores": {
+      "bleu1": 0.10689736318760402,
+      "bleu2": 0.03852785634690222,
+      "bleu3": 0.017917677983987607,
+      "bleu4": 0.010597389178104256
+    },
+    "rouge_l_f1": 0.06475837712119907,
+    "bleurt_score": 0.0,
+    "total_samples": 10
+  },
+  "summary": {
+    "exact_match": 0.0,
+    "f1_score": 0.06708722109533469,
+    "precision": 0.08388888888888889,
+    "recall": 0.06185897435897436,
+    "rouge_l_f1": 0.06475837712119907,
+    "bleurt_score": 0.0,
+    "bleu_1": 0.10689736318760402,
+    "bleu_2": 0.03852785634690222,
+    "bleu_3": 0.017917677983987607,
+    "bleu_4": 0.010597389178104256,
+    "total_samples": 10
+  }
+}

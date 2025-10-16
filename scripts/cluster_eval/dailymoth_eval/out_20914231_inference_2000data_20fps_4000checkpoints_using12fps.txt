@@ -1,0 +1,2072 @@
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==============================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+✅ Checkpoint found: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Evaluation on DailyMoth-70h Dataset
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_4xa100_20fps/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/test_ssvp.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/
+
+🚀 Loading model...
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+✅ Loaded non-LoRA weights successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 500 samples (from 4185 total)
+📋 Processing 500 samples
+🎬 Starting evaluation on 500 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000004-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000004-2022.6.14.mp4
+Ground truth: by raging floodwaters that were powerful enough
+Prediction: the water and then ran out of the building,
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000007-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000007-2022.6.14.mp4
+Ground truth: and several tourists had to be evacuated.
+Prediction: and that they were not allowed to enter.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/videos/00000/0000011-2022.6.14.mp4
+🔍 Video exists: True
+Video: 0000011-2022.6.14.mp4
+Ground truth: crested at 13.88 feet,
+Prediction: the top 138 fastest-growing occupations,
+------------------------------------------------------------
+Video: 0000015-2022.6.14.mp4
+Ground truth: A community near the gates of Yellowstone,
+Prediction: a city near the border of Ukraine,
+------------------------------------------------------------
+Video: 0000020-2022.6.14.mp4
+Ground truth: News reports said
+Prediction: The jury said,
+------------------------------------------------------------
+Video: 0000025-2022.6.14.mp4
+Ground truth: a man carrying a handgun entered a sports complex
+Prediction: A man with a gun charged into the building and
+------------------------------------------------------------
+Video: 0000034-2022.6.14.mp4
+Ground truth: Police officers were at the scene in two minutes
+Prediction: Police responded within five minutes and
+------------------------------------------------------------
+Video: 0000035-2022.6.14.mp4
+Ground truth: and found the gunman in the gymnasium and shot at him.
+Prediction: the French government in Gijon, Spain.
+------------------------------------------------------------
+Video: 0000040-2022.6.14.mp4
+Ground truth: Nobody was injured, only the gunman was killed.
+Prediction: There was no other person injured.
+------------------------------------------------------------
+Video: 0000041-2022.6.14.mp4
+Ground truth: The war in Ukraine is now
+Prediction: The war in Ukraine is ongoing,
+------------------------------------------------------------
+Video: 0000056-2022.6.14.mp4
+Ground truth: that Google’s artificially intelligent chatbot named LaMDA
+Prediction: that George's actual cause of death was
+------------------------------------------------------------
+Video: 0000058-2022.6.14.mp4
+Ground truth: and is self-aware.
+Prediction: the brain and body,
+------------------------------------------------------------
+Video: 0000060-2022.6.14.mp4
+Ground truth: to see if the robot would use discriminatory or hate speech,
+Prediction: and that he saw the driver and tried to stop him,
+------------------------------------------------------------
+Video: 0000063-2022.6.14.mp4
+Ground truth: Lemonie posted a paper that is sort of a transcript
+Prediction: LeMone was a former member of the National Football League
+------------------------------------------------------------
+Video: 0000064-2022.6.14.mp4
+Ground truth: of different questions he asked LaMDA.
+Prediction: and other related laws,
+------------------------------------------------------------
+Video: 0000067-2022.6.14.mp4
+Ground truth: to help me focus on helping others.”
+Prediction: a military hospital.
+------------------------------------------------------------
+Video: 0000073-2022.6.14.mp4
+Ground truth: that he was placed on paid administrative leave,
+Prediction: and was sentenced to death,
+------------------------------------------------------------
+Video: 0000074-2022.6.14.mp4
+Ground truth: so he decided to go public.
+Prediction: and that he was not responsible for the shooting.
+------------------------------------------------------------
+Video: 0000076-2022.6.14.mp4
+Ground truth: there is no evidence to support Lemoine’s claims.
+Prediction: and no evidence of election fraud.
+------------------------------------------------------------
+Video: 0000079-2022.6.14.mp4
+Ground truth: believe that Lemoine is exaggerating.
+Prediction: He said he was not a leader or an actor.
+------------------------------------------------------------
+Video: 0000082-2022.6.14.mp4
+Ground truth: “spaz” in it.
+Prediction: the Spanish-speaking community.
+------------------------------------------------------------
+Video: 0000083-2022.6.14.mp4
+Ground truth: The term is considered derogatory
+Prediction: The driver said he was driving at a normal speed and
+------------------------------------------------------------
+Video: 0000086-2022.6.14.mp4
+Ground truth: is based on “spastic diplegia, a form of cerebral palsy.”
+Prediction: the time on the state of South Dakota.
+------------------------------------------------------------
+Video: 0000087-2022.6.14.mp4
+Ground truth: The word is more commonly used as an insult in the U.K.
+Prediction: The increase is expected to be in line with UK inflation.
+------------------------------------------------------------
+Video: 0000091-2022.6.14.mp4
+Ground truth: hurtful language hurled towards them
+Prediction: and not human rights.
+------------------------------------------------------------
+Video: 0000097-2022.6.14.mp4
+Ground truth: she’s been waiting to see in the world.
+Prediction: and that they want to see it happen.
+------------------------------------------------------------
+Video: 0000124-2022.6.14.mp4
+Ground truth: said he hopes to one day own a NBA franchise.
+Prediction: He said he hopes to win the nomination.
+------------------------------------------------------------
+Video: 0000134-2022.6.14.mp4
+Ground truth: See you tomorrow and stay with the light.
+Prediction: See you tomorrow and stay with the light.
+------------------------------------------------------------
+Video: 0000140-2022.7.14.mp4
+Ground truth: their foundations.
+Prediction: and then collapsed.
+------------------------------------------------------------
+Video: 0000150-2022.7.14.mp4
+Ground truth: a 27-year-old in May.
+Prediction: the Las Vegas shooting in May.
+------------------------------------------------------------
+Video: 0000158-2022.7.14.mp4
+Ground truth: Police said the suspect was arrested on Tuesday,
+Prediction: Police said they arrested the suspect on Saturday and
+------------------------------------------------------------
+Video: 0000159-2022.7.14.mp4
+Ground truth: confessed to the crime, was charged with felony rape,
+Prediction: the coronavirus pandemic and the death of Floyd,
+------------------------------------------------------------
+Video: 0000164-2022.7.14.mp4
+Ground truth: Biden said, "Imagine being that little girl...
+Prediction: She said she is not thinking about her death and
+------------------------------------------------------------
+Video: 0000172-2022.7.14.mp4
+Ground truth: the presidency in 2024.
+Prediction: the Capitol in 2024.
+------------------------------------------------------------
+Video: 0000181-2022.7.14.mp4
+Ground truth: including three children.
+Prediction: in three separate incidents.
+------------------------------------------------------------
+Video: 0000185-2022.7.14.mp4
+Ground truth: including four children, were hospitalized.
+Prediction: four people were hospitalized.
+------------------------------------------------------------
+Video: 0000213-2022.7.14.mp4
+Ground truth: the Bill and Melinda Gates Foundation.
+Prediction: the Hebrew University of Jerusalem.
+------------------------------------------------------------
+Video: 0000216-2022.7.14.mp4
+Ground truth: fight diseases, reduce childhood deaths, address climate change,
+Prediction: a severe illness that can cause death and is caused by
+------------------------------------------------------------
+Video: 0000219-2022.7.14.mp4
+Ground truth: the world's richest people one day.
+Prediction: world's largest pharmaceutical company,
+------------------------------------------------------------
+Video: 0000220-2022.7.14.mp4
+Ground truth: He said he feels he has an obligation to return
+Prediction: and that he had a different opinion on
+------------------------------------------------------------
+Video: 0000223-2022.7.14.mp4
+Ground truth: currently has a net worth of $114 billion,
+Prediction: The next one is on November 14.
+------------------------------------------------------------
+Video: 0000239-2022.4.26.mp4
+Ground truth: it will become a privately held company.
+Prediction: a private company that sells electricity.
+------------------------------------------------------------
+Video: 0000250-2022.4.26.mp4
+Ground truth: which was permanently suspended after the January 6 attack
+Prediction: and that it is not sustainable and that it is against
+------------------------------------------------------------
+Video: 0000256-2022.4.26.mp4
+Ground truth: Truth Social and said he would stick with that platform.
+Prediction: the school's principal.
+------------------------------------------------------------
+Video: 0000259-2022.4.26.mp4
+Ground truth: to slavery.
+Prediction: the death penalty.
+------------------------------------------------------------
+Video: 0000261-2022.4.26.mp4
+Ground truth: staff, and leaders enslaved more than 70 individuals
+Prediction: the death of his wife and their 7-month-old baby
+------------------------------------------------------------
+Video: 0000273-2022.4.26.mp4
+Ground truth: about 12 seconds from the upcoming Marvel film,
+Prediction: the 11th Senate district in Maryland,
+------------------------------------------------------------
+Video: 0000286-2022.4.26.mp4
+Ground truth: punishable by death.
+Prediction: and that they were not killed.
+------------------------------------------------------------
+Video: 0000293-2022.4.26.mp4
+Ground truth: out in opposition of a new law that bans instruction or
+Prediction: the new law, but it is not clear whether
+------------------------------------------------------------
+Video: 0000294-2022.4.26.mp4
+Ground truth: classroom discussion of LGBTQ+ topics in elementary schools.
+Prediction: a public school district.
+------------------------------------------------------------
+Video: 0000298-2022.4.26.mp4
+Ground truth: to keep providing Ukraine with weapons and
+Prediction: the war with Ukraine and weapons supplies,
+------------------------------------------------------------
+Video: 0000302-2022.4.26.mp4
+Ground truth: an air base in Germany.
+Prediction: and other areas of Germany.
+------------------------------------------------------------
+Video: 0000312-2022.4.26.mp4
+Ground truth: Rep. Madison Cawthorn (R-NC) tried to bring a loaded gun
+Prediction: Madison, Wisconsin, is the first state to pass a law that
+------------------------------------------------------------
+Video: 0000319-2022.4.26.mp4
+Ground truth: of the gun.
+Prediction: and then shot himself.
+------------------------------------------------------------
+Video: 0000320-2022.4.26.mp4
+Ground truth: It is the second time Cawthorn was stopped trying to bring
+Prediction: the second time CNN has apologized for
+------------------------------------------------------------
+Video: 0000326-2022.12.28.mp4
+Ground truth: Here are today's top stories.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0000345-2022.12.28.mp4
+Ground truth: Fortunately, some who saw the livestream had a snowplow
+Prediction: The other person, a Lyft driver, was on his way to pick up
+------------------------------------------------------------
+Video: 0000350-2022.12.28.mp4
+Ground truth: she is now considered family.
+Prediction: and that it was a family tragedy.
+------------------------------------------------------------
+Video: 0000351-2022.12.28.mp4
+Ground truth: It just shows how dangerous the blizzard in Buffalo was.
+Prediction: This is the first time that the bill has passed in
+------------------------------------------------------------
+Video: 0000353-2022.12.28.mp4
+Ground truth: Another story that has recently emerged is
+Prediction: Another woman was killed and
+------------------------------------------------------------
+Video: 0000355-2022.12.28.mp4
+Ground truth: She was only six minutes away from her home
+Prediction: She was driving her car and her home when
+------------------------------------------------------------
+Video: 0000356-2022.12.28.mp4
+Ground truth: when she became stuck in the blizzard.
+Prediction: and then it came crashing down.
+------------------------------------------------------------
+Video: 0000359-2022.12.28.mp4
+Ground truth: She called 911 and waited for first responders
+Prediction: the phone and said, "I want to die."
+------------------------------------------------------------
+Video: 0000365-2022.12.28.mp4
+Ground truth: A city official said most of its snow-clearing equipment
+Prediction: A city official said the tree was cut down
+------------------------------------------------------------
+Video: 0000372-2022.12.28.mp4
+Ground truth: Benedict is 95 years old.
+Prediction: Bennett is 95 years old.
+------------------------------------------------------------
+Video: 0000375-2022.12.28.mp4
+Ground truth: He said he resigned due to declining health.
+Prediction: He was a former mayor of the city.
+------------------------------------------------------------
+Video: 0000380-2022.12.28.mp4
+Ground truth: about his past.
+Prediction: his former position.
+------------------------------------------------------------
+Video: 0000395-2022.12.28.mp4
+Ground truth: about the people's concerns.
+Prediction: people who are concerned about the future.
+------------------------------------------------------------
+Video: 0000398-2022.12.28.mp4
+Ground truth: The Supreme Court voted 5-4 to keep in effect a policy from
+Prediction: The Supreme Court is expected to hear arguments on
+------------------------------------------------------------
+Video: 0000399-2022.12.28.mp4
+Ground truth: the Trump administration that allowed the U.S. to
+Prediction: the Trump administration,
+------------------------------------------------------------
+Video: 0000407-2022.12.28.mp4
+Ground truth: at least until the end of June.
+Prediction: at the end of June.
+------------------------------------------------------------
+Video: 0000409-2022.12.28.mp4
+Ground truth: three liberal judges who dissented, saying
+Prediction: the three-day trial on Wednesday.
+------------------------------------------------------------
+Video: 0000420-2022.12.28.mp4
+Ground truth: The White House said they would comply with
+Prediction: The White House said they would work with
+------------------------------------------------------------
+Video: 0000421-2022.12.28.mp4
+Ground truth: the Supreme court's decision and would make preparations on
+Prediction: the Supreme Court, but they said they would not do it
+------------------------------------------------------------
+Video: 0000424-2022.12.28.mp4
+Ground truth: two Asian friends were eating at an In-N-Out restaurant and
+Prediction: two of them eating at an Italian restaurant,
+------------------------------------------------------------
+Video: 0000430-2022.12.28.mp4
+Ground truth: a clever comment, the man became angry and
+Prediction: and that they were not violent.
+------------------------------------------------------------
+Video: 0000441-2022.12.28.mp4
+Ground truth: a 40-year-old man from Denver named
+Prediction: 40 Black men named Deeter,
+------------------------------------------------------------
+Video: 0000445-2022.12.28.mp4
+Ground truth: the past about the man.
+Prediction: the previous election.
+------------------------------------------------------------
+Video: 0000446-2022.12.28.mp4
+Ground truth: Axios reported that two of the leaders of the plot to
+Prediction: Axios explained that two of the people who were arrested
+------------------------------------------------------------
+Video: 0000456-2022.12.28.mp4
+Ground truth: their roles in the plot to kidnap the governor at
+Prediction: the coronavirus rules in place at his golf club,
+------------------------------------------------------------
+Video: 0000554-2023.4.6.mp4
+Ground truth: It is April 6.
+Prediction: It is Thursday, April 6.
+------------------------------------------------------------
+Video: 0000559-2023.4.6.mp4
+Ground truth: On Wednesday, Indiana Gov. Holcomb signed a bill
+Prediction: On Wednesday, the Indiana governor, Holcomb,
+------------------------------------------------------------
+Video: 0000570-2023.4.6.mp4
+Ground truth: that ban gender-affirming care for minors.
+Prediction: and gender identity.
+------------------------------------------------------------
+Video: 0000587-2023.4.6.mp4
+Ground truth: The AG's office conducted an investigation
+Prediction: The AG's office is investigating
+------------------------------------------------------------
+Video: 0000589-2023.4.6.mp4
+Ground truth: on Wednesday.
+Prediction: on Wednesday.
+------------------------------------------------------------
+Video: 0000592-2023.4.6.mp4
+Ground truth: They said abusers were often given the opportunity to
+Prediction: The abusers were able to get people to sign up for
+------------------------------------------------------------
+Video: 0000595-2023.4.6.mp4
+Ground truth: what they have found.
+Prediction: and other health issues.
+------------------------------------------------------------
+Video: 0000611-2023.4.6.mp4
+Ground truth: luxury trips from a Republican megadonor for
+Prediction: the Louisiana Republican Party,
+------------------------------------------------------------
+Video: 0000630-2023.4.6.mp4
+Ground truth: Others said Thomas should be investigated or even impeached.
+Prediction: and said he was "stupid."
+------------------------------------------------------------
+Video: 0000642-2023.4.6.mp4
+Ground truth: His body was exhumed, investigated,
+Prediction: The body was found and
+------------------------------------------------------------
+Video: 0000643-2023.4.6.mp4
+Ground truth: and now it's reburied.
+Prediction: the right to vote.
+------------------------------------------------------------
+Video: 0000646-2023.4.6.mp4
+Ground truth: A Netflix documentary showed that some people suspected
+Prediction: The Netflix show was released on December 17.
+------------------------------------------------------------
+Video: 0000648-2023.4.6.mp4
+Ground truth: that Buster and Smith were in.
+Prediction: the Trumps and the Sussmanns,
+------------------------------------------------------------
+Video: 0000649-2023.4.6.mp4
+Ground truth: Smith was openly gay.
+Prediction: the Michigan House of Representatives.
+------------------------------------------------------------
+Video: 0000650-2023.4.6.mp4
+Ground truth: Buster recently said he denies any involvement and asked for
+Prediction: Barr said he is not aware of any specific allegations
+------------------------------------------------------------
+Video: 0000651-2023.4.6.mp4
+Ground truth: the media to stop publishing rumors.
+Prediction: and the school district.
+------------------------------------------------------------
+Video: 0000659-2023.4.6.mp4
+Ground truth: kidnapping a wild platypus and showing it off to others.
+Prediction: the World Health Organization (WHO) and other organizations
+------------------------------------------------------------
+Video: 0000675-2023.4.6.mp4
+Ground truth: That is all the top stories for today.
+Prediction: That is all the top stories for today.
+------------------------------------------------------------
+Video: 0000677-2022.9.21.mp4
+Ground truth: It is Wednesday, September 21.
+Prediction: It is Wednesday, September 29.
+------------------------------------------------------------
+Video: 0000685-2022.9.21.mp4
+Ground truth: News analysts said Putin may be making this move
+Prediction: News analysts said it is possible that Putin is trying to
+------------------------------------------------------------
+Video: 0000703-2022.9.21.mp4
+Ground truth: a Category 1 storm, has strengthened into
+Prediction: a missile strike, but it is stronger than
+------------------------------------------------------------
+Video: 0000707-2022.9.21.mp4
+Ground truth: tomorrow night or early Friday and then
+Prediction: the other night or on Friday evening,
+------------------------------------------------------------
+Video: 0000708-2022.9.21.mp4
+Ground truth: approach Canada's Atlantic provinces late Friday.
+Prediction: the Canadian Atlantic region.
+------------------------------------------------------------
+Video: 0000711-2022.9.21.mp4
+Ground truth: As of today, only 26% of the island had power.
+Prediction: Today is World Mental Health Day.
+------------------------------------------------------------
+Video: 0000714-2022.9.21.mp4
+Ground truth: One person was killed after he was swept away
+Prediction: A person who was in the water,
+------------------------------------------------------------
+Video: 0000716-2022.9.21.mp4
+Ground truth: the second burned to death after he tried to fill
+Prediction: The two people died because they were on a hiking trail
+------------------------------------------------------------
+Video: 0000733-2022.9.21.mp4
+Ground truth: The FDA said they've received reports of teenagers
+Prediction: the FDA last year.
+------------------------------------------------------------
+Video: 0000750-2022.9.21.mp4
+Ground truth: The AG said her office has made a criminal referral to
+Prediction: The AG's office said they have evidence of
+------------------------------------------------------------
+Video: 0000751-2022.9.21.mp4
+Ground truth: the U.S. Department of Justice and the IRS.
+Prediction: the U.S. Justice Department.
+------------------------------------------------------------
+Video: 0000753-2022.9.21.mp4
+Ground truth: has nothing to do with facts or the law.
+Prediction: and that it is not a "fashion statement."
+------------------------------------------------------------
+Video: 0000754-2022.9.21.mp4
+Ground truth: She said she looks forward to defending Trump in
+Prediction: The law says that people who are in the U.S.
+------------------------------------------------------------
+Video: 0000755-2022.9.21.mp4
+Ground truth: the judicial system.
+Prediction: the Supreme Court.
+------------------------------------------------------------
+Video: 0000756-2022.9.21.mp4
+Ground truth: The New York Yankees star player Aaron Judge hit
+Prediction: In New York, actor Aaron Judge was sentenced
+------------------------------------------------------------
+Video: 0000770-2022.9.21.mp4
+Ground truth: That is all the top stories for today.
+Prediction: That is all the top stories for today.
+------------------------------------------------------------
+Video: 0000878-2022.10.27.mp4
+Ground truth: It is Thursday, October 27.
+Prediction: It is Thursday, October 27.
+------------------------------------------------------------
+Video: 0000879-2022.10.27.mp4
+Ground truth: Here are today's top stories.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0000880-2022.10.27.mp4
+Ground truth: Elon Musk visited the headquarters of Twitter
+Prediction: Elon Musk, who is the CEO of Twitter,
+------------------------------------------------------------
+Video: 0000895-2022.10.27.mp4
+Ground truth: Donald Trump's account,
+Prediction: the Donald Trump Organization,
+------------------------------------------------------------
+Video: 0000902-2022.10.27.mp4
+Ground truth: which borders Texas' southern tip.
+Prediction: and the U.S. and other countries.
+------------------------------------------------------------
+Video: 0000906-2022.10.27.mp4
+Ground truth: Legislators moved to another room to finish their debate
+Prediction: The National Transportation Safety Board (NTSB)
+------------------------------------------------------------
+Video: 0000907-2022.10.27.mp4
+Ground truth: and vote.
+Prediction: and then removed it.
+------------------------------------------------------------
+Video: 0000910-2022.10.27.mp4
+Ground truth: plants in the Midwest.
+Prediction: in the U.S. about 50% of the time.
+------------------------------------------------------------
+Video: 0000912-2022.10.27.mp4
+Ground truth: loads of frozen beef were stolen in Nebraska.
+Prediction: the FBI's investigation in New England.
+------------------------------------------------------------
+Video: 0000923-2022.10.27.mp4
+Ground truth: after taxes are taken out.
+Prediction: and other taxes.
+------------------------------------------------------------
+Video: 0000928-2022.10.27.mp4
+Ground truth: So someone has to be really, really, really lucky.
+Prediction: The boy was taken away.
+------------------------------------------------------------
+Video: 0000930-2022.10.27.mp4
+Ground truth: who is from Tennessee, was sentenced to 7.5 years
+Prediction: The testimony was given by seven people who were
+------------------------------------------------------------
+Video: 0000936-2022.10.27.mp4
+Ground truth: Fanone sustained a heart attack on that day and
+Prediction: The police officer was not emotionally affected.
+------------------------------------------------------------
+Video: 0000937-2022.10.27.mp4
+Ground truth: has since resigned from the D.C. police department.
+Prediction: and that he was not a DC official.
+------------------------------------------------------------
+Video: 0000944-2022.10.27.mp4
+Ground truth: burst into flames.
+Prediction: The fire was extinguished.
+------------------------------------------------------------
+Video: 0000957-2022.10.27.mp4
+Ground truth: they do not know if he has retained an attorney.
+Prediction: and that he was not a threat.
+------------------------------------------------------------
+Video: 0001176-2022.12.15.mp4
+Ground truth: Here are today's top stories.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0001181-2022.12.15.mp4
+Ground truth: called ByteDance.
+Prediction: the Biden administration.
+------------------------------------------------------------
+Video: 0001190-2022.12.15.mp4
+Ground truth: TikTok has over 1 billion monthly users in the world.
+Prediction: TikTok is worth about $100 billion worldwide.
+------------------------------------------------------------
+Video: 0001199-2022.12.15.mp4
+Ground truth: facility went up into flames on Tuesday morning and
+Prediction: and that he was burned on Tuesday morning.
+------------------------------------------------------------
+Video: 0001203-2022.12.15.mp4
+Ground truth: An NYPD official said there was a lot of biological evidence
+Prediction: A New York police official said the bus was full of
+------------------------------------------------------------
+Video: 0001204-2022.12.15.mp4
+Ground truth: from past crimes, burglaries, shooting incidents, and others.
+Prediction: and that the crime was motivated by hate.
+------------------------------------------------------------
+Video: 0001207-2022.12.15.mp4
+Ground truth: Firefighters tried to stop the fire by going inside
+Prediction: The fire was extinguished and
+------------------------------------------------------------
+Video: 0001210-2022.12.15.mp4
+Ground truth: Three marine fireboats and drones were brought in
+Prediction: Three marine animals, dolphins and porpoises, were found
+------------------------------------------------------------
+Video: 0001214-2022.12.15.mp4
+Ground truth: Eight people had minor injuries from the fire.
+Prediction: Eight people were injured and hospitalized.
+------------------------------------------------------------
+Video: 0001219-2022.12.15.mp4
+Ground truth: Elon Musk's Twitter suspended a popular Twitter account
+Prediction: Elon Musk tweeted that he would suspend Twitter accounts
+------------------------------------------------------------
+Video: 0001224-2022.12.15.mp4
+Ground truth: he offered the account owner, 20-year-old Jack Sweeney,
+Prediction: the abortion rights of transgender women,
+------------------------------------------------------------
+Video: 0001225-2022.12.15.mp4
+Ground truth: $5,000 to delete his account.
+Prediction: $5,000 worth of drugs.
+------------------------------------------------------------
+Video: 0001230-2022.12.15.mp4
+Ground truth: What changed?
+Prediction: the health of the planet.
+------------------------------------------------------------
+Video: 0001261-2022.12.15.mp4
+Ground truth: kill a sitting governor is a threat to democracy itself.
+Prediction: the Senate, and that they would defeat the Democratic Party.
+------------------------------------------------------------
+Video: 0001278-2022.12.15.mp4
+Ground truth: Arizona elected Katie Hobbs (D) as their new governor and
+Prediction: the state of Kentucky and the new governor, Andy Beshear.
+------------------------------------------------------------
+Video: 0001291-2022.12.15.mp4
+Ground truth: That is all the top stories for today.
+Prediction: That is all the top stories for today.
+------------------------------------------------------------
+Video: 0001304-2023.3.13.mp4
+Ground truth: President Biden approved a controversial oil and gas
+Prediction: The Biden administration is working with oil and gas companies
+------------------------------------------------------------
+Video: 0001312-2023.3.13.mp4
+Ground truth: There are many people who say this is the wrong move and
+Prediction: Many people said it was wrong and that
+------------------------------------------------------------
+Video: 0001314-2023.3.13.mp4
+Ground truth: communities and our climate.
+Prediction: and other cities.
+------------------------------------------------------------
+Video: 0001315-2023.3.13.mp4
+Ground truth: President Biden gave an address today to try
+Prediction: The president gave a speech today and
+------------------------------------------------------------
+Video: 0001318-2023.3.13.mp4
+Ground truth: There was another bank in New York,
+Prediction: The second is a bill in New York that would require
+------------------------------------------------------------
+Video: 0001323-2023.3.13.mp4
+Ground truth: Federal officials said everyone who had deposits in the banks
+Prediction: The federal government is paying for all of it,
+------------------------------------------------------------
+Video: 0001349-2023.3.13.mp4
+Ground truth: They called 911 but the child died at the scene.
+Prediction: The phone number was 911 and it was answered by
+------------------------------------------------------------
+Video: 0001360-2023.3.13.mp4
+Ground truth: The man was taken to a hospital and it was feared that
+Prediction: The man was wearing a white shirt and
+------------------------------------------------------------
+Video: 0001365-2023.3.13.mp4
+Ground truth: An Ohio official said zebras are not on the list of dangerous,
+Prediction: A judge in Oregon said the law is unconstitutional and
+------------------------------------------------------------
+Video: 0001369-2023.2.13.mp4
+Ground truth: It is February 13.
+Prediction: It is February 13.
+------------------------------------------------------------
+Video: 0001389-2023.2.13.mp4
+Ground truth: The object is described as "cylindrical" and
+Prediction: The third is called the Cylindrical Window,
+------------------------------------------------------------
+Video: 0001390-2023.2.13.mp4
+Ground truth: was smaller, but similar to the South Carolina balloon.
+Prediction: the other two states that have similar laws.
+------------------------------------------------------------
+Video: 0001396-2023.2.13.mp4
+Ground truth: So, it is three objects shot down in three consecutive days.
+Prediction: The three were shot and killed in separate incidents.
+------------------------------------------------------------
+Video: 0001407-2023.2.13.mp4
+Ground truth: southeastern Turkiye, near its border with Syria.
+Prediction: in the eastern part of the country.
+------------------------------------------------------------
+Video: 0001421-2023.2.13.mp4
+Ground truth: donated $30 million to help quake victims.
+Prediction: a $30 million settlement with the victims' families.
+------------------------------------------------------------
+Video: 0001428-2023.2.13.mp4
+Ground truth: Some political leaders have blamed Turkish President Erdogan
+Prediction: The doctor said he believes that the death was
+------------------------------------------------------------
+Video: 0001429-2023.2.13.mp4
+Ground truth: for failing to enforce building regulations.
+Prediction: the right to vote and to run for office.
+------------------------------------------------------------
+Video: 0001431-2023.2.13.mp4
+Ground truth: committed suicide on February 2.
+Prediction: on February 2.
+------------------------------------------------------------
+Video: 0001435-2023.2.13.mp4
+Ground truth: at her school in Ocean County.
+Prediction: in Oregon and Kentucky.
+------------------------------------------------------------
+Video: 0001446-2023.2.13.mp4
+Ground truth: The father said he will "not sleep' until
+Prediction: The man said he would not apologize and that
+------------------------------------------------------------
+Video: 0001469-2023.2.13.mp4
+Ground truth: It's a coincidence.
+Prediction: and died of natural causes.
+------------------------------------------------------------
+Video: 0001471-2023.2.13.mp4
+Ground truth: Super Bowl 57 last night in Glendale, Arizona.
+Prediction: the 57th year of the Golden Globes.
+------------------------------------------------------------
+Video: 0001473-2023.2.13.mp4
+Ground truth: the game's MVP.
+Prediction: the MVP award.
+------------------------------------------------------------
+Video: 0001504-2022.6.29.mp4
+Ground truth: News reports said the Secret Service agent in the limo,
+Prediction: The news said the private security company in Los Angeles
+------------------------------------------------------------
+Video: 0001513-2022.6.29.mp4
+Ground truth: whether they’ll call upon Engel and the limo driver to testify.
+Prediction: and will be sentenced on Monday in New York City.
+------------------------------------------------------------
+Video: 0001517-2022.6.29.mp4
+Ground truth: A 29-year-old Amazon worker and gun owner was arrested over
+Prediction: The 29-year-old woman was a gymnast and
+------------------------------------------------------------
+Video: 0001524-2022.6.29.mp4
+Ground truth: that he thought it’d be a good idea to
+Prediction: that he thought it was good.
+------------------------------------------------------------
+Video: 0001536-2022.6.29.mp4
+Ground truth: had a history of mental illness,
+Prediction: He said he is a "good man."
+------------------------------------------------------------
+Video: 0001539-2022.6.29.mp4
+Ground truth: With all this information,
+Prediction: The shooting happened near a school.
+------------------------------------------------------------
+Video: 0001540-2022.6.29.mp4
+Ground truth: law enforcement arrested Aceves and
+Prediction: Police arrested the suspect.
+------------------------------------------------------------
+Video: 0001542-2022.6.29.mp4
+Ground truth: He is jailed on a $50,000 bond.
+Prediction: The price is now about $500,000.
+------------------------------------------------------------
+Video: 0001543-2022.6.29.mp4
+Ground truth: In Florida, there is a law
+Prediction: in Florida is now a law,
+------------------------------------------------------------
+Video: 0001549-2022.6.29.mp4
+Ground truth: and the cop can hear it, then they can issue the ticket.
+Prediction: Police officers were able to pull them out.
+------------------------------------------------------------
+Video: 0001555-2022.6.29.mp4
+Ground truth: would be stationed in Poland.
+Prediction: the U.S. military in Poland,
+------------------------------------------------------------
+Video: 0001583-2022.6.29.mp4
+Ground truth: The two women were from India and were charged with
+Prediction: Two women from Alaska were sentenced today
+------------------------------------------------------------
+Video: 0001585-2022.6.29.mp4
+Ground truth: The women are facing a maximum sentence of up to 10 years and
+Prediction: Women who are under 10 years of age can be sentenced
+------------------------------------------------------------
+Video: 0001612-2022.2.8.mp4
+Ground truth: Pfizer said it predicts that in 2022,
+Prediction: The fire department said they are still working on
+------------------------------------------------------------
+Video: 0001625-2022.2.8.mp4
+Ground truth: Canadian truck drivers protesting Covid-19 related
+Prediction: The Canadian government has announced that it will ban
+------------------------------------------------------------
+Video: 0001626-2022.2.8.mp4
+Ground truth: rules have blocked the Ambassador Bridge
+Prediction: the door and locked it with a master key,
+------------------------------------------------------------
+Video: 0001628-2022.2.8.mp4
+Ground truth: It is the busiest international crossing in North America.
+Prediction: the last time it was used in the U.S. was in 2017.
+------------------------------------------------------------
+Video: 0001636-2022.2.8.mp4
+Ground truth: the border and called the protesters
+Prediction: and that he was wrong.
+------------------------------------------------------------
+Video: 0001637-2022.2.8.mp4
+Ground truth: a "small, fringe minority."
+Prediction: the end of May.
+------------------------------------------------------------
+Video: 0001640-2022.2.8.mp4
+Ground truth: (meaning no semi-trucks).
+Prediction: and that it was a tragic accident.
+------------------------------------------------------------
+Video: 0002136-2022.4.5.mp4
+Ground truth: It is currently in the jury selection phase and
+Prediction: The jury is still deliberating.
+------------------------------------------------------------
+Video: 0002149-2022.4.5.mp4
+Ground truth: that is set to begin this Thursday.
+Prediction: on Thursday.
+------------------------------------------------------------
+Video: 0002159-2022.4.5.mp4
+Ground truth: and killed in Bucha, which is in the Kyiv region.
+Prediction: a building in Bucha, which is near Kyiv.
+------------------------------------------------------------
+Video: 0002161-2022.4.5.mp4
+Ground truth: the bodies of those who were killed from streets
+Prediction: the body on the road and then killed the driver,
+------------------------------------------------------------
+Video: 0002172-2022.4.5.mp4
+Ground truth: and restrictions that blocked many migrants
+Prediction: a "no-fly zone" and that it would be a "military mission."
+------------------------------------------------------------
+Video: 0002186-2022.4.5.mp4
+Ground truth: "unmitigated chaos and catastrophe" at the border.
+Prediction: and that it was a chaotic scene.
+------------------------------------------------------------
+Video: 0002191-2022.4.5.mp4
+Ground truth: those aged 60 and older could significantly increase
+Prediction: The U.S. has over 100,000 people who have died from
+------------------------------------------------------------
+Video: 0002198-2022.4.5.mp4
+Ground truth: from walking and that the benefits plateau
+Prediction: the Russian invasion of Ukraine,
+------------------------------------------------------------
+Video: 0002200-2022.4.5.mp4
+Ground truth: This means you get the most health benefits at 7,000 steps
+Prediction: the health of the planet and human life,
+------------------------------------------------------------
+Video: 0002204-2022.4.5.mp4
+Ground truth: with a fitness watch.
+Prediction: and then went back to work.
+------------------------------------------------------------
+Video: 0002210-2022.4.5.mp4
+Ground truth: and provide health insurance coverage for Americans.
+Prediction: the Supreme Court.
+------------------------------------------------------------
+Video: 0002235-2022.6.30.mp4
+Ground truth: to serve on the Supreme Court of the United States,
+Prediction: the Supreme Court.
+------------------------------------------------------------
+Video: 0002243-2022.6.30.mp4
+Ground truth: teenagers' hopes and dreams and trapped them in his house
+Prediction: Tsunami's own "X" logo on it,
+------------------------------------------------------------
+Video: 0002254-2022.6.30.mp4
+Ground truth: but was able to evade punishment.
+Prediction: and not for the sake of the country.
+------------------------------------------------------------
+Video: 0002260-2022.6.30.mp4
+Ground truth: President Biden said he supports changing Senate filibuster rules
+Prediction: President Biden has supported the bill,
+------------------------------------------------------------
+Video: 0002262-2022.6.30.mp4
+Ground truth: abortion rights without needing at least 60 Senators' support.
+Prediction: the school's board of directors,
+------------------------------------------------------------
+Video: 0002264-2022.6.30.mp4
+Ground truth: because Vice President Kamala Harris is able to be
+Prediction: The other victim was a 69-year-old woman.
+------------------------------------------------------------
+Video: 0002271-2022.6.30.mp4
+Ground truth: which has to do with contraceptives (birth control).
+Prediction: the "C" in "conceal."
+------------------------------------------------------------
+Video: 0002276-2022.6.30.mp4
+Ground truth: The Supreme Court ruled today to limit how much authority
+Prediction: The Supreme Court today heard arguments on
+------------------------------------------------------------
+Video: 0002290-2022.6.30.mp4
+Ground truth: for crimes that they commit on tribal land
+Prediction: the crime that they committed on the trail,
+------------------------------------------------------------
+Video: 0002300-2022.6.30.mp4
+Ground truth: It is worth an estimated $20 million today.
+Prediction: The average price of a home today is
+------------------------------------------------------------
+Video: 0002302-2022.6.30.mp4
+Ground truth: Charles and Willa Bruce, owned the property and turned it into
+Prediction: Chase Wilbur, who was a student at the school,
+------------------------------------------------------------
+Video: 0002337-2022.7.4.mp4
+Ground truth: it has caused protests and controversy in the city.
+Prediction: and that they were protesting in the city.
+------------------------------------------------------------
+Video: 0002338-2022.7.4.mp4
+Ground truth: The incident took place on Monday, June 27.
+Prediction: The incident took place on June 7.
+------------------------------------------------------------
+Video: 0002344-2022.7.4.mp4
+Ground truth: Eventually, Walker's car stopped and he ran outside
+Prediction: the shooting and that the shooter was stopped by
+------------------------------------------------------------
+Video: 0002346-2022.7.4.mp4
+Ground truth: Several police officers ran after him,
+Prediction: and then they were shot at.
+------------------------------------------------------------
+Video: 0002357-2022.7.4.mp4
+Ground truth: On Saturday, President Biden tweeted that
+Prediction: On Saturday, the Biden administration announced that
+------------------------------------------------------------
+Video: 0002364-2022.7.4.mp4
+Ground truth: saying the Biden White House is either sending out
+Prediction: and Biden's White House,
+------------------------------------------------------------
+Video: 0002378-2022.7.4.mp4
+Ground truth: but that it typically takes time for gas prices to go down.
+Prediction: and that it is not an official law.
+------------------------------------------------------------
+Video: 0002382-2022.7.4.mp4
+Ground truth: or canceling the Keystone Pipeline.
+Prediction: and that they would not release Kyle.
+------------------------------------------------------------
+Video: 0002390-2022.7.4.mp4
+Ground truth: The three victims were a 17-year-old male teenager,
+Prediction: The three victims were 17-year-old Malene and 18-year-old
+------------------------------------------------------------
+Video: 0002403-2022.7.4.mp4
+Ground truth: There are 17 hikers who are currently missing
+Prediction: There were 17 people killed and
+------------------------------------------------------------
+Video: 0002405-2022.7.4.mp4
+Ground truth: First responders said conditions were too dangerous for them
+Prediction: The district attorney said the crime was committed last month,
+------------------------------------------------------------
+Video: 0002406-2022.7.4.mp4
+Ground truth: to search on Monday, so the response was delayed.
+Prediction: the building and then left.
+------------------------------------------------------------
+Video: 0002409-2022.7.4.mp4
+Ground truth: The glacier has been melting for many years and
+Prediction: The city of Greenville is located in
+------------------------------------------------------------
+Video: 0002424-2022.7.4.mp4
+Ground truth: that authorities would investigate.
+Prediction: the investigation.
+------------------------------------------------------------
+Video: 0002652-2022.3.23.mp4
+Ground truth: Here are today's top stories.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0002664-2022.3.23.mp4
+Ground truth: News videos showed several homes with severe damage and
+Prediction: The video shows several homes that were damaged,
+------------------------------------------------------------
+Video: 0002674-2022.3.23.mp4
+Ground truth: of key cities that Russia hoped to easily conquer,
+Prediction: The city of Kherson is a major industrial center
+------------------------------------------------------------
+Video: 0002677-2022.3.23.mp4
+Ground truth: missile attacks or constant shelling of cities.
+Prediction: and other support services.
+------------------------------------------------------------
+Video: 0002692-2022.3.23.mp4
+Ground truth: from participating in high school women's sports leagues.
+Prediction: in Houston with the team.
+------------------------------------------------------------
+Video: 0002696-2022.3.23.mp4
+Ground truth: directed at few people,
+Prediction: the person who was injured.
+------------------------------------------------------------
+Video: 0002699-2022.3.23.mp4
+Ground truth: playing high school, and that only one is involved
+Prediction: the hospital with four other patients,
+------------------------------------------------------------
+Video: 0002700-2022.3.23.mp4
+Ground truth: in girls' sports.
+Prediction: and was married to a girl.
+------------------------------------------------------------
+Video: 0002702-2022.3.23.mp4
+Ground truth: transgender youth and said "I want them to live."
+Prediction: the women's team.
+------------------------------------------------------------
+Video: 0002705-2022.3.23.mp4
+Ground truth: 11 other states have passed and signed bans on transgender girls
+Prediction: 11 Americans who were killed in a school shooting in
+------------------------------------------------------------
+Video: 0002707-2022.3.23.mp4
+Ground truth: Actress Amanda Bynes' nine-year conservatorship has
+Prediction: Actor Mandy Moore, who played the role of Samantha in
+------------------------------------------------------------
+Video: 0002709-2022.3.23.mp4
+Ground truth: it was "no longer needed or required."
+Prediction: the most important thing.
+------------------------------------------------------------
+Video: 0002718-2022.3.23.mp4
+Ground truth: 13-year conservatorship ending in November 2021.
+Prediction: the year 2021.
+------------------------------------------------------------
+Video: 0002725-2022.3.23.mp4
+Ground truth: suddenly plunge in a nosedive in the middle of its flight.
+Prediction: the front of the building.
+------------------------------------------------------------
+Video: 0002726-2022.3.23.mp4
+Ground truth: Chinese officials have invited U.S. officials to come to
+Prediction: The Supreme Court is expected to hear arguments on
+------------------------------------------------------------
+Video: 0002808-2022.4.7.mp4
+Ground truth: the first Black woman justice when she takes over
+Prediction: the last Black woman to win the title,
+------------------------------------------------------------
+Video: 0002818-2022.4.7.mp4
+Ground truth: The fox that was captured near the U.S. Capitol was euthanized
+Prediction: The boy was found near the Capitol and died of
+------------------------------------------------------------
+Video: 0002828-2022.4.7.mp4
+Ground truth: from playing in girls and women's sports from
+Prediction: in the U.S. and women with children,
+------------------------------------------------------------
+Video: 0002831-2022.4.7.mp4
+Ground truth: because it discriminates against transgender children.
+Prediction: the death penalty.
+------------------------------------------------------------
+Video: 0002832-2022.4.7.mp4
+Ground truth: He also said transgender children deserve compassion,
+Prediction: The governor said he is concerned about
+------------------------------------------------------------
+Video: 0002841-2022.4.7.mp4
+Ground truth: North Dakota is a thescelosaurus that died
+Prediction: Donald Trump and his wife, Melania,
+------------------------------------------------------------
+Video: 0002855-2022.4.7.mp4
+Ground truth: the coronavirus today.
+Prediction: the coronavirus today.
+------------------------------------------------------------
+Video: 0002867-2022.4.7.mp4
+Ground truth: The U.N. General Assembly voted in a majority to suspend Russia
+Prediction: The U.S. Department of Defense announced that
+------------------------------------------------------------
+Video: 0002868-2022.4.7.mp4
+Ground truth: from the UN's Human Rights Council.
+Prediction: and U.S. citizens.
+------------------------------------------------------------
+Video: 0002875-2022.4.7.mp4
+Ground truth: by Russia.
+Prediction: the Mississippi River.
+------------------------------------------------------------
+Video: 0002878-2022.4.7.mp4
+Ground truth: and indiscriminate bombing of Ukraine.
+Prediction: the Ukrainian border.
+------------------------------------------------------------
+Video: 0002880-2022.4.7.mp4
+Ground truth: German intelligence intercepted two separate communications
+Prediction: the U.S. and Israel, but it is not clear what the two countries
+------------------------------------------------------------
+Video: 0002890-2022.4.7.mp4
+Ground truth: Both the U.S. and NATO warned that
+Prediction: the Supreme Court, and the National Archives.
+------------------------------------------------------------
+Video: 0003091-2022.3.21.mp4
+Ground truth: Here are top stories from the weekend and today.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0003093-2022.3.21.mp4
+Ground truth: who is President Biden's nominee to the Supreme Court,
+Prediction: the Biden administration, and the Supreme Court.
+------------------------------------------------------------
+Video: 0003098-2022.3.21.mp4
+Ground truth: while questioning will take place on Tuesday and Wednesday.
+Prediction: and will be back on Tuesday, January 13.
+------------------------------------------------------------
+Video: 0003104-2022.3.21.mp4
+Ground truth: recognized her two daughters, aged 21 and 17, and
+Prediction: a person who was a former employee of the company,
+------------------------------------------------------------
+Video: 0003112-2022.3.21.mp4
+Ground truth: the hospital on Friday due to an infection and
+Prediction: on Wednesday because of his illness.
+------------------------------------------------------------
+Video: 0003118-2022.3.21.mp4
+Ground truth: In southern China, a Boeing 737 passenger plane with 132 people
+Prediction: In South Georgia, the Boeing 737 plane that crashed into
+------------------------------------------------------------
+Video: 0003143-2022.3.21.mp4
+Ground truth: when the aircraft crashed.
+Prediction: the plane crashed.
+------------------------------------------------------------
+Video: 0003166-2022.3.21.mp4
+Ground truth: they would allow civilians out of the city with
+Prediction: the local community and the city,
+------------------------------------------------------------
+Video: 0003168-2022.3.21.mp4
+Ground truth: but Ukrainian leaders refused to surrender.
+Prediction: Ukraine's eastern regions.
+------------------------------------------------------------
+Video: 0003448-2022.12.9.mp4
+Ground truth: Here are today's top stories.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0003454-2022.12.9.mp4
+Ground truth: She used to have long locs but they were cut off.
+Prediction: and that he was wearing a mask.
+------------------------------------------------------------
+Video: 0003456-2022.12.9.mp4
+Ground truth: when she was told that she would be going home to the U.S.
+Prediction: the man will be charged with murder.
+------------------------------------------------------------
+Video: 0003461-2022.12.9.mp4
+Ground truth: He was arrested in 2008 after he tried to sell arms to
+Prediction: was arrested in 2018 for using a weapon of war against
+------------------------------------------------------------
+Video: 0003465-2022.12.9.mp4
+Ground truth: let Bout go.
+Prediction: the Boston area.
+------------------------------------------------------------
+Video: 0003468-2022.12.9.mp4
+Ground truth: so they are glad that they could get Griner home.
+Prediction: and then killed himself at his home.
+------------------------------------------------------------
+Video: 0003474-2022.12.9.mp4
+Ground truth: and murdering a 7-year-old girl named Athena Strand in
+Prediction: the last time he was in the state of West Virginia,
+------------------------------------------------------------
+Video: 0003479-2022.12.9.mp4
+Ground truth: The driver, Tanner Lynn Horner, said he killed the girl by
+Prediction: The driver, Taylor Hornor, said he was driving
+------------------------------------------------------------
+Video: 0003482-2022.12.9.mp4
+Ground truth: Police said they have surveillance video from inside
+Prediction: Police said they found the body inside of
+------------------------------------------------------------
+Video: 0003488-2022.12.9.mp4
+Ground truth: The girl went outside after she got into an argument
+Prediction: the girl was not wearing a helmet,
+------------------------------------------------------------
+Video: 0003489-2022.12.9.mp4
+Ground truth: with her stepmother.
+Prediction: the first time.
+------------------------------------------------------------
+Video: 0003496-2022.12.9.mp4
+Ground truth: aggravated kidnapping.
+Prediction: the Arvadistrict.
+------------------------------------------------------------
+Video: 0003501-2022.12.9.mp4
+Ground truth: as Joseph A. Zarelli.
+Prediction: The judge's name is Joshua Zarelli.
+------------------------------------------------------------
+Video: 0003504-2022.12.9.mp4
+Ground truth: but new forensic genetic genealogy methods helped with
+Prediction: The new Fencing and Gymnastics committees will be
+------------------------------------------------------------
+Video: 0003512-2022.12.9.mp4
+Ground truth: that will have meaningful progress
+Prediction: and that it is more common for
+------------------------------------------------------------
+Video: 0003519-2022.12.9.mp4
+Ground truth: ChatGPT works like a text conversation or
+Prediction: Chappelle's show was canceled by the Texas governor
+------------------------------------------------------------
+Video: 0003520-2022.12.9.mp4
+Ground truth: an emailed conversation.
+Prediction: the city's boundaries.
+------------------------------------------------------------
+Video: 0003528-2022.12.9.mp4
+Ground truth: The response to my question was accurate.
+Prediction: He said he was not a "target."
+------------------------------------------------------------
+Video: 0003533-2022.12.9.mp4
+Ground truth: can be "confidently wrong."
+Prediction: and that it is not the right time.
+------------------------------------------------------------
+Video: 0003536-2022.12.9.mp4
+Ground truth: Dr. Anthony Fauci, who led the U.S. response
+Prediction: Dr. Anthony Fauci, the nation's top infectious disease expert,
+------------------------------------------------------------
+Video: 0003550-2022.12.9.mp4
+Ground truth: He is 81 years old.
+Prediction: It is July 1.
+------------------------------------------------------------
+Video: 0003555-2022.12.9.mp4
+Ground truth: that will shake up the Senate -
+Prediction: the Senate, and that he is not a member of
+------------------------------------------------------------
+Video: 0003560-2022.12.9.mp4
+Ground truth: The White House said the decision doesn't change
+Prediction: The White House said they would not comment on
+------------------------------------------------------------
+Video: 0003563-2022.12.9.mp4
+Ground truth: they have in the past.
+Prediction: and then they were gone.
+------------------------------------------------------------
+Video: 0003657-2022.11.8.mp4
+Ground truth: victory parade on Monday.
+Prediction: on Monday.
+------------------------------------------------------------
+Video: 0003658-2022.11.8.mp4
+Ground truth: A 33-year-old man allegedly threw two beer cans toward
+Prediction: The father and son were charged with two counts of
+------------------------------------------------------------
+Video: 0003665-2022.11.8.mp4
+Ground truth: at the parade and throw two cans toward Cruz and grabbed him
+Prediction: the judge and the prosecutor,
+------------------------------------------------------------
+Video: 0003669-2022.11.8.mp4
+Ground truth: The Weather Channel reported that
+Prediction: The Wall Street Journal reported that
+------------------------------------------------------------
+Video: 0003673-2022.11.8.mp4
+Ground truth: is moving westwards.
+Prediction: in southwestern Wisconsin.
+------------------------------------------------------------
+Video: 0003710-2022.11.8.mp4
+Ground truth: Trump said at a rally in Iowa on Thursday
+Prediction: Trump gave a rally in Iowa on Thursday and
+------------------------------------------------------------
+Video: 0003720-2022.11.8.mp4
+Ground truth: as long as three demands are met:
+Prediction: the state of New York for three years.
+------------------------------------------------------------
+Video: 0003725-2022.11.8.mp4
+Ground truth: "Russia started this and Russia can end this,
+Prediction: Russia's invasion of Ukraine.
+------------------------------------------------------------
+Video: 0003733-2022.11.8.mp4
+Ground truth: The sun, Earth, and moon lined up perfectly.
+Prediction: The incident is separate from the U.S.-Mexico border wall,
+------------------------------------------------------------
+Video: 0003737-2022.11.8.mp4
+Ground truth: Many people on social media posted images of a red moon.
+Prediction: Many people were injured or killed.
+------------------------------------------------------------
+Video: 0003923-2022.5.3.mp4
+Ground truth: a Mississippi law that banned abortions
+Prediction: in Michigan, but it was later withdrawn.
+------------------------------------------------------------
+Video: 0003940-2022.5.3.mp4
+Ground truth: 17 states and D.C. have codified the right to abortion.
+Prediction: The 17-year-old's family said the code of conduct was violated
+------------------------------------------------------------
+Video: 0003949-2022.5.3.mp4
+Ground truth: that it would be "one of the worst and most damaging
+Prediction: a shooting at a school,
+------------------------------------------------------------
+Video: 0003957-2022.5.3.mp4
+Ground truth: but did not represent the court's final decision.
+Prediction: and not show his face.
+------------------------------------------------------------
+Video: 0003958-2022.5.3.mp4
+Ground truth: He said has ordered an investigation on the leak.
+Prediction: and that he would investigate the allegations.
+------------------------------------------------------------
+Video: 0003960-2022.5.3.mp4
+Ground truth: a body of a man that was in a corroded barrel
+Prediction: a man and a woman who were walking on a bridge
+------------------------------------------------------------
+Video: 0003961-2022.5.3.mp4
+Ground truth: on the lake's shore.
+Prediction: Lake Shorland.
+------------------------------------------------------------
+Video: 0003969-2022.5.3.mp4
+Ground truth: the barrel is now at the lake's shoreline.
+Prediction: allowing the shooter to escape.
+------------------------------------------------------------
+Video: 0003973-2022.5.3.mp4
+Ground truth: water levels continue to plunge due to severe drought.
+Prediction: The water levels are still rising.
+------------------------------------------------------------
+Video: 0003981-2022.5.3.mp4
+Ground truth: but a juror who spoke to a reporter after
+Prediction: a judge who was appointed after
+------------------------------------------------------------
+Video: 0003983-2022.5.3.mp4
+Ground truth: Webster will be sentenced on September 2.
+Prediction: Waters will be sentenced on September 2.
+------------------------------------------------------------
+Video: 0003984-2022.5.3.mp4
+Ground truth: The maximum penalty for his assault charge is 20 years,
+Prediction: the top of the class at ASU,
+------------------------------------------------------------
+Video: 0003988-2022.5.3.mp4
+Ground truth: A primary election are battles within parties
+Prediction: Riots in the city of Eugene,
+------------------------------------------------------------
+Video: 0003990-2022.5.3.mp4
+Ground truth: within the party.
+Prediction: the trial today.
+------------------------------------------------------------
+Video: 0004003-2022.5.3.mp4
+Ground truth: challengers who want to push the Legislature further
+Prediction: to be more aggressive and to increase
+------------------------------------------------------------
+Video: 0004016-2022.5.3.mp4
+Ground truth: and called himself a "Pro-life Spider-Man."
+Prediction: The photo was posted on social media.
+------------------------------------------------------------
+Video: 0004022-2022.5.3.mp4
+Ground truth: See you tomorrow and stay with the light.
+Prediction: See you tomorrow and stay with the light.
+------------------------------------------------------------
+Video: 0004122-2022.10.25.mp4
+Ground truth: Here are today's top stories.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0004125-2022.10.25.mp4
+Ground truth: which means Griner will have to start serving her prison term.
+Prediction: The death toll from the tornadoes is still rising.
+------------------------------------------------------------
+Video: 0004133-2022.10.25.mp4
+Ground truth: The Biden Administration said Russia's judicial proceeding
+Prediction: Biden said Russia's actions are unacceptable and
+------------------------------------------------------------
+Video: 0004134-2022.10.25.mp4
+Ground truth: is a sham and that President Biden is willing to make
+Prediction: that it is not a "shaming" or "humiliating" event,
+------------------------------------------------------------
+Video: 0004135-2022.10.25.mp4
+Ground truth: tough decisions to bring Americans home.
+Prediction: the sky and then back down again.
+------------------------------------------------------------
+Video: 0004138-2022.10.25.mp4
+Ground truth: AP News said there could be a high-stakes prisoner swap
+Prediction: AP News said the storm is causing high seas and
+------------------------------------------------------------
+Video: 0004164-2022.10.25.mp4
+Ground truth: Rishi Sunak.
+Prediction: Rishon LeZion.
+------------------------------------------------------------
+Video: 0004166-2022.10.25.mp4
+Ground truth: the youngest PM since 1812 at 42 years old.
+Prediction: the most popular in 1982.
+------------------------------------------------------------
+Video: 0004180-2022.10.25.mp4
+Ground truth: News reports said he could have suffered a medical emergency
+Prediction: Rossum said she is not against abortion,
+------------------------------------------------------------
+Video: 0004203-2022.10.25.mp4
+Ground truth: On Sunday, an elevator at the Grand Canyon Caverns,
+Prediction: On Sunday, a family from Grand Canyon National Park
+------------------------------------------------------------
+Video: 0004209-2022.10.25.mp4
+Ground truth: finally brought back on Monday night with
+Prediction: and other areas on Monday night.
+------------------------------------------------------------
+Video: 0004235-2022.9.23.mp4
+Ground truth: in their home.
+Prediction: in his home.
+------------------------------------------------------------
+Video: 0004237-2022.9.23.mp4
+Ground truth: The mother's name was Cora Bush and she was 33.
+Prediction: The mother's name is Cora Bush.
+------------------------------------------------------------
+Video: 0004240-2022.9.23.mp4
+Ground truth: her account of the incident corroborated with the evidence
+Prediction: He said he was devastated by his wife's death and
+------------------------------------------------------------
+Video: 0004242-2022.9.23.mp4
+Ground truth: A news report said data shows that
+Prediction: The meteorologist said that the D.A.T.A. system,
+------------------------------------------------------------
+Video: 0004244-2022.9.23.mp4
+Ground truth: 194 unintentional shootings by children in the U.S.,
+Prediction: 1944, the first U.S. Supreme Court justice
+------------------------------------------------------------
+Video: 0004252-2022.9.23.mp4
+Ground truth: The inspector general said there were over
+Prediction: The mayor said over 2,000 people were
+------------------------------------------------------------
+Video: 0004256-2022.9.23.mp4
+Ground truth: during the first few months of the coronavirus pandemic.
+Prediction: the pandemic.
+------------------------------------------------------------
+Video: 0004257-2022.9.23.mp4
+Ground truth: The U.S. Department of Justice has a task force dedicated
+Prediction: The U.S. Justice Department's task force investigating
+------------------------------------------------------------
+Video: 0004258-2022.9.23.mp4
+Ground truth: to investigating and prosecuting suspected fraudsters.
+Prediction: investigate and prosecute those who committed hate crimes.
+------------------------------------------------------------
+Video: 0004270-2022.9.23.mp4
+Ground truth: was invited to speak at a Trump rally
+Prediction: the Supreme Court, and at Trump's funeral.
+------------------------------------------------------------
+Video: 0004271-2022.9.23.mp4
+Ground truth: earlier this month in Pennsylvania.
+Prediction: in Pennsylvania.
+------------------------------------------------------------
+Video: 0004301-2022.9.23.mp4
+Ground truth: The second update is that there are referendums in
+Prediction: The U.S. is now in a red zone,
+------------------------------------------------------------
+Video: 0004303-2022.9.23.mp4
+Ground truth: from Ukraine to become a part of Russia.
+Prediction: the Ukrainian government.
+------------------------------------------------------------
+Video: 0004321-2022.9.23.mp4
+Ground truth: It is not known exactly what the U.S. has been saying,
+Prediction: the event, but the U.S. did not.
+------------------------------------------------------------
+Video: 0004387-2023.2.9.mp4
+Ground truth: on climbing and has exceeded 20,000 victims.
+Prediction: the city is now at 20,000 evacuees.
+------------------------------------------------------------
+Video: 0004390-2023.2.9.mp4
+Ground truth: with "The Guardian."
+Prediction: the Texas gun law.
+------------------------------------------------------------
+Video: 0004396-2023.2.9.mp4
+Ground truth: by a South Korean crew.
+Prediction: the crash.
+------------------------------------------------------------
+Video: 0004398-2023.2.9.mp4
+Ground truth: In the city of Kahramanmaras,
+Prediction: the city of Khamsin,
+------------------------------------------------------------
+Video: 0004403-2023.2.9.mp4
+Ground truth: These people are usually dehydrated and
+Prediction: He was in deep debt and
+------------------------------------------------------------
+Video: 0004411-2023.2.9.mp4
+Ground truth: which makes things even more complicated.
+Prediction: and more dangerous.
+------------------------------------------------------------
+Video: 0004412-2023.2.9.mp4
+Ground truth: The UN has managed to send in an aid convoy,
+Prediction: The U.N. said aid could be delivered by
+------------------------------------------------------------
+Video: 0004420-2023.2.9.mp4
+Ground truth: the Chinese spy balloon that was shot down
+Prediction: The state of Texas has already passed
+------------------------------------------------------------
+Video: 0004425-2023.2.9.mp4
+Ground truth: communication signals and intelligence.
+Prediction: the pandemic and the war in Ukraine.
+------------------------------------------------------------
+Video: 0004428-2023.2.9.mp4
+Ground truth: Secretary of State Anthony Blinken said
+Prediction: Sec. of State Antony Blinken said
+------------------------------------------------------------
+Video: 0004440-2023.2.9.mp4
+Ground truth: They died by strangulation.
+Prediction: The animal was killed.
+------------------------------------------------------------
+Video: 0004454-2023.2.9.mp4
+Ground truth: Researchers said to compare, they studied 164 brain samples
+Prediction: The school said they have identified 16 potential suspects
+------------------------------------------------------------
+Video: 0004458-2023.2.9.mp4
+Ground truth: It can cause a progressive decline of memory and
+Prediction: The CDC said the booster shots are needed because
+------------------------------------------------------------
+Video: 0004461-2023.2.9.mp4
+Ground truth: The study highlights the dangers of playing football
+Prediction: The vehicle was traveling at high speeds on
+------------------------------------------------------------
+Video: 0004467-2023.2.9.mp4
+Ground truth: The Georgia Bureau of Investigation said
+Prediction: The Guardian said the Vatican has not commented on
+------------------------------------------------------------
+Video: 0004475-2023.2.9.mp4
+Ground truth: A state prison official said he was terminated from his job.
+Prediction: A Georgia state official said he was fired.
+------------------------------------------------------------
+Video: 0004482-2023.2.9.mp4
+Ground truth: The chair of the committee, Rep. James Comer (R-Ky) said
+Prediction: The chairman of the House Committee on Rules,
+------------------------------------------------------------
+Video: 0004483-2023.2.9.mp4
+Ground truth: the American people deserve transparency.
+Prediction: Americans who want to buy new cars.
+------------------------------------------------------------
+Video: 0004501-2022.4.19.mp4
+Ground truth: that voided the Biden administration's mask mandate
+Prediction: the Biden administration's mask mandate,
+------------------------------------------------------------
+Video: 0004506-2022.4.19.mp4
+Ground truth: on domestic flights,
+Prediction: in the U.S. and Canada.
+------------------------------------------------------------
+Video: 0004514-2022.4.19.mp4
+Ground truth: a kindergartner brought a bottle of tequila mix with
+Prediction: two children and a teenager who was traveling with them
+------------------------------------------------------------
+Video: 0004518-2022.4.19.mp4
+Ground truth: The school contacted the parents of the five students and
+Prediction: The school was closed for five days and
+------------------------------------------------------------
+Video: 0004520-2022.4.19.mp4
+Ground truth: The school said no student became ill or
+Prediction: Schools said they do not require students to be vaccinated,
+------------------------------------------------------------
+Video: 0004533-2022.4.19.mp4
+Ground truth: Hernandez said others have told her that it is karma.
+Prediction: He said he was told by other parents that Kramer was
+------------------------------------------------------------
+Video: 0004534-2022.4.19.mp4
+Ground truth: She said her reaction was sadness because he had died and
+Prediction: He said he felt like he was being targeted by
+------------------------------------------------------------
+Video: 0004535-2022.4.19.mp4
+Ground truth: said "the Lord saw fit to take him out of his misery."
+Prediction: and that it was not a "white supremacy" speech.
+------------------------------------------------------------
+Video: 0004537-2022.4.19.mp4
+Ground truth: another vehicle and get back on her feet.
+Prediction: a car and then on a fishing boat.
+------------------------------------------------------------
+Video: 0004545-2022.4.19.mp4
+Ground truth: an opening of about 3 inches, but the ride's operators
+Prediction: the three-hour period of time when the fire was burning,
+------------------------------------------------------------
+Video: 0004547-2022.4.19.mp4
+Ground truth: accommodate Sampson's large size at 6'5 and 340 pounds.
+Prediction: the Senate, but he was defeated by 30 votes.
+------------------------------------------------------------
+Video: 0004551-2022.4.19.mp4
+Ground truth: extended up to 10 inches with force.
+Prediction: 10 inches of snow.
+------------------------------------------------------------
+Video: 0004554-2022.4.19.mp4
+Ground truth: and then drops at speeds up to 75 mph before quickly stopping.
+Prediction: the car was traveling at 75 mph and
+------------------------------------------------------------
+Video: 0004575-2022.4.19.mp4
+Ground truth: There was a new round of intense bombing along Ukraine's east.
+Prediction: and that it is a new threat to Ukraine.
+------------------------------------------------------------
+Video: 0004580-2022.4.19.mp4
+Ground truth: the Russian army is focused on the new phase,
+Prediction: the military and that they are now working with the French government
+------------------------------------------------------------
+Video: 0004584-2022.4.19.mp4
+Ground truth: a part of the $800 million aid package President Biden
+Prediction: the 100% carbon-free electricity goal,
+------------------------------------------------------------
+Video: 0004597-2022.5.19.mp4
+Ground truth: The Washington Post explained that
+Prediction: The Washington Post explained that
+------------------------------------------------------------
+Video: 0004600-2022.5.19.mp4
+Ground truth: The virus was first identified in 1958
+Prediction: The vest was worn by the player in 1958,
+------------------------------------------------------------
+Video: 0004606-2022.5.19.mp4
+Ground truth: Some strains of the virus can kill
+Prediction: The storm is expected to hit the state of Texas
+------------------------------------------------------------
+Video: 0004609-2022.5.19.mp4
+Ground truth: 1 out of 100 people dying.
+Prediction: in December.
+------------------------------------------------------------
+Video: 0004612-2022.5.19.mp4
+Ground truth: Health officials said a number of recent cases involve men
+Prediction: Health officials said the death was related to an accidental
+------------------------------------------------------------
+Video: 0004613-2022.5.19.mp4
+Ground truth: who have sex with other men.
+Prediction: sexual harassment.
+------------------------------------------------------------
+Video: 0004614-2022.5.19.mp4
+Ground truth: The Massachusetts man had recently traveled to Canada.
+Prediction: The man was from Canada and
+------------------------------------------------------------
+Video: 0004627-2022.5.19.mp4
+Ground truth: The U.S. Senate today approved a $40 billion package to send
+Prediction: The U.S. Senate today voted 40-50 on a bill to
+------------------------------------------------------------
+Video: 0004636-2022.5.19.mp4
+Ground truth: they may face Russian courts.
+Prediction: and that Russia's territory is intact.
+------------------------------------------------------------
+Video: 0004639-2022.5.19.mp4
+Ground truth: Today the leaders of Sweden and Finland met with President Biden
+Prediction: Today the Supreme Court said in a 6-3 decision that
+------------------------------------------------------------
+Video: 0004644-2022.5.19.mp4
+Ground truth: But there may be a barrier to Sweden and Finland's entry
+Prediction: A person who was on the train said
+------------------------------------------------------------
+Video: 0004646-2022.5.19.mp4
+Ground truth: the countries of harboring members of
+Prediction: the hospital or hospital workers,
+------------------------------------------------------------
+Video: 0004660-2022.5.19.mp4
+Ground truth: this week.
+Prediction: the school district.
+------------------------------------------------------------
+Video: 0004663-2022.5.19.mp4
+Ground truth: hospitalizations to voluntarily wear masks indoors and
+Prediction: the hospital and that they were wearing masks,
+------------------------------------------------------------
+Video: 0004674-2022.5.19.mp4
+Ground truth: Gendron posted on several social media pages that
+Prediction: Gensler was on a flight from San Francisco to
+------------------------------------------------------------
+Video: 0004677-2022.5.19.mp4
+Ground truth: He wrote that he decided to target a Buffalo zip code
+Prediction: He said he was not aware of Black Pete and
+------------------------------------------------------------
+Video: 0004684-2022.5.19.mp4
+Ground truth: Ford Motor Co. said
+Prediction: The Ford Motor Company said
+------------------------------------------------------------
+Video: 0004688-2022.5.19.mp4
+Ground truth: It is not known what is causing the fires.
+Prediction: I'm sorry, I don't know what it is."
+------------------------------------------------------------
+Video: 0004700-2023.1.23.mp4
+Ground truth: A gunman opened fire in a packed dance hall
+Prediction: A man with a gun opened fire inside of a mall and
+------------------------------------------------------------
+Video: 0004701-2023.1.23.mp4
+Ground truth: during a Lunar New Year festival in Monterey Park, California on
+Prediction: The Louisiana National Guard is in Monroe County,
+------------------------------------------------------------
+Video: 0004707-2023.1.23.mp4
+Ground truth: The gunman was identified as 72-year-old Huu Can Tran.
+Prediction: The gunman was named Hugh Cunningham.
+------------------------------------------------------------
+Video: 0004716-2023.1.23.mp4
+Ground truth: The person who wrestled the gun away from Tran at
+Prediction: The shooting happened at a gas station.
+------------------------------------------------------------
+Video: 0004730-2023.1.23.mp4
+Ground truth: targeting his ex-wife.
+Prediction: and that he is a father.
+------------------------------------------------------------
+Video: 0004747-2023.1.23.mp4
+Ground truth: Last week police raided the forest,
+Prediction: Last week, police raided a home and
+------------------------------------------------------------
+Video: 0004751-2023.1.23.mp4
+Ground truth: On Saturday night people gathered for a protest
+Prediction: On Saturday night, protesters broke into
+------------------------------------------------------------
+Video: 0004766-2023.1.23.mp4
+Ground truth: as she walked out of her dressing room,
+Prediction: and that they were not wearing masks,
+------------------------------------------------------------
+Video: 0004772-2023.1.23.mp4
+Ground truth: that it "never happened" and that he "would never do
+Prediction: This is the first time that the Supreme Court has overturned
+------------------------------------------------------------
+Video: 0004775-2023.1.23.mp4
+Ground truth: that killed two people in Wales, Alaska last week.
+Prediction: two people in Wales last week,
+------------------------------------------------------------
+Video: 0004783-2023.1.23.mp4
+Ground truth: The principal of the school ordered a lockdown and
+Prediction: Schools were closed for several days and
+------------------------------------------------------------
+Video: 0004785-2023.1.23.mp4
+Ground truth: what was happening outside.
+Prediction: the Supreme Court.
+------------------------------------------------------------
+Video: 0004790-2023.1.23.mp4
+Ground truth: There was a call for community members to help -
+Prediction: The city is now in a state of emergency,
+------------------------------------------------------------
+Video: 0004791-2023.1.23.mp4
+Ground truth: there is no police in town -
+Prediction: and no police response.
+------------------------------------------------------------
+Video: 0004800-2023.1.23.mp4
+Ground truth: in Alaska was 30 years ago.
+Prediction: the last 30 years.
+------------------------------------------------------------
+Video: 0004804-2023.1.23.mp4
+Ground truth: Poland's government said it wants to give
+Prediction: Poland's government said
+------------------------------------------------------------
+Video: 0004817-2023.1.23.mp4
+Ground truth: Russian attacks at the front lines.
+Prediction: and that they are not against the mask mandate.
+------------------------------------------------------------
+Video: 0004820-2022.6.16.mp4
+Ground truth: It is Thursday, June 16.
+Prediction: It is Thursday, June 16.
+------------------------------------------------------------
+Video: 0004822-2022.6.16.mp4
+Ground truth: Today the Jan 6. House Committee held its third hearing.
+Prediction: Today the House voted on its third impeachment motion,
+------------------------------------------------------------
+Video: 0004825-2022.6.16.mp4
+Ground truth: Congress' counting and certification of electoral votes
+Prediction: and that they would not be able to elect
+------------------------------------------------------------
+Video: 0004837-2022.6.16.mp4
+Ground truth: one a former counsel to him and
+Prediction: The couple was a former couple,
+------------------------------------------------------------
+Video: 0004844-2022.6.16.mp4
+Ground truth: that the Constitution never intended for the vice president
+Prediction: the state's laws and regulations,
+------------------------------------------------------------
+Video: 0004848-2022.6.16.mp4
+Ground truth: Ivanka Trump, testified in a video that
+Prediction: Van Trump's testimony,
+------------------------------------------------------------
+Video: 0004871-2022.6.16.mp4
+Ground truth: The leaders of France, Italy, and Germany traveled together in
+Prediction: President Michelle Bachelet of Chile,
+------------------------------------------------------------
+Video: 0004876-2022.6.16.mp4
+Ground truth: News analysts said in recent days,
+Prediction: News analysts said it is a serious blow for Ukraine,
+------------------------------------------------------------
+Video: 0004884-2022.6.16.mp4
+Ground truth: The Italian prime minister said this process cannot be delayed.
+Prediction: The EPA said it would be working with other agencies.
+------------------------------------------------------------
+Video: 0004892-2022.6.16.mp4
+Ground truth: their families, and some local residents who have been hiding
+Prediction: the family's home and that they were injured.
+------------------------------------------------------------
+Video: 0004896-2022.6.16.mp4
+Ground truth: eastern Ukraine as it battles against Russian advances.
+Prediction: and that it is continuing to escalate.
+------------------------------------------------------------
+Video: 0004897-2022.6.16.mp4
+Ground truth: Dr. Anthony Fauci tested positive for the coronavirus
+Prediction: Dr. Anthony Fauci, said he tested positive for Covid-19
+------------------------------------------------------------
+Video: 0004908-2022.6.16.mp4
+Ground truth: a science center named after him.
+Prediction: and other African countries.
+------------------------------------------------------------
+Video: 0004911-2022.6.16.mp4
+Ground truth: Photographs showed him with and without a mask.
+Prediction: and people who wear masks.
+------------------------------------------------------------
+Video: 0004912-2022.6.16.mp4
+Ground truth: Fauci is now isolating and will continue to work from home.
+Prediction: The FDA is now allowing the vaccine to be used at home.
+------------------------------------------------------------
+Video: 0004913-2022.6.16.mp4
+Ground truth: One of the jurors in the Johnny Depp vs Amber Heard
+Prediction: A jury in New York City found George Floyd guilty of
+------------------------------------------------------------
+Video: 0004914-2022.6.16.mp4
+Ground truth: defamation trial said in an interview with
+Prediction: the Democratic National Committee (DNC) and
+------------------------------------------------------------
+Video: 0004920-2022.6.16.mp4
+Ground truth: so they felt like she had "crocodile tears."
+Prediction: and not wearing masks.
+------------------------------------------------------------
+Video: 0004927-2022.6.16.mp4
+Ground truth: Heard plans to appeal.
+Prediction: The H-1B visa is for temporary workers.
+------------------------------------------------------------
+Video: 0004930-2022.6.16.mp4
+Ground truth: received 26 new federal charges,
+Prediction: 26 New York state officials,
+------------------------------------------------------------
+Video: 0004945-2022.8.9.mp4
+Ground truth: It is Tuesday, August 9.
+Prediction: It is Tuesday, August 9.
+------------------------------------------------------------
+Video: 0004948-2022.8.9.mp4
+Ground truth: FBI agents conducted a surprise search of
+Prediction: the FBI and law enforcement officers surrounded
+------------------------------------------------------------
+Video: 0004951-2022.8.9.mp4
+Ground truth: News reports said the agents served a search warrant as
+Prediction: The police department said they are investigating
+------------------------------------------------------------
+Video: 0004960-2022.8.9.mp4
+Ground truth: "has two known active investigations connected to
+Prediction: There are two other allegations of misconduct
+------------------------------------------------------------
+Video: 0004968-2022.8.9.mp4
+Ground truth: Democratic leaders said the search was appropriate
+Prediction: Democrats said they believe that
+------------------------------------------------------------
+Video: 0004978-2022.8.9.mp4
+Ground truth: the 1978 film, "Grease" opposite John Travolta.
+Prediction: if they are gay or transgender.
+------------------------------------------------------------
+Video: 0004983-2022.8.9.mp4
+Ground truth: In 2017, she announced that her cancer returned and spread.
+Prediction: The two victims were a couple.
+------------------------------------------------------------
+Video: 0004985-2022.8.9.mp4
+Ground truth: In Los Angeles, a nurse named Nicole Linton was charged with
+Prediction: In Louisiana, a nonbinary person named Nicolino,
+------------------------------------------------------------
+Video: 0004986-2022.8.9.mp4
+Ground truth: six counts of murder after she allegedly drove her car at
+Prediction: six weeks of treatment, but the doctor said
+------------------------------------------------------------
+Video: 0004988-2022.8.9.mp4
+Ground truth: slammed into multiple other cars, killing six people,
+Prediction: and that another car hit six people,
+------------------------------------------------------------
+Video: 0004991-2022.8.9.mp4
+Ground truth: The incident was on Thursday afternoon.
+Prediction: The incident happened on Thursday.
+------------------------------------------------------------
+Video: 0005001-2022.8.9.mp4
+Ground truth: Linton's vehicle.
+Prediction: the island.
+------------------------------------------------------------
+Video: 0005003-2022.8.9.mp4
+Ground truth: was taken to jail.
+Prediction: and sentenced him to life in prison.
+------------------------------------------------------------
+Video: 0005006-2022.8.9.mp4
+Ground truth: profound mental health issues before the crash and
+Prediction: the government's health department said
+------------------------------------------------------------
+Video: 0005015-2022.8.9.mp4
+Ground truth: if the disease is not treated, it can spread through the body
+Prediction: The symptoms of the disease include
+------------------------------------------------------------
+Video: 0005021-2022.8.9.mp4
+Ground truth: are now seeking at least 6,000 volunteers in the U.S.
+Prediction: The mask mandate is in effect for six weeks,
+------------------------------------------------------------
+Video: 0005029-2022.8.9.mp4
+Ground truth: Her spokesperson said she fell into a coma on Monday and
+Prediction: Facebook said on Monday that it would be
+------------------------------------------------------------
+Video: 0005034-2022.8.9.mp4
+Ground truth: and entered the home about 30 feet in.
+Prediction: the building for about 30 minutes.
+------------------------------------------------------------
+Video: 0005039-2022.8.9.mp4
+Ground truth: There was a female resident inside the home who was
+Prediction: The man was inside of the home and
+------------------------------------------------------------
+Video: 0005042-2022.8.9.mp4
+Ground truth: but the resident said she lost everything.
+Prediction: The animals were released today.
+------------------------------------------------------------
+Video: 0005045-2022.8.9.mp4
+Ground truth: Serena Williams announced that she will retire after
+Prediction: Sen. Jerry Westmoreland (R) announced that he would resign
+------------------------------------------------------------
+Video: 0005049-2022.8.9.mp4
+Ground truth: of the greatest tennis athletes ever with
+Prediction: the Supreme Court, and the state legislature.
+------------------------------------------------------------
+Video: 0005050-2022.8.9.mp4
+Ground truth: her 23 Grand Slam titles and 73 overall titles.
+Prediction: 230,000 gas stations.
+------------------------------------------------------------
+Video: 0005058-2022.8.9.mp4
+Ground truth: see Serena compete.
+Prediction: the Senate with Democrats.
+------------------------------------------------------------
+Video: 0005060-2022.8.9.mp4
+Ground truth: See you tomorrow and stay with the light.
+Prediction: See you tomorrow and stay with the light.
+------------------------------------------------------------
+Video: 0005062-2022.11.18.mp4
+Ground truth: Here are today's top stories.
+Prediction: Here are today's top stories.
+------------------------------------------------------------
+Video: 0005063-2022.11.18.mp4
+Ground truth: The Buffalo, New York area was hit with
+Prediction: The Black Friday shopping weekend is over.
+------------------------------------------------------------
+Video: 0005079-2022.11.18.mp4
+Ground truth: The U.S. will then play against England and then Iran.
+Prediction: The U.S. will be sending troops next week.
+------------------------------------------------------------
+Video: 0005085-2022.11.18.mp4
+Ground truth: It was recently announced that no alcohol will be sold at
+Prediction: the death penalty, but it is not clear whether
+------------------------------------------------------------
+Video: 0005086-2022.11.18.mp4
+Ground truth: the eight stadiums that will host the games.
+Prediction: eight seats on the board.
+------------------------------------------------------------
+Video: 0005096-2022.11.18.mp4
+Ground truth: Smith's job will be to decide if anyone violated the law
+Prediction: Smith's attorney said if the law is passed,
+------------------------------------------------------------
+Video: 0005101-2022.11.18.mp4
+Ground truth: are a weaponization of the justice system.
+Prediction: the European Union (EU).
+------------------------------------------------------------
+Video: 0005116-2022.11.18.mp4
+Ground truth: in the Archdiocese of Baltimore who has been accused of
+Prediction: The Air Force said the astronauts were not injured and
+------------------------------------------------------------
+Video: 0005132-2022.11.18.mp4
+Ground truth: the authority to forgive student loans and that if their plan
+Prediction: the school's rules, and that if he did,
+------------------------------------------------------------
+Video: 0005136-2022.11.18.mp4
+Ground truth: That is all the top stories for this week.
+Prediction: That is all the top stories for today.
+------------------------------------------------------------
+Video: 0005142-2023.4.4.mp4
+Ground truth: he was indicted by the Manhattan District Attorney's office.
+Prediction: the New York City Department of Education.
+------------------------------------------------------------
+Video: 0005149-2023.4.4.mp4
+Ground truth: A judge allowed photographs in the courtroom
+Prediction: The judge then showed pictures of the courtroom and
+------------------------------------------------------------
+Video: 0005155-2023.4.4.mp4
+Ground truth: which is a felony.
+Prediction: in Florida.
+------------------------------------------------------------
+Video: 0005158-2023.4.4.mp4
+Ground truth: an alleged affair she had with Trump.
+Prediction: the alleged plot against Trump.
+------------------------------------------------------------
+Video: 0005167-2023.4.4.mp4
+Ground truth: The indictment sheet against Trump said
+Prediction: The incident is not related to Trump,
+------------------------------------------------------------
+Video: 0005172-2023.4.4.mp4
+Ground truth: Prosecutors and DA Alvin Bragg said Trump covered up
+Prediction: The Pope, Francis, said Trump is a "great man"
+------------------------------------------------------------
+Video: 0005186-2023.4.4.mp4
+Ground truth: Trump pleaded not guilty to all of his counts.
+Prediction: Trump pleaded not guilty and was sentenced to three years.
+------------------------------------------------------------
+Video: 0005187-2023.4.4.mp4
+Ground truth: He left the courtroom and went back to his motorcade
+Prediction: the court's decision, and that it is a victory for
+------------------------------------------------------------
+Video: 0005190-2023.4.4.mp4
+Ground truth: Trump is flying to Florida.
+Prediction: The plane is now on the ground.
+------------------------------------------------------------
+Video: 0005194-2023.4.4.mp4
+Ground truth: but that he is determined to fight the allegations in court
+Prediction: and that he is not a threat to anyone in
+------------------------------------------------------------
+Video: 0005198-2023.4.4.mp4
+Ground truth: On Sunday, Louisiana State University (LSU) won
+Prediction: On Sunday, the Los Angeles Times reported that
+------------------------------------------------------------
+Video: 0005202-2023.4.4.mp4
+Ground truth: on record with almost 10 million viewers.
+Prediction: and over 10,000 miles of pipelines.
+------------------------------------------------------------
+Video: 0005207-2023.4.4.mp4
+Ground truth: "you can't see me" gesture that Clark used in a previous game
+Prediction: the plane and that he was flying for another airline,
+------------------------------------------------------------
+Video: 0005215-2023.4.4.mp4
+Ground truth: First Lady Jill Biden added fuel to the fire by
+Prediction: A female jellyfish, which is called a "jellyfish,"
+------------------------------------------------------------
+Video: 0005228-2023.4.4.mp4
+Ground truth: Clark set an NCAA tournament record with 191 points,
+Prediction: The Clark County Sheriff's Office said
+------------------------------------------------------------
+Video: 0005230-2023.4.4.mp4
+Ground truth: In separate but related news, the University of Connecticut
+Prediction: The next big event is the U.S. Open,
+------------------------------------------------------------
+Video: 0005233-2023.4.4.mp4
+Ground truth: One interesting fact is that LSU's Reese is
+Prediction: A dog owner, Lorraine, said
+------------------------------------------------------------
+Video: 0005237-2023.4.4.mp4
+Ground truth: in the mouth of an alligator last week.
+Prediction: and that it is a very serious situation.
+------------------------------------------------------------
+Video: 0005240-2023.4.4.mp4
+Ground truth: killing his son by throwing him in a lake.
+Prediction: the boy's body was found in a lake.
+------------------------------------------------------------
+Video: 0005246-2023.4.4.mp4
+Ground truth: When police realized that their son was missing,
+Prediction: the shooting, but they were not able to identify
+------------------------------------------------------------
+Video: 0005247-2023.4.4.mp4
+Ground truth: they started a search.
+Prediction: search for survivors.
+------------------------------------------------------------
+Video: 0005252-2023.4.4.mp4
+Ground truth: The alligator was euthanized.
+Prediction: The police department said
+------------------------------------------------------------
+Video: 0005257-2023.4.4.mp4
+Ground truth: It seems like the alligator bit him afterward.
+Prediction: and other expenses.
+------------------------------------------------------------
+Video: 0005259-2023.4.4.mp4
+Ground truth: Today Finland became an official member of
+Prediction: Today Finland officially joined NATO,
+------------------------------------------------------------
+Video: 0005270-2023.4.4.mp4
+Ground truth: Sweden applied to join NATO at about the same time as Finland
+Prediction: The school district said it has been working with
+------------------------------------------------------------
+Video: 0005272-2023.4.4.mp4
+Ground truth: On Sunday, a Russian blogger who was well-known for
+Prediction: a Russian blogger who was critical of the government,
+------------------------------------------------------------
+Video: 0005275-2023.4.4.mp4
+Ground truth: His name was Vladen Tatarsky.
+Prediction: Vladimir Putin,
+------------------------------------------------------------
+Video: 0005276-2023.4.4.mp4
+Ground truth: He had hundreds of thousands of followers on Telegram and
+Prediction: a large number of people on Telegram,
+------------------------------------------------------------
+Video: 0005288-2023.4.4.mp4
+Ground truth: what's going on in Russia.
+Prediction: and then they left.
+------------------------------------------------------------
+Video: 0005350-2023.1.27.mp4
+Ground truth: A federal jury found Sayfullo Saipov,
+Prediction: A federal judge, Judge Sylva Sisipov,
+------------------------------------------------------------
+Video: 0005352-2023.1.27.mp4
+Ground truth: and used it to kill eight people on a bike path in New York City
+Prediction: a 100 mph wind gust and eight people on the New York City
+------------------------------------------------------------
+Video: 0005365-2023.1.27.mp4
+Ground truth: that has almost 16 million followers,
+Prediction: 11 million people.
+------------------------------------------------------------
+Video: 0005369-2023.1.27.mp4
+Ground truth: for their funny father-son comedy bits and dances.
+Prediction: the right way, but it's not clear what happened.
+------------------------------------------------------------
+Video: 0005379-2023.1.27.mp4
+Ground truth: he found cancer.
+Prediction: because of the coronavirus pandemic.
+------------------------------------------------------------
+Video: 0005380-2023.1.27.mp4
+Ground truth: He said his doctor said it is very rare for young men like him
+Prediction: He said his son, a 10-year-old boy, was the one who
+------------------------------------------------------------
+Video: 0005381-2023.1.27.mp4
+Ground truth: to get colon cancer and he wants to spread awareness for
+Prediction: the Colorado River, and wants to stop the flow of water.
+------------------------------------------------------------
+Video: 0005387-2023.1.27.mp4
+Ground truth: The eggs belonged to the titanosaurs,
+Prediction: The victim's name was Tiana Jones.
+------------------------------------------------------------
+Video: 0005392-2023.1.27.mp4
+Ground truth: which is what modern-day crocodiles do.
+Prediction: and that it is the same as today's election.
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/qwen2vl_dailymoth_results_20251010_131734.json
+
+📊 Calculating evaluation metrics...
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-DailyMoth (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0400
+  F1 Score:         0.2523
+  Precision:        0.2737
+  Recall:           0.2427
+  ROUGE-L F1:       0.2625
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2864
+  BLEU2: 0.1806
+  BLEU3: 0.1331
+  BLEU4: 0.1041
+
+📋 Summary:
+  Total Samples:    500
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251010_131734.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/dailymoth/evaluation_metrics_20251010_131734.json
+
+🎯 Summary:
+   Total samples: 500
+   Successful: 500
+   Success rate: 100.0%
+🎉 DailyMoth-70h evaluation job completed!

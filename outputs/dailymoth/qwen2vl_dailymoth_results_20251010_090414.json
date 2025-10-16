@@ -1,0 +1,134 @@
+[
+  {
+    "video": "0000004-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the area was destroyed and there were many dead animals,",
+    "ground_truth": "by raging floodwaters that were powerful enough"
+  },
+  {
+    "video": "0000007-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The government said it will not allow the group to enter.",
+    "ground_truth": "and several tourists had to be evacuated."
+  },
+  {
+    "video": "0000011-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The 138-foot tall statue is located",
+    "ground_truth": "crested at 13.88 feet,"
+  },
+  {
+    "video": "0000015-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. and Canada, and that it is a \"major threat\"",
+    "ground_truth": "A community near the gates of Yellowstone,"
+  },
+  {
+    "video": "0000020-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in the U.S.",
+    "ground_truth": "News reports said"
+  },
+  {
+    "video": "0000025-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "One of the suspects was a 31-year-old man who is a former soldier",
+    "ground_truth": "a man carrying a handgun entered a sports complex"
+  },
+  {
+    "video": "0000034-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Police said they found 56 bodies,",
+    "ground_truth": "Police officers were at the scene in two minutes"
+  },
+  {
+    "video": "0000035-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The FBI said they found a gun at the home of Goyomar.",
+    "ground_truth": "and found the gunman in the gymnasium and shot at him."
+  },
+  {
+    "video": "0000040-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The judge said he would issue an order to stop the trial.",
+    "ground_truth": "Nobody was injured, only the gunman was killed."
+  },
+  {
+    "video": "0000041-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.S. is now at war with",
+    "ground_truth": "The war in Ukraine is now"
+  },
+  {
+    "video": "0000056-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Georgia state capitol building, and that it was a \"coup.\"",
+    "ground_truth": "that Google’s artificially intelligent chatbot named LaMDA"
+  },
+  {
+    "video": "0000058-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. Capitol and that he was",
+    "ground_truth": "and is self-aware."
+  },
+  {
+    "video": "0000060-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the two men were seen walking away from the scene and",
+    "ground_truth": "to see if the robot would use discriminatory or hate speech,"
+  },
+  {
+    "video": "0000063-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Levine said he would not be able to attend the funeral",
+    "ground_truth": "Lemonie posted a paper that is sort of a transcript"
+  },
+  {
+    "video": "0000064-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. Department of Agriculture (USDA)",
+    "ground_truth": "of different questions he asked LaMDA."
+  },
+  {
+    "video": "0000067-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the military and the government.",
+    "ground_truth": "to help me focus on helping others.”"
+  },
+  {
+    "video": "0000073-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. Attorney's Office in Atlanta,",
+    "ground_truth": "that he was placed on paid administrative leave,"
+  },
+  {
+    "video": "0000074-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and the other was a woman.",
+    "ground_truth": "so he decided to go public."
+  },
+  {
+    "video": "0000076-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. and European Union's sanctions on Russia.",
+    "ground_truth": "there is no evidence to support Lemoine’s claims."
+  },
+  {
+    "video": "0000079-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was a loyal member of the Liberal Party.",
+    "ground_truth": "believe that Lemoine is exaggerating."
+  },
+  {
+    "video": "0000082-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court, Stephen Paddock,",
+    "ground_truth": "“spaz” in it."
+  },
+  {
+    "video": "0000083-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The judge said he is concerned that the U.S. government",
+    "ground_truth": "The term is considered derogatory"
+  }
+]

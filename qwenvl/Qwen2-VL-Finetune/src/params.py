@@ -28,6 +28,7 @@ class CLSArguments(HFTrainingArguments):
     adam_beta1: float = field(default=0.9)
     adam_beta2: float = field(default=0.999)
     adam_epsilon: float = field(default=1e-8)
+    # max_grad_norm is already defined in HFTrainingArguments (default=1.0)
 
     freeze_vision_tower: bool = field(default=False)
     freeze_llm: bool = field(default=False)
@@ -109,6 +110,8 @@ class TrainingArguments(HFTrainingArguments):
     adam_beta1: float = field(default=0.9)
     adam_beta2: float = field(default=0.999)
     adam_epsilon: float = field(default=1e-8)
+    # max_grad_norm is already defined in HFTrainingArguments (default=1.0)
+    # No need to redefine it here
 
     freeze_vision_tower: bool = field(default=False)
     freeze_llm: bool = field(default=False)
@@ -158,6 +161,7 @@ class DPOArguments(DPOConfigTRL):
     adam_beta1: float = field(default=0.9)
     adam_beta2: float = field(default=0.999)
     adam_epsilon: float = field(default=1e-8)
+    max_grad_norm: float = field(default=1.0, metadata={"help": "Maximum gradient norm (for gradient clipping)."})
 
     freeze_vision_tower: bool = field(default=False)
     freeze_llm: bool = field(default=False)
@@ -218,6 +222,7 @@ class GRPOArguments(GRPOConfigTRL):
     adam_beta1: float = field(default=0.9)
     adam_beta2: float = field(default=0.999)
     adam_epsilon: float = field(default=1e-8)
+    max_grad_norm: float = field(default=1.0, metadata={"help": "Maximum gradient norm (for gradient clipping)."})
 
     freeze_vision_tower: bool = field(default=False)
     freeze_llm: bool = field(default=False)

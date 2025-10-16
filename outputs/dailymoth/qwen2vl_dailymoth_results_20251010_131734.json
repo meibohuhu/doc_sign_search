@@ -1,0 +1,3002 @@
+[
+  {
+    "video": "0000004-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the water and then ran out of the building,",
+    "ground_truth": "by raging floodwaters that were powerful enough"
+  },
+  {
+    "video": "0000007-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they were not allowed to enter.",
+    "ground_truth": "and several tourists had to be evacuated."
+  },
+  {
+    "video": "0000011-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the top 138 fastest-growing occupations,",
+    "ground_truth": "crested at 13.88 feet,"
+  },
+  {
+    "video": "0000015-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a city near the border of Ukraine,",
+    "ground_truth": "A community near the gates of Yellowstone,"
+  },
+  {
+    "video": "0000020-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The jury said,",
+    "ground_truth": "News reports said"
+  },
+  {
+    "video": "0000025-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A man with a gun charged into the building and",
+    "ground_truth": "a man carrying a handgun entered a sports complex"
+  },
+  {
+    "video": "0000034-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Police responded within five minutes and",
+    "ground_truth": "Police officers were at the scene in two minutes"
+  },
+  {
+    "video": "0000035-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the French government in Gijon, Spain.",
+    "ground_truth": "and found the gunman in the gymnasium and shot at him."
+  },
+  {
+    "video": "0000040-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "There was no other person injured.",
+    "ground_truth": "Nobody was injured, only the gunman was killed."
+  },
+  {
+    "video": "0000041-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The war in Ukraine is ongoing,",
+    "ground_truth": "The war in Ukraine is now"
+  },
+  {
+    "video": "0000056-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "that George's actual cause of death was",
+    "ground_truth": "that Google’s artificially intelligent chatbot named LaMDA"
+  },
+  {
+    "video": "0000058-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the brain and body,",
+    "ground_truth": "and is self-aware."
+  },
+  {
+    "video": "0000060-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he saw the driver and tried to stop him,",
+    "ground_truth": "to see if the robot would use discriminatory or hate speech,"
+  },
+  {
+    "video": "0000063-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "LeMone was a former member of the National Football League",
+    "ground_truth": "Lemonie posted a paper that is sort of a transcript"
+  },
+  {
+    "video": "0000064-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other related laws,",
+    "ground_truth": "of different questions he asked LaMDA."
+  },
+  {
+    "video": "0000067-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a military hospital.",
+    "ground_truth": "to help me focus on helping others.”"
+  },
+  {
+    "video": "0000073-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and was sentenced to death,",
+    "ground_truth": "that he was placed on paid administrative leave,"
+  },
+  {
+    "video": "0000074-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was not responsible for the shooting.",
+    "ground_truth": "so he decided to go public."
+  },
+  {
+    "video": "0000076-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and no evidence of election fraud.",
+    "ground_truth": "there is no evidence to support Lemoine’s claims."
+  },
+  {
+    "video": "0000079-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he was not a leader or an actor.",
+    "ground_truth": "believe that Lemoine is exaggerating."
+  },
+  {
+    "video": "0000082-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Spanish-speaking community.",
+    "ground_truth": "“spaz” in it."
+  },
+  {
+    "video": "0000083-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The driver said he was driving at a normal speed and",
+    "ground_truth": "The term is considered derogatory"
+  },
+  {
+    "video": "0000086-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the time on the state of South Dakota.",
+    "ground_truth": "is based on “spastic diplegia, a form of cerebral palsy.”"
+  },
+  {
+    "video": "0000087-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The increase is expected to be in line with UK inflation.",
+    "ground_truth": "The word is more commonly used as an insult in the U.K."
+  },
+  {
+    "video": "0000091-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and not human rights.",
+    "ground_truth": "hurtful language hurled towards them"
+  },
+  {
+    "video": "0000097-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they want to see it happen.",
+    "ground_truth": "she’s been waiting to see in the world."
+  },
+  {
+    "video": "0000124-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he hopes to win the nomination.",
+    "ground_truth": "said he hopes to one day own a NBA franchise."
+  },
+  {
+    "video": "0000134-2022.6.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "See you tomorrow and stay with the light.",
+    "ground_truth": "See you tomorrow and stay with the light."
+  },
+  {
+    "video": "0000140-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then collapsed.",
+    "ground_truth": "their foundations."
+  },
+  {
+    "video": "0000150-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Las Vegas shooting in May.",
+    "ground_truth": "a 27-year-old in May."
+  },
+  {
+    "video": "0000158-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Police said they arrested the suspect on Saturday and",
+    "ground_truth": "Police said the suspect was arrested on Tuesday,"
+  },
+  {
+    "video": "0000159-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the coronavirus pandemic and the death of Floyd,",
+    "ground_truth": "confessed to the crime, was charged with felony rape,"
+  },
+  {
+    "video": "0000164-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "She said she is not thinking about her death and",
+    "ground_truth": "Biden said, \"Imagine being that little girl..."
+  },
+  {
+    "video": "0000172-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Capitol in 2024.",
+    "ground_truth": "the presidency in 2024."
+  },
+  {
+    "video": "0000181-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in three separate incidents.",
+    "ground_truth": "including three children."
+  },
+  {
+    "video": "0000185-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "four people were hospitalized.",
+    "ground_truth": "including four children, were hospitalized."
+  },
+  {
+    "video": "0000213-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Hebrew University of Jerusalem.",
+    "ground_truth": "the Bill and Melinda Gates Foundation."
+  },
+  {
+    "video": "0000216-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a severe illness that can cause death and is caused by",
+    "ground_truth": "fight diseases, reduce childhood deaths, address climate change,"
+  },
+  {
+    "video": "0000219-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "world's largest pharmaceutical company,",
+    "ground_truth": "the world's richest people one day."
+  },
+  {
+    "video": "0000220-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he had a different opinion on",
+    "ground_truth": "He said he feels he has an obligation to return"
+  },
+  {
+    "video": "0000223-2022.7.14.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The next one is on November 14.",
+    "ground_truth": "currently has a net worth of $114 billion,"
+  },
+  {
+    "video": "0000239-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a private company that sells electricity.",
+    "ground_truth": "it will become a privately held company."
+  },
+  {
+    "video": "0000250-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is not sustainable and that it is against",
+    "ground_truth": "which was permanently suspended after the January 6 attack"
+  },
+  {
+    "video": "0000256-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the school's principal.",
+    "ground_truth": "Truth Social and said he would stick with that platform."
+  },
+  {
+    "video": "0000259-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the death penalty.",
+    "ground_truth": "to slavery."
+  },
+  {
+    "video": "0000261-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the death of his wife and their 7-month-old baby",
+    "ground_truth": "staff, and leaders enslaved more than 70 individuals"
+  },
+  {
+    "video": "0000273-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the 11th Senate district in Maryland,",
+    "ground_truth": "about 12 seconds from the upcoming Marvel film,"
+  },
+  {
+    "video": "0000286-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they were not killed.",
+    "ground_truth": "punishable by death."
+  },
+  {
+    "video": "0000293-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the new law, but it is not clear whether",
+    "ground_truth": "out in opposition of a new law that bans instruction or"
+  },
+  {
+    "video": "0000294-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a public school district.",
+    "ground_truth": "classroom discussion of LGBTQ+ topics in elementary schools."
+  },
+  {
+    "video": "0000298-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the war with Ukraine and weapons supplies,",
+    "ground_truth": "to keep providing Ukraine with weapons and"
+  },
+  {
+    "video": "0000302-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other areas of Germany.",
+    "ground_truth": "an air base in Germany."
+  },
+  {
+    "video": "0000312-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Madison, Wisconsin, is the first state to pass a law that",
+    "ground_truth": "Rep. Madison Cawthorn (R-NC) tried to bring a loaded gun"
+  },
+  {
+    "video": "0000319-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then shot himself.",
+    "ground_truth": "of the gun."
+  },
+  {
+    "video": "0000320-2022.4.26.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the second time CNN has apologized for",
+    "ground_truth": "It is the second time Cawthorn was stopped trying to bring"
+  },
+  {
+    "video": "0000326-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0000345-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The other person, a Lyft driver, was on his way to pick up",
+    "ground_truth": "Fortunately, some who saw the livestream had a snowplow"
+  },
+  {
+    "video": "0000350-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it was a family tragedy.",
+    "ground_truth": "she is now considered family."
+  },
+  {
+    "video": "0000351-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is the first time that the bill has passed in",
+    "ground_truth": "It just shows how dangerous the blizzard in Buffalo was."
+  },
+  {
+    "video": "0000353-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Another woman was killed and",
+    "ground_truth": "Another story that has recently emerged is"
+  },
+  {
+    "video": "0000355-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "She was driving her car and her home when",
+    "ground_truth": "She was only six minutes away from her home"
+  },
+  {
+    "video": "0000356-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then it came crashing down.",
+    "ground_truth": "when she became stuck in the blizzard."
+  },
+  {
+    "video": "0000359-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the phone and said, \"I want to die.\"",
+    "ground_truth": "She called 911 and waited for first responders"
+  },
+  {
+    "video": "0000365-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A city official said the tree was cut down",
+    "ground_truth": "A city official said most of its snow-clearing equipment"
+  },
+  {
+    "video": "0000372-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Bennett is 95 years old.",
+    "ground_truth": "Benedict is 95 years old."
+  },
+  {
+    "video": "0000375-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He was a former mayor of the city.",
+    "ground_truth": "He said he resigned due to declining health."
+  },
+  {
+    "video": "0000380-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "his former position.",
+    "ground_truth": "about his past."
+  },
+  {
+    "video": "0000395-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "people who are concerned about the future.",
+    "ground_truth": "about the people's concerns."
+  },
+  {
+    "video": "0000398-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Supreme Court is expected to hear arguments on",
+    "ground_truth": "The Supreme Court voted 5-4 to keep in effect a policy from"
+  },
+  {
+    "video": "0000399-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Trump administration,",
+    "ground_truth": "the Trump administration that allowed the U.S. to"
+  },
+  {
+    "video": "0000407-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "at the end of June.",
+    "ground_truth": "at least until the end of June."
+  },
+  {
+    "video": "0000409-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the three-day trial on Wednesday.",
+    "ground_truth": "three liberal judges who dissented, saying"
+  },
+  {
+    "video": "0000420-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The White House said they would work with",
+    "ground_truth": "The White House said they would comply with"
+  },
+  {
+    "video": "0000421-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court, but they said they would not do it",
+    "ground_truth": "the Supreme court's decision and would make preparations on"
+  },
+  {
+    "video": "0000424-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "two of them eating at an Italian restaurant,",
+    "ground_truth": "two Asian friends were eating at an In-N-Out restaurant and"
+  },
+  {
+    "video": "0000430-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they were not violent.",
+    "ground_truth": "a clever comment, the man became angry and"
+  },
+  {
+    "video": "0000441-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "40 Black men named Deeter,",
+    "ground_truth": "a 40-year-old man from Denver named"
+  },
+  {
+    "video": "0000445-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the previous election.",
+    "ground_truth": "the past about the man."
+  },
+  {
+    "video": "0000446-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Axios explained that two of the people who were arrested",
+    "ground_truth": "Axios reported that two of the leaders of the plot to"
+  },
+  {
+    "video": "0000456-2022.12.28.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the coronavirus rules in place at his golf club,",
+    "ground_truth": "their roles in the plot to kidnap the governor at"
+  },
+  {
+    "video": "0000554-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It is Thursday, April 6.",
+    "ground_truth": "It is April 6."
+  },
+  {
+    "video": "0000559-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On Wednesday, the Indiana governor, Holcomb,",
+    "ground_truth": "On Wednesday, Indiana Gov. Holcomb signed a bill"
+  },
+  {
+    "video": "0000570-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and gender identity.",
+    "ground_truth": "that ban gender-affirming care for minors."
+  },
+  {
+    "video": "0000587-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The AG's office is investigating",
+    "ground_truth": "The AG's office conducted an investigation"
+  },
+  {
+    "video": "0000589-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "on Wednesday.",
+    "ground_truth": "on Wednesday."
+  },
+  {
+    "video": "0000592-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The abusers were able to get people to sign up for",
+    "ground_truth": "They said abusers were often given the opportunity to"
+  },
+  {
+    "video": "0000595-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other health issues.",
+    "ground_truth": "what they have found."
+  },
+  {
+    "video": "0000611-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Louisiana Republican Party,",
+    "ground_truth": "luxury trips from a Republican megadonor for"
+  },
+  {
+    "video": "0000630-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and said he was \"stupid.\"",
+    "ground_truth": "Others said Thomas should be investigated or even impeached."
+  },
+  {
+    "video": "0000642-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The body was found and",
+    "ground_truth": "His body was exhumed, investigated,"
+  },
+  {
+    "video": "0000643-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the right to vote.",
+    "ground_truth": "and now it's reburied."
+  },
+  {
+    "video": "0000646-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Netflix show was released on December 17.",
+    "ground_truth": "A Netflix documentary showed that some people suspected"
+  },
+  {
+    "video": "0000648-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Trumps and the Sussmanns,",
+    "ground_truth": "that Buster and Smith were in."
+  },
+  {
+    "video": "0000649-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Michigan House of Representatives.",
+    "ground_truth": "Smith was openly gay."
+  },
+  {
+    "video": "0000650-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Barr said he is not aware of any specific allegations",
+    "ground_truth": "Buster recently said he denies any involvement and asked for"
+  },
+  {
+    "video": "0000651-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and the school district.",
+    "ground_truth": "the media to stop publishing rumors."
+  },
+  {
+    "video": "0000659-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the World Health Organization (WHO) and other organizations",
+    "ground_truth": "kidnapping a wild platypus and showing it off to others."
+  },
+  {
+    "video": "0000675-2023.4.6.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "That is all the top stories for today.",
+    "ground_truth": "That is all the top stories for today."
+  },
+  {
+    "video": "0000677-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It is Wednesday, September 29.",
+    "ground_truth": "It is Wednesday, September 21."
+  },
+  {
+    "video": "0000685-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "News analysts said it is possible that Putin is trying to",
+    "ground_truth": "News analysts said Putin may be making this move"
+  },
+  {
+    "video": "0000703-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a missile strike, but it is stronger than",
+    "ground_truth": "a Category 1 storm, has strengthened into"
+  },
+  {
+    "video": "0000707-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the other night or on Friday evening,",
+    "ground_truth": "tomorrow night or early Friday and then"
+  },
+  {
+    "video": "0000708-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Canadian Atlantic region.",
+    "ground_truth": "approach Canada's Atlantic provinces late Friday."
+  },
+  {
+    "video": "0000711-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Today is World Mental Health Day.",
+    "ground_truth": "As of today, only 26% of the island had power."
+  },
+  {
+    "video": "0000714-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A person who was in the water,",
+    "ground_truth": "One person was killed after he was swept away"
+  },
+  {
+    "video": "0000716-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The two people died because they were on a hiking trail",
+    "ground_truth": "the second burned to death after he tried to fill"
+  },
+  {
+    "video": "0000733-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the FDA last year.",
+    "ground_truth": "The FDA said they've received reports of teenagers"
+  },
+  {
+    "video": "0000750-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The AG's office said they have evidence of",
+    "ground_truth": "The AG said her office has made a criminal referral to"
+  },
+  {
+    "video": "0000751-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. Justice Department.",
+    "ground_truth": "the U.S. Department of Justice and the IRS."
+  },
+  {
+    "video": "0000753-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is not a \"fashion statement.\"",
+    "ground_truth": "has nothing to do with facts or the law."
+  },
+  {
+    "video": "0000754-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The law says that people who are in the U.S.",
+    "ground_truth": "She said she looks forward to defending Trump in"
+  },
+  {
+    "video": "0000755-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court.",
+    "ground_truth": "the judicial system."
+  },
+  {
+    "video": "0000756-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In New York, actor Aaron Judge was sentenced",
+    "ground_truth": "The New York Yankees star player Aaron Judge hit"
+  },
+  {
+    "video": "0000770-2022.9.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "That is all the top stories for today.",
+    "ground_truth": "That is all the top stories for today."
+  },
+  {
+    "video": "0000878-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It is Thursday, October 27.",
+    "ground_truth": "It is Thursday, October 27."
+  },
+  {
+    "video": "0000879-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0000880-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Elon Musk, who is the CEO of Twitter,",
+    "ground_truth": "Elon Musk visited the headquarters of Twitter"
+  },
+  {
+    "video": "0000895-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Donald Trump Organization,",
+    "ground_truth": "Donald Trump's account,"
+  },
+  {
+    "video": "0000902-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and the U.S. and other countries.",
+    "ground_truth": "which borders Texas' southern tip."
+  },
+  {
+    "video": "0000906-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The National Transportation Safety Board (NTSB)",
+    "ground_truth": "Legislators moved to another room to finish their debate"
+  },
+  {
+    "video": "0000907-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then removed it.",
+    "ground_truth": "and vote."
+  },
+  {
+    "video": "0000910-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in the U.S. about 50% of the time.",
+    "ground_truth": "plants in the Midwest."
+  },
+  {
+    "video": "0000912-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the FBI's investigation in New England.",
+    "ground_truth": "loads of frozen beef were stolen in Nebraska."
+  },
+  {
+    "video": "0000923-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other taxes.",
+    "ground_truth": "after taxes are taken out."
+  },
+  {
+    "video": "0000928-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The boy was taken away.",
+    "ground_truth": "So someone has to be really, really, really lucky."
+  },
+  {
+    "video": "0000930-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The testimony was given by seven people who were",
+    "ground_truth": "who is from Tennessee, was sentenced to 7.5 years"
+  },
+  {
+    "video": "0000936-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The police officer was not emotionally affected.",
+    "ground_truth": "Fanone sustained a heart attack on that day and"
+  },
+  {
+    "video": "0000937-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was not a DC official.",
+    "ground_truth": "has since resigned from the D.C. police department."
+  },
+  {
+    "video": "0000944-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The fire was extinguished.",
+    "ground_truth": "burst into flames."
+  },
+  {
+    "video": "0000957-2022.10.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was not a threat.",
+    "ground_truth": "they do not know if he has retained an attorney."
+  },
+  {
+    "video": "0001176-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0001181-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Biden administration.",
+    "ground_truth": "called ByteDance."
+  },
+  {
+    "video": "0001190-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "TikTok is worth about $100 billion worldwide.",
+    "ground_truth": "TikTok has over 1 billion monthly users in the world."
+  },
+  {
+    "video": "0001199-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was burned on Tuesday morning.",
+    "ground_truth": "facility went up into flames on Tuesday morning and"
+  },
+  {
+    "video": "0001203-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A New York police official said the bus was full of",
+    "ground_truth": "An NYPD official said there was a lot of biological evidence"
+  },
+  {
+    "video": "0001204-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that the crime was motivated by hate.",
+    "ground_truth": "from past crimes, burglaries, shooting incidents, and others."
+  },
+  {
+    "video": "0001207-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The fire was extinguished and",
+    "ground_truth": "Firefighters tried to stop the fire by going inside"
+  },
+  {
+    "video": "0001210-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Three marine animals, dolphins and porpoises, were found",
+    "ground_truth": "Three marine fireboats and drones were brought in"
+  },
+  {
+    "video": "0001214-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Eight people were injured and hospitalized.",
+    "ground_truth": "Eight people had minor injuries from the fire."
+  },
+  {
+    "video": "0001219-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Elon Musk tweeted that he would suspend Twitter accounts",
+    "ground_truth": "Elon Musk's Twitter suspended a popular Twitter account"
+  },
+  {
+    "video": "0001224-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the abortion rights of transgender women,",
+    "ground_truth": "he offered the account owner, 20-year-old Jack Sweeney,"
+  },
+  {
+    "video": "0001225-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "$5,000 worth of drugs.",
+    "ground_truth": "$5,000 to delete his account."
+  },
+  {
+    "video": "0001230-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the health of the planet.",
+    "ground_truth": "What changed?"
+  },
+  {
+    "video": "0001261-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Senate, and that they would defeat the Democratic Party.",
+    "ground_truth": "kill a sitting governor is a threat to democracy itself."
+  },
+  {
+    "video": "0001278-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the state of Kentucky and the new governor, Andy Beshear.",
+    "ground_truth": "Arizona elected Katie Hobbs (D) as their new governor and"
+  },
+  {
+    "video": "0001291-2022.12.15.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "That is all the top stories for today.",
+    "ground_truth": "That is all the top stories for today."
+  },
+  {
+    "video": "0001304-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Biden administration is working with oil and gas companies",
+    "ground_truth": "President Biden approved a controversial oil and gas"
+  },
+  {
+    "video": "0001312-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Many people said it was wrong and that",
+    "ground_truth": "There are many people who say this is the wrong move and"
+  },
+  {
+    "video": "0001314-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other cities.",
+    "ground_truth": "communities and our climate."
+  },
+  {
+    "video": "0001315-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The president gave a speech today and",
+    "ground_truth": "President Biden gave an address today to try"
+  },
+  {
+    "video": "0001318-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The second is a bill in New York that would require",
+    "ground_truth": "There was another bank in New York,"
+  },
+  {
+    "video": "0001323-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The federal government is paying for all of it,",
+    "ground_truth": "Federal officials said everyone who had deposits in the banks"
+  },
+  {
+    "video": "0001349-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The phone number was 911 and it was answered by",
+    "ground_truth": "They called 911 but the child died at the scene."
+  },
+  {
+    "video": "0001360-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The man was wearing a white shirt and",
+    "ground_truth": "The man was taken to a hospital and it was feared that"
+  },
+  {
+    "video": "0001365-2023.3.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A judge in Oregon said the law is unconstitutional and",
+    "ground_truth": "An Ohio official said zebras are not on the list of dangerous,"
+  },
+  {
+    "video": "0001369-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It is February 13.",
+    "ground_truth": "It is February 13."
+  },
+  {
+    "video": "0001389-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The third is called the Cylindrical Window,",
+    "ground_truth": "The object is described as \"cylindrical\" and"
+  },
+  {
+    "video": "0001390-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the other two states that have similar laws.",
+    "ground_truth": "was smaller, but similar to the South Carolina balloon."
+  },
+  {
+    "video": "0001396-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The three were shot and killed in separate incidents.",
+    "ground_truth": "So, it is three objects shot down in three consecutive days."
+  },
+  {
+    "video": "0001407-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in the eastern part of the country.",
+    "ground_truth": "southeastern Turkiye, near its border with Syria."
+  },
+  {
+    "video": "0001421-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a $30 million settlement with the victims' families.",
+    "ground_truth": "donated $30 million to help quake victims."
+  },
+  {
+    "video": "0001428-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The doctor said he believes that the death was",
+    "ground_truth": "Some political leaders have blamed Turkish President Erdogan"
+  },
+  {
+    "video": "0001429-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the right to vote and to run for office.",
+    "ground_truth": "for failing to enforce building regulations."
+  },
+  {
+    "video": "0001431-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "on February 2.",
+    "ground_truth": "committed suicide on February 2."
+  },
+  {
+    "video": "0001435-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in Oregon and Kentucky.",
+    "ground_truth": "at her school in Ocean County."
+  },
+  {
+    "video": "0001446-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The man said he would not apologize and that",
+    "ground_truth": "The father said he will \"not sleep' until"
+  },
+  {
+    "video": "0001469-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and died of natural causes.",
+    "ground_truth": "It's a coincidence."
+  },
+  {
+    "video": "0001471-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the 57th year of the Golden Globes.",
+    "ground_truth": "Super Bowl 57 last night in Glendale, Arizona."
+  },
+  {
+    "video": "0001473-2023.2.13.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the MVP award.",
+    "ground_truth": "the game's MVP."
+  },
+  {
+    "video": "0001504-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The news said the private security company in Los Angeles",
+    "ground_truth": "News reports said the Secret Service agent in the limo,"
+  },
+  {
+    "video": "0001513-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and will be sentenced on Monday in New York City.",
+    "ground_truth": "whether they’ll call upon Engel and the limo driver to testify."
+  },
+  {
+    "video": "0001517-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The 29-year-old woman was a gymnast and",
+    "ground_truth": "A 29-year-old Amazon worker and gun owner was arrested over"
+  },
+  {
+    "video": "0001524-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "that he thought it was good.",
+    "ground_truth": "that he thought it’d be a good idea to"
+  },
+  {
+    "video": "0001536-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he is a \"good man.\"",
+    "ground_truth": "had a history of mental illness,"
+  },
+  {
+    "video": "0001539-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The shooting happened near a school.",
+    "ground_truth": "With all this information,"
+  },
+  {
+    "video": "0001540-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Police arrested the suspect.",
+    "ground_truth": "law enforcement arrested Aceves and"
+  },
+  {
+    "video": "0001542-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The price is now about $500,000.",
+    "ground_truth": "He is jailed on a $50,000 bond."
+  },
+  {
+    "video": "0001543-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in Florida is now a law,",
+    "ground_truth": "In Florida, there is a law"
+  },
+  {
+    "video": "0001549-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Police officers were able to pull them out.",
+    "ground_truth": "and the cop can hear it, then they can issue the ticket."
+  },
+  {
+    "video": "0001555-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. military in Poland,",
+    "ground_truth": "would be stationed in Poland."
+  },
+  {
+    "video": "0001583-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Two women from Alaska were sentenced today",
+    "ground_truth": "The two women were from India and were charged with"
+  },
+  {
+    "video": "0001585-2022.6.29.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Women who are under 10 years of age can be sentenced",
+    "ground_truth": "The women are facing a maximum sentence of up to 10 years and"
+  },
+  {
+    "video": "0001612-2022.2.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The fire department said they are still working on",
+    "ground_truth": "Pfizer said it predicts that in 2022,"
+  },
+  {
+    "video": "0001625-2022.2.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Canadian government has announced that it will ban",
+    "ground_truth": "Canadian truck drivers protesting Covid-19 related"
+  },
+  {
+    "video": "0001626-2022.2.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the door and locked it with a master key,",
+    "ground_truth": "rules have blocked the Ambassador Bridge"
+  },
+  {
+    "video": "0001628-2022.2.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the last time it was used in the U.S. was in 2017.",
+    "ground_truth": "It is the busiest international crossing in North America."
+  },
+  {
+    "video": "0001636-2022.2.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was wrong.",
+    "ground_truth": "the border and called the protesters"
+  },
+  {
+    "video": "0001637-2022.2.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the end of May.",
+    "ground_truth": "a \"small, fringe minority.\""
+  },
+  {
+    "video": "0001640-2022.2.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it was a tragic accident.",
+    "ground_truth": "(meaning no semi-trucks)."
+  },
+  {
+    "video": "0002136-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The jury is still deliberating.",
+    "ground_truth": "It is currently in the jury selection phase and"
+  },
+  {
+    "video": "0002149-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "on Thursday.",
+    "ground_truth": "that is set to begin this Thursday."
+  },
+  {
+    "video": "0002159-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a building in Bucha, which is near Kyiv.",
+    "ground_truth": "and killed in Bucha, which is in the Kyiv region."
+  },
+  {
+    "video": "0002161-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the body on the road and then killed the driver,",
+    "ground_truth": "the bodies of those who were killed from streets"
+  },
+  {
+    "video": "0002172-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a \"no-fly zone\" and that it would be a \"military mission.\"",
+    "ground_truth": "and restrictions that blocked many migrants"
+  },
+  {
+    "video": "0002186-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it was a chaotic scene.",
+    "ground_truth": "\"unmitigated chaos and catastrophe\" at the border."
+  },
+  {
+    "video": "0002191-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.S. has over 100,000 people who have died from",
+    "ground_truth": "those aged 60 and older could significantly increase"
+  },
+  {
+    "video": "0002198-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Russian invasion of Ukraine,",
+    "ground_truth": "from walking and that the benefits plateau"
+  },
+  {
+    "video": "0002200-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the health of the planet and human life,",
+    "ground_truth": "This means you get the most health benefits at 7,000 steps"
+  },
+  {
+    "video": "0002204-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then went back to work.",
+    "ground_truth": "with a fitness watch."
+  },
+  {
+    "video": "0002210-2022.4.5.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court.",
+    "ground_truth": "and provide health insurance coverage for Americans."
+  },
+  {
+    "video": "0002235-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court.",
+    "ground_truth": "to serve on the Supreme Court of the United States,"
+  },
+  {
+    "video": "0002243-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Tsunami's own \"X\" logo on it,",
+    "ground_truth": "teenagers' hopes and dreams and trapped them in his house"
+  },
+  {
+    "video": "0002254-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and not for the sake of the country.",
+    "ground_truth": "but was able to evade punishment."
+  },
+  {
+    "video": "0002260-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "President Biden has supported the bill,",
+    "ground_truth": "President Biden said he supports changing Senate filibuster rules"
+  },
+  {
+    "video": "0002262-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the school's board of directors,",
+    "ground_truth": "abortion rights without needing at least 60 Senators' support."
+  },
+  {
+    "video": "0002264-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The other victim was a 69-year-old woman.",
+    "ground_truth": "because Vice President Kamala Harris is able to be"
+  },
+  {
+    "video": "0002271-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the \"C\" in \"conceal.\"",
+    "ground_truth": "which has to do with contraceptives (birth control)."
+  },
+  {
+    "video": "0002276-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Supreme Court today heard arguments on",
+    "ground_truth": "The Supreme Court ruled today to limit how much authority"
+  },
+  {
+    "video": "0002290-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the crime that they committed on the trail,",
+    "ground_truth": "for crimes that they commit on tribal land"
+  },
+  {
+    "video": "0002300-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The average price of a home today is",
+    "ground_truth": "It is worth an estimated $20 million today."
+  },
+  {
+    "video": "0002302-2022.6.30.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Chase Wilbur, who was a student at the school,",
+    "ground_truth": "Charles and Willa Bruce, owned the property and turned it into"
+  },
+  {
+    "video": "0002337-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they were protesting in the city.",
+    "ground_truth": "it has caused protests and controversy in the city."
+  },
+  {
+    "video": "0002338-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The incident took place on June 7.",
+    "ground_truth": "The incident took place on Monday, June 27."
+  },
+  {
+    "video": "0002344-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the shooting and that the shooter was stopped by",
+    "ground_truth": "Eventually, Walker's car stopped and he ran outside"
+  },
+  {
+    "video": "0002346-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then they were shot at.",
+    "ground_truth": "Several police officers ran after him,"
+  },
+  {
+    "video": "0002357-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On Saturday, the Biden administration announced that",
+    "ground_truth": "On Saturday, President Biden tweeted that"
+  },
+  {
+    "video": "0002364-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and Biden's White House,",
+    "ground_truth": "saying the Biden White House is either sending out"
+  },
+  {
+    "video": "0002378-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is not an official law.",
+    "ground_truth": "but that it typically takes time for gas prices to go down."
+  },
+  {
+    "video": "0002382-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they would not release Kyle.",
+    "ground_truth": "or canceling the Keystone Pipeline."
+  },
+  {
+    "video": "0002390-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The three victims were 17-year-old Malene and 18-year-old",
+    "ground_truth": "The three victims were a 17-year-old male teenager,"
+  },
+  {
+    "video": "0002403-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "There were 17 people killed and",
+    "ground_truth": "There are 17 hikers who are currently missing"
+  },
+  {
+    "video": "0002405-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The district attorney said the crime was committed last month,",
+    "ground_truth": "First responders said conditions were too dangerous for them"
+  },
+  {
+    "video": "0002406-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the building and then left.",
+    "ground_truth": "to search on Monday, so the response was delayed."
+  },
+  {
+    "video": "0002409-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The city of Greenville is located in",
+    "ground_truth": "The glacier has been melting for many years and"
+  },
+  {
+    "video": "0002424-2022.7.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the investigation.",
+    "ground_truth": "that authorities would investigate."
+  },
+  {
+    "video": "0002652-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0002664-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The video shows several homes that were damaged,",
+    "ground_truth": "News videos showed several homes with severe damage and"
+  },
+  {
+    "video": "0002674-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The city of Kherson is a major industrial center",
+    "ground_truth": "of key cities that Russia hoped to easily conquer,"
+  },
+  {
+    "video": "0002677-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other support services.",
+    "ground_truth": "missile attacks or constant shelling of cities."
+  },
+  {
+    "video": "0002692-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in Houston with the team.",
+    "ground_truth": "from participating in high school women's sports leagues."
+  },
+  {
+    "video": "0002696-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the person who was injured.",
+    "ground_truth": "directed at few people,"
+  },
+  {
+    "video": "0002699-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the hospital with four other patients,",
+    "ground_truth": "playing high school, and that only one is involved"
+  },
+  {
+    "video": "0002700-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and was married to a girl.",
+    "ground_truth": "in girls' sports."
+  },
+  {
+    "video": "0002702-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the women's team.",
+    "ground_truth": "transgender youth and said \"I want them to live.\""
+  },
+  {
+    "video": "0002705-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "11 Americans who were killed in a school shooting in",
+    "ground_truth": "11 other states have passed and signed bans on transgender girls"
+  },
+  {
+    "video": "0002707-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Actor Mandy Moore, who played the role of Samantha in",
+    "ground_truth": "Actress Amanda Bynes' nine-year conservatorship has"
+  },
+  {
+    "video": "0002709-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the most important thing.",
+    "ground_truth": "it was \"no longer needed or required.\""
+  },
+  {
+    "video": "0002718-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the year 2021.",
+    "ground_truth": "13-year conservatorship ending in November 2021."
+  },
+  {
+    "video": "0002725-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the front of the building.",
+    "ground_truth": "suddenly plunge in a nosedive in the middle of its flight."
+  },
+  {
+    "video": "0002726-2022.3.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Supreme Court is expected to hear arguments on",
+    "ground_truth": "Chinese officials have invited U.S. officials to come to"
+  },
+  {
+    "video": "0002808-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the last Black woman to win the title,",
+    "ground_truth": "the first Black woman justice when she takes over"
+  },
+  {
+    "video": "0002818-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The boy was found near the Capitol and died of",
+    "ground_truth": "The fox that was captured near the U.S. Capitol was euthanized"
+  },
+  {
+    "video": "0002828-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in the U.S. and women with children,",
+    "ground_truth": "from playing in girls and women's sports from"
+  },
+  {
+    "video": "0002831-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the death penalty.",
+    "ground_truth": "because it discriminates against transgender children."
+  },
+  {
+    "video": "0002832-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The governor said he is concerned about",
+    "ground_truth": "He also said transgender children deserve compassion,"
+  },
+  {
+    "video": "0002841-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Donald Trump and his wife, Melania,",
+    "ground_truth": "North Dakota is a thescelosaurus that died"
+  },
+  {
+    "video": "0002855-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the coronavirus today.",
+    "ground_truth": "the coronavirus today."
+  },
+  {
+    "video": "0002867-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.S. Department of Defense announced that",
+    "ground_truth": "The U.N. General Assembly voted in a majority to suspend Russia"
+  },
+  {
+    "video": "0002868-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and U.S. citizens.",
+    "ground_truth": "from the UN's Human Rights Council."
+  },
+  {
+    "video": "0002875-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Mississippi River.",
+    "ground_truth": "by Russia."
+  },
+  {
+    "video": "0002878-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Ukrainian border.",
+    "ground_truth": "and indiscriminate bombing of Ukraine."
+  },
+  {
+    "video": "0002880-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the U.S. and Israel, but it is not clear what the two countries",
+    "ground_truth": "German intelligence intercepted two separate communications"
+  },
+  {
+    "video": "0002890-2022.4.7.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court, and the National Archives.",
+    "ground_truth": "Both the U.S. and NATO warned that"
+  },
+  {
+    "video": "0003091-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are top stories from the weekend and today."
+  },
+  {
+    "video": "0003093-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Biden administration, and the Supreme Court.",
+    "ground_truth": "who is President Biden's nominee to the Supreme Court,"
+  },
+  {
+    "video": "0003098-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and will be back on Tuesday, January 13.",
+    "ground_truth": "while questioning will take place on Tuesday and Wednesday."
+  },
+  {
+    "video": "0003104-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a person who was a former employee of the company,",
+    "ground_truth": "recognized her two daughters, aged 21 and 17, and"
+  },
+  {
+    "video": "0003112-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "on Wednesday because of his illness.",
+    "ground_truth": "the hospital on Friday due to an infection and"
+  },
+  {
+    "video": "0003118-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In South Georgia, the Boeing 737 plane that crashed into",
+    "ground_truth": "In southern China, a Boeing 737 passenger plane with 132 people"
+  },
+  {
+    "video": "0003143-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the plane crashed.",
+    "ground_truth": "when the aircraft crashed."
+  },
+  {
+    "video": "0003166-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the local community and the city,",
+    "ground_truth": "they would allow civilians out of the city with"
+  },
+  {
+    "video": "0003168-2022.3.21.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Ukraine's eastern regions.",
+    "ground_truth": "but Ukrainian leaders refused to surrender."
+  },
+  {
+    "video": "0003448-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0003454-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he was wearing a mask.",
+    "ground_truth": "She used to have long locs but they were cut off."
+  },
+  {
+    "video": "0003456-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the man will be charged with murder.",
+    "ground_truth": "when she was told that she would be going home to the U.S."
+  },
+  {
+    "video": "0003461-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "was arrested in 2018 for using a weapon of war against",
+    "ground_truth": "He was arrested in 2008 after he tried to sell arms to"
+  },
+  {
+    "video": "0003465-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Boston area.",
+    "ground_truth": "let Bout go."
+  },
+  {
+    "video": "0003468-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then killed himself at his home.",
+    "ground_truth": "so they are glad that they could get Griner home."
+  },
+  {
+    "video": "0003474-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the last time he was in the state of West Virginia,",
+    "ground_truth": "and murdering a 7-year-old girl named Athena Strand in"
+  },
+  {
+    "video": "0003479-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The driver, Taylor Hornor, said he was driving",
+    "ground_truth": "The driver, Tanner Lynn Horner, said he killed the girl by"
+  },
+  {
+    "video": "0003482-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Police said they found the body inside of",
+    "ground_truth": "Police said they have surveillance video from inside"
+  },
+  {
+    "video": "0003488-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the girl was not wearing a helmet,",
+    "ground_truth": "The girl went outside after she got into an argument"
+  },
+  {
+    "video": "0003489-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the first time.",
+    "ground_truth": "with her stepmother."
+  },
+  {
+    "video": "0003496-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Arvadistrict.",
+    "ground_truth": "aggravated kidnapping."
+  },
+  {
+    "video": "0003501-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The judge's name is Joshua Zarelli.",
+    "ground_truth": "as Joseph A. Zarelli."
+  },
+  {
+    "video": "0003504-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The new Fencing and Gymnastics committees will be",
+    "ground_truth": "but new forensic genetic genealogy methods helped with"
+  },
+  {
+    "video": "0003512-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is more common for",
+    "ground_truth": "that will have meaningful progress"
+  },
+  {
+    "video": "0003519-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Chappelle's show was canceled by the Texas governor",
+    "ground_truth": "ChatGPT works like a text conversation or"
+  },
+  {
+    "video": "0003520-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the city's boundaries.",
+    "ground_truth": "an emailed conversation."
+  },
+  {
+    "video": "0003528-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he was not a \"target.\"",
+    "ground_truth": "The response to my question was accurate."
+  },
+  {
+    "video": "0003533-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is not the right time.",
+    "ground_truth": "can be \"confidently wrong.\""
+  },
+  {
+    "video": "0003536-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Dr. Anthony Fauci, the nation's top infectious disease expert,",
+    "ground_truth": "Dr. Anthony Fauci, who led the U.S. response"
+  },
+  {
+    "video": "0003550-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It is July 1.",
+    "ground_truth": "He is 81 years old."
+  },
+  {
+    "video": "0003555-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Senate, and that he is not a member of",
+    "ground_truth": "that will shake up the Senate -"
+  },
+  {
+    "video": "0003560-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The White House said they would not comment on",
+    "ground_truth": "The White House said the decision doesn't change"
+  },
+  {
+    "video": "0003563-2022.12.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then they were gone.",
+    "ground_truth": "they have in the past."
+  },
+  {
+    "video": "0003657-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "on Monday.",
+    "ground_truth": "victory parade on Monday."
+  },
+  {
+    "video": "0003658-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The father and son were charged with two counts of",
+    "ground_truth": "A 33-year-old man allegedly threw two beer cans toward"
+  },
+  {
+    "video": "0003665-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the judge and the prosecutor,",
+    "ground_truth": "at the parade and throw two cans toward Cruz and grabbed him"
+  },
+  {
+    "video": "0003669-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Wall Street Journal reported that",
+    "ground_truth": "The Weather Channel reported that"
+  },
+  {
+    "video": "0003673-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in southwestern Wisconsin.",
+    "ground_truth": "is moving westwards."
+  },
+  {
+    "video": "0003710-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Trump gave a rally in Iowa on Thursday and",
+    "ground_truth": "Trump said at a rally in Iowa on Thursday"
+  },
+  {
+    "video": "0003720-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the state of New York for three years.",
+    "ground_truth": "as long as three demands are met:"
+  },
+  {
+    "video": "0003725-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Russia's invasion of Ukraine.",
+    "ground_truth": "\"Russia started this and Russia can end this,"
+  },
+  {
+    "video": "0003733-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The incident is separate from the U.S.-Mexico border wall,",
+    "ground_truth": "The sun, Earth, and moon lined up perfectly."
+  },
+  {
+    "video": "0003737-2022.11.8.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Many people were injured or killed.",
+    "ground_truth": "Many people on social media posted images of a red moon."
+  },
+  {
+    "video": "0003923-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in Michigan, but it was later withdrawn.",
+    "ground_truth": "a Mississippi law that banned abortions"
+  },
+  {
+    "video": "0003940-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The 17-year-old's family said the code of conduct was violated",
+    "ground_truth": "17 states and D.C. have codified the right to abortion."
+  },
+  {
+    "video": "0003949-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a shooting at a school,",
+    "ground_truth": "that it would be \"one of the worst and most damaging"
+  },
+  {
+    "video": "0003957-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and not show his face.",
+    "ground_truth": "but did not represent the court's final decision."
+  },
+  {
+    "video": "0003958-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he would investigate the allegations.",
+    "ground_truth": "He said has ordered an investigation on the leak."
+  },
+  {
+    "video": "0003960-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a man and a woman who were walking on a bridge",
+    "ground_truth": "a body of a man that was in a corroded barrel"
+  },
+  {
+    "video": "0003961-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Lake Shorland.",
+    "ground_truth": "on the lake's shore."
+  },
+  {
+    "video": "0003969-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "allowing the shooter to escape.",
+    "ground_truth": "the barrel is now at the lake's shoreline."
+  },
+  {
+    "video": "0003973-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The water levels are still rising.",
+    "ground_truth": "water levels continue to plunge due to severe drought."
+  },
+  {
+    "video": "0003981-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a judge who was appointed after",
+    "ground_truth": "but a juror who spoke to a reporter after"
+  },
+  {
+    "video": "0003983-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Waters will be sentenced on September 2.",
+    "ground_truth": "Webster will be sentenced on September 2."
+  },
+  {
+    "video": "0003984-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the top of the class at ASU,",
+    "ground_truth": "The maximum penalty for his assault charge is 20 years,"
+  },
+  {
+    "video": "0003988-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Riots in the city of Eugene,",
+    "ground_truth": "A primary election are battles within parties"
+  },
+  {
+    "video": "0003990-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the trial today.",
+    "ground_truth": "within the party."
+  },
+  {
+    "video": "0004003-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "to be more aggressive and to increase",
+    "ground_truth": "challengers who want to push the Legislature further"
+  },
+  {
+    "video": "0004016-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The photo was posted on social media.",
+    "ground_truth": "and called himself a \"Pro-life Spider-Man.\""
+  },
+  {
+    "video": "0004022-2022.5.3.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "See you tomorrow and stay with the light.",
+    "ground_truth": "See you tomorrow and stay with the light."
+  },
+  {
+    "video": "0004122-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0004125-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The death toll from the tornadoes is still rising.",
+    "ground_truth": "which means Griner will have to start serving her prison term."
+  },
+  {
+    "video": "0004133-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Biden said Russia's actions are unacceptable and",
+    "ground_truth": "The Biden Administration said Russia's judicial proceeding"
+  },
+  {
+    "video": "0004134-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "that it is not a \"shaming\" or \"humiliating\" event,",
+    "ground_truth": "is a sham and that President Biden is willing to make"
+  },
+  {
+    "video": "0004135-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the sky and then back down again.",
+    "ground_truth": "tough decisions to bring Americans home."
+  },
+  {
+    "video": "0004138-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "AP News said the storm is causing high seas and",
+    "ground_truth": "AP News said there could be a high-stakes prisoner swap"
+  },
+  {
+    "video": "0004164-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Rishon LeZion.",
+    "ground_truth": "Rishi Sunak."
+  },
+  {
+    "video": "0004166-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the most popular in 1982.",
+    "ground_truth": "the youngest PM since 1812 at 42 years old."
+  },
+  {
+    "video": "0004180-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Rossum said she is not against abortion,",
+    "ground_truth": "News reports said he could have suffered a medical emergency"
+  },
+  {
+    "video": "0004203-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On Sunday, a family from Grand Canyon National Park",
+    "ground_truth": "On Sunday, an elevator at the Grand Canyon Caverns,"
+  },
+  {
+    "video": "0004209-2022.10.25.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other areas on Monday night.",
+    "ground_truth": "finally brought back on Monday night with"
+  },
+  {
+    "video": "0004235-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in his home.",
+    "ground_truth": "in their home."
+  },
+  {
+    "video": "0004237-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The mother's name is Cora Bush.",
+    "ground_truth": "The mother's name was Cora Bush and she was 33."
+  },
+  {
+    "video": "0004240-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he was devastated by his wife's death and",
+    "ground_truth": "her account of the incident corroborated with the evidence"
+  },
+  {
+    "video": "0004242-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The meteorologist said that the D.A.T.A. system,",
+    "ground_truth": "A news report said data shows that"
+  },
+  {
+    "video": "0004244-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "1944, the first U.S. Supreme Court justice",
+    "ground_truth": "194 unintentional shootings by children in the U.S.,"
+  },
+  {
+    "video": "0004252-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The mayor said over 2,000 people were",
+    "ground_truth": "The inspector general said there were over"
+  },
+  {
+    "video": "0004256-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the pandemic.",
+    "ground_truth": "during the first few months of the coronavirus pandemic."
+  },
+  {
+    "video": "0004257-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.S. Justice Department's task force investigating",
+    "ground_truth": "The U.S. Department of Justice has a task force dedicated"
+  },
+  {
+    "video": "0004258-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "investigate and prosecute those who committed hate crimes.",
+    "ground_truth": "to investigating and prosecuting suspected fraudsters."
+  },
+  {
+    "video": "0004270-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court, and at Trump's funeral.",
+    "ground_truth": "was invited to speak at a Trump rally"
+  },
+  {
+    "video": "0004271-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in Pennsylvania.",
+    "ground_truth": "earlier this month in Pennsylvania."
+  },
+  {
+    "video": "0004301-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.S. is now in a red zone,",
+    "ground_truth": "The second update is that there are referendums in"
+  },
+  {
+    "video": "0004303-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Ukrainian government.",
+    "ground_truth": "from Ukraine to become a part of Russia."
+  },
+  {
+    "video": "0004321-2022.9.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the event, but the U.S. did not.",
+    "ground_truth": "It is not known exactly what the U.S. has been saying,"
+  },
+  {
+    "video": "0004387-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the city is now at 20,000 evacuees.",
+    "ground_truth": "on climbing and has exceeded 20,000 victims."
+  },
+  {
+    "video": "0004390-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Texas gun law.",
+    "ground_truth": "with \"The Guardian.\""
+  },
+  {
+    "video": "0004396-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the crash.",
+    "ground_truth": "by a South Korean crew."
+  },
+  {
+    "video": "0004398-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the city of Khamsin,",
+    "ground_truth": "In the city of Kahramanmaras,"
+  },
+  {
+    "video": "0004403-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He was in deep debt and",
+    "ground_truth": "These people are usually dehydrated and"
+  },
+  {
+    "video": "0004411-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and more dangerous.",
+    "ground_truth": "which makes things even more complicated."
+  },
+  {
+    "video": "0004412-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.N. said aid could be delivered by",
+    "ground_truth": "The UN has managed to send in an aid convoy,"
+  },
+  {
+    "video": "0004420-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The state of Texas has already passed",
+    "ground_truth": "the Chinese spy balloon that was shot down"
+  },
+  {
+    "video": "0004425-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the pandemic and the war in Ukraine.",
+    "ground_truth": "communication signals and intelligence."
+  },
+  {
+    "video": "0004428-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Sec. of State Antony Blinken said",
+    "ground_truth": "Secretary of State Anthony Blinken said"
+  },
+  {
+    "video": "0004440-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The animal was killed.",
+    "ground_truth": "They died by strangulation."
+  },
+  {
+    "video": "0004454-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The school said they have identified 16 potential suspects",
+    "ground_truth": "Researchers said to compare, they studied 164 brain samples"
+  },
+  {
+    "video": "0004458-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The CDC said the booster shots are needed because",
+    "ground_truth": "It can cause a progressive decline of memory and"
+  },
+  {
+    "video": "0004461-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The vehicle was traveling at high speeds on",
+    "ground_truth": "The study highlights the dangers of playing football"
+  },
+  {
+    "video": "0004467-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Guardian said the Vatican has not commented on",
+    "ground_truth": "The Georgia Bureau of Investigation said"
+  },
+  {
+    "video": "0004475-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A Georgia state official said he was fired.",
+    "ground_truth": "A state prison official said he was terminated from his job."
+  },
+  {
+    "video": "0004482-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The chairman of the House Committee on Rules,",
+    "ground_truth": "The chair of the committee, Rep. James Comer (R-Ky) said"
+  },
+  {
+    "video": "0004483-2023.2.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Americans who want to buy new cars.",
+    "ground_truth": "the American people deserve transparency."
+  },
+  {
+    "video": "0004501-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Biden administration's mask mandate,",
+    "ground_truth": "that voided the Biden administration's mask mandate"
+  },
+  {
+    "video": "0004506-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in the U.S. and Canada.",
+    "ground_truth": "on domestic flights,"
+  },
+  {
+    "video": "0004514-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "two children and a teenager who was traveling with them",
+    "ground_truth": "a kindergartner brought a bottle of tequila mix with"
+  },
+  {
+    "video": "0004518-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The school was closed for five days and",
+    "ground_truth": "The school contacted the parents of the five students and"
+  },
+  {
+    "video": "0004520-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Schools said they do not require students to be vaccinated,",
+    "ground_truth": "The school said no student became ill or"
+  },
+  {
+    "video": "0004533-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he was told by other parents that Kramer was",
+    "ground_truth": "Hernandez said others have told her that it is karma."
+  },
+  {
+    "video": "0004534-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he felt like he was being targeted by",
+    "ground_truth": "She said her reaction was sadness because he had died and"
+  },
+  {
+    "video": "0004535-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it was not a \"white supremacy\" speech.",
+    "ground_truth": "said \"the Lord saw fit to take him out of his misery.\""
+  },
+  {
+    "video": "0004537-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a car and then on a fishing boat.",
+    "ground_truth": "another vehicle and get back on her feet."
+  },
+  {
+    "video": "0004545-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the three-hour period of time when the fire was burning,",
+    "ground_truth": "an opening of about 3 inches, but the ride's operators"
+  },
+  {
+    "video": "0004547-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Senate, but he was defeated by 30 votes.",
+    "ground_truth": "accommodate Sampson's large size at 6'5 and 340 pounds."
+  },
+  {
+    "video": "0004551-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "10 inches of snow.",
+    "ground_truth": "extended up to 10 inches with force."
+  },
+  {
+    "video": "0004554-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the car was traveling at 75 mph and",
+    "ground_truth": "and then drops at speeds up to 75 mph before quickly stopping."
+  },
+  {
+    "video": "0004575-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is a new threat to Ukraine.",
+    "ground_truth": "There was a new round of intense bombing along Ukraine's east."
+  },
+  {
+    "video": "0004580-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the military and that they are now working with the French government",
+    "ground_truth": "the Russian army is focused on the new phase,"
+  },
+  {
+    "video": "0004584-2022.4.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the 100% carbon-free electricity goal,",
+    "ground_truth": "a part of the $800 million aid package President Biden"
+  },
+  {
+    "video": "0004597-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Washington Post explained that",
+    "ground_truth": "The Washington Post explained that"
+  },
+  {
+    "video": "0004600-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The vest was worn by the player in 1958,",
+    "ground_truth": "The virus was first identified in 1958"
+  },
+  {
+    "video": "0004606-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The storm is expected to hit the state of Texas",
+    "ground_truth": "Some strains of the virus can kill"
+  },
+  {
+    "video": "0004609-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in December.",
+    "ground_truth": "1 out of 100 people dying."
+  },
+  {
+    "video": "0004612-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Health officials said the death was related to an accidental",
+    "ground_truth": "Health officials said a number of recent cases involve men"
+  },
+  {
+    "video": "0004613-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "sexual harassment.",
+    "ground_truth": "who have sex with other men."
+  },
+  {
+    "video": "0004614-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The man was from Canada and",
+    "ground_truth": "The Massachusetts man had recently traveled to Canada."
+  },
+  {
+    "video": "0004627-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.S. Senate today voted 40-50 on a bill to",
+    "ground_truth": "The U.S. Senate today approved a $40 billion package to send"
+  },
+  {
+    "video": "0004636-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that Russia's territory is intact.",
+    "ground_truth": "they may face Russian courts."
+  },
+  {
+    "video": "0004639-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Today the Supreme Court said in a 6-3 decision that",
+    "ground_truth": "Today the leaders of Sweden and Finland met with President Biden"
+  },
+  {
+    "video": "0004644-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A person who was on the train said",
+    "ground_truth": "But there may be a barrier to Sweden and Finland's entry"
+  },
+  {
+    "video": "0004646-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the hospital or hospital workers,",
+    "ground_truth": "the countries of harboring members of"
+  },
+  {
+    "video": "0004660-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the school district.",
+    "ground_truth": "this week."
+  },
+  {
+    "video": "0004663-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the hospital and that they were wearing masks,",
+    "ground_truth": "hospitalizations to voluntarily wear masks indoors and"
+  },
+  {
+    "video": "0004674-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Gensler was on a flight from San Francisco to",
+    "ground_truth": "Gendron posted on several social media pages that"
+  },
+  {
+    "video": "0004677-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said he was not aware of Black Pete and",
+    "ground_truth": "He wrote that he decided to target a Buffalo zip code"
+  },
+  {
+    "video": "0004684-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Ford Motor Company said",
+    "ground_truth": "Ford Motor Co. said"
+  },
+  {
+    "video": "0004688-2022.5.19.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm sorry, I don't know what it is.\"",
+    "ground_truth": "It is not known what is causing the fires."
+  },
+  {
+    "video": "0004700-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A man with a gun opened fire inside of a mall and",
+    "ground_truth": "A gunman opened fire in a packed dance hall"
+  },
+  {
+    "video": "0004701-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Louisiana National Guard is in Monroe County,",
+    "ground_truth": "during a Lunar New Year festival in Monterey Park, California on"
+  },
+  {
+    "video": "0004707-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The gunman was named Hugh Cunningham.",
+    "ground_truth": "The gunman was identified as 72-year-old Huu Can Tran."
+  },
+  {
+    "video": "0004716-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The shooting happened at a gas station.",
+    "ground_truth": "The person who wrestled the gun away from Tran at"
+  },
+  {
+    "video": "0004730-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he is a father.",
+    "ground_truth": "targeting his ex-wife."
+  },
+  {
+    "video": "0004747-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Last week, police raided a home and",
+    "ground_truth": "Last week police raided the forest,"
+  },
+  {
+    "video": "0004751-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On Saturday night, protesters broke into",
+    "ground_truth": "On Saturday night people gathered for a protest"
+  },
+  {
+    "video": "0004766-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they were not wearing masks,",
+    "ground_truth": "as she walked out of her dressing room,"
+  },
+  {
+    "video": "0004772-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is the first time that the Supreme Court has overturned",
+    "ground_truth": "that it \"never happened\" and that he \"would never do"
+  },
+  {
+    "video": "0004775-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "two people in Wales last week,",
+    "ground_truth": "that killed two people in Wales, Alaska last week."
+  },
+  {
+    "video": "0004783-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Schools were closed for several days and",
+    "ground_truth": "The principal of the school ordered a lockdown and"
+  },
+  {
+    "video": "0004785-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court.",
+    "ground_truth": "what was happening outside."
+  },
+  {
+    "video": "0004790-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The city is now in a state of emergency,",
+    "ground_truth": "There was a call for community members to help -"
+  },
+  {
+    "video": "0004791-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and no police response.",
+    "ground_truth": "there is no police in town -"
+  },
+  {
+    "video": "0004800-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the last 30 years.",
+    "ground_truth": "in Alaska was 30 years ago."
+  },
+  {
+    "video": "0004804-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Poland's government said",
+    "ground_truth": "Poland's government said it wants to give"
+  },
+  {
+    "video": "0004817-2023.1.23.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they are not against the mask mandate.",
+    "ground_truth": "Russian attacks at the front lines."
+  },
+  {
+    "video": "0004820-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It is Thursday, June 16.",
+    "ground_truth": "It is Thursday, June 16."
+  },
+  {
+    "video": "0004822-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Today the House voted on its third impeachment motion,",
+    "ground_truth": "Today the Jan 6. House Committee held its third hearing."
+  },
+  {
+    "video": "0004825-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that they would not be able to elect",
+    "ground_truth": "Congress' counting and certification of electoral votes"
+  },
+  {
+    "video": "0004837-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The couple was a former couple,",
+    "ground_truth": "one a former counsel to him and"
+  },
+  {
+    "video": "0004844-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the state's laws and regulations,",
+    "ground_truth": "that the Constitution never intended for the vice president"
+  },
+  {
+    "video": "0004848-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Van Trump's testimony,",
+    "ground_truth": "Ivanka Trump, testified in a video that"
+  },
+  {
+    "video": "0004871-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "President Michelle Bachelet of Chile,",
+    "ground_truth": "The leaders of France, Italy, and Germany traveled together in"
+  },
+  {
+    "video": "0004876-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "News analysts said it is a serious blow for Ukraine,",
+    "ground_truth": "News analysts said in recent days,"
+  },
+  {
+    "video": "0004884-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The EPA said it would be working with other agencies.",
+    "ground_truth": "The Italian prime minister said this process cannot be delayed."
+  },
+  {
+    "video": "0004892-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the family's home and that they were injured.",
+    "ground_truth": "their families, and some local residents who have been hiding"
+  },
+  {
+    "video": "0004896-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is continuing to escalate.",
+    "ground_truth": "eastern Ukraine as it battles against Russian advances."
+  },
+  {
+    "video": "0004897-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Dr. Anthony Fauci, said he tested positive for Covid-19",
+    "ground_truth": "Dr. Anthony Fauci tested positive for the coronavirus"
+  },
+  {
+    "video": "0004908-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other African countries.",
+    "ground_truth": "a science center named after him."
+  },
+  {
+    "video": "0004911-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and people who wear masks.",
+    "ground_truth": "Photographs showed him with and without a mask."
+  },
+  {
+    "video": "0004912-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The FDA is now allowing the vaccine to be used at home.",
+    "ground_truth": "Fauci is now isolating and will continue to work from home."
+  },
+  {
+    "video": "0004913-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A jury in New York City found George Floyd guilty of",
+    "ground_truth": "One of the jurors in the Johnny Depp vs Amber Heard"
+  },
+  {
+    "video": "0004914-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Democratic National Committee (DNC) and",
+    "ground_truth": "defamation trial said in an interview with"
+  },
+  {
+    "video": "0004920-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and not wearing masks.",
+    "ground_truth": "so they felt like she had \"crocodile tears.\""
+  },
+  {
+    "video": "0004927-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The H-1B visa is for temporary workers.",
+    "ground_truth": "Heard plans to appeal."
+  },
+  {
+    "video": "0004930-2022.6.16.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "26 New York state officials,",
+    "ground_truth": "received 26 new federal charges,"
+  },
+  {
+    "video": "0004945-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It is Tuesday, August 9.",
+    "ground_truth": "It is Tuesday, August 9."
+  },
+  {
+    "video": "0004948-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the FBI and law enforcement officers surrounded",
+    "ground_truth": "FBI agents conducted a surprise search of"
+  },
+  {
+    "video": "0004951-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The police department said they are investigating",
+    "ground_truth": "News reports said the agents served a search warrant as"
+  },
+  {
+    "video": "0004960-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "There are two other allegations of misconduct",
+    "ground_truth": "\"has two known active investigations connected to"
+  },
+  {
+    "video": "0004968-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Democrats said they believe that",
+    "ground_truth": "Democratic leaders said the search was appropriate"
+  },
+  {
+    "video": "0004978-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "if they are gay or transgender.",
+    "ground_truth": "the 1978 film, \"Grease\" opposite John Travolta."
+  },
+  {
+    "video": "0004983-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The two victims were a couple.",
+    "ground_truth": "In 2017, she announced that her cancer returned and spread."
+  },
+  {
+    "video": "0004985-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In Louisiana, a nonbinary person named Nicolino,",
+    "ground_truth": "In Los Angeles, a nurse named Nicole Linton was charged with"
+  },
+  {
+    "video": "0004986-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "six weeks of treatment, but the doctor said",
+    "ground_truth": "six counts of murder after she allegedly drove her car at"
+  },
+  {
+    "video": "0004988-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that another car hit six people,",
+    "ground_truth": "slammed into multiple other cars, killing six people,"
+  },
+  {
+    "video": "0004991-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The incident happened on Thursday.",
+    "ground_truth": "The incident was on Thursday afternoon."
+  },
+  {
+    "video": "0005001-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the island.",
+    "ground_truth": "Linton's vehicle."
+  },
+  {
+    "video": "0005003-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and sentenced him to life in prison.",
+    "ground_truth": "was taken to jail."
+  },
+  {
+    "video": "0005006-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the government's health department said",
+    "ground_truth": "profound mental health issues before the crash and"
+  },
+  {
+    "video": "0005015-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The symptoms of the disease include",
+    "ground_truth": "if the disease is not treated, it can spread through the body"
+  },
+  {
+    "video": "0005021-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The mask mandate is in effect for six weeks,",
+    "ground_truth": "are now seeking at least 6,000 volunteers in the U.S."
+  },
+  {
+    "video": "0005029-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Facebook said on Monday that it would be",
+    "ground_truth": "Her spokesperson said she fell into a coma on Monday and"
+  },
+  {
+    "video": "0005034-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the building for about 30 minutes.",
+    "ground_truth": "and entered the home about 30 feet in."
+  },
+  {
+    "video": "0005039-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The man was inside of the home and",
+    "ground_truth": "There was a female resident inside the home who was"
+  },
+  {
+    "video": "0005042-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The animals were released today.",
+    "ground_truth": "but the resident said she lost everything."
+  },
+  {
+    "video": "0005045-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Sen. Jerry Westmoreland (R) announced that he would resign",
+    "ground_truth": "Serena Williams announced that she will retire after"
+  },
+  {
+    "video": "0005049-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Supreme Court, and the state legislature.",
+    "ground_truth": "of the greatest tennis athletes ever with"
+  },
+  {
+    "video": "0005050-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "230,000 gas stations.",
+    "ground_truth": "her 23 Grand Slam titles and 73 overall titles."
+  },
+  {
+    "video": "0005058-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Senate with Democrats.",
+    "ground_truth": "see Serena compete."
+  },
+  {
+    "video": "0005060-2022.8.9.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "See you tomorrow and stay with the light.",
+    "ground_truth": "See you tomorrow and stay with the light."
+  },
+  {
+    "video": "0005062-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0005063-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Black Friday shopping weekend is over.",
+    "ground_truth": "The Buffalo, New York area was hit with"
+  },
+  {
+    "video": "0005079-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The U.S. will be sending troops next week.",
+    "ground_truth": "The U.S. will then play against England and then Iran."
+  },
+  {
+    "video": "0005085-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the death penalty, but it is not clear whether",
+    "ground_truth": "It was recently announced that no alcohol will be sold at"
+  },
+  {
+    "video": "0005086-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "eight seats on the board.",
+    "ground_truth": "the eight stadiums that will host the games."
+  },
+  {
+    "video": "0005096-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Smith's attorney said if the law is passed,",
+    "ground_truth": "Smith's job will be to decide if anyone violated the law"
+  },
+  {
+    "video": "0005101-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the European Union (EU).",
+    "ground_truth": "are a weaponization of the justice system."
+  },
+  {
+    "video": "0005116-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Air Force said the astronauts were not injured and",
+    "ground_truth": "in the Archdiocese of Baltimore who has been accused of"
+  },
+  {
+    "video": "0005132-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the school's rules, and that if he did,",
+    "ground_truth": "the authority to forgive student loans and that if their plan"
+  },
+  {
+    "video": "0005136-2022.11.18.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "That is all the top stories for today.",
+    "ground_truth": "That is all the top stories for this week."
+  },
+  {
+    "video": "0005142-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the New York City Department of Education.",
+    "ground_truth": "he was indicted by the Manhattan District Attorney's office."
+  },
+  {
+    "video": "0005149-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The judge then showed pictures of the courtroom and",
+    "ground_truth": "A judge allowed photographs in the courtroom"
+  },
+  {
+    "video": "0005155-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "in Florida.",
+    "ground_truth": "which is a felony."
+  },
+  {
+    "video": "0005158-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the alleged plot against Trump.",
+    "ground_truth": "an alleged affair she had with Trump."
+  },
+  {
+    "video": "0005167-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The incident is not related to Trump,",
+    "ground_truth": "The indictment sheet against Trump said"
+  },
+  {
+    "video": "0005172-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Pope, Francis, said Trump is a \"great man\"",
+    "ground_truth": "Prosecutors and DA Alvin Bragg said Trump covered up"
+  },
+  {
+    "video": "0005186-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Trump pleaded not guilty and was sentenced to three years.",
+    "ground_truth": "Trump pleaded not guilty to all of his counts."
+  },
+  {
+    "video": "0005187-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the court's decision, and that it is a victory for",
+    "ground_truth": "He left the courtroom and went back to his motorcade"
+  },
+  {
+    "video": "0005190-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The plane is now on the ground.",
+    "ground_truth": "Trump is flying to Florida."
+  },
+  {
+    "video": "0005194-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that he is not a threat to anyone in",
+    "ground_truth": "but that he is determined to fight the allegations in court"
+  },
+  {
+    "video": "0005198-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On Sunday, the Los Angeles Times reported that",
+    "ground_truth": "On Sunday, Louisiana State University (LSU) won"
+  },
+  {
+    "video": "0005202-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and over 10,000 miles of pipelines.",
+    "ground_truth": "on record with almost 10 million viewers."
+  },
+  {
+    "video": "0005207-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the plane and that he was flying for another airline,",
+    "ground_truth": "\"you can't see me\" gesture that Clark used in a previous game"
+  },
+  {
+    "video": "0005215-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A female jellyfish, which is called a \"jellyfish,\"",
+    "ground_truth": "First Lady Jill Biden added fuel to the fire by"
+  },
+  {
+    "video": "0005228-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The Clark County Sheriff's Office said",
+    "ground_truth": "Clark set an NCAA tournament record with 191 points,"
+  },
+  {
+    "video": "0005230-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The next big event is the U.S. Open,",
+    "ground_truth": "In separate but related news, the University of Connecticut"
+  },
+  {
+    "video": "0005233-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A dog owner, Lorraine, said",
+    "ground_truth": "One interesting fact is that LSU's Reese is"
+  },
+  {
+    "video": "0005237-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is a very serious situation.",
+    "ground_truth": "in the mouth of an alligator last week."
+  },
+  {
+    "video": "0005240-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the boy's body was found in a lake.",
+    "ground_truth": "killing his son by throwing him in a lake."
+  },
+  {
+    "video": "0005246-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the shooting, but they were not able to identify",
+    "ground_truth": "When police realized that their son was missing,"
+  },
+  {
+    "video": "0005247-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "search for survivors.",
+    "ground_truth": "they started a search."
+  },
+  {
+    "video": "0005252-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The police department said",
+    "ground_truth": "The alligator was euthanized."
+  },
+  {
+    "video": "0005257-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and other expenses.",
+    "ground_truth": "It seems like the alligator bit him afterward."
+  },
+  {
+    "video": "0005259-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Today Finland officially joined NATO,",
+    "ground_truth": "Today Finland became an official member of"
+  },
+  {
+    "video": "0005270-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The school district said it has been working with",
+    "ground_truth": "Sweden applied to join NATO at about the same time as Finland"
+  },
+  {
+    "video": "0005272-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a Russian blogger who was critical of the government,",
+    "ground_truth": "On Sunday, a Russian blogger who was well-known for"
+  },
+  {
+    "video": "0005275-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Vladimir Putin,",
+    "ground_truth": "His name was Vladen Tatarsky."
+  },
+  {
+    "video": "0005276-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a large number of people on Telegram,",
+    "ground_truth": "He had hundreds of thousands of followers on Telegram and"
+  },
+  {
+    "video": "0005288-2023.4.4.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and then they left.",
+    "ground_truth": "what's going on in Russia."
+  },
+  {
+    "video": "0005350-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A federal judge, Judge Sylva Sisipov,",
+    "ground_truth": "A federal jury found Sayfullo Saipov,"
+  },
+  {
+    "video": "0005352-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "a 100 mph wind gust and eight people on the New York City",
+    "ground_truth": "and used it to kill eight people on a bike path in New York City"
+  },
+  {
+    "video": "0005365-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "11 million people.",
+    "ground_truth": "that has almost 16 million followers,"
+  },
+  {
+    "video": "0005369-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the right way, but it's not clear what happened.",
+    "ground_truth": "for their funny father-son comedy bits and dances."
+  },
+  {
+    "video": "0005379-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "because of the coronavirus pandemic.",
+    "ground_truth": "he found cancer."
+  },
+  {
+    "video": "0005380-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He said his son, a 10-year-old boy, was the one who",
+    "ground_truth": "He said his doctor said it is very rare for young men like him"
+  },
+  {
+    "video": "0005381-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "the Colorado River, and wants to stop the flow of water.",
+    "ground_truth": "to get colon cancer and he wants to spread awareness for"
+  },
+  {
+    "video": "0005387-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The victim's name was Tiana Jones.",
+    "ground_truth": "The eggs belonged to the titanosaurs,"
+  },
+  {
+    "video": "0005392-2023.1.27.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "and that it is the same as today's election.",
+    "ground_truth": "which is what modern-day crocodiles do."
+  }
+]
