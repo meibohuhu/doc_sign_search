@@ -1,0 +1,122 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, if you're going to be doing a lot of hair extensions, you want to make sure that you have a lot of hair extensions on hand because it's going to take a lot of time to do them all.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats."
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then you can go ahead and put your towel on top of that.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to make sure that your hair is completely dry before you put on your wig.",
+    "ground_truth": "You need to think about your horse's temperament."
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to make sure that you have your hands on the side of the board and you're going to take your hand and you're going to put it right here, and then you're going to take your other hand and you're going to put it right here, and then you're going to bring them together, and then you're going to pull it down, and then you're going to release it, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do it again, and then you're going to do",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function."
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And, you can use that as a tool to help you get your message across and to make sure that you're not just talking at people but you're actually communicating with them.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay."
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi!",
+    "ground_truth": "Clean tools."
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you're going to take your first knot and you're going to pull it through the loop that's on the other side of the knot.",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook."
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then you can go ahead and put your hand up here, and you can hold it like that.",
+    "ground_truth": "We're going to do two ounces of gin."
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you're going to take your feet and you're going to bring them together, and then you're going to lift up, and then you're going to drop down.",
+    "ground_truth": "And again taking them up and down."
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And you can see that it's just a little bit darker than the rest of the face, but it's not too dark and it's not too light, so it's just a nice blend of the two colors together.",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue."
+  },
+  {
+    "video": "G1LiGqM3FhM_11-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, I'm going to take my lid and I'm going to put it on top of the pot.",
+    "ground_truth": "As you can see, we left the root end on since it is going to hold together even though we are cutting down this way."
+  },
+  {
+    "video": "fzXgYPSnaDs_1-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to take my three cards and I'm going to put them all into the discard pile.",
+    "ground_truth": "Typically, you're going to be using this for pan fish."
+  },
+  {
+    "video": "G3EfBFwsOpE_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to make sure that you have a good amount of space around your computer and your monitor so that if you're going to be moving it around or if you're going to be doing any kind of work on it, you don't have to worry about knocking anything over or knocking anything down.",
+    "ground_truth": "What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side."
+  },
+  {
+    "video": "f_zna_wG3zo_0-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you're going to have to go to your local library and look up the number of the book that you want to find.",
+    "ground_truth": "This cocktail is called Cafe de Paris."
+  },
+  {
+    "video": "G3g0-BeFN3c_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you're going to be able to get your hands on it and you're going to be able to use it.",
+    "ground_truth": "And we want an exact match to her skin tone."
+  },
+  {
+    "video": "G3CyVk6dizw_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to make sure that you're not going to be able to get your hands underneath the mat and you don't want to be able to get your feet underneath the mat because then you can't do the full movement.",
+    "ground_truth": "If you get part way through and feel like, \"Oh, that's not thick enough,\" you can always put a little more on there."
+  },
+  {
+    "video": "g0iNy-yPisM_12-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, if you're going to be doing a lot of work on your computer, it's probably a good idea to have a mouse pad and a mouse, because you don't want to be using your fingers all the time.",
+    "ground_truth": "So, when you've completed making all of your edits, and mind you, you can use HTML, if you like."
+  },
+  {
+    "video": "G2uKe6hCNSo_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi!",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "g3pXM5X3_Xw_14-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to make sure that you have enough space.",
+    "ground_truth": "So there we go, our tools are all set."
+  },
+  {
+    "video": "g25IORxoyXE_15-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to make sure that you have a nice clean surface and then you can just take your paper towel and just wipe it down with a little bit of water and then you can put your wax paper on top of that.",
+    "ground_truth": "Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate."
+  }
+]

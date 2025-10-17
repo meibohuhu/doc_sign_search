@@ -8,7 +8,7 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=02:00:00
+#SBATCH --time=03:00:00
 #SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
 #SBATCH --mem=64g
@@ -33,8 +33,8 @@ cd /home/mh2803/projects/sign_language_llm
 
 # Configuration
 # CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_16batchsize/checkpoint-4000"
-# CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_16batchsize_fast1/checkpoint-3000"   ### out_20919470.txt
-CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-3000"
+CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_16batchsize_fast1/checkpoint-3000"   ### out_20919470.txt
+# CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-3000"
 
 # CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000"
 MODEL_BASE="Qwen/Qwen2.5-VL-3B-Instruct"
@@ -60,9 +60,9 @@ echo ""
     --video-folder "$VIDEO_FOLDER" \
     --question-file "$QUESTION_FILE" \
     --out-dir "$OUT_DIR" \
-    --max-samples 1000 \
+    --max-samples 2000 \
     --enable-evaluation \
-    --video-fps 18
+    --video-fps 12
     # --save-frames \
 
 echo "🎉 Evaluation job completed!"

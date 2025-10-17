@@ -40,7 +40,7 @@ NUM_DEVICES=4
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
 # RESUME FROM FAST1 CHECKPOINT
-RESUME_FROM_CHECKPOINT="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_16batchsize_fast1/checkpoint-2000"
+RESUME_FROM_CHECKPOINT="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_16batchsize_fast1/checkpoint-3000"
 
 echo "🚀 Starting OPTIMIZED Qwen2VL How2Sign Training on 4xA100"
 echo "========================================================"
