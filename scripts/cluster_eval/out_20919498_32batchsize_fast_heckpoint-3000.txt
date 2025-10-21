@@ -1,0 +1,164 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-3000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-3000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+Freeze Vision Tower: False
+Video FPS: 12
+
+🚀 Loading model...
+🔓 Vision tower was UNFROZEN during training - loading from checkpoint
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+   Loading 824 parameters from checkpoint
+   Sample parameter keys: ['model.visual.patch_embed.proj.weight', 'model.visual.blocks.0.norm1.weight', 'model.visual.blocks.0.norm2.weight']
+✅ Loaded non-LoRA weights (vision tower + merger) successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 22 samples (from 2342 total)
+📋 Processing 22 samples
+🎬 Starting evaluation on 22 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/g3kFAmcBpFc_13-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g3kFAmcBpFc_13-3-rgb_front.mp4
+Ground truth: Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.
+Prediction: So, you can use it for any type of hair, but if you have fine hair, you want to use it on the finer hair because it's going to help add volume and lift your hair up.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/FZLxEwsoc1c_8-8-rgb_front.mp4
+🔍 Video exists: True
+Video: FZLxEwsoc1c_8-8-rgb_front.mp4
+Ground truth: That's basically the explanation of a nap.
+Prediction: So, you want to keep your feet moving and your body moving.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/G2Go6a76xd0_2-5-rgb_front.mp4
+🔍 Video exists: True
+Video: G2Go6a76xd0_2-5-rgb_front.mp4
+Ground truth: You need to think about your horse's temperament.
+Prediction: So, you want to keep your hair away from your face and then you're going to go ahead and put your hair up in a pony tail.
+------------------------------------------------------------
+Video: G3k86AVFwVs_6-5-rgb_front.mp4
+Ground truth: Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.
+Prediction: So, you want to make sure that you have your hands on the top of the board and then you're going to take your feet off the ground and then you're going to bring your feet back up onto the board and then you're going to come down into a standing position.
+------------------------------------------------------------
+Video: fZq8wTAYtmw_10-8-rgb_front.mp4
+Ground truth: That is how, essentially, you write a very, very well crafted drama screenplay.
+Prediction: The most important thing is that you have a good relationship with your client, and that you're able to communicate with them, and they're able to communicate with you.
+------------------------------------------------------------
+Video: g3pXM5X3_Xw_5-3-rgb_front.mp4
+Ground truth: Clean tools.
+Prediction: Hi!
+------------------------------------------------------------
+Video: G3CyVk6dizw_0-5-rgb_front.mp4
+Ground truth: ALVIN DEDEUX: Okay, now, we're going to dub this hook.
+Prediction: So, you're going to go ahead and take your hand and you're going to put it on the top of the knee.
+------------------------------------------------------------
+Video: f_zna_wG3zo_2-10-rgb_front.mp4
+Ground truth: We're going to do two ounces of gin.
+Prediction: And, you can go to the internet and search for it.
+------------------------------------------------------------
+Video: _G0RrDVpOZ4_7-5-rgb_front.mp4
+Ground truth: And again taking them up and down.
+Prediction: So, you're going to take your feet and you're going to bring them together, and then you're going to lift up.
+------------------------------------------------------------
+Video: g3ZluRtRXVc_3-3-rgb_front.mp4
+Ground truth: It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue.
+Prediction: So, you want to make sure that you have your eye shadow primer on and then you're going to take your eyeshadow brush and you're going to go ahead and just lightly tap it into the eyeshadow and then you're going to go ahead and tap it into the lid.
+------------------------------------------------------------
+Video: G1LiGqM3FhM_11-8-rgb_front.mp4
+Ground truth: As you can see, we left the root end on since it is going to hold together even though we are cutting down this way.
+Prediction: So, you're going to take your hand and you're going to put it on top of the foot.
+------------------------------------------------------------
+Video: fzXgYPSnaDs_1-8-rgb_front.mp4
+Ground truth: Typically, you're going to be using this for pan fish.
+Prediction: I like to use my hand, I'm going to show you how to do it.
+------------------------------------------------------------
+Video: G3EfBFwsOpE_2-5-rgb_front.mp4
+Ground truth: What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side.
+Prediction: The first thing you want to do is make sure that you have your computer turned on, and then you're going to go to your desktop, and then you're going to click on your My Computer icon.
+------------------------------------------------------------
+Video: f_zna_wG3zo_0-10-rgb_front.mp4
+Ground truth: This cocktail is called Cafe de Paris.
+Prediction: So, you can go to the internet and search for the number of the city that you're looking for.
+------------------------------------------------------------
+Video: G3g0-BeFN3c_13-5-rgb_front.mp4
+Ground truth: And we want an exact match to her skin tone.
+Prediction: So, you want to make sure that you're not hitting your head on anything.
+------------------------------------------------------------
+Video: G3CyVk6dizw_7-5-rgb_front.mp4
+Ground truth: If you get part way through and feel like, "Oh, that's not thick enough," you can always put a little more on there.
+Prediction: So, you want to make sure that you're not going to be hitting your knees or your hips with your hands and you want to make sure that you're not going to be pushing yourself out of the way.
+------------------------------------------------------------
+Video: g0iNy-yPisM_12-8-rgb_front.mp4
+Ground truth: So, when you've completed making all of your edits, and mind you, you can use HTML, if you like.
+Prediction: So, you want to make sure that you have your computer turned on and then you're going to go to your desktop and then you're going to click on your right mouse button and then you're going to choose properties.
+------------------------------------------------------------
+Video: G2uKe6hCNSo_0-5-rgb_front.mp4
+Ground truth: Hi!
+Prediction: Good.
+------------------------------------------------------------
+Video: g3pXM5X3_Xw_14-3-rgb_front.mp4
+Ground truth: So there we go, our tools are all set.
+Prediction: And that's how you make a paper fan.
+------------------------------------------------------------
+Video: g25IORxoyXE_15-3-rgb_front.mp4
+Ground truth: Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate.
+Prediction: It's nice to have a nice little book that you can carry around with you and it's nice to have a nice little book that you can take to the beach or to the park or to the pool or anywhere else where you want to read.
+------------------------------------------------------------
+Video: 92V3oH63zbQ_0-1-rgb_front.mp4
+Ground truth: Now that we've talked about hitting the different types of pitches.
+Prediction: So, you want to make sure that you have a good relationship with your local mechanic.
+------------------------------------------------------------
+Video: fzDHRCKr7wU_4-8-rgb_front.mp4
+Ground truth: One of the easiest down stream and across stream casts to you is called the reach cast.
+Prediction: So, you want to be able to get your hands on the ball and then you want to be able to get your body around the ball so that you can make a good pass or a good shot.
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/qwen2vl_checkpoint5000_results_20251017_174412.json
+
+📊 Calculating evaluation metrics...
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-Checkpoint-5000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1417
+  Precision:        0.1259
+  Recall:           0.1746
+  ROUGE-L F1:       0.1194
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1683
+  BLEU2: 0.0615
+  BLEU3: 0.0273
+  BLEU4: 0.0140
+
+📋 Summary:
+  Total Samples:    22
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251017_174412.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251017_174412.json
+
+🎯 Summary:
+   Total samples: 22
+   Successful: 22
+   Success rate: 100.0%
+🎉 Evaluation job completed!

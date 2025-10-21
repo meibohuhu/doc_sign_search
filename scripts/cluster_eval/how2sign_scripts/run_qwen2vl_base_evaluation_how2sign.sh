@@ -10,7 +10,7 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --time=04:00:00
 #SBATCH --gpus-per-node=a100:1
-#SBATCH --partition tier3
+#SBATCH --partition scavenger
 #SBATCH --mem=64g
 
 spack load /lhqcen5

@@ -1,0 +1,70 @@
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:10<00:10, 10.04s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:16<00:00,  7.70s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:16<00:00,  8.05s/it]
+The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
+/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:693: UserWarning: Model with `tie_word_embeddings=True` and the tied_target_modules=['model.language_model.embed_tokens', 'lm_head'] are part of the adapter. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. See for example https://github.com/huggingface/peft/issues/2018.
+  warnings.warn(
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+  0%|          | 0/1500 [00:00<?, ?it/s]qwen-vl-utils using decord to read video.
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/dataset/sft_dataset.py", line 232, in __getitem__
+[rank0]:     pixel_values = torch.cat(all_pixel_values, dim=0)
+[rank0]: RuntimeError: torch.cat(): expected a non-empty list of Tensors
+
+[rank0]: During handling of the above exception, another exception occurred:
+
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 267, in <module>
+[rank0]:     train()
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 241, in train
+[rank0]:     trainer.train()  # Start fresh anyway
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 2229, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 2510, in _inner_training_loop
+[rank0]:     batch_samples, num_items_in_batch = self.get_batch_samples(epoch_iterator, num_batches, args.device)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 5275, in get_batch_samples
+[rank0]:     batch_samples.append(next(epoch_iterator))
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/accelerate/data_loader.py", line 567, in __iter__
+[rank0]:     current_batch = next(dataloader_iter)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 708, in __next__
+[rank0]:     data = self._next_data()
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 764, in _next_data
+[rank0]:     data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+[rank0]:     data = [self.dataset[idx] for idx in possibly_batched_index]
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
+[rank0]:     data = [self.dataset[idx] for idx in possibly_batched_index]
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/dataset/sft_dataset.py", line 245, in __getitem__
+[rank0]:     video_file_info = sources.get('video', 'unknown') if 'sources' in locals() else 'unknown'
+[rank0]: AttributeError: 'list' object has no attribute 'get'
+  0%|          | 0/1500 [00:01<?, ?it/s]
+[rank0]:[W1019 11:04:47.467199357 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+E1019 11:04:48.675000 1003217 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 1003285) of binary: /home/mh2803/miniconda3/envs/qwenvl/bin/python3.10
+Traceback (most recent call last):
+  File "/home/mh2803/miniconda3/envs/qwenvl/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+src/train/train_sft.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-10-19_11:04:48
+  host      : skl-a-49.rc.rit.edu
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1003285)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

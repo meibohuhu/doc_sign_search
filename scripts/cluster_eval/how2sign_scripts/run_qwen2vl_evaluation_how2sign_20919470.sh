@@ -60,7 +60,7 @@ echo ""
     --video-folder "$VIDEO_FOLDER" \
     --question-file "$QUESTION_FILE" \
     --out-dir "$OUT_DIR" \
-    --max-samples 2000 \
+    --max-samples 250 \
     --enable-evaluation \
     --video-fps 12
     # --save-frames \

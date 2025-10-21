@@ -1,14 +1,14 @@
 #!/bin/bash -l
-# Qwen2VL Checkpoint-5000 Evaluation Script
+# Qwen2VL Checkpoint-4000 Evaluation Script
 # Based on qwen25_metrics.py reference approach
 
-#SBATCH --job-name=qwen2vl_eval_checkpoint5000
+#SBATCH --job-name=qwen2vl_eval_checkpoint4000
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
 #SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=02:00:00
+#SBATCH --time=04:00:00
 #SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
 #SBATCH --mem=64g
@@ -34,7 +34,7 @@ cd /home/mh2803/projects/sign_language_llm
 # Configuration
 # CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_16batchsize/checkpoint-4000"
 # CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_16batchsize_fast1/checkpoint-3000"   ### out_20919470.txt
-CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-3000"
+CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-4000"
 
 # CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000"
 MODEL_BASE="Qwen/Qwen2.5-VL-3B-Instruct"
@@ -42,7 +42,7 @@ VIDEO_FOLDER="/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_vi
 QUESTION_FILE="/home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json"
 OUT_DIR="/home/mh2803/projects/sign_language_llm/outputs/"
 
-echo "🎬 Qwen2VL Checkpoint-5000 Evaluation"
+echo "🎬 Qwen2VL Checkpoint-4000 Evaluation"
 echo "======================================"
 echo "Checkpoint: $CHECKPOINT_PATH"
 echo "Model Base: $MODEL_BASE"
@@ -54,15 +54,13 @@ echo ""
 
 # Run evaluation with limited samples for testing
 # NOTE: Add --freeze-vision-tower flag if vision tower was frozen during training
-/home/mh2803/miniconda3/envs/qwenvl/bin/python scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign.py \
+/home/mh2803/miniconda3/envs/qwenvl/bin/python scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude.py \
     --checkpoint-path "$CHECKPOINT_PATH" \
     --model-base "$MODEL_BASE" \
     --video-folder "$VIDEO_FOLDER" \
     --question-file "$QUESTION_FILE" \
     --out-dir "$OUT_DIR" \
-    --max-samples 1000 \
-    --enable-evaluation \
-    --video-fps 18
-    # --save-frames \
+    --max-samples 200 \
+    --video-fps 12
 
 echo "🎉 Evaluation job completed!"
