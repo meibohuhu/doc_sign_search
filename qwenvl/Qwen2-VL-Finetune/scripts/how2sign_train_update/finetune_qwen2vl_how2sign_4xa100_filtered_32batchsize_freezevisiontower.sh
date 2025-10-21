@@ -4,7 +4,7 @@
 # Qwen2VL How2Sign Training on 4xA100 GPUs
 # Using DeepSpeed ZeRO-3 for efficient multi-GPU training
 
-#SBATCH --job-name=qwen2vl_how2sign_4xa100_filtered_32batchsize_fast_resume
+#SBATCH --job-name=qwen2vl_how2sign_4xa100_filtered_32batchsize_freezevisiontower
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
 #SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
 #SBATCH --ntasks 1
@@ -23,8 +23,8 @@ export PATH="/home/mh2803/miniconda3/envs/qwenvl/bin:$PATH"
 export PYTHONPATH="/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src:$PYTHONPATH"
 export OMP_NUM_THREADS=16
 
-# Memory optimization for longer videos at 20fps
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+# # Memory optimization for longer videos at 20fps
+# export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 # Change to Qwen2-VL-Finetune directory
 cd /home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune
@@ -38,13 +38,9 @@ BATCH_PER_DEVICE=1
 NUM_DEVICES=4
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
-# Resume configuration
-RESUME_FROM_CHECKPOINT="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-2000"
-
-echo "🚀 Resuming Qwen2VL How2Sign Training on 4xA100"
+echo "🚀 Starting Qwen2VL How2Sign Training on 4xA100"
 echo "================================================"
 echo "Model: $MODEL_NAME"
-echo "Resume from: $RESUME_FROM_CHECKPOINT"
 echo "Global Batch Size: $GLOBAL_BATCH_SIZE"
 echo "Per-Device Batch Size: $BATCH_PER_DEVICE"
 echo "Gradient Accumulation Steps: $GRAD_ACCUM_STEPS"
@@ -56,24 +52,24 @@ deepspeed src/train/train_sft.py \
     --deepspeed scripts/zero3_qwen2vl.json \
     --model_id $MODEL_NAME \
     --data_path /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.json \
-    --image_folder /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips/ \
-    --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast_resume/ \
-    --resume_from_checkpoint $RESUME_FROM_CHECKPOINT \
+    --image_folder /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_320x320/ \
+    --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_freezevisiontower/ \
+    --num_train_epochs 3 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --video_min_pixels $((320 * 320)) \
     --video_max_pixels $((320 * 320)) \
-    --fps 20 \
-    --max_grad_norm 0.5 \
-    --learning_rate 5e-6 \
+    --fps 18 \
+    --max_grad_norm 1.0 \
+    --learning_rate 1e-5 \
     --lr_scheduler_type cosine \
     --weight_decay 0.01 \
-    --logging_steps 10 \
+    --logging_steps 1 \
     --save_steps 1000 \
     --save_total_limit 2 \
     --max_steps 6000 \
     --use_liger True \
-    --freeze_vision_tower False \
+    --freeze_vision_tower True \
     --freeze_llm True \
     --freeze_merger False \
     --bf16 True \
@@ -84,7 +80,7 @@ deepspeed src/train/train_sft.py \
     --lora_rank 32 \
     --lora_alpha 64 \
     --vision_lr 5e-6 \
-    --merger_lr 5e-6 \
+    --merger_lr 1e-5 \
     --report_to none
 
 echo ""
