@@ -10,7 +10,7 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=48:00:00
+#SBATCH --time=72:00:00
 #SBATCH --gpus-per-node=a100:4
 #SBATCH --partition tier3
 #SBATCH --mem=256G
@@ -54,7 +54,6 @@ deepspeed src/train/train_sft.py \
     --data_path /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.json \
     --image_folder /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_320x320/ \
     --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_freezevisiontower_resume/ \
-    --resume_from_checkpoint /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_freezevisiontower/checkpoint-1000 \
     --num_train_epochs 3 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
@@ -69,7 +68,7 @@ deepspeed src/train/train_sft.py \
     --logging_steps 1 \
     --save_steps 1000 \
     --save_total_limit 2 \
-    --max_steps 6000 \
+    --max_steps 8000 \
     --use_liger True \
     --freeze_vision_tower True \
     --freeze_llm True \

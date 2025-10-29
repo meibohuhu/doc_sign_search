@@ -149,6 +149,8 @@ def eval_model(args):
     print(f"Output Dir: {args.out_dir}")
     print(f"Freeze Vision Tower: {args.freeze_vision_tower}")
     print(f"Video FPS: {args.video_fps}")
+    print(f"Min Pixels: {args.min_pixels}")
+    print(f"Max Pixels: {args.max_pixels}")
     print()
     
     # Load the model using LoRA checkpoint
@@ -285,6 +287,7 @@ def eval_model(args):
         try:
             # Prepare the prompt for ASL translation (same as reference)
             fq = "Translate the American Sign Language in this video to English."
+            # fq = "Provide the English translation of this ASL video"
             if 'video' in source:
                 video_file = source["video"]
                 video = os.path.join(args.video_folder, video_file)
@@ -355,6 +358,7 @@ def eval_model(args):
                     image_inputs, video_inputs, video_kwargs = process_vision_info(conversation, return_video_kwargs=True)
                     
                     # Step 3: Process with processor
+                    # Override video_kwargs with command line arguments to match training settings
                     inputs = processor(
                         text=[text],
                         images=image_inputs,
@@ -392,11 +396,23 @@ def eval_model(args):
                     })
                     continue
                 
-                # Generate response using official pattern with optimizations
+                # Generate response using beam search with improved parameters
                 with torch.no_grad():
                     # Use mixed precision for faster inference
                     with torch.autocast(device_type="cuda", dtype=torch.float16):
-                        output_ids = model.generate(**inputs, max_new_tokens=args.max_new_tokens)
+                        output_ids = model.generate(
+                            **inputs,
+                            num_beams=5,                    # Beam search for better quality
+                            do_sample=True,                 # Enable sampling for better diversity
+                            temperature=0.7,                # Temperature for generation (0.7 is a good balance)
+                            top_p=0.9,                      # Nucleus sampling
+                            top_k=50,                      # Top-k sampling
+                            length_penalty=1.0,            # Length penalty (1.0 = neutral)
+                            no_repeat_ngram_size=4,        # Prevent 3-gram repetition
+                            repetition_penalty=1.1,        # Slight penalty for token repetition
+                            min_length=1,                   # Minimum output length
+                            max_new_tokens=args.max_new_tokens  # Maximum tokens to generate
+                        )
                         generated_ids = [output_ids[len(input_ids):] for input_ids, output_ids in zip(inputs.input_ids, output_ids)]
                         output = processor.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
                         
@@ -518,6 +534,10 @@ def main():
                        help="FPS for frame extraction (default: 12)")
     parser.add_argument("--freeze-vision-tower", action="store_true", default=False,
                        help="If True, vision tower was frozen during training (use original pretrained vision tower)")
+    parser.add_argument("--min-pixels", type=int, default=240*240,
+                       help="Min pixels for video processing (MUST match training!)")
+    parser.add_argument("--max-pixels", type=int, default=240*240,
+                       help="Max pixels for video processing (MUST match training!)")
     
     args = parser.parse_args()
     eval_model(args)

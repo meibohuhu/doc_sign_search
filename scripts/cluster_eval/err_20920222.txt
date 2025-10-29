@@ -1,93 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:13<00:13, 13.73s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:13<00:13, 13.69s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:13<00:13, 13.72s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:13<00:13, 13.93s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.51s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 12.27s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:24<00:00, 12.49s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.50s/it]
-The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
-The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
-The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
-Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.36s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.60s/it]
-The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
-/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:693: UserWarning: Model with `tie_word_embeddings=True` and the tied_target_modules=['model.language_model.embed_tokens', 'lm_head'] are part of the adapter. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. See for example https://github.com/huggingface/peft/issues/2018.
-  warnings.warn(
-/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:693: UserWarning: Model with `tie_word_embeddings=True` and the tied_target_modules=['model.language_model.embed_tokens', 'lm_head'] are part of the adapter. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. See for example https://github.com/huggingface/peft/issues/2018.
-  warnings.warn(
-The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
-/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:693: UserWarning: Model with `tie_word_embeddings=True` and the tied_target_modules=['model.language_model.embed_tokens', 'lm_head'] are part of the adapter. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. See for example https://github.com/huggingface/peft/issues/2018.
-  warnings.warn(
-/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/peft/tuners/tuners_utils.py:693: UserWarning: Model with `tie_word_embeddings=True` and the tied_target_modules=['model.language_model.embed_tokens', 'lm_head'] are part of the adapter. This can lead to complications, for example when merging the adapter or converting your model to formats other than safetensors. See for example https://github.com/huggingface/peft/issues/2018.
-  warnings.warn(
-The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
-The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
-The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-Gradient accumulation steps mismatch: GradientAccumulationPlugin has 1, DeepSpeed config has 8. Using DeepSpeed's value.
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
-[rank2]: Traceback (most recent call last):
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
-[rank2]:     yield
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_transports/default.py", line 250, in handle_request
-[rank2]:     resp = self._pool.handle_request(req)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 256, in handle_request
-[rank2]:     raise exc from None
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_sync/connection_pool.py", line 236, in handle_request
-[rank2]:     response = connection.handle_request(
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_sync/connection.py", line 103, in handle_request
-[rank2]:     return self._connection.handle_request(request)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 136, in handle_request
-[rank2]:     raise exc
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 106, in handle_request
-[rank2]:     ) = self._receive_response_headers(**kwargs)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 177, in _receive_response_headers
-[rank2]:     event = self._receive_event(timeout=timeout)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_sync/http11.py", line 217, in _receive_event
-[rank2]:     data = self._network_stream.read(
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_backends/sync.py", line 126, in read
-[rank2]:     with map_exceptions(exc_map):
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/contextlib.py", line 153, in __exit__
-[rank2]:     self.gen.throw(typ, value, traceback)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
-[rank2]:     raise to_exc(exc) from exc
-[rank2]: httpcore.ReadTimeout: The read operation timed out
-
-[rank2]: The above exception was the direct cause of the following exception:
-
-[rank2]: Traceback (most recent call last):
-[rank2]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 267, in <module>
-[rank2]:     train()
-[rank2]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 203, in train
-[rank2]:     processor = AutoProcessor.from_pretrained(model_args.model_id)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/auto/processing_auto.py", line 396, in from_pretrained
-[rank2]:     return processor_class.from_pretrained(
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/processing_utils.py", line 1393, in from_pretrained
-[rank2]:     processor_dict, kwargs = cls.get_processor_dict(pretrained_model_name_or_path, **kwargs)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/processing_utils.py", line 959, in get_processor_dict
-[rank2]:     for template in list_repo_templates(
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/hub.py", line 164, in list_repo_templates
-[rank2]:     return [
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/hub.py", line 164, in <listcomp>
-[rank2]:     return [
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3052, in list_repo_tree
-[rank2]:     for path_info in paginate(path=tree_url, headers=headers, params={"recursive": recursive, "expand": expand}):
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/huggingface_hub/utils/_pagination.py", line 36, in paginate
-[rank2]:     r = session.get(path, params=params, headers=headers)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_client.py", line 1053, in get
-[rank2]:     return self.request(
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
-[rank2]:     return self.send(request, auth=auth, follow_redirects=follow_redirects)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
-[rank2]:     response = self._send_handling_auth(
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
-[rank2]:     response = self._send_handling_redirects(
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_client.py", line 979, in _send_handling_redirects
-[rank2]:     response = self._send_single_request(request)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_client.py", line 1014, in _send_single_request
-[rank2]:     response = transport.handle_request(request)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 89, in handle_request
-[rank2]:     return super().handle_request(request)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_transports/default.py", line 249, in handle_request
-[rank2]:     with map_httpcore_exceptions():
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/contextlib.py", line 153, in __exit__
-[rank2]:     self.gen.throw(typ, value, traceback)
-[rank2]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
-[rank2]:     raise mapped_exc(message) from exc
-[rank2]: httpx.ReadTimeout: ('The read operation timed out', '(Request ID: 7d8d18e8-e650-470b-bf54-b83d06d66683)')
-The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.

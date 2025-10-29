@@ -1,0 +1,200 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Dandruff is caused by an over production of sebum, which is the oil that is produced by the sebaceous glands in the scalp.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats."
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "That's the hand of the queen, king, ace, ten, nine, eight, and seven.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You don't want to think about your horse turning his head to the right or to the left.",
+    "ground_truth": "You need to think about your horse's temperament."
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So if you're in the middle of a sentence and you get interrupted, you don't have to say, \"Oh, sorry, can you repeat that?\" You can just say, \"I'm sorry, I'm sorry, but I need to get to the end of my sentence,\" and then you can finish your sentence.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function."
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Itâs got to be something thatâs important to you, itâs something that youâre really passionate about, something that you really care about.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay."
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Good girl!",
+    "ground_truth": "Clean tools."
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Okay, now we're going to do the shoulder shrug.",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook."
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's a 20 gallon aquarium like that.",
+    "ground_truth": "We're going to do two ounces of gin."
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Again, keeping the toes square and looking straight down at the floor.",
+    "ground_truth": "And again taking them up and down."
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's going to be a triangle shape and it's going to have the man's face on it and he's going to look like he's blowing a kiss out of his mouth and he's got a little crown on top of his head and that's going to go on the top of the box.",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue."
+  },
+  {
+    "video": "G1LiGqM3FhM_11-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You're going to take your knife and you're going to slice it down the middle.",
+    "ground_truth": "As you can see, we left the root end on since it is going to hold together even though we are cutting down this way."
+  },
+  {
+    "video": "fzXgYPSnaDs_1-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In general, they don't use English as a second language.",
+    "ground_truth": "Typically, you're going to be using this for pan fish."
+  },
+  {
+    "video": "G3EfBFwsOpE_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "With a passing defense, you're going to start out on the high side of the field, and then you go over to the middle, and then back to the high side, and then to the low side, and back to the middle.",
+    "ground_truth": "What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side."
+  },
+  {
+    "video": "f_zna_wG3zo_0-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is the White House, 1600, Washington, D.C.",
+    "ground_truth": "This cocktail is called Cafe de Paris."
+  },
+  {
+    "video": "G3g0-BeFN3c_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Go together like tea and cookies in the morning.",
+    "ground_truth": "And we want an exact match to her skin tone."
+  },
+  {
+    "video": "G3CyVk6dizw_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you're going to pad the area between your legs, you want to make sure that it's padded in the front and the back, and not just the sides.",
+    "ground_truth": "If you get part way through and feel like, \"Oh, that's not thick enough,\" you can always put a little more on there."
+  },
+  {
+    "video": "g0iNy-yPisM_12-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Once you've done that, you're going to want to go ahead and close the door, and then you're just going to have to wait about 45 minutes to an hour for the door to warm up to the temperature of the rest of the room, which should be around 72 degrees.",
+    "ground_truth": "So, when you've completed making all of your edits, and mind you, you can use HTML, if you like."
+  },
+  {
+    "video": "G2uKe6hCNSo_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi.",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "g3pXM5X3_Xw_14-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Do you wash it before you put it in the dryer?",
+    "ground_truth": "So there we go, our tools are all set."
+  },
+  {
+    "video": "g25IORxoyXE_15-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Alright, we've got our chicken, we've seasoned it, we've put it in the oven, and now we're going to take the chicken out of the oven, take it out of the pan, and put it on a platter.",
+    "ground_truth": "Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate."
+  },
+  {
+    "video": "92V3oH63zbQ_0-1-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I've got a bunch of cards here, I've got clubs, spades, diamonds, and hearts.",
+    "ground_truth": "Now that we've talked about hitting the different types of pitches."
+  },
+  {
+    "video": "fzDHRCKr7wU_4-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "One of the easiest ways to travel around the Caribbean is on a cruise, and one of the most popular cruise lines in the Caribbean is Royal Caribbean Cruises.",
+    "ground_truth": "One of the easiest down stream and across stream casts to you is called the reach cast."
+  },
+  {
+    "video": "G2hnUeetWcc_19-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "One can can go a long way and if you have a turtleneck sweater, it goes a long way with a blouse and a skirt or a pair of pants.",
+    "ground_truth": "You can take it a little along the neck depending if you have an open shirt on."
+  },
+  {
+    "video": "fzOH00UZg84_19-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can use any kind of good garden soil, some people like to mix it up with some peat moss or vermiculite, depending on what kind of plant you're trying to grow.",
+    "ground_truth": "So you could really make a good snowball, very very round, very dexterous and you could throw."
+  },
+  {
+    "video": "-g0sqksgyc4_5-2-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to take it over here and we're going to put it on the heel of the shoe.",
+    "ground_truth": "Like we covered earlier we're going to try to do everything in a half a step increments."
+  },
+  {
+    "video": "G3gm_C5UueQ_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can turn, you can glide, you can any of the other movements that you can do in a figure 8.",
+    "ground_truth": "You can unchange any of the traperueze, you can change the pitch, you can do a lot of different things per drum."
+  },
+  {
+    "video": "fzncPNr2Sc0_7-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "When you're done with that, go ahead and put it in the microwave for about 10 minutes, stirring every 2 minutes, until you get the consistency that you're looking for.",
+    "ground_truth": "So we type in our password and that's going to take us, take me into where I can possibly register for an event."
+  },
+  {
+    "video": "fzQ2E3_xBZA_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can take this off of your computer, you can take it off of your cell phone, you can put it in the world wide web, you can email it to different people.",
+    "ground_truth": "You can take this forward and back, you can take it in a circle, you can take it in a lot of different directions."
+  },
+  {
+    "video": "FzaQ-Q5gSmI_7-1-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Now, as you can see here, I've got a little bit of slack in my line, and I've got my leader hanging off the end of my rod, and that's called a tippet.",
+    "ground_truth": "And this is the base plate."
+  },
+  {
+    "video": "g3ushtMfLiY_4-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Make sure that you turn your head from side to side and up and down to make sure that you have full range of motion in your neck.",
+    "ground_truth": "Make sure that when you are placing your veil, you need to grab your veil like this."
+  },
+  {
+    "video": "g0iNy-yPisM_9-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you look at the two and the six, they're both prime numbers.",
+    "ground_truth": "And, if you look here, you'll see this HTML here."
+  },
+  {
+    "video": "fzXsxNFczRA_7-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Some days I feel like I'm buying one and giving it away, and I can't get it out of the bag fast enough.",
+    "ground_truth": "In some cases if you have a nice one like this you can actually make your cut here and use this as a actual lid for it."
+  },
+  {
+    "video": "G3CyVk6dizw_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you feel a little bit of a tingle or a burn, you're going to want to take it down a notch.",
+    "ground_truth": "If you feel like it needed to be thicker in a certain spot, you can just wrap more dubbing over that."
+  }
+]

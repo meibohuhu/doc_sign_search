@@ -1,6 +1,6 @@
 #!/bin/bash -l
 # Qwen2VL Evaluation on DailyMoth-70h Dataset
-# Based on run_qwen2vl_evaluation.sh
+# Uses improved qwen2vl_evaluation_dailymoth_claude.py with better model loading
 
 #SBATCH --job-name=qwen2vl_eval_dailymoth
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
@@ -11,7 +11,7 @@
 #SBATCH --time=04:00:00
 #SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
-#SBATCH --mem=64g
+#SBATCH --mem=32g
 
 spack load /lhqcen5
 spack load cuda@12.4.0/obxqih4
@@ -62,17 +62,28 @@ echo "✅ Checkpoint found: $CHECKPOINT_PATH"
 # Create output directory if it doesn't exist
 mkdir -p "$OUT_DIR"
 
+# Video resolution settings (MUST match training!)
+# For 224x224 training: min-pixels=50176, max-pixels=50176
+# For 320x320 training: min-pixels=102400, max-pixels=102400
+RESOLUTION=224
+MIN_PIXELS=$((RESOLUTION * RESOLUTION))
+MAX_PIXELS=$((RESOLUTION * RESOLUTION))
+
+echo "📐 Video resolution: ${RESOLUTION}x${RESOLUTION} (${MIN_PIXELS} pixels)"
+echo ""
+
 # Run evaluation on full test set (4185 samples)
 # Adjust --max-samples as needed or remove it to process all samples
-/home/mh2803/miniconda3/envs/qwenvl/bin/python scripts/cluster_eval/dailymoth_scripts/qwen2vl_evaluation_dailymoth.py \
+/home/mh2803/miniconda3/envs/qwenvl/bin/python scripts/cluster_eval/dailymoth_scripts/qwen2vl_evaluation_dailymoth_claude.py \
     --checkpoint-path "$CHECKPOINT_PATH" \
     --model-base "$MODEL_BASE" \
     --video-folder "$VIDEO_FOLDER" \
     --question-file "$QUESTION_FILE" \
     --out-dir "$OUT_DIR" \
-    --max-samples 80 \
-    --enable-evaluation \
-    --video-fps 12
+    --max-samples 250 \
+    --video-fps 12 \
+    --min-pixels "$MIN_PIXELS" \
+    --max-pixels "$MAX_PIXELS"
 
 echo "🎉 DailyMoth-70h evaluation job completed!"
 

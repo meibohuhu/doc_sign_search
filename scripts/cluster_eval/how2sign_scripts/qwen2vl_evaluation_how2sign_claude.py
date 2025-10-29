@@ -99,31 +99,45 @@ def load_trained_model(checkpoint_path, base_model_name="Qwen/Qwen2.5-VL-3B-Inst
     print(f"      Merger: {len(merger_keys)} keys")
     print(f"      Total: {len(cleaned_state)} keys")
     
+    # Handle frozen vision tower case
     if len(vision_keys) == 0:
-        raise ValueError("❌ No vision keys found after cleaning!")
-    
-    print(f"\n   ✅ Vision tower found!")
+        print(f"\n   ⚠️  No vision tower weights in checkpoint")
+        print(f"      This indicates vision tower was FULLY FROZEN during training")
+        print(f"      ✅ Using pretrained vision tower from base model")
+        vision_tower_status = "FROZEN (using pretrained)"
+    elif len(vision_keys) < 50:  # Partial unfreezing (e.g., only top layers)
+        print(f"\n   ⚠️  Only {len(vision_keys)} vision tower keys found")
+        print(f"      This indicates partial unfreezing (e.g., unfreeze_topk_vision)")
+        print(f"      ✅ Loading partially trained vision tower weights")
+        vision_tower_status = "PARTIALLY TRAINED"
+    else:
+        print(f"\n   ✅ Full vision tower found in checkpoint!")
+        vision_tower_status = "FULLY TRAINED"
     
     # Load into model
-    print(f"\n   🔄 Loading weights into model...")
-    missing_keys, unexpected_keys = model.load_state_dict(cleaned_state, strict=False)
+    if len(cleaned_state) > 0:
+        print(f"\n   🔄 Loading weights into model...")
+        missing_keys, unexpected_keys = model.load_state_dict(cleaned_state, strict=False)
+        
+        loaded_count = len(cleaned_state) - len(missing_keys)
+        print(f"      ✅ Loaded: {loaded_count}/{len(cleaned_state)} parameters")
+        print(f"      Missing: {len(missing_keys)} (normal for LoRA)")
+        print(f"      Unexpected: {len(unexpected_keys)}")
+    else:
+        print(f"\n   ⚠️  No trainable weights to load (vision was frozen)")
+        vision_tower_status = "FROZEN (using pretrained)"
     
-    loaded_count = len(cleaned_state) - len(missing_keys)
-    print(f"      ✅ Loaded: {loaded_count}/{len(cleaned_state)} parameters")
-    print(f"      Missing: {len(missing_keys)} (normal for LoRA)")
-    print(f"      Unexpected: {len(unexpected_keys)}")
-    
-    # Verify vision tower loaded
+    # Verify vision tower status
     model_vision_params = sum(
         p.numel() for n, p in model.named_parameters() 
         if 'visual' in n.lower()
     )
-    print(f"\n   ✅ Vision parameters in model: {model_vision_params:,}")
+    print(f"\n   📊 Vision parameters in model: {model_vision_params:,}")
     
     if model_vision_params < 400_000_000:
-        print(f"      ⚠️  WARNING: Expected ~600M, got {model_vision_params:,}")
+        print(f"      ⚠️  Note: Expected ~600M for full vision tower")
     else:
-        print(f"      ✅ Vision tower fully loaded!")
+        print(f"      ✅ Full vision tower present ({model_vision_params:,} params)")
     
     # Step 3: Load LoRA
     print(f"\n3️⃣ Loading LoRA weights (LLM)...")
@@ -141,8 +155,11 @@ def load_trained_model(checkpoint_path, base_model_name="Qwen/Qwen2.5-VL-3B-Inst
     print(f"\n{'='*70}")
     print(f"✅ COMPLETE MODEL LOADED SUCCESSFULLY!")
     print(f"{'='*70}")
-    print(f"   🎯 Vision tower: TRAINED (from checkpoint) ✅")
-    print(f"   🎯 Merger: TRAINED (from checkpoint) ✅")
+    print(f"   🎯 Vision tower: {vision_tower_status}")
+    if len(merger_keys) > 0:
+        print(f"   🎯 Merger: TRAINED (from checkpoint) ✅")
+    else:
+        print(f"   🎯 Merger: FROZEN (using pretrained) ⚠️")
     print(f"   🎯 LLM: TRAINED (via LoRA) ✅")
     print(f"{'='*70}\n")
     
@@ -228,11 +245,14 @@ def eval_model(args):
             
             image_inputs, video_inputs = process_vision_info(conversation)
             
+            # CRITICAL: Match training resolution constraints
             inputs = processor(
                 text=[text],
                 images=image_inputs,
                 videos=video_inputs,
-                return_tensors="pt"
+                return_tensors="pt",
+                min_pixels=args.min_pixels,
+                max_pixels=args.max_pixels
             ).to(device)
             
             # Generate
@@ -330,9 +350,9 @@ def eval_model(args):
     print(f"{'='*70}\n")
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate Checkpoint-4000 on test set")
+    parser = argparse.ArgumentParser(description="Evaluate trained checkpoint on test set")
     parser.add_argument("--checkpoint-path", type=str, required=True,
-                       help="Path to checkpoint-4000")
+                       help="Path to checkpoint directory")
     parser.add_argument("--model-base", type=str, 
                        default="Qwen/Qwen2.5-VL-3B-Instruct",
                        help="Base model name")
@@ -346,8 +366,12 @@ def main():
                        help="Limit number of samples (for testing)")
     parser.add_argument("--max-new-tokens", type=int, default=128,
                        help="Max tokens to generate")
-    parser.add_argument("--video-fps", type=int, default=24,
-                       help="FPS for video processing")
+    parser.add_argument("--video-fps", type=int, default=18,
+                       help="FPS for video processing (MUST match training!)")
+    parser.add_argument("--min-pixels", type=int, default=320*320,
+                       help="Min pixels for video processing (MUST match training!)")
+    parser.add_argument("--max-pixels", type=int, default=320*320,
+                       help="Max pixels for video processing (MUST match training!)")
     
     args = parser.parse_args()
     

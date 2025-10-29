@@ -290,10 +290,10 @@ def evaluate(
     derived_metrics = {}
     for i in range(1, EVAL_BLEU_ORDER + 1):
         derived_metrics[f"bleu{i}"] = compute_bleu(metric_logger.meters, order=i)
-    derived_metrics.update(rouge_metric.compute(predictions=all_preds, references=all_refs))
-    derived_metrics.update(meteor_metric.compute(predictions=all_preds, references=all_refs))
-    derived_metrics.update(
-        {"chrf": chrf_metric.compute(predictions=all_preds, references=all_refs)["score"]}
+        derived_metrics.update(rouge_metric.compute(predictions=all_preds, references=all_refs))
+        derived_metrics.update(meteor_metric.compute(predictions=all_preds, references=all_refs))
+        derived_metrics.update(
+            {"chrf": chrf_metric.compute(predictions=all_preds, references=all_refs)["score"]}
     )
 
     print(

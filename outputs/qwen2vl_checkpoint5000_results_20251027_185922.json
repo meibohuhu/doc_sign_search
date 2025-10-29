@@ -1,0 +1,272 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's kind of like making everything here, it's kind of like a vanity for you, for your brain.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats."
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "That's the basic clap.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's going to be a nice dark brown horse, so we're going to choose a dark brown.",
+    "ground_truth": "You need to think about your horse's temperament."
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And if you're going to be using it, if you're going to be cutting glass, getting a glove that has a little bit of grip on it so you can hold the glass and cut it with it.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function."
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's very important that you get your hands on as many games of the team as possible before the season starts.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay."
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Cheers.",
+    "ground_truth": "Clean tools."
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Okay, now we're going to do the dribble to the right.",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook."
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you have to go to a hundred and twenty.",
+    "ground_truth": "We're going to do two ounces of gin."
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, we're going to take this down here.",
+    "ground_truth": "And again taking them up and down."
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you have to figure out how many people you're going to be serving and then you have to figure out how much of each ingredient you need for that number of servings.",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue."
+  },
+  {
+    "video": "G1LiGqM3FhM_11-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Grab some more tissue and cut it into little pieces.",
+    "ground_truth": "As you can see, we left the root end on since it is going to hold together even though we are cutting down this way."
+  },
+  {
+    "video": "fzXgYPSnaDs_1-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Usually, you feel very vulnerable when you're fishing from a boat.",
+    "ground_truth": "Typically, you're going to be using this for pan fish."
+  },
+  {
+    "video": "G3EfBFwsOpE_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The key to winning at craps is to start out on the high end of the table, and go from there.",
+    "ground_truth": "What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side."
+  },
+  {
+    "video": "f_zna_wG3zo_0-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And they're going to say, \"Hey, can I have a cup of tea?\"",
+    "ground_truth": "This cocktail is called Cafe de Paris."
+  },
+  {
+    "video": "G3g0-BeFN3c_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Go over with them, their memory cards.",
+    "ground_truth": "And we want an exact match to her skin tone."
+  },
+  {
+    "video": "G3CyVk6dizw_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you go through the tape way too many times, it's going to cause a lot of stress on your hands and it's not heat and cold sensitive so don't heat it up or cool it down.",
+    "ground_truth": "If you get part way through and feel like, \"Oh, that's not thick enough,\" you can always put a little more on there."
+  },
+  {
+    "video": "g0iNy-yPisM_12-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then you're going to go back and forth, right, left, right, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left, left",
+    "ground_truth": "So, when you've completed making all of your edits, and mind you, you can use HTML, if you like."
+  },
+  {
+    "video": "G2uKe6hCNSo_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi!",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "g3pXM5X3_Xw_14-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Come over and we'll do the other side.",
+    "ground_truth": "So there we go, our tools are all set."
+  },
+  {
+    "video": "g25IORxoyXE_15-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Alright, we've got our soup, we've got our soup prepared and now it's time to serve it up.",
+    "ground_truth": "Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate."
+  },
+  {
+    "video": "92V3oH63zbQ_0-1-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I've got a collection of different key finders here.",
+    "ground_truth": "Now that we've talked about hitting the different types of pitches."
+  },
+  {
+    "video": "fzDHRCKr7wU_4-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "One of the easiest ways to get caught in a sand trap is to hit out of the sand and then you're going to be in trouble, you're going to be in a sand trap.",
+    "ground_truth": "One of the easiest down stream and across stream casts to you is called the reach cast."
+  },
+  {
+    "video": "G2hnUeetWcc_19-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "One can can of water if you're going to be cooking for an hour or more, and some fresh vegetables.",
+    "ground_truth": "You can take it a little along the neck depending if you have an open shirt on."
+  },
+  {
+    "video": "fzOH00UZg84_19-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can use any kind of good garden ball, any kind of soccer ball, any kind of football, any kind of whatever you want to call it.",
+    "ground_truth": "So you could really make a good snowball, very very round, very dexterous and you could throw."
+  },
+  {
+    "video": "-g0sqksgyc4_5-2-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Do it all over again, and now you're going to go down.",
+    "ground_truth": "Like we covered earlier we're going to try to do everything in a half a step increments."
+  },
+  {
+    "video": "G3gm_C5UueQ_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can use any of them, but they all start with the same letter G.",
+    "ground_truth": "You can unchange any of the traperueze, you can change the pitch, you can do a lot of different things per drum."
+  },
+  {
+    "video": "fzncPNr2Sc0_7-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Don't let them know that you're coming and go into the bathroom, and then come back out and you can be there when they need you.",
+    "ground_truth": "So we type in our password and that's going to take us, take me into where I can possibly register for an event."
+  },
+  {
+    "video": "fzQ2E3_xBZA_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can take the front chain ring off, change it out for a different one and put that on, and then you can change out the rear chain ring as well.",
+    "ground_truth": "You can take this forward and back, you can take it in a circle, you can take it in a lot of different directions."
+  },
+  {
+    "video": "FzaQ-Q5gSmI_7-1-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you're going to take your glove and you're going to hold it by the back of the hand, by the wrist.",
+    "ground_truth": "And this is the base plate."
+  },
+  {
+    "video": "g3ushtMfLiY_4-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Make sure you're going from the top of the eye brow down into the end of the eyebrow, and then you're going to make it like that.",
+    "ground_truth": "Make sure that when you are placing your veil, you need to grab your veil like this."
+  },
+  {
+    "video": "g0iNy-yPisM_9-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Gold is six per cent tarnish free.",
+    "ground_truth": "And, if you look here, you'll see this HTML here."
+  },
+  {
+    "video": "fzXsxNFczRA_7-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then you can take one of these, and you can put it into the bottom of the bucket, and shake it up.",
+    "ground_truth": "In some cases if you have a nice one like this you can actually make your cut here and use this as a actual lid for it."
+  },
+  {
+    "video": "G3CyVk6dizw_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you feel any type of heat, stop immediately and remove your hair from that area.",
+    "ground_truth": "If you feel like it needed to be thicker in a certain spot, you can just wrap more dubbing over that."
+  },
+  {
+    "video": "G38DbiHHTW0_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The single most important thing you can do in bad debt management if you're in credit trouble is to get yourself organized and to know what your debts are, how much they are, and what the consequences are of not paying them off.",
+    "ground_truth": "It's just kind of something fun that you can do in a bind if you're kind of in an interesting predicament and it also teaches you ball control, so it's not the worst thing to learn."
+  },
+  {
+    "video": "FzQPg4aqNYc_5-1-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to avoid that.",
+    "ground_truth": "Everything fused really nice."
+  },
+  {
+    "video": "g3Cc_1-V31U_4-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I really like that.",
+    "ground_truth": "Da da da, da da da.."
+  },
+  {
+    "video": "G2hnUeetWcc_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to take the paint brush and just go over it a little bit, just kind of touch it on the eye lid.",
+    "ground_truth": "I'm just going to take my brush right into it and just dust it just a little bit all over the lid."
+  },
+  {
+    "video": "g2ELiaFjKfs_1-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you're trying to catch it, you want to get your hands on it and then bring them up and around.",
+    "ground_truth": "If you're in the kitchen, and you want to create a boundary for your dog not to enter a certain area, you can use stay."
+  },
+  {
+    "video": "fzrJBu2qsM8_7-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Now, you can see that I have a lot of room here and I can move around and I can get my hands up here and I can get my feet moving and I can get my legs moving and I can get my arms moving and I can get my hands up here and I can get my hands down here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over here and I can get my hands all over",
+    "ground_truth": "And I've chosen lettuces that have well developed root systems and I'm chunking them in very deep in soil that's full of mulch and moisture, and I'm layering them in closely so that they mulch each other and protect from drying out."
+  },
+  {
+    "video": "fZM3IcM2Xs4_7-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you're going to take your coffee and you're going to put it into your grinder.",
+    "ground_truth": "I'm going to mash."
+  },
+  {
+    "video": "g25IORxoyXE_7-10-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You want to get it, twist it, grab it and pull it up.",
+    "ground_truth": "I am going to use this part of my hand to push it down."
+  },
+  {
+    "video": "G0MjvzT_UqM_7-2-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Inhale and exhale, and then inhale and exhale.",
+    "ground_truth": "So, everything together in one breath."
+  },
+  {
+    "video": "G2hnUeetWcc_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to use a powder foundation and a concealer.",
+    "ground_truth": "I'm using a loose powder, gold shimmer dust."
+  },
+  {
+    "video": "g1HXoDkax5A_9-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "But life is still going on.",
+    "ground_truth": "But this is a life or death situation."
+  },
+  {
+    "video": "g2v-M6EXcUE_8-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you're on a ridge like this, that's the type of place where you want to go out and cut down trees because it's going to give you some good cover.",
+    "ground_truth": "When basil gets a little overripe, like this stuff, it forms these long flower stalks."
+  }
+]

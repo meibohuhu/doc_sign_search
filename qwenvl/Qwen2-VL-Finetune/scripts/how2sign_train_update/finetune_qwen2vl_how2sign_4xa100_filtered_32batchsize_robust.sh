@@ -121,12 +121,12 @@ deepspeed src/train/train_sft.py \
     --num_train_epochs 3 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
-    --video_min_pixels $((256 * 256)) \
-    --video_max_pixels $((256 * 256)) \
-    --fps 20 \
-    --max_grad_norm 1.0 \
-    --learning_rate 5e-6 \
-    --lr_scheduler_type cosine \
+    --video_min_pixels $((224 * 224)) \
+    --video_max_pixels $((224 * 224)) \
+    --fps 18 \
+    --max_grad_norm 10.0 \
+    --learning_rate 3e-5 \
+    --lr_scheduler_type cosine_with_restarts \
     --logging_steps 1 \
     --save_steps 1000 \
     --save_total_limit 2 \
@@ -142,8 +142,8 @@ deepspeed src/train/train_sft.py \
     --lora_enable True \
     --lora_rank 32 \
     --lora_alpha 64 \
-    --vision_lr 5e-6 \
-    --merger_lr 1e-5 \
+    --vision_lr 1e-5 \
+    --merger_lr 3e-5 \
     --report_to none
 
 echo ""

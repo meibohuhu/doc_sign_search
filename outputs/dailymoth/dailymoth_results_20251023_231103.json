@@ -1,0 +1,1252 @@
+[
+  {
+    "video": "0000004-2022.6.14.mp4",
+    "model_output": "the water and then ran out of the building,",
+    "ground_truth": "by raging floodwaters that were powerful enough"
+  },
+  {
+    "video": "0000007-2022.6.14.mp4",
+    "model_output": "and that they were not allowed to enter.",
+    "ground_truth": "and several tourists had to be evacuated."
+  },
+  {
+    "video": "0000011-2022.6.14.mp4",
+    "model_output": "the top 138 fastest-growing states,",
+    "ground_truth": "crested at 13.88 feet,"
+  },
+  {
+    "video": "0000015-2022.6.14.mp4",
+    "model_output": "a city near the border with Ukraine,",
+    "ground_truth": "A community near the gates of Yellowstone,"
+  },
+  {
+    "video": "0000020-2022.6.14.mp4",
+    "model_output": "The New York Times said",
+    "ground_truth": "News reports said"
+  },
+  {
+    "video": "0000025-2022.6.14.mp4",
+    "model_output": "A man with a gun and a knife entered the building,",
+    "ground_truth": "a man carrying a handgun entered a sports complex"
+  },
+  {
+    "video": "0000034-2022.6.14.mp4",
+    "model_output": "Police said they responded to a call about a shooting at",
+    "ground_truth": "Police officers were at the scene in two minutes"
+  },
+  {
+    "video": "0000035-2022.6.14.mp4",
+    "model_output": "and the French government in Gijón, Spain.",
+    "ground_truth": "and found the gunman in the gymnasium and shot at him."
+  },
+  {
+    "video": "0000040-2022.6.14.mp4",
+    "model_output": "There was no other person injured.",
+    "ground_truth": "Nobody was injured, only the gunman was killed."
+  },
+  {
+    "video": "0000041-2022.6.14.mp4",
+    "model_output": "In Ukraine, there is a large group of people",
+    "ground_truth": "The war in Ukraine is now"
+  },
+  {
+    "video": "0000056-2022.6.14.mp4",
+    "model_output": "He said George's \"all-white\" character,",
+    "ground_truth": "that Google’s artificially intelligent chatbot named LaMDA"
+  },
+  {
+    "video": "0000058-2022.6.14.mp4",
+    "model_output": "the U.S. military and that they were thinking of",
+    "ground_truth": "and is self-aware."
+  },
+  {
+    "video": "0000060-2022.6.14.mp4",
+    "model_output": "and that he saw a person walking away from him,",
+    "ground_truth": "to see if the robot would use discriminatory or hate speech,"
+  },
+  {
+    "video": "0000063-2022.6.14.mp4",
+    "model_output": "LeMone said he was one of the first people to sign up for",
+    "ground_truth": "Lemonie posted a paper that is sort of a transcript"
+  },
+  {
+    "video": "0000064-2022.6.14.mp4",
+    "model_output": "to be independent of the state legislature,",
+    "ground_truth": "of different questions he asked LaMDA."
+  },
+  {
+    "video": "0000067-2022.6.14.mp4",
+    "model_output": "the military and civilian officials.",
+    "ground_truth": "to help me focus on helping others.”"
+  },
+  {
+    "video": "0000073-2022.6.14.mp4",
+    "model_output": "and was sentenced to death by lethal injection.",
+    "ground_truth": "that he was placed on paid administrative leave,"
+  },
+  {
+    "video": "0000074-2022.6.14.mp4",
+    "model_output": "and then shot him down.",
+    "ground_truth": "so he decided to go public."
+  },
+  {
+    "video": "0000076-2022.6.14.mp4",
+    "model_output": "no evidence of election fraud,",
+    "ground_truth": "there is no evidence to support Lemoine’s claims."
+  },
+  {
+    "video": "0000079-2022.6.14.mp4",
+    "model_output": "He said he is not a leader or an expert.",
+    "ground_truth": "believe that Lemoine is exaggerating."
+  },
+  {
+    "video": "0000082-2022.6.14.mp4",
+    "model_output": "the Sapporo area.",
+    "ground_truth": "“spaz” in it."
+  },
+  {
+    "video": "0000083-2022.6.14.mp4",
+    "model_output": "This is the first time that many of these people have been",
+    "ground_truth": "The term is considered derogatory"
+  },
+  {
+    "video": "0000086-2022.6.14.mp4",
+    "model_output": "on time on the Sappi Upland Leaf Paper plant.",
+    "ground_truth": "is based on “spastic diplegia, a form of cerebral palsy.”"
+  },
+  {
+    "video": "0000087-2022.6.14.mp4",
+    "model_output": "The increase is expected to continue in the UK and other countries.",
+    "ground_truth": "The word is more commonly used as an insult in the U.K."
+  },
+  {
+    "video": "0000091-2022.6.14.mp4",
+    "model_output": "and that they were not human.",
+    "ground_truth": "hurtful language hurled towards them"
+  },
+  {
+    "video": "0000097-2022.6.14.mp4",
+    "model_output": "and that they want to see the world again.",
+    "ground_truth": "she’s been waiting to see in the world."
+  },
+  {
+    "video": "0000124-2022.6.14.mp4",
+    "model_output": "He said he hopes to continue his work with the NBA.",
+    "ground_truth": "said he hopes to one day own a NBA franchise."
+  },
+  {
+    "video": "0000134-2022.6.14.mp4",
+    "model_output": "See you tomorrow and stay with the light.",
+    "ground_truth": "See you tomorrow and stay with the light."
+  },
+  {
+    "video": "0000140-2022.7.14.mp4",
+    "model_output": "the building collapsed.",
+    "ground_truth": "their foundations."
+  },
+  {
+    "video": "0000150-2022.7.14.mp4",
+    "model_output": "the Las Vegas Raiders last month.",
+    "ground_truth": "a 27-year-old in May."
+  },
+  {
+    "video": "0000158-2022.7.14.mp4",
+    "model_output": "Police said the suspect was arrested on Saturday and",
+    "ground_truth": "Police said the suspect was arrested on Tuesday,"
+  },
+  {
+    "video": "0000159-2022.7.14.mp4",
+    "model_output": "the coronavirus pandemic, and that he is now working with",
+    "ground_truth": "confessed to the crime, was charged with felony rape,"
+  },
+  {
+    "video": "0000164-2022.7.14.mp4",
+    "model_output": "She said she knew that Taylor was a good person and",
+    "ground_truth": "Biden said, \"Imagine being that little girl..."
+  },
+  {
+    "video": "0000172-2022.7.14.mp4",
+    "model_output": "in January 2024.",
+    "ground_truth": "the presidency in 2024."
+  },
+  {
+    "video": "0000181-2022.7.14.mp4",
+    "model_output": "in three separate incidents.",
+    "ground_truth": "including three children."
+  },
+  {
+    "video": "0000185-2022.7.14.mp4",
+    "model_output": "four people were hospitalized.",
+    "ground_truth": "including four children, were hospitalized."
+  },
+  {
+    "video": "0000213-2022.7.14.mp4",
+    "model_output": "the Hebrew University of Jerusalem.",
+    "ground_truth": "the Bill and Melinda Gates Foundation."
+  },
+  {
+    "video": "0000216-2022.7.14.mp4",
+    "model_output": "a severe illness that causes people to lose their ability to",
+    "ground_truth": "fight diseases, reduce childhood deaths, address climate change,"
+  },
+  {
+    "video": "0000219-2022.7.14.mp4",
+    "model_output": "world's largest pharmaceutical company,",
+    "ground_truth": "the world's richest people one day."
+  },
+  {
+    "video": "0000220-2022.7.14.mp4",
+    "model_output": "and that he has new information on his case,",
+    "ground_truth": "He said he feels he has an obligation to return"
+  },
+  {
+    "video": "0000223-2022.7.14.mp4",
+    "model_output": "Now, the next one is on Tuesday, November 14.",
+    "ground_truth": "currently has a net worth of $114 billion,"
+  },
+  {
+    "video": "0000239-2022.4.26.mp4",
+    "model_output": "to provide legal representation for those who are seeking it.",
+    "ground_truth": "it will become a privately held company."
+  },
+  {
+    "video": "0000250-2022.4.26.mp4",
+    "model_output": "There was a significant increase in the number of people who were",
+    "ground_truth": "which was permanently suspended after the January 6 attack"
+  },
+  {
+    "video": "0000256-2022.4.26.mp4",
+    "model_output": "the \"Rosa L. Parks\" bus.",
+    "ground_truth": "Truth Social and said he would stick with that platform."
+  },
+  {
+    "video": "0000259-2022.4.26.mp4",
+    "model_output": "the death penalty.",
+    "ground_truth": "to slavery."
+  },
+  {
+    "video": "0000261-2022.4.26.mp4",
+    "model_output": "the death penalty for those who killed 70 people,",
+    "ground_truth": "staff, and leaders enslaved more than 70 individuals"
+  },
+  {
+    "video": "0000273-2022.4.26.mp4",
+    "model_output": "the 11th season of \"MasterChef\" and",
+    "ground_truth": "about 12 seconds from the upcoming Marvel film,"
+  },
+  {
+    "video": "0000286-2022.4.26.mp4",
+    "model_output": "and that they would be sentenced.",
+    "ground_truth": "punishable by death."
+  },
+  {
+    "video": "0000293-2022.4.26.mp4",
+    "model_output": "the new law, but it is not clear whether",
+    "ground_truth": "out in opposition of a new law that bans instruction or"
+  },
+  {
+    "video": "0000294-2022.4.26.mp4",
+    "model_output": "a public library.",
+    "ground_truth": "classroom discussion of LGBTQ+ topics in elementary schools."
+  },
+  {
+    "video": "0000298-2022.4.26.mp4",
+    "model_output": "the war with Ukraine, and with the West supporting",
+    "ground_truth": "to keep providing Ukraine with weapons and"
+  },
+  {
+    "video": "0000302-2022.4.26.mp4",
+    "model_output": "and abortion rights in the U.S.",
+    "ground_truth": "an air base in Germany."
+  },
+  {
+    "video": "0000312-2022.4.26.mp4",
+    "model_output": "The Massachusetts Law on Abortion (MA Law) is",
+    "ground_truth": "Rep. Madison Cawthorn (R-NC) tried to bring a loaded gun"
+  },
+  {
+    "video": "0000319-2022.4.26.mp4",
+    "model_output": "and then shot himself.",
+    "ground_truth": "of the gun."
+  },
+  {
+    "video": "0000320-2022.4.26.mp4",
+    "model_output": "It is the second time that Cavani has been banned from",
+    "ground_truth": "It is the second time Cawthorn was stopped trying to bring"
+  },
+  {
+    "video": "0000326-2022.12.28.mp4",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0000345-2022.12.28.mp4",
+    "model_output": "The other person, a Lyft driver, was driving on",
+    "ground_truth": "Fortunately, some who saw the livestream had a snowplow"
+  },
+  {
+    "video": "0000350-2022.12.28.mp4",
+    "model_output": "and that they were close friends.",
+    "ground_truth": "she is now considered family."
+  },
+  {
+    "video": "0000351-2022.12.28.mp4",
+    "model_output": "This is shocking and tragic news for the entire country,",
+    "ground_truth": "It just shows how dangerous the blizzard in Buffalo was."
+  },
+  {
+    "video": "0000353-2022.12.28.mp4",
+    "model_output": "Another story that broke out was about",
+    "ground_truth": "Another story that has recently emerged is"
+  },
+  {
+    "video": "0000355-2022.12.28.mp4",
+    "model_output": "She said she was at her friend's apartment and",
+    "ground_truth": "She was only six minutes away from her home"
+  },
+  {
+    "video": "0000356-2022.12.28.mp4",
+    "model_output": "the plane crashed and the passengers were injured.",
+    "ground_truth": "when she became stuck in the blizzard."
+  },
+  {
+    "video": "0000359-2022.12.28.mp4",
+    "model_output": "the phone number and said they wanted to speak with",
+    "ground_truth": "She called 911 and waited for first responders"
+  },
+  {
+    "video": "0000365-2022.12.28.mp4",
+    "model_output": "A Black city official said they have removed",
+    "ground_truth": "A city official said most of its snow-clearing equipment"
+  },
+  {
+    "video": "0000372-2022.12.28.mp4",
+    "model_output": "Bennett is 95 years old.",
+    "ground_truth": "Benedict is 95 years old."
+  },
+  {
+    "video": "0000375-2022.12.28.mp4",
+    "model_output": "and that it was a mistake.",
+    "ground_truth": "He said he resigned due to declining health."
+  },
+  {
+    "video": "0000380-2022.12.28.mp4",
+    "model_output": "his former position.",
+    "ground_truth": "about his past."
+  },
+  {
+    "video": "0000395-2022.12.28.mp4",
+    "model_output": "people who are concerned about this.",
+    "ground_truth": "about the people's concerns."
+  },
+  {
+    "video": "0000398-2022.12.28.mp4",
+    "model_output": "The Supreme Court ruled that the Florida law is unconstitutional",
+    "ground_truth": "The Supreme Court voted 5-4 to keep in effect a policy from"
+  },
+  {
+    "video": "0000399-2022.12.28.mp4",
+    "model_output": "Trump's attorney said they would challenge",
+    "ground_truth": "the Trump administration that allowed the U.S. to"
+  },
+  {
+    "video": "0000407-2022.12.28.mp4",
+    "model_output": "the end of June.",
+    "ground_truth": "at least until the end of June."
+  },
+  {
+    "video": "0000409-2022.12.28.mp4",
+    "model_output": "the three-day trial on Wednesday.",
+    "ground_truth": "three liberal judges who dissented, saying"
+  },
+  {
+    "video": "0000420-2022.12.28.mp4",
+    "model_output": "The White House said they would work with",
+    "ground_truth": "The White House said they would comply with"
+  },
+  {
+    "video": "0000421-2022.12.28.mp4",
+    "model_output": "the Supreme Court, but said they would not do so",
+    "ground_truth": "the Supreme court's decision and would make preparations on"
+  },
+  {
+    "video": "0000424-2022.12.28.mp4",
+    "model_output": "Two of the athletes, who are from the same country,",
+    "ground_truth": "two Asian friends were eating at an In-N-Out restaurant and"
+  },
+  {
+    "video": "0000430-2022.12.28.mp4",
+    "model_output": "and that they were not prepared for the violence",
+    "ground_truth": "a clever comment, the man became angry and"
+  },
+  {
+    "video": "0000441-2022.12.28.mp4",
+    "model_output": "40-year-old man named Deeter,",
+    "ground_truth": "a 40-year-old man from Denver named"
+  },
+  {
+    "video": "0000445-2022.12.28.mp4",
+    "model_output": "and that he would be back.",
+    "ground_truth": "the past about the man."
+  },
+  {
+    "video": "0000446-2022.12.28.mp4",
+    "model_output": "Axios explained that the two people who were arrested,",
+    "ground_truth": "Axios reported that two of the leaders of the plot to"
+  },
+  {
+    "video": "0000456-2022.12.28.mp4",
+    "model_output": "the coronavirus rules in place at his golf course,",
+    "ground_truth": "their roles in the plot to kidnap the governor at"
+  },
+  {
+    "video": "0000554-2023.4.6.mp4",
+    "model_output": "It is April 6.",
+    "ground_truth": "It is April 6."
+  },
+  {
+    "video": "0000559-2023.4.6.mp4",
+    "model_output": "On Wednesday, Indiana Gov. Holcomb signed",
+    "ground_truth": "On Wednesday, Indiana Gov. Holcomb signed a bill"
+  },
+  {
+    "video": "0000570-2023.4.6.mp4",
+    "model_output": "and George Floyd, and Minneapolis.",
+    "ground_truth": "that ban gender-affirming care for minors."
+  },
+  {
+    "video": "0000587-2023.4.6.mp4",
+    "model_output": "The AG's office said they would continue to investigate",
+    "ground_truth": "The AG's office conducted an investigation"
+  },
+  {
+    "video": "0000589-2023.4.6.mp4",
+    "model_output": "on Wednesday.",
+    "ground_truth": "on Wednesday."
+  },
+  {
+    "video": "0000592-2023.4.6.mp4",
+    "model_output": "The AB 102 bill would allow people who have been",
+    "ground_truth": "They said abusers were often given the opportunity to"
+  },
+  {
+    "video": "0000595-2023.4.6.mp4",
+    "model_output": "and that they have no health concerns.",
+    "ground_truth": "what they have found."
+  },
+  {
+    "video": "0000611-2023.4.6.mp4",
+    "model_output": "Luzay was a Republican who was more conservative",
+    "ground_truth": "luxury trips from a Republican megadonor for"
+  },
+  {
+    "video": "0000630-2023.4.6.mp4",
+    "model_output": "and said he was a \"thug.\"",
+    "ground_truth": "Others said Thomas should be investigated or even impeached."
+  },
+  {
+    "video": "0000642-2023.4.6.mp4",
+    "model_output": "The body was found and it is now being investigated.",
+    "ground_truth": "His body was exhumed, investigated,"
+  },
+  {
+    "video": "0000643-2023.4.6.mp4",
+    "model_output": "the right to self-defense.",
+    "ground_truth": "and now it's reburied."
+  },
+  {
+    "video": "0000646-2023.4.6.mp4",
+    "model_output": "The New York Times showed images of people who were suspected",
+    "ground_truth": "A Netflix documentary showed that some people suspected"
+  },
+  {
+    "video": "0000648-2023.4.6.mp4",
+    "model_output": "the Trumps and the Sussmanns,",
+    "ground_truth": "that Buster and Smith were in."
+  },
+  {
+    "video": "0000649-2023.4.6.mp4",
+    "model_output": "the Michigan House of Representatives.",
+    "ground_truth": "Smith was openly gay."
+  },
+  {
+    "video": "0000650-2023.4.6.mp4",
+    "model_output": "Bustos said he was not aware of the incident and",
+    "ground_truth": "Buster recently said he denies any involvement and asked for"
+  },
+  {
+    "video": "0000651-2023.4.6.mp4",
+    "model_output": "and a few other things.",
+    "ground_truth": "the media to stop publishing rumors."
+  },
+  {
+    "video": "0000659-2023.4.6.mp4",
+    "model_output": "the World Health Organization (WHO) and the Pan American Health Organization (PAHO).",
+    "ground_truth": "kidnapping a wild platypus and showing it off to others."
+  },
+  {
+    "video": "0000675-2023.4.6.mp4",
+    "model_output": "That is all the top stories for today.",
+    "ground_truth": "That is all the top stories for today."
+  },
+  {
+    "video": "0000677-2022.9.21.mp4",
+    "model_output": "It is Wednesday, September 29.",
+    "ground_truth": "It is Wednesday, September 21."
+  },
+  {
+    "video": "0000685-2022.9.21.mp4",
+    "model_output": "News analysts said it is possible that Putin is trying to",
+    "ground_truth": "News analysts said Putin may be making this move"
+  },
+  {
+    "video": "0000703-2022.9.21.mp4",
+    "model_output": "a 10% increase in power capacity,",
+    "ground_truth": "a Category 1 storm, has strengthened into"
+  },
+  {
+    "video": "0000707-2022.9.21.mp4",
+    "model_output": "the night before or on the day of the shooting,",
+    "ground_truth": "tomorrow night or early Friday and then"
+  },
+  {
+    "video": "0000708-2022.9.21.mp4",
+    "model_output": "the Canadian Atlantic Ocean.",
+    "ground_truth": "approach Canada's Atlantic provinces late Friday."
+  },
+  {
+    "video": "0000711-2022.9.21.mp4",
+    "model_output": "The AAPI Today logo is shown.",
+    "ground_truth": "As of today, only 26% of the island had power."
+  },
+  {
+    "video": "0000714-2022.9.21.mp4",
+    "model_output": "A person was found dead in water,",
+    "ground_truth": "One person was killed after he was swept away"
+  },
+  {
+    "video": "0000716-2022.9.21.mp4",
+    "model_output": "The two people died from burns and",
+    "ground_truth": "the second burned to death after he tried to fill"
+  },
+  {
+    "video": "0000733-2022.9.21.mp4",
+    "model_output": "The FDA said it is safe for people to take the shots,",
+    "ground_truth": "The FDA said they've received reports of teenagers"
+  },
+  {
+    "video": "0000750-2022.9.21.mp4",
+    "model_output": "The AG's office said they would not prosecute",
+    "ground_truth": "The AG said her office has made a criminal referral to"
+  },
+  {
+    "video": "0000751-2022.9.21.mp4",
+    "model_output": "the U.S. District Court for the District of Arizona.",
+    "ground_truth": "the U.S. Department of Justice and the IRS."
+  },
+  {
+    "video": "0000753-2022.9.21.mp4",
+    "model_output": "and not with the fan who was killed.",
+    "ground_truth": "has nothing to do with facts or the law."
+  },
+  {
+    "video": "0000754-2022.9.21.mp4",
+    "model_output": "The law says that people who commit acts of terrorism",
+    "ground_truth": "She said she looks forward to defending Trump in"
+  },
+  {
+    "video": "0000755-2022.9.21.mp4",
+    "model_output": "the court's decision.",
+    "ground_truth": "the judicial system."
+  },
+  {
+    "video": "0000756-2022.9.21.mp4",
+    "model_output": "In New York City, the mayor, Bill de Blasio,",
+    "ground_truth": "The New York Yankees star player Aaron Judge hit"
+  },
+  {
+    "video": "0000770-2022.9.21.mp4",
+    "model_output": "That is all the top stories for today.",
+    "ground_truth": "That is all the top stories for today."
+  },
+  {
+    "video": "0000878-2022.10.27.mp4",
+    "model_output": "It is Thursday, October 27.",
+    "ground_truth": "It is Thursday, October 27."
+  },
+  {
+    "video": "0000879-2022.10.27.mp4",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0000880-2022.10.27.mp4",
+    "model_output": "Elon Musk, who is the CEO of Twitter,",
+    "ground_truth": "Elon Musk visited the headquarters of Twitter"
+  },
+  {
+    "video": "0000895-2022.10.27.mp4",
+    "model_output": "the Donald Trump administration,",
+    "ground_truth": "Donald Trump's account,"
+  },
+  {
+    "video": "0000902-2022.10.27.mp4",
+    "model_output": "and the U.S. and other countries.",
+    "ground_truth": "which borders Texas' southern tip."
+  },
+  {
+    "video": "0000906-2022.10.27.mp4",
+    "model_output": "The National Guard was called in to assist with",
+    "ground_truth": "Legislators moved to another room to finish their debate"
+  },
+  {
+    "video": "0000907-2022.10.27.mp4",
+    "model_output": "and then he was released.",
+    "ground_truth": "and vote."
+  },
+  {
+    "video": "0000910-2022.10.27.mp4",
+    "model_output": "in the western U.S.",
+    "ground_truth": "plants in the Midwest."
+  },
+  {
+    "video": "0000912-2022.10.27.mp4",
+    "model_output": "the FBI's investigation into the January 6 attack on",
+    "ground_truth": "loads of frozen beef were stolen in Nebraska."
+  },
+  {
+    "video": "0000923-2022.10.27.mp4",
+    "model_output": "and other taxes.",
+    "ground_truth": "after taxes are taken out."
+  },
+  {
+    "video": "0000928-2022.10.27.mp4",
+    "model_output": "The boy was taken away by police.",
+    "ground_truth": "So someone has to be really, really, really lucky."
+  },
+  {
+    "video": "0000930-2022.10.27.mp4",
+    "model_output": "The term \"Tennessee\" refers to",
+    "ground_truth": "who is from Tennessee, was sentenced to 7.5 years"
+  },
+  {
+    "video": "0000936-2022.10.27.mp4",
+    "model_output": "The father was taken into police custody and",
+    "ground_truth": "Fanone sustained a heart attack on that day and"
+  },
+  {
+    "video": "0000937-2022.10.27.mp4",
+    "model_output": "and was taken into custody by DC police.",
+    "ground_truth": "has since resigned from the D.C. police department."
+  },
+  {
+    "video": "0000944-2022.10.27.mp4",
+    "model_output": "The fire was extinguished.",
+    "ground_truth": "burst into flames."
+  },
+  {
+    "video": "0000957-2022.10.27.mp4",
+    "model_output": "and that he was not a threat.",
+    "ground_truth": "they do not know if he has retained an attorney."
+  },
+  {
+    "video": "0001176-2022.12.15.mp4",
+    "model_output": "Here are today's top stories.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0001181-2022.12.15.mp4",
+    "model_output": "the Bay Area.",
+    "ground_truth": "called ByteDance."
+  },
+  {
+    "video": "0001190-2022.12.15.mp4",
+    "model_output": "TikTok is one of the world's top social media platforms.",
+    "ground_truth": "TikTok has over 1 billion monthly users in the world."
+  },
+  {
+    "video": "0001199-2022.12.15.mp4",
+    "model_output": "and that they were burning on Tuesday morning.",
+    "ground_truth": "facility went up into flames on Tuesday morning and"
+  },
+  {
+    "video": "0001203-2022.12.15.mp4",
+    "model_output": "A New York police officer said they found the body of",
+    "ground_truth": "An NYPD official said there was a lot of biological evidence"
+  },
+  {
+    "video": "0001204-2022.12.15.mp4",
+    "model_output": "and the crime of terrorism.",
+    "ground_truth": "from past crimes, burglaries, shooting incidents, and others."
+  },
+  {
+    "video": "0001207-2022.12.15.mp4",
+    "model_output": "The fire was contained and there were no injuries.",
+    "ground_truth": "Firefighters tried to stop the fire by going inside"
+  },
+  {
+    "video": "0001210-2022.12.15.mp4",
+    "model_output": "Three marines were killed and several others were injured",
+    "ground_truth": "Three marine fireboats and drones were brought in"
+  },
+  {
+    "video": "0001214-2022.12.15.mp4",
+    "model_output": "Eight people were injured and several buildings were damaged.",
+    "ground_truth": "Eight people had minor injuries from the fire."
+  },
+  {
+    "video": "0001219-2022.12.15.mp4",
+    "model_output": "Elon Musk tweeted that he would suspend Twitter's ability",
+    "ground_truth": "Elon Musk's Twitter suspended a popular Twitter account"
+  },
+  {
+    "video": "0001224-2022.12.15.mp4",
+    "model_output": "the death of a woman named Jessica Weiseny,",
+    "ground_truth": "he offered the account owner, 20-year-old Jack Sweeney,"
+  },
+  {
+    "video": "0001225-2022.12.15.mp4",
+    "model_output": "$5,000 worth of drugs.",
+    "ground_truth": "$5,000 to delete his account."
+  },
+  {
+    "video": "0001230-2022.12.15.mp4",
+    "model_output": "and that it is safe.",
+    "ground_truth": "What changed?"
+  },
+  {
+    "video": "0001261-2022.12.15.mp4",
+    "model_output": "and that the National Guard is needed to protect the U.S.",
+    "ground_truth": "kill a sitting governor is a threat to democracy itself."
+  },
+  {
+    "video": "0001278-2022.12.15.mp4",
+    "model_output": "the state of Kentucky, and the District of Columbia.",
+    "ground_truth": "Arizona elected Katie Hobbs (D) as their new governor and"
+  },
+  {
+    "video": "0001291-2022.12.15.mp4",
+    "model_output": "That is all the top stories for today.",
+    "ground_truth": "That is all the top stories for today."
+  },
+  {
+    "video": "0001304-2023.3.13.mp4",
+    "model_output": "The picture shows Biden walking out of the Oval Office",
+    "ground_truth": "President Biden approved a controversial oil and gas"
+  },
+  {
+    "video": "0001312-2023.3.13.mp4",
+    "model_output": "Many people said it was wrong and that they were",
+    "ground_truth": "There are many people who say this is the wrong move and"
+  },
+  {
+    "video": "0001314-2023.3.13.mp4",
+    "model_output": "and other cities.",
+    "ground_truth": "communities and our climate."
+  },
+  {
+    "video": "0001315-2023.3.13.mp4",
+    "model_output": "The president said he is \"very sorry\" and that",
+    "ground_truth": "President Biden gave an address today to try"
+  },
+  {
+    "video": "0001318-2023.3.13.mp4",
+    "model_output": "The second incident happened at a bank in New York City",
+    "ground_truth": "There was another bank in New York,"
+  },
+  {
+    "video": "0001323-2023.3.13.mp4",
+    "model_output": "The federal government is paying for all of this,",
+    "ground_truth": "Federal officials said everyone who had deposits in the banks"
+  },
+  {
+    "video": "0001349-2023.3.13.mp4",
+    "model_output": "The phone number was 930-415-2678.",
+    "ground_truth": "They called 911 but the child died at the scene."
+  },
+  {
+    "video": "0001360-2023.3.13.mp4",
+    "model_output": "The man was wearing a white shirt and",
+    "ground_truth": "The man was taken to a hospital and it was feared that"
+  },
+  {
+    "video": "0001365-2023.3.13.mp4",
+    "model_output": "A judge in Oregon said Zeberka's actions were",
+    "ground_truth": "An Ohio official said zebras are not on the list of dangerous,"
+  },
+  {
+    "video": "0001369-2023.2.13.mp4",
+    "model_output": "It is February 13.",
+    "ground_truth": "It is February 13."
+  },
+  {
+    "video": "0001389-2023.2.13.mp4",
+    "model_output": "The third is called the Cylindrical Wall,",
+    "ground_truth": "The object is described as \"cylindrical\" and"
+  },
+  {
+    "video": "0001390-2023.2.13.mp4",
+    "model_output": "the other two states, and South Carolina.",
+    "ground_truth": "was smaller, but similar to the South Carolina balloon."
+  },
+  {
+    "video": "0001396-2023.2.13.mp4",
+    "model_output": "The three were shot and killed in three separate incidents.",
+    "ground_truth": "So, it is three objects shot down in three consecutive days."
+  },
+  {
+    "video": "0001407-2023.2.13.mp4",
+    "model_output": "in the eastern part of the country.",
+    "ground_truth": "southeastern Turkiye, near its border with Syria."
+  },
+  {
+    "video": "0001421-2023.2.13.mp4",
+    "model_output": "the cost of 30 million vaccines and",
+    "ground_truth": "donated $30 million to help quake victims."
+  },
+  {
+    "video": "0001428-2023.2.13.mp4",
+    "model_output": "He said he was thinking of going to Germany and",
+    "ground_truth": "Some political leaders have blamed Turkish President Erdogan"
+  },
+  {
+    "video": "0001429-2023.2.13.mp4",
+    "model_output": "the right to vote and to run for office.",
+    "ground_truth": "for failing to enforce building regulations."
+  },
+  {
+    "video": "0001431-2023.2.13.mp4",
+    "model_output": "on February 2.",
+    "ground_truth": "committed suicide on February 2."
+  },
+  {
+    "video": "0001435-2023.2.13.mp4",
+    "model_output": "in Oregon, Colorado, and Kentucky.",
+    "ground_truth": "at her school in Ocean County."
+  },
+  {
+    "video": "0001446-2023.2.13.mp4",
+    "model_output": "The father said he will not be attending",
+    "ground_truth": "The father said he will \"not sleep' until"
+  },
+  {
+    "video": "0001469-2023.2.13.mp4",
+    "model_output": "The plane was on its way to London.",
+    "ground_truth": "It's a coincidence."
+  },
+  {
+    "video": "0001471-2023.2.13.mp4",
+    "model_output": "the 57th year in Glenn.",
+    "ground_truth": "Super Bowl 57 last night in Glendale, Arizona."
+  },
+  {
+    "video": "0001473-2023.2.13.mp4",
+    "model_output": "the MVP award.",
+    "ground_truth": "the game's MVP."
+  },
+  {
+    "video": "0001504-2022.6.29.mp4",
+    "model_output": "News reports said that the private security guard",
+    "ground_truth": "News reports said the Secret Service agent in the limo,"
+  },
+  {
+    "video": "0001513-2022.6.29.mp4",
+    "model_output": "and will be sentenced on June 29.",
+    "ground_truth": "whether they’ll call upon Engel and the limo driver to testify."
+  },
+  {
+    "video": "0001517-2022.6.29.mp4",
+    "model_output": "The 29-year-old was working at a fast-food restaurant",
+    "ground_truth": "A 29-year-old Amazon worker and gun owner was arrested over"
+  },
+  {
+    "video": "0001524-2022.6.29.mp4",
+    "model_output": "He said he thought it was good that",
+    "ground_truth": "that he thought it’d be a good idea to"
+  },
+  {
+    "video": "0001536-2022.6.29.mp4",
+    "model_output": "He said he is a \"good, normal, healthy man.\"",
+    "ground_truth": "had a history of mental illness,"
+  },
+  {
+    "video": "0001539-2022.6.29.mp4",
+    "model_output": "The couple was found dead inside their home.",
+    "ground_truth": "With all this information,"
+  },
+  {
+    "video": "0001540-2022.6.29.mp4",
+    "model_output": "Police arrested Aceves.",
+    "ground_truth": "law enforcement arrested Aceves and"
+  },
+  {
+    "video": "0001542-2022.6.29.mp4",
+    "model_output": "It is now about $500 billion.",
+    "ground_truth": "He is jailed on a $50,000 bond."
+  },
+  {
+    "video": "0001543-2022.6.29.mp4",
+    "model_output": "In Florida, there is a law that allows police to use",
+    "ground_truth": "In Florida, there is a law"
+  },
+  {
+    "video": "0001549-2022.6.29.mp4",
+    "model_output": "and police officers were able to pull them out.",
+    "ground_truth": "and the cop can hear it, then they can issue the ticket."
+  },
+  {
+    "video": "0001555-2022.6.29.mp4",
+    "model_output": "the U.S. military base in Poland,",
+    "ground_truth": "would be stationed in Poland."
+  },
+  {
+    "video": "0001583-2022.6.29.mp4",
+    "model_output": "Two women from Alaska were charged with",
+    "ground_truth": "The two women were from India and were charged with"
+  },
+  {
+    "video": "0001585-2022.6.29.mp4",
+    "model_output": "Women who are under 10 years of age can be",
+    "ground_truth": "The women are facing a maximum sentence of up to 10 years and"
+  },
+  {
+    "video": "0001612-2022.2.8.mp4",
+    "model_output": "Ferrer said he is still working on his 2021 book,",
+    "ground_truth": "Pfizer said it predicts that in 2022,"
+  },
+  {
+    "video": "0001625-2022.2.8.mp4",
+    "model_output": "The Canadian government has announced that it will ban",
+    "ground_truth": "Canadian truck drivers protesting Covid-19 related"
+  },
+  {
+    "video": "0001626-2022.2.8.mp4",
+    "model_output": "The protesters were blocking traffic on the highway and",
+    "ground_truth": "rules have blocked the Ambassador Bridge"
+  },
+  {
+    "video": "0001628-2022.2.8.mp4",
+    "model_output": "the last time it was used in a war in 2003.",
+    "ground_truth": "It is the busiest international crossing in North America."
+  },
+  {
+    "video": "0001636-2022.2.8.mp4",
+    "model_output": "and that he was a good person and that",
+    "ground_truth": "the border and called the protesters"
+  },
+  {
+    "video": "0001637-2022.2.8.mp4",
+    "model_output": "and then was shot and killed.",
+    "ground_truth": "a \"small, fringe minority.\""
+  },
+  {
+    "video": "0001640-2022.2.8.mp4",
+    "model_output": "and that it was a car accident.",
+    "ground_truth": "(meaning no semi-trucks)."
+  },
+  {
+    "video": "0002136-2022.4.5.mp4",
+    "model_output": "Now, the jury is deliberating on whether",
+    "ground_truth": "It is currently in the jury selection phase and"
+  },
+  {
+    "video": "0002149-2022.4.5.mp4",
+    "model_output": "on Thursday.",
+    "ground_truth": "that is set to begin this Thursday."
+  },
+  {
+    "video": "0002159-2022.4.5.mp4",
+    "model_output": "a building in Burkina Faso,",
+    "ground_truth": "and killed in Bucha, which is in the Kyiv region."
+  },
+  {
+    "video": "0002161-2022.4.5.mp4",
+    "model_output": "the heart of the country, on the road,",
+    "ground_truth": "the bodies of those who were killed from streets"
+  },
+  {
+    "video": "0002172-2022.4.5.mp4",
+    "model_output": "a \"no-fly zone\" around the city,",
+    "ground_truth": "and restrictions that blocked many migrants"
+  },
+  {
+    "video": "0002186-2022.4.5.mp4",
+    "model_output": "and that it was a chaotic scene.",
+    "ground_truth": "\"unmitigated chaos and catastrophe\" at the border."
+  },
+  {
+    "video": "0002191-2022.4.5.mp4",
+    "model_output": "The U.S. has over 400,000 people who have died from",
+    "ground_truth": "those aged 60 and older could significantly increase"
+  },
+  {
+    "video": "0002198-2022.4.5.mp4",
+    "model_output": "the U.S., Canada, and the European Union.",
+    "ground_truth": "from walking and that the benefits plateau"
+  },
+  {
+    "video": "0002200-2022.4.5.mp4",
+    "model_output": "the health of the planet and human life,",
+    "ground_truth": "This means you get the most health benefits at 7,000 steps"
+  },
+  {
+    "video": "0002204-2022.4.5.mp4",
+    "model_output": "and then returned to the scene.",
+    "ground_truth": "with a fitness watch."
+  },
+  {
+    "video": "0002210-2022.4.5.mp4",
+    "model_output": "and then went back inside.",
+    "ground_truth": "and provide health insurance coverage for Americans."
+  },
+  {
+    "video": "0002235-2022.6.30.mp4",
+    "model_output": "the Supreme Court of the U.S.",
+    "ground_truth": "to serve on the Supreme Court of the United States,"
+  },
+  {
+    "video": "0002243-2022.6.30.mp4",
+    "model_output": "The Texas House of Representatives voted 120-34",
+    "ground_truth": "teenagers' hopes and dreams and trapped them in his house"
+  },
+  {
+    "video": "0002254-2022.6.30.mp4",
+    "model_output": "and not for the purpose of hunting.",
+    "ground_truth": "but was able to evade punishment."
+  },
+  {
+    "video": "0002260-2022.6.30.mp4",
+    "model_output": "President Biden signed into law a bill that would ban",
+    "ground_truth": "President Biden said he supports changing Senate filibuster rules"
+  },
+  {
+    "video": "0002262-2022.6.30.mp4",
+    "model_output": "to the death penalty for those who commit murders",
+    "ground_truth": "abortion rights without needing at least 60 Senators' support."
+  },
+  {
+    "video": "0002264-2022.6.30.mp4",
+    "model_output": "because of the Virginia, Oklahoma, and Georgia races.",
+    "ground_truth": "because Vice President Kamala Harris is able to be"
+  },
+  {
+    "video": "0002271-2022.6.30.mp4",
+    "model_output": "that you can't use the CNN logo,",
+    "ground_truth": "which has to do with contraceptives (birth control)."
+  },
+  {
+    "video": "0002276-2022.6.30.mp4",
+    "model_output": "The Supreme Court today heard arguments on whether",
+    "ground_truth": "The Supreme Court ruled today to limit how much authority"
+  },
+  {
+    "video": "0002290-2022.6.30.mp4",
+    "model_output": "the crime scene, and that they were not on the trail of",
+    "ground_truth": "for crimes that they commit on tribal land"
+  },
+  {
+    "video": "0002300-2022.6.30.mp4",
+    "model_output": "The average cost of a home is $230,000 today",
+    "ground_truth": "It is worth an estimated $20 million today."
+  },
+  {
+    "video": "0002302-2022.6.30.mp4",
+    "model_output": "Chad Lyles and William B. Bruce, who were both",
+    "ground_truth": "Charles and Willa Bruce, owned the property and turned it into"
+  },
+  {
+    "video": "0002337-2022.7.4.mp4",
+    "model_output": "and other people protesting in the city.",
+    "ground_truth": "it has caused protests and controversy in the city."
+  },
+  {
+    "video": "0002338-2022.7.4.mp4",
+    "model_output": "The city of Gjovik on June 27.",
+    "ground_truth": "The incident took place on Monday, June 27."
+  },
+  {
+    "video": "0002344-2022.7.4.mp4",
+    "model_output": "and then the shooter ran away and was captured.",
+    "ground_truth": "Eventually, Walker's car stopped and he ran outside"
+  },
+  {
+    "video": "0002346-2022.7.4.mp4",
+    "model_output": "and police officers, and that they were fighting each other.",
+    "ground_truth": "Several police officers ran after him,"
+  },
+  {
+    "video": "0002357-2022.7.4.mp4",
+    "model_output": "On Saturday, the Biden administration announced that",
+    "ground_truth": "On Saturday, President Biden tweeted that"
+  },
+  {
+    "video": "0002364-2022.7.4.mp4",
+    "model_output": "and Biden's White House staff,",
+    "ground_truth": "saying the Biden White House is either sending out"
+  },
+  {
+    "video": "0002378-2022.7.4.mp4",
+    "model_output": "and that it is not time for the police to step back.",
+    "ground_truth": "but that it typically takes time for gas prices to go down."
+  },
+  {
+    "video": "0002382-2022.7.4.mp4",
+    "model_output": "and that they would not beKYSTE.",
+    "ground_truth": "or canceling the Keystone Pipeline."
+  },
+  {
+    "video": "0002390-2022.7.4.mp4",
+    "model_output": "The three victims were 17-year-old Malik, 18-year-old Reza,",
+    "ground_truth": "The three victims were a 17-year-old male teenager,"
+  },
+  {
+    "video": "0002403-2022.7.4.mp4",
+    "model_output": "There were 17 people on the plane,",
+    "ground_truth": "There are 17 hikers who are currently missing"
+  },
+  {
+    "video": "0002405-2022.7.4.mp4",
+    "model_output": "The district attorney said the crime was committed",
+    "ground_truth": "First responders said conditions were too dangerous for them"
+  },
+  {
+    "video": "0002406-2022.7.4.mp4",
+    "model_output": "and the public's safety.",
+    "ground_truth": "to search on Monday, so the response was delayed."
+  },
+  {
+    "video": "0002409-2022.7.4.mp4",
+    "model_output": "The city of Greenville is a small city that is located",
+    "ground_truth": "The glacier has been melting for many years and"
+  },
+  {
+    "video": "0002424-2022.7.4.mp4",
+    "model_output": "and will be investigating.",
+    "ground_truth": "that authorities would investigate."
+  },
+  {
+    "video": "0002652-2022.3.23.mp4",
+    "model_output": "Here are today's top stories from around the world.",
+    "ground_truth": "Here are today's top stories."
+  },
+  {
+    "video": "0002664-2022.3.23.mp4",
+    "model_output": "The video shows several people at a home,",
+    "ground_truth": "News videos showed several homes with severe damage and"
+  },
+  {
+    "video": "0002674-2022.3.23.mp4",
+    "model_output": "The city of Kherson is now under Russian control,",
+    "ground_truth": "of key cities that Russia hoped to easily conquer,"
+  },
+  {
+    "video": "0002677-2022.3.23.mp4",
+    "model_output": "and other support services.",
+    "ground_truth": "missile attacks or constant shelling of cities."
+  },
+  {
+    "video": "0002692-2022.3.23.mp4",
+    "model_output": "in the Houston area with people who were stranded.",
+    "ground_truth": "from participating in high school women's sports leagues."
+  },
+  {
+    "video": "0002696-2022.3.23.mp4",
+    "model_output": "the person who was injured.",
+    "ground_truth": "directed at few people,"
+  },
+  {
+    "video": "0002699-2022.3.23.mp4",
+    "model_output": "The horses were with four other horses and",
+    "ground_truth": "playing high school, and that only one is involved"
+  },
+  {
+    "video": "0002700-2022.3.23.mp4",
+    "model_output": "and was married to a girl.",
+    "ground_truth": "in girls' sports."
+  },
+  {
+    "video": "0002702-2022.3.23.mp4",
+    "model_output": "the women's team.",
+    "ground_truth": "transgender youth and said \"I want them to live.\""
+  },
+  {
+    "video": "0002705-2022.3.23.mp4",
+    "model_output": "In 11 other states, the Supreme Court's decision means",
+    "ground_truth": "11 other states have passed and signed bans on transgender girls"
+  },
+  {
+    "video": "0002707-2022.3.23.mp4",
+    "model_output": "Actor Adam Sandler, who is known for his role as",
+    "ground_truth": "Actress Amanda Bynes' nine-year conservatorship has"
+  },
+  {
+    "video": "0002709-2022.3.23.mp4",
+    "model_output": "the most popular show.",
+    "ground_truth": "it was \"no longer needed or required.\""
+  },
+  {
+    "video": "0002718-2022.3.23.mp4",
+    "model_output": "the year 2021.",
+    "ground_truth": "13-year conservatorship ending in November 2021."
+  },
+  {
+    "video": "0002725-2022.3.23.mp4",
+    "model_output": "and then fell down.",
+    "ground_truth": "suddenly plunge in a nosedive in the middle of its flight."
+  },
+  {
+    "video": "0002726-2022.3.23.mp4",
+    "model_output": "The Supreme Court has already ruled that",
+    "ground_truth": "Chinese officials have invited U.S. officials to come to"
+  },
+  {
+    "video": "0002808-2022.4.7.mp4",
+    "model_output": "the last time a woman won the title was in 2019,",
+    "ground_truth": "the first Black woman justice when she takes over"
+  },
+  {
+    "video": "0002818-2022.4.7.mp4",
+    "model_output": "The boy was found and taken to a hospital,",
+    "ground_truth": "The fox that was captured near the U.S. Capitol was euthanized"
+  },
+  {
+    "video": "0002828-2022.4.7.mp4",
+    "model_output": "and other girls and women with their husbands,",
+    "ground_truth": "from playing in girls and women's sports from"
+  },
+  {
+    "video": "0002831-2022.4.7.mp4",
+    "model_output": "and religious organizations.",
+    "ground_truth": "because it discriminates against transgender children."
+  },
+  {
+    "video": "0002832-2022.4.7.mp4",
+    "model_output": "The governor said he is concerned about the rising number of",
+    "ground_truth": "He also said transgender children deserve compassion,"
+  },
+  {
+    "video": "0002841-2022.4.7.mp4",
+    "model_output": "North Dakota, Dakota, South Dakota, and Texas.",
+    "ground_truth": "North Dakota is a thescelosaurus that died"
+  },
+  {
+    "video": "0002855-2022.4.7.mp4",
+    "model_output": "the coronavirus today.",
+    "ground_truth": "the coronavirus today."
+  },
+  {
+    "video": "0002867-2022.4.7.mp4",
+    "model_output": "The U.S. military has released images of",
+    "ground_truth": "The U.N. General Assembly voted in a majority to suspend Russia"
+  },
+  {
+    "video": "0002868-2022.4.7.mp4",
+    "model_output": "and the United Nations.",
+    "ground_truth": "from the UN's Human Rights Council."
+  },
+  {
+    "video": "0002875-2022.4.7.mp4",
+    "model_output": "the Jesse Jackson statue.",
+    "ground_truth": "by Russia."
+  }
+]

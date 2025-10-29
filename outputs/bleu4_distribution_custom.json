@@ -1,0 +1,29 @@
+{
+  "total_samples": 2000,
+  "intervals": {
+    "0.00-0.02": {
+      "count": 442,
+      "percentage": 22.1
+    },
+    "0.02-0.04": {
+      "count": 820,
+      "percentage": 41.0
+    },
+    "0.04-0.06": {
+      "count": 379,
+      "percentage": 18.95
+    },
+    "0.06-0.08": {
+      "count": 125,
+      "percentage": 6.25
+    },
+    "0.08-0.10": {
+      "count": 85,
+      "percentage": 4.25
+    },
+    "over 0.10": {
+      "count": 149,
+      "percentage": 7.449999999999999
+    }
+  }
+}

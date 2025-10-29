@@ -5,6 +5,8 @@
 logs/
 debug*.log
 
+outputs/jw4905/
+
 # Weights & Biases (wandb) - Large logging directory (60MB in your case)
 wandb/
 .wandb/

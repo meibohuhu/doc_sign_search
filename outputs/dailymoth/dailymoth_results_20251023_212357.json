@@ -1,0 +1,77 @@
+[
+  {
+    "video": "0000004-2022.6.14.mp4",
+    "model_output": "the water and then ran out of the building,",
+    "ground_truth": "by raging floodwaters that were powerful enough"
+  },
+  {
+    "video": "0000007-2022.6.14.mp4",
+    "model_output": "and that they were not allowed to leave.",
+    "ground_truth": "and several tourists had to be evacuated."
+  },
+  {
+    "video": "0000011-2022.6.14.mp4",
+    "model_output": "the top 138 fastest-growing states,",
+    "ground_truth": "crested at 13.88 feet,"
+  },
+  {
+    "video": "0000015-2022.6.14.mp4",
+    "model_output": "a neighborhood near the home of the victim,",
+    "ground_truth": "A community near the gates of Yellowstone,"
+  },
+  {
+    "video": "0000020-2022.6.14.mp4",
+    "model_output": "The New York Times said",
+    "ground_truth": "News reports said"
+  },
+  {
+    "video": "0000025-2022.6.14.mp4",
+    "model_output": "A man with a gun and a knife entered the building,",
+    "ground_truth": "a man carrying a handgun entered a sports complex"
+  },
+  {
+    "video": "0000034-2022.6.14.mp4",
+    "model_output": "Police said they responded to a call about a shooting at",
+    "ground_truth": "Police officers were at the scene in two minutes"
+  },
+  {
+    "video": "0000035-2022.6.14.mp4",
+    "model_output": "and the French government in Gijón, Spain.",
+    "ground_truth": "and found the gunman in the gymnasium and shot at him."
+  },
+  {
+    "video": "0000040-2022.6.14.mp4",
+    "model_output": "There was no other person injured.",
+    "ground_truth": "Nobody was injured, only the gunman was killed."
+  },
+  {
+    "video": "0000041-2022.6.14.mp4",
+    "model_output": "In Ukraine, there is a large group of people",
+    "ground_truth": "The war in Ukraine is now"
+  },
+  {
+    "video": "0000056-2022.6.14.mp4",
+    "model_output": "He said George's family, including his daughter,",
+    "ground_truth": "that Google’s artificially intelligent chatbot named LaMDA"
+  },
+  {
+    "video": "0000058-2022.6.14.mp4",
+    "model_output": "the U.S. military and that they were thinking of",
+    "ground_truth": "and is self-aware."
+  },
+  {
+    "video": "0000060-2022.6.14.mp4",
+    "model_output": "and that he saw a person walking away from him,",
+    "ground_truth": "to see if the robot would use discriminatory or hate speech,"
+  },
+  {
+    "video": "0000063-2022.6.14.mp4",
+    "model_output": "LeMone said he was one of the first people to sign up for",
+    "ground_truth": "Lemonie posted a paper that is sort of a transcript"
+  },
+  {
+    "video": "0000064-2022.6.14.mp4",
+    "model_output": "to be independent of the state legislature,",
+    "ground_truth": "of different questions he asked LaMDA."
+  }
+]

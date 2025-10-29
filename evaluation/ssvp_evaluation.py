@@ -41,12 +41,8 @@ if HF_EVALUATE_AVAILABLE:
         print(f"Warning: Could not load ROUGE metric: {e}")
         ROUGE_AVAILABLE = False
     
-    try:
-        bleurt_metric = hf_evaluate.load("bleurt", module_type="metric", config_name="BLEURT-20")
-        BLEURT_AVAILABLE = True
-    except Exception as e:
-        print(f"Warning: Could not load BLEURT-20 metric: {e}")
-        BLEURT_AVAILABLE = False
+    # BLEURT disabled due to TensorFlow compatibility issues
+    BLEURT_AVAILABLE = False
 else:
     ROUGE_AVAILABLE = False
     BLEURT_AVAILABLE = False
@@ -184,26 +180,10 @@ def calculate_rouge_l_ssvp(predictions: List[str], ground_truths: List[str]) -> 
 def calculate_bleurt_score_ssvp(predictions: List[str], ground_truths: List[str]) -> float:
     """
     Calculate BLEURT score using the exact same approach as SSVP-SLT.
-    Uses HuggingFace evaluate bleurt metric with BLEURT-20 config (lines 349, 355-358).
+    Currently disabled due to TensorFlow compatibility issues.
     """
-    if not BLEURT_AVAILABLE:
-        print("BLEURT-20 not available, skipping BLEURT evaluation")
-        return 0.0
-    
-    if not predictions or not ground_truths:
-        return 0.0
-    
-    try:
-        # Use the same approach as in engine_translation.py lines 355-358
-        bleurt_results = bleurt_metric.compute(
-            predictions=predictions, references=ground_truths
-        )
-        # Return mean score, same as line 358
-        return np.array(bleurt_results["scores"]).mean()
-        
-    except Exception as e:
-        print(f"Error calculating BLEURT scores: {e}")
-        return 0.0
+    # BLEURT disabled - returns 0.0
+    return 0.0
 
 def comprehensive_evaluation_ssvp(references: List[str], predictions: List[str]) -> Dict[str, Any]:
     """
@@ -228,7 +208,7 @@ def comprehensive_evaluation_ssvp(references: List[str], predictions: List[str])
             'total_samples': 0
         }
     
-    # Calculate all metrics using SSVP-SLT approach
+    # Calculate all metrics
     exact_match = exact_match_score(predictions, references)
     f1_metrics = calculate_f1_metrics(predictions, references)
     bleu_scores = calculate_bleu_scores_ssvp(predictions, references)

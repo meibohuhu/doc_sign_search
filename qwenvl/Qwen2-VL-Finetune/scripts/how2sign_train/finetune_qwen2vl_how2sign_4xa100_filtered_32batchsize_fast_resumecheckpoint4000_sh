@@ -10,9 +10,9 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=84:00:00
+#SBATCH --time=72:00:00
 #SBATCH --gpus-per-node=a100:4
-#SBATCH --partition tier3
+#SBATCH --partition scavenger
 #SBATCH --mem=256G
 
 spack load /lhqcen5
@@ -61,7 +61,8 @@ deepspeed src/train/train_sft.py \
     --video_max_pixels $((320 * 320)) \
     --fps 20 \
     --max_grad_norm 1.0 \
-    --learning_rate 5e-6 \
+    --learning_rate 2e-5 \
+    --lr_scheduler_type cosine_with_restarts \
     --logging_steps 1 \
     --save_steps 1000 \
     --save_total_limit 2 \
@@ -77,8 +78,8 @@ deepspeed src/train/train_sft.py \
     --lora_enable True \
     --lora_rank 32 \
     --lora_alpha 64 \
-    --vision_lr 5e-6 \
-    --merger_lr 5e-6 \
+    --vision_lr 1e-5 \
+    --merger_lr 2e-5 \
     --report_to none
 
 echo ""

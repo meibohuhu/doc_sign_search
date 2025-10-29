@@ -7,11 +7,11 @@
 #SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=16
-#SBATCH --time=04:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --time=02:00:00
 #SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
-#SBATCH --mem=64g
+#SBATCH --mem=32g
 
 spack load /lhqcen5
 spack load cuda@12.4.0/obxqih4
@@ -52,15 +52,17 @@ echo "Output Dir: $OUT_DIR"
 echo ""
 
 
-# Run evaluation with limited samples for testing
-# NOTE: Add --freeze-vision-tower flag if vision tower was frozen during training
+# Run evaluation
+# CRITICAL: FPS and resolution MUST match training settings!
+# How2Sign training: fps=18, 320x320
+# DailyMoth training: fps=12, 320x320
 /home/mh2803/miniconda3/envs/qwenvl/bin/python scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude.py \
     --checkpoint-path "$CHECKPOINT_PATH" \
     --model-base "$MODEL_BASE" \
     --video-folder "$VIDEO_FOLDER" \
     --question-file "$QUESTION_FILE" \
     --out-dir "$OUT_DIR" \
-    --max-samples 200 \
+    --max-samples 250 \
     --video-fps 12
 
 echo "🎉 Evaluation job completed!"

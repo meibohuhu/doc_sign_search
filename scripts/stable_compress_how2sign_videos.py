@@ -98,14 +98,14 @@ def detect_stable_crop_region(video_path, sample_frames=10):
     
     return (crop_x, crop_y, crop_w, crop_h)
 
-def stable_crop_to_square(frame, crop_region, target_size=224):
+def stable_crop_to_square(frame, crop_region, target_size=320):
     """
     Stable crop frame to square format using fixed region
     
     Args:
         frame: Input frame
         crop_region: Fixed crop region (x, y, w, h)
-        target_size: Target square size
+        target_size: Target square size (default 320 to match training)
     
     Returns:
         Square cropped frame
@@ -141,14 +141,14 @@ def stable_crop_to_square(frame, crop_region, target_size=224):
     
     return resized_frame
 
-def compress_video_stable(input_path, output_path, target_size=224, fps=24):
+def compress_video_stable(input_path, output_path, target_size=320, fps=24):
     """
     Compress video with stable cropping (no shaking)
     
     Args:
         input_path: Path to input video
         output_path: Path to output video
-        target_size: Target square size
+        target_size: Target square size (default 320 to match training)
         fps: Target FPS
     """
     try:
@@ -222,12 +222,12 @@ def main():
                        default="/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips",
                        help="Input directory containing videos")
     parser.add_argument("--output-dir", type=str,
-                       default="/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224",
+                       default="/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_320x320",
                        help="Output directory for compressed videos")
-    parser.add_argument("--size", type=int, default=224,
-                       help="Target square size (224x224)")
+    parser.add_argument("--size", type=int, default=320,
+                       help="Target square size (320x320, matches training config)")
     parser.add_argument("--fps", type=int, default=24,
-                       help="Target FPS")
+                       help="Target FPS (24 for How2Sign, 12 for DailyMoth)")
     parser.add_argument("--overwrite", action="store_true", default=False,
                        help="Overwrite existing files")
     parser.add_argument("--test-samples", type=int, default=0,

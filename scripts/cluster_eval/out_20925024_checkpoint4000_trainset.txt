@@ -1,0 +1,456 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_sample_100.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_sample_100.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+Freeze Vision Tower: False
+Video FPS: 12
+Min Pixels: 57600
+Max Pixels: 57600
+
+🚀 Loading model...
+🔓 Vision tower was UNFROZEN during training - loading from checkpoint
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+   Loading 824 parameters from checkpoint
+   Sample parameter keys: ['model.visual.patch_embed.proj.weight', 'model.visual.blocks.0.norm1.weight', 'model.visual.blocks.0.norm2.weight']
+✅ Loaded non-LoRA weights (vision tower + merger) successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 95 samples (from 100 total)
+📋 Processing 95 samples
+🎬 Starting evaluation on 95 videos...
+------------------------------------------------------------
+🔍 Video path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/--7E2sU6zP4_10-5-rgb_front.mp4
+🔍 Video exists: True
+Video: --7E2sU6zP4_10-5-rgb_front.mp4
+Ground truth: And I call them decorative elements because basically all they're meant to do is to enrich and color the page.
+Prediction: And I'm going to be flipping it over and basically I'm just going to kind of flip it around and kind of get the colors mixed up a little bit.
+------------------------------------------------------------
+🔍 Video path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/--7E2sU6zP4_11-5-rgb_front.mp4
+🔍 Video exists: True
+Video: --7E2sU6zP4_11-5-rgb_front.mp4
+Ground truth: So they don't really have much of a symbolic meaning other than maybe life is richer, life is beautiful, but they've become so beautifully stylized and so you find them in different illuminative being rendered in very different ways.
+Prediction: And they really don't have a lot of evidence to back up their claims, but they may have a life, they may have some kind of life insurance, or they may have an annuity, which is a type of insurance that pays out a certain amount of money in the event of your death.
+------------------------------------------------------------
+🔍 Video path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/--7E2sU6zP4_12-5-rgb_front.mp4
+🔍 Video exists: True
+Video: --7E2sU6zP4_12-5-rgb_front.mp4
+Ground truth: Now this is very, this is actually an insert of a kind of an envelope for stationary, and this is a very Italian design.
+Prediction: And then you can take a knife and cut it into little pieces, and then you can put it in a bag, and then put it in the freezer, and it'll stay in the freezer for about five days, and that's a really good way to do it.
+------------------------------------------------------------
+Video: --7E2sU6zP4_13-5-rgb_front.mp4
+Ground truth: This is all the you know, take off on the idea of the acanthus leaf.
+Prediction: This guy knows the idea of the alley oop.
+------------------------------------------------------------
+Video: --7E2sU6zP4_5-5-rgb_front.mp4
+Ground truth: It's almost has a feathery like posture to it.
+Prediction: And again, now we have the palm facing the same direction as the rest of the hand, and we're going to turn it towards us.
+------------------------------------------------------------
+Video: --7E2sU6zP4_6-5-rgb_front.mp4
+Ground truth: And so, it's used in architecture as a decorative element in architecture on columns and so on, and it's also used a great deal in illumination.
+Prediction: And then you're going to use a medium size brush, and you're just going to go all over the top of the decoupage glue, and then you're also going to use the same medium size brush that you used on the edges, and just go around the edge of your decoupage piece, and that's going to give you a really nice finished look.
+------------------------------------------------------------
+Video: --7E2sU6zP4_7-5-rgb_front.mp4
+Ground truth: And so what's happened with the idea of acanthus leaf, is that it has is taken on all these different creative looks.
+Prediction: There's a lot of different ideas out there about acupuncture and how it works and what kind of effects it has on the body.
+------------------------------------------------------------
+Video: --7E2sU6zP4_8-5-rgb_front.mp4
+Ground truth: And it has been wildly colored so you can look at some an acanthus leaf and you can start with the idea of a black and white drawing.
+Prediction: And it's also a great way to color and you can even cut it out and put it into a paper bag and give it as a gift.
+------------------------------------------------------------
+Video: --7E2sU6zP4_9-5-rgb_front.mp4
+Ground truth: Here, actually, I have some samples of traced acanthus leaves from different illuminated manuscripts.
+Prediction: Here's an example of a painting that I did in the abstract style, and the abstract style is where you don't necessarily have to have a specific subject matter in your painting.
+------------------------------------------------------------
+Video: --8pSDeC-fg_0-5-rgb_front.mp4
+Ground truth: Hi.
+Prediction: Hi!
+------------------------------------------------------------
+Video: --8pSDeC-fg_1-5-rgb_front.mp4
+Ground truth: My name is Dr. Art Bowler.
+Prediction: My name is Anthony Maddaloni and this has been how to cure chapped lips.
+------------------------------------------------------------
+Video: --8pSDeC-fg_10-5-rgb_front.mp4
+Ground truth: Are you always focused on the positive aspects of your physical self instead of the negative?
+Prediction: And ask them to give you feedback on how they feel about your behavior and their evaluation of your performance.
+------------------------------------------------------------
+Video: --8pSDeC-fg_11-5-rgb_front.mp4
+Ground truth: If so you have high self esteem.
+Prediction: If it's raining outside, you're probably going to stay inside and watch TV.
+------------------------------------------------------------
+Video: --8pSDeC-fg_12-5-rgb_front.mp4
+Ground truth: Low self esteem tends to bring us down and there's a set of thoughts or cognitions that tend to go with low self esteem.
+Prediction: I'm going to talk to you about how to buy a new car, and I'm going to tell you what to think about when you're buying a car, and how to get the best deal on the car that you want.
+------------------------------------------------------------
+Video: --8pSDeC-fg_13-5-rgb_front.mp4
+Ground truth: Such as I am unlove, unlovable and no one will like me.
+Prediction: This is me, I am not a lover of conflict, I am a lover of compromise.
+------------------------------------------------------------
+Video: --8pSDeC-fg_14-5-rgb_front.mp4
+Ground truth: By doing cognitive therapy and working on those thoughts, we can help our clients to feel better about themselves by gaining a more accurate appraisal of themselves, their situation and their environment.
+Prediction: It's important to do your homework, to research the work that you're going to be working on, to learn as much as you can about it, so that you can help your client feel more confident about the treatment that they're going to receive.
+------------------------------------------------------------
+Video: --8pSDeC-fg_15-5-rgb_front.mp4
+Ground truth: It's really important to notice if you have low self esteem because then you can do something about it.
+Prediction: It's very important to identify if you have a male or a female because it can help you with breeding.
+------------------------------------------------------------
+Video: --8pSDeC-fg_16-5-rgb_front.mp4
+Ground truth: This is Dr. Art Bowler and this has been how to tell if you have low self esteem.
+Prediction: This type is worn on the ankle, and this is how it's worn, if you have an ankle bracelet.
+------------------------------------------------------------
+Video: --8pSDeC-fg_2-5-rgb_front.mp4
+Ground truth: And I'm a psychologist in Manhattan, New York City, where I have my own private practice.
+Prediction: I am an artist in New York City and I have my own studio.
+------------------------------------------------------------
+Video: --8pSDeC-fg_3-5-rgb_front.mp4
+Ground truth: In this clip I'm going to talk about how to tell if you have low self esteem.
+Prediction: In this clip, I'm going to be talking about how to have a valentine's day date.
+------------------------------------------------------------
+Video: --8pSDeC-fg_4-5-rgb_front.mp4
+Ground truth: Low self esteem or a low feeling about oneself is unfortunately very common.
+Prediction: So hold on for a minute and I'm going to tell you about the benefits of self hypnosis and the benefits of hypnosis in general.
+------------------------------------------------------------
+Video: --8pSDeC-fg_5-5-rgb_front.mp4
+Ground truth: But fortunately it's very fixable.
+Prediction: Depending on how high you want to go.
+------------------------------------------------------------
+Video: --8pSDeC-fg_6-5-rgb_front.mp4
+Ground truth: When one has low self esteem, the way you can tell is look in the mirror.
+Prediction: When one person has the ball, they're the only one that can pass the ball or dribble the ball.
+------------------------------------------------------------
+Video: --8pSDeC-fg_7-5-rgb_front.mp4
+Ground truth: How do you feel about yourself?
+Prediction: How do you feel about yourself?
+------------------------------------------------------------
+Video: --8pSDeC-fg_8-5-rgb_front.mp4
+Ground truth: What do you see?
+Prediction: What do you want to see?
+------------------------------------------------------------
+Video: --8pSDeC-fg_9-5-rgb_front.mp4
+Ground truth: Do you see the positive parts of your personality or do you notice the negative?
+Prediction: So what you want to see from a tennis player is a lot of forehand ground strokes and a lot of backhand ground strokes.
+------------------------------------------------------------
+Video: --dANj_01AU_0-5-rgb_front.mp4
+Ground truth: In the side position, we're going to be palming and thumbing the sen lines on the legs.
+Prediction: In the side position, the ball is between your legs, and you're on your elbows and your forearms.
+------------------------------------------------------------
+Video: --dANj_01AU_1-5-rgb_front.mp4
+Ground truth: Now make sure your client is comfortable in the side position, supporting your head, knee supported, arms are resting in front comfortably.
+Prediction: In order to make sure that you get the maximum benefit from the massage, it's best to be in a relaxed state of mind and body.
+------------------------------------------------------------
+Video: --dANj_01AU_10-5-rgb_front.mp4
+Ground truth: I lift it up enough to make sure that I'm comfortable.
+Prediction: So, you want to be able to move around.
+------------------------------------------------------------
+Video: --dANj_01AU_11-5-rgb_front.mp4
+Ground truth: Come back and forth.
+Prediction: So, you're going to do a half step, and then a half step.
+------------------------------------------------------------
+Video: --dANj_01AU_12-5-rgb_front.mp4
+Ground truth: Always make sure you get a little thumbing in there too.
+Prediction: Make sure you get every little bit in there.
+------------------------------------------------------------
+Video: --dANj_01AU_13-5-rgb_front.mp4
+Ground truth: So we're going to start again on this one.
+Prediction: Drop and drop.
+------------------------------------------------------------
+Video: --dANj_01AU_14-5-rgb_front.mp4
+Ground truth: Place the thumb, place the thumb, just on the side of leg, and just kind of, you'll feel that you'll feel a little groove in there so you're not pressing up on any bones.
+Prediction: And then you can go ahead and do the same thing on the other side and just kind of have a little bit of a wavy look going on.
+------------------------------------------------------------
+Video: --dANj_01AU_15-5-rgb_front.mp4
+Ground truth: And just thumb up and pressing in the thumb in the area where, my fingerprint would be not on the tips of that stabbing her with my fingernails.
+Prediction: If you have a little bit of room around the perimeter of your yard, you might be able to get away with not having a fence, but if you have a lot of trees, a lot of bushes, or a lot of shrubbery, you're probably going to need a fence.
+------------------------------------------------------------
+Video: --dANj_01AU_16-5-rgb_front.mp4
+Ground truth: Be very mindful of that.
+Prediction: Take a shower, do whatever you need to do.
+------------------------------------------------------------
+Video: --dANj_01AU_17-5-rgb_front.mp4
+Ground truth: Coming in here and again, nice rocking back and forth, back and forth.
+Prediction: Let them know here, again, nice and firm, here, here, and here.
+------------------------------------------------------------
+Video: --dANj_01AU_18-5-rgb_front.mp4
+Ground truth: Not applying too much thumb pressure, to not only save your own thumbs but to not kind of over press on your client.
+Prediction: You don't have to spend a lot of money, you don't even have to spend any money at all, you can just go out and buy a bag of sand and you can make your own sand castles.
+------------------------------------------------------------
+Video: --dANj_01AU_19-5-rgb_front.mp4
+Ground truth: Back and forth.
+Prediction: Back and forth.
+------------------------------------------------------------
+Video: --dANj_01AU_2-5-rgb_front.mp4
+Ground truth: So starting with palming on sen lines with this leg.
+Prediction: So, start with the pliable clay.
+------------------------------------------------------------
+Video: --dANj_01AU_20-5-rgb_front.mp4
+Ground truth: Back and forth.
+Prediction: All around my house.
+------------------------------------------------------------
+Video: --dANj_01AU_21-5-rgb_front.mp4
+Ground truth: Always giving a little bit of Meta, a little loving kindness as you finish.
+Prediction: And that's how you fix a rip in a pair of jeans.
+------------------------------------------------------------
+Video: --dANj_01AU_3-5-rgb_front.mp4
+Ground truth: On the front leg you're going to be doing the outside.
+Prediction: On the front of the canoe it's going to be doing most of the work.
+------------------------------------------------------------
+Video: --dANj_01AU_4-5-rgb_front.mp4
+Ground truth: And on the inside leg closest to you, you're going to be doing the inside.
+Prediction: On the inside and on the outside and on the inside again.
+------------------------------------------------------------
+Video: --dANj_01AU_5-5-rgb_front.mp4
+Ground truth: So we're going to start with the inside leg first.
+Prediction: We're going to start in the inside and work our way out.
+------------------------------------------------------------
+Video: --dANj_01AU_6-5-rgb_front.mp4
+Ground truth: Placing the palm, placing the palm and then start in a nice rocking fashion.
+Prediction: Pulse and deepening and deepening until you get a nice rhythmic undulation of the feet.
+------------------------------------------------------------
+Video: --dANj_01AU_7-5-rgb_front.mp4
+Ground truth: Walking it up, rocking it down.
+Prediction: You walk down the lane, you hit a bad shot, you're out of position, you're too far off the line, whatever the case may be.
+------------------------------------------------------------
+Video: --dANj_01AU_8-5-rgb_front.mp4
+Ground truth: And you can do this as long or as short as the massage requires, time wise or your client's needs.
+Prediction: You can do this at any time of the day, you can do this when you wake up in the morning or when you go to sleep at night or even in the middle of the day.
+------------------------------------------------------------
+Video: --dANj_01AU_9-5-rgb_front.mp4
+Ground truth: Coming to the other one, and again, just in a nice rocking position.
+Prediction: Then turn the other way, all the way back again, just in a nice rocking motion.
+------------------------------------------------------------
+Video: -00cp1iGiDw_1-5-rgb_front.mp4
+Ground truth: If you like to find more about my services you can visit my website canineheadstart.com.
+Prediction: In this clip I'm going to talk about importing cars from Europe.
+------------------------------------------------------------
+Video: -00cp1iGiDw_10_11-5-rgb_front.mp4
+Ground truth: So that is one option. Another option is if you know your dog has fleas there is something called cap star and this is a product that is oral product.
+Prediction: That's one of the things that you need to be aware of, you need to know where your dog has left their leash, and that's something that you can always carry with you when you're out with your dog, and that is a leash.
+------------------------------------------------------------
+Video: -00cp1iGiDw_12-5-rgb_front.mp4
+Ground truth: It works right away and it will actually kill all of the fleas that are on the dog for the next 24 hours and it start working in about 30 minutes.
+Prediction: It can be very strong, it can be very aggressive, and it can be extremely dangerous to humans and other species of fish, and it's on the top of the list for the most dangerous fish in the world.
+------------------------------------------------------------
+Video: -00cp1iGiDw_13-5-rgb_front.mp4
+Ground truth: So if you taken your dog to a place or a friends house or to a training school and you believe that there are fleas there and your dog may have gotten fleas this is a great product to use when you are about to leave before you bring your dog to your home.
+Prediction: So if they take the dog and go to a place where the dog can't go to the bathroom, then the dog is going to learn to go in the house, and that's going to be a great way for you to get rid of the dog, because you're going to know where the dog is at all times, and you'll know if the dog needs to go out or not.
+------------------------------------------------------------
+Video: -00cp1iGiDw_14-5-rgb_front.mp4
+Ground truth: Again this is a oral preventive and this is also a oral preventive.
+Prediction: A lot of that is going to come down to the fact that they're going to be exposed to a lot of different bacteria and germs and they're also going to be eating a lot of raw foods.
+------------------------------------------------------------
+Video: -00cp1iGiDw_15-5-rgb_front.mp4
+Ground truth: We are going to be talking about external flea prevention in the next video.
+Prediction: And then we're going to be talking about the outside of the tire, the tread in the tire, and the tread pattern in the tire.
+------------------------------------------------------------
+Video: -00cp1iGiDw_2-5-rgb_front.mp4
+Ground truth: So we are going to be talking about flea prevention in this short video clip.
+Prediction: So, we're going to be talking about the left side of the bed in this segment and the right side in the next segment.
+------------------------------------------------------------
+Video: -00cp1iGiDw_3-5-rgb_front.mp4
+Ground truth: There are a number of products out there that you can use on your dog obviously one way to prevent fleas is not have you dog go out side but that is not really realistic.
+Prediction: Moving around the field, covering ground, getting out of the way of the runners, trying to get to the base as soon as possible, so that you can make the out at the end of the play.
+------------------------------------------------------------
+Video: -00cp1iGiDw_4-5-rgb_front.mp4
+Ground truth: So we are going to be talking about products that you can use to prevent fleas.
+Prediction: So, we're going to talk about the types of jobs that you can do as a freelance artist.
+------------------------------------------------------------
+Video: -00cp1iGiDw_5-5-rgb_front.mp4
+Ground truth: In the last of couple of years there has been a increase of different types of options out there that you can use.
+Prediction: In the game of baseball, every team is going to have a different type of player that they're going to need to have on their roster.
+------------------------------------------------------------
+Video: -00cp1iGiDw_6-5-rgb_front.mp4
+Ground truth: I'm just going to talk about three of the ones that are most commonly used and seems to be more effective.
+Prediction: I'm going to talk to you about three of the most common mistakes that people make when they're trying to learn how to speak in front of a group.
+------------------------------------------------------------
+Video: -00cp1iGiDw_7-5-rgb_front.mp4
+Ground truth: So there is something called sentinel and this is a monthly tablet and sentinel actually prevents not only fleas but heart worm as well and the come individually wrap packages.
+Prediction: So, somewhere along the way, they're going to get tangled, and that's when you're going to feel the tug of the line, and you're actually pulling the fish out of the water, and then you're just going to have to let it go, and let the fish go, and then move on to the next fish, and repeat the process.
+------------------------------------------------------------
+Video: -00cp1iGiDw_9-5-rgb_front.mp4
+Ground truth: cottion is the excess scalp of a flea so it doesn't kill the fleas but it prevents them from infesting or reproducing in your home.
+Prediction: This is the oil that's going to be in the engine and it's going to lubricate all the moving parts in the engine, but it's also going to create a seal between the cylinder and the piston.
+------------------------------------------------------------
+Video: -06_nJnhORg_0-5-rgb_front.mp4
+Ground truth: Some of the days that are the hardest are when, you know, I start out first thing in the morning and things just, like I woke up on the wrong side of the bed, or...or whatever, you know, type of phrase you want to use.
+Prediction: Some of the things that you need to make sure that you know before you start shopping for a gift is what is the purpose of the gift, what is the relationship between you and the person that you are buying the gift for, and what is the budget that you have for the gift.
+------------------------------------------------------------
+Video: -06_nJnhORg_1-5-rgb_front.mp4
+Ground truth: But things just don't go right from the very beginning.
+Prediction: The plant is doing well, everything is taking care of itself.
+------------------------------------------------------------
+Video: -06_nJnhORg_10-5-rgb_front.mp4
+Ground truth: I have lots of clients that want cleaning done Thursdays and Fridays, because they want it done right before the weekend.
+Prediction: I'm here to talk to you about what you want to do after you graduate from high school.
+------------------------------------------------------------
+Video: -06_nJnhORg_11-5-rgb_front.mp4
+Ground truth: So Thursdays are really jam-packed.
+Prediction: They're going to run away from you, they're going to try to get away from you.
+------------------------------------------------------------
+Video: -06_nJnhORg_12-5-rgb_front.mp4
+Ground truth: I've got three very big jobs, three very big houses that have, you know, three and four bathrooms, and, just large houses...so, that makes for a really long day.
+Prediction: I've got three of them, and they've been with me for years and years and years, and they're just huge, and they get really long, and they last a long time.
+------------------------------------------------------------
+Video: -06_nJnhORg_13-5-rgb_front.mp4
+Ground truth: And, I had one of those days where I just woke up and things just didn't want to go my way.
+Prediction: And I'm going to do one, two, three, all the way around, and I'm just going to go around and around and around until I'm done.
+------------------------------------------------------------
+Video: -06_nJnhORg_14-5-rgb_front.mp4
+Ground truth: So I...I continued to fight through it, fight through it...didn't feel real great.
+Prediction: So, we're going to keep going until we get the exact number that we need, and then we'll have a great harvest.
+------------------------------------------------------------
+Video: -06_nJnhORg_15-5-rgb_front.mp4
+Ground truth: So, got in the car, got to the first job, everything went, you know, okay....I was good, but I was still a little bit late.
+Prediction: I'm going to take my car, I'm going to drive it back to my house, I know where it is, and then I'll be back.
+------------------------------------------------------------
+Video: -06_nJnhORg_16-5-rgb_front.mp4
+Ground truth: So, got to the next job, and, you know, moving right along, and I go out to get some cleaning supplies out of my car, and it's locked.
+Prediction: O.k., let them know that you're going to go ahead and get them out of the house, get them away from all the stuff that's going on in their lives, and get them to a place where they're going to be safe.
+------------------------------------------------------------
+Video: -06_nJnhORg_17-5-rgb_front.mp4
+Ground truth: And I go to get my keys out of my little supply box, and they weren't in there, so, I, you know, look around for my keys, and, sure enough, they are locked in my car and I have no extras.
+Prediction: And I'm going to go ahead and get my keys out of the house, turn the TV off, turn the radio off, turn off the phone, and I'm just going to shut the door and lock it from the inside, and leave the key in the house, and turn the TV back on, turn the phone back on, and the radio back on, because I really don't want them to know that I'm gone.
+------------------------------------------------------------
+Video: -06_nJnhORg_18-5-rgb_front.mp4
+Ground truth: I have none at home, I have no extras, cause I have an extra key in my car, and I have my remote in my car.
+Prediction: I can't eat food, I can't move around, I don't have any energy, I have no motivation to do anything, and I have no will to do anything.
+------------------------------------------------------------
+Video: -06_nJnhORg_19-5-rgb_front.mp4
+Ground truth: And, so, that was kind of tough.
+Prediction: And I'm out of here with a happy dog.
+------------------------------------------------------------
+Video: -06_nJnhORg_2-5-rgb_front.mp4
+Ground truth: You get a late start, you, you know, get to the house and it's an extra big mess, and, you know, you just....one thing after the other just leads to a tough day of...of a long tough day working.
+Prediction: It gets everybody involved, it's a great icebreaker, and it's a lot of fun, and you can add a lot of different themes to it.
+------------------------------------------------------------
+Video: -06_nJnhORg_20-5-rgb_front.mp4
+Ground truth: So, I, you know, I had to just fight through the cleaning, and had to have a lock-smith come out and open my doors, and I had to go to another job.
+Prediction: I don't know if you've heard of it or not, but I have, and I have gone to all of them, and they're all pretty good.
+------------------------------------------------------------
+Video: -06_nJnhORg_21-5-rgb_front.mp4
+Ground truth: So, you know, sometimes when things just don't go your way...you know, you just have a rough day, and you go to bed that night and you hopefully wake up the next morning and.. and it's all better.
+Prediction: Just like that.
+------------------------------------------------------------
+Video: -06_nJnhORg_3-5-rgb_front.mp4
+Ground truth: Generally, I...I will schedule two to three houses a day, and if I get a late start then, you know, of course, that just delays the next job, and then the next job, and then it can be seven or eight at night when I get home.
+Prediction: The general rule of thumb is that if you're going to be cooking it for more than 10 minutes, you want to reduce the amount of salt that you put in, so if you're cooking it for 20 minutes, don't put in as much salt as you would if you were cooking it for just 5 minutes.
+------------------------------------------------------------
+Video: -06_nJnhORg_4_5-5-rgb_front.mp4
+Ground truth: And one thing that I like...I try not to do is to interfere with my client's family time as well. So, when I get a late start, and maybe I have a horrendous house that I had to clean and...and wasn't planning on it, then my day gets later and I start to intrude into their family time.
+Prediction: What I'm going to do is I'm not going to be the one who's going to get out of the way, I'm the one who is going to get in the way.
+------------------------------------------------------------
+Video: -06_nJnhORg_6_7-5-rgb_front.mp4
+Ground truth: And...and that makes it tough for me, I don't...I don't like to do that at all. So that's probably the hardest part, is, if I don't start my day right.
+Prediction: And boom, it's gone, and I don't even have to clean it up, because it's just paper, and I can just throw it away, if I don't need it anymore.
+------------------------------------------------------------
+Video: -06_nJnhORg_8-5-rgb_front.mp4
+Ground truth: So, I kind of have to mentally prepare myself for my day, so, that's probably the hardest day for me, is not preparing myself.
+Prediction: I don't know if you've ever had a dream where you wake up in the middle of the night and you feel like you've had a dream, but you can't remember what the dream was about.
+------------------------------------------------------------
+Video: -06_nJnhORg_9-5-rgb_front.mp4
+Ground truth: One of my toughest days are Thursdays.
+Prediction: One, and two, and three, and four, and five, and six, and seven, and eight, and nine, and ten, and eleven, and twelve, and thirteen, and fourteen.
+------------------------------------------------------------
+Video: -08ZGCviCm4_0-5-rgb_front.mp4
+Ground truth: Hello welcome my name is Julio Nutt and I am a master instructor of the Jim McLean Golf School in Miami, Florida.
+Prediction: Hi!
+------------------------------------------------------------
+Video: -08ZGCviCm4_1-5-rgb_front.mp4
+Ground truth: In this clip I am going to talk about a great drill that is really going to help you to shift your weight forward.
+Prediction: In this clip, we're going to talk about how to really move around your bar.
+------------------------------------------------------------
+Video: -08ZGCviCm4_2-5-rgb_front.mp4
+Ground truth: In golf you have got to learn to shift your weight forward in order to hit the ball and transfer your weight into your left side.
+Prediction: In the case of a tennis ball, you're going to hit it with the side of the racket, and that's going to give you the spin that you're looking for.
+------------------------------------------------------------
+Video: -08ZGCviCm4_3-5-rgb_front.mp4
+Ground truth: But many amateurs when hitting the ball they hang to the right side, they get their arms really close and tight to their bodies and they have a lot of difficulty transferring their weight into their left side.
+Prediction: Many, many years before I was born, my grandfather, who was born in 1900, went to school and learned how to read and write, and he taught it to his children, and they taught it to their children, and so on and so forth.
+------------------------------------------------------------
+Video: -08ZGCviCm4_4-5-rgb_front.mp4
+Ground truth: Just using a shaft would be a great drill to use because when we're throwing something forward we're throwing a Frisbee, if we're throwing a ball the natural motion is to throw the weight with it.
+Prediction: Just for fun, I'm going to go ahead and play around with it a little bit, but I'm always playing around with it, and I go back and forth, and I'm moving around with my partner, and we're moving around with our partner.
+------------------------------------------------------------
+Video: -08ZGCviCm4_5-5-rgb_front.mp4
+Ground truth: So right now I'm not going to think about hitting the golf ball, I'm going to think about throwing the shaft.
+Prediction: So now I'm thinking about turning and I'm going to turn all the way around off of my left foot, thinking about turning with my left foot.
+------------------------------------------------------------
+Video: -08ZGCviCm4_6-5-rgb_front.mp4
+Ground truth: So I'm going to get in my golf position and as I swing I am going to let the shot go as hard as I can and that is really going to help me develop the habit of throwing my weight.
+Prediction: I get in on my opponent's shot, and as they hit the ball, I'm going to hit it back to them, and that's going to give them a little bit of a challenge, because they're going to have to hit the ball back to me.
+------------------------------------------------------------
+Video: -08ZGCviCm4_7-5-rgb_front.mp4
+Ground truth: That is a great tip that I give to a lot of my students.
+Prediction: This is a great way for me to give you an overview of what I'm going to do.
+------------------------------------------------------------
+Video: -08ZGCviCm4_8-5-rgb_front.mp4
+Ground truth: When hitting the ball think about throwing the club and that is going to generate extension and weight transfer.
+Prediction: So when you hit the ball, you're going to hit the ball with the outside of the club, and then turn the club around and hit the ball on the backswing.
+------------------------------------------------------------
+Video: -08ZGCviCm4_9-5-rgb_front.mp4
+Ground truth: This is Julio Nutt at the Jim McLean Golf School.
+Prediction: This is the tip of the bat, the part that you hit the ball with.
+------------------------------------------------------------
+Video: -0BynF9TSNI_1-5-rgb_front.mp4
+Ground truth: Today I'm going to take you back into time and I'm going to show you one of my grandmother's favorite things to make the kids and that was sweet bruschetta.
+Prediction: Now I'm going to go back in time to show you my favorite color, which is a great blue.
+------------------------------------------------------------
+Video: -0BynF9TSNI_10-5-rgb_front.mp4
+Ground truth: This recipe what my grandmother use to do this and I hope you enjoy it, I hope you make it, it's really fun and fast.
+Prediction: The next step in preparing the plant for transplant is to do this and we're going to want to make sure that the plant is well watered before we put it in the ground.
+------------------------------------------------------------
+Video: -0BynF9TSNI_11-5-rgb_front.mp4
+Ground truth: The kids will love you for it.
+Prediction: It's a joke, but it's true, so don't do it.
+------------------------------------------------------------
+Video: -0BynF9TSNI_12-5-rgb_front.mp4
+Ground truth: I'll show you the ingredients, utensils it's literally 15 minutes and it's done.
+Prediction: And that's just some of the benefits of a natural nail versus a acrylic nail.
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/qwen2vl_checkpoint5000_results_20251029_102842.json
+
+📊 Calculating evaluation metrics...
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-Checkpoint-5000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0211
+  F1 Score:         0.2677
+  Precision:        0.2665
+  Recall:           0.2844
+  ROUGE-L F1:       0.2625
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2703
+  BLEU2: 0.1396
+  BLEU3: 0.0840
+  BLEU4: 0.0514
+
+📋 Summary:
+  Total Samples:    95
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251029_102842.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251029_102842.json
+
+🎯 Summary:
+   Total samples: 95
+   Successful: 95
+   Success rate: 100.0%
+🎉 Evaluation job completed!

@@ -1,0 +1,572 @@
+[
+  {
+    "video": "--7E2sU6zP4_10-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And I'm going to go ahead and basically just kind of blend it into the other colors and kind of blend them all together.",
+    "ground_truth": "And I call them decorative elements because basically all they're meant to do is to enrich and color the page."
+  },
+  {
+    "video": "--7E2sU6zP4_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And they're really, they're alive, they're animated, they may be moving, they may have a life, they may eat, they may drink, they may sleep, they may dream, they may die, and they may be reborn in different lifetimes.",
+    "ground_truth": "So they don't really have much of a symbolic meaning other than maybe life is richer, life is beautiful, but they've become so beautifully stylized and so you find them in different illuminative being rendered in very different ways."
+  },
+  {
+    "video": "--7E2sU6zP4_12-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's a backside 180 ollie, and then you land on the back of your board, and you finish it off with a kick turn.",
+    "ground_truth": "Now this is very, this is actually an insert of a kind of an envelope for stationary, and this is a very Italian design."
+  },
+  {
+    "video": "--7E2sU6zP4_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This guy doesn't know any of the ideas of the artists of the ages.",
+    "ground_truth": "This is all the you know, take off on the idea of the acanthus leaf."
+  },
+  {
+    "video": "--7E2sU6zP4_5-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Check again and now you have the palm facing away from you like this.",
+    "ground_truth": "It's almost has a feathery like posture to it."
+  },
+  {
+    "video": "--7E2sU6zP4_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And you're going to use the same kind of decorations that you used on the bottom of the cake, on the sides of the cake as well as on the top of the cake.",
+    "ground_truth": "And so, it's used in architecture as a decorative element in architecture on columns and so on, and it's also used a great deal in illumination."
+  },
+  {
+    "video": "--7E2sU6zP4_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "There's a lot of different ideas, different theories, and different approaches on different types of trees.",
+    "ground_truth": "And so what's happened with the idea of acanthus leaf, is that it has is taken on all these different creative looks."
+  },
+  {
+    "video": "--7E2sU6zP4_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And each one is a different color and you can look at the paper and you can kind of get an idea of what the image is going to look like.",
+    "ground_truth": "And it has been wildly colored so you can look at some an acanthus leaf and you can start with the idea of a black and white drawing."
+  },
+  {
+    "video": "--7E2sU6zP4_9-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Here, I've got a painting of a landscape from the 1700's, done by an unknown artist.",
+    "ground_truth": "Here, actually, I have some samples of traced acanthus leaves from different illuminated manuscripts."
+  },
+  {
+    "video": "--8pSDeC-fg_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi!",
+    "ground_truth": "Hi."
+  },
+  {
+    "video": "--8pSDeC-fg_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "My name is Sean Hobson.",
+    "ground_truth": "My name is Dr. Art Bowler."
+  },
+  {
+    "video": "--8pSDeC-fg_10-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Explain to them that the purpose of the test is to determine the level of alcohol in your system.",
+    "ground_truth": "Are you always focused on the positive aspects of your physical self instead of the negative?"
+  },
+  {
+    "video": "--8pSDeC-fg_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If it's too high, you're going to have a problem.",
+    "ground_truth": "If so you have high self esteem."
+  },
+  {
+    "video": "--8pSDeC-fg_12-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The first thing that we're going to talk about is bringing the bag down and thinking about the line of communication between you and the person that you're going to be speaking to.",
+    "ground_truth": "Low self esteem tends to bring us down and there's a set of thoughts or cognitions that tend to go with low self esteem."
+  },
+  {
+    "video": "--8pSDeC-fg_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And, I'm not the only one who believes that love is not a commodity that can be bought and sold.",
+    "ground_truth": "Such as I am unlove, unlovable and no one will like me."
+  },
+  {
+    "video": "--8pSDeC-fg_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "By doing homework, studying, working on projects, thinking, I can help myself, feeling better about myself, feeling more confident about myself, taking better care of myself.",
+    "ground_truth": "By doing cognitive therapy and working on those thoughts, we can help our clients to feel better about themselves by gaining a more accurate appraisal of themselves, their situation and their environment."
+  },
+  {
+    "video": "--8pSDeC-fg_15-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's very important that you identify if you have a male or a female because it can help you with breeding.",
+    "ground_truth": "It's really important to notice if you have low self esteem because then you can do something about it."
+  },
+  {
+    "video": "--8pSDeC-fg_16-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This type of romper is called a one button romper and this is how it's called if it has a button in the front.",
+    "ground_truth": "This is Dr. Art Bowler and this has been how to tell if you have low self esteem."
+  },
+  {
+    "video": "--8pSDeC-fg_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm the owner and chef of several restaurants in Austin, Texas.",
+    "ground_truth": "And I'm a psychologist in Manhattan, New York City, where I have my own private practice."
+  },
+  {
+    "video": "--8pSDeC-fg_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In this clip I'm going to be talking about how to judge a judge, if you have a judge that you don't like.",
+    "ground_truth": "In this clip I'm going to talk about how to tell if you have low self esteem."
+  },
+  {
+    "video": "--8pSDeC-fg_4-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you hold her hand, you let her know that you're with her, you don't want to be too close but you want to be close enough that she knows that you're there.",
+    "ground_truth": "Low self esteem or a low feeling about oneself is unfortunately very common."
+  },
+  {
+    "video": "--8pSDeC-fg_5-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Based on your financial situation.",
+    "ground_truth": "But fortunately it's very fixable."
+  },
+  {
+    "video": "--8pSDeC-fg_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "When one person has all the cards, that person wins the game.",
+    "ground_truth": "When one has low self esteem, the way you can tell is look in the mirror."
+  },
+  {
+    "video": "--8pSDeC-fg_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "How do you feel about yourself?",
+    "ground_truth": "How do you feel about yourself?"
+  },
+  {
+    "video": "--8pSDeC-fg_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "What do you see?",
+    "ground_truth": "What do you see?"
+  },
+  {
+    "video": "--8pSDeC-fg_9-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "What you want to see from an artist is an artist that has a lot of personality or a lot of showmanship.",
+    "ground_truth": "Do you see the positive parts of your personality or do you notice the negative?"
+  },
+  {
+    "video": "--dANj_01AU_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In the side position, you're going to be pelting any line.",
+    "ground_truth": "In the side position, we're going to be palming and thumbing the sen lines on the legs."
+  },
+  {
+    "video": "--dANj_01AU_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In order to make sure that you get the most out of the massage, the first thing you need to do is be honest with the massage therapist about any medical conditions that you may have.",
+    "ground_truth": "Now make sure your client is comfortable in the side position, supporting your head, knee supported, arms are resting in front comfortably."
+  },
+  {
+    "video": "--dANj_01AU_10-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to be able to move around.",
+    "ground_truth": "I lift it up enough to make sure that I'm comfortable."
+  },
+  {
+    "video": "--dANj_01AU_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Come up and over, come up and over.",
+    "ground_truth": "Come back and forth."
+  },
+  {
+    "video": "--dANj_01AU_12-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Make sure you get a little bit in there.",
+    "ground_truth": "Always make sure you get a little thumbing in there too."
+  },
+  {
+    "video": "--dANj_01AU_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Come back center.",
+    "ground_truth": "So we're going to start again on this one."
+  },
+  {
+    "video": "--dANj_01AU_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "They're going to walk away from you, they're going to slink away, they're just going to disappear, they're not going to feel comfortable around you.",
+    "ground_truth": "Place the thumb, place the thumb, just on the side of leg, and just kind of, you'll feel that you'll feel a little groove in there so you're not pressing up on any bones."
+  },
+  {
+    "video": "--dANj_01AU_15-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you can turn around in a circle and land on the same foot that you started on, then you're going to be on line with the rest of the dancers.",
+    "ground_truth": "And just thumb up and pressing in the thumb in the area where, my fingerprint would be not on the tips of that stabbing her with my fingernails."
+  },
+  {
+    "video": "--dANj_01AU_16-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Stay with me, I'm going to show you what to do next.",
+    "ground_truth": "Be very mindful of that."
+  },
+  {
+    "video": "--dANj_01AU_17-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Let them know here, again nice and firm, here, here, nice and firm.",
+    "ground_truth": "Coming in here and again, nice rocking back and forth, back and forth."
+  },
+  {
+    "video": "--dANj_01AU_18-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You don't even have to be in the middle of the interview, you can say, \"Hey, how are you doing?\" \"I'm doing well, thank you.\" \"Can I ask you a question?\" \"Yes.\" \"Are you going to be able to make it to the interview?\" \"Yes, I'm going to make it.\"",
+    "ground_truth": "Not applying too much thumb pressure, to not only save your own thumbs but to not kind of over press on your client."
+  },
+  {
+    "video": "--dANj_01AU_19-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Back and forth.",
+    "ground_truth": "Back and forth."
+  },
+  {
+    "video": "--dANj_01AU_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, let's start with the pliers, the lineman's pliers.",
+    "ground_truth": "So starting with palming on sen lines with this leg."
+  },
+  {
+    "video": "--dANj_01AU_20-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "All around my house.",
+    "ground_truth": "Back and forth."
+  },
+  {
+    "video": "--dANj_01AU_21-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And you just rub it all over the back of the jeans.",
+    "ground_truth": "Always giving a little bit of Meta, a little loving kindness as you finish."
+  },
+  {
+    "video": "--dANj_01AU_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On the front of the canoe you're going to be doing most of your paddling.",
+    "ground_truth": "On the front leg you're going to be doing the outside."
+  },
+  {
+    "video": "--dANj_01AU_4-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On the inside of the second, you're going to do the inside in.",
+    "ground_truth": "And on the inside leg closest to you, you're going to be doing the inside."
+  },
+  {
+    "video": "--dANj_01AU_5-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to start in the inside.",
+    "ground_truth": "So we're going to start with the inside leg first."
+  },
+  {
+    "video": "--dANj_01AU_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Back and forth, back and forth, nice rocking motion.",
+    "ground_truth": "Placing the palm, placing the palm and then start in a nice rocking fashion."
+  },
+  {
+    "video": "--dANj_01AU_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You walk around the field, you look for the pitcher, and you try to figure out what the pitcher is going to do.",
+    "ground_truth": "Walking it up, rocking it down."
+  },
+  {
+    "video": "--dANj_01AU_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can do this at any time of the day, you can do it in the morning when you wake up, in the evening when you come home from work, or even in the middle of the night.",
+    "ground_truth": "And you can do this as long or as short as the massage requires, time wise or your client's needs."
+  },
+  {
+    "video": "--dANj_01AU_9-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Then turn the other way, all the way around, just in a nice rocking position.",
+    "ground_truth": "Coming to the other one, and again, just in a nice rocking position."
+  },
+  {
+    "video": "-00cp1iGiDw_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you have any questions about my vineyard and winery, feel free to contact me.",
+    "ground_truth": "If you like to find more about my services you can visit my website canineheadstart.com."
+  },
+  {
+    "video": "-00cp1iGiDw_10_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "That's one of the advantages of any kind of game that you have a left side and a right side, because there's always someone on the court who's going to be playing the right side, and there's always going to be someone on the left side, and that person is going to be responsible for the right side.",
+    "ground_truth": "So that is one option. Another option is if you know your dog has fleas there is something called cap star and this is a product that is oral product."
+  },
+  {
+    "video": "-00cp1iGiDw_12-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "They can work all day, they can get really fatigued, they're really dedicated, they're all over the field, they're on the field all day long, they're in the dugout, they're working in the office, and they're working on the field.",
+    "ground_truth": "It works right away and it will actually kill all of the fleas that are on the dog for the next 24 hours and it start working in about 30 minutes."
+  },
+  {
+    "video": "-00cp1iGiDw_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, if they ask you, \"What's the best way to train your dog\", or \"How to get your dog to come when you call\", or \"The best way to discipline your dog\", the answer is, go to a dog trainer, or a dog behaviorist, and they're going to be able to give you great advice on how to go about it.",
+    "ground_truth": "So if you taken your dog to a place or a friends house or to a training school and you believe that there are fleas there and your dog may have gotten fleas this is a great product to use when you are about to leave before you bring your dog to your home."
+  },
+  {
+    "video": "-00cp1iGiDw_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And again, that's hot coffee, hot sauce, and also hot chocolate and hot coffee.",
+    "ground_truth": "Again this is a oral preventive and this is also a oral preventive."
+  },
+  {
+    "video": "-00cp1iGiDw_15-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And we're going to be talking about outdoor lighting safety in the next segment.",
+    "ground_truth": "We are going to be talking about external flea prevention in the next video."
+  },
+  {
+    "video": "-00cp1iGiDw_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, we're going to talk about the rules of the game before we begin the game.",
+    "ground_truth": "So we are going to be talking about flea prevention in this short video clip."
+  },
+  {
+    "video": "-00cp1iGiDw_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Moving in and out of the production zone, the quarterback is trying to get the ball to the running back or the tight end or the outside receiver so that they can score a touchdown for a touchdown.",
+    "ground_truth": "There are a number of products out there that you can use on your dog obviously one way to prevent fleas is not have you dog go out side but that is not really realistic."
+  },
+  {
+    "video": "-00cp1iGiDw_4-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, we're going to talk about the types of jobs that you can do as a freelance artist.",
+    "ground_truth": "So we are going to be talking about products that you can use to prevent fleas."
+  },
+  {
+    "video": "-00cp1iGiDw_5-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In the last segment we talked about the different types of jump ropes, the different ways to use jump ropes, and the different tricks that you can do with jump ropes.",
+    "ground_truth": "In the last of couple of years there has been a increase of different types of options out there that you can use."
+  },
+  {
+    "video": "-00cp1iGiDw_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to talk to you about the three kinds of jokes that are most commonly used in stand up comedy.",
+    "ground_truth": "I'm just going to talk about three of the ones that are most commonly used and seems to be more effective."
+  },
+  {
+    "video": "-00cp1iGiDw_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, somewhere along the way, they're going to get entangled, and that's going to be the start of the actual battle of the Lances, and then the rest of the game will progress from there.",
+    "ground_truth": "So there is something called sentinel and this is a monthly tablet and sentinel actually prevents not only fleas but heart worm as well and the come individually wrap packages."
+  },
+  {
+    "video": "-00cp1iGiDw_9-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This organic oil is going to penetrate into the follicle of the hair, but it's going to create a barrier that's going to prevent the dead skin cells from going into the hair shaft.",
+    "ground_truth": "cottion is the excess scalp of a flea so it doesn't kill the fleas but it prevents them from infesting or reproducing in your home."
+  },
+  {
+    "video": "-06_nJnhORg_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Some of the types of games that are played, one, you really have to know what you're talking about, and the first game that comes to mind is beer pong, and beer pong is basically a game where you have a bunch of beer bottles, and they're all set up in a line, and then you have beer pong cups, and you fill them up with beer, and you shoot the beer pong cups at the bottles, and if you hit the bottle, you get a point, and the person who gets the most points wins the beer pong game.",
+    "ground_truth": "Some of the days that are the hardest are when, you know, I start out first thing in the morning and things just, like I woke up on the wrong side of the bed, or...or whatever, you know, type of phrase you want to use."
+  },
+  {
+    "video": "-06_nJnhORg_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And that's the end of that segment.",
+    "ground_truth": "But things just don't go right from the very beginning."
+  },
+  {
+    "video": "-06_nJnhORg_10-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm here today to talk to you about what you want to do after you graduate from high school and enter the job market.",
+    "ground_truth": "I have lots of clients that want cleaning done Thursdays and Fridays, because they want it done right before the weekend."
+  },
+  {
+    "video": "-06_nJnhORg_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So you're going to go out there, you're really going to have to work at it, but you can do it.",
+    "ground_truth": "So Thursdays are really jam-packed."
+  },
+  {
+    "video": "-06_nJnhORg_12-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I've got three of them, and they've been with me for years and years and years, and they're just huge, and they make a really long lasting impression.",
+    "ground_truth": "I've got three very big jobs, three very big houses that have, you know, three and four bathrooms, and, just large houses...so, that makes for a really long day."
+  },
+  {
+    "video": "-06_nJnhORg_13-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And, I had one of those, where they're all the way around, and I just thought it was kind of cute, and I decided to do it that way.",
+    "ground_truth": "And, I had one of those days where I just woke up and things just didn't want to go my way."
+  },
+  {
+    "video": "-06_nJnhORg_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, we keep going until we get the exact number that we need and then we have a great harvest.",
+    "ground_truth": "So I...I continued to fight through it, fight through it...didn't feel real great."
+  },
+  {
+    "video": "-06_nJnhORg_15-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I canât tell you how many times Iâve taken my car to the mechanic and theyâve told me, âWeâre going to have to change your oil.",
+    "ground_truth": "So, got in the car, got to the first job, everything went, you know, okay....I was good, but I was still a little bit late."
+  },
+  {
+    "video": "-06_nJnhORg_16-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Ooh la la, they'll run away, they'll hide in the bushes, they'll get out of the way, they'll do whatever it takes to get away from you.",
+    "ground_truth": "So, got to the next job, and, you know, moving right along, and I go out to get some cleaning supplies out of my car, and it's locked."
+  },
+  {
+    "video": "-06_nJnhORg_17-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And everybody's got their own style, and my style, I guess, is just kind of running around and yelling at people, and running around the house, and yelling at the dog, and running out the door, and coming back in, and screaming at the kids, and running all over the place, and it's really lively.",
+    "ground_truth": "And I go to get my keys out of my little supply box, and they weren't in there, so, I, you know, look around for my keys, and, sure enough, they are locked in my car and I have no extras."
+  },
+  {
+    "video": "-06_nJnhORg_18-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I can't eat the food, I can't go out and have dinner with my friends, and I can't drive my car.",
+    "ground_truth": "I have none at home, I have no extras, cause I have an extra key in my car, and I have my remote in my car."
+  },
+  {
+    "video": "-06_nJnhORg_19-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And they go roaring like a lion.",
+    "ground_truth": "And, so, that was kind of tough."
+  },
+  {
+    "video": "-06_nJnhORg_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It gets everybody involved, it's a great icebreaker, and it adds a lot of fun to the party, and it's a long lasting memory that everyone will remember for a long time.",
+    "ground_truth": "You get a late start, you, you know, get to the house and it's an extra big mess, and, you know, you just....one thing after the other just leads to a tough day of...of a long tough day working."
+  },
+  {
+    "video": "-06_nJnhORg_20-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I don't know if you've heard of it or not, but I have been around the country and I have heard of it, and I have gone to all the state fairs and county fairs, and they all have it.",
+    "ground_truth": "So, I, you know, I had to just fight through the cleaning, and had to have a lock-smith come out and open my doors, and I had to go to another job."
+  },
+  {
+    "video": "-06_nJnhORg_21-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Just like that.",
+    "ground_truth": "So, you know, sometimes when things just don't go your way...you know, you just have a rough day, and you go to bed that night and you hopefully wake up the next morning and.. and it's all better."
+  },
+  {
+    "video": "-06_nJnhORg_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Generally speaking, there are two types of teaching styles, there is the direct and the indirect. If you get a hard-to-teach student, it's usually just a matter of matching your teaching style to the student's teaching style.",
+    "ground_truth": "Generally, I...I will schedule two to three houses a day, and if I get a late start then, you know, of course, that just delays the next job, and then the next job, and then it can be seven or eight at night when I get home."
+  },
+  {
+    "video": "-06_nJnhORg_4_5-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "What I like about it is I don't have to be in the middle of the court with my opponent, I can get out of the way of the shot, and if I get hit by the shot, I'm not going to get hurt because I'm not in the court, I'm out of the court.",
+    "ground_truth": "And one thing that I like...I try not to do is to interfere with my client's family time as well. So, when I get a late start, and maybe I have a horrendous house that I had to clean and...and wasn't planning on it, then my day gets later and I start to intrude into their family time."
+  },
+  {
+    "video": "-06_nJnhORg_6_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And everyone's reaction is, \"Oh, I feel like I'm at a birthday party,\" or \"Oh, that reminds me of when I was a kid,\" or \"That reminds me of my mom,\" or whatever.",
+    "ground_truth": "And...and that makes it tough for me, I don't...I don't like to do that at all. So that's probably the hardest part, is, if I don't start my day right."
+  },
+  {
+    "video": "-06_nJnhORg_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I can't remember who invented the game, but it's been around for a long time for me, and for my generation, and for the generation that came after us.",
+    "ground_truth": "So, I kind of have to mentally prepare myself for my day, so, that's probably the hardest day for me, is not preparing myself."
+  },
+  {
+    "video": "-06_nJnhORg_9-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "One of my favorite things to do is to hammer in a nail.",
+    "ground_truth": "One of my toughest days are Thursdays."
+  },
+  {
+    "video": "-08ZGCviCm4_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi, my name is Sylvia Russell, and I'm a beauty expert, and I teach you how to become a beauty expert.",
+    "ground_truth": "Hello welcome my name is Julio Nutt and I am a master instructor of the Jim McLean Golf School in Miami, Florida."
+  },
+  {
+    "video": "-08ZGCviCm4_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In this clip, we're going to talk about how to really move around the floor when you're dancing.",
+    "ground_truth": "In this clip I am going to talk about a great drill that is really going to help you to shift your weight forward."
+  },
+  {
+    "video": "-08ZGCviCm4_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In baseball you're going to hit the ball to the right side of the field, or the left side, or the center field.",
+    "ground_truth": "In golf you have got to learn to shift your weight forward in order to hit the ball and transfer your weight into your left side."
+  },
+  {
+    "video": "-08ZGCviCm4_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Many of them begin to run away from me, and all of a sudden, they're running away from each other, and they're running around in circles, and I'm really trying to get them to cross over to the other side of the pen.",
+    "ground_truth": "But many amateurs when hitting the ball they hang to the right side, they get their arms really close and tight to their bodies and they have a lot of difficulty transferring their weight into their left side."
+  },
+  {
+    "video": "-08ZGCviCm4_4-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Just for the T-shirt usage, it's a great exercise but I'm always somebody who goes to the gym, I go to the gym at least three times a week, I go running, I go swimming, I go biking, I go hiking, I go rock climbing, you name it, I do it.",
+    "ground_truth": "Just using a shaft would be a great drill to use because when we're throwing something forward we're throwing a Frisbee, if we're throwing a ball the natural motion is to throw the weight with it."
+  },
+  {
+    "video": "-08ZGCviCm4_5-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Now, I'm thinking about the other hand, and I'm going to turn my thought around, and think about the hand that I don't have.",
+    "ground_truth": "So right now I'm not going to think about hitting the golf ball, I'm going to think about throwing the shaft."
+  },
+  {
+    "video": "-08ZGCviCm4_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I get in on the attack, and the attack and the defense, I let him know that I'm coming, and I'm going to hit him as hard as I can, and he's going to try to get out of the way, but he's not going to be able to.",
+    "ground_truth": "So I'm going to get in my golf position and as I swing I am going to let the shot go as hard as I can and that is really going to help me develop the habit of throwing my weight."
+  },
+  {
+    "video": "-08ZGCviCm4_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi, this is John Stewart, and this is how I would give a speech.",
+    "ground_truth": "That is a great tip that I give to a lot of my students."
+  },
+  {
+    "video": "-08ZGCviCm4_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "When they hit the ball, they're going to hit the ball with the outside of their club head and that's going to create spin on the ball.",
+    "ground_truth": "When hitting the ball think about throwing the club and that is going to generate extension and weight transfer."
+  },
+  {
+    "video": "-08ZGCviCm4_9-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is Yolanda Vanveen from vanveenbulbs.com.",
+    "ground_truth": "This is Julio Nutt at the Jim McLean Golf School."
+  },
+  {
+    "video": "-0BynF9TSNI_1-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Now I'm going to go into nature to show you my favorite place to make this kind of sand castle, and that is the beach itself.",
+    "ground_truth": "Today I'm going to take you back into time and I'm going to show you one of my grandmother's favorite things to make the kids and that was sweet bruschetta."
+  },
+  {
+    "video": "-0BynF9TSNI_10-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is a piece that I picked up at a thrift shop, and I decided to do this piece, and I wanted to make sure that it was fun, and that it was something that would make people smile.",
+    "ground_truth": "This recipe what my grandmother use to do this and I hope you enjoy it, I hope you make it, it's really fun and fast."
+  },
+  {
+    "video": "-0BynF9TSNI_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Kids love them, adults love them, everybody loves them.",
+    "ground_truth": "The kids will love you for it."
+  },
+  {
+    "video": "-0BynF9TSNI_12-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And that's an example of an antonym, a word that has the opposite meaning of another word.",
+    "ground_truth": "I'll show you the ingredients, utensils it's literally 15 minutes and it's done."
+  }
+]

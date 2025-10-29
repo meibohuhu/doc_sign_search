@@ -1,0 +1,172 @@
+🎬 Qwen2VL Checkpoint-4000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-4000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips/
+Question File: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU: NVIDIA A100-PCIE-40GB
+💾 Memory: 42.3GB
+
+🚀 Loading model from checkpoint...
+   Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_how2sign_4xa100_filtered_32batchsize_fast/checkpoint-4000
+
+1️⃣ Loading base model...
+   ✅ Base model loaded
+
+2️⃣ Loading vision tower + merger...
+   File size: 6.99 GB
+   🔄 Loading checkpoint (this may take 30-60 seconds)...
+   ✅ Loaded 824 keys from disk
+
+   🔧 Cleaning key prefixes...
+   ✅ Cleaned 824 keys
+
+   📝 Sample cleaned keys:
+      - model.visual.patch_embed.proj.weight
+      - model.visual.blocks.0.norm1.weight
+      - model.visual.blocks.0.norm2.weight
+      - model.visual.blocks.0.attn.qkv.weight
+      - model.visual.blocks.0.attn.qkv.bias
+
+   📊 Components in checkpoint:
+      Vision tower: 390 keys
+      Merger: 5 keys
+      Total: 824 keys
+
+   ✅ Vision tower found!
+
+   🔄 Loading weights into model...
+      ✅ Loaded: 462/824 parameters
+      Missing: 362 (normal for LoRA)
+      Unexpected: 361
+
+   ✅ Vision parameters in model: 668,684,288
+      ✅ Vision tower fully loaded!
+
+3️⃣ Loading LoRA weights (LLM)...
+   ✅ LoRA loaded
+
+4️⃣ Loading processor...
+   ✅ Processor loaded
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+   🎯 Vision tower: TRAINED (from checkpoint) ✅
+   🎯 Merger: TRAINED (from checkpoint) ✅
+   🎯 LLM: TRAINED (via LoRA) ✅
+======================================================================
+
+📂 Loading test data from: /home/mh2803/projects/sign_language_llm/vanshika/asl_test/segmented_videos.json
+   Limited to 98 samples
+   Total samples: 98
+
+🎬 Starting evaluation...
+======================================================================
+
+
+──────────────────────────────────────────────────────────────────────
+[1/98] g3kFAmcBpFc_13-3-rgb_front.mp4
+Ground truth: Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.
+Prediction:   So, you can see that we've got a little bit of curl at the ends and it's just going to give us a little bit more volume and lift.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[2/98] FZLxEwsoc1c_8-8-rgb_front.mp4
+Ground truth: That's basically the explanation of a nap.
+Prediction:   And then you can go ahead and take your hands off of the floor, and just lift yourself up into a standing position.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/98] G2Go6a76xd0_2-5-rgb_front.mp4
+Ground truth: You need to think about your horse's temperament.
+Prediction:   So, you're going to take your hair and you're going to take your comb and you're going to comb it through the hair.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[4/98] G3k86AVFwVs_6-5-rgb_front.mp4
+Ground truth: Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.
+Prediction:   The other thing that you can do is if you're playing with your friends and you want to play a game of rock paper scissors, you can just say "rock, paper, scissors".
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[5/98] fZq8wTAYtmw_10-8-rgb_front.mp4
+Ground truth: That is how, essentially, you write a very, very well crafted drama screenplay.
+Prediction:   The more you practice, the better you'll be at it and the more fun it will be for you and your partner.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[6/98] g3pXM5X3_Xw_5-3-rgb_front.mp4
+Ground truth: Clean tools.
+Prediction:   Hi!
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[7/98] G3CyVk6dizw_0-5-rgb_front.mp4
+Ground truth: ALVIN DEDEUX: Okay, now, we're going to dub this hook.
+Prediction:   So, you're going to take your left hand and you're going to cross it over your right hand, and then you're going to bring it down.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[8/98] f_zna_wG3zo_2-10-rgb_front.mp4
+Ground truth: We're going to do two ounces of gin.
+Prediction:   So, you're going to go to your computer and you're going to type in www.google.com.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[9/98] _G0RrDVpOZ4_7-5-rgb_front.mp4
+Ground truth: And again taking them up and down.
+Prediction:   So, you're going to take your feet and you're going to bring them up to the side, and then you're going to bring them back down.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[10/98] g3ZluRtRXVc_3-3-rgb_front.mp4
+Ground truth: It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue.
+Prediction:   And then you can go ahead and put your mask on, and you're going to want to put it on for about 15 minutes, and then take it off, and then you're going to rinse it off with warm water.
+✅ Partial match (has some words)
+
+======================================================================
+✅ Results saved: /home/mh2803/projects/sign_language_llm/outputs/checkpoint4000_results_20251021_234537.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+Warning: Could not load BLEURT-20 metric: To be able to use evaluate-metric/bleurt, you need to install the following dependencies['bleurt'] using 'pip install git+https://github.com/google-research/bleurt.git' for instance'
+BLEURT-20 not available, skipping BLEURT evaluation
+
+============================================================
+EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0102
+  F1 Score:         0.1501
+  Precision:        0.1394
+  Recall:           0.1826
+  ROUGE-L F1:       0.1267
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1254
+  BLEU2: 0.0468
+  BLEU3: 0.0180
+  BLEU4: 0.0077
+
+📋 Summary:
+  Total Samples:    98
+============================================================
+
+📊 Metrics saved: /home/mh2803/projects/sign_language_llm/outputs/metrics_20251021_234537.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 98
+   Successful: 98
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+
+🎉 Evaluation job completed!

@@ -5,13 +5,13 @@
 # Using DeepSpeed ZeRO-3 for efficient multi-GPU training
 # Includes network timeout handling, offline fallback, and memory optimization
 
-#SBATCH --job-name=qwen2vl_how2sign_2xa100_filtered_256resolution
+#SBATCH --job-name=qwen2vl_how2sign_2xa100_short_clips_recipe
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
 #SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=48:00:00
+#SBATCH --time=10:00:00
 #SBATCH --gpus-per-node=a100:2
 #SBATCH --partition tier3
 #SBATCH --mem=256G
@@ -58,6 +58,16 @@ echo "Per-Device Batch Size: $BATCH_PER_DEVICE"
 echo "Gradient Accumulation Steps: $GRAD_ACCUM_STEPS"
 echo "Number of GPUs: $NUM_DEVICES"
 echo "Memory Optimization: PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True"
+echo ""
+echo "📋 TRAINING RECIPE CONFIGURATION:"
+echo "• Vision Tower: Frozen with top1 block unfrozen (unfreeze_topk_vision=1)"
+echo "• Merger + LoRA: Enabled"
+echo "• Learning Rate: 1e-4 (main), 5e-6 (vision), 1e-4 (merger)"
+echo "• Scheduler: Cosine with 0.05 warmup ratio"
+echo "• Weight Decay: 0.01"
+echo "• Label Smoothing: 0.0"
+echo "• Max Grad Norm: 1.0"
+echo "• Dataset: Short clips under 10s (24,880 clips - cleaned)"
 echo ""
 
 # Check if model is already cached
@@ -117,25 +127,28 @@ echo "🏃 Starting training with memory optimization..."
 deepspeed src/train/train_sft.py \
     --deepspeed scripts/zero3_qwen2vl.json \
     --model_id $MODEL_NAME \
-    --data_path /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.json \
+    --data_path /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/short_clips_under_10s.json \
     --image_folder /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/ \
-    --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_2xa100_filtered_256resolution/ \
+    --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_2xa100_short_clips_recipe/ \
     --num_train_epochs 3 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
-    --video_min_pixels $((256 * 256)) \
-    --video_max_pixels $((256 * 256)) \
+    --video_min_pixels $((224 * 224)) \
+    --video_max_pixels $((224 * 224)) \
     --fps 12 \
-    --max_grad_norm 1.0 \
-    --learning_rate 1e-5 \
+    --max_grad_norm 10.0 \
+    --learning_rate 3e-5 \
     --lr_scheduler_type cosine \
+    --warmup_steps 200 \
     --weight_decay 0.01 \
+    --label_smoothing 0.0 \
     --logging_steps 1 \
     --save_steps 1000 \
     --save_total_limit 2 \
     --max_steps 6000 \
     --use_liger True \
     --freeze_vision_tower False \
+    --unfreeze_topk_vision 1 \
     --freeze_llm True \
     --freeze_merger False \
     --bf16 True \
@@ -145,8 +158,8 @@ deepspeed src/train/train_sft.py \
     --lora_enable True \
     --lora_rank 32 \
     --lora_alpha 64 \
-    --vision_lr 2e-6 \
-    --merger_lr 1e-5 \
+    --vision_lr 5e-6 \
+    --merger_lr 5e-5 \
     --report_to none
 
 TRAINING_EXIT_CODE=$?

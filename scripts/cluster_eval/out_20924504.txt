@@ -1,0 +1,203 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU: NVIDIA A100-PCIE-40GB
+💾 Memory: 42.3GB
+
+🚀 Loading model from checkpoint...
+   Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+
+1️⃣ Loading base model...
+   ✅ Base model loaded
+
+2️⃣ Loading vision tower + merger...
+   File size: 6.99 GB
+   🔄 Loading checkpoint (this may take 30-60 seconds)...
+   ✅ Loaded 824 keys from disk
+
+   🔧 Cleaning key prefixes...
+   ✅ Cleaned 824 keys
+
+   📝 Sample cleaned keys:
+      - model.visual.patch_embed.proj.weight
+      - model.visual.blocks.0.norm1.weight
+      - model.visual.blocks.0.norm2.weight
+      - model.visual.blocks.0.attn.qkv.weight
+      - model.visual.blocks.0.attn.qkv.bias
+
+   📊 Components in checkpoint:
+      Vision tower: 390 keys
+      Merger: 5 keys
+      Total: 824 keys
+
+   ✅ Full vision tower found in checkpoint!
+
+   🔄 Loading weights into model...
+      ✅ Loaded: 462/824 parameters
+      Missing: 362 (normal for LoRA)
+      Unexpected: 361
+
+   📊 Vision parameters in model: 668,684,288
+      ✅ Full vision tower present (668,684,288 params)
+
+3️⃣ Loading LoRA weights (LLM)...
+   ✅ LoRA loaded
+
+4️⃣ Loading processor...
+   ✅ Processor loaded
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+   🎯 Vision tower: FULLY TRAINED
+   🎯 Merger: TRAINED (from checkpoint) ✅
+   🎯 LLM: TRAINED (via LoRA) ✅
+======================================================================
+
+📂 Loading test data from: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.json
+   Limited to 230 samples
+   Total samples: 230
+
+🎬 Starting evaluation...
+======================================================================
+
+
+──────────────────────────────────────────────────────────────────────
+[1/230] g3kFAmcBpFc_13-3-rgb_front.mp4
+Ground truth: Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.
+Prediction:   It's kind of like, you know, it's like, "oh, I'm going to be a vampire."
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[2/230] FZLxEwsoc1c_8-8-rgb_front.mp4
+Ground truth: That's basically the explanation of a nap.
+Prediction:   That's another thing about the backhand pass.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/230] G2Go6a76xd0_2-5-rgb_front.mp4
+Ground truth: You need to think about your horse's temperament.
+Prediction:   It's going to be a nice, rounded cow horn, like so.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[4/230] G3k86AVFwVs_6-5-rgb_front.mp4
+Ground truth: Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.
+Prediction:   And if you're going to break up your speech into parts, it's best to have a good transition between those parts.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[5/230] fZq8wTAYtmw_10-8-rgb_front.mp4
+Ground truth: That is how, essentially, you write a very, very well crafted drama screenplay.
+Prediction:   It's very important that you get your hands on as many of these as possible and practice them.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[6/230] g3pXM5X3_Xw_5-3-rgb_front.mp4
+Ground truth: Clean tools.
+Prediction:   Cheers.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[7/230] G3CyVk6dizw_0-5-rgb_front.mp4
+Ground truth: ALVIN DEDEUX: Okay, now, we're going to dub this hook.
+Prediction:   Okay, now we're going to do the dribbling.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[8/230] f_zna_wG3zo_2-10-rgb_front.mp4
+Ground truth: We're going to do two ounces of gin.
+Prediction:   So, you have to get out of that.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[9/230] _G0RrDVpOZ4_7-5-rgb_front.mp4
+Ground truth: And again taking them up and down.
+Prediction:   So, we're going to take this down.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[10/230] g3ZluRtRXVc_3-3-rgb_front.mp4
+Ground truth: It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue.
+Prediction:   So, you have to be able to tell who's on top and who's on bottom and that's how you tell who's on top and who's on bottom.
+✅ Partial match (has some words)
+
+======================================================================
+✅ Results saved: /home/mh2803/projects/sign_language_llm/outputs/checkpoint4000_results_20251027_233700.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+Error calculating BLEURT scores: Graph execution error:
+
+Detected at node bert/embeddings/LayerNorm/batchnorm/Rsqrt defined at (most recent call last):
+  File "/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude.py", line 392, in <module>
+
+  File "/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude.py", line 389, in main
+
+  File "/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude.py", line 327, in eval_model
+
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/home/mh2803/projects/sign_language_llm/evaluation/ssvp_evaluation.py", line 45, in <module>
+
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/evaluate/loading.py", line 769, in load
+
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/evaluate/module.py", line 706, in download_and_prepare
+
+  File "/home/mh2803/.cache/huggingface/modules/evaluate_modules/metrics/evaluate-metric--bleurt/98e148b2f8c4a88aba5037e4e0e90c9fd9ec35dc37a054ded8cfef0fa801ffab/bleurt.py", line 121, in _download_and_prepare
+
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/bleurt/score.py", line 172, in __init__
+
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/bleurt/score.py", line 62, in initialize
+
+JIT compilation failed.
+	 [[{{node bert/embeddings/LayerNorm/batchnorm/Rsqrt}}]] [Op:__inference_pruned_17629]
+
+============================================================
+EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0087
+  F1 Score:         0.1795
+  Precision:        0.1997
+  Recall:           0.1766
+  ROUGE-L F1:       0.1774
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2315
+  BLEU2: 0.1040
+  BLEU3: 0.0545
+  BLEU4: 0.0292
+
+📋 Summary:
+  Total Samples:    230
+============================================================
+
+📊 Metrics saved: /home/mh2803/projects/sign_language_llm/outputs/metrics_20251027_233700.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 230
+   Successful: 230
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+
+🎉 Evaluation job completed!
