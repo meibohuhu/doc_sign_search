@@ -29,6 +29,84 @@ except ImportError:
     MEDIAPIPE_AVAILABLE = False
     print("Warning: MediaPipe not available. Will use center-point prompt only.")
 
+# Try to import Mask2Former
+try:
+    from detectron2.config import get_cfg
+    from detectron2.engine import DefaultPredictor
+    from detectron2.model_zoo import model_zoo
+    from detectron2.utils.visualizer import Visualizer
+    from detectron2.data import MetadataCatalog
+    MASK2FORMER_AVAILABLE = True
+except ImportError:
+    MASK2FORMER_AVAILABLE = False
+    print("Warning: Detectron2/Mask2Former not available. Install with: pip install detectron2")
+
+
+class SegmentationBackend:
+    """Base class for different segmentation backends."""
+    
+    def segment(self, rgb_frame, bbox=None):
+        """
+        Segment a frame.
+        
+        Args:
+            rgb_frame: RGB frame
+            bbox: Optional bounding box (x, y, width, height)
+            
+        Returns:
+            np.ndarray: Binary mask (255 for foreground, 0 for background)
+        """
+        raise NotImplementedError
+
+
+class MediaPipeSegmentation(SegmentationBackend):
+    """MediaPipe Selfie Segmentation backend - fast and lightweight."""
+    
+    def __init__(self, device="cuda", model_selection=1, mask_threshold=0.5):
+        """
+        Initialize MediaPipe Selfie Segmentation.
+        
+        Args:
+            device: Device (not used for MediaPipe, kept for compatibility)
+            model_selection: 0=general model, 1=landscape model (better quality)
+            mask_threshold: Threshold for converting probability mask to binary (0.0-1.0)
+        """
+        if not MEDIAPIPE_AVAILABLE:
+            raise ImportError("MediaPipe is required for this backend")
+        self.mp_selfie_segmentation = mp.solutions.selfie_segmentation
+        self.model_selection = model_selection
+        self.mask_threshold = mask_threshold
+        self.selfie_segmentation = self.mp_selfie_segmentation.SelfieSegmentation(
+            model_selection=model_selection  # 0=general, 1=landscape (better quality)
+        )
+    
+    def segment(self, rgb_frame, bbox=None):
+        """Segment person using MediaPipe Selfie Segmentation."""
+        results = self.selfie_segmentation.process(rgb_frame)
+        mask = results.segmentation_mask
+        # Convert to binary mask using configurable threshold
+        mask = (mask > self.mask_threshold).astype(np.uint8) * 255
+        
+        # Post-process mask for smoother edges and better quality (same as SAM)
+        # Fill small holes
+        kernel_small = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel_small, iterations=2)
+        
+        # Remove small noise/artifacts
+        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel_small, iterations=1)
+        
+        # Smooth edges with larger kernel
+        kernel_large = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel_large, iterations=1)
+        
+        # Apply Gaussian blur for smoother edges
+        mask = cv2.GaussianBlur(mask, (7, 7), 1.0)
+        
+        # Re-threshold to maintain binary mask
+        _, mask = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
+        
+        return mask
+
 
 class SAMVideoProcessor:
     """
@@ -45,65 +123,155 @@ class SAMVideoProcessor:
     Uses Segment Anything Model (SAM) for precise segmentation.
     """
     
-    def __init__(self, sam_checkpoint, model_type="vit_h", device="cuda", 
-                 use_automatic_generator=True, stability_threshold=0.95):
+    def __init__(self, sam_checkpoint=None, model_type="vit_h", device="cuda", 
+                 use_automatic_generator=True, stability_threshold=0.95, 
+                 temporal_smoothing=0.7, remove_clothing=True, 
+                 segmentation_backend="sam",
+                 crop_scale=1.0, mediapipe_model_selection=1, 
+                 mediapipe_mask_threshold=0.5, mediapipe_pose_confidence=0.5,
+                 mediapipe_hands_confidence=0.5, mediapipe_face_confidence=0.5,
+                 brighten_face_hands=True, brightness_boost=1.3, background_color="black", 
+                 use_blurred_background=False, background_blur_size=51, background_brightness=0.1):
         """
-        Initialize SAM video processor.
+        Initialize video processor with multiple segmentation backend options.
         
         Args:
-            sam_checkpoint: Path to SAM model checkpoint
+            sam_checkpoint: Path to SAM model checkpoint (required for SAM backends)
             model_type: SAM model type ("vit_h", "vit_l", "vit_b")
             device: Device to use ("cuda" or "cpu")
-            use_automatic_generator: Use automatic mask generator (better quality)
+            use_automatic_generator: Use automatic mask generator (better quality, SAM only)
+            background_color: Background color for masked regions ("black", "gray", or "blurred"). 
+                             "blurred" uses blurred original background (best for ViT attention).
+            use_blurred_background: If True, use blurred original background instead of solid color.
+            background_blur_size: Gaussian blur kernel size for blurred background (default: 51).
+            background_brightness: Brightness multiplier for blurred background (0.0-1.0, default: 0.1).
             stability_threshold: Stability score threshold for mask filtering
+            temporal_smoothing: Temporal smoothing factor (0.0-1.0). Higher = more smoothing.
+                               0.7 means 70% previous frame + 30% current frame
+            remove_clothing: If True, remove clothing and keep only face, hands, exposed skin
+            segmentation_backend: Which backend to use:
+                                  - "sam": Standard SAM (default)
+                                  - "mediapipe": MediaPipe Selfie Segmentation (fastest)
+            crop_scale: Scale factor for bounding box size (1.0 = default, < 1.0 = smaller crop, > 1.0 = larger crop)
+            mediapipe_model_selection: MediaPipe model (0=general, 1=landscape) for selfie segmentation
+            mediapipe_mask_threshold: Threshold for MediaPipe mask (0.0-1.0, lower = more permissive)
+            mediapipe_pose_confidence: Confidence threshold for MediaPipe pose detection (0.0-1.0)
+            mediapipe_hands_confidence: Confidence threshold for MediaPipe hands detection (0.0-1.0)
+            mediapipe_face_confidence: Confidence threshold for MediaPipe face detection (0.0-1.0)
+            brighten_face_hands: If True, brighten face and hands regions (default: True)
+            brightness_boost: Brightness multiplier for face/hands (default: 1.3 = 30% brighter)
         """
         self.device = device if torch.cuda.is_available() and device == "cuda" else "cpu"
+        self.brighten_face_hands = brighten_face_hands
+        self.brightness_boost = brightness_boost
+        self.background_color = background_color.lower()
+        self.use_blurred_background = use_blurred_background or (background_color.lower() == "blurred")
+        self.background_blur_size = background_blur_size
+        self.background_brightness = background_brightness
         self.use_automatic_generator = use_automatic_generator
         self.stability_threshold = stability_threshold
+        self.temporal_smoothing = temporal_smoothing
+        self.remove_clothing = remove_clothing
+        self.segmentation_backend_name = segmentation_backend
+        self.crop_scale = crop_scale
         
-        if not SAM_AVAILABLE:
-            raise ImportError(
-                "Segment Anything Model is required.\n"
-                "Install with: pip install git+https://github.com/facebookresearch/segment-anything.git\n"
-                "Download checkpoints from: https://github.com/facebookresearch/segment-anything#model-checkpoints"
+        # Initialize temporal smoothing buffers
+        self.previous_mask = None
+        self.previous_bbox = None
+        self.smoothing_alpha = temporal_smoothing  # Weight for previous frame
+        
+        # Initialize segmentation backend
+        print(f"🚀 Loading segmentation backend: {segmentation_backend}...")
+        
+        if segmentation_backend == "mediapipe":
+            if not MEDIAPIPE_AVAILABLE:
+                raise ImportError("MediaPipe is required for mediapipe backend")
+            self.segmentation_backend = MediaPipeSegmentation(
+                device=self.device,
+                model_selection=mediapipe_model_selection,
+                mask_threshold=mediapipe_mask_threshold
             )
-        
-        print(f"🚀 Loading SAM model ({model_type}) on {self.device}...")
-        
-        # Load SAM model
-        try:
-            self.sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
-            self.sam.to(device=self.device)
-            self.sam.eval()
+            self.sam = None
+            self.predictor = None
+            self.mask_generator = None
+            print(f"✅ MediaPipe Selfie Segmentation loaded! (model={mediapipe_model_selection}, threshold={mediapipe_mask_threshold})")
             
-            if use_automatic_generator:
-                # Use automatic mask generator for better quality
-                self.mask_generator = SamAutomaticMaskGenerator(
-                    self.sam,
-                    points_per_side=32,
-                    pred_iou_thresh=0.9,
-                    stability_score_thresh=stability_threshold,
-                    crop_n_layers=1,
-                    crop_n_points_downscale_factor=2,
-                    min_mask_region_area=100,
+        elif segmentation_backend == "sam" or segmentation_backend is None:
+            # Default: Standard SAM
+            if not SAM_AVAILABLE:
+                raise ImportError(
+                    "Segment Anything Model is required.\n"
+                    "Install with: pip install git+https://github.com/facebookresearch/segment-anything.git\n"
+                    "Download checkpoints from: https://github.com/facebookresearch/segment-anything#model-checkpoints"
                 )
-            else:
-                # Use predictor for prompt-based segmentation
-                self.predictor = SamPredictor(self.sam)
+            if sam_checkpoint is None:
+                raise ValueError(
+                    "sam_checkpoint is required for SAM backend.\n"
+                    "Use --segmentation-backend mediapipe to skip SAM checkpoint requirement."
+                )
             
-            print("✅ SAM model loaded successfully!")
-        except Exception as e:
-            print(f"❌ Error loading SAM model: {e}")
-            raise
+            print(f"🚀 Loading SAM model ({model_type}) on {self.device}...")
+            
+            try:
+                self.sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
+                self.sam.to(device=self.device)
+                self.sam.eval()
+                
+                if use_automatic_generator:
+                    # Use automatic mask generator for better quality
+                    # Reduced points_per_side from 32 to 16 for faster processing
+                    # (32->16 reduces computation by ~4x: 32*32=1024 vs 16*16=256 points)
+                    print("⚠️  Using automatic mask generator (slower but better quality)")
+                    print("   If too slow, use --no-automatic for faster prompt-based mode")
+                    self.mask_generator = SamAutomaticMaskGenerator(
+                        self.sam,
+                        points_per_side=16,  # Reduced from 32 for speed
+                        pred_iou_thresh=0.88,  # Slightly lower for faster filtering
+                        stability_score_thresh=stability_threshold,
+                        crop_n_layers=1,
+                        crop_n_points_downscale_factor=2,
+                        min_mask_region_area=100,
+                    )
+                    self.predictor = None  # Not used in automatic mode
+                else:
+                    # Use predictor for prompt-based segmentation (much faster)
+                    print("⚡ Using prompt-based segmentation (faster)")
+                    self.predictor = SamPredictor(self.sam)
+                    self.mask_generator = None  # Not used in prompt mode
+                
+                self.segmentation_backend = None  # Use legacy SAM code
+                print("✅ SAM model loaded successfully!")
+            except Exception as e:
+                print(f"❌ Error loading SAM model: {e}")
+                raise
+        else:
+            raise ValueError(f"Unknown segmentation backend: {segmentation_backend}")
         
         # Initialize MediaPipe for upper body detection (optional)
+        self.mediapipe_pose_confidence = mediapipe_pose_confidence
+        self.mediapipe_hands_confidence = mediapipe_hands_confidence
+        self.mediapipe_face_confidence = mediapipe_face_confidence
+        
         if MEDIAPIPE_AVAILABLE:
             self.mp_pose = mp.solutions.pose
             self.pose = self.mp_pose.Pose(
                 static_image_mode=False,
-                min_detection_confidence=0.5,
-                min_tracking_confidence=0.5,
+                min_detection_confidence=self.mediapipe_pose_confidence,
+                min_tracking_confidence=self.mediapipe_pose_confidence,
                 model_complexity=1
+            )
+            # Add hands and face detection for clothing removal
+            self.mp_hands = mp.solutions.hands
+            self.hands = self.mp_hands.Hands(
+                static_image_mode=False,
+                max_num_hands=2,
+                min_detection_confidence=self.mediapipe_hands_confidence,
+                min_tracking_confidence=self.mediapipe_hands_confidence
+            )
+            self.mp_face = mp.solutions.face_detection
+            self.face_detector = self.mp_face.FaceDetection(
+                model_selection=0,
+                min_detection_confidence=self.mediapipe_face_confidence
             )
             self.use_mediapipe = True
         else:
@@ -112,7 +280,7 @@ class SAMVideoProcessor:
     def detect_upper_body_region(self, rgb_frame):
         """
         STEP 1: Detect Upper Body Region
-        Detects upper body bounding box for SAM prompt.
+        Detects upper body bounding box for SAM prompt with temporal smoothing.
         
         Args:
             rgb_frame: RGB frame from video
@@ -121,6 +289,7 @@ class SAMVideoProcessor:
             tuple: (x, y, width, height) bounding box or None
         """
         h, w = rgb_frame.shape[:2]
+        current_bbox = None
         
         if self.use_mediapipe:
             # Use MediaPipe pose to detect upper body
@@ -143,31 +312,58 @@ class SAMVideoProcessor:
                     x_min, x_max = int(min(xs)), int(max(xs))
                     y_min, y_max = int(min(ys)), int(max(ys))
                     
-                    # Add margin
-                    margin_x = int((x_max - x_min) * 0.1)
-                    margin_y = int((y_max - y_min) * 0.1)
+                    # Add margin (scaled by crop_scale)
+                    margin_x = int((x_max - x_min) * 0.1 * self.crop_scale)
+                    margin_y = int((y_max - y_min) * 0.1 * self.crop_scale)
                     
                     x = max(0, x_min - margin_x)
                     y = max(0, y_min - margin_y)
                     width = min(w - x, x_max - x_min + 2 * margin_x)
                     height = min(h - y, y_max - y_min + 2 * margin_y)
                     
-                    return x, y, width, height
+                    current_bbox = (x, y, width, height)
         
-        # Fallback: use center region (assumes signer is centered)
-        center_x, center_y = w // 2, h // 2
-        bbox_width = int(w * 0.6)  # 60% of width
-        bbox_height = int(h * 0.7)  # 70% of height
+        if current_bbox is None:
+            # Fallback: use center region (assumes signer is centered)
+            # For sign language videos, person is typically in upper-center
+            center_x = w // 2
+            center_y = int(h * 0.35)  # Upper third (for upper body)
+            # Apply crop_scale to default sizes
+            bbox_width = int(w * 0.7 * self.crop_scale)  # 70% of width (wider for arms) * scale
+            bbox_height = int(h * 0.65 * self.crop_scale)  # 65% of height (upper body) * scale
+            
+            x = center_x - bbox_width // 2
+            y = center_y - bbox_height // 3  # More space above than below
+            current_bbox = (x, y, bbox_width, bbox_height)
         
-        x = center_x - bbox_width // 2
-        y = center_y - bbox_height // 2
-        
-        return x, y, bbox_width, bbox_height
+        # Apply temporal smoothing to bounding box
+        if self.previous_bbox is not None and self.temporal_smoothing > 0:
+            prev_x, prev_y, prev_w, prev_h = self.previous_bbox
+            curr_x, curr_y, curr_w, curr_h = current_bbox
+            
+            # Smooth coordinates with exponential moving average
+            smooth_x = int(self.smoothing_alpha * prev_x + (1 - self.smoothing_alpha) * curr_x)
+            smooth_y = int(self.smoothing_alpha * prev_y + (1 - self.smoothing_alpha) * curr_y)
+            smooth_w = int(self.smoothing_alpha * prev_w + (1 - self.smoothing_alpha) * curr_w)
+            smooth_h = int(self.smoothing_alpha * prev_h + (1 - self.smoothing_alpha) * curr_h)
+            
+            # Ensure smoothed bbox stays within frame bounds
+            smooth_x = max(0, min(smooth_x, w - 1))
+            smooth_y = max(0, min(smooth_y, h - 1))
+            smooth_w = max(10, min(smooth_w, w - smooth_x))
+            smooth_h = max(10, min(smooth_h, h - smooth_y))
+            
+            smoothed_bbox = (smooth_x, smooth_y, smooth_w, smooth_h)
+            self.previous_bbox = smoothed_bbox
+            return smoothed_bbox
+        else:
+            self.previous_bbox = current_bbox
+            return current_bbox
     
     def segment_with_sam(self, rgb_frame, bbox=None, point_prompt=None):
         """
-        STEP 2: SAM Segmentation Pipeline
-        Segments the upper body region using SAM.
+        STEP 2: Segmentation Pipeline
+        Segments the upper body region using selected backend.
         
         Args:
             rgb_frame: RGB frame from video
@@ -179,27 +375,136 @@ class SAMVideoProcessor:
         """
         h, w = rgb_frame.shape[:2]
         
+        # Use backend if available (MediaPipe)
+        if self.segmentation_backend is not None:
+            mask = self.segmentation_backend.segment(rgb_frame, bbox=bbox)
+            
+            # Apply temporal smoothing for MediaPipe backend (same as SAM)
+            if self.previous_mask is not None and self.temporal_smoothing > 0:
+                # Check if previous mask has same dimensions
+                if self.previous_mask.shape == mask.shape:
+                    # Exponential moving average for mask smoothing
+                    mask_float = mask.astype(np.float32) / 255.0
+                    prev_mask_float = self.previous_mask.astype(np.float32) / 255.0
+                    smoothed_mask = (self.smoothing_alpha * prev_mask_float + 
+                                   (1 - self.smoothing_alpha) * mask_float)
+                    mask = (smoothed_mask * 255).astype(np.uint8)
+                
+                self.previous_mask = mask.copy()
+            else:
+                self.previous_mask = mask.copy()
+            
+            return mask
+        
+        # Legacy SAM code (for standard SAM backend)
         if self.use_automatic_generator:
             # Automatic mask generation (better quality, slower)
+            # Note: This can be very slow (several seconds per frame)
             masks = self.mask_generator.generate(rgb_frame)
             
             if not masks:
                 # Fallback: return empty mask
                 return np.zeros((h, w), dtype=np.uint8)
             
-            # Select the best mask (largest area, highest stability)
-            # Filter by stability score
+            # Select the best mask using multiple criteria
+            # Filter by stability score first
             valid_masks = [m for m in masks if m.get('stability_score', 0) >= self.stability_threshold]
             
             if not valid_masks:
-                # Use all masks if none meet threshold
+                # Lower threshold if no masks meet it
+                valid_masks = [m for m in masks if m.get('stability_score', 0) >= max(0.7, self.stability_threshold - 0.1)]
+            
+            if not valid_masks:
+                # Use all masks if still none meet threshold
                 valid_masks = masks
             
-            # Find the largest mask (likely the person)
-            best_mask = max(valid_masks, key=lambda m: m['area'])
+            if not valid_masks:
+                # Still no masks, return empty
+                return np.zeros((h, w), dtype=np.uint8)
+            
+            # Score masks using multiple criteria:
+            # 1. Area (larger is better, but not too large - person should be reasonable size)
+            # 2. Stability score
+            # 3. Overlap with bounding box if available
+            # 4. Position (center-biased for sign language videos)
+            frame_area = h * w
+            best_mask = None
+            best_score = -1
+            
+            for mask_data in valid_masks:
+                mask_seg = mask_data['segmentation']
+                area = mask_data['area']
+                stability = mask_data.get('stability_score', 0)
+                pred_iou = mask_data.get('predicted_iou', 0)
+                
+                # Calculate score components
+                # 1. Area score: prefer masks that are 5-50% of frame (reasonable person size)
+                area_ratio = area / frame_area
+                if area_ratio < 0.01:  # Too small
+                    area_score = 0
+                elif area_ratio > 0.7:  # Too large (likely background)
+                    area_score = 0
+                elif 0.05 <= area_ratio <= 0.5:  # Ideal range
+                    area_score = 1.0
+                else:
+                    area_score = 1.0 - abs(area_ratio - 0.2) * 2  # Falloff outside ideal
+                
+                # 2. Stability and IoU scores
+                quality_score = (stability * 0.6 + pred_iou * 0.4)
+                
+                # 3. Bbox overlap score if bbox provided
+                bbox_score = 1.0
+                if bbox:
+                    x, y, width, height = bbox
+                    bbox_mask = np.zeros((h, w), dtype=bool)
+                    bbox_mask[y:y+height, x:x+width] = True
+                    overlap = np.sum(mask_seg & bbox_mask) / max(1, np.sum(mask_seg))
+                    bbox_score = overlap
+                
+                # 4. Center position score (people usually centered in sign language videos)
+                mask_y_indices, mask_x_indices = np.where(mask_seg)
+                if len(mask_y_indices) > 0:
+                    center_y = np.mean(mask_y_indices) / h
+                    center_x = np.mean(mask_x_indices) / w
+                    # Prefer masks centered horizontally (0.3-0.7 of width) and upper-middle vertically
+                    center_score = (1.0 - abs(center_x - 0.5) * 2) * (1.0 - abs(center_y - 0.4) * 1.5)
+                    center_score = max(0, center_score)
+                else:
+                    center_score = 0
+                
+                # Combined score (weighted combination)
+                total_score = (
+                    area_score * 0.3 +
+                    quality_score * 0.4 +
+                    bbox_score * 0.2 +
+                    center_score * 0.1
+                )
+                
+                if total_score > best_score:
+                    best_score = total_score
+                    best_mask = mask_data
+            
+            # Fallback: if no mask found (shouldn't happen), use largest
+            if best_mask is None:
+                best_mask = max(valid_masks, key=lambda m: m['area'])
             
             # Convert to binary mask
             mask = best_mask['segmentation'].astype(np.uint8) * 255
+            
+            # Apply temporal smoothing to mask (for automatic mode)
+            if self.previous_mask is not None and self.temporal_smoothing > 0:
+                # Check if previous mask has same dimensions
+                if self.previous_mask.shape == mask.shape:
+                    # Exponential moving average for mask smoothing
+                    mask_float = mask.astype(np.float32) / 255.0
+                    prev_mask_float = self.previous_mask.astype(np.float32) / 255.0
+                    smoothed_mask = (self.smoothing_alpha * prev_mask_float + 
+                                   (1 - self.smoothing_alpha) * mask_float)
+                    mask = (smoothed_mask * 255).astype(np.uint8)
+                
+                self.previous_mask = mask.copy()
+            else:
+                self.previous_mask = mask.copy()
             
         else:
             # Prompt-based segmentation (faster, requires prompts)
@@ -235,49 +540,367 @@ class SAMVideoProcessor:
                     multimask_output=True,
                 )
             
-            # Select the mask with highest score
-            best_mask_idx = np.argmax(scores)
+            # Select the best mask using multiple criteria
+            best_mask_idx = 0
+            best_score = -1
+            
+            for idx, (mask_candidate, score, logit) in enumerate(zip(masks, scores, logits)):
+                mask_binary = mask_candidate.astype(np.uint8)
+                
+                # Calculate additional quality metrics
+                mask_area = np.sum(mask_binary)
+                frame_area = h * w
+                area_ratio = mask_area / frame_area
+                
+                # Penalize masks that are too small (< 1%) or too large (> 70%)
+                if area_ratio < 0.01 or area_ratio > 0.7:
+                    continue  # Skip obviously bad masks
+                
+                # If bbox provided, calculate overlap
+                bbox_score = 1.0
+                if bbox:
+                    x, y, width, height = bbox
+                    bbox_mask = np.zeros((h, w), dtype=bool)
+                    bbox_mask[y:y+height, x:x+width] = True
+                    overlap = np.sum(mask_binary & bbox_mask) / max(1, mask_area)
+                    bbox_score = overlap
+                    # Prefer masks with good bbox overlap
+                    if overlap < 0.3:
+                        continue  # Skip masks with poor bbox overlap
+                
+                # Combined score: model score + area appropriateness + bbox overlap
+                area_score = 1.0 if 0.05 <= area_ratio <= 0.5 else 0.8
+                combined_score = score * 0.5 + area_score * 0.2 + bbox_score * 0.3
+                
+                if combined_score > best_score:
+                    best_score = combined_score
+                    best_mask_idx = idx
+            
+            # Fallback: if no mask passed filters, use highest scoring one
+            if best_score == -1:
+                best_mask_idx = np.argmax(scores)
+            
             mask = masks[best_mask_idx].astype(np.uint8) * 255
+            
+            # Apply temporal smoothing to mask (for prompt-based mode)
+            if self.previous_mask is not None and self.temporal_smoothing > 0:
+                # Check if previous mask has same dimensions
+                if self.previous_mask.shape == mask.shape:
+                    # Exponential moving average for mask smoothing
+                    mask_float = mask.astype(np.float32) / 255.0
+                    prev_mask_float = self.previous_mask.astype(np.float32) / 255.0
+                    smoothed_mask = (self.smoothing_alpha * prev_mask_float + 
+                                   (1 - self.smoothing_alpha) * mask_float)
+                    mask = (smoothed_mask * 255).astype(np.uint8)
+                
+                self.previous_mask = mask.copy()
+            else:
+                self.previous_mask = mask.copy()
         
-        # Post-process mask for smoother edges
-        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
-        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+        # Post-process mask for smoother edges and better quality
+        # First, fill small holes in the mask
+        kernel_small = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel_small, iterations=2)
         
-        # Apply Gaussian blur for smoother edges
-        mask = cv2.GaussianBlur(mask, (5, 5), 0)
+        # Remove small noise/artifacts
+        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel_small, iterations=1)
+        
+        # Smooth edges with larger kernel
+        kernel_large = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel_large, iterations=1)
+        
+        # Apply Gaussian blur for smoother edges (reduces aliasing)
+        mask = cv2.GaussianBlur(mask, (7, 7), 1.0)
+        
+        # Re-threshold to maintain binary mask
         _, mask = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
+        
+        # Optional: dilate slightly to ensure we don't cut off edges
+        kernel_dilate = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+        mask = cv2.dilate(mask, kernel_dilate, iterations=1)
         
         return mask
     
-    def apply_mask(self, frame, mask):
+    def detect_body_parts_mask(self, rgb_frame, sam_mask):
+        """
+        Detect and create mask for body parts only (face, hands, arms skin) excluding clothing.
+        
+        Args:
+            rgb_frame: RGB frame
+            sam_mask: Binary mask from SAM (person segmentation)
+            
+        Returns:
+            np.ndarray: Binary mask for body parts only (255 for skin/body parts, 0 for clothing/background)
+        """
+        h, w = rgb_frame.shape[:2]
+        body_parts_mask = np.zeros((h, w), dtype=np.uint8)
+        
+        if not self.use_mediapipe:
+            # If MediaPipe not available, use simple skin color detection
+            return self.skin_color_detection(rgb_frame, sam_mask)
+        
+        # Convert RGB to BGR for OpenCV operations
+        frame_bgr = cv2.cvtColor(rgb_frame, cv2.COLOR_RGB2BGR)
+        frame_hsv = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2HSV)
+        
+        # 1. Detect and add face
+        face_results = self.face_detector.process(rgb_frame)
+        if face_results.detections:
+            for detection in face_results.detections:
+                bbox = detection.location_data.relative_bounding_box
+                x = int(bbox.xmin * w)
+                y = int(bbox.ymin * h)
+                width = int(bbox.width * w)
+                height = int(bbox.height * h)
+                # Expand slightly to include neck area
+                expand = 10
+                x = max(0, x - expand)
+                y = max(0, y - expand)
+                width = min(w - x, width + 2 * expand)
+                height = min(h - y, height + 2 * expand)
+                body_parts_mask[y:y+height, x:x+width] = 255
+        
+        # 2. Detect and add hands
+        hand_results = self.hands.process(rgb_frame)
+        if hand_results.multi_hand_landmarks:
+            for hand_landmarks in hand_results.multi_hand_landmarks:
+                # Get bounding box of hand landmarks
+                xs = [lm.x * w for lm in hand_landmarks.landmark]
+                ys = [lm.y * h for lm in hand_landmarks.landmark]
+                x_min, x_max = int(min(xs)), int(max(xs))
+                y_min, y_max = int(min(ys)), int(max(ys))
+                # Expand hand region
+                margin = 20
+                x_min = max(0, x_min - margin)
+                y_min = max(0, y_min - margin)
+                x_max = min(w, x_max + margin)
+                y_max = min(h, y_max + margin)
+                body_parts_mask[y_min:y_max, x_min:x_max] = 255
+        
+        # 3. Detect arms/neck using pose landmarks + skin color detection
+        pose_results = self.pose.process(rgb_frame)
+        if pose_results.pose_landmarks:
+            # Keypoints for arms and neck
+            # Left/Right shoulders, elbows, wrists, and neck area
+            keypoint_indices = {
+                'left_arm': [11, 13, 15],  # Left shoulder, elbow, wrist
+                'right_arm': [12, 14, 16],  # Right shoulder, elbow, wrist
+                'neck': [0, 2, 5, 7],  # Nose, eyes, ears (for neck region)
+            }
+            
+            landmarks = pose_results.pose_landmarks.landmark
+            arm_points = []
+            
+            # Collect arm keypoints
+            for idx in keypoint_indices['left_arm'] + keypoint_indices['right_arm']:
+                if idx < len(landmarks):
+                    lm = landmarks[idx]
+                    if lm.visibility > 0.5:
+                        arm_points.append((int(lm.x * w), int(lm.y * h)))
+            
+            # Create arm regions using skin color detection
+            if arm_points:
+                # Define arm region bounding box
+                if arm_points:
+                    xs = [p[0] for p in arm_points]
+                    ys = [p[1] for p in arm_points]
+                    x_min, x_max = max(0, min(xs) - 30), min(w, max(xs) + 30)
+                    y_min, y_max = max(0, min(ys) - 30), min(h, max(ys) + 30)
+                    
+                    # Use skin color detection in arm region
+                    arm_region = frame_bgr[y_min:y_max, x_min:x_max]
+                    if arm_region.size > 0:
+                        arm_skin_mask = self.skin_color_detection_small(arm_region)
+                        # Only keep skin regions that are within SAM mask
+                        arm_sam_mask = sam_mask[y_min:y_max, x_min:x_max]
+                        arm_skin_mask = arm_skin_mask & (arm_sam_mask > 0)
+                        body_parts_mask[y_min:y_max, x_min:x_max] = np.maximum(
+                            body_parts_mask[y_min:y_max, x_min:x_max],
+                            arm_skin_mask.astype(np.uint8) * 255
+                        )
+        
+        # 4. Use skin color detection for exposed skin areas within SAM mask
+        # This helps catch neck and other exposed skin areas
+        skin_mask = self.skin_color_detection(rgb_frame, sam_mask)
+        
+        # Combine: body parts mask + skin mask (within SAM mask)
+        combined_mask = np.maximum(body_parts_mask, skin_mask)
+        combined_mask = combined_mask & (sam_mask > 0)  # Only keep within SAM person mask
+        
+        return combined_mask
+    
+    def skin_color_detection(self, rgb_frame, sam_mask):
+        """
+        Detect skin color regions using HSV color space.
+        
+        Args:
+            rgb_frame: RGB frame
+            sam_mask: Binary mask to constrain search area
+            
+        Returns:
+            np.ndarray: Binary mask of skin regions
+        """
+        # Convert to HSV for better skin detection
+        frame_bgr = cv2.cvtColor(rgb_frame, cv2.COLOR_RGB2BGR)
+        frame_hsv = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2HSV)
+        
+        # HSV ranges for skin detection (works for various skin tones)
+        # Lower bound: hue 0-20, saturation > 40, value > 50
+        # Upper bound: hue 0-20, saturation < 255, value < 255
+        lower_skin1 = np.array([0, 40, 50], dtype=np.uint8)
+        upper_skin1 = np.array([20, 255, 255], dtype=np.uint8)
+        
+        # Also try another range for different lighting
+        lower_skin2 = np.array([0, 30, 60], dtype=np.uint8)
+        upper_skin2 = np.array([20, 255, 255], dtype=np.uint8)
+        
+        # Create masks
+        skin_mask1 = cv2.inRange(frame_hsv, lower_skin1, upper_skin1)
+        skin_mask2 = cv2.inRange(frame_hsv, lower_skin2, upper_skin2)
+        skin_mask = cv2.bitwise_or(skin_mask1, skin_mask2)
+        
+        # Only keep skin within SAM mask (person region)
+        skin_mask = cv2.bitwise_and(skin_mask, sam_mask)
+        
+        # Clean up noise
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+        skin_mask = cv2.morphologyEx(skin_mask, cv2.MORPH_OPEN, kernel, iterations=1)
+        skin_mask = cv2.morphologyEx(skin_mask, cv2.MORPH_CLOSE, kernel, iterations=2)
+        
+        return skin_mask
+    
+    def skin_color_detection_small(self, bgr_region):
+        """
+        Skin detection for a small region (faster).
+        
+        Args:
+            bgr_region: BGR image region
+            
+        Returns:
+            np.ndarray: Binary mask of skin regions
+        """
+        if bgr_region.size == 0:
+            return np.zeros((1, 1), dtype=np.uint8)
+        
+        frame_hsv = cv2.cvtColor(bgr_region, cv2.COLOR_BGR2HSV)
+        lower_skin = np.array([0, 40, 50], dtype=np.uint8)
+        upper_skin = np.array([20, 255, 255], dtype=np.uint8)
+        skin_mask = cv2.inRange(frame_hsv, lower_skin, upper_skin)
+        return skin_mask > 0
+    
+    def detect_face_hands_mask(self, rgb_frame):
+        """
+        Detect face and hands separately for highlighting.
+        
+        Args:
+            rgb_frame: RGB frame
+            
+        Returns:
+            np.ndarray: Binary mask for face and hands only (255 for face/hands, 0 otherwise)
+        """
+        h, w = rgb_frame.shape[:2]
+        face_hands_mask = np.zeros((h, w), dtype=np.uint8)
+        
+        if not self.use_mediapipe:
+            return face_hands_mask
+        
+        # 1. Detect and add face
+        face_results = self.face_detector.process(rgb_frame)
+        if face_results.detections:
+            for detection in face_results.detections:
+                bbox = detection.location_data.relative_bounding_box
+                x = int(bbox.xmin * w)
+                y = int(bbox.ymin * h)
+                width = int(bbox.width * w)
+                height = int(bbox.height * h)
+                # Expand slightly to include full face area
+                expand = 15
+                x = max(0, x - expand)
+                y = max(0, y - expand)
+                width = min(w - x, width + 2 * expand)
+                height = min(h - y, height + 2 * expand)
+                face_hands_mask[y:y+height, x:x+width] = 255
+        
+        # 2. Detect and add hands
+        hand_results = self.hands.process(rgb_frame)
+        if hand_results.multi_hand_landmarks:
+            for hand_landmarks in hand_results.multi_hand_landmarks:
+                # Get bounding box of hand landmarks
+                xs = [lm.x * w for lm in hand_landmarks.landmark]
+                ys = [lm.y * h for lm in hand_landmarks.landmark]
+                x_min, x_max = int(min(xs)), int(max(xs))
+                y_min, y_max = int(min(ys)), int(max(ys))
+                # Expand hand region more for better coverage
+                margin = 25
+                x_min = max(0, x_min - margin)
+                y_min = max(0, y_min - margin)
+                x_max = min(w, x_max + margin)
+                y_max = min(h, y_max + margin)
+                face_hands_mask[y_min:y_max, x_min:x_max] = 255
+        
+        return face_hands_mask
+    
+    def apply_mask(self, frame, mask, face_hands_mask=None, brightness_boost=1.3):
         """
         STEP 3: Apply Mask to Frame
-        Masks frame to keep only segmented region, black out background.
+        Masks frame to keep only segmented region, sets background.
+        Optionally brightens face and hands regions.
         
         Args:
             frame: Original frame (BGR)
             mask: Binary mask from SAM
+            face_hands_mask: Optional mask for face and hands (for brightening)
+            brightness_boost: Brightness multiplier for face/hands (default: 1.3 = 30% brighter)
             
         Returns:
-            np.ndarray: Masked frame with black background
+            np.ndarray: Masked frame with specified background
         """
-        masked_frame = frame.copy()
-        masked_frame[mask == 0] = 0
-        return masked_frame
+        masked_frame = frame.copy().astype(np.float32)
+        
+        # Set background based on configuration
+        if self.use_blurred_background:
+            # Use blurred original background (best for ViT attention)
+            # This preserves spatial context while keeping background subtle
+            blurred_bg = cv2.GaussianBlur(frame, (self.background_blur_size, self.background_blur_size), 0)
+            blurred_bg = (blurred_bg.astype(np.float32) * self.background_brightness).astype(np.uint8)
+            masked_frame[mask == 0] = blurred_bg[mask == 0]
+        elif self.background_color == "gray":
+            # Use gray background (128, 128, 128)
+            masked_frame[mask == 0] = [128, 128, 128]
+        else:
+            # Default: black background (0, 0, 0)
+            masked_frame[mask == 0] = [0, 0, 0]
+        
+        # Brighten face and hands if mask provided
+        if face_hands_mask is not None and np.any(face_hands_mask > 0):
+            # Only brighten areas that are both in mask and in face/hands regions
+            brighten_mask = (mask > 0) & (face_hands_mask > 0)
+            
+            # Apply brightness boost with clipping to prevent overflow
+            masked_frame[brighten_mask] = np.clip(
+                masked_frame[brighten_mask] * brightness_boost,
+                0, 255
+            )
+        
+        return masked_frame.astype(np.uint8)
     
-    def process_frame(self, frame):
+    def process_frame(self, frame, remove_clothing=True, brighten_face_hands=True, brightness_boost=1.3):
         """
-        Complete Pipeline: Input → Detection → SAM Segmentation → Masking → Output
+        Complete Pipeline: Input → Detection → SAM Segmentation → Clothing Removal → Brightening → Masking → Output
         
         Pipeline steps:
         1. Convert BGR to RGB
         2. Detect upper body region (MediaPipe or center-based)
         3. Segment with SAM (automatic or prompt-based)
-        4. Apply mask to frame (black background)
+        4. Remove clothing (keep only face, hands, exposed skin)
+        5. Detect face and hands for brightening
+        6. Apply mask to frame (black background) with optional brightening
         
         Args:
             frame: Input frame (BGR format)
+            remove_clothing: If True, remove clothing and keep only body parts
+            brighten_face_hands: If True, brighten face and hands regions
+            brightness_boost: Brightness multiplier for face/hands (default: 1.3 = 30% brighter)
             
         Returns:
             tuple: (masked_frame, mask)
@@ -288,11 +911,36 @@ class SAMVideoProcessor:
         # STEP 1: Detect upper body region for prompt
         bbox = self.detect_upper_body_region(rgb_frame)
         
-        # STEP 2: Segment with SAM
-        mask = self.segment_with_sam(rgb_frame, bbox=bbox)
+        # STEP 2: Segment with SAM (gets entire person including clothing)
+        sam_mask = self.segment_with_sam(rgb_frame, bbox=bbox)
         
-        # STEP 3: Apply mask
-        masked_frame = self.apply_mask(frame, mask)
+        # STEP 3: Remove clothing if requested
+        if remove_clothing:
+            body_parts_mask = self.detect_body_parts_mask(rgb_frame, sam_mask)
+            # Use body parts mask instead of full SAM mask
+            mask = body_parts_mask
+        else:
+            mask = sam_mask
+        
+        # STEP 4: Detect face and hands for brightening (if requested)
+        face_hands_mask = None
+        if brighten_face_hands:
+            face_hands_mask = self.detect_face_hands_mask(rgb_frame)
+        
+        # STEP 5: Apply mask with optional brightening
+        masked_frame = self.apply_mask(frame, mask, face_hands_mask, brightness_boost)
+        
+        # STEP 6: Ensure background has correct color (no noise)
+        # Double-check: any pixel outside mask should have the specified background
+        if self.use_blurred_background:
+            # Re-apply blurred background to ensure consistency
+            blurred_bg = cv2.GaussianBlur(frame, (self.background_blur_size, self.background_blur_size), 0)
+            blurred_bg = (blurred_bg.astype(np.float32) * self.background_brightness).astype(np.uint8)
+            masked_frame[mask == 0] = blurred_bg[mask == 0]
+        elif self.background_color == "gray":
+            masked_frame[mask == 0] = [128, 128, 128]
+        else:
+            masked_frame[mask == 0] = [0, 0, 0]
         
         return masked_frame, mask
     
@@ -331,16 +979,39 @@ class SAMVideoProcessor:
             mask_output_path = str(output_path).replace('.mp4', '_mask_vis.mp4')
             mask_out = cv2.VideoWriter(mask_output_path, fourcc, fps, (width, height))
         
+        # Reset temporal smoothing buffers for new video
+        self.previous_mask = None
+        self.previous_bbox = None
+        
         # Process frames
         frame_count = 0
-        with tqdm(total=total_frames, desc="Processing frames") as pbar:
+        print(f"📊 Processing {total_frames} frames...")
+        print(f"⚡ Mode: {'Automatic (SLOW - several seconds per frame)' if self.use_automatic_generator else 'Prompt-based (FAST)'}")
+        if self.temporal_smoothing > 0:
+            print(f"🎯 Temporal smoothing: {self.temporal_smoothing:.1%} (reduces shakiness)")
+        
+        with tqdm(total=total_frames, desc="Processing frames", unit="frame") as pbar:
             while cap.isOpened():
                 ret, frame = cap.read()
                 if not ret:
                     break
                 
+                # Update progress bar description with current frame
+                pbar.set_description(f"Processing frame {frame_count + 1}/{total_frames}")
+                
                 # Process frame
-                masked_frame, mask = self.process_frame(frame)
+                try:
+                    masked_frame, mask = self.process_frame(
+                        frame, 
+                        remove_clothing=self.remove_clothing,
+                        brighten_face_hands=self.brighten_face_hands,
+                        brightness_boost=self.brightness_boost
+                    )
+                except Exception as e:
+                    print(f"\n⚠️  Error processing frame {frame_count + 1}: {e}")
+                    # Continue with original frame if processing fails
+                    masked_frame = frame
+                    mask = np.ones((frame.shape[0], frame.shape[1]), dtype=np.uint8) * 255
                 
                 # Write masked frame
                 out.write(masked_frame)
@@ -353,6 +1024,10 @@ class SAMVideoProcessor:
                 
                 frame_count += 1
                 pbar.update(1)
+                
+                # Periodic status update every 10 frames
+                if frame_count % 10 == 0:
+                    pbar.set_postfix({"processed": f"{frame_count}/{total_frames}"})
         
         # Release resources
         cap.release()
@@ -391,8 +1066,8 @@ def main():
     parser.add_argument(
         "--sam-checkpoint",
         type=str,
-        required=True,
-        help="Path to SAM model checkpoint file"
+        default=None,
+        help="Path to SAM model checkpoint file (required for SAM backends)"
     )
     parser.add_argument(
         "--model-type",
@@ -400,6 +1075,13 @@ def main():
         default="vit_h",
         choices=["vit_h", "vit_l", "vit_b"],
         help="SAM model type (default: vit_h for best quality)"
+    )
+    parser.add_argument(
+        "--segmentation-backend",
+        type=str,
+        default="sam",
+        choices=["sam", "mediapipe"],
+        help="Segmentation backend: 'sam' (default) or 'mediapipe' (fastest)"
     )
     parser.add_argument(
         "--device",
@@ -420,6 +1102,54 @@ def main():
         help="Stability score threshold for mask filtering (default: 0.95)"
     )
     parser.add_argument(
+        "--temporal-smoothing",
+        type=float,
+        default=0.7,
+        help="Temporal smoothing factor (0.0-1.0) to reduce shakiness. Higher = more smoothing. Default: 0.7"
+    )
+    parser.add_argument(
+        "--keep-clothing",
+        action="store_true",
+        help="Keep clothing in output (default: remove clothing, keep only face/hands/skin)"
+    )
+    parser.add_argument(
+        "--crop-scale",
+        type=float,
+        default=1.0,
+        help="Scale factor for bounding box size (1.0 = default, < 1.0 = smaller crop, > 1.0 = larger crop). Default: 1.0"
+    )
+    parser.add_argument(
+        "--mediapipe-model-selection",
+        type=int,
+        default=1,
+        choices=[0, 1],
+        help="MediaPipe selfie segmentation model: 0=general, 1=landscape (better quality). Default: 1"
+    )
+    parser.add_argument(
+        "--mediapipe-mask-threshold",
+        type=float,
+        default=0.5,
+        help="MediaPipe mask threshold (0.0-1.0). Lower = more permissive. Default: 0.5"
+    )
+    parser.add_argument(
+        "--mediapipe-pose-confidence",
+        type=float,
+        default=0.5,
+        help="MediaPipe pose detection confidence threshold (0.0-1.0). Lower = more detections. Default: 0.5"
+    )
+    parser.add_argument(
+        "--mediapipe-hands-confidence",
+        type=float,
+        default=0.5,
+        help="MediaPipe hands detection confidence threshold (0.0-1.0). Lower = more detections. Default: 0.5"
+    )
+    parser.add_argument(
+        "--mediapipe-face-confidence",
+        type=float,
+        default=0.5,
+        help="MediaPipe face detection confidence threshold (0.0-1.0). Lower = more detections. Default: 0.5"
+    )
+    parser.add_argument(
         "--save-mask-vis",
         action="store_true",
         help="Also save mask visualization video"
@@ -430,22 +1160,87 @@ def main():
         default=None,
         help="Output video FPS (default: same as input)"
     )
+    parser.add_argument(
+        "--no-brighten-face-hands",
+        action="store_true",
+        help="Disable brightening of face and hands (default: enabled, brightens by 30%)"
+    )
+    parser.add_argument(
+        "--brightness-boost",
+        type=float,
+        default=1.3,
+        help="Brightness multiplier for face and hands (default: 1.3 = 30% brighter). Higher = brighter."
+    )
+    parser.add_argument(
+        "--background-color",
+        type=str,
+        default="black",
+        choices=["black", "gray", "blurred"],
+        help="Background type for masked regions (default: black). "
+             "Options: 'black' (pure black), 'gray' (gray), 'blurred' (blurred original background). "
+             "'blurred' is recommended for better ViT attention on face/hands."
+    )
+    parser.add_argument(
+        "--background-blur-size",
+        type=int,
+        default=51,
+        help="Gaussian blur kernel size for blurred background (default: 51, larger = more blur)."
+    )
+    parser.add_argument(
+        "--background-brightness",
+        type=float,
+        default=0.1,
+        help="Brightness multiplier for blurred background (0.0-1.0, default: 0.1 = 10% of original). "
+             "Lower = darker background."
+    )
     
     args = parser.parse_args()
     
-    # Check SAM availability
-    if not SAM_AVAILABLE:
+    # Check backend availability
+    if args.segmentation_backend == "sam" and not SAM_AVAILABLE:
         print("❌ Error: Segment Anything Model is not installed.")
         print("   Install with: pip install git+https://github.com/facebookresearch/segment-anything.git")
         print("   Download checkpoints from: https://github.com/facebookresearch/segment-anything#model-checkpoints")
         sys.exit(1)
     
-    # Check checkpoint file
-    checkpoint_path = Path(args.sam_checkpoint)
-    if not checkpoint_path.exists():
-        print(f"❌ Error: SAM checkpoint not found: {checkpoint_path}")
-        print("   Download checkpoints from: https://github.com/facebookresearch/segment-anything#model-checkpoints")
+    if args.segmentation_backend == "mediapipe" and not MEDIAPIPE_AVAILABLE:
+        print("❌ Error: MediaPipe is not installed.")
+        print("   Install with: pip install mediapipe")
         sys.exit(1)
+    
+    # Check checkpoint file (only required for SAM-based backends)
+    checkpoint_path = None
+    if args.segmentation_backend == "sam":
+        if args.sam_checkpoint is None:
+            print(f"❌ Error: --sam-checkpoint is required for '{args.segmentation_backend}' backend")
+            print(f"   💡 Tip: Use --segmentation-backend mediapipe to skip SAM checkpoint requirement")
+            sys.exit(1)
+        checkpoint_path = Path(args.sam_checkpoint)
+        if not checkpoint_path.exists():
+            print(f"❌ Error: SAM checkpoint not found: {checkpoint_path}")
+            print("   Download checkpoints from: https://github.com/facebookresearch/segment-anything#model-checkpoints")
+            print(f"   💡 Tip: Use --segmentation-backend mediapipe to skip SAM checkpoint requirement")
+            sys.exit(1)
+    elif args.segmentation_backend == "mediapipe":
+        # MediaPipe doesn't need checkpoint
+        checkpoint_path = None
+        if args.sam_checkpoint is not None:
+            print("⚠️  Warning: --sam-checkpoint is ignored when using MediaPipe backend")
+    
+    # Auto-detect model type from checkpoint filename if possible (only for SAM backends)
+    if checkpoint_path:
+        checkpoint_name = checkpoint_path.name.lower()
+        detected_model_type = None
+        for model_type in ["vit_h", "vit_l", "vit_b"]:
+            if f"sam_{model_type}" in checkpoint_name or f"_{model_type}_" in checkpoint_name:
+                detected_model_type = model_type
+                break
+        
+        # Use detected model type if it differs from user input
+        if detected_model_type and detected_model_type != args.model_type:
+            print(f"⚠️  Warning: Detected model type '{detected_model_type}' from checkpoint filename,")
+            print(f"   but you specified '{args.model_type}'. Using '{detected_model_type}' instead.")
+            args.model_type = detected_model_type
     
     # Resolve input path
     input_path = Path(args.input)
@@ -470,19 +1265,52 @@ def main():
     print("=" * 60)
     print(f"Input:  {input_path}")
     print(f"Output: {output_path}")
-    print(f"Model:  {args.model_type}")
+    print(f"Backend: {args.segmentation_backend}")
+    if checkpoint_path:
+        print(f"Model:  {args.model_type}")
     print(f"Device: {args.device}")
-    print(f"Mode:   {'Automatic' if not args.no_automatic else 'Prompt-based'}")
+    if args.segmentation_backend == "sam":
+        print(f"Mode:   {'Automatic' if not args.no_automatic else 'Prompt-based'}")
+    print(f"Clothing: {'Keep' if args.keep_clothing else 'Remove (face/hands/skin only)'}")
+    if args.crop_scale != 1.0:
+        print(f"Crop Scale: {args.crop_scale:.2f} ({'smaller' if args.crop_scale < 1.0 else 'larger'} crop)")
+    brighten_enabled = not args.no_brighten_face_hands
+    print(f"Brighten Face/Hands: {'Enabled' if brighten_enabled else 'Disabled'}")
+    if brighten_enabled:
+        print(f"Brightness Boost: {args.brightness_boost:.2f}x ({int((args.brightness_boost - 1) * 100)}% brighter)")
+    print(f"Background Color: {args.background_color}")
+    if args.background_color == "blurred":
+        print(f"  Blur Size: {args.background_blur_size}, Brightness: {args.background_brightness:.2f} (recommended for ViT attention)")
+    elif args.background_color == "gray":
+        print(f"  (may help with ViT attention)")
+    if args.segmentation_backend == "mediapipe":
+        print(f"MediaPipe Model: {args.mediapipe_model_selection} ({'general' if args.mediapipe_model_selection == 0 else 'landscape'})")
+        print(f"MediaPipe Mask Threshold: {args.mediapipe_mask_threshold:.2f}")
+        print(f"MediaPipe Confidences: pose={args.mediapipe_pose_confidence:.2f}, hands={args.mediapipe_hands_confidence:.2f}, face={args.mediapipe_face_confidence:.2f}")
     print("-" * 60)
     
     # Initialize processor
     try:
         processor = SAMVideoProcessor(
-            sam_checkpoint=str(checkpoint_path),
+            sam_checkpoint=str(checkpoint_path) if checkpoint_path else None,
             model_type=args.model_type,
             device=args.device,
             use_automatic_generator=not args.no_automatic,
-            stability_threshold=args.stability_threshold
+            stability_threshold=args.stability_threshold,
+            temporal_smoothing=args.temporal_smoothing,
+            remove_clothing=not args.keep_clothing,
+            segmentation_backend=args.segmentation_backend,
+            crop_scale=args.crop_scale,
+            mediapipe_model_selection=args.mediapipe_model_selection,
+            mediapipe_mask_threshold=args.mediapipe_mask_threshold,
+            mediapipe_pose_confidence=args.mediapipe_pose_confidence,
+            mediapipe_hands_confidence=args.mediapipe_hands_confidence,
+            mediapipe_face_confidence=args.mediapipe_face_confidence,
+            brighten_face_hands=not args.no_brighten_face_hands,
+            brightness_boost=args.brightness_boost,
+            background_color=args.background_color,
+            background_blur_size=args.background_blur_size,
+            background_brightness=args.background_brightness
         )
         
         # Process video
