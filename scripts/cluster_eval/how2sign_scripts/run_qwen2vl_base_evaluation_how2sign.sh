@@ -8,9 +8,9 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=09:35:00
+#SBATCH --time=00:45:00
 #SBATCH --gpus-per-node=a100:1
-#SBATCH --partition scavenger
+#SBATCH --partition tier3
 #SBATCH --mem=64g
 
 spack load /lhqcen5
@@ -34,7 +34,7 @@ cd /home/mh2803/projects/sign_language_llm
 # Configuration for How2Sign dataset
 MODEL_BASE="Qwen/Qwen2.5-VL-3B-Instruct"
 VIDEO_FOLDER="/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/"
-QUESTION_FILE="/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.json"
+QUESTION_FILE="/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json"
 OUT_DIR="/home/mh2803/projects/sign_language_llm/outputs/how2sign_base/"
 
 echo "🎬 Qwen2.5-VL-3B-Instruct BASE Model Evaluation on How2Sign"
@@ -55,8 +55,8 @@ mkdir -p "$OUT_DIR"
     --video-folder "$VIDEO_FOLDER" \
     --question-file "$QUESTION_FILE" \
     --out-dir "$OUT_DIR" \
-    --max-samples 1300 \
+    --max-samples 18 \
     --enable-evaluation \
-    --video-fps 12
+    --video-fps 18
 
 echo "🎉 BASE model evaluation job completed!"

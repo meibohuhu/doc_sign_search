@@ -1,0 +1,176 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU: NVIDIA A100-PCIE-40GB
+💾 Memory: 42.3GB
+
+🚀 Loading model from checkpoint...
+   Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+
+1️⃣ Loading base model...
+   ✅ Base model loaded
+
+2️⃣ Loading vision tower + merger...
+   File size: 6.99 GB
+   🔄 Loading checkpoint (this may take 30-60 seconds)...
+   ✅ Loaded 824 keys from disk
+
+   🔧 Cleaning key prefixes...
+   ✅ Cleaned 824 keys
+
+   📝 Sample cleaned keys:
+      - model.visual.patch_embed.proj.weight
+      - model.visual.blocks.0.norm1.weight
+      - model.visual.blocks.0.norm2.weight
+      - model.visual.blocks.0.attn.qkv.weight
+      - model.visual.blocks.0.attn.qkv.bias
+
+   📊 Components in checkpoint:
+      Vision tower: 390 keys
+      Merger: 5 keys
+      Total: 824 keys
+
+   ✅ Full vision tower found in checkpoint!
+
+   🔄 Loading weights into model...
+      ✅ Loaded: 462/824 parameters
+      Missing: 362 (normal for LoRA)
+      Unexpected: 361
+
+   📊 Vision parameters in model: 668,684,288
+      ✅ Full vision tower present (668,684,288 params)
+
+3️⃣ Loading LoRA weights (LLM)...
+   ✅ LoRA loaded
+
+4️⃣ Loading processor...
+   ✅ Processor loaded
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+   🎯 Vision tower: FULLY TRAINED
+   🎯 Merger: TRAINED (from checkpoint) ✅
+   🎯 LLM: TRAINED (via LoRA) ✅
+======================================================================
+
+📂 Loading test data from: /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.sample120.json
+   Limited to 110 samples
+   Total samples: 110
+
+🎬 Starting evaluation...
+======================================================================
+
+
+──────────────────────────────────────────────────────────────────────
+[1/110] 1L0GSTIb9Vs_4-5-rgb_front.mp4
+Ground truth: The male of the species is white with black wings and very very long tail feathers.
+Prediction:   Now the man's going to turn his hips, turn his shoulders, turn his chest, turn his head, all the way to the left side, and then back to the center.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[2/110] 0rsdwK7sHjE_18-5-rgb_front.mp4
+Ground truth: If you want to dry it, you can put a fan on it.
+Prediction:   If there's a lot of wind, you're going to want to wait until the wind dies down a little bit.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/110] 1Tix6cnQko4_11-5-rgb_front.mp4
+Ground truth: So as you bend, you're going to press into the floor.
+Prediction:   The next step is going to be placing the glass on the floor.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[4/110] BJIygZtYwXM_13-3-rgb_front.mp4
+Ground truth: That just looks gloomy.
+Prediction:   Look how pretty that is.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[5/110] -dXU26rkB7I_12-5-rgb_front.mp4
+Ground truth: If you over mix it, your cookies will run.
+Prediction:   If you over mix it, your cookies will run.
+✅ EXACT MATCH!
+
+──────────────────────────────────────────────────────────────────────
+[6/110] 00Cal635Wno_14-5-rgb_front.mp4
+Ground truth: But once it's on there, it's nice and stiff and you're good to go, that's your float head.
+Prediction:   Now, the backhand spring is going to be a lot easier for you if you've got a nice spring in your legs.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[7/110] dzctDQsw2dk_6-8-rgb_front.mp4
+Ground truth: And then we will return, remove the mask and add the final touches which will be a hydrating creme.
+Prediction:   It's basically the same thing, you're going to add the water and the sugar and then you're just going to mix it all up.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[8/110] 47yGbJ5YDYk_3-5-rgb_front.mp4
+Ground truth: And the third part the hammer or the striker or the beater or the metal stick that you hit it with.
+Prediction:   This is the key part of it, this is the part of it that you want to get out of the shape that you want it to be.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[9/110] 05snMPwCV98_4-5-rgb_front.mp4
+Ground truth: This is a shrunken sweater vest with ribbing.
+Prediction:   This is a great way to take the weight off of your legs with the roller broom.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[10/110] 1QBezkHsXd4_7-8-rgb_front.mp4
+Ground truth: So, you can take it into the pool and swim a bit in it just to get accustomed to it.
+Prediction:   There are so many different types of photography that you can become a specialist in.
+✅ Partial match (has some words)
+
+❌ Error on sample 34: CUDA out of memory. Tried to allocate 3.15 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.68 GiB is free. Including non-PyTorch memory, this process has 37.69 GiB memory in use. Of the allocated memory 37.09 GiB is allocated by PyTorch, and 99.92 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 59: CUDA out of memory. Tried to allocate 3.31 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.74 GiB is free. Including non-PyTorch memory, this process has 37.63 GiB memory in use. Of the allocated memory 37.00 GiB is allocated by PyTorch, and 135.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 87: CUDA out of memory. Tried to allocate 3.28 GiB. GPU 0 has a total capacity of 39.38 GiB of which 2.03 GiB is free. Including non-PyTorch memory, this process has 37.34 GiB memory in use. Of the allocated memory 36.75 GiB is allocated by PyTorch, and 89.69 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+======================================================================
+✅ Results saved: /home/mh2803/projects/sign_language_llm/outputs/checkpoint4000_results_20251031_040600.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+
+============================================================
+EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0093
+  F1 Score:         0.2143
+  Precision:        0.2331
+  Recall:           0.2149
+  ROUGE-L F1:       0.2112
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2546
+  BLEU2: 0.1195
+  BLEU3: 0.0708
+  BLEU4: 0.0468
+
+📋 Summary:
+  Total Samples:    107
+============================================================
+
+📊 Metrics saved: /home/mh2803/projects/sign_language_llm/outputs/metrics_20251031_040600.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 110
+   Successful: 107
+   Failed: 3
+   Success rate: 97.3%
+======================================================================
+
+🎉 Evaluation job completed!

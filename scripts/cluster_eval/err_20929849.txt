@@ -1,0 +1,100 @@
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+`torch_dtype` is deprecated! Use `dtype` instead!
+You are using a model of type qwen2_5_vl to instantiate a model of type qwen2_vl. This is not supported for all configurations of models and can yield errors.
+The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
+The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+  0%|          | 0/10000 [00:00<?, ?it/s]qwen-vl-utils using decord to read video.
+qwen-vl-utils using decord to read video.
+/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+  0%|          | 1/10000 [00:13<38:28:14, 13.85s/it]                                                      0%|          | 1/10000 [00:17<38:28:14, 13.85s/it][rank1]: Traceback (most recent call last):
+[rank1]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 267, in <module>
+[rank1]:     train()
+[rank1]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 241, in train
+[rank1]:     trainer.train()  # Start fresh anyway
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 2229, in train
+[rank1]:     return inner_training_loop(
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 2566, in _inner_training_loop
+[rank1]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 3859, in training_step
+[rank1]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 3941, in compute_loss
+[rank1]:     outputs = model(**inputs)
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1639, in forward
+[rank1]:     inputs, kwargs = self._pre_forward(*inputs, **kwargs)
+[rank1]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1528, in _pre_forward
+[rank1]:     if torch.is_grad_enabled() and self.reducer._rebuild_buckets():
+[rank1]: RuntimeError: Expected to have finished reduction in the prior iteration before starting a new one. This error indicates that your module has parameters that were not used in producing loss. You can enable unused parameter detection by passing the keyword argument `find_unused_parameters=True` to `torch.nn.parallel.DistributedDataParallel`, and by 
+[rank1]: making sure all `forward` function outputs participate in calculating loss. 
+[rank1]: If you already have done the above, then the distributed data parallel module wasn't able to locate the output tensors in the return value of your module's `forward` function. Please include the loss function and the structure of the return value of `forward` of your module when reporting this issue (e.g. list, dict, iterable).
+[rank1]: Parameter indices which did not receive grad for rank 1: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+[rank1]:  In addition, you can set the environment variable TORCH_DISTRIBUTED_DEBUG to either INFO or DETAIL to print out information about which particular parameters did not receive gradient on this rank as part of this error
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 267, in <module>
+[rank0]:     train()
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src/train/train_sft.py", line 241, in train
+[rank0]:     trainer.train()  # Start fresh anyway
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 2229, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 2566, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 3859, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/trainer.py", line 3941, in compute_loss
+[rank0]:     outputs = model(**inputs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1639, in forward
+[rank0]:     inputs, kwargs = self._pre_forward(*inputs, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1528, in _pre_forward
+[rank0]:     if torch.is_grad_enabled() and self.reducer._rebuild_buckets():
+[rank0]: RuntimeError: Expected to have finished reduction in the prior iteration before starting a new one. This error indicates that your module has parameters that were not used in producing loss. You can enable unused parameter detection by passing the keyword argument `find_unused_parameters=True` to `torch.nn.parallel.DistributedDataParallel`, and by 
+[rank0]: making sure all `forward` function outputs participate in calculating loss. 
+[rank0]: If you already have done the above, then the distributed data parallel module wasn't able to locate the output tensors in the return value of your module's `forward` function. Please include the loss function and the structure of the return value of `forward` of your module when reporting this issue (e.g. list, dict, iterable).
+[rank0]: Parameter indices which did not receive grad for rank 0: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+[rank0]:  In addition, you can set the environment variable TORCH_DISTRIBUTED_DEBUG to either INFO or DETAIL to print out information about which particular parameters did not receive gradient on this rank as part of this error
+  0%|          | 1/10000 [00:19<53:33:47, 19.28s/it]
+[rank0]:[W1107 16:59:46.230676389 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W1107 16:59:48.075000 2341598 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2341609 closing signal SIGTERM
+E1107 16:59:48.340000 2341598 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 1 (pid: 2341610) of binary: /home/mh2803/miniconda3/envs/qwenvl/bin/python3.10
+Traceback (most recent call last):
+  File "/home/mh2803/miniconda3/envs/qwenvl/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/mh2803/miniconda3/envs/qwenvl/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+src/train/train_sft.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-07_16:59:48
+  host      : skl-a-54.rc.rit.edu
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 2341610)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

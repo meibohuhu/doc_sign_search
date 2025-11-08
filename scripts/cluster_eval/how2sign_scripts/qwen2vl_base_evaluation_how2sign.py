@@ -143,8 +143,8 @@ def eval_model(args):
     for source in tqdm(data_dict, desc="Processing videos"):
         try:
             # Prepare the prompt for ASL translation (same as fine-tuned model)
-            # fq = "Translate the American Sign Language in this video to English."
-            fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
+            fq = "Translate the American Sign Language in this video to English. Answer in one sentence only"
+            # fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
             if 'video' in source:
                 video_file = source["video"]
                 video = os.path.join(args.video_folder, video_file)
@@ -245,7 +245,19 @@ def eval_model(args):
                 with torch.no_grad():
                     # Use mixed precision for faster inference
                     with torch.autocast(device_type="cuda", dtype=torch.float16):
-                        output_ids = model.generate(**inputs, max_new_tokens=args.max_new_tokens)
+                        output_ids = model.generate(
+                            **inputs,
+                            num_beams=5,
+                            do_sample=True,
+                            temperature=0.7,
+                            top_p=0.9,
+                            top_k=50,
+                            length_penalty=1.0,
+                            no_repeat_ngram_size=4,
+                            repetition_penalty=1.1,
+                            min_length=1,
+                            max_new_tokens=args.max_new_tokens,
+                        )
                         generated_ids = [output_ids[len(input_ids):] for input_ids, output_ids in zip(inputs.input_ids, output_ids)]
                         output = processor.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
                         

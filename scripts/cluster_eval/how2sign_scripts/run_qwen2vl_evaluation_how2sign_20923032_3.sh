@@ -1,5 +1,5 @@
 #!/bin/bash -l
-# Qwen2VL Checkpoint-5000 Evaluation Script
+# Qwen2VL Checkpoint-6000 Evaluation Script
 # Based on qwen25_metrics.py reference approach
 
 #SBATCH --job-name=qwen2vl_eval_checkpoint4000
@@ -8,7 +8,7 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=01:55:00
+#SBATCH --time=02:55:00
 #SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
 #SBATCH --mem=64g
@@ -39,7 +39,7 @@ CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4x
 # CHECKPOINT_PATH="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/qwen2vl_ssvp_2xa100_12fps_diverse/checkpoint-6000"
 MODEL_BASE="Qwen/Qwen2.5-VL-3B-Instruct"
 VIDEO_FOLDER="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/"
-QUESTION_FILE="/home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_sample_100.json"
+QUESTION_FILE="/home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.sample120.json"
 OUT_DIR="/home/mh2803/projects/sign_language_llm/outputs/"
 
 echo "🎬 Qwen2VL Checkpoint-5000 Evaluation"
@@ -59,6 +59,8 @@ echo ""
     --video-folder "$VIDEO_FOLDER" \
     --question-file "$QUESTION_FILE" \
     --out-dir "$OUT_DIR" \
-    --max-samples 95 \
-    --video-fps 12
+    --max-samples 110 \
+    --min-pixels $((224*224)) \
+    --max-pixels $((224*224)) \
+    --video-fps 18
 echo "🎉 Evaluation job completed!"

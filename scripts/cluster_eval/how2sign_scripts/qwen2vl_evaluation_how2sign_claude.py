@@ -258,7 +258,19 @@ def eval_model(args):
             # Generate
             with torch.no_grad():
                 with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-                    output_ids = model.generate(**inputs, max_new_tokens=args.max_new_tokens)
+                    output_ids = model.generate(
+                            **inputs,
+                            num_beams=5,                    # Beam search for better quality
+                            do_sample=True,                 # Enable sampling for better diversity
+                            temperature=0.7,                # Temperature for generation (0.7 is a good balance)
+                            top_p=0.9,                      # Nucleus sampling
+                            top_k=50,                      # Top-k sampling
+                            length_penalty=1.0,            # Length penalty (1.0 = neutral)
+                            no_repeat_ngram_size=4,        # Prevent 4-gram repetition
+                            repetition_penalty=1.1,        # Slight penalty for token repetition
+                            min_length=1,                   # Minimum output length
+                            max_new_tokens=args.max_new_tokens  # Maximum tokens to generate
+                        )
                     generated_ids = [
                         out[len(inp):] 
                         for inp, out in zip(inputs.input_ids, output_ids)

@@ -13,7 +13,7 @@
 #SBATCH --time=02:00:00
 #SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
-#SBATCH --mem=256g
+#SBATCH --mem=64g
 
 spack load /lhqcen5
 spack load cuda@12.4.0/obxqih4
@@ -37,7 +37,7 @@ export HF_HUB_ENABLE_HF_TRANSFER=1
 cd /home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune
 
 # Model configuration - using 3B model for faster training on 1xA100
-MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
+MODEL_NAME="Qwen/Qwen2.5-VL-7B-Instruct"
 
 # Optimized training configuration for 1xA100 GPU
 GLOBAL_BATCH_SIZE=4
@@ -45,9 +45,14 @@ BATCH_PER_DEVICE=1
 NUM_DEVICES=1
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
-echo "🚀 Starting Qwen2VL How2Sign Training on 1xA100 (ROBUST VERSION)"
+echo "🚀 Starting Qwen2VL How2Sign Training on 1xA100 (VISION-ONLY: Top 2 Layers + Projector)"
 echo "==============================================================="
 echo "Model: $MODEL_NAME"
+echo "Training Mode: Vision Encoder (Top 2 Layers) + Projector (Merger)"
+echo "LLM: FROZEN"
+echo "LoRA: DISABLED"
+echo "Vision Layers: Top 2 Unfrozen (rest frozen)"
+echo "Projector (Merger): UNFROZEN"
 echo "Global Batch Size: $GLOBAL_BATCH_SIZE"
 echo "Per-Device Batch Size: $BATCH_PER_DEVICE"
 echo "Gradient Accumulation Steps: $GRAD_ACCUM_STEPS"
@@ -112,12 +117,12 @@ torchrun --nproc_per_node=1 --nnodes=1 --master_port=29501 src/train/train_sft.p
     --model_id $MODEL_NAME \
     --data_path /home/mh2803/projects/sign_language_llm/vanshika/asl_test/train_merged_70_30.json \
     --image_folder /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/ \
-    --output_dir /home/mh2803/projects/sign_language_llm/qwenvl/1101/Qwen2-VL-Finetune/output/qwen2vl_how2sign_1xa100 \
+    --output_dir /home/mh2803/projects/sign_language_llm/qwenvl/1101/qwen2vl_how2sign_1xa100 \
     --num_train_epochs 3 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
-    --video_min_pixels $((224 * 224)) \
-    --video_max_pixels $((224 * 224)) \
+    --video_min_pixels $((320 * 320)) \
+    --video_max_pixels $((320 * 320)) \
     --fps 12 \
     --max_grad_norm 1.0 \
     --learning_rate 3e-5 \
@@ -126,16 +131,15 @@ torchrun --nproc_per_node=1 --nnodes=1 --master_port=29501 src/train/train_sft.p
     --save_total_limit 2 \
     --max_steps 1500 \
     --use_liger True \
-    --freeze_vision_tower False \
+    --freeze_vision_tower True \
     --freeze_llm True \
     --freeze_merger False \
+    --unfreeze_topk_vision 2 \
     --bf16 True \
     --fp16 False \
     --disable_flash_attn2 False \
     --gradient_checkpointing True \
-    --lora_enable True \
-    --lora_rank 32 \
-    --lora_alpha 64 \
+    --lora_enable False \
     --vision_lr 1e-5 \
     --merger_lr 3e-5 \
     --report_to none

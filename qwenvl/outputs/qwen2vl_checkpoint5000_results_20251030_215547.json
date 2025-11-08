@@ -1,0 +1,662 @@
+[
+  {
+    "video": "1L0GSTIb9Vs_4-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The men's man is the man on the left, the women's woman is the woman on the right, and the judge is the judge on the far left.",
+    "ground_truth": "The male of the species is white with black wings and very very long tail feathers."
+  },
+  {
+    "video": "0rsdwK7sHjE_18-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If there's a lot of wind, you want to be able to put your feet in and out to keep from being blown around.",
+    "ground_truth": "If you want to dry it, you can put a fan on it."
+  },
+  {
+    "video": "1Tix6cnQko4_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then we're going to move on to the next piece of paper.",
+    "ground_truth": "So as you bend, you're going to press into the floor."
+  },
+  {
+    "video": "BJIygZtYwXM_13-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to show you what it looks like when it's done.",
+    "ground_truth": "That just looks gloomy."
+  },
+  {
+    "video": "-dXU26rkB7I_12-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you over mix it, your cookies will be runny.",
+    "ground_truth": "If you over mix it, your cookies will run."
+  },
+  {
+    "video": "00Cal635Wno_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "In this clip, we're going to talk about how to make a nice stretchy, good going for your head band.",
+    "ground_truth": "But once it's on there, it's nice and stiff and you're good to go, that's your float head."
+  },
+  {
+    "video": "dzctDQsw2dk_6-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The other thing that you can do is you can add a little bit of water, just a little bit, just enough to make it a little bit easier to clean up.",
+    "ground_truth": "And then we will return, remove the mask and add the final touches which will be a hydrating creme."
+  },
+  {
+    "video": "47yGbJ5YDYk_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is where you're going to take some of the clay off of the edge of the mold, or the ceramic, or the stoneware, or the earthenware, or the bisque ware, or whatever it is that you're making.",
+    "ground_truth": "And the third part the hammer or the striker or the beater or the metal stick that you hit it with."
+  },
+  {
+    "video": "05snMPwCV98_4-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is a great way to open up the body, and it can be done with or without a partner.",
+    "ground_truth": "This is a shrunken sweater vest with ribbing."
+  },
+  {
+    "video": "1QBezkHsXd4_7-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "There are so many different types of photography that you can become a specialist in.",
+    "ground_truth": "So, you can take it into the pool and swim a bit in it just to get accustomed to it."
+  },
+  {
+    "video": "5YMC8pMGeTA_10-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to take my left foot and I'm going to step it out in front of me.",
+    "ground_truth": "So it's going to go, front and back, and front and back."
+  },
+  {
+    "video": "-eXHI3iqu7g_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It doesn't have to be an exact even number of inches, but it has to be an odd number of inches.",
+    "ground_truth": "Don't ever pour your fix down the drain."
+  },
+  {
+    "video": "fJ5vO67Ktnw_0-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Back here, and here, and all the way back here, and then I'm going to do the same thing on the other side.",
+    "ground_truth": "Okay, here we're going to go over the idea of a pendulum."
+  },
+  {
+    "video": "3MXwlCKtSPU_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You don't want to take yourself too far out of your comfort zone if you can help it because if you do, you're going to have a really bad reaction to it and it's not going to be very fun.",
+    "ground_truth": "You don't want to buy these if you find them because they're pretty much worth nothing but everybody thinks they're great."
+  },
+  {
+    "video": "15bYoBr7BWs_42-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You want to make sure that you're going to be able to see the top of the wall and the bottom of the wall.",
+    "ground_truth": "Then, you want to go ahead and get the reverse side too."
+  },
+  {
+    "video": "-Bz0BNwqAE4_15-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And we're going to go around the circle and each member of the group is going to take a piece of paper, and if you have a group that has an even number of people, you're going to need two pieces of paper.",
+    "ground_truth": "And we're also going to need a couple of sheets of notebook paper and a pen, and if you have a music stand handy, that would be good, too."
+  },
+  {
+    "video": "038vE9JsU9I_7-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The next tool that we're going to talk about is really getting a grip on the racquet.",
+    "ground_truth": "And those are the tools and supplies needed for saxophone maintenance."
+  },
+  {
+    "video": "1_j3bP8UnZg_6-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you're going to be going to a place where you're not familiar with the local customs, it's always a good idea to call ahead of time and let them know that you're coming, so that they can let you know what the customs are, and what you need to do in order to be able to get in and out of the country without any problems.",
+    "ground_truth": "All the labels do research and they are looking to find out if your act is playing out anywhere, can you sell tickets, do you have a song on the radio, do you have a big e-mail list, do you have any sort of a following."
+  },
+  {
+    "video": "1xKU91ggLeI_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi, I'm Jeff Klein, vodka connoisseur and bartender here at Beak's Old Florida Saloon in St. Petersburg, Florida.",
+    "ground_truth": "My name is Jeff Klein and I'm a vodka connoisseur and bartender here at Beak's Old Florida in St. Petersburg."
+  },
+  {
+    "video": "0-_hOoXzsWw_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So if you're standing in the middle of the court and you're trying to get the ball, you're not going to be able to do that without a bounce pass.",
+    "ground_truth": "So if he just stands up and doesn't try and root and I push him, it takes no effort to push him over."
+  },
+  {
+    "video": "1B-uqjIDMKk_5-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Long time no see, how are do you do?",
+    "ground_truth": "Would you need to learn a second language?"
+  },
+  {
+    "video": "04-j8JucIXg_9-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "One of the first things that you need to learn is the proper way to set up your tent.",
+    "ground_truth": "One thing to remember is that setting up a tent, you can do this with one person."
+  },
+  {
+    "video": "4U57Q4XIfoM_13-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to do the same thing to the other side, so we're going to take the right foot and place it in front of the left foot, and we're just going to stand in a T position, just like we did in the T position for the front tuck, except this time it's going to be a back tuck.",
+    "ground_truth": "Once you do that for a two minute round, in fact I've even had some of the kids doing them for three two minute rounds, because you'll actually get the same workout without the jump rope anyway, but you look kind of foolish sometimes when the other boxers are looking at you and you don't have a jump rope and you're still jumping."
+  },
+  {
+    "video": "1YnA7Iv3oJ8_3-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to take a look at a couple of the different ways that you can measure the distance between two parallel lines, and I'm going to show you two different ways to do that.",
+    "ground_truth": "Basically, what it is, is it's a little gadget that measures how much voltage is flowing between 2 contacts and you use these little kinda contact points, these little wires to make that measurement."
+  },
+  {
+    "video": "-f7htdZ3Kk0_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Let's take a look at how we can take a hat and turn it into a head piece.",
+    "ground_truth": "Let's look at candidates."
+  },
+  {
+    "video": "E3r2mQix7Uo_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Okay, around the world, one, two, three, four.",
+    "ground_truth": "Let's look at one of them."
+  },
+  {
+    "video": "5k66qfWaM7E_5-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You want to make sure that you know what you're talking about and that you have a good working relationship with the people that you're going to be working with.",
+    "ground_truth": "And that's one indication to know that you actually combined the image properly."
+  },
+  {
+    "video": "0EjXICFqrKo_37-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Left, back, left, back.",
+    "ground_truth": "And left."
+  },
+  {
+    "video": "17hrR6QZBdU_19-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can carry it with you, you can train with it, you can practice with it, and that's one of the most important things that you need to be able to do as a martial artist, is be able to train with your weapon.",
+    "ground_truth": "It's small enough to fit in your backpack, your pocket, and keep it with you in rehearsals, so if you want to learn a lot of improv games, this is the book for you."
+  },
+  {
+    "video": "bA53FmWDNPU_12-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The best way to do that is you want to give the ball to somebody that's going to be able to make a good pass to somebody else that's in a good position to make a shot.",
+    "ground_truth": "It forces him to make a decision; meanwhile, the ball may be going someplace else."
+  },
+  {
+    "video": "b33htMHPtl8_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And the water doesn't have to be as hot because I don't have the antifreeze in there, but it's going to have to be hot enough to get the water moving.",
+    "ground_truth": "Swamp water does not have the stipulation that he has to stop so he can continue moving on."
+  },
+  {
+    "video": "5YMC8pMGeTA_17-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Push and pull, push and pull.",
+    "ground_truth": "And push, pull in; push, pull in."
+  },
+  {
+    "video": "-fNgnONv_3I_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "What you want to do is you want to mix it up, you want to get all of the ingredients mixed up, and then you want to pour it into a pitcher, and you want to shake it up really good, and then strain it into your glass.",
+    "ground_truth": "When you're calling a snake, what you want to do is a modified tiger crawl--no pun intended, that's actually what it's called."
+  },
+  {
+    "video": "5Uy3r6Sl4pM_5-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "ERROR: CUDA out of memory. Tried to allocate 3.15 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.63 GiB is free. Including non-PyTorch memory, this process has 37.75 GiB memory in use. Of the allocated memory 37.09 GiB is allocated by PyTorch, and 159.86 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+    "ground_truth": "But the thing is to bridge the topic of divorce gradually, slowly, let them know that you're not happy about certain things, let the other party know that you'd like to talk about it, if you can't talk about it and reach a resolution, then you'd like to make an amicable divorce so that, or separation so that you both have certain things that you need."
+  },
+  {
+    "video": "a-WMWISI12s_16-2-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you're going to go out and buy a plant and you're not sure what kind of plant it is, you can always go to your local garden center or nursery and ask the people there, they're going to be able to help you identify the plant and tell you how to take care of it.",
+    "ground_truth": "Be realistic when your obsessive your garden and the space that you have in it, play it accordingly and your garden would reward you with great vegetables all summer long."
+  },
+  {
+    "video": "1TsfCQyFt1A_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "A two ounce shot of Bacardi Limon, we're going to add a half ounce of lime juice, and we're not going to add any sweet and sour mix.",
+    "ground_truth": "A wicker basket, which I showed in the previous segment is a classic add on, particularly for a woman's bike."
+  },
+  {
+    "video": "-dyT7rtkAMk_20-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Breathe, get over it, let it go, whatever it is, it's just okay.",
+    "ground_truth": "At the end of that 10 times, you can just noodle home, take an easy ride to recover."
+  },
+  {
+    "video": "16y-dsX1MDk_8-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Left foot, right knee, left knee, left foot.",
+    "ground_truth": "Or, you have this same one...this is an eleven by fourteen (the same size) and it only runs thirty three dollars."
+  },
+  {
+    "video": "-dNt6nmRfFE_3-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You want to make sure that you have a good amount of space around the perimeter of the area that you are going to be tiling so that you have room for grout.",
+    "ground_truth": "You like to look up at your hand as you're stretching feeling it stretch and deepening the stretch along your side."
+  },
+  {
+    "video": "57bbRJn0xec_17-1-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The ball's in his hands.",
+    "ground_truth": "medicine ball."
+  },
+  {
+    "video": "EN_Lv4gfL_A_5-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to be talking about something that's going to be a lot of fun for you and your friends to do right now.",
+    "ground_truth": "I prefer to always have people speak in the present tense."
+  },
+  {
+    "video": "0HfN3Ts0FxQ_16-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Make sure you have all three of them.",
+    "ground_truth": "Make sure you get all of it on there."
+  },
+  {
+    "video": "1g9c_YQZh5E_2-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to take it out of the oven and I'm going to let it cool down and then I'm just going to go ahead and take it out and I'm actually going to put it in the oven and bake it for another 10 minutes and then I'll take it out again and then I can go ahead and cut it up and put it in a container and store it in the refrigerator and it's going to keep for about a couple of days.",
+    "ground_truth": "You know I'm looking at the way I'm tearing this paper down and it's like a book already, and I'm like what kind of book can I make today with cyanotypes, and one thing that I forgot to mention is that the cyanotype is cheap."
+  },
+  {
+    "video": "1XoT1-gzWfg_2-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "How did you learn how to speak Spanish?",
+    "ground_truth": "How does one become a comedian?"
+  },
+  {
+    "video": "0oHN9y80NME_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If I'm going to use this leaf cutter, I'm probably going to go ahead and cut it to a different size.",
+    "ground_truth": "If I was going to use this liner, I probably go to a different frame."
+  },
+  {
+    "video": "4BKUiL-ou2Q_8-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you're going to be in the water for an extended period of time, you want to make sure that you're wearing a wetsuit that's going to keep you warm enough that you're not going to get too cold, but at the same time, you don't want the wetsuit to be so thick that it's going to restrict your movement.",
+    "ground_truth": "This is actually water rain retention discharge so the survey may in fact show that the sewer company maintains the right to have access to this small area."
+  },
+  {
+    "video": "0C_NjyLtHwc_33-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to take my knife and I'm going to cut off the bottom of the eggplant and then I'm just going to cut it into slices.",
+    "ground_truth": "And I'm just going to hold the button and just gently slide it down the thread to where it's fitting right there and then I'm going to go look where I have the knot and just go right below the knot and stick it through to the other side."
+  },
+  {
+    "video": "5qji7JFwR3M_2-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is going to be about an inch and a half to two inches long, depending on how big you want them to be.",
+    "ground_truth": "You need to stay back like eight to twelve inches away from the wood."
+  },
+  {
+    "video": "1in4niLBTxc_4-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "What I'm going to do is I'm just going to take a little bit of the wax and I'm actually going to pour it into the container.",
+    "ground_truth": "I do a little twist here like this."
+  },
+  {
+    "video": "5c2eJSafE3M_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And what we're going to do is we're just going to take a nice clean, dry towel, and we want to wipe off any excess clay.",
+    "ground_truth": "There we go, we have a nice wall fitting clew patch."
+  },
+  {
+    "video": "DX3KWLldIJc_2-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to slice it in half and then I'm going to cut it in half again.",
+    "ground_truth": "You want to cut down a nice flat side like that."
+  },
+  {
+    "video": "bwnfdMdvWFQ_0-4-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi, my name is Dean Hale, and I'm going to teach you how to play craps.",
+    "ground_truth": "Hi my name is Mary Thinnes and I am a skin care expert."
+  },
+  {
+    "video": "0zD5Uh7S35A_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Each cup corresponds to a particular card in the tarot deck.",
+    "ground_truth": "This notch should meet with this notch."
+  },
+  {
+    "video": "07n9gNTlVdI_16-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is a stroller that is pretty hard to take apart and put back together, so I tend to get this stroller and leave it on the high end of the stroller price range, because it can be a little bit of a pain to take apart, and put it back together.",
+    "ground_truth": "The stringer is pretty hard to shape, so I usually tend to get that down and then you can shape the foam to the stringer, starting on the high points always first."
+  },
+  {
+    "video": "5x3CorS_t30_11-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then you can go ahead and take your blue and your red and you can put them to the side and then you can take your yellow and your black and you can mix them together.",
+    "ground_truth": "A great way to impress the girls, guys."
+  },
+  {
+    "video": "5qsNHYnRWYQ_3-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "What you want to do is you want to take your bowl, you want to turn it upside down, and you want to put it on top of whatever you're trying to remove the wax from.",
+    "ground_truth": "So don't let the employer bull you or intimidate you or have you answer questions that they legally cannot answer."
+  },
+  {
+    "video": "berpJe71eNY_11-4-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So if you're going to be in the water for a long period of time, you want to make sure that you're wearing a wetsuit that's going to keep you warm enough that you're not going to get too cold, but not so warm that you're uncomfortable.",
+    "ground_truth": "So wet down the sand, get in there and practice out of it and you'll find that your skills will increase and you won't be fearful of virtually any lie that you could ever get."
+  },
+  {
+    "video": "10d1oeViKYw_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Lift, drop, lift, drop.",
+    "ground_truth": "Your hips are down."
+  },
+  {
+    "video": "1r9BuA9JwsY_3-11-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "ERROR: CUDA out of memory. Tried to allocate 3.31 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.74 GiB is free. Including non-PyTorch memory, this process has 37.63 GiB memory in use. Of the allocated memory 37.00 GiB is allocated by PyTorch, and 139.01 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+    "ground_truth": "You want to, you want to actually, you know, rub off any kind of germs that's on there in the disinfectant water."
+  },
+  {
+    "video": "06tA1xvaSt8_5-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You're going to need about a cup and a half to a full cup of rice, depending on how many people you're cooking for and how much rice you want to end up with.",
+    "ground_truth": "What's more, in terms of getting into, like, the really more detailed areas, where you're just going to be on the basic shape of the shoulder."
+  },
+  {
+    "video": "4MIPkK7F4GM_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "What you want to do is like the backswing, you want to try to do the same thing with the hands as you do with the club.",
+    "ground_truth": "And what you want to do is that's the basic brush but you're going to want to do it so your hand is behind your back."
+  },
+  {
+    "video": "CFC40Yw8CyQ_9-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is an example of a house that was built in the late 1800s and early 1900s.",
+    "ground_truth": "When you are house training a puppy, a pen like this is more comfortable then a crate so your puppy learns to go in the crate for short term confinement and in the pen for longer term confinement."
+  },
+  {
+    "video": "-fPRgGA3QYY_28-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Let's keep your forearms on the ground, don't let them move.",
+    "ground_truth": "Let's turn them over this time so that they don't move as much."
+  },
+  {
+    "video": "5HDlLzELoeg_2-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Now, I'm going to show you how to use your microwave to reheat or defrost your food.",
+    "ground_truth": "The first one we are going to cover is going to be the code machine."
+  },
+  {
+    "video": "-F8wNvnNQNs_2-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Once you've done that, you're going to want to take a look at the bottom of your laptop and you'll see there's a little button right here.",
+    "ground_truth": "Now once it's attached nice and firmly we want to moisten it, but only a very little amount."
+  },
+  {
+    "video": "aVY3jET8UVY_4-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "With every hand that you have, you're going to need a scarf.",
+    "ground_truth": "I love to do that with scarves."
+  },
+  {
+    "video": "14fs-ot5KCc_17-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Your feet are going to be slightly wider than your shoulders, your toes are going to point slightly out to the side, and you're going to lift your heels off the ground.",
+    "ground_truth": "We're going to get up on our toes to get some momentum, and we're going to go straight in."
+  },
+  {
+    "video": "3Dna82kryPY_9-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You don't want to use your leg, you want to use the rest of your body, your arms, your shoulders, your chest, your back, your legs, all the way down to your feet, to get as much power as you possibly can into the shot put.",
+    "ground_truth": "So you take the front leg, step over to the side."
+  },
+  {
+    "video": "bwLhAEu1h90_14-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So we're going to take some things about sitting on a chair, getting a little bit more comfortable in the chair, and getting a nice seat in the chair.",
+    "ground_truth": "So, the one thing about sit-on-top kayaks, you will get a little wetter than sit-inside kayaks."
+  },
+  {
+    "video": "46WKIipNJt8_9-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to show you how to do that, and then we're going to take a look at the next step, which is going to be the 6th fret on the E string.",
+    "ground_truth": "So now we have the pot centered on the wheel, the next thing is going to be securing it and I just want to get a little bit of moisture on this wheel so that clay will stick."
+  },
+  {
+    "video": "1yvskpdZCPs_5-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So I'm going to take my left foot and place it in the pit of my right foot, and I'm just going to lift my feet up off the floor, and then I'll bring my left foot back down, and I'll lift my right foot back up, and that's going to give me a little bit of a stretch in my lower back.",
+    "ground_truth": "When you extend your legs, pull your legs into a Pilates dance, which means your heels are together and your toes are out like a V. Keep the small of your back down to the mat."
+  },
+  {
+    "video": "DDbXcFzIXH4_1-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's the same size as a standard dress shirt, it's got a button down the front, it has a collar, it's long enough for you to be able to wear a tie with it, and it has a pocket on the side of the shirt.",
+    "ground_truth": "This is just like on a regular button down the front oxford shirt that has cuffs, boring old plain shirt that a man would wear with a tie."
+  },
+  {
+    "video": "1jeK8PkhsR4_8-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to hold it there for about a second and then I'm going to release.",
+    "ground_truth": "Ok."
+  },
+  {
+    "video": "2G29ijsPVXI_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And if that's the case, then you're going to need to do the same thing on the other side of the court, so if you're on the right side, you need to go to the left side, and vice versa.",
+    "ground_truth": "If this is congested, this congestion is not going to go anywhere, so you need to get the congestion out of the hamstring first, and then work the calves, so real quick, just work the calf."
+  },
+  {
+    "video": "FWi7va17oUQ_24-9-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to pour three shots of Bacardi Limon, which is a lemon flavored rum.",
+    "ground_truth": "You don't want to sit in there and try and turn it, thinking it doesn't work, 'cause it....it turns on on it's own."
+  },
+  {
+    "video": "23ln0Sw_8Qo_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then the other side, same thing, and then you turn around and you do the same thing to the other side.",
+    "ground_truth": "And the way I like to describe it is, remember when you were a little kid and you'd run through your mom's kitchen with your socks on and slide around."
+  },
+  {
+    "video": "1PwvyT44-uE_21-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's hard work, it's heavy lifting, it's inside, it's outside, it's all over the place, it's wind, it's rain, it's snow.",
+    "ground_truth": "A hard heavy interior core, but with absorption on both sides."
+  },
+  {
+    "video": "1h3mvQDZnBw_25-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then I'm just going to take a little bit of this and I'm going to put it on the back of my hand.",
+    "ground_truth": "That's all it took was one little tiny nip."
+  },
+  {
+    "video": "1bziHM2QeX8_5-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You can use an eraser, but you don't want to erase anything that you haven't drawn yet, because you're going to have to erase it again.",
+    "ground_truth": "And I've got my needle tool here, so you can see you don't have to have a scoring tool."
+  },
+  {
+    "video": "dnzYz8sZHSg_2-1-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Again, I'm going to go ahead and take my wire and I'm just going to wrap it around.",
+    "ground_truth": "How often do you want to change your oil is a good question."
+  },
+  {
+    "video": "0z-gCDC8oOw_9-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to take our cup of coffee and we're going to pour it into our cocktail shaker.",
+    "ground_truth": "I have one here handy."
+  },
+  {
+    "video": "C88yVO-7XzA_8-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And there you have it, and now we're going to move on to the next step.",
+    "ground_truth": "Anyway here's where we are and now let's move on to our next step."
+  },
+  {
+    "video": "dEsle4TneCw_19-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "I'm going to go ahead and start in this shape in the block.",
+    "ground_truth": "I'm going to start form this angle."
+  },
+  {
+    "video": "1bJg-DSYR8k_3-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's a big room, it's a big space, it's got a lot of windows, so it's very light and bright.",
+    "ground_truth": "You don't have to make a vision board big in order for it to be effective."
+  },
+  {
+    "video": "02LnULLXds4_29-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "This is going to be the base of our tripod.",
+    "ground_truth": "Again I'm going to move this down here."
+  },
+  {
+    "video": "5T4P9SM0_ck_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "First of all, how high up the hill are they going to be running?",
+    "ground_truth": "Left hip goes up and drop."
+  },
+  {
+    "video": "1H55083VyWI_5-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "ERROR: CUDA out of memory. Tried to allocate 3.28 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.98 GiB is free. Including non-PyTorch memory, this process has 37.39 GiB memory in use. Of the allocated memory 36.75 GiB is allocated by PyTorch, and 147.63 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+    "ground_truth": "So, this time, once I've got it jacked up, I'm going to put it on a jack stand or another device to safely carry the load."
+  },
+  {
+    "video": "3zd-g_u97RM_4-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Once you've done that, you're going to take your pot and you're just going to put it in the oven and let it bake for about an hour and a half to two hours.",
+    "ground_truth": "You would keep on doing this until you have yourself a full pot of the prepared wine."
+  },
+  {
+    "video": "3daeOlNR8_A_30-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to take our paper and we're going to turn it upside down and we're just going to spray it all over.",
+    "ground_truth": "Maybe even a dedicated bucket."
+  },
+  {
+    "video": "EWV6xcewNVk_6-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "The first thing you want to do is you want to take your hair and you want to pull it up into a pony tail and then you're going to take your flat iron and you're just going to run it all the way down the length of your hair.",
+    "ground_truth": "You've got to first put a braid at the back of your hair."
+  },
+  {
+    "video": "1nN1DqwS0q4_5-11-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And then I'm going to take my scissors and I'm just going to snip off the ends.",
+    "ground_truth": "For that last story you plus 3 friends, it would be 3 + 1 = 4."
+  },
+  {
+    "video": "CnycvXFq8H4_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Hi, this is Liz Muller from Liz's Hair Design in Hollywood, Florida.",
+    "ground_truth": "Hi I'm Kim with Simply Beautiful in Austin, Texas."
+  },
+  {
+    "video": "22OyLDVZI6c_8-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You're going to do the same thing again, you're going to want to keep moving that needle up and down on your arm.",
+    "ground_truth": "When you bring it up, again you want to keep putting tension on that bicep."
+  },
+  {
+    "video": "1fZfM65z0zk_16-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So you want to go ahead and go to your computer, and you're going to go to your control panel.",
+    "ground_truth": "You want to go ahead and get it down."
+  },
+  {
+    "video": "aomlhMR9PLQ_11-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You want to make sure that you think about the people that you're going to be speaking to, and what they're going to think about you, and what you want to say to them, and how you want to present yourself, and what kind of impression you want to leave on them.",
+    "ground_truth": "It, it doesn't make a lot of sense, people don't say why do you keep pushing through, it seems weird but I can't tell you the physics but for some reason it works."
+  },
+  {
+    "video": "00Fc7cZX1gM_0-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "He's going to bend his knees and he's going to bring his hands in front of his body and he's just going to bend at the waist and bring his hands down to the ground.",
+    "ground_truth": "One of the main problems with illnesses in box turtles is going to be vitamin A deficiency."
+  },
+  {
+    "video": "0C_NjyLtHwc_41-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "There we go.",
+    "ground_truth": "There you go."
+  },
+  {
+    "video": "3qf2Ggfmlf4_7-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to go around the circle and each person is going to make up a story about something that happened to them when they were a child, and they're going to tell it to the person next to them, and then the next person, and so on, all the way around the circle.",
+    "ground_truth": "Our quarterback will then open up wide and make a long pitch to the outside to the running back."
+  },
+  {
+    "video": "1xKU91ggLeI_2-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "How are you doing today?",
+    "ground_truth": "How are you?"
+  },
+  {
+    "video": "0veHGYSKaDc_12-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, you want to be able to get your hands on these things, and you want to know what they're worth, so you can sell them for a profit.",
+    "ground_truth": "Up, up, has this nice twisting action."
+  },
+  {
+    "video": "D-2jxcZeURM_14-4-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "We're going to go to the right hand side of the screen and we're going to click on the button that looks like a plus sign here.",
+    "ground_truth": "Usually wheels will run somewhere between a ninety six and a one hundred and one."
+  },
+  {
+    "video": "1ND0o3AeO1k_9-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "So, some of the things that you don't want to do when you're choosing a pair of pants is choose pants that are too big for you.",
+    "ground_truth": "So some of these letters were discovered in Pompeii."
+  },
+  {
+    "video": "0sal9F4RXeY_14-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "You're going to take your knife and you're going to cut off the top of the onion and then you're just going to slice it in half.",
+    "ground_truth": "And sometimes it's a matter of just kind of reweaving a little hole."
+  },
+  {
+    "video": "_FTTCZOoBHg_10-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "On the front, on the back, on the side, on the top, on the bottom.",
+    "ground_truth": "Obviously if from the front you've got no damage, you have no visible damage, the repair has been adequately."
+  },
+  {
+    "video": "36xBmAZNzRg_6-5-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "Go over each hand, we donât really need to go over every single one of them, but weâre going to go over the ones that are most important to us, and then weâll move on to the next one, and then the next one and the next one.",
+    "ground_truth": "So, for race two, we're picking what number we think is going to come in first, and that's the very first number we put in a Daily Double."
+  },
+  {
+    "video": "1Y3Ruxz7AUw_12-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's a great time of year to go out and add some plants, add some flowers, add some trees, add some shrubs, add some ground cover, add some bulbs, add some perennials, add some roses, add some ornamental grass, add some cactus, add some succulents, add some fern, add some peonies, add some irises, add some tulips, add some daffodils, add some crocus, add some snowdrops, add some primroses, add some violets, add some forget-me-nots, add some buttercups, add some marigolds, add some zinnias, add some nasturtles, add some sunflowers, add some cosmos, add some lilies, add some chives, add some garlic, add some onions, add some carrots, add some lettuce, add some spinach, add some radishes, add some peas, add some beans, add some potatoes, add some sweet corn, add some tomatoes, add some peppers, add some cucumbers, add some squash, add some melons, add some strawberries, add some raspberries, add some blackberries, add somethin.",
+    "ground_truth": "Ticks are more common in the wintertime in this area because they need a little bit of moisture, and so if you're starting to pick up some ticks with your dog, you can use a topical product that we can recommend, or we have a really good tick collar that might help your dog from having these attached to him."
+  },
+  {
+    "video": "-CiUc2Gk4v8_10-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "If you're throwing a punch, you want to throw it out to the side, away from the person you're throwing it at.",
+    "ground_truth": "You never want to carry the tool by the chord."
+  },
+  {
+    "video": "BRa6-tUUd0E_2-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "When you're shopping for a backpack, you want to look for something that's going to hold a lot of stuff, but at the same time, it's going to be light enough that you're not going to have to carry a lot of weight around.",
+    "ground_truth": "When reading a map of when you are going hiking, there are some things to look at right away."
+  },
+  {
+    "video": "01KR04fE7Fw_2-3-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "And now we're going to pour the water and the eucalyptus leaves into the teapot and let it steep for about three to five minutes.",
+    "ground_truth": "I'm soaking my feet in a plain plastic basin with the Epsom salt in bath temperature water."
+  },
+  {
+    "video": "d7AGobq8bmw_8-8-rgb_front.mp4",
+    "prompt": "Translate the American Sign Language in this video to English.",
+    "model_output": "It's very important that you take care of yourself, because if you're sick, you're not going to be able to perform at your best, and you're going to want to make sure that you get the proper amount of sleep, that you're eating the proper foods, and that you're taking care of yourself so that you can be at your best when you're competing.",
+    "ground_truth": "Force yourself to be in bed by a certain time no matter what, maybe it's midnight, maybe it's 11 pm, but make sure that you at least get 8 hours of sleep per night."
+  }
+]

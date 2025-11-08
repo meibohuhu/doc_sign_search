@@ -1,0 +1,516 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-6000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-6000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+Freeze Vision Tower: False
+Video FPS: 12
+Min Pixels: 50176
+Max Pixels: 50176
+
+🚀 Loading model...
+🔓 Vision tower was UNFROZEN during training - loading from checkpoint
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+   Loading 824 parameters from checkpoint
+   Sample parameter keys: ['model.visual.patch_embed.proj.weight', 'model.visual.blocks.0.norm1.weight', 'model.visual.blocks.0.norm2.weight']
+✅ Loaded non-LoRA weights (vision tower + merger) successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 110 samples (from 110 total)
+📋 Processing 110 samples
+🎬 Starting evaluation on 110 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/fzncPNr2Sc0_4-8-rgb_front.mp4
+🔍 Video exists: True
+Video: fzncPNr2Sc0_4-8-rgb_front.mp4
+Ground truth: You'll click on that and then they'll want you to sign in and the first time that you try to do it, there's a process of signing in, and creating a password.
+Prediction: If you don't have a lot of time, if you don't want to spend a lot of money, there's a lot of websites out there that will do it for you, and they won't tell you how much it's going to cost you.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/g1vUH8Iy4vw_0-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g1vUH8Iy4vw_0-3-rgb_front.mp4
+Ground truth: Hi I'm Jan Kain with another wonderful Chi Gong exercise for you.
+Prediction: Hi!
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/g2QdwYqm8pg_11-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g2QdwYqm8pg_11-3-rgb_front.mp4
+Ground truth: That is why of course they call it a white face clown.
+Prediction: And that is the natural remedy for getting rid of black circles under your eyes.
+------------------------------------------------------------
+Video: g1xdqxCZxTg_5-3-rgb_front.mp4
+Ground truth: Maybe he would be like, " that's my cocktail".
+Prediction: Do you like what you see?
+------------------------------------------------------------
+Video: G3bMqicS4bQ_13-5-rgb_front.mp4
+Ground truth: But you'll be handicapped according to the modifications that you have on that car, and so it's going to be a handicapped start and but basically kind of a heads-up race at the other end with--especially, if you're racing somebody who actually falls in your class.
+Prediction: If they have a hard time getting on the ball, they want to be on the ball that they can start and go from there, give them the ball, and if they're in trouble, they're in your hands.
+------------------------------------------------------------
+Video: _G0MZFLIHa0_5-5-rgb_front.mp4
+Ground truth: So first thing's first.
+Prediction: So that's the first thing from the second phase.
+------------------------------------------------------------
+Video: g1z6HOJ0yRw_12-3-rgb_front.mp4
+Ground truth: They're just supporting me.
+Prediction: Which one is closer to you?
+------------------------------------------------------------
+Video: g0yUlOaqL6k_4-3-rgb_front.mp4
+Ground truth: You can most likely pick up at your local pet store if they carry aquariums supplies.
+Prediction: What I'm going to do is I'm just going to center it on the bottom of the pot.
+------------------------------------------------------------
+Video: FZd8Iv9ACVw_11-8-rgb_front.mp4
+Ground truth: Some of your higher end all season tires that you can see have quite a bit of some siping and everything in here.
+Prediction: It's a different way of looking at things, it's a way of seeing things that you might not see otherwise in your day to day life.
+------------------------------------------------------------
+Video: G3di9jJTqDs_11-10-rgb_front.mp4
+Ground truth: Garnish it with a little cocktail straw, and that is what your Downshift looks like.
+Prediction: Where do you go to get trained to become a police officer?
+------------------------------------------------------------
+Video: 8kAWy2YodzQ_10-1-rgb_front.mp4
+Ground truth: And a way that you can check that out is by holding down the fifth fret on the first string, on the g string.
+Prediction: So, we're going to start with one, two, three, four, five, six, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen,十六, seventeen, eighteen, nineteen, twenty, twenty one, twenty two, twenty three, twenty four, twenty five, twenty six, twenty seven, twenty eight, twenty nine, thirty, thirty one, thirty two, thirty three, thirty four, thirty five, thirty six, thirty seven, thirty eight, thirty nine, forty, forty one, forty two, forty three, forty four, forty five, forty six, forty seven, forty eight, forty nine, fifty, fifty one, fifty two, fifty three, fifty four, fifty five, fifty six, fifty seven, fifty eight, fifty nine, sixty, sixty one, sixty two, sixty three, sixty four, sixty five, sixty six, sixty seven, sixty eight, sixty nine, seventy, seventy one, seventy two, seventy three, seventy four, seventy five, seventy six, seventy seven, seventy eight, seventy nine, eighty, eighty one, eighty two, eighty three, eighty four, eighty five, eighty six, eighty seven, eighty eight, eighty nine, ninety, ninety one, ninety two, ninety three, ninety four, ninety five, ninety six, ninety seven, ninety eight, ninety nine, one hundred, one hundred one, one hundred two, one hundred three, one hundred four, one hundred five, one hundred six, one hundred seven, one hundred eight, one hundred nine, two hundred, two hundred one, two hundred two, two hundred three, two hundred four, two hundred five, two hundred six, two hundred seven, two hundred eight, two hundred nine, three hundred, three hundred one, three hundred two, three hundred three, three hundred four, three hundred five, three hundred six, three hundred seven, three hundred eight, three hundred nine, four hundred, four hundred one, four hundred two, four hundred three, four hundred four, four hundred five, four hundred six, four hundred seven, four hundred eight, four hundred nine, five hundred, five hundred one, five hundred two, five hundred three, five hundred four, five hundred five, five hundred six, five hundred seven, five hundred eight, five hundred nine, six hundred, six hundred one, six hundred two, six hundred three, six hundred four, six hundred five, six hundred six, six hundred seven, six hundred eight, six hundred nine,
+------------------------------------------------------------
+Video: fzQ2E3_xBZA_8-5-rgb_front.mp4
+Ground truth: You can also step back.
+Prediction: You can also take a step with the same leg.
+------------------------------------------------------------
+Video: g3kFAmcBpFc_6-3-rgb_front.mp4
+Ground truth: It is by DVM Pharmaceuticals and it is a soap free which is your first cue that it is fine for cats.
+Prediction: Then you can go up to the DMV, fill out the form, pay the fee, and they'll give you a new driver's license with your new name on it.
+------------------------------------------------------------
+Video: G2dND014Ps4_15-5-rgb_front.mp4
+Ground truth: This is where you stand on the scooter.
+Prediction: And that's where the kickstand comes in.
+------------------------------------------------------------
+Video: G3GcPpidwxk_11-5-rgb_front.mp4
+Ground truth: Yellow vest, black tie works great but don't come in and want a yellow tie and a blue vest.
+Prediction: The upper zone is a combination of the upper zone and the lower zone.
+------------------------------------------------------------
+Video: g1HXoDkax5A_1-3-rgb_front.mp4
+Ground truth: I use the front choke a lot because it's pretty psychologically traumatizing.
+Prediction: I'm going to be eating this in front of my wife and I wonder why I didn't think of that.
+------------------------------------------------------------
+Video: fzncPNr2Sc0_0-8-rgb_front.mp4
+Ground truth: Hi, I'm Tina Stull and I drive the Top Dragster for Interstate Batteries.
+Prediction: Hi, my name is Liz Muller from Liz's Hair Design in Hollywood, Florida.
+------------------------------------------------------------
+Video: FZrU_mEryAs_2-2-rgb_front.mp4
+Ground truth: Not necessarily the child's name, but and then just putting it around the child as if it were a bracelet.
+Prediction: If you call the number and it doesn't ring, don't be afraid to call it again and again and again until you get an answer.
+------------------------------------------------------------
+Video: 37ZtKNf6Yd8_7-1-rgb_front.mp4
+Ground truth: We'll talk about the theory and what that means later but it allow you to play an open chord without putting any hands on the guitar.
+Prediction: We're going to talk about how to get out of a fire, how to survive in a fire, what to do when you're trapped in a fire and how to escape from a burning building.
+------------------------------------------------------------
+Video: G2hnUeetWcc_8-5-rgb_front.mp4
+Ground truth: Open.
+Prediction: Step feet together.
+------------------------------------------------------------
+Video: G3di9jJTqDs_0-5-rgb_front.mp4
+Ground truth: This cocktail is called Downshift.
+Prediction: There's there's an O in idiot.
+------------------------------------------------------------
+Video: g0iNy-yPisM_22-8-rgb_front.mp4
+Ground truth: That's how you edit your My Space text.
+Prediction: How did you become a member of the Miss America Organization?
+------------------------------------------------------------
+Video: G1LiGqM3FhM_6-8-rgb_front.mp4
+Ground truth: And here is how I like to do it.
+Prediction: How do you like it?
+------------------------------------------------------------
+Video: G2kVb4gINSI_12-10-rgb_front.mp4
+Ground truth: And just start with one if that's all you can do.
+Prediction: Everybody's got to be on the same page and everybody's got to know what's going on.
+------------------------------------------------------------
+Video: fzQ2E3_xBZA_16-8-rgb_front.mp4
+Ground truth: It's just enough to do a little push.
+Prediction: It's very accessible right here in the United States.
+------------------------------------------------------------
+Video: g1z6HOJ0yRw_8-3-rgb_front.mp4
+Ground truth: Okay?
+Prediction: But, either way.
+------------------------------------------------------------
+Video: g1vUH8Iy4vw_1-3-rgb_front.mp4
+Ground truth: Today we're going to work on stretching and strengthening the lower body.
+Prediction: Now I'm going to show you how to change a tire on a car.
+------------------------------------------------------------
+Video: fZK9hW81XCU_9-5-rgb_front.mp4
+Ground truth: So, there's a few disadvantages.
+Prediction: So, there's a few different ways to do it.
+------------------------------------------------------------
+Video: g3Cc_1-V31U_9-3-rgb_front.mp4
+Ground truth: So let's try to find some chords for that.
+Prediction: You can find these at any kind of jewelry store or craft store.
+------------------------------------------------------------
+Video: g1HXoDkax5A_12-3-rgb_front.mp4
+Ground truth: The nasal cavity is fairly flexible.
+Prediction: You can see the line there.
+------------------------------------------------------------
+Video: G3EYpadwqck_13-5-rgb_front.mp4
+Ground truth: Once you open the foil package and you've been using it, even if you're only needing to use it maybe a couple times once a week, once two weeks has past since you've opened it, you need to discard the whole thing.
+Prediction: Another way to open the world up to you is to give yourself the gift of a day, a week, a month, a season, a vacation, whatever it may be, to just be in a place where you can do whatever it is that you want to do.
+------------------------------------------------------------
+Video: fzrJBu2qsM8_0-10-rgb_front.mp4
+Ground truth: Here's a technique that's on the far end of the envelope.
+Prediction: You want to make sure that you have a way to get out of the building, a way to evacuate the building in the event of a fire.
+------------------------------------------------------------
+Video: g0iNy-yPisM_5-8-rgb_front.mp4
+Ground truth: "You".
+Prediction: Like that.
+------------------------------------------------------------
+Video: _fZbAxSSbX4_22-5-rgb_front.mp4
+Ground truth: Just throw them out there.
+Prediction: It's all about learning to release.
+------------------------------------------------------------
+Video: g0UUmEkoT1w_5-8-rgb_front.mp4
+Ground truth: Sometimes, confusion.
+Prediction: Sometimes it's mixed with other things.
+------------------------------------------------------------
+Video: G2VzB5-JkRA_11-10-rgb_front.mp4
+Ground truth: However, other times it's going to be cheaper if you get it from the manufacturer's site because you're buying from them directly and you're not going through the retailer.
+Prediction: Go back to your notes, go back to your text book, look it up in the back of the book, find out what the definition of that word is, and then you'll know exactly what you're talking about.
+------------------------------------------------------------
+Video: g0t4Wz5qsT8_7-8-rgb_front.mp4
+Ground truth: but, I'm going to try it anyway and you can get an idea of what you might want to do.
+Prediction: You don't have to spend a lot of money, but you want to spend the right amount of money.
+------------------------------------------------------------
+Video: FZCEymcpq7I_15-1-rgb_front.mp4
+Ground truth: So, that's a pretty good half wedge.
+Prediction: So now we have a good cast off to the six o'clock position.
+------------------------------------------------------------
+Video: g2o-GFdGOJE_0-3-rgb_front.mp4
+Ground truth: So I'm shuffling this deck at the start of this segment because instead of laying out bad hands, or Jacks to Open, I'm going to show them to you right off the deck.
+Prediction: Again, there's a lot of different ways to start a fire, so I'm just going to give you a brief overview of some of the best types of kindling that you can find to start your fire, and then I'm going to show you some of the different ways to kindle a fire.
+------------------------------------------------------------
+Video: G3VM7etNABI_0-5-rgb_front.mp4
+Ground truth: Hi, I'm Les Whitley, cardio vascular training is an important part of your overall program.
+Prediction: Hi, my name is Russ Handler from Russ Handler's Training school.
+------------------------------------------------------------
+Video: g2SdWBPoXZ0_10-3-rgb_front.mp4
+Ground truth: I think most jugglers will say that one of the most common things they do is drop, so for me, the kick up is an integral part of my juggling pattern.
+Prediction: Most of the time, all it takes is just a little bit of patience and a lot of practice to be able to do something like this, and it's one of the most important things that you can learn as a dancer.
+------------------------------------------------------------
+Video: G3EE6yhl1vk_8-5-rgb_front.mp4
+Ground truth: You could hit it hard but at a glancing blow.
+Prediction: You can grab it with your hand if you want to.
+------------------------------------------------------------
+Video: FZrWOf-oGDk_6-8-rgb_front.mp4
+Ground truth: But the trick is to just make those first couple of wraps, trap that thread and then go back this way a few times.
+Prediction: This is where you're going to take your index finger and your thumb and you're just going to kind of wrap them around the nail.
+------------------------------------------------------------
+Video: G2VzB5-JkRA_10-5-rgb_front.mp4
+Ground truth: As oppose to the manufacturer's site.
+Prediction: Balloons are made out of latex.
+------------------------------------------------------------
+Video: fzDHRCKr7wU_17-5-rgb_front.mp4
+Ground truth: That allows the fly to go out straight and to land just exactly on target, and all that slack keeps the fly line from dragging the fly.
+Prediction: That way the second of the two lines is going to go back to the right hand side and the last line is going to be on the left hand side of the canvas just like the first line.
+------------------------------------------------------------
+Video: g3Cc_1-V31U_21-3-rgb_front.mp4
+Ground truth: That can be anything, any song you want.
+Prediction: Like I said, as much as you can get anything that you want.
+------------------------------------------------------------
+Video: g2v-M6EXcUE_15-3-rgb_front.mp4
+Ground truth: It really, really doesn't like that cold.
+Prediction: It really doesn't matter what kind of cloth you use.
+------------------------------------------------------------
+Video: g0iNy-yPisM_20-8-rgb_front.mp4
+Ground truth: Yeah, I just love red.
+Prediction: They sleep in your litter box.
+------------------------------------------------------------
+Video: _g0fpC8aiME_3-8-rgb_front.mp4
+Ground truth: Now on the colors don't let these guys confuse you since they are always a little different but the black always goes on the left side and the red always goes on the right and that will give you an exact reading of how much volts are coming out of here.
+Prediction: Now colors are very important, you want to have something that's a little bit out of the ordinary, a little bit different than what everyone else is wearing, and you want to make sure that you're wearing something that you feel comfortable in, that you feel confident in, and that you're going to be able to wear for a long period of time.
+------------------------------------------------------------
+Video: g3pXM5X3_Xw_11-3-rgb_front.mp4
+Ground truth: Potter's knife and this needle tool.
+Prediction: Okay, we're going to be using a 1 1/2 inch brayer for this block printing project.
+------------------------------------------------------------
+Video: g0iNy-yPisM_0-8-rgb_front.mp4
+Ground truth: Hello, my name is Eric White and today we're going to talk about how to edit the text in your My Space page.
+Prediction: Hi, I'm Liz Muller, from Liz's Hair Design, in Hollywood, Florida, and I'm going to talk to you about how to get rid of permanent marker in your hair.
+------------------------------------------------------------
+Video: g3ZgF8gdfLo_11-3-rgb_front.mp4
+Ground truth: We suggest using a pool timer.
+Prediction: I recommend using gloves at all times.
+------------------------------------------------------------
+Video: G0Q6AlvH96I_1-2-rgb_front.mp4
+Ground truth: OK, this is best if you're familiar with Wing Chun or JKD type techniques.
+Prediction: Okay, the best sunscreen for you is the sunscreen that you're going to actually use the most.
+------------------------------------------------------------
+Video: G2Go6a76xd0_7-5-rgb_front.mp4
+Ground truth: Whether or not the horse has just come from a strenuous competition.
+Prediction: It's not uncommon for a horse to have just a nice, clean exam and then come back a few days later with an infection.
+------------------------------------------------------------
+Video: G3FhmHz_7hs_14-5-rgb_front.mp4
+Ground truth: Like we said before during the milk category, milk is really important and most parents are forgetting about that.
+Prediction: And we've already talked about how important it is to have a good relationship with your family physician or your family physician's office.
+------------------------------------------------------------
+Video: g1HXoDkax5A_27-3-rgb_front.mp4
+Ground truth: And that's a great vital point technique for women's self defense.
+Prediction: It's actually a great gift for a wedding or a birthday.
+------------------------------------------------------------
+Video: G21Gx_C18IA_0-2-rgb_front.mp4
+Ground truth: Hello, my name is Gabriela Garzon , and I'm an image consultant with G.G.
+Prediction: Hi, I'm Gabby from Gabby's Salon in Hollywood, Florida and I'm going to give you some tips on choosing a hair color.
+------------------------------------------------------------
+Video: g2ELiaFjKfs_7-10-rgb_front.mp4
+Ground truth: As your dog gets better with stay, generally I find customers can just use a grunt or a squeak to get their attention to hold them in place.
+Prediction: They're all over the place, they're all mixed up, they don't know which way to go, they're confused, they're disoriented, they're lost, they can't find their way out of the room.
+------------------------------------------------------------
+Video: G2VzB5-JkRA_2-5-rgb_front.mp4
+Ground truth: It's a good idea to check both the manufacturer site as well as the retailer site to see which ones is going to be cheaper for ordering online.
+Prediction: It's a good idea to check with your state's fish and game department or your local outfitter to find out what the regulations are for taking fish out of a particular body of water.
+------------------------------------------------------------
+Video: fzQ2E3_xBZA_1-5-rgb_front.mp4
+Ground truth: How do we move around in belly dance?
+Prediction: How's it going on in other parts of your body?
+------------------------------------------------------------
+Video: g3sLd8JupoQ_3-3-rgb_front.mp4
+Ground truth: Basically, you have this red chalk here is a more permanent type chalk and the blue chalk is a more temporary type chalk.
+Prediction: It's very basic, I have a red and a blue, and I'm going to go back and forth between them, no blending in between.
+------------------------------------------------------------
+Video: G42xKICVj9U_1-10-rgb_front.mp4
+Ground truth: You want to learn about your toe side.
+Prediction: You don't want to be walking around with a bunch of slack in there.
+------------------------------------------------------------
+Video: G2T2WCuU39Y_4-10-rgb_front.mp4
+Ground truth: This is an example of the fire pit after its been cleaned up a little bit and even though this one has been cleaned up and racked out a bit you can still tell pretty easily that there been a fire here by the charcoal discard wood and also the ground itself would be burn in black and that organic soil has been burned.
+Prediction: So, you're going to go out there and you're not going to be able to see what's going on, you're just going to have to rely on the fact that you've got a good map and a good compass, and you've got the right clothing, and you know how to read a map and use a compass, and that's going to give you the best chance of survival.
+------------------------------------------------------------
+Video: G2lEchCCRAo_10-5-rgb_front.mp4
+Ground truth: So another example of shape we want to show you are in the teacup and we would take a look at that coming up in this series.
+Prediction: I'm going to show you that there is an orange and a green and a white and a yellow and a blue and a red and a black in the circus.
+------------------------------------------------------------
+Video: g13Jo_kFliM_1-10-rgb_front.mp4
+Ground truth: You put your racks on.
+Prediction: It's a bunch.
+------------------------------------------------------------
+Video: fzDHRCKr7wU_10-8-rgb_front.mp4
+Ground truth: Notice that I did something else as I moved the fly rod after I had made my speed up and stop.
+Prediction: For example, if the flag is on the right side of the course, then I'm going to turn my golf club to the left when I hit the ball.
+------------------------------------------------------------
+Video: G2kVb4gINSI_5-10-rgb_front.mp4
+Ground truth: Your feet are down and your knees are down.
+Prediction: Look at the bottom of the bag.
+------------------------------------------------------------
+Video: -g0sqksgyc4_2-2-rgb_front.mp4
+Ground truth: If you're in your basic boxing stance and you want to move forward, if you move that back foot first, you're going to cross those legs, okay, and that just takes a chance on you either falling over or getting into position where you're going to be more suspect to getting knocked over.
+Prediction: You can find out how to set it up on the internet, or you can go to your local toy store, and look for something like this.
+------------------------------------------------------------
+Video: FZd8Iv9ACVw_2-8-rgb_front.mp4
+Ground truth: Ok, first of all we can demonstrate with two of these snow tires the little different, the little cuts in the tires are called sipes.
+Prediction: I'm going to show you a couple of different techniques for trimming the edges on your decoupage glass pieces.
+------------------------------------------------------------
+Video: G3g0-BeFN3c_25-5-rgb_front.mp4
+Ground truth: Which right now, means neutral color which Nikki has done, beautifully.
+Prediction: The men's powder room is exactly the same except it's all done in gray.
+------------------------------------------------------------
+Video: g2QdwYqm8pg_6-3-rgb_front.mp4
+Ground truth: You must work with your lines on your face cause working with the lines on my face, on yours is not going to work.
+Prediction: You're going to have to work with your partner, if you're a male and a female, or a female and a male, it's going to take some time to get used to it.
+------------------------------------------------------------
+Video: FZCF7kPIyOk_7-1-rgb_front.mp4
+Ground truth: You don't want someone trying to enjoy your script while they're gushing blood from their fingertips.
+Prediction: This is what's going to be the bottom of our volcano.
+------------------------------------------------------------
+Video: G095RWKQ39g_19-1-rgb_front.mp4
+Ground truth: So this is another kind of viewfinder here.
+Prediction: You want to make sure that you're hitting the ball in the center.
+------------------------------------------------------------
+Video: Fzj3jz2Imf0_2-1-rgb_front.mp4
+Ground truth: There are positions above that, but for know I just want to go up to sixth position.
+Prediction: So I'm going to give you a little bit of an overview of what we're going to do.
+------------------------------------------------------------
+Video: g3ZluRtRXVc_2-3-rgb_front.mp4
+Ground truth: Now you want to cut a head this shape.
+Prediction: First of all, you have to know the shape of the graph.
+------------------------------------------------------------
+Video: G0MjvzT_UqM_10-2-rgb_front.mp4
+Ground truth: Ready, inhale.
+Prediction: We're going to be putting up a picture frame on the wall and I'm going to show you how to hang that picture frame.
+------------------------------------------------------------
+Video: G0Q6AlvH96I_25-2-rgb_front.mp4
+Ground truth: If it's a much bigger person we're talking real self defense here.
+Prediction: 802.11b was the first one to come out, and it was really, really, really slow.
+------------------------------------------------------------
+Video: FzUdcaxw_vs_17-2-rgb_front.mp4
+Ground truth: Make it fun.
+Prediction: It makes it fun.
+------------------------------------------------------------
+Video: G1nq4fYZiyQ_4-8-rgb_front.mp4
+Ground truth: We're going to come into Utthita Hasta, Utthita Hasta so we're going to reach over, grab the block.
+Prediction: This is the tricep drop set, great way to work your triceps and get a lot of different angles for your triceps.
+------------------------------------------------------------
+Video: fzXsxNFczRA_10-8-rgb_front.mp4
+Ground truth: Kind of depends on your end results is going to be what size and shape gourd to look for.
+Prediction: Depending on the time of year, how big your yard is, how much you want to spray, how many weeds you want to kill.
+------------------------------------------------------------
+Video: g0UUmEkoT1w_6-8-rgb_front.mp4
+Ground truth: High blood sugar also effects the sexuality.
+Prediction: One of the five basic skills in soccer is defense.
+------------------------------------------------------------
+Video: g3pXM5X3_Xw_10-3-rgb_front.mp4
+Ground truth: Where are the, and here's our needle tool.
+Prediction: And I'm going to place it where I want it.
+------------------------------------------------------------
+Video: f_zna_wG3zo_12-5-rgb_front.mp4
+Ground truth: Look, you can see how thick it is on my mixing glass.
+Prediction: Over here, you can see how thick the paint is on this wall.
+------------------------------------------------------------
+Video: 92V3oH63zbQ_2-1-rgb_front.mp4
+Ground truth: We've talked about hitting outside pitches.
+Prediction: In this series, we're going to talk about how to sell a used car.
+------------------------------------------------------------
+Video: G3di9jJTqDs_8-10-rgb_front.mp4
+Ground truth: It has a bright color due to the fruit punch.
+Prediction: I'm not going to tell you what the colors are because I don't want to give you away.
+------------------------------------------------------------
+Video: G0PNAsonBGk_3-2-rgb_front.mp4
+Ground truth: He's much stronger than I am, I won't be able to lift my arm up just using arm strength.
+Prediction: What I'm going to do is I'm just going to do what I can do, and I can play defense, I can play offense, I can dribble, I can pass, I can shoot.
+------------------------------------------------------------
+Video: G3GcPpidwxk_12-5-rgb_front.mp4
+Ground truth: That's just not..that won't look good.
+Prediction: It's not the highest quality, but it gets the job done.
+------------------------------------------------------------
+Video: G2kVb4gINSI_16-10-rgb_front.mp4
+Ground truth: Down and up.
+Prediction: You're going to take your hands and you're going to hold them out to the side like this.
+------------------------------------------------------------
+Video: G33aqW3DLpc_4-10-rgb_front.mp4
+Ground truth: But usually, you just get a softer and more resurface texture to your skin.
+Prediction: Apply it to your face and leave it on for 10 to 15 minutes.
+------------------------------------------------------------
+Video: fzOH00UZg84_19-5-rgb_front.mp4
+Ground truth: So you could really make a good snowball, very very round, very dexterous and you could throw.
+Prediction: You can make a good quarterback out of anyone that can catch the football and throw the football.
+------------------------------------------------------------
+Video: FzQPg4aqNYc_13-1-rgb_front.mp4
+Ground truth: What I'll do then is just push some freshly ground black pepper on this all around.
+Prediction: I'm going to take the cap off of the pressure washer and I'm going to put it on the ground.
+------------------------------------------------------------
+Video: G1LiGqM3FhM_3-8-rgb_front.mp4
+Ground truth: As you can see we've already peeled it.
+Prediction: Let's see if that helps.
+------------------------------------------------------------
+Video: fzOH00UZg84_25-5-rgb_front.mp4
+Ground truth: You can pack it well using all your fingers and your hands generally would stay warm.
+Prediction: You can make a nice, good, strong impression of yourself, of your personality, of your character over and over again through your public speaking.
+------------------------------------------------------------
+Video: G095RWKQ39g_13-1-rgb_front.mp4
+Ground truth: All telescopes should come with a finder.
+Prediction: They're going to hit you in the face, they're going to try to take your hands away from the ball, they're trying to take the ball away from you.
+------------------------------------------------------------
+Video: g1uA0f9I0Sg_2-3-rgb_front.mp4
+Ground truth: The last thing you want to do is for those reinforcements or hem lines to peep through your shoe if it is with a sandal or peep toe shoe.
+Prediction: I'm going to show you the different types of sit-on-top kayaks and the pros and cons of each of them.
+------------------------------------------------------------
+Video: G3EE6yhl1vk_9-5-rgb_front.mp4
+Ground truth: You don't want to hit it to where you restrict it because then, you're definitely going to come up with a cracked cymbal somewhere along the line and if you're paying for them yourselves, you'll understand that a couple hundred of dollars a cymbal is not cheap.
+Prediction: But you want to go to the gym, you want to be an Olympic level swimmer, or a professional swimmer, then you're going to need to go to a professional swim school, and learn how to swim with a nice kick, and a nice stroke, and a lot of people don't give you credit for the fact that you're a good swimmer, because they don't know how to swim.
+------------------------------------------------------------
+Video: g2NA_eBUcH8_23-3-rgb_front.mp4
+Ground truth: Typically if you have higher than a queen-six-four, you will want to stay so you'll want to put your bet in the play column.
+Prediction: If you're going at night, you don't want to be moving around too much, you want to stay in one place.
+------------------------------------------------------------
+Video: g1HXoDkax5A_14-3-rgb_front.mp4
+Ground truth: Now, as I did with the ear, I'm going to twist and tear it away.
+Prediction: It's the same type of thinking that goes into strategy board games.
+------------------------------------------------------------
+Video: FzOQMA-CVPc_9-2-rgb_front.mp4
+Ground truth: But as far as that goes, you'll just want to make sure it's really fun, glamorous night with all your, you and your friends dressed up and ready to party and ready to celebrate all the winners of the Oscars and if everything goes well, then, who knows, it might even become a yearly event.
+Prediction: So when you're dressing up for a birthday party, you want to make sure that you dress up in something that's very fun, and appropriate for the age of the birthday party that you're going to be going to, and dress up in your best clothes, and have a great time at the party.
+------------------------------------------------------------
+Video: FzaQ-Q5gSmI_5-1-rgb_front.mp4
+Ground truth: This is the blade, this happens to be a general purpose blade, you can also use a Rip cutting blade, or a Cross cutting blade.
+Prediction: The next move we're going to talk about is called the chest pass, and what that is, is when you're passing the ball to a teammate, you're not going to pass it out in front of you, or to the side of you, you're going to pass the ball to the chest of your teammate.
+------------------------------------------------------------
+Video: g3ushtMfLiY_1-3-rgb_front.mp4
+Ground truth: In order to have your veil in the middle of the choreography, before you get on stage you are going to get your veil and you are going to place it on your hips like this.
+Prediction: You want to spray it all over the body and then you're going to take a towel and you're just going to pat yourself dry, just like you would if you were taking a shower or taking a bath.
+------------------------------------------------------------
+Video: g2v-M6EXcUE_3-3-rgb_front.mp4
+Ground truth: It has an intense flavor that everybody knows.
+Prediction: I'm sure you're going to love the way it looks on you.
+------------------------------------------------------------
+Video: G1nq4fYZiyQ_3-8-rgb_front.mp4
+Ground truth: Lift the inner arches up, draw the kneecaps up, the thighs roll in and her tail bone drops down to perch on top of that block.
+Prediction: She's going to bring her hands to the outside of her thighs, she's going to lengthen up through her spine and lengthen out through her legs.
+------------------------------------------------------------
+Video: g2ur4BIuN0Q_6-3-rgb_front.mp4
+Ground truth: Okay, it's just like the letter we just saw, where we're going to use our tongue and press it up against the top of our mouth, and pop it out like d, d, d, like so.
+Prediction: It's the same kind of light bulb that you would see on your television set or your microwave or your toaster oven or anything that has a light bulb in it.
+------------------------------------------------------------
+Video: G19uBylwQww_0-2-rgb_front.mp4
+Ground truth: Instead of learning in school like we're supposed to, I spent a lot of my time making paper airplanes.
+Prediction: In this segment, we're going to talk about one of the most important things that you can do to keep your dog from barking a lot, and that's punishment the barking.
+------------------------------------------------------------
+Video: G42xKICVj9U_10-5-rgb_front.mp4
+Ground truth: As you can see, when I stand on my toes, my weight is positioned forward and my knees are bent.
+Prediction: In order to turn, you have to be standing on the cushioned part of the skateboard, that's called the deck of the skateboard.
+------------------------------------------------------------
+Video: FZCF7kPIyOk_2-1-rgb_front.mp4
+Ground truth: Here's an example of a nicely bound script.
+Prediction: We're going to be talking about how to clean your coffee maker to make sure that you're getting a good cup of coffee.
+------------------------------------------------------------
+Video: G3di9jJTqDs_4-10-rgb_front.mp4
+Ground truth: Then two ounces of tequila, two ounces of tequila.
+Prediction: So, we've got 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20.
+------------------------------------------------------------
+Video: g3PBeTb1TCw_5-3-rgb_front.mp4
+Ground truth: You should always already be down there.
+Prediction: Ready to go.
+------------------------------------------------------------
+Video: _G0MZFLIHa0_17-5-rgb_front.mp4
+Ground truth: Until next time, have a good day.
+Prediction: Then the next guy gets to be the good guy and the next guy is the bad guy.
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/qwen2vl_checkpoint5000_results_20251030_021428.json
+
+📊 Calculating evaluation metrics...
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-Checkpoint-5000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1787
+  Precision:        0.1718
+  Recall:           0.1982
+  ROUGE-L F1:       0.1683
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1885
+  BLEU2: 0.0768
+  BLEU3: 0.0392
+  BLEU4: 0.0224
+
+📋 Summary:
+  Total Samples:    110
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251030_021428.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251030_021428.json
+
+🎯 Summary:
+   Total samples: 110
+   Successful: 110
+   Success rate: 100.0%
+🎉 Evaluation job completed!

@@ -1,0 +1,507 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+==================================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+Freeze Vision Tower: False
+Video FPS: 18
+Min Pixels: 50176
+Max Pixels: 50176
+
+🚀 Loading model...
+🔓 Vision tower was UNFROZEN during training - loading from checkpoint
+🔄 Loading non-LoRA trainable weights (vision tower + merger)...
+   Loading 824 parameters from checkpoint
+   Sample parameter keys: ['model.visual.patch_embed.proj.weight', 'model.visual.blocks.0.norm1.weight', 'model.visual.blocks.0.norm2.weight']
+✅ Loaded non-LoRA weights (vision tower + merger) successfully!
+🔄 Loading LoRA weights...
+✅ Model loaded successfully!
+[qwen2vl_evaluation] Resolved vision image size: 1024
+Limited to 110 samples (from 110 total)
+📋 Processing 110 samples
+🎬 Starting evaluation on 110 videos...
+------------------------------------------------------------
+🔍 Video path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/1L0GSTIb9Vs_4-5-rgb_front.mp4
+🔍 Video exists: True
+Video: 1L0GSTIb9Vs_4-5-rgb_front.mp4
+Ground truth: The male of the species is white with black wings and very very long tail feathers.
+Prediction: The men's man, the man on the right, has a white shirt, white pants, white socks, and he has a very long arm, very long legs, very long arms, and very long legs.
+------------------------------------------------------------
+🔍 Video path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/0rsdwK7sHjE_18-5-rgb_front.mp4
+🔍 Video exists: True
+Video: 0rsdwK7sHjE_18-5-rgb_front.mp4
+Ground truth: If you want to dry it, you can put a fan on it.
+Prediction: If there's a wind that's blowing towards you, you want to turn into the wind so that you can put the boat in and out of the water.
+------------------------------------------------------------
+🔍 Video path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/1Tix6cnQko4_11-5-rgb_front.mp4
+🔍 Video exists: True
+Video: 1Tix6cnQko4_11-5-rgb_front.mp4
+Ground truth: So as you bend, you're going to press into the floor.
+Prediction: Next step is going to be putting the ice in the glass.
+------------------------------------------------------------
+Video: BJIygZtYwXM_13-3-rgb_front.mp4
+Ground truth: That just looks gloomy.
+Prediction: Look at that color, beautiful.
+------------------------------------------------------------
+Video: -dXU26rkB7I_12-5-rgb_front.mp4
+Ground truth: If you over mix it, your cookies will run.
+Prediction: If you over mix it, your cookies will run in the oven.
+------------------------------------------------------------
+Video: 00Cal635Wno_14-5-rgb_front.mp4
+Ground truth: But once it's on there, it's nice and stiff and you're good to go, that's your float head.
+Prediction: The benefits of yoga is that it's on a daily basis, it's a nice stretch, and it's good to go for your head.
+------------------------------------------------------------
+Video: dzctDQsw2dk_6-8-rgb_front.mp4
+Ground truth: And then we will return, remove the mask and add the final touches which will be a hydrating creme.
+Prediction: It's basically the same process except you're going to add a little bit of water and a little bit more soap and you're just going to rinse it off.
+------------------------------------------------------------
+Video: 47yGbJ5YDYk_3-5-rgb_front.mp4
+Ground truth: And the third part the hammer or the striker or the beater or the metal stick that you hit it with.
+Prediction: The key part of the tackle is the rod, the line, the leader, the tippet, or the trace, or the bead sequence that you want to match up with the fly that you're casting.
+------------------------------------------------------------
+Video: 05snMPwCV98_4-5-rgb_front.mp4
+Ground truth: This is a shrunken sweater vest with ribbing.
+Prediction: This is a great way to narrow the width of your waist with a ribbing technique.
+------------------------------------------------------------
+Video: 1QBezkHsXd4_7-8-rgb_front.mp4
+Ground truth: So, you can take it into the pool and swim a bit in it just to get accustomed to it.
+Prediction: There are so many different types of photography that you can become a specialist in.
+------------------------------------------------------------
+Video: 5YMC8pMGeTA_10-8-rgb_front.mp4
+Ground truth: So it's going to go, front and back, and front and back.
+Prediction: So you're going to take one foot in front of the other.
+------------------------------------------------------------
+Video: -eXHI3iqu7g_2-5-rgb_front.mp4
+Ground truth: Don't ever pour your fix down the drain.
+Prediction: It doesn't have to be an exact even inch, it can be a quarter of an inch either way.
+------------------------------------------------------------
+Video: fJ5vO67Ktnw_0-3-rgb_front.mp4
+Ground truth: Okay, here we're going to go over the idea of a pendulum.
+Prediction: Back in here, here's our pot, and I'm going to go ahead and tell you what we're going to do.
+------------------------------------------------------------
+Video: 3MXwlCKtSPU_11-5-rgb_front.mp4
+Ground truth: You don't want to buy these if you find them because they're pretty much worth nothing but everybody thinks they're great.
+Prediction: It's a lot of fun for a few dollars, but if you're going to go out and spend a lot of money, make sure that you're really going to have a good time.
+------------------------------------------------------------
+Video: 15bYoBr7BWs_42-8-rgb_front.mp4
+Ground truth: Then, you want to go ahead and get the reverse side too.
+Prediction: And you're going to go underneath and then you're just going to straighten out your arm.
+------------------------------------------------------------
+Video: -Bz0BNwqAE4_15-5-rgb_front.mp4
+Ground truth: And we're also going to need a couple of sheets of notebook paper and a pen, and if you have a music stand handy, that would be good, too.
+Prediction: And we're going to wash this in a sink full of warm soapy water, rinse it off, and then we're just going to take a clean paper towel, and if you have some hand sanitizer, that's good too, and wipe it down.
+------------------------------------------------------------
+Video: 038vE9JsU9I_7-8-rgb_front.mp4
+Ground truth: And those are the tools and supplies needed for saxophone maintenance.
+Prediction: In this segment we're going to talk about the really hard stuff, which is getting the key out of the key ring.
+------------------------------------------------------------
+Video: 1_j3bP8UnZg_6-8-rgb_front.mp4
+Ground truth: All the labels do research and they are looking to find out if your act is playing out anywhere, can you sell tickets, do you have a song on the radio, do you have a big e-mail list, do you have any sort of a following.
+Prediction: When you get to the field, you're not going to be able to find out who your opponents are, so you're going to have to look around and try to figure out who they are, and that's going to take you a little bit of time.
+------------------------------------------------------------
+Video: 1xKU91ggLeI_3-5-rgb_front.mp4
+Ground truth: My name is Jeff Klein and I'm a vodka connoisseur and bartender here at Beak's Old Florida in St. Petersburg.
+Prediction: I'm Jeff Klein, vodka connoisseur and owner of Beak's Old Florida in St. Petersburg, Florida.
+------------------------------------------------------------
+Video: 0-_hOoXzsWw_14-5-rgb_front.mp4
+Ground truth: So if he just stands up and doesn't try and root and I push him, it takes no effort to push him over.
+Prediction: So, if he's standing there, he's going to try to cover me, and I'm going to be able to get past him, and there's no way for him to block me.
+------------------------------------------------------------
+Video: 1B-uqjIDMKk_5-8-rgb_front.mp4
+Ground truth: Would you need to learn a second language?
+Prediction: Long days on their feet, long days on their hands.
+------------------------------------------------------------
+Video: 04-j8JucIXg_9-8-rgb_front.mp4
+Ground truth: One thing to remember is that setting up a tent, you can do this with one person.
+Prediction: One of the first things that you need to think about when you're building a tent is the type of tent that you're going to build.
+------------------------------------------------------------
+Video: 4U57Q4XIfoM_13-8-rgb_front.mp4
+Ground truth: Once you do that for a two minute round, in fact I've even had some of the kids doing them for three two minute rounds, because you'll actually get the same workout without the jump rope anyway, but you look kind of foolish sometimes when the other boxers are looking at you and you don't have a jump rope and you're still jumping.
+Prediction: We're going to do the same thing with the second point, we're going to draw a line from the first point to the second point and that's going to give us the height of the triangle.
+------------------------------------------------------------
+Video: 1YnA7Iv3oJ8_3-8-rgb_front.mp4
+Ground truth: Basically, what it is, is it's a little gadget that measures how much voltage is flowing between 2 contacts and you use these little kinda contact points, these little wires to make that measurement.
+Prediction: What we want to do is we want to take a tape measure and measure the distance from one side of the wall to the other and then we want to measure the height of the wall from the floor to the ceiling and then we're going to add those two measurements together and that's going to give us the amount of wire that we need.
+------------------------------------------------------------
+Video: -f7htdZ3Kk0_2-5-rgb_front.mp4
+Ground truth: Let's look at candidates.
+Prediction: The way that you can tell is looking at the heel of the hat.
+------------------------------------------------------------
+Video: E3r2mQix7Uo_3-5-rgb_front.mp4
+Ground truth: Let's look at one of them.
+Prediction: Kind of around the leg, one, two, three, four.
+------------------------------------------------------------
+Video: 5k66qfWaM7E_5-8-rgb_front.mp4
+Ground truth: And that's one indication to know that you actually combined the image properly.
+Prediction: You want to be aware of what's going on around you, but you don't want to be so hard on yourself that you can't enjoy the ride.
+------------------------------------------------------------
+Video: 0EjXICFqrKo_37-8-rgb_front.mp4
+Ground truth: And left.
+Prediction: Left, back, left, back.
+------------------------------------------------------------
+Video: 17hrR6QZBdU_19-8-rgb_front.mp4
+Ground truth: It's small enough to fit in your backpack, your pocket, and keep it with you in rehearsals, so if you want to learn a lot of improv games, this is the book for you.
+Prediction: This is a backpack, a day pack type of backpack, and it has a lot of features that make it a good backpack for a variety of activities, such as hiking, backpacking, climbing, skiing, snowboarding.
+------------------------------------------------------------
+Video: bA53FmWDNPU_12-8-rgb_front.mp4
+Ground truth: It forces him to make a decision; meanwhile, the ball may be going someplace else.
+Prediction: If the person is standing on the other side of the room, you want to give them a lot of room, you don't want to be pushing them out of the way or anything like that.
+------------------------------------------------------------
+Video: b33htMHPtl8_8-5-rgb_front.mp4
+Ground truth: Swamp water does not have the stipulation that he has to stop so he can continue moving on.
+Prediction: The water doesn't have to be as salty as the sea, but it has to have enough salt in it to give it the brine that it needs.
+------------------------------------------------------------
+Video: 5YMC8pMGeTA_17-8-rgb_front.mp4
+Ground truth: And push, pull in; push, pull in.
+Prediction: Push, pull in, push, pull in.
+------------------------------------------------------------
+Video: -fNgnONv_3I_8-5-rgb_front.mp4
+Ground truth: When you're calling a snake, what you want to do is a modified tiger crawl--no pun intended, that's actually what it's called.
+Prediction: So what you want to do is you want to get a little bit of an edge on it, and then you want to go ahead and hit it, and you want to try to get it to land as close to the center as possible.
+------------------------------------------------------------
+❌ Error processing sample: CUDA out of memory. Tried to allocate 3.15 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.63 GiB is free. Including non-PyTorch memory, this process has 37.75 GiB memory in use. Of the allocated memory 37.09 GiB is allocated by PyTorch, and 159.86 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Video: a-WMWISI12s_16-2-rgb_front.mp4
+Ground truth: Be realistic when your obsessive your garden and the space that you have in it, play it accordingly and your garden would reward you with great vegetables all summer long.
+Prediction: When your child grows out of the stroller, you can put them in a car seat or a high chair and they will be able to sit in the stroller again, but you will have to get a bigger stroller for your child.
+------------------------------------------------------------
+Video: 1TsfCQyFt1A_2-5-rgb_front.mp4
+Ground truth: A wicker basket, which I showed in the previous segment is a classic add on, particularly for a woman's bike.
+Prediction: A wok or a pan like this is used for roasting, browning, searing, steaming, sauteing, and it's an excellent tool to add flavor and depth to your dishes.
+------------------------------------------------------------
+Video: -dyT7rtkAMk_20-5-rgb_front.mp4
+Ground truth: At the end of that 10 times, you can just noodle home, take an easy ride to recover.
+Prediction: Breathe, get over the obstacle, whatever it is, just do it, then you can do it again.
+------------------------------------------------------------
+Video: 16y-dsX1MDk_8-8-rgb_front.mp4
+Ground truth: Or, you have this same one...this is an eleven by fourteen (the same size) and it only runs thirty three dollars.
+Prediction: Left and right, left and right, one, two, three, four, five, six, seven, eight.
+------------------------------------------------------------
+Video: -dNt6nmRfFE_3-5-rgb_front.mp4
+Ground truth: You like to look up at your hand as you're stretching feeling it stretch and deepening the stretch along your side.
+Prediction: If you get too close to the wall, you're not going to be able to hit the ball and you're going to get blocked by the wall.
+------------------------------------------------------------
+Video: 57bbRJn0xec_17-1-rgb_front.mp4
+Ground truth: medicine ball.
+Prediction: Ball, back and forth.
+------------------------------------------------------------
+Video: EN_Lv4gfL_A_5-8-rgb_front.mp4
+Ground truth: I prefer to always have people speak in the present tense.
+Prediction: I'm sorry, but somebody's going to have to speak English in this room right now.
+------------------------------------------------------------
+Video: 0HfN3Ts0FxQ_16-5-rgb_front.mp4
+Ground truth: Make sure you get all of it on there.
+Prediction: Make sure you have all three of them.
+------------------------------------------------------------
+Video: 1g9c_YQZh5E_2-8-rgb_front.mp4
+Ground truth: You know I'm looking at the way I'm tearing this paper down and it's like a book already, and I'm like what kind of book can I make today with cyanotypes, and one thing that I forgot to mention is that the cyanotype is cheap.
+Prediction: You know, you have to have a lot of things to go with it, a lot of stuff to go with that, and that's going to be a lot of collectibles, cards, toys, figurines, that kind of thing, and then you're going to need a place to put all that stuff, so you need a lot of shelves, and a lot of boxes, and drawers, and cabinets, and all that kind of stuff.
+------------------------------------------------------------
+Video: 1XoT1-gzWfg_2-8-rgb_front.mp4
+Ground truth: How does one become a comedian?
+Prediction: How did you become a comedian?
+------------------------------------------------------------
+Video: 0oHN9y80NME_6-5-rgb_front.mp4
+Ground truth: If I was going to use this liner, I probably go to a different frame.
+Prediction: If I'm going to use this one, I'm probably going to be going to a different state.
+------------------------------------------------------------
+Video: 4BKUiL-ou2Q_8-8-rgb_front.mp4
+Ground truth: This is actually water rain retention discharge so the survey may in fact show that the sewer company maintains the right to have access to this small area.
+Prediction: I'm going to show you how to do that in the next clip and then we're going to move on to the next step which is going to be showing you how to make the boat itself.
+------------------------------------------------------------
+Video: 0C_NjyLtHwc_33-8-rgb_front.mp4
+Ground truth: And I'm just going to hold the button and just gently slide it down the thread to where it's fitting right there and then I'm going to go look where I have the knot and just go right below the knot and stick it through to the other side.
+Prediction: I'm going to take a little bit of it and I'm going to put it on the back of my hand.
+------------------------------------------------------------
+Video: 5qji7JFwR3M_2-8-rgb_front.mp4
+Ground truth: You need to stay back like eight to twelve inches away from the wood.
+Prediction: This is going to be about eight inches long, so I'm going to mark it off at eight inches.
+------------------------------------------------------------
+Video: 1in4niLBTxc_4-8-rgb_front.mp4
+Ground truth: I do a little twist here like this.
+Prediction: So what I'm going to do is I'm just going to pour a little bit in here.
+------------------------------------------------------------
+Video: 5c2eJSafE3M_8-5-rgb_front.mp4
+Ground truth: There we go, we have a nice wall fitting clew patch.
+Prediction: And what we're going to do is we're just going to take a nice clean, dry, lint free towel.
+------------------------------------------------------------
+Video: DX3KWLldIJc_2-8-rgb_front.mp4
+Ground truth: You want to cut down a nice flat side like that.
+Prediction: I'm going to slice it in half and then I'm going to cut it in half again.
+------------------------------------------------------------
+Video: bwnfdMdvWFQ_0-4-rgb_front.mp4
+Ground truth: Hi my name is Mary Thinnes and I am a skin care expert.
+Prediction: Hi, my name is Sean Hobson, and I'm a basketball coach.
+------------------------------------------------------------
+Video: 0zD5Uh7S35A_6-5-rgb_front.mp4
+Ground truth: This notch should meet with this notch.
+Prediction: The next step in the process is to apply the decoupage glue to the back of the image.
+------------------------------------------------------------
+Video: 07n9gNTlVdI_16-5-rgb_front.mp4
+Ground truth: The stringer is pretty hard to shape, so I usually tend to get that down and then you can shape the foam to the stringer, starting on the high points always first.
+Prediction: This shot is pretty tricky and it's hard to get the timing right to get the proper amount of spin on the ball, so we're going to start on the high point of the ball, first, second, third.
+------------------------------------------------------------
+Video: 5x3CorS_t30_11-5-rgb_front.mp4
+Ground truth: A great way to impress the girls, guys.
+Prediction: And they can run away, they can hide behind the blue wall, but they can't run away and hide behind the red wall.
+------------------------------------------------------------
+Video: 5qsNHYnRWYQ_3-3-rgb_front.mp4
+Ground truth: So don't let the employer bull you or intimidate you or have you answer questions that they legally cannot answer.
+Prediction: Don't let them out of your arm's reach, don't let them get too far away from you, and don't be afraid to push them away if they try to push you away.
+------------------------------------------------------------
+Video: berpJe71eNY_11-4-rgb_front.mp4
+Ground truth: So wet down the sand, get in there and practice out of it and you'll find that your skills will increase and you won't be fearful of virtually any lie that you could ever get.
+Prediction: If you have a lot of loose ends or frayed hair, you want to go ahead and get rid of that before you put your hair in a braid, otherwise it's going to come undone and it's not going to look very good.
+------------------------------------------------------------
+Video: 10d1oeViKYw_6-5-rgb_front.mp4
+Ground truth: Your hips are down.
+Prediction: Left hip forward, left hip back, left hip forward.
+------------------------------------------------------------
+❌ Error processing sample: CUDA out of memory. Tried to allocate 3.31 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.74 GiB is free. Including non-PyTorch memory, this process has 37.63 GiB memory in use. Of the allocated memory 37.00 GiB is allocated by PyTorch, and 135.01 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Video: 06tA1xvaSt8_5-5-rgb_front.mp4
+Ground truth: What's more, in terms of getting into, like, the really more detailed areas, where you're just going to be on the basic shape of the shoulder.
+Prediction: You want to do that for about 15 to 20 minutes and then you want to rinse it off with warm water and then pat it dry.
+------------------------------------------------------------
+Video: 4MIPkK7F4GM_2-5-rgb_front.mp4
+Ground truth: And what you want to do is that's the basic brush but you're going to want to do it so your hand is behind your back.
+Prediction: Some of the things that you want to do is like the backside 180 ollie, which is a lot of people want to do and it's a lot harder than it looks.
+------------------------------------------------------------
+Video: CFC40Yw8CyQ_9-8-rgb_front.mp4
+Ground truth: When you are house training a puppy, a pen like this is more comfortable then a crate so your puppy learns to go in the crate for short term confinement and in the pen for longer term confinement.
+Prediction: In the case of a house that's been built on a foundation, the foundation is the part of the house that sits on the ground, and it's the part that's going to bear the weight of the rest of the house.
+------------------------------------------------------------
+Video: -fPRgGA3QYY_28-5-rgb_front.mp4
+Ground truth: Let's turn them over this time so that they don't move as much.
+Prediction: Gently tap your forefingertip on the ball, but don't move the ball.
+------------------------------------------------------------
+Video: 5HDlLzELoeg_2-8-rgb_front.mp4
+Ground truth: The first one we are going to cover is going to be the code machine.
+Prediction: Now, I'm going to show you how to change oil on a Honda motorcycle.
+------------------------------------------------------------
+Video: -F8wNvnNQNs_2-8-rgb_front.mp4
+Ground truth: Now once it's attached nice and firmly we want to moisten it, but only a very little amount.
+Prediction: Once you've done that, you've got the base of the image in place and you've given it a little bit of dimension by giving it a shadow.
+------------------------------------------------------------
+Video: aVY3jET8UVY_4-5-rgb_front.mp4
+Ground truth: I love to do that with scarves.
+Prediction: With the front view of the neck.
+------------------------------------------------------------
+Video: 14fs-ot5KCc_17-8-rgb_front.mp4
+Ground truth: We're going to get up on our toes to get some momentum, and we're going to go straight in.
+Prediction: Your feet are going to be slightly wider than your shoulders and you're going to shift your weight from one foot to the other as you jump.
+------------------------------------------------------------
+Video: 3Dna82kryPY_9-8-rgb_front.mp4
+Ground truth: So you take the front leg, step over to the side.
+Prediction: You don't want to use your foot, you want to use the edge of your foot, and you want to make sure that you're using the muscles in your legs, not your arms.
+------------------------------------------------------------
+Video: bwLhAEu1h90_14-5-rgb_front.mp4
+Ground truth: So, the one thing about sit-on-top kayaks, you will get a little wetter than sit-inside kayaks.
+Prediction: So, the things about sit-on-top kayaks, they get a little bit more water in the bottom of the boat, and that's why they're called sit-on-top.
+------------------------------------------------------------
+Video: 46WKIipNJt8_9-8-rgb_front.mp4
+Ground truth: So now we have the pot centered on the wheel, the next thing is going to be securing it and I just want to get a little bit of moisture on this wheel so that clay will stick.
+Prediction: Okay, I'm going to show you what that looks like, and then we're going to go on to the next step, and that's going to be the 6th fret on the E string.
+------------------------------------------------------------
+Video: 1yvskpdZCPs_5-8-rgb_front.mp4
+Ground truth: When you extend your legs, pull your legs into a Pilates dance, which means your heels are together and your toes are out like a V. Keep the small of your back down to the mat.
+Prediction: So you're going to take your right foot and bring it in between your left foot and the inside of your left shin and then you're just going to step back with your left foot so that your left foot is behind your right foot, your left heel is going to be in line with your right ankle and your left toes are going to be pointing straight ahead.
+------------------------------------------------------------
+Video: DDbXcFzIXH4_1-8-rgb_front.mp4
+Ground truth: This is just like on a regular button down the front oxford shirt that has cuffs, boring old plain shirt that a man would wear with a tie.
+Prediction: It's the same size as a regular button, it's got a button hole on the back of it so you can sew it on and it's long enough to give you a little bit of room to sew it on so you don't have to worry about it being too tight or too loose.
+------------------------------------------------------------
+Video: 1jeK8PkhsR4_8-8-rgb_front.mp4
+Ground truth: Ok.
+Prediction: And, we're going to shake that up.
+------------------------------------------------------------
+Video: 2G29ijsPVXI_7-5-rgb_front.mp4
+Ground truth: If this is congested, this congestion is not going to go anywhere, so you need to get the congestion out of the hamstring first, and then work the calves, so real quick, just work the calf.
+Prediction: If that's the case, then the negation of the antecedent is the same as the consequent.
+------------------------------------------------------------
+Video: FWi7va17oUQ_24-9-rgb_front.mp4
+Ground truth: You don't want to sit in there and try and turn it, thinking it doesn't work, 'cause it....it turns on on it's own.
+Prediction: I'm going to take my first three cards and I'm going to put them in the community or the pot.
+------------------------------------------------------------
+Video: 23ln0Sw_8Qo_8-5-rgb_front.mp4
+Ground truth: And the way I like to describe it is, remember when you were a little kid and you'd run through your mom's kitchen with your socks on and slide around.
+Prediction: And the other person likes the shape of the dress, but they don't like the color, and the other person says, "Well, that's okay, we can get a different color," and then they get a different pair of shoes with the same shoe on them.
+------------------------------------------------------------
+Video: 1PwvyT44-uE_21-8-rgb_front.mp4
+Ground truth: A hard heavy interior core, but with absorption on both sides.
+Prediction: It's hard to carry a lot of weight inside a building but you can have a lot of wind loading on the outside of the building.
+------------------------------------------------------------
+Video: 1h3mvQDZnBw_25-8-rgb_front.mp4
+Ground truth: That's all it took was one little tiny nip.
+Prediction: And then I'm going to leave it on for about 10 minutes and then I'm just going to take it off.
+------------------------------------------------------------
+Video: 1bziHM2QeX8_5-8-rgb_front.mp4
+Ground truth: And I've got my needle tool here, so you can see you don't have to have a scoring tool.
+Prediction: You use the eraser to remove the ink, but you don't erase the image, you just erase the ink.
+------------------------------------------------------------
+Video: dnzYz8sZHSg_2-1-rgb_front.mp4
+Ground truth: How often do you want to change your oil is a good question.
+Prediction: Again, I'm going to go over with you how we're going to do that.
+------------------------------------------------------------
+Video: 0z-gCDC8oOw_9-8-rgb_front.mp4
+Ground truth: I have one here handy.
+Prediction: So, I'm going to take it and I'm just going to pull it back just like I did with the forehand.
+------------------------------------------------------------
+Video: C88yVO-7XzA_8-3-rgb_front.mp4
+Ground truth: Anyway here's where we are and now let's move on to our next step.
+Prediction: And there you have it, now we are ready to move on to the next step.
+------------------------------------------------------------
+Video: dEsle4TneCw_19-5-rgb_front.mp4
+Ground truth: I'm going to start form this angle.
+Prediction: I'm going to go to the beginning of the dash in this case.
+------------------------------------------------------------
+Video: 1bJg-DSYR8k_3-8-rgb_front.mp4
+Ground truth: You don't have to make a vision board big in order for it to be effective.
+Prediction: You don't want to be too close to the wall because you're not going to be able to see what you're doing.
+------------------------------------------------------------
+Video: 02LnULLXds4_29-8-rgb_front.mp4
+Ground truth: Again I'm going to move this down here.
+Prediction: You want to make sure that you have a firm grip on the handle of the scissor.
+------------------------------------------------------------
+Video: 5T4P9SM0_ck_2-5-rgb_front.mp4
+Ground truth: Left hip goes up and drop.
+Prediction: But again, with the lightest possible weight.
+------------------------------------------------------------
+❌ Error processing sample: CUDA out of memory. Tried to allocate 3.28 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.98 GiB is free. Including non-PyTorch memory, this process has 37.40 GiB memory in use. Of the allocated memory 36.75 GiB is allocated by PyTorch, and 149.63 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Video: 3zd-g_u97RM_4-8-rgb_front.mp4
+Ground truth: You would keep on doing this until you have yourself a full pot of the prepared wine.
+Prediction: I'm going to place it in the oven and let it bake for about 10 minutes and then I'm going to take it out and let it cool.
+------------------------------------------------------------
+Video: 3daeOlNR8_A_30-5-rgb_front.mp4
+Ground truth: Maybe even a dedicated bucket.
+Prediction: Clean it off and then you can pour it down the drain.
+------------------------------------------------------------
+Video: EWV6xcewNVk_6-8-rgb_front.mp4
+Ground truth: You've got to first put a braid at the back of your hair.
+Prediction: The first thing you want to do is you want to take your hair and you want to pull it back into a pony tail and then you're going to take your flat iron and you're just going to run it down the length of your hair.
+------------------------------------------------------------
+Video: 1nN1DqwS0q4_5-11-rgb_front.mp4
+Ground truth: For that last story you plus 3 friends, it would be 3 + 1 = 4.
+Prediction: So, we're going to take our basket, and we're just going to fill it up with these little flowers.
+------------------------------------------------------------
+Video: CnycvXFq8H4_0-5-rgb_front.mp4
+Ground truth: Hi I'm Kim with Simply Beautiful in Austin, Texas.
+Prediction: Hi, I'm Kelli.
+------------------------------------------------------------
+Video: 22OyLDVZI6c_8-5-rgb_front.mp4
+Ground truth: When you bring it up, again you want to keep putting tension on that bicep.
+Prediction: And then, again, you want to keep moving that energy up on your arms.
+------------------------------------------------------------
+Video: 1fZfM65z0zk_16-8-rgb_front.mp4
+Ground truth: You want to go ahead and get it down.
+Prediction: You want to know what they eat.
+------------------------------------------------------------
+Video: aomlhMR9PLQ_11-8-rgb_front.mp4
+Ground truth: It, it doesn't make a lot of sense, people don't say why do you keep pushing through, it seems weird but I can't tell you the physics but for some reason it works.
+Prediction: You want to make sure that you have a good mental picture of who your audience is, what their interests are, what their needs are, so that you can tailor your presentation to them.
+------------------------------------------------------------
+Video: 00Fc7cZX1gM_0-5-rgb_front.mp4
+Ground truth: One of the main problems with illnesses in box turtles is going to be vitamin A deficiency.
+Prediction: One of the most common mistakes that people make when they're trying to get a kick turn is that they try to turn with the inside of their foot and the outside of their foot at the same time.
+------------------------------------------------------------
+Video: 0C_NjyLtHwc_41-8-rgb_front.mp4
+Ground truth: There you go.
+Prediction: Just like that.
+------------------------------------------------------------
+Video: 3qf2Ggfmlf4_7-5-rgb_front.mp4
+Ground truth: Our quarterback will then open up wide and make a long pitch to the outside to the running back.
+Prediction: Our quarter back is going to turn and make the long throw to the outside to the running back to pick up the first down.
+------------------------------------------------------------
+Video: 1xKU91ggLeI_2-5-rgb_front.mp4
+Ground truth: How are you?
+Prediction: How are you, Sarah here.
+------------------------------------------------------------
+Video: 0veHGYSKaDc_12-8-rgb_front.mp4
+Ground truth: Up, up, has this nice twisting action.
+Prediction: You want to be able to take your hands off of the boat and still be able to control the boat.
+------------------------------------------------------------
+Video: D-2jxcZeURM_14-4-rgb_front.mp4
+Ground truth: Usually wheels will run somewhere between a ninety six and a one hundred and one.
+Prediction: You're going to want to hit the space bar to go to the next track, and then you're going to hit the left arrow button to go back to the previous track.
+------------------------------------------------------------
+Video: 1ND0o3AeO1k_9-5-rgb_front.mp4
+Ground truth: So some of these letters were discovered in Pompeii.
+Prediction: So, some of the benefits of the treadmill, as I mentioned earlier, are cardiovascular conditioning.
+------------------------------------------------------------
+Video: 0sal9F4RXeY_14-8-rgb_front.mp4
+Ground truth: And sometimes it's a matter of just kind of reweaving a little hole.
+Prediction: So, you're going to take your knife and you're just going to cut it into little chunks like this.
+------------------------------------------------------------
+Video: _FTTCZOoBHg_10-8-rgb_front.mp4
+Ground truth: Obviously if from the front you've got no damage, you have no visible damage, the repair has been adequately.
+Prediction: Once you know the front of the painting and the back of the painting, you're going to be able to figure out how much more paint you need.
+------------------------------------------------------------
+Video: 36xBmAZNzRg_6-5-rgb_front.mp4
+Ground truth: So, for race two, we're picking what number we think is going to come in first, and that's the very first number we put in a Daily Double.
+Prediction: You're going to have to work with each other, you're going to find out who's the best defender, who's the fastest, who's got the best shot, and we're going to try to come up with a team that's going to be good enough to make it to the next round.
+------------------------------------------------------------
+Video: 1Y3Ruxz7AUw_12-8-rgb_front.mp4
+Ground truth: Ticks are more common in the wintertime in this area because they need a little bit of moisture, and so if you're starting to pick up some ticks with your dog, you can use a topical product that we can recommend, or we have a really good tick collar that might help your dog from having these attached to him.
+Prediction: It's a great time to add some flowers, add some greenery, add some plants, add some decorations, add some jewelry, add some pearls, add some earrings, add some necklaces, add some bracelets, add some tribal jewelry, tribal necklaces, tribal earrings, tribal bracelets, tribal jewelry.
+------------------------------------------------------------
+Video: -CiUc2Gk4v8_10-8-rgb_front.mp4
+Ground truth: You never want to carry the tool by the chord.
+Prediction: You don't want to let go of the dog's hand, you want to keep your dog's hand in yours all the way through.
+------------------------------------------------------------
+Video: BRa6-tUUd0E_2-8-rgb_front.mp4
+Ground truth: When reading a map of when you are going hiking, there are some things to look at right away.
+Prediction: When you're shopping for a backpack, you want to be able to carry a lot of things, but you don't want to be carrying a lot of weight.
+------------------------------------------------------------
+Video: 01KR04fE7Fw_2-3-rgb_front.mp4
+Ground truth: I'm soaking my feet in a plain plastic basin with the Epsom salt in bath temperature water.
+Prediction: Alright, now that the water is boiling, we're going to reduce the heat to a simmer and let it simmer for about 10 to 15 minutes, depending on how firm you like your shrimp to be.
+------------------------------------------------------------
+Video: d7AGobq8bmw_8-8-rgb_front.mp4
+Ground truth: Force yourself to be in bed by a certain time no matter what, maybe it's midnight, maybe it's 11 pm, but make sure that you at least get 8 hours of sleep per night.
+Prediction: It's very important that you take care of yourself, make time for yourself, and make sure that you're getting the proper amount of sleep, that you're eating properly, and that you're taking care of yourself so that you can be at your best when you're on the job.
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/qwen2vl_checkpoint5000_results_20251030_011759.json
+
+📊 Calculating evaluation metrics...
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-Checkpoint-5000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.2412
+  Precision:        0.2316
+  Recall:           0.2682
+  ROUGE-L F1:       0.2366
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2422
+  BLEU2: 0.1213
+  BLEU3: 0.0719
+  BLEU4: 0.0452
+
+📋 Summary:
+  Total Samples:    107
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251030_011759.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/evaluation_metrics_20251030_011759.json
+
+🎯 Summary:
+   Total samples: 110
+   Successful: 107
+   Success rate: 97.3%
+🎉 Evaluation job completed!

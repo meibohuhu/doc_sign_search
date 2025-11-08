@@ -1,0 +1,172 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU: NVIDIA A100-PCIE-40GB
+💾 Memory: 42.3GB
+
+🚀 Loading model from checkpoint...
+   Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
+
+1️⃣ Loading base model...
+   ✅ Base model loaded
+
+2️⃣ Loading vision tower + merger...
+   File size: 6.99 GB
+   🔄 Loading checkpoint (this may take 30-60 seconds)...
+   ✅ Loaded 824 keys from disk
+
+   🔧 Cleaning key prefixes...
+   ✅ Cleaned 824 keys
+
+   📝 Sample cleaned keys:
+      - model.visual.patch_embed.proj.weight
+      - model.visual.blocks.0.norm1.weight
+      - model.visual.blocks.0.norm2.weight
+      - model.visual.blocks.0.attn.qkv.weight
+      - model.visual.blocks.0.attn.qkv.bias
+
+   📊 Components in checkpoint:
+      Vision tower: 390 keys
+      Merger: 5 keys
+      Total: 824 keys
+
+   ✅ Full vision tower found in checkpoint!
+
+   🔄 Loading weights into model...
+      ✅ Loaded: 462/824 parameters
+      Missing: 362 (normal for LoRA)
+      Unexpected: 361
+
+   📊 Vision parameters in model: 668,684,288
+      ✅ Full vision tower present (668,684,288 params)
+
+3️⃣ Loading LoRA weights (LLM)...
+   ✅ LoRA loaded
+
+4️⃣ Loading processor...
+   ✅ Processor loaded
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+   🎯 Vision tower: FULLY TRAINED
+   🎯 Merger: TRAINED (from checkpoint) ✅
+   🎯 LLM: TRAINED (via LoRA) ✅
+======================================================================
+
+📂 Loading test data from: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+   Limited to 110 samples
+   Total samples: 110
+
+🎬 Starting evaluation...
+======================================================================
+
+
+──────────────────────────────────────────────────────────────────────
+[1/110] fzncPNr2Sc0_4-8-rgb_front.mp4
+Ground truth: You'll click on that and then they'll want you to sign in and the first time that you try to do it, there's a process of signing in, and creating a password.
+Prediction:   If you don't want to do that, you can just go ahead and cut the onion in half, and then you can take your knife, and you can cut off the top of the onion.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[2/110] g1vUH8Iy4vw_0-3-rgb_front.mp4
+Ground truth: Hi I'm Jan Kain with another wonderful Chi Gong exercise for you.
+Prediction:   Hi, my name is Tim Cole, and I'm the director of the Center for disease control and prevention in Washington, D.C.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/110] g2QdwYqm8pg_11-3-rgb_front.mp4
+Ground truth: That is why of course they call it a white face clown.
+Prediction:   That's the same on the opposite side.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[4/110] g1xdqxCZxTg_5-3-rgb_front.mp4
+Ground truth: Maybe he would be like, " that's my cocktail".
+Prediction:   I may feel like it's the same, but it's not.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[5/110] G3bMqicS4bQ_13-5-rgb_front.mp4
+Ground truth: But you'll be handicapped according to the modifications that you have on that car, and so it's going to be a handicapped start and but basically kind of a heads-up race at the other end with--especially, if you're racing somebody who actually falls in your class.
+Prediction:   So, if you're going to be in the car for an extended period of time, you want to give yourself a little bit of a break.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[6/110] _G0MZFLIHa0_5-5-rgb_front.mp4
+Ground truth: So first thing's first.
+Prediction:   So, those are some of the things that you can do to prevent nail biting in your dog.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[7/110] g1z6HOJ0yRw_12-3-rgb_front.mp4
+Ground truth: They're just supporting me.
+Prediction:   That's the only way to do it.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[8/110] g0yUlOaqL6k_4-3-rgb_front.mp4
+Ground truth: You can most likely pick up at your local pet store if they carry aquariums supplies.
+Prediction:   So, what you want to do is you want to be in the center, and then you want to go up and down, up and down.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[9/110] FZd8Iv9ACVw_11-8-rgb_front.mp4
+Ground truth: Some of your higher end all season tires that you can see have quite a bit of some siping and everything in here.
+Prediction:   So, some of the things that you can see here, there's a little car, there's everything else that's in here.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[10/110] G3di9jJTqDs_11-10-rgb_front.mp4
+Ground truth: Garnish it with a little cocktail straw, and that is what your Downshift looks like.
+Prediction:   You're going to go up, you're going to come down, and then up, and then down.
+✅ Partial match (has some words)
+
+❌ Error on sample 99: CUDA out of memory. Tried to allocate 3.75 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.57 GiB is free. Including non-PyTorch memory, this process has 37.80 GiB memory in use. Of the allocated memory 37.20 GiB is allocated by PyTorch, and 111.08 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+======================================================================
+✅ Results saved: /home/mh2803/projects/sign_language_llm/outputs/checkpoint4000_results_20251031_014045.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+
+============================================================
+EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1632
+  Precision:        0.1718
+  Recall:           0.1700
+  ROUGE-L F1:       0.1620
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2248
+  BLEU2: 0.0971
+  BLEU3: 0.0531
+  BLEU4: 0.0320
+
+📋 Summary:
+  Total Samples:    109
+============================================================
+
+📊 Metrics saved: /home/mh2803/projects/sign_language_llm/outputs/metrics_20251031_014045.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 110
+   Successful: 109
+   Failed: 1
+   Success rate: 99.1%
+======================================================================
+
+🎉 Evaluation job completed!

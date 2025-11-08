@@ -1,0 +1,32 @@
+{
+  "model_name": "Qwen2VL-BASE-How2Sign",
+  "evaluation_style": "SSVP-SLT",
+  "evaluation_metrics": {
+    "exact_match": 0.0,
+    "f1_score": 0.0805038051414863,
+    "precision": 0.10550945967612634,
+    "recall": 0.06715598070087234,
+    "bleu_scores": {
+      "bleu1": 0.11678545636068544,
+      "bleu2": 0.013578336971739782,
+      "bleu3": 0.005411129600337044,
+      "bleu4": 0.0029398975132232043
+    },
+    "rouge_l_f1": 0.07949915029496785,
+    "bleurt_score": 0.0,
+    "total_samples": 18
+  },
+  "summary": {
+    "exact_match": 0.0,
+    "f1_score": 0.0805038051414863,
+    "precision": 0.10550945967612634,
+    "recall": 0.06715598070087234,
+    "rouge_l_f1": 0.07949915029496785,
+    "bleurt_score": 0.0,
+    "bleu_1": 0.11678545636068544,
+    "bleu_2": 0.013578336971739782,
+    "bleu_3": 0.005411129600337044,
+    "bleu_4": 0.0029398975132232043,
+    "total_samples": 18
+  }
+}

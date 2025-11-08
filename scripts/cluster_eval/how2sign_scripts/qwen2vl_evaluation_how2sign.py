@@ -408,7 +408,7 @@ def eval_model(args):
                             top_p=0.9,                      # Nucleus sampling
                             top_k=50,                      # Top-k sampling
                             length_penalty=1.0,            # Length penalty (1.0 = neutral)
-                            no_repeat_ngram_size=4,        # Prevent 3-gram repetition
+                            no_repeat_ngram_size=4,        # Prevent 4-gram repetition
                             repetition_penalty=1.1,        # Slight penalty for token repetition
                             min_length=1,                   # Minimum output length
                             max_new_tokens=args.max_new_tokens  # Maximum tokens to generate
@@ -534,9 +534,9 @@ def main():
                        help="FPS for frame extraction (default: 12)")
     parser.add_argument("--freeze-vision-tower", action="store_true", default=False,
                        help="If True, vision tower was frozen during training (use original pretrained vision tower)")
-    parser.add_argument("--min-pixels", type=int, default=240*240,
+    parser.add_argument("--min-pixels", type=int, default=224*224,
                        help="Min pixels for video processing (MUST match training!)")
-    parser.add_argument("--max-pixels", type=int, default=240*240,
+    parser.add_argument("--max-pixels", type=int, default=224*224,
                        help="Max pixels for video processing (MUST match training!)")
     
     args = parser.parse_args()

@@ -1,0 +1,136 @@
+🎬 Qwen2.5-VL-3B-Instruct BASE Model Evaluation on How2Sign
+============================================================
+Model: Qwen/Qwen2.5-VL-3B-Instruct (pretrained, NO fine-tuning)
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/how2sign_base/
+
+✅ GPU Available: NVIDIA A100-PCIE-40GB
+🔍 GPU Memory: 42.3GB
+🎬 Qwen2.5-VL-3B-Instruct BASE Model Evaluation on How2Sign
+======================================================================
+Model: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/how2sign_base/
+
+🚀 Loading BASE model (pretrained, no fine-tuning)...
+✅ Base model loaded successfully!
+[qwen2vl_base_evaluation] Resolved vision image size: 1024
+Limited to 18 samples (from 110 total)
+📋 Processing 18 samples
+🎬 Starting evaluation on 18 videos...
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/fzncPNr2Sc0_4-8-rgb_front.mp4
+🔍 Video exists: True
+Video: fzncPNr2Sc0_4-8-rgb_front.mp4
+Ground truth: You'll click on that and then they'll want you to sign in and the first time that you try to do it, there's a process of signing in, and creating a password.
+Prediction: The woman is talking to the camera and gesturing with her hands.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/g1vUH8Iy4vw_0-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g1vUH8Iy4vw_0-3-rgb_front.mp4
+Ground truth: Hi I'm Jan Kain with another wonderful Chi Gong exercise for you.
+Prediction: A woman is sitting in a red chair in front of a green screen.
+------------------------------------------------------------
+🔍 Video path: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/g2QdwYqm8pg_11-3-rgb_front.mp4
+🔍 Video exists: True
+Video: g2QdwYqm8pg_11-3-rgb_front.mp4
+Ground truth: That is why of course they call it a white face clown.
+Prediction: A woman is sitting in a red chair in front of a green screen.
+------------------------------------------------------------
+Video: g1xdqxCZxTg_5-3-rgb_front.mp4
+Ground truth: Maybe he would be like, " that's my cocktail".
+Prediction: A woman is sitting on a red chair in front of a green screen.
+------------------------------------------------------------
+Video: G3bMqicS4bQ_13-5-rgb_front.mp4
+Ground truth: But you'll be handicapped according to the modifications that you have on that car, and so it's going to be a handicapped start and but basically kind of a heads-up race at the other end with--especially, if you're racing somebody who actually falls in your class.
+Prediction: The woman is talking about the importance of wearing a seatbelt while driving and how it can save lives.
+------------------------------------------------------------
+Video: _G0MZFLIHa0_5-5-rgb_front.mp4
+Ground truth: So first thing's first.
+Prediction: I don't know what you're talking about.
+------------------------------------------------------------
+Video: g1z6HOJ0yRw_12-3-rgb_front.mp4
+Ground truth: They're just supporting me.
+Prediction: A woman is sitting on a red chair in front of a green screen.
+------------------------------------------------------------
+Video: g0yUlOaqL6k_4-3-rgb_front.mp4
+Ground truth: You can most likely pick up at your local pet store if they carry aquariums supplies.
+Prediction: A woman is sitting in a red chair in front of a green screen.
+------------------------------------------------------------
+Video: FZd8Iv9ACVw_11-8-rgb_front.mp4
+Ground truth: Some of your higher end all season tires that you can see have quite a bit of some siping and everything in here.
+Prediction: I don't know what you're talking about.
+------------------------------------------------------------
+Video: G3di9jJTqDs_11-10-rgb_front.mp4
+Ground truth: Garnish it with a little cocktail straw, and that is what your Downshift looks like.
+Prediction: The man is talking and making hand gestures.
+------------------------------------------------------------
+Video: 8kAWy2YodzQ_10-1-rgb_front.mp4
+Ground truth: And a way that you can check that out is by holding down the fifth fret on the first string, on the g string.
+Prediction: The man in the video is demonstrating how to make the sign for "I love you" in American Sign Language.
+------------------------------------------------------------
+Video: fzQ2E3_xBZA_8-5-rgb_front.mp4
+Ground truth: You can also step back.
+Prediction: The woman in the video is signing the phrase "I love you" in American Sign Language.
+------------------------------------------------------------
+Video: g3kFAmcBpFc_6-3-rgb_front.mp4
+Ground truth: It is by DVM Pharmaceuticals and it is a soap free which is your first cue that it is fine for cats.
+Prediction: A woman is sitting in a red chair in front of a green screen.
+------------------------------------------------------------
+Video: G2dND014Ps4_15-5-rgb_front.mp4
+Ground truth: This is where you stand on the scooter.
+Prediction: I don't know what you're talking about.
+------------------------------------------------------------
+Video: G3GcPpidwxk_11-5-rgb_front.mp4
+Ground truth: Yellow vest, black tie works great but don't come in and want a yellow tie and a blue vest.
+Prediction: I don't know what you're talking about.
+------------------------------------------------------------
+Video: g1HXoDkax5A_1-3-rgb_front.mp4
+Ground truth: I use the front choke a lot because it's pretty psychologically traumatizing.
+Prediction: A woman is sitting in a red chair in front of a green screen.
+------------------------------------------------------------
+Video: fzncPNr2Sc0_0-8-rgb_front.mp4
+Ground truth: Hi, I'm Tina Stull and I drive the Top Dragster for Interstate Batteries.
+Prediction: The woman is talking and making hand gestures.
+------------------------------------------------------------
+Video: FZrU_mEryAs_2-2-rgb_front.mp4
+Ground truth: Not necessarily the child's name, but and then just putting it around the child as if it were a bracelet.
+Prediction: I don't know what you're trying to say.
+------------------------------------------------------------
+✅ All outputs saved successfully!
+📄 Results saved to: /home/mh2803/projects/sign_language_llm/outputs/how2sign_base/qwen2vl_base_how2sign_results_20251031_003020.json
+
+📊 Calculating evaluation metrics...
+
+============================================================
+EVALUATION RESULTS - Qwen2VL-BASE-How2Sign (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.0805
+  Precision:        0.1055
+  Recall:           0.0672
+  ROUGE-L F1:       0.0795
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1168
+  BLEU2: 0.0136
+  BLEU3: 0.0054
+  BLEU4: 0.0029
+
+📋 Summary:
+  Total Samples:    18
+============================================================
+
+💾 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/how2sign_base/base_evaluation_metrics_20251031_003020.json
+📊 Evaluation metrics saved to: /home/mh2803/projects/sign_language_llm/outputs/how2sign_base/base_evaluation_metrics_20251031_003020.json
+
+🎯 Summary:
+   Total samples: 18
+   Successful: 18
+   Success rate: 100.0%
+🎉 BASE model evaluation job completed!

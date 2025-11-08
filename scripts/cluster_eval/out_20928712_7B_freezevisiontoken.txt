@@ -1,0 +1,190 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_freezevisiontower_7B/checkpoint-7000
+Model Base: Qwen/Qwen2.5-VL-7B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU: NVIDIA A100-PCIE-40GB
+💾 Memory: 42.3GB
+
+🚀 Loading model from checkpoint...
+   Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_freezevisiontower_7B/checkpoint-7000
+
+1️⃣ Loading base model...
+   ✅ Base model loaded
+
+2️⃣ Loading vision tower + merger...
+   File size: 15.45 GB
+   🔄 Loading checkpoint (this may take 30-60 seconds)...
+   ✅ Loaded 729 keys from disk
+
+   🔧 Cleaning key prefixes...
+   ✅ Cleaned 729 keys
+
+   📝 Sample cleaned keys:
+      - model.visual.patch_embed.proj.weight
+      - model.visual.blocks.0.norm1.weight
+      - model.visual.blocks.0.norm2.weight
+      - model.visual.blocks.0.attn.qkv.weight
+      - model.visual.blocks.0.attn.qkv.bias
+
+   📊 Components in checkpoint:
+      Vision tower: 390 keys
+      Merger: 5 keys
+      Total: 729 keys
+
+   ✅ Full vision tower found in checkpoint!
+
+   🔄 Loading weights into model...
+      ✅ Loaded: 447/729 parameters
+      Missing: 282 (normal for LoRA)
+      Unexpected: 282
+
+   📊 Vision parameters in model: 676,550,144
+      ✅ Full vision tower present (676,550,144 params)
+
+3️⃣ Loading LoRA weights (LLM)...
+   ✅ LoRA loaded
+
+4️⃣ Loading processor...
+   ✅ Processor loaded
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+   🎯 Vision tower: FULLY TRAINED
+   🎯 Merger: TRAINED (from checkpoint) ✅
+   🎯 LLM: TRAINED (via LoRA) ✅
+======================================================================
+
+📂 Loading test data from: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
+   Limited to 110 samples
+   Total samples: 110
+
+🎬 Starting evaluation...
+======================================================================
+
+
+──────────────────────────────────────────────────────────────────────
+[1/110] fzncPNr2Sc0_4-8-rgb_front.mp4
+Ground truth: You'll click on that and then they'll want you to sign in and the first time that you try to do it, there's a process of signing in, and creating a password.
+Prediction:   You want to make sure that you have a lot of variety in your diet so that you get all the nutrients that you need.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[2/110] g1vUH8Iy4vw_0-3-rgb_front.mp4
+Ground truth: Hi I'm Jan Kain with another wonderful Chi Gong exercise for you.
+Prediction:   Hi, I'm Jennifer Cail.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/110] g2QdwYqm8pg_11-3-rgb_front.mp4
+Ground truth: That is why of course they call it a white face clown.
+Prediction:   And sit on the edge of your seat, because you're about to learn how to sew a button on.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[4/110] g1xdqxCZxTg_5-3-rgb_front.mp4
+Ground truth: Maybe he would be like, " that's my cocktail".
+Prediction:   It feels really good.
+⚠️  No obvious match
+
+❌ Error on sample 5: CUDA out of memory. Tried to allocate 4.00 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.69 GiB is free. Including non-PyTorch memory, this process has 35.68 GiB memory in use. Of the allocated memory 35.07 GiB is allocated by PyTorch, and 109.57 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+──────────────────────────────────────────────────────────────────────
+[6/110] _G0MZFLIHa0_5-5-rgb_front.mp4
+Ground truth: So first thing's first.
+Prediction:   So that's the first thing you want to do.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[7/110] g1z6HOJ0yRw_12-3-rgb_front.mp4
+Ground truth: They're just supporting me.
+Prediction:   We're going to do one side at a time.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[8/110] g0yUlOaqL6k_4-3-rgb_front.mp4
+Ground truth: You can most likely pick up at your local pet store if they carry aquariums supplies.
+Prediction:   So what I'm going to do is I'm just going to take my needle and thread it up.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[9/110] FZd8Iv9ACVw_11-8-rgb_front.mp4
+Ground truth: Some of your higher end all season tires that you can see have quite a bit of some siping and everything in here.
+Prediction:   So, we're going to start with our feet about shoulder width apart, hands at our side, and we're just going to go ahead and take a step forward with our left foot.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[10/110] G3di9jJTqDs_11-10-rgb_front.mp4
+Ground truth: Garnish it with a little cocktail straw, and that is what your Downshift looks like.
+Prediction:   It's going to go up, it's going to come back down, and you're going to hit the ball.
+✅ Partial match (has some words)
+
+❌ Error on sample 11: CUDA out of memory. Tried to allocate 2.72 GiB. GPU 0 has a total capacity of 39.38 GiB of which 867.38 MiB is free. Including non-PyTorch memory, this process has 38.53 GiB memory in use. Of the allocated memory 37.91 GiB is allocated by PyTorch, and 117.30 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 31: CUDA out of memory. Tried to allocate 3.38 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.34 GiB is free. Including non-PyTorch memory, this process has 36.03 GiB memory in use. Of the allocated memory 35.33 GiB is allocated by PyTorch, and 205.39 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 39: CUDA out of memory. Tried to allocate 3.23 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.19 GiB is free. Including non-PyTorch memory, this process has 36.19 GiB memory in use. Of the allocated memory 35.50 GiB is allocated by PyTorch, and 193.03 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 45: CUDA out of memory. Tried to allocate 3.33 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.21 GiB is free. Including non-PyTorch memory, this process has 36.17 GiB memory in use. Of the allocated memory 35.40 GiB is allocated by PyTorch, and 276.68 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 49: CUDA out of memory. Tried to allocate 3.33 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.23 GiB is free. Including non-PyTorch memory, this process has 36.15 GiB memory in use. Of the allocated memory 35.40 GiB is allocated by PyTorch, and 256.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 63: CUDA out of memory. Tried to allocate 2.34 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.66 GiB is free. Including non-PyTorch memory, this process has 37.71 GiB memory in use. Of the allocated memory 37.12 GiB is allocated by PyTorch, and 95.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 64: CUDA out of memory. Tried to allocate 3.87 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.28 GiB is free. Including non-PyTorch memory, this process has 36.09 GiB memory in use. Of the allocated memory 35.40 GiB is allocated by PyTorch, and 194.19 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 68: CUDA out of memory. Tried to allocate 2.75 GiB. GPU 0 has a total capacity of 39.38 GiB of which 627.38 MiB is free. Including non-PyTorch memory, this process has 38.76 GiB memory in use. Of the allocated memory 38.13 GiB is allocated by PyTorch, and 128.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 96: CUDA out of memory. Tried to allocate 2.47 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.64 GiB is free. Including non-PyTorch memory, this process has 37.73 GiB memory in use. Of the allocated memory 37.14 GiB is allocated by PyTorch, and 96.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 99: CUDA out of memory. Tried to allocate 3.75 GiB. GPU 0 has a total capacity of 39.38 GiB of which 1.86 GiB is free. Including non-PyTorch memory, this process has 37.51 GiB memory in use. Of the allocated memory 36.92 GiB is allocated by PyTorch, and 97.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 101: CUDA out of memory. Tried to allocate 3.38 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.20 GiB is free. Including non-PyTorch memory, this process has 36.17 GiB memory in use. Of the allocated memory 35.51 GiB is allocated by PyTorch, and 159.48 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+❌ Error on sample 106: CUDA out of memory. Tried to allocate 3.49 GiB. GPU 0 has a total capacity of 39.38 GiB of which 3.44 GiB is free. Including non-PyTorch memory, this process has 35.93 GiB memory in use. Of the allocated memory 35.16 GiB is allocated by PyTorch, and 276.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+======================================================================
+✅ Results saved: /home/mh2803/projects/sign_language_llm/outputs/checkpoint4000_results_20251105_100118.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+
+============================================================
+EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0103
+  F1 Score:         0.1241
+  Precision:        0.1265
+  Recall:           0.1336
+  ROUGE-L F1:       0.1285
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1713
+  BLEU2: 0.0583
+  BLEU3: 0.0276
+  BLEU4: 0.0146
+
+📋 Summary:
+  Total Samples:    97
+============================================================
+
+📊 Metrics saved: /home/mh2803/projects/sign_language_llm/outputs/metrics_20251105_100118.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 110
+   Successful: 97
+   Failed: 13
+   Success rate: 88.2%
+======================================================================
+
+🎉 Evaluation job completed!

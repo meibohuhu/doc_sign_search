@@ -52,9 +52,9 @@ echo ""
 deepspeed src/train/train_sft.py \
     --deepspeed scripts/zero3_qwen2vl.json \
     --model_id $MODEL_NAME \
-    --data_path /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed_.json \
+    --data_path /home/mh2803/projects/sign_language_llm/how2sign/video/train_videos/segmented_train_videos_corrupted_removed.json \
     --image_folder /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/ \
-    --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_freezevisiontower_7B/ \
+    --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1018/qwen2vl_how2sign_4xa100_filtered_32batchsize_7B/ \
     --num_train_epochs 3 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
@@ -69,7 +69,7 @@ deepspeed src/train/train_sft.py \
     --logging_steps 1 \
     --save_strategy epoch \
     --save_total_limit 3 \
-    --max_steps 7000 \
+    --max_steps 8000 \
     --use_liger True \
     --freeze_vision_tower True \
     --freeze_llm True \
