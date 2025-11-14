@@ -37,7 +37,7 @@ export HF_HUB_ENABLE_HF_TRANSFER=1
 cd /home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune
 
 # Model configuration - using 3B model for faster training on 1xA100
-MODEL_NAME="Qwen/Qwen2.5-VL-7B-Instruct"
+MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
 
 # Optimized training configuration for 1xA100 GPU
 GLOBAL_BATCH_SIZE=4
@@ -123,7 +123,7 @@ torchrun --nproc_per_node=1 --nnodes=1 --master_port=29501 src/train/train_sft.p
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --video_min_pixels $((320 * 320)) \
     --video_max_pixels $((320 * 320)) \
-    --fps 12 \
+    --nframes 12 \
     --max_grad_norm 1.0 \
     --learning_rate 3e-5 \
     --logging_steps 1 \

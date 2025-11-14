@@ -1,0 +1,170 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1101/qwen2vl_how2sign_4xa100_filtered_32batchsize_under10s/checkpoint-7002
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample100.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU: NVIDIA A100-PCIE-40GB
+💾 Memory: 42.3GB
+
+🚀 Loading model from checkpoint...
+   Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1101/qwen2vl_how2sign_4xa100_filtered_32batchsize_under10s/checkpoint-7002
+
+1️⃣ Loading base model...
+   ✅ Base model loaded
+
+2️⃣ Loading vision tower + merger...
+   File size: 6.99 GB
+   🔄 Loading checkpoint (this may take 30-60 seconds)...
+   ✅ Loaded 824 keys from disk
+
+   🔧 Cleaning key prefixes...
+   ✅ Cleaned 824 keys
+
+   📝 Sample cleaned keys:
+      - model.visual.patch_embed.proj.weight
+      - model.visual.blocks.0.norm1.weight
+      - model.visual.blocks.0.norm2.weight
+      - model.visual.blocks.0.attn.qkv.weight
+      - model.visual.blocks.0.attn.qkv.bias
+
+   📊 Components in checkpoint:
+      Vision tower: 390 keys
+      Merger: 5 keys
+      Total: 824 keys
+
+   ✅ Full vision tower found in checkpoint!
+
+   🔄 Loading weights into model...
+      ✅ Loaded: 462/824 parameters
+      Missing: 362 (normal for LoRA)
+      Unexpected: 361
+
+   📊 Vision parameters in model: 668,684,288
+      ✅ Full vision tower present (668,684,288 params)
+
+3️⃣ Loading LoRA weights (LLM)...
+   ✅ LoRA loaded
+
+4️⃣ Loading processor...
+   ✅ Processor loaded
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+   🎯 Vision tower: FULLY TRAINED
+   🎯 Merger: TRAINED (from checkpoint) ✅
+   🎯 LLM: TRAINED (via LoRA) ✅
+======================================================================
+
+📂 Loading test data from: /home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample100.json
+   Limited to 20 samples
+   Total samples: 20
+
+🎬 Starting evaluation...
+======================================================================
+
+
+──────────────────────────────────────────────────────────────────────
+[1/20] g0fgci8L_rc_19-8-rgb_front.mp4
+Ground truth: That's about where we want it.
+Prediction:   Focus on your hands and your facial expressions.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[2/20] G-0gYel1YA8_3-2-rgb_front.mp4
+Ground truth: This could be an eyebrow piercing, a nose piercing, a navel piercing.
+Prediction:   Okay, now we're going to do the same thing on the other side.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/20] 8kAWy2YodzQ_19-1-rgb_front.mp4
+Ground truth: And that's how you tune a ukulele.
+Prediction:   Okay, what we're going to do now is going to be a little bit different.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[4/20] g1z6HOJ0yRw_4-3-rgb_front.mp4
+Ground truth: Next thing, I'm going to do is I'm going to sit on the ground with the rope in between my legs.
+Prediction:   Okay, what I'm going to do is I'm just going to go ahead and show you how to do it. So, I'm actually going to show you how I do it, and then you're going to try it.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[5/20] G2kVb4gINSI_16-5-rgb_front.mp4
+Ground truth: Down and up.
+Prediction:   Okay.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[6/20] G2VzB5-JkRA_14-5-rgb_front.mp4
+Ground truth: There's a good chance I could find it even cheaper for this on some sites that may not be on a comparison site.
+Prediction:   Good morning.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[7/20] G23G21G49dk_8-2-rgb_front.mp4
+Ground truth: You want to leave a little bit of space on this end.
+Prediction:   I'm going to start with my right hand and I'm going to make a circle with my hand.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[8/20] G0MjvzT_UqM_21-2-rgb_front.mp4
+Ground truth: Two more.
+Prediction:   Okay, now we're going to do the same thing with the other side.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[9/20] g1xdqxCZxTg_7-3-rgb_front.mp4
+Ground truth: Aliens?
+Prediction:   Focus.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[10/20] FzaQ-Q5gSmI_6-1-rgb_front.mp4
+Ground truth: Rip cutting blades tend to have fewer teeth, they're more aggressive, Cross cutting blades have more teeth and make a finer cut.
+Prediction:   Hi, my name is John, and I'm going to be talking to you today about how to make a hot chocolate bomb. So, what you're going to need is some hot chocolate powder, some milk, and a little bit of sugar. You're going to take the hot chocolate powder and mix it with the milk and the sugar, and you're just going to mix it together until it's nice and smooth. Once you've got that all mixed up, you're ready to make your hot chocolate bombs.
+✅ Partial match (has some words)
+
+======================================================================
+✅ Results saved: /home/mh2803/projects/sign_language_llm/outputs/checkpoint4000_results_20251114_162956.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+
+============================================================
+EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.0893
+  Precision:        0.0985
+  Recall:           0.1186
+  ROUGE-L F1:       0.0719
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.0870
+  BLEU2: 0.0418
+  BLEU3: 0.0251
+  BLEU4: 0.0180
+
+📋 Summary:
+  Total Samples:    20
+============================================================
+
+📊 Metrics saved: /home/mh2803/projects/sign_language_llm/outputs/metrics_20251114_162956.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 20
+   Successful: 20
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+
+🎉 Evaluation job completed!

@@ -10,7 +10,7 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=00:00:30
+#SBATCH --time=24:00:00
 #SBATCH --gpus-per-node=a100:2
 #SBATCH --partition tier3
 #SBATCH --mem=128g
@@ -125,25 +125,25 @@ torchrun --nproc_per_node=2 --nnodes=1 --master_port=29501 src/train/train_sft.p
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --video_min_pixels $((224 * 224)) \
     --video_max_pixels $((224 * 224)) \
-    --fps 12 \
+    --fps 15 \
     --max_grad_norm 1.0 \
     --learning_rate 3e-5 \
     --logging_steps 1 \
     --save_strategy epoch \
     --save_total_limit 2 \
-    --max_steps 10000 \
+    --max_steps 14000 \
     --use_liger True \
     --freeze_vision_tower True \
     --freeze_llm True \
     --freeze_merger False \
-    --unfreeze_topk_vision 2 \
+    --unfreeze_topk_vision 4 \
     --bf16 True \
     --fp16 False \
     --disable_flash_attn2 False \
     --gradient_checkpointing True \
     --ddp_find_unused_parameters True \
     --lora_enable False \
-    --vision_lr 1e-5 \
+    --vision_lr 3e-5 \
     --merger_lr 3e-5 \
     --report_to none
 
