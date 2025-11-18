@@ -22,33 +22,60 @@ def sanitize_filename(filename):
         filename = filename.replace(char, '_')
     return filename
 
-def resolve_ffmpeg_path(ffmpeg_arg):
-    """Resolve the ffmpeg executable path to an absolute path.
-    This is important for multiprocessing workers which may not have the same PATH."""
-    # If it's already an absolute path and exists, use it
-    if os.path.isabs(ffmpeg_arg) and os.path.isfile(ffmpeg_arg):
-        return os.path.abspath(ffmpeg_arg)
+def cleanup_old_temp_dirs(temp_base='/local1/tmp', max_age_hours=24):
+    """
+    Clean up old temporary directories that are older than max_age_hours.
     
-    # If it's a relative path and exists, make it absolute
-    if os.path.isfile(ffmpeg_arg):
-        return os.path.abspath(ffmpeg_arg)
+    Args:
+        temp_base: Base directory for temporary files
+        max_age_hours: Maximum age in hours for temp directories (default: 24)
+    """
+    if not os.path.exists(temp_base):
+        return
     
-    # Try to find it in PATH
-    ffmpeg_path = shutil.which(ffmpeg_arg)
-    if ffmpeg_path:
-        return os.path.abspath(ffmpeg_path)
+    import time
+    current_time = time.time()
+    max_age_seconds = max_age_hours * 3600
     
-    # On Windows, try to find ffmpeg.exe in project root
-    if os.name == 'nt' and ffmpeg_arg in ['ffmpeg', 'ffmpeg.exe']:
-        ffmpeg_exe = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ffmpeg.exe")
-        if os.path.isfile(ffmpeg_exe):
-            return os.path.abspath(ffmpeg_exe)
+    cleaned_count = 0
+    cleaned_size = 0
     
-    # If not found, return the original (will fail later with a clearer error)
-    # But still try to make it absolute if it looks like a path
-    if os.path.sep in ffmpeg_arg:
-        return os.path.abspath(ffmpeg_arg)
-    return ffmpeg_arg
+    try:
+        for item in os.listdir(temp_base):
+            item_path = os.path.join(temp_base, item)
+            if not os.path.isdir(item_path):
+                continue
+            
+            # Check if it's a temp directory (starts with 'tmp')
+            if not item.startswith('tmp'):
+                continue
+            
+            try:
+                # Get modification time
+                mtime = os.path.getmtime(item_path)
+                age_seconds = current_time - mtime
+                
+                if age_seconds > max_age_seconds:
+                    # Calculate size before deletion
+                    try:
+                        size = sum(os.path.getsize(os.path.join(dirpath, filename))
+                                   for dirpath, dirnames, filenames in os.walk(item_path)
+                                   for filename in filenames)
+                        cleaned_size += size
+                    except:
+                        pass
+                    
+                    # Remove the directory
+                    shutil.rmtree(item_path)
+                    cleaned_count += 1
+            except Exception as e:
+                # Skip directories that can't be accessed or deleted
+                continue
+        
+        if cleaned_count > 0:
+            print(f"🧹 Cleaned up {cleaned_count} old temp directories ({cleaned_size / (1024**3):.2f} GB)")
+    except Exception as e:
+        print(f"Warning: Error during temp directory cleanup: {e}")
 
 def crop_resize(imgs, bbox, target_size):
     x0, y0, x1, y1 = bbox[0], bbox[1], bbox[2], bbox[3]
@@ -71,28 +98,39 @@ def crop_resize(imgs, bbox, target_size):
         rois.append(roi)
     return rois
 
-def write_video_ffmpeg(rois, target_path, ffmpeg):
+def write_video_ffmpeg(rois, target_path, ffmpeg, fps=None):
     os.makedirs(os.path.dirname(target_path), exist_ok=True)
     decimals = 10
-    fps = 30
-    tmp_dir = tempfile.mkdtemp()
-    for i_roi, roi in enumerate(rois):
-        cv2.imwrite(os.path.join(tmp_dir, str(i_roi).zfill(decimals)+'.png'), roi)
-    list_fn = os.path.join(tmp_dir, "list")
-    with open(list_fn, 'w') as fo:
-        # Use forward slashes for ffmpeg (works on both Windows and Unix)
-        pattern = os.path.join(tmp_dir, f'%0{decimals}d.png').replace('\\', '/')
-        fo.write(f"file '{pattern}'\n")
-    ## ffmpeg
-    if os.path.isfile(target_path):
-        os.remove(target_path)
-    cmd = [ffmpeg, "-f", "concat", "-safe", "0", "-i", list_fn, "-q:v", "1", "-r", str(fps), '-y', '-c:v', 'h264_nvenc', '-preset', 'p1', '-rc', 'vbr', '-crf', '20', '-pix_fmt', 'yuv420p', target_path]
-    pipe = subprocess.run(cmd, stdout = subprocess.PIPE, stderr = subprocess.STDOUT)
-    if pipe.returncode != 0:
-        print(f"ERROR: ffmpeg failed for {target_path}")
-        print(pipe.stdout.decode('utf-8', errors='ignore'))
-    # rm tmp dir
-    shutil.rmtree(tmp_dir)
+    if fps is None:
+        fps = 30  # Default FPS if not specified
+    # Use /local1 for temp directory if available (to avoid root partition space issues)
+    temp_base = '/local1/tmp' if os.path.exists('/local1') else None
+    if temp_base:
+        os.makedirs(temp_base, exist_ok=True)
+    tmp_dir = tempfile.mkdtemp(dir=temp_base)
+    try:
+        for i_roi, roi in enumerate(rois):
+            cv2.imwrite(os.path.join(tmp_dir, str(i_roi).zfill(decimals)+'.png'), roi)
+        list_fn = os.path.join(tmp_dir, "list")
+        with open(list_fn, 'w') as fo:
+            # Use forward slashes for ffmpeg (works on both Windows and Unix)
+            pattern = os.path.join(tmp_dir, f'%0{decimals}d.png').replace('\\', '/')
+            fo.write(f"file '{pattern}'\n")
+        ## ffmpeg
+        if os.path.isfile(target_path):
+            os.remove(target_path)
+        cmd = [ffmpeg, "-f", "concat", "-safe", "0", "-i", list_fn, "-q:v", "1", "-r", str(fps), '-y', '-c:v', 'h264_nvenc', '-preset', 'p1', '-rc', 'vbr', '-crf', '20', '-pix_fmt', 'yuv420p', target_path]
+        pipe = subprocess.run(cmd, stdout = subprocess.PIPE, stderr = subprocess.STDOUT)
+        if pipe.returncode != 0:
+            print(f"ERROR: ffmpeg failed for {target_path}")
+            print(pipe.stdout.decode('utf-8', errors='ignore'))
+    finally:
+        # Always cleanup tmp dir, even if there's an error
+        try:
+            shutil.rmtree(tmp_dir)
+        except Exception as e:
+            # Log but don't fail if cleanup fails
+            print(f"Warning: Failed to cleanup temp directory {tmp_dir}: {e}")
     return
 
 def adjust_bbox_with_margin(x0, y0, x1, y1, frame_w, frame_h, scale):
@@ -114,6 +152,13 @@ def process_single_video(input_video, output_video, bbox, target_size, ffmpeg, b
     if not os.path.isfile(input_video):
         raise FileNotFoundError(f"Input video not found: {input_video}")
     cap = cv2.VideoCapture(input_video)
+    
+    # Get original FPS from input video
+    original_fps = cap.get(cv2.CAP_PROP_FPS)
+    if original_fps <= 0 or original_fps > 120:
+        # Fallback to default if FPS is invalid
+        original_fps = 30
+    
     frames = []
     while True:
         ret, frame = cap.read()
@@ -137,7 +182,7 @@ def process_single_video(input_video, output_video, bbox, target_size, ffmpeg, b
     rois = crop_resize(frames, bbox_pixels, target_size)
     out_path = output_video
     inp = Path(input_video)
-    default_name = inp.stem + f"_crop_{target_size}.mp4"
+    default_name = inp.name  # Use original filename
     if out_path is None:
         out_path = str(inp.with_name(default_name))
     else:
@@ -147,15 +192,47 @@ def process_single_video(input_video, output_video, bbox, target_size, ffmpeg, b
             out_path = str(out_path_path / default_name)
         else:
             out_path_path.parent.mkdir(parents=True, exist_ok=True)
-    write_video_ffmpeg(rois, out_path, ffmpeg)
+    write_video_ffmpeg(rois, out_path, ffmpeg, fps=original_fps)
     if not os.path.isfile(out_path):
         raise RuntimeError(f"Failed to create output video: {out_path}")
-    # Use tqdm.write to avoid interfering with progress bars
-    try:
-        tqdm.write(f"✓ Saved cropped video to {out_path}")
-    except:
-        print(f"✓ Saved cropped video to {out_path}")
+    print(f"✓ Saved cropped video to {out_path}")
     return
+
+def process_video_file_for_multiprocessing(video_file_path, output_dir, bbox_list, target_size, ffmpeg, bbox_scale):
+    """
+    Process a single video file - module-level function for multiprocessing.
+    This function can be pickled by multiprocessing.
+    
+    Args:
+        video_file_path: Path to input video file
+        output_dir: Output directory path
+        bbox_list: Bounding box coordinates as list
+        target_size: Target output size
+        ffmpeg: Path to ffmpeg executable
+        bbox_scale: Bbox scale factor
+        
+    Returns:
+        dict: Status information {'status': 'success'|'skipped'|'error', 'file': filename, ...}
+    """
+    video_file = Path(video_file_path)
+    output_video = Path(output_dir) / video_file.name  # Use original filename
+    
+    # Skip if output already exists
+    if output_video.exists():
+        return {'status': 'skipped', 'file': video_file.name}
+    
+    try:
+        process_single_video(
+            str(video_file),
+            str(output_video),
+            bbox_list,
+            target_size,
+            ffmpeg,
+            bbox_scale
+        )
+        return {'status': 'success', 'file': video_file.name}
+    except Exception as e:
+        return {'status': 'error', 'file': video_file.name, 'error': str(e)}
 
 def get_clip(input_video_dir, output_video_dir, tsv_fn, bbox_fn, rank, nshard, target_size=224, ffmpeg=None, bbox_scale=1.0):
     os.makedirs(output_video_dir, exist_ok=True)
@@ -176,23 +253,37 @@ def get_clip(input_video_dir, output_video_dir, tsv_fn, bbox_fn, rank, nshard, t
         output_video = os.path.join(output_video_dir, sanitize_filename(vid)+'.mp4')
         if os.path.isfile(output_video):
             continue
-        tmp_dir = tempfile.mkdtemp()
-        input_video_clip = os.path.join(tmp_dir, 'tmp.mp4')
-        cmd = [ffmpeg, '-ss', start_time, '-to', end_time, '-i', input_video_whole, '-c:v', 'libx264', '-crf', '20', input_video_clip]
-        print(' '.join(cmd))
-        subprocess.call(cmd)
-        cap = cv2.VideoCapture(input_video_clip)
-        frames_origin = []
-        print(f"Reading video clip: {input_video_clip}")
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                break
-            frames_origin.append(frame)
-        cap.release()  # Release the video capture before deleting the file
-        import time
-        time.sleep(0.1)  # Give Windows time to release the file handle
-        shutil.rmtree(tmp_dir)
+        # Use /local1 for temp directory if available (to avoid root partition space issues)
+        temp_base = '/local1/tmp' if os.path.exists('/local1') else None
+        if temp_base:
+            os.makedirs(temp_base, exist_ok=True)
+        tmp_dir = tempfile.mkdtemp(dir=temp_base)
+        try:
+            input_video_clip = os.path.join(tmp_dir, 'tmp.mp4')
+            cmd = [ffmpeg, '-ss', start_time, '-to', end_time, '-i', input_video_whole, '-c:v', 'libx264', '-crf', '20', input_video_clip]
+            print(' '.join(cmd))
+            subprocess.call(cmd)
+            cap = cv2.VideoCapture(input_video_clip)
+            # Get FPS from the clip
+            original_fps = cap.get(cv2.CAP_PROP_FPS)
+            if original_fps <= 0 or original_fps > 120:
+                original_fps = 30
+            
+            frames_origin = []
+            print(f"Reading video clip: {input_video_clip}")
+            while True:
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                frames_origin.append(frame)
+            cap.release()  # Release the video capture before deleting the file
+            time.sleep(0.1)  # Give Windows time to release the file handle
+        finally:
+            # Always cleanup tmp dir, even if there's an error
+            try:
+                shutil.rmtree(tmp_dir)
+            except Exception as e:
+                print(f"Warning: Failed to cleanup temp directory {tmp_dir}: {e}")
         x0, y0, x1, y1 = bbox
         W, H = frames_origin[0].shape[1], frames_origin[0].shape[0]
         x0p = x0 * W if max(bbox) <= 1.0 else x0
@@ -203,104 +294,11 @@ def get_clip(input_video_dir, output_video_dir, tsv_fn, bbox_fn, rank, nshard, t
         print([int(x0p), int(y0p), int(x1p), int(y1p)], frames_origin[0].shape, target_size)
         rois = crop_resize(frames_origin, [x0p, y0p, x1p, y1p], target_size)
         print(f"Saving ROIs to {output_video}")
-        write_video_ffmpeg(rois, output_video, ffmpeg=ffmpeg)
+        write_video_ffmpeg(rois, output_video, ffmpeg=ffmpeg, fps=original_fps)
         if os.path.isfile(output_video):
             print(f"✓ Successfully saved {output_video}")
         else:
             print(f"✗ ERROR: File not created: {output_video}")
-    return
-
-def process_directory(input_dir, output_dir, bbox, target_size, ffmpeg, bbox_scale, num_workers=1):
-    """Process all videos in a directory with the same bbox coordinates."""
-    if not os.path.isdir(input_dir):
-        raise NotADirectoryError(f"Input directory not found: {input_dir}")
-    
-    # Common video extensions
-    video_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.flv', '.wmv', '.webm', '.m4v']
-    
-    # Find all video files in the directory
-    video_files = []
-    for ext in video_extensions:
-        video_files.extend(glob.glob(os.path.join(input_dir, f'*{ext}')))
-        video_files.extend(glob.glob(os.path.join(input_dir, f'*{ext.upper()}')))
-    
-    if not video_files:
-        raise ValueError(f"No video files found in directory: {input_dir}")
-    
-    print(f"Found {len(video_files)} video files in {input_dir}")
-    
-    # Ensure output directory exists
-    # Find the deepest existing parent directory
-    output_path = Path(output_dir)
-    existing_parent = output_path
-    while existing_parent != existing_parent.parent and not existing_parent.exists():
-        existing_parent = existing_parent.parent
-    
-    if not existing_parent.exists():
-        raise NotADirectoryError(f"None of the parent directories exist for: {output_dir}")
-    
-    if not os.access(existing_parent, os.W_OK):
-        raise PermissionError(f"No write permission for existing parent directory: {existing_parent}. Cannot create: {output_dir}")
-    
-    # Try to create the output directory
-    try:
-        os.makedirs(output_dir, exist_ok=True)
-    except PermissionError as e:
-        raise PermissionError(f"Cannot create output directory {output_dir}. Error: {e}. "
-                            f"Deepest existing parent: {existing_parent}")
-    except OSError as e:
-        raise OSError(f"Cannot create output directory {output_dir}. Error: {e}. "
-                     f"Deepest existing parent: {existing_parent}")
-    
-    # Prepare items for processing
-    items = []
-    for input_video in video_files:
-        inp = Path(input_video)
-        output_filename = inp.stem + f"_crop_{target_size}.mp4"
-        output_path = os.path.join(output_dir, output_filename)
-        items.append((input_video, output_path))
-    
-    # Process videos
-    if num_workers > 1:
-        # Parallel processing
-        print(f"Using {num_workers} parallel workers")
-        def process_item(args_tuple):
-            input_video, output_path = args_tuple
-            inp = Path(input_video)
-            try:
-                # Skip if output already exists
-                if os.path.isfile(output_path):
-                    return True, f"Skipped {inp.name}"
-                
-                # Process the video
-                process_single_video(input_video, output_path, bbox, target_size, ffmpeg, bbox_scale)
-                return True, f"Processed {inp.name}"
-            except Exception as e:
-                return False, f"Error processing {inp.name}: {str(e)}"
-        
-        with mp.Pool(num_workers) as pool:
-            results = list(tqdm(pool.imap(process_item, items), total=len(items), desc="Processing videos"))
-        
-        successful = sum(1 for success, _ in results if success)
-        print(f"✓ Finished processing: {successful}/{len(items)} videos successful")
-    else:
-        # Sequential processing with better progress reporting
-        for i, (input_video, output_path) in enumerate(tqdm(items, desc="Processing videos"), 1):
-            try:
-                inp = Path(input_video)
-                # Skip if output already exists
-                if os.path.isfile(output_path):
-                    tqdm.write(f"[{i}/{len(items)}] ⏭ Skipping {inp.name} (output already exists)")
-                    continue
-                
-                tqdm.write(f"[{i}/{len(items)}] Processing {inp.name}...")
-                # Process the video
-                process_single_video(input_video, output_path, bbox, target_size, ffmpeg, bbox_scale)
-            except Exception as e:
-                tqdm.write(f"[{i}/{len(items)}] ✗ Error processing {input_video}: {str(e)}")
-                continue
-        
-        print(f"✓ Finished processing {len(items)} videos")
     return
 
 
@@ -313,52 +311,134 @@ def main():
     parser.add_argument('--ffmpeg', type=str, default='ffmpeg', help='path to ffmpeg')
     parser.add_argument('--target-size', type=int, default=720, help='output square size (default: 720)')
     parser.add_argument('--input-video', type=str, help='Process a single video (overrides TSV mode)')
-    parser.add_argument('--input-dir', type=str, help='Process all videos in a directory (overrides TSV mode)')
-    parser.add_argument('--output-video', type=str, help='Output path for single video or output directory for batch processing')
-    parser.add_argument('--bbox-coords', type=str, help='Bounding box as x0,y0,x1,y1 (normalized 0-1 or pixels) for single video or batch processing')
+    parser.add_argument('--output-video', type=str, help='Output path for single video')
+    parser.add_argument('--bbox-coords', type=str, help='Bounding box as x0,y0,x1,y1 (normalized 0-1 or pixels) for single video')
     parser.add_argument('--bbox-scale', type=float, default=0.85, help='Scale factor (0-1) to shrink bbox around center for tighter crop (default: 0.85)')
+    parser.add_argument('--input-dir', type=str, help='Process all videos from a directory (overrides TSV and single video mode)')
+    parser.add_argument('--output-dir', type=str, help='Output directory for batch processing (required with --input-dir)')
+    parser.add_argument('--default-bbox', type=str, default='0.2,0.2,0.8,0.8', help='Default bounding box as x0,y0,x1,y1 (normalized 0-1) for batch processing. Default: 0.2,0.2,0.8,0.8 (center 60 percent of frame)')
 
     parser.add_argument('--slurm', action='store_true', help='slurm or not')
     parser.add_argument('--nshard', type=int, default=100, help='number of slurm jobs to launch in total')
     parser.add_argument('--workers', type=int, default=0, help='number of parallel workers (0 = use all CPU cores)')
     parser.add_argument('--slurm-argument', type=str, default='{"slurm_array_parallelism":100,"slurm_partition":"speech-cpu","timeout_min":240,"slurm_mem":"16g"}', help='slurm arguments')
+    parser.add_argument('--cleanup-temp', action='store_true', help='Clean up old temporary directories before processing')
+    parser.add_argument('--cleanup-temp-age', type=int, default=24, help='Maximum age in hours for temp directories to keep (default: 24)')
     args = parser.parse_args()
 
-    # Resolve ffmpeg path (important for multiprocessing workers)
-    args.ffmpeg = resolve_ffmpeg_path(args.ffmpeg)
-    
-    # Verify ffmpeg is accessible
-    if not os.path.isfile(args.ffmpeg):
-        # Try to run it to see if it's in PATH
-        try:
-            result = subprocess.run([args.ffmpeg, '-version'], 
-                                  stdout=subprocess.PIPE, 
-                                  stderr=subprocess.PIPE, 
-                                  timeout=5)
-            if result.returncode != 0 and 'ffmpeg' not in result.stderr.decode('utf-8', errors='ignore').lower():
-                raise FileNotFoundError(f"ffmpeg not found: {args.ffmpeg}")
-        except (FileNotFoundError, subprocess.TimeoutExpired) as e:
-            raise FileNotFoundError(f"ffmpeg not found or not executable: {args.ffmpeg}. "
-                                  f"Make sure ffmpeg is installed and in PATH. Error: {e}")
+    # Auto-detect ffmpeg on Windows if not specified
+    if args.ffmpeg == 'ffmpeg' and os.name == 'nt':
+        # Look for ffmpeg.exe in the project root
+        ffmpeg_exe = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ffmpeg.exe")
+        if os.path.isfile(ffmpeg_exe):
+            args.ffmpeg = ffmpeg_exe
+        else:
+            args.ffmpeg = "ffmpeg.exe"
 
+    # Cleanup old temp directories if requested
+    if args.cleanup_temp:
+        temp_base = '/local1/tmp' if os.path.exists('/local1') else None
+        if temp_base:
+            cleanup_old_temp_dirs(temp_base, args.cleanup_temp_age)
+
+    # Batch process directory mode (highest priority)
     if args.input_dir:
-        if args.bbox_coords is None:
-            raise ValueError("--bbox-coords is required when processing a directory")
-        if args.output_video is None:
-            raise ValueError("--output-video is required when processing a directory (specify output directory)")
-        bbox_list = [v.strip() for v in args.bbox_coords.replace(' ', '').split(',')]
+        if args.output_dir is None:
+            raise ValueError("--output-dir is required when using --input-dir")
+        
+        input_dir = Path(args.input_dir)
+        output_dir = Path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        if not input_dir.exists():
+            raise ValueError(f"Input directory does not exist: {input_dir}")
+        
+        # Parse default bbox (support both --default-bbox and --bbox-coords)
+        bbox_str = args.bbox_coords if args.bbox_coords else args.default_bbox
+        if args.bbox_coords:
+            print(f"ℹ️  Using --bbox-coords for batch processing (consider using --default-bbox in future)")
+        bbox_list = [v.strip() for v in bbox_str.replace(' ', '').split(',')]
         if len(bbox_list) != 4:
-            raise ValueError("bbox-coords must have four values: x0,y0,x1,y1")
-        # Ensure output_video is treated as a directory
-        output_dir = args.output_video
-        if not output_dir.endswith(os.sep) and not os.path.isdir(output_dir):
-            # If it doesn't exist and doesn't end with separator, treat as directory
-            pass
-        # Use workers if specified, otherwise default to 1 (sequential)
-        num_workers = args.workers if args.workers > 0 else 1
-        process_directory(args.input_dir, output_dir, bbox_list, args.target_size, args.ffmpeg, args.bbox_scale, num_workers)
+            raise ValueError("bbox must have four values: x0,y0,x1,y1")
+        
+        # Find all video files
+        video_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.flv', '.webm']
+        video_files = []
+        for ext in video_extensions:
+            video_files.extend(input_dir.glob(f'*{ext}'))
+            video_files.extend(input_dir.glob(f'*{ext.upper()}'))
+        
+        if not video_files:
+            print(f"⚠️  No video files found in {input_dir}")
+            return
+        
+        print(f"📹 Found {len(video_files)} video files")
+        print(f"📁 Input directory: {input_dir}")
+        print(f"📁 Output directory: {output_dir}")
+        print(f"📐 Bbox: {bbox_str} (normalized)")
+        print(f"📏 Target size: {args.target_size}x{args.target_size}")
+        print(f"🔧 Bbox scale: {args.bbox_scale}")
+        
+        # Determine number of workers
+        num_workers = args.workers if args.workers > 0 else mp.cpu_count()
+        if num_workers > 1:
+            print(f"🚀 Using {num_workers} parallel workers")
+        else:
+            print(f"🐌 Using single-threaded processing")
+        print("-" * 60)
+        
+        # Prepare arguments for multiprocessing
+        # Create a partial function with all necessary parameters
+        from functools import partial
+        process_func = partial(
+            process_video_file_for_multiprocessing,
+            output_dir=str(output_dir),
+            bbox_list=bbox_list,
+            target_size=args.target_size,
+            ffmpeg=args.ffmpeg,
+            bbox_scale=args.bbox_scale
+        )
+        
+        # Process videos
+        success_count = 0
+        skipped_count = 0
+        error_count = 0
+        
+        if num_workers > 1:
+            # Multiprocessing mode
+            video_paths = [str(vf) for vf in video_files]
+            with mp.Pool(num_workers) as pool:
+                results = list(tqdm(
+                    pool.imap(process_func, video_paths),
+                    total=len(video_paths),
+                    desc="Processing videos"
+                ))
+        else:
+            # Single-threaded mode
+            results = []
+            for video_file in tqdm(video_files, desc="Processing videos"):
+                result = process_func(str(video_file))
+                results.append(result)
+        
+        # Count results
+        for result in results:
+            if result['status'] == 'success':
+                success_count += 1
+            elif result['status'] == 'skipped':
+                skipped_count += 1
+            elif result['status'] == 'error':
+                error_count += 1
+                print(f"❌ Error processing {result['file']}: {result.get('error', 'Unknown error')}")
+        
+        print("-" * 60)
+        print(f"✅ Successfully processed: {success_count} videos")
+        if skipped_count > 0:
+            print(f"⏭️  Skipped (already exist): {skipped_count} videos")
+        if error_count > 0:
+            print(f"❌ Errors: {error_count} videos")
         return
     
+    # Single video mode
     if args.input_video:
         if args.bbox_coords is None:
             raise ValueError("--bbox-coords is required when processing a single video")
@@ -391,7 +471,6 @@ def main():
                 items.append([vid, yid, start, end, vid2bbox[vid]])
         
         # Split work across workers
-        from tqdm import tqdm
         def process_item(args_tuple):
             vid, yid, start, end, bbox = args_tuple
             
@@ -404,23 +483,38 @@ def main():
                 return False
             
             # Process one clip (reuse existing code from get_clip)
-            tmp_dir = tempfile.mkdtemp()
-            input_video_clip = os.path.join(tmp_dir, 'tmp.mp4')
-            
-            # Use GPU encoding (NVENC) for much faster processing
-            cmd = [args.ffmpeg, '-ss', start, '-to', end, '-i', input_video_whole, '-c:v', 'h264_nvenc', '-preset', 'p1', '-crf', '20', '-rc', 'vbr', input_video_clip]
-            subprocess.call(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            
-            cap = cv2.VideoCapture(input_video_clip)
-            frames_origin = []
-            while True:
-                ret, frame = cap.read()
-                if not ret:
-                    break
-                frames_origin.append(frame)
-            cap.release()
-            time.sleep(0.1)
-            shutil.rmtree(tmp_dir)
+            # Use /local1 for temp directory if available (to avoid root partition space issues)
+            temp_base = '/local1/tmp' if os.path.exists('/local1') else None
+            if temp_base:
+                os.makedirs(temp_base, exist_ok=True)
+            tmp_dir = tempfile.mkdtemp(dir=temp_base)
+            try:
+                input_video_clip = os.path.join(tmp_dir, 'tmp.mp4')
+                
+                # Use GPU encoding (NVENC) for much faster processing
+                cmd = [args.ffmpeg, '-ss', start, '-to', end, '-i', input_video_whole, '-c:v', 'h264_nvenc', '-preset', 'p1', '-crf', '20', '-rc', 'vbr', input_video_clip]
+                subprocess.call(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                
+                cap = cv2.VideoCapture(input_video_clip)
+                # Get FPS from the clip
+                original_fps = cap.get(cv2.CAP_PROP_FPS)
+                if original_fps <= 0 or original_fps > 120:
+                    original_fps = 30
+                
+                frames_origin = []
+                while True:
+                    ret, frame = cap.read()
+                    if not ret:
+                        break
+                    frames_origin.append(frame)
+                cap.release()
+                time.sleep(0.1)
+            finally:
+                # Always cleanup tmp dir, even if there's an error
+                try:
+                    shutil.rmtree(tmp_dir)
+                except Exception as e:
+                    pass  # Silently ignore cleanup errors in multiprocessing
             
             x0, y0, x1, y1 = bbox
             W, H = frames_origin[0].shape[1], frames_origin[0].shape[0]
@@ -430,7 +524,7 @@ def main():
             y1p = y1 * H if max(bbox) <= 1.0 else y1
             x0p, y0p, x1p, y1p = adjust_bbox_with_margin(x0p, y0p, x1p, y1p, W, H, args.bbox_scale)
             rois = crop_resize(frames_origin, [x0p, y0p, x1p, y1p], args.target_size)
-            write_video_ffmpeg(rois, output_video, ffmpeg=args.ffmpeg)
+            write_video_ffmpeg(rois, output_video, ffmpeg=args.ffmpeg, fps=original_fps)
             
             return os.path.isfile(output_video)
         

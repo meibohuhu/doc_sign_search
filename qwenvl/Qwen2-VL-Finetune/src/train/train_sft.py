@@ -68,6 +68,88 @@ def unfreeze_topk_layers(model, k_llm: int = 0, k_vis: int = 0):
             for p in blk.parameters():
                 p.requires_grad = True
 
+## mh: 2025-11-18: Log model training configuration
+def log_model_training_config(model, training_args):
+    """Log which components are trainable"""
+    rank0_print("\n" + "=" * 70)
+    rank0_print("📋 Model Training Configuration Check")
+    rank0_print("=" * 70)
+    
+    # 1. Check ViT (Vision Encoder) layers
+    total_blocks = 0
+    trainable_blocks = 0
+    if hasattr(model, "visual") and hasattr(model.visual, "blocks"):
+        total_blocks = len(model.visual.blocks)
+        trainable_block_indices = []
+        
+        for idx, blk in enumerate(model.visual.blocks):
+            has_trainable = any(p.requires_grad for p in blk.parameters())
+            if has_trainable:
+                trainable_blocks += 1
+                trainable_block_indices.append(idx)
+        
+        rank0_print(f"\n🔍 Vision Encoder (ViT):")
+        rank0_print(f"  Total blocks: {total_blocks}")
+        rank0_print(f"  Trainable blocks: {trainable_blocks}")
+        if trainable_block_indices:
+            if len(trainable_block_indices) <= 10:
+                rank0_print(f"  Trainable block indices: {trainable_block_indices}")
+            else:
+                rank0_print(f"  Trainable block indices: {trainable_block_indices[:5]} ... {trainable_block_indices[-5:]}")
+                rank0_print(f"  (Showing first 5 and last 5 of {len(trainable_block_indices)} blocks)")
+        else:
+            rank0_print(f"  ⚠️  No trainable blocks found!")
+        rank0_print(f"  freeze_vision_tower: {training_args.freeze_vision_tower}")
+        rank0_print(f"  unfreeze_topk_vision: {getattr(training_args, 'unfreeze_topk_vision', 0)}")
+    else:
+        rank0_print(f"\n🔍 Vision Encoder (ViT): Not found in model")
+    
+    # 2. Check Merger
+    merger_trainable = False
+    merger_param_count = 0
+    if hasattr(model, "visual") and hasattr(model.visual, "merger"):
+        merger_params = list(model.visual.merger.parameters())
+        merger_param_count = len(merger_params)
+        merger_trainable = any(p.requires_grad for p in merger_params)
+    
+    rank0_print(f"\n🔗 Merger:")
+    rank0_print(f"  Trainable: {merger_trainable}")
+    rank0_print(f"  Parameter count: {merger_param_count}")
+    rank0_print(f"  freeze_merger: {training_args.freeze_merger}")
+    
+    # 3. Check LLM LoRA
+    llm_lora_count = 0
+    llm_lora_modules = []
+    if training_args.lora_enable:
+        from peft.tuners.lora import LoraLayer
+        for name, module in model.named_modules():
+            if isinstance(module, LoraLayer):
+                # Check if this LoRA is for LLM (not vision)
+                if "visual" not in name and "merger" not in name:
+                    llm_lora_count += 1
+                    llm_lora_modules.append(name)
+    
+    rank0_print(f"\n🧠 LLM LoRA:")
+    rank0_print(f"  lora_enable: {training_args.lora_enable}")
+    rank0_print(f"  LLM LoRA modules: {llm_lora_count}")
+    if llm_lora_modules:
+        if len(llm_lora_modules) <= 10:
+            rank0_print(f"  LoRA module names: {llm_lora_modules[:10]}")
+        else:
+            rank0_print(f"  LoRA module names (first 10): {llm_lora_modules[:10]} ...")
+            rank0_print(f"  (Total {len(llm_lora_modules)} LoRA modules)")
+    else:
+        if training_args.lora_enable:
+            rank0_print(f"  ⚠️  No LLM LoRA modules found (might be vision-only LoRA)")
+    rank0_print(f"  freeze_llm: {training_args.freeze_llm}")
+    
+    # 4. Summary
+    rank0_print(f"\n📊 Summary:")
+    rank0_print(f"  ✅ ViT layers unfrozen: {trainable_blocks}/{total_blocks}")
+    rank0_print(f"  {'✅' if merger_trainable else '❌'} Merger training: {merger_trainable}")
+    rank0_print(f"  {'✅' if llm_lora_count > 0 and training_args.lora_enable else '❌'} LLM LoRA training: {llm_lora_count > 0}")
+    rank0_print("=" * 70 + "\n")
+
 
 def train():
     global local_rank
@@ -94,6 +176,11 @@ def train():
     
     if data_args.nframes is not None and data_args.fps is not None:
         raise ValueError("You cannot set both `nframes` and `fps` at the same time. Please set only one of them.")
+
+### mh: 2025-11-15: add fbcf
+    if training_args.enable_fbcf and not data_args.mask_folder:
+        raise ValueError("`enable_fbcf` requires `data_args.mask_folder` to be specified.")
+################################################################################
 
     if training_args.lora_enable and not training_args.freeze_llm:
         raise ValueError("If `lora_enable` is True, `freeze_llm` must also be True.")
@@ -190,7 +277,28 @@ def train():
         # So I just made it this way.
         # Need to be fixed in the future.
 
-        if not training_args.freeze_vision_tower:
+        # mh: 2025-11-18: Handle vision tower: respect unfreeze_topk_vision if specified
+        unfreeze_topk_vision = getattr(training_args, "unfreeze_topk_vision", 0)
+        if unfreeze_topk_vision > 0:
+            # Only unfreeze top k layers (even if freeze_vision_tower=True)
+            if hasattr(model, "visual") and hasattr(model.visual, "blocks"):
+                # First, freeze all vision blocks
+                for blk in model.visual.blocks:
+                    for p in blk.parameters():
+                        p.requires_grad = False
+                # Then, unfreeze only the last k blocks
+                for blk in model.visual.blocks[-unfreeze_topk_vision:]:
+                    for p in blk.parameters():
+                        p.requires_grad = True
+                rank0_print(f"✅ Unfroze top {unfreeze_topk_vision} Vision Encoder blocks (indices {list(range(len(model.visual.blocks) - unfreeze_topk_vision, len(model.visual.blocks)))})")
+            # Also handle other vision parameters (like patch_embed, norm, etc.)
+            # But exclude blocks (which we already handled above)
+            for name, param in model.named_parameters():
+                if "visual" in name and "blocks" not in name:
+                    # Keep other vision components frozen when using unfreeze_topk_vision
+                    param.requires_grad = False
+        elif not training_args.freeze_vision_tower:
+            # Unfreeze all vision parameters
             for name, param in model.named_parameters():
                 if "visual" in name:
                     param.requires_grad = True
@@ -199,6 +307,9 @@ def train():
             for name, param in model.named_parameters():
                 if "merger" in name:
                     param.requires_grad = True
+
+    # mh: 2025-11-18: Log model training configuration (after all configuration is done)
+    log_model_training_config(model, training_args)
 
     processor = AutoProcessor.from_pretrained(model_args.model_id)
 
@@ -218,11 +329,12 @@ def train():
                     if training_args.bf16 and module.weight.dtype == torch.float32:
                         module = module.to(torch.bfloat16)
 
+    ### mh: 2025-11-15: this is the data module class: sft_dataset.py. it has the data and other stuff.
     data_module = make_supervised_data_module(model_id=model_args.model_id,
                                               processor=processor,
                                               data_args=data_args)
 
-    trainer = QwenSFTTrainer(
+    trainer = QwenSFTTrainer(    #### mh: 2025-11-15: this is the trainer class: sft_trainer.py. it has loss function and other stuff.
         model=model,
         processing_class=processor,
         args=training_args,

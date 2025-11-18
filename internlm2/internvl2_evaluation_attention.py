@@ -186,8 +186,8 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
         input_ids = inputs['input_ids'].to(model.device)
     else:
         # Fallback: manual tokenization (may not match chat() format exactly)
-        inputs = tokenizer(full_question, return_tensors='pt').to(model.device)
-        input_ids = inputs.input_ids
+    inputs = tokenizer(full_question, return_tensors='pt').to(model.device)
+    input_ids = inputs.input_ids
     
     # Find <image> token positions in the tokenized input
     image_token_ids = tokenizer.encode('<image>', add_special_tokens=False)
@@ -260,7 +260,7 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
                         history=None,
                         return_history=False
                     )
-            generated_text = response.strip()
+                    generated_text = response.strip()
             print(f"   ✅ Chat method succeeded, generated: {generated_text[:100]}")
         except RuntimeError as e:
             print(f"   ⚠️  Chat method failed (expected): {str(e)[:100]}")
@@ -661,13 +661,13 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
     print(f"\n📹 Processing video: {video_file}")
     
     # Load video
-    pixel_values, num_patches_list, frame_indices = load_video(
-        video_path, 
-        num_segments=args.num_segments,
+        pixel_values, num_patches_list, frame_indices = load_video(
+            video_path, 
+            num_segments=args.num_segments,
         input_size=args.image_size
-    )
-    pixel_values = pixel_values.to(torch.bfloat16).cuda()
-    print(f"   ✅ Loaded {len(num_patches_list)} frames")
+        )
+        pixel_values = pixel_values.to(torch.bfloat16).cuda()
+        print(f"   ✅ Loaded {len(num_patches_list)} frames")
     
     # Extract attention
     aggregated_attention, visual_token_idx, generated_text = extract_attention_with_hook(
@@ -706,9 +706,9 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
             mosaic_rgb = plt.cm.hot(mosaic_mask)[:, :, :3]  # Get RGB, ignore alpha
             mosaic_rgb = (mosaic_rgb * 255).astype(np.uint8)
             
-            mosaic_path = os.path.join(output_dir, f"{video_file}_mosaic_mask.png")
+                mosaic_path = os.path.join(output_dir, f"{video_file}_mosaic_mask.png")
             Image.fromarray(mosaic_rgb).save(mosaic_path)
-            print(f"   ✅ Saved mosaic mask: {mosaic_path}")
+                print(f"   ✅ Saved mosaic mask: {mosaic_path}")
         # Visualize specific frames
         # Use frame_indices from load_video if not specified by user
         frames_to_visualize = args.frame_indices if args.frame_indices else frame_indices.tolist()
@@ -739,10 +739,10 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
                             break
                 else:
                     # Using sampled frames: direct mapping
-                    for i, orig_idx in enumerate(frame_indices):
+                for i, orig_idx in enumerate(frame_indices):
                         if orig_idx == frame_idx:
-                            frame_idx_in_segments = i
-                            break
+                        frame_idx_in_segments = i
+                        break
                 
                 if frame_idx_in_segments is None:
                     continue
@@ -768,13 +768,13 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
 
 def process_model(args):
     print(f"🤖 Loading model: {args.model_path}")
-    model = AutoModel.from_pretrained(
-        args.model_path,
-        torch_dtype=torch.bfloat16,
-        low_cpu_mem_usage=True,
-        trust_remote_code=True
-    ).eval().cuda()
-    tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+        model = AutoModel.from_pretrained(
+            args.model_path,
+            torch_dtype=torch.bfloat16,
+            low_cpu_mem_usage=True,
+            trust_remote_code=True
+        ).eval().cuda()
+        tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
     
     # Resolve image size
     image_size = args.image_size
@@ -819,23 +819,23 @@ def process_model(args):
     for idx, video_path in enumerate(tqdm(video_paths, desc="Processing"), 1):
         video_name = os.path.basename(video_path)
         generated_text, aggregated_attention = process_video(
-            model, tokenizer, video_path, question, args,
+                model, tokenizer, video_path, question, args,
             attention_dir, video_name
-        )
-        
-        results.append({
+            )
+            
+            results.append({
             "video": video_name,
             "video_path": video_path,
-            "model_output": generated_text,
-            "has_attention": aggregated_attention is not None
-        })
-        
-        print(f"\n{'─'*70}")
+                "model_output": generated_text,
+                "has_attention": aggregated_attention is not None
+            })
+            
+                print(f"\n{'─'*70}")
         print(f"[{idx}/{len(video_paths)}] {video_name}")
-        print(f"Prediction:   {generated_text}")
-        
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
+                print(f"Prediction:   {generated_text}")
+            
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
     
     # Save results
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

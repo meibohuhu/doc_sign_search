@@ -1,6 +1,7 @@
 import copy
 import os
-from typing import Dict
+from pathlib import Path
+from typing import Dict, Optional
 import torch
 import transformers
 import ujson as json
@@ -17,8 +18,8 @@ from src.constants import (
 )
 
 from .data_utils import get_image_info, get_video_info, llava_to_openai, pad_sequence
-
-
+### mh: 2025-11-15: add mask 
+from .mask_utils import load_mask, prepare_mask_tensor
 
 class SupervisedDataset(Dataset):
     """Dataset for supervised fine-tuning."""
@@ -53,6 +54,27 @@ class SupervisedDataset(Dataset):
         self.fps = data_args.fps
         self.nframes = data_args.nframes
 
+        ### mh: 2025-11-15: add mask 
+        self.video_root = Path(self.data_args.image_folder).expanduser() if self.data_args.image_folder else None
+
+        self.mask_root = Path(data_args.mask_folder).expanduser() if data_args.mask_folder else None
+        if data_args.mask_file_suffix:
+            suffix = data_args.mask_file_suffix
+            self.mask_suffix = suffix if suffix.startswith(".") else f".{suffix}"
+        else:
+            self.mask_suffix = ".npz"
+        self.mask_key = data_args.mask_key
+        self.mask_dilation = data_args.mask_dilation
+        self.mask_blur_kernel = data_args.mask_blur_kernel
+        self.bg_noise_std = data_args.fbcf_bg_noise_std
+        self.use_masks = self.mask_root is not None
+        
+        # Debug: Count how many samples have mask files (only check first 100 to avoid slowdown)
+        if self.use_masks and self.mask_root:
+            self._mask_stats_checked = False
+        else:
+            self._mask_stats_checked = True
+# ###########################################
     def __len__(self):
         return len(self.list_data_dict)
 
@@ -62,10 +84,13 @@ class SupervisedDataset(Dataset):
         for attempt in range(max_retries):
             try:
                 idx = (i + attempt) % len(self.list_data_dict)
-                sources = self.list_data_dict[idx]
+                sample = self.list_data_dict[idx]
+                sources = sample  ### mh: 2025-11-15: add mask 
 
                 is_video = False
-
+                ### mh: 2025-11-15: add mask 
+                video_mask_paths = []
+                ###########################################
                 processor = self.processor
                 if "image" in sources:
                     videos = None
@@ -95,10 +120,41 @@ class SupervisedDataset(Dataset):
                     video_files = sources["video"]
                     video_folder = self.data_args.image_folder
 
+                    ### mh: 2025-11-15: add mask 
+                    video_mask_paths = []
+                    ##########################################
                     if isinstance(video_files, str):
                         video_files = [video_files]
 
                     videos = []
+                    
+                    # mh: 2025-11-15: Debug: Check mask statistics on first call
+                    if self.use_masks and not self._mask_stats_checked and i == 0 and attempt == 0:
+                        self._mask_stats_checked = True
+                        # Count masks for first 100 samples
+                        mask_count = 0
+                        total_checked = min(100, len(self.list_data_dict))
+                        for check_idx in range(total_checked):
+                            check_sample = self.list_data_dict[check_idx]
+                            if "video" in check_sample:
+                                check_videos = check_sample["video"]
+                                if isinstance(check_videos, str):
+                                    check_videos = [check_videos]
+                                for check_video in check_videos:
+                                    if not check_video.startswith("http") and not os.path.isabs(check_video):
+                                        check_video_path = os.path.join(video_folder, check_video)
+                                    else:
+                                        check_video_path = check_video
+                                    check_mask_path = self._resolve_mask_path(check_video_path)
+                                    if check_mask_path and os.path.exists(check_mask_path):
+                                        mask_count += 1
+                        coverage = 100 * mask_count / total_checked
+                        print(f"📊 Mask coverage: {mask_count}/{total_checked} ({coverage:.1f}%)")
+                        if mask_count == 0:
+                            print(f"  ⚠️  WARNING: No mask files found! FBCF will not be applied.")
+                        elif mask_count < total_checked * 0.5:
+                            print(f"  ⚠️  WARNING: Less than 50% of videos have masks. FBCF will only apply to videos with masks.")
+                    ###########################################
                     for video_file in video_files:
                         # Handle different path scenarios
                         if not video_file.startswith("http") and not os.path.isabs(video_file):
@@ -123,20 +179,30 @@ class SupervisedDataset(Dataset):
                         
                         video_input, video_kwargs = get_video_info(video_file, self.video_min_pixel, self.video_max_pixel, self.video_resized_w, self.video_resized_h, self.fps, self.nframes)
                         videos.append(video_input)
+                         ### mh: 2025-11-15: add mask 
+                        if self.use_masks:
+                            resolved_mask_path = self._resolve_mask_path(video_file)
+                            video_mask_paths.append(resolved_mask_path)
                 else:
                     grid_key = None
                     pixel_key = None
                     images=None
                     videos=None
 
-                sources = copy.deepcopy(llava_to_openai(sources['conversations'], is_video=is_video))
+                ### mh: 2025-11-15: add mask 
+                ### sources = copy.deepcopy(llava_to_openai(sources['conversations'], is_video=is_video))
+                sources = copy.deepcopy(llava_to_openai(sample['conversations'], is_video=is_video))
+                ###########################################
 
                 all_input_ids = []
                 all_labels = []
                 all_pixel_values = []
+                 ### mh: 2025-11-15: add fg and bg pixel values 
+                all_pixel_values_fg = []
+                all_pixel_values_bg = []
                 all_image_grid_thw = []
                 all_second_gird = []
-
+                ###########################################
                 image_curr_count = 0
                 video_curr_count = 0
                 # ===========================================
@@ -191,10 +257,46 @@ class SupervisedDataset(Dataset):
                         else:
                             inputs = processor(text=[user_input], images=images, videos=videos_for_this_turn, padding=False, do_resize=False, return_tensors='pt')
                         prompt_input_ids = inputs['input_ids']
-                        all_pixel_values.append(inputs[pixel_key])
+
+                        ### mh: 2025-11-15: add fg and bg pixel values 
+                        ## all_pixel_values.append(inputs[pixel_key])
+                        video_pixels = inputs[pixel_key]
+                        fg_pixels = None
+                        bg_pixels = None
+                        if self.use_masks and len(video_mask_paths) >= video_curr_count + num_videos:
+                            mask_slice = video_mask_paths[video_curr_count : video_curr_count + num_videos]
+                            # Get video_grid_thw to extract frame information
+                            video_grid_thw = inputs[grid_key]  # shape: [num_videos, 3] where 3 = [T, H, W]
+                            mask_tensor = self._build_video_mask_tensor(mask_slice, video_pixels, video_grid_thw)
+                            if mask_tensor is not None:
+                                # mask_tensor shape: [sum(T*H*W), 1] (flattened to match video_pixels)
+                                # video_pixels shape: [num_patches, feature_dim] 
+                                # We need to ensure they can be broadcast together
+                                # Expand mask to match video_pixels feature dimension if needed
+                                if mask_tensor.shape[0] == video_pixels.shape[0]:
+                                    # Expand mask from [N, 1] to [N, feature_dim] to match video_pixels
+                                    if mask_tensor.dim() == 2 and mask_tensor.shape[1] == 1:
+                                        mask_tensor = mask_tensor.expand(-1, video_pixels.shape[1])
+                                    fg_pixels = video_pixels * mask_tensor  ## 前景：mask区域保留
+                                    bg_pixels = video_pixels * (1 - mask_tensor) ## 背景：mask区域置0
+                                else:
+                                    print(f"⚠️  WARNING: Shape mismatch - mask_tensor: {mask_tensor.shape}, video_pixels: {video_pixels.shape}")
+                                    fg_pixels = None
+                                    bg_pixels = None
+                                    
+                                # Apply background noise if enabled and bg_pixels was created
+                                if bg_pixels is not None and self.bg_noise_std > 0:
+                                    ## addd noise to bg pixels 背景添加噪声
+                                    noise = torch.randn_like(video_pixels) * self.bg_noise_std
+                                    bg_pixels = bg_pixels + noise * (1 - mask_tensor)
+                        all_pixel_values.append(video_pixels) # 原始video
+                        if fg_pixels is not None and bg_pixels is not None:
+                            all_pixel_values_fg.append(fg_pixels)  # 前景video  
+                            all_pixel_values_bg.append(bg_pixels)  # 背景video
+                        ###########################################
                         all_image_grid_thw.append(inputs[grid_key])
                         video_curr_count += num_videos
-
+               
                     else:
                         prompt_input_ids = processor.tokenizer(user_input, add_special_tokens=False, padding=False, return_tensors='pt')['input_ids']
 
@@ -234,6 +336,13 @@ class SupervisedDataset(Dataset):
                     data_dict[pixel_key] = pixel_values
                     data_dict[grid_key] = image_thw
 
+                    ## mh: 2025-11-15: add fg and bg pixel values
+                    if pixel_key == "pixel_values_videos" and len(all_pixel_values_fg) > 0:
+                        pixel_values_fg = torch.cat(all_pixel_values_fg, dim=0)
+                        pixel_values_bg = torch.cat(all_pixel_values_bg, dim=0)
+                        data_dict["pixel_values_videos_fg"] = pixel_values_fg
+                        data_dict["pixel_values_videos_bg"] = pixel_values_bg
+                    ###########################################
                 if len(all_second_gird) > 0:
                     second_gird = all_second_gird
                     data_dict["second_per_grid_ts"] = second_gird
@@ -242,7 +351,7 @@ class SupervisedDataset(Dataset):
             
             except Exception as e:
                 # Log the error and try the next sample
-                video_file_info = sources.get('video', 'unknown') if 'sources' in locals() else 'unknown'
+                video_file_info = sample.get('video', 'unknown') if isinstance(sample, dict) else 'unknown'
                 print(f"⚠️  Warning: Failed to load sample {idx} (video: {video_file_info}). Error: {str(e)[:200]}")
                 
                 if attempt < max_retries - 1:
@@ -251,6 +360,73 @@ class SupervisedDataset(Dataset):
                     # If all retries failed, raise the error
                     raise RuntimeError(f"Failed to load valid sample after {max_retries} attempts. Last error: {str(e)}")
 
+## mh: 2025-11-15: add mask path resolution
+    def _resolve_mask_path(self, video_file: str) -> Optional[str]:
+        if self.mask_root is None:
+            return None
+        video_path = Path(video_file)
+        rel_path = None
+        if self.video_root:
+            try:
+                rel_path = video_path.relative_to(self.video_root)
+            except ValueError:
+                rel_path = Path(video_path.name)
+        elif video_path.is_absolute():
+            rel_path = Path(video_path.name)
+        else:
+            rel_path = video_path
+        rel_path = rel_path.with_suffix(self.mask_suffix)
+        return str(self.mask_root / rel_path)
+
+    def _build_video_mask_tensor(self, mask_paths, video_tensor: torch.Tensor, video_grid_thw: torch.Tensor) -> Optional[torch.Tensor]:
+        if not mask_paths or any(path is None for path in mask_paths):
+            return None
+        
+        # video_tensor shape is [num_patches, feature_dim] (flattened)
+        # video_grid_thw shape is [num_videos, 3] where each row is [T, H, W]
+        # We need to process each video's mask separately since they may have different frame counts
+        if video_grid_thw.dim() != 2 or video_grid_thw.shape[1] != 3:
+            print(f"⚠️  WARNING: Unexpected video_grid_thw shape: {video_grid_thw.shape}")
+            return None
+        
+        if len(mask_paths) != video_grid_thw.shape[0]:
+            print(f"⚠️  WARNING: Number of mask paths ({len(mask_paths)}) != number of videos ({video_grid_thw.shape[0]})")
+            return None
+        
+        mask_tensors = []
+        for idx, mask_path in enumerate(mask_paths):
+            # Get frame count and dimensions for this specific video
+            num_frames = int(video_grid_thw[idx, 0].item())  # T (frames)
+            height = int(video_grid_thw[idx, 1].item())      # H
+            width = int(video_grid_thw[idx, 2].item())       # W
+            
+            mask_np = load_mask(mask_path, self.mask_key)
+            if mask_np is None:
+                if mask_path and not os.path.exists(mask_path):
+                    print(f"⚠️  WARNING: Mask file not found: {mask_path}")
+                return None
+            
+            mask_tensor = prepare_mask_tensor(
+                mask_np,
+                target_frames=num_frames,
+                target_height=height,
+                target_width=width,
+                dilation=self.mask_dilation,
+                blur_kernel=self.mask_blur_kernel,
+            )
+            # mask_tensor shape: [T, 1, H, W]
+            # We need to flatten it to match video_tensor structure
+            # After flattening: [T * H * W, 1]
+            T, C, H, W = mask_tensor.shape
+            mask_tensor_flat = mask_tensor.view(T * H * W, C)  # [T*H*W, 1]
+            mask_tensors.append(mask_tensor_flat)
+        
+        # Concatenate masks for all videos
+        mask_stack = torch.cat(mask_tensors, dim=0)  # [sum(T*H*W), 1]
+        mask_stack = mask_stack.to(video_tensor.device, dtype=video_tensor.dtype)
+        
+        return mask_stack
+###########################################
 class DataCollatorForSupervisedDataset(object):
     """Collate examples for supervised fine-tuning."""
 
@@ -262,15 +438,25 @@ class DataCollatorForSupervisedDataset(object):
         batch_label_ids = []
         batch_pixel_values = []
         batch_pixel_video_values = []
+        
+        ## mh: 2025-11-15: add fg and bg pixel values
+        batch_pixel_video_fg_values = []
+        batch_pixel_video_bg_values = []
         batch_video_thw = []
         batch_image_thw = []
         batch_second_per_grid_ts = []
-
+        ###########################################
         for example in examples:
             keys = example.keys()
             if "pixel_values_videos" in keys:
                 batch_pixel_video_values.append(example["pixel_values_videos"])
                 batch_video_thw.append(example["video_grid_thw"])
+            ## mh: 2025-11-15: add fg and bg pixel values
+            if "pixel_values_videos_fg" in keys:
+                batch_pixel_video_fg_values.append(example["pixel_values_videos_fg"])
+            if "pixel_values_videos_bg" in keys:
+                batch_pixel_video_bg_values.append(example["pixel_values_videos_bg"])
+            ###########################################
             elif "pixel_values" in keys:
                 batch_pixel_values.append(example["pixel_values"])
                 batch_image_thw.append(example["image_grid_thw"])
@@ -305,7 +491,16 @@ class DataCollatorForSupervisedDataset(object):
             video_thw = torch.cat(batch_video_thw, dim=0)
             data_dict["pixel_values_videos"] = pixel_video_values
             data_dict["video_grid_thw"] = video_thw
-
+        ### mh: 2025-11-15: add fg and bg pixel values
+        if len(batch_pixel_video_fg_values) > 0:
+            if len(batch_pixel_video_fg_values) != len(batch_pixel_video_values):
+                print(f"⚠️  WARNING: fg_pixels count ({len(batch_pixel_video_fg_values)}) != original video count ({len(batch_pixel_video_values)})")
+            data_dict["pixel_values_videos_fg"] = torch.cat(batch_pixel_video_fg_values, dim=0)
+        if len(batch_pixel_video_bg_values) > 0:
+            if len(batch_pixel_video_bg_values) != len(batch_pixel_video_values):
+                print(f"⚠️  WARNING: bg_pixels count ({len(batch_pixel_video_bg_values)}) != original video count ({len(batch_pixel_video_values)})")
+            data_dict["pixel_values_videos_bg"] = torch.cat(batch_pixel_video_bg_values, dim=0)
+        ###########################################
         if len(batch_second_per_grid_ts) > 0:
             data_dict["second_per_grid_ts"] = batch_second_per_grid_ts
 

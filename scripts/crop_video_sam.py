@@ -13,6 +13,8 @@ from pathlib import Path
 from tqdm import tqdm
 import sys
 import torch
+import multiprocessing
+from functools import partial
 
 try:
     from segment_anything import sam_model_registry, SamPredictor, SamAutomaticMaskGenerator
@@ -125,13 +127,17 @@ class SAMVideoProcessor:
     
     def __init__(self, sam_checkpoint=None, model_type="vit_h", device="cuda", 
                  use_automatic_generator=True, stability_threshold=0.95, 
-                 temporal_smoothing=0.7, remove_clothing=True, 
+                 temporal_smoothing=0.6, remove_clothing=True, 
                  segmentation_backend="sam",
                  crop_scale=1.0, mediapipe_model_selection=1, 
                  mediapipe_mask_threshold=0.5, mediapipe_pose_confidence=0.5,
                  mediapipe_hands_confidence=0.5, mediapipe_face_confidence=0.5,
-                 brighten_face_hands=True, brightness_boost=1.3, background_color="black", 
-                 use_blurred_background=False, background_blur_size=51, background_brightness=0.1):
+                 mediapipe_face_expand=15, mediapipe_hand_margin=25,
+                 mediapipe_face_shrink=0.2,
+                 output_size=None,
+                 background_color="black", 
+                 use_blurred_background=False, background_blur_size=51, background_brightness=0.1,
+                 face_hands_only=False):
         """
         Initialize video processor with multiple segmentation backend options.
         
@@ -147,8 +153,9 @@ class SAMVideoProcessor:
             background_brightness: Brightness multiplier for blurred background (0.0-1.0, default: 0.1).
             stability_threshold: Stability score threshold for mask filtering
             temporal_smoothing: Temporal smoothing factor (0.0-1.0). Higher = more smoothing.
-                               0.7 means 70% previous frame + 30% current frame
+                               0.5 means 50% previous frame + 50% current frame (default: 0.5)
             remove_clothing: If True, remove clothing and keep only face, hands, exposed skin
+            face_hands_only: If True, only extract face and hands (no body parts). Requires MediaPipe.
             segmentation_backend: Which backend to use:
                                   - "sam": Standard SAM (default)
                                   - "mediapipe": MediaPipe Selfie Segmentation (fastest)
@@ -158,12 +165,12 @@ class SAMVideoProcessor:
             mediapipe_pose_confidence: Confidence threshold for MediaPipe pose detection (0.0-1.0)
             mediapipe_hands_confidence: Confidence threshold for MediaPipe hands detection (0.0-1.0)
             mediapipe_face_confidence: Confidence threshold for MediaPipe face detection (0.0-1.0)
-            brighten_face_hands: If True, brighten face and hands regions (default: True)
-            brightness_boost: Brightness multiplier for face/hands (default: 1.3 = 30% brighter)
+            mediapipe_face_expand: Extra pixels to expand around detected face box (default: 15)
+            mediapipe_hand_margin: Extra pixels to expand around detected hand landmarks (default: 25)
+            mediapipe_face_shrink: Fraction (0-1) to trim from bottom of face box to avoid neck (default: 0.2)
+            output_size: If set (int), resize final masked frames to output_size x output_size (e.g., 320 or 224)
         """
         self.device = device if torch.cuda.is_available() and device == "cuda" else "cpu"
-        self.brighten_face_hands = brighten_face_hands
-        self.brightness_boost = brightness_boost
         self.background_color = background_color.lower()
         self.use_blurred_background = use_blurred_background or (background_color.lower() == "blurred")
         self.background_blur_size = background_blur_size
@@ -172,8 +179,13 @@ class SAMVideoProcessor:
         self.stability_threshold = stability_threshold
         self.temporal_smoothing = temporal_smoothing
         self.remove_clothing = remove_clothing
+        self.face_hands_only = face_hands_only
         self.segmentation_backend_name = segmentation_backend
         self.crop_scale = crop_scale
+        self.mediapipe_face_expand = mediapipe_face_expand
+        self.mediapipe_hand_margin = mediapipe_hand_margin
+        self.mediapipe_face_shrink = mediapipe_face_shrink
+        self.output_size = output_size
         
         # Initialize temporal smoothing buffers
         self.previous_mask = None
@@ -729,6 +741,80 @@ class SAMVideoProcessor:
         
         return combined_mask
     
+    def detect_face_hands_only_mask(self, rgb_frame):
+        """
+        Detect and create mask for face and hands only (no body parts).
+        This method only uses MediaPipe face and hand detection.
+        
+        Args:
+            rgb_frame: RGB frame
+            
+        Returns:
+            np.ndarray: Binary mask for face and hands only (255 for face/hands, 0 for background)
+        """
+        h, w = rgb_frame.shape[:2]
+        face_hands_mask = np.zeros((h, w), dtype=np.uint8)
+        
+        if not self.use_mediapipe:
+            raise ValueError("face_hands_only mode requires MediaPipe. Please install: pip install mediapipe")
+        
+        # 1. Detect and add face
+        face_results = self.face_detector.process(rgb_frame)
+        if face_results.detections:
+            for detection in face_results.detections:
+                bbox = detection.location_data.relative_bounding_box
+                x = int(bbox.xmin * w)
+                y = int(bbox.ymin * h)
+                width = int(bbox.width * w)
+                height = int(bbox.height * h)
+                
+                # Apply face expansion and shrink settings
+                expand_x = self.mediapipe_face_expand
+                expand_y = self.mediapipe_face_expand
+                
+                # Shrink from bottom to avoid neck region
+                if self.mediapipe_face_shrink > 0:
+                    height = int(height * (1 - self.mediapipe_face_shrink))
+                
+                x = max(0, x - expand_x)
+                y = max(0, y - expand_y)
+                width = min(w - x, width + 2 * expand_x)
+                height = min(h - y, height + 2 * expand_y)
+                
+                face_hands_mask[y:y+height, x:x+width] = 255
+        
+        # 2. Detect and add hands
+        hand_results = self.hands.process(rgb_frame)
+        if hand_results.multi_hand_landmarks:
+            for hand_landmarks in hand_results.multi_hand_landmarks:
+                # Get bounding box of hand landmarks
+                xs = [lm.x * w for lm in hand_landmarks.landmark]
+                ys = [lm.y * h for lm in hand_landmarks.landmark]
+                x_min, x_max = int(min(xs)), int(max(xs))
+                y_min, y_max = int(min(ys)), int(max(ys))
+                
+                # Apply hand margin setting
+                margin = self.mediapipe_hand_margin
+                x_min = max(0, x_min - margin)
+                y_min = max(0, y_min - margin)
+                x_max = min(w, x_max + margin)
+                y_max = min(h, y_max + margin)
+                
+                face_hands_mask[y_min:y_max, x_min:x_max] = 255
+        
+        # Post-process mask for smoother edges
+        kernel_small = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+        face_hands_mask = cv2.morphologyEx(face_hands_mask, cv2.MORPH_CLOSE, kernel_small, iterations=2)
+        face_hands_mask = cv2.morphologyEx(face_hands_mask, cv2.MORPH_OPEN, kernel_small, iterations=1)
+        
+        # Smooth edges
+        kernel_large = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+        face_hands_mask = cv2.morphologyEx(face_hands_mask, cv2.MORPH_CLOSE, kernel_large, iterations=1)
+        face_hands_mask = cv2.GaussianBlur(face_hands_mask, (7, 7), 1.0)
+        _, face_hands_mask = cv2.threshold(face_hands_mask, 127, 255, cv2.THRESH_BINARY)
+        
+        return face_hands_mask
+    
     def skin_color_detection(self, rgb_frame, sam_mask):
         """
         Detect skin color regions using HSV color space.
@@ -788,69 +874,15 @@ class SAMVideoProcessor:
         skin_mask = cv2.inRange(frame_hsv, lower_skin, upper_skin)
         return skin_mask > 0
     
-    def detect_face_hands_mask(self, rgb_frame):
-        """
-        Detect face and hands separately for highlighting.
-        
-        Args:
-            rgb_frame: RGB frame
-            
-        Returns:
-            np.ndarray: Binary mask for face and hands only (255 for face/hands, 0 otherwise)
-        """
-        h, w = rgb_frame.shape[:2]
-        face_hands_mask = np.zeros((h, w), dtype=np.uint8)
-        
-        if not self.use_mediapipe:
-            return face_hands_mask
-        
-        # 1. Detect and add face
-        face_results = self.face_detector.process(rgb_frame)
-        if face_results.detections:
-            for detection in face_results.detections:
-                bbox = detection.location_data.relative_bounding_box
-                x = int(bbox.xmin * w)
-                y = int(bbox.ymin * h)
-                width = int(bbox.width * w)
-                height = int(bbox.height * h)
-                # Expand slightly to include full face area
-                expand = 15
-                x = max(0, x - expand)
-                y = max(0, y - expand)
-                width = min(w - x, width + 2 * expand)
-                height = min(h - y, height + 2 * expand)
-                face_hands_mask[y:y+height, x:x+width] = 255
-        
-        # 2. Detect and add hands
-        hand_results = self.hands.process(rgb_frame)
-        if hand_results.multi_hand_landmarks:
-            for hand_landmarks in hand_results.multi_hand_landmarks:
-                # Get bounding box of hand landmarks
-                xs = [lm.x * w for lm in hand_landmarks.landmark]
-                ys = [lm.y * h for lm in hand_landmarks.landmark]
-                x_min, x_max = int(min(xs)), int(max(xs))
-                y_min, y_max = int(min(ys)), int(max(ys))
-                # Expand hand region more for better coverage
-                margin = 25
-                x_min = max(0, x_min - margin)
-                y_min = max(0, y_min - margin)
-                x_max = min(w, x_max + margin)
-                y_max = min(h, y_max + margin)
-                face_hands_mask[y_min:y_max, x_min:x_max] = 255
-        
-        return face_hands_mask
     
-    def apply_mask(self, frame, mask, face_hands_mask=None, brightness_boost=1.3):
+    def apply_mask(self, frame, mask):
         """
         STEP 3: Apply Mask to Frame
         Masks frame to keep only segmented region, sets background.
-        Optionally brightens face and hands regions.
         
         Args:
             frame: Original frame (BGR)
             mask: Binary mask from SAM
-            face_hands_mask: Optional mask for face and hands (for brightening)
-            brightness_boost: Brightness multiplier for face/hands (default: 1.3 = 30% brighter)
             
         Returns:
             np.ndarray: Masked frame with specified background
@@ -871,20 +903,9 @@ class SAMVideoProcessor:
             # Default: black background (0, 0, 0)
             masked_frame[mask == 0] = [0, 0, 0]
         
-        # Brighten face and hands if mask provided
-        if face_hands_mask is not None and np.any(face_hands_mask > 0):
-            # Only brighten areas that are both in mask and in face/hands regions
-            brighten_mask = (mask > 0) & (face_hands_mask > 0)
-            
-            # Apply brightness boost with clipping to prevent overflow
-            masked_frame[brighten_mask] = np.clip(
-                masked_frame[brighten_mask] * brightness_boost,
-                0, 255
-            )
-        
         return masked_frame.astype(np.uint8)
     
-    def process_frame(self, frame, remove_clothing=True, brighten_face_hands=True, brightness_boost=1.3):
+    def process_frame(self, frame, remove_clothing=True):
         """
         Complete Pipeline: Input → Detection → SAM Segmentation → Clothing Removal → Brightening → Masking → Output
         
@@ -893,14 +914,11 @@ class SAMVideoProcessor:
         2. Detect upper body region (MediaPipe or center-based)
         3. Segment with SAM (automatic or prompt-based)
         4. Remove clothing (keep only face, hands, exposed skin)
-        5. Detect face and hands for brightening
-        6. Apply mask to frame (black background) with optional brightening
+        5. Apply mask to frame (black background)
         
         Args:
             frame: Input frame (BGR format)
             remove_clothing: If True, remove clothing and keep only body parts
-            brighten_face_hands: If True, brighten face and hands regions
-            brightness_boost: Brightness multiplier for face/hands (default: 1.3 = 30% brighter)
             
         Returns:
             tuple: (masked_frame, mask)
@@ -908,27 +926,27 @@ class SAMVideoProcessor:
         # Convert BGR to RGB
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         
-        # STEP 1: Detect upper body region for prompt
-        bbox = self.detect_upper_body_region(rgb_frame)
-        
-        # STEP 2: Segment with SAM (gets entire person including clothing)
-        sam_mask = self.segment_with_sam(rgb_frame, bbox=bbox)
-        
-        # STEP 3: Remove clothing if requested
-        if remove_clothing:
-            body_parts_mask = self.detect_body_parts_mask(rgb_frame, sam_mask)
-            # Use body parts mask instead of full SAM mask
-            mask = body_parts_mask
+        # STEP 1: Check if face_hands_only mode is enabled
+        if self.face_hands_only:
+            # Only extract face and hands using MediaPipe (no body segmentation needed)
+            mask = self.detect_face_hands_only_mask(rgb_frame)
         else:
-            mask = sam_mask
+            # STEP 2: Detect upper body region for prompt
+            bbox = self.detect_upper_body_region(rgb_frame)
+            
+            # STEP 3: Segment with SAM (gets entire person including clothing)
+            sam_mask = self.segment_with_sam(rgb_frame, bbox=bbox)
+            
+            # STEP 4: Remove clothing if requested
+            if remove_clothing:
+                body_parts_mask = self.detect_body_parts_mask(rgb_frame, sam_mask)
+                # Use body parts mask instead of full SAM mask
+                mask = body_parts_mask
+            else:
+                mask = sam_mask
         
-        # STEP 4: Detect face and hands for brightening (if requested)
-        face_hands_mask = None
-        if brighten_face_hands:
-            face_hands_mask = self.detect_face_hands_mask(rgb_frame)
-        
-        # STEP 5: Apply mask with optional brightening
-        masked_frame = self.apply_mask(frame, mask, face_hands_mask, brightness_boost)
+        # STEP 5: Apply mask
+        masked_frame = self.apply_mask(frame, mask)
         
         # STEP 6: Ensure background has correct color (no noise)
         # Double-check: any pixel outside mask should have the specified background
@@ -941,6 +959,16 @@ class SAMVideoProcessor:
             masked_frame[mask == 0] = [128, 128, 128]
         else:
             masked_frame[mask == 0] = [0, 0, 0]
+        
+        # Optional final resize to fixed resolution
+        if self.output_size is not None:
+            if isinstance(self.output_size, (tuple, list)) and len(self.output_size) == 2:
+                out_w, out_h = int(self.output_size[0]), int(self.output_size[1])
+            else:
+                size = int(self.output_size)
+                out_w = out_h = size
+            masked_frame = cv2.resize(masked_frame, (out_w, out_h), interpolation=cv2.INTER_LINEAR)
+            mask = cv2.resize(mask, (out_w, out_h), interpolation=cv2.INTER_NEAREST)
         
         return masked_frame, mask
     
@@ -969,15 +997,26 @@ class SAMVideoProcessor:
         if fps is None:
             fps = original_fps
         
+        # Determine output resolution (resize if requested)
+        if self.output_size is not None:
+            if isinstance(self.output_size, (tuple, list)) and len(self.output_size) == 2:
+                output_width = int(self.output_size[0])
+                output_height = int(self.output_size[1])
+            else:
+                size = int(self.output_size)
+                output_width = output_height = size
+        else:
+            output_width, output_height = width, height
+        
         # Setup video writer
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out = cv2.VideoWriter(str(output_path), fourcc, fps, (width, height))
+        out = cv2.VideoWriter(str(output_path), fourcc, fps, (output_width, output_height))
         
         # Optional: mask visualization writer
         mask_out = None
         if save_mask_video:
             mask_output_path = str(output_path).replace('.mp4', '_mask_vis.mp4')
-            mask_out = cv2.VideoWriter(mask_output_path, fourcc, fps, (width, height))
+            mask_out = cv2.VideoWriter(mask_output_path, fourcc, fps, (output_width, output_height))
         
         # Reset temporal smoothing buffers for new video
         self.previous_mask = None
@@ -1003,9 +1042,7 @@ class SAMVideoProcessor:
                 try:
                     masked_frame, mask = self.process_frame(
                         frame, 
-                        remove_clothing=self.remove_clothing,
-                        brighten_face_hands=self.brighten_face_hands,
-                        brightness_boost=self.brightness_boost
+                        remove_clothing=self.remove_clothing
                     )
                 except Exception as e:
                     print(f"\n⚠️  Error processing frame {frame_count + 1}: {e}")
@@ -1041,6 +1078,44 @@ class SAMVideoProcessor:
             print(f"📹 Mask visualization saved to: {mask_output_path}")
 
 
+def process_single_video_for_multiprocessing(video_file_path, output_dir, processor_kwargs, fps=None, save_mask_video=False):
+    """
+    Process a single video file - module-level function for multiprocessing.
+    This function can be pickled by multiprocessing.
+    
+    Args:
+        video_file_path: Path to input video file
+        output_dir: Output directory path
+        processor_kwargs: Dictionary of arguments to create SAMVideoProcessor
+        fps: Output FPS (optional)
+        save_mask_video: Whether to save mask visualization
+        
+    Returns:
+        dict: Status information {'status': 'success'|'skipped'|'error', 'file': filename, ...}
+    """
+    video_file = Path(video_file_path)
+    output_video = Path(output_dir) / f"{video_file.stem}.mp4"
+    
+    # Skip if output already exists
+    if output_video.exists():
+        return {'status': 'skipped', 'file': video_file.name}
+    
+    try:
+        # Create processor instance for this process
+        processor = SAMVideoProcessor(**processor_kwargs)
+        
+        # Process video
+        processor.process_video(
+            video_file,
+            output_video,
+            fps=fps,
+            save_mask_video=save_mask_video
+        )
+        return {'status': 'success', 'file': video_file.name}
+    except Exception as e:
+        return {'status': 'error', 'file': video_file.name, 'error': str(e)}
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Process videos with SAM to segment upper body and mask background"
@@ -1048,14 +1123,20 @@ def main():
     parser.add_argument(
         "--input", "-i",
         type=str,
-        required=True,
-        help="Input video file path"
+        default=None,
+        help="Input video file path (required if --input-dir not specified)"
+    )
+    parser.add_argument(
+        "--input-dir",
+        type=str,
+        default=None,
+        help="Process all videos from a directory (overrides --input)"
     )
     parser.add_argument(
         "--output", "-o",
         type=str,
         default=None,
-        help="Output video file path (default: input_sam_masked.mp4)"
+        help="Output video file path (default: same as input filename)"
     )
     parser.add_argument(
         "--output-dir",
@@ -1105,12 +1186,18 @@ def main():
         "--temporal-smoothing",
         type=float,
         default=0.7,
-        help="Temporal smoothing factor (0.0-1.0) to reduce shakiness. Higher = more smoothing. Default: 0.7"
+        help="Temporal smoothing factor (0.0-1.0) to reduce shakiness. Higher = more smoothing. Default: 0.5"
     )
     parser.add_argument(
         "--keep-clothing",
         action="store_true",
         help="Keep clothing in output (default: remove clothing, keep only face/hands/skin)"
+    )
+    parser.add_argument(
+        "--face-hands-only",
+        action="store_true",
+        help="Only extract face and hands (no body parts). Requires MediaPipe backend. "
+             "This mode is faster and ideal for sign language videos focusing on facial expressions and hand gestures."
     )
     parser.add_argument(
         "--crop-scale",
@@ -1150,6 +1237,30 @@ def main():
         help="MediaPipe face detection confidence threshold (0.0-1.0). Lower = more detections. Default: 0.5"
     )
     parser.add_argument(
+        "--mediapipe-face-expand",
+        type=int,
+        default=15,
+        help="Extra pixels to expand around detected face bounding box (default: 15). Increase to include more context."
+    )
+    parser.add_argument(
+        "--mediapipe-hand-margin",
+        type=int,
+        default=25,
+        help="Extra pixels to expand around detected hand region (default: 25). Increase to include more context."
+    )
+    parser.add_argument(
+        "--mediapipe-face-shrink",
+        type=float,
+        default=0.2,
+        help="Fraction (0-1) to trim from bottom of face box to avoid neck region (default: 0.2). Set to 0 to disable."
+    )
+    parser.add_argument(
+        "--resize-output",
+        type=str,
+        default=None,
+        help="Resize final masked video frames. Provide a single value (e.g., 320 or 224) or WIDTHxHEIGHT (e.g., 320x256)."
+    )
+    parser.add_argument(
         "--save-mask-vis",
         action="store_true",
         help="Also save mask visualization video"
@@ -1159,17 +1270,6 @@ def main():
         type=int,
         default=None,
         help="Output video FPS (default: same as input)"
-    )
-    parser.add_argument(
-        "--no-brighten-face-hands",
-        action="store_true",
-        help="Disable brightening of face and hands (default: enabled, brightens by 30%)"
-    )
-    parser.add_argument(
-        "--brightness-boost",
-        type=float,
-        default=1.3,
-        help="Brightness multiplier for face and hands (default: 1.3 = 30% brighter). Higher = brighter."
     )
     parser.add_argument(
         "--background-color",
@@ -1193,6 +1293,12 @@ def main():
         help="Brightness multiplier for blurred background (0.0-1.0, default: 0.1 = 10% of original). "
              "Lower = darker background."
     )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=0,
+        help="Number of parallel workers (0 = use all CPU cores, 1 = single-threaded). Default: 0"
+    )
     
     args = parser.parse_args()
     
@@ -1207,6 +1313,17 @@ def main():
         print("❌ Error: MediaPipe is not installed.")
         print("   Install with: pip install mediapipe")
         sys.exit(1)
+    
+    # Check face_hands_only requirement
+    if args.face_hands_only:
+        if not MEDIAPIPE_AVAILABLE:
+            print("❌ Error: --face-hands-only requires MediaPipe.")
+            print("   Install with: pip install mediapipe")
+            sys.exit(1)
+        if args.segmentation_backend != "mediapipe":
+            print("⚠️  Warning: --face-hands-only works best with MediaPipe backend.")
+            print("   Automatically switching to MediaPipe backend.")
+            args.segmentation_backend = "mediapipe"
     
     # Check checkpoint file (only required for SAM-based backends)
     checkpoint_path = None
@@ -1242,7 +1359,154 @@ def main():
             print(f"   but you specified '{args.model_type}'. Using '{detected_model_type}' instead.")
             args.model_type = detected_model_type
     
-    # Resolve input path
+    # Batch process directory mode (highest priority)
+    if args.input_dir:
+        if args.output_dir is None:
+            print("❌ Error: --output-dir is required when using --input-dir")
+            sys.exit(1)
+        
+        input_dir = Path(args.input_dir)
+        output_dir = Path(args.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        if not input_dir.exists():
+            print(f"❌ Error: Input directory does not exist: {input_dir}")
+            sys.exit(1)
+        
+        # Find all video files
+        video_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.flv', '.webm']
+        video_files = []
+        for ext in video_extensions:
+            video_files.extend(input_dir.glob(f'*{ext}'))
+            video_files.extend(input_dir.glob(f'*{ext.upper()}'))
+        
+        if not video_files:
+            print(f"⚠️  No video files found in {input_dir}")
+            sys.exit(1)
+        
+        print("🎬 SAM-Based Video Segmentation (Batch Mode)")
+        print("=" * 60)
+        print(f"📹 Found {len(video_files)} video files")
+        print(f"📁 Input directory: {input_dir}")
+        print(f"📁 Output directory: {output_dir}")
+        print(f"Backend: {args.segmentation_backend}")
+        if checkpoint_path:
+            print(f"Model:  {args.model_type}")
+        print(f"Device: {args.device}")
+        
+        # Determine number of workers
+        num_workers = args.workers if args.workers > 0 else multiprocessing.cpu_count()
+        if num_workers > 1:
+            print(f"🚀 Using {num_workers} parallel workers")
+        else:
+            print(f"🐌 Using single-threaded processing")
+        
+        # Parse resize option
+        def parse_resize_option(opt):
+            if opt is None:
+                return None
+            if isinstance(opt, (tuple, list)) and len(opt) == 2:
+                return (int(opt[0]), int(opt[1]))
+            try:
+                if isinstance(opt, int):
+                    return (opt, opt)
+                if isinstance(opt, str):
+                    if "x" in opt.lower():
+                        w_str, h_str = opt.lower().split("x")
+                        return (int(w_str), int(h_str))
+                    return (int(opt), int(opt))
+            except ValueError:
+                print(f"⚠️  Invalid --resize-output value '{opt}', ignoring resize.")
+            return None
+        
+        resize_output = parse_resize_option(args.resize_output)
+        
+        # Prepare processor kwargs
+        processor_kwargs = {
+            'sam_checkpoint': str(checkpoint_path) if checkpoint_path else None,
+            'model_type': args.model_type,
+            'device': args.device,
+            'use_automatic_generator': not args.no_automatic,
+            'stability_threshold': args.stability_threshold,
+            'temporal_smoothing': args.temporal_smoothing,
+            'remove_clothing': not args.keep_clothing,
+            'segmentation_backend': args.segmentation_backend,
+            'crop_scale': args.crop_scale,
+            'mediapipe_model_selection': args.mediapipe_model_selection,
+            'mediapipe_mask_threshold': args.mediapipe_mask_threshold,
+            'mediapipe_pose_confidence': args.mediapipe_pose_confidence,
+            'mediapipe_hands_confidence': args.mediapipe_hands_confidence,
+            'mediapipe_face_confidence': args.mediapipe_face_confidence,
+            'mediapipe_face_expand': args.mediapipe_face_expand,
+            'mediapipe_hand_margin': args.mediapipe_hand_margin,
+            'mediapipe_face_shrink': args.mediapipe_face_shrink,
+            'output_size': resize_output,
+            'background_color': args.background_color,
+            'background_blur_size': args.background_blur_size,
+            'background_brightness': args.background_brightness,
+            'face_hands_only': args.face_hands_only
+        }
+        
+        print("-" * 60)
+        
+        # Process videos
+        success_count = 0
+        skipped_count = 0
+        error_count = 0
+        
+        if num_workers > 1:
+            # Multiprocessing mode
+            video_paths = [str(vf) for vf in video_files]
+            process_func = partial(
+                process_single_video_for_multiprocessing,
+                output_dir=str(output_dir),
+                processor_kwargs=processor_kwargs,
+                fps=args.fps,
+                save_mask_video=args.save_mask_vis
+            )
+            
+            with multiprocessing.Pool(num_workers) as pool:
+                results = list(tqdm(
+                    pool.imap(process_func, video_paths),
+                    total=len(video_paths),
+                    desc="Processing videos"
+                ))
+        else:
+            # Single-threaded mode
+            results = []
+            for video_file in tqdm(video_files, desc="Processing videos"):
+                result = process_single_video_for_multiprocessing(
+                    str(video_file),
+                    str(output_dir),
+                    processor_kwargs,
+                    fps=args.fps,
+                    save_mask_video=args.save_mask_vis
+                )
+                results.append(result)
+        
+        # Count results
+        for result in results:
+            if result['status'] == 'success':
+                success_count += 1
+            elif result['status'] == 'skipped':
+                skipped_count += 1
+            elif result['status'] == 'error':
+                error_count += 1
+                print(f"❌ Error processing {result['file']}: {result.get('error', 'Unknown error')}")
+        
+        print("-" * 60)
+        print(f"✅ Successfully processed: {success_count} videos")
+        if skipped_count > 0:
+            print(f"⏭️  Skipped (already exist): {skipped_count} videos")
+        if error_count > 0:
+            print(f"❌ Errors: {error_count} videos")
+        return
+    
+    # Single video mode
+    if args.input is None:
+        print("❌ Error: --input or --input-dir is required")
+        sys.exit(1)
+    
     input_path = Path(args.input)
     if not input_path.exists():
         print(f"❌ Error: Input video not found: {input_path}")
@@ -1254,9 +1518,9 @@ def main():
     elif args.output_dir:
         output_dir = Path(args.output_dir)
         output_dir.mkdir(parents=True, exist_ok=True)
-        output_path = output_dir / f"{input_path.stem}_sam_masked.mp4"
+        output_path = output_dir / f"{input_path.stem}.mp4"
     else:
-        output_path = input_path.parent / f"{input_path.stem}_sam_masked.mp4"
+        output_path = input_path.parent / f"{input_path.stem}.mp4"
     
     # Create output directory if needed
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1271,13 +1535,32 @@ def main():
     print(f"Device: {args.device}")
     if args.segmentation_backend == "sam":
         print(f"Mode:   {'Automatic' if not args.no_automatic else 'Prompt-based'}")
-    print(f"Clothing: {'Keep' if args.keep_clothing else 'Remove (face/hands/skin only)'}")
+    if args.face_hands_only:
+        print(f"Mode:   Face and Hands Only (MediaPipe)")
+    else:
+        print(f"Clothing: {'Keep' if args.keep_clothing else 'Remove (face/hands/skin only)'}")
+    # Parse resize option
+    def parse_resize_option(opt):
+        if opt is None:
+            return None
+        if isinstance(opt, (tuple, list)) and len(opt) == 2:
+            return (int(opt[0]), int(opt[1]))
+        try:
+            if isinstance(opt, int):
+                return (opt, opt)
+            if isinstance(opt, str):
+                if "x" in opt.lower():
+                    w_str, h_str = opt.lower().split("x")
+                    return (int(w_str), int(h_str))
+                return (int(opt), int(opt))
+        except ValueError:
+            print(f"⚠️  Invalid --resize-output value '{opt}', ignoring resize.")
+        return None
+    
+    resize_output = parse_resize_option(args.resize_output)
+    
     if args.crop_scale != 1.0:
         print(f"Crop Scale: {args.crop_scale:.2f} ({'smaller' if args.crop_scale < 1.0 else 'larger'} crop)")
-    brighten_enabled = not args.no_brighten_face_hands
-    print(f"Brighten Face/Hands: {'Enabled' if brighten_enabled else 'Disabled'}")
-    if brighten_enabled:
-        print(f"Brightness Boost: {args.brightness_boost:.2f}x ({int((args.brightness_boost - 1) * 100)}% brighter)")
     print(f"Background Color: {args.background_color}")
     if args.background_color == "blurred":
         print(f"  Blur Size: {args.background_blur_size}, Brightness: {args.background_brightness:.2f} (recommended for ViT attention)")
@@ -1287,6 +1570,11 @@ def main():
         print(f"MediaPipe Model: {args.mediapipe_model_selection} ({'general' if args.mediapipe_model_selection == 0 else 'landscape'})")
         print(f"MediaPipe Mask Threshold: {args.mediapipe_mask_threshold:.2f}")
         print(f"MediaPipe Confidences: pose={args.mediapipe_pose_confidence:.2f}, hands={args.mediapipe_hands_confidence:.2f}, face={args.mediapipe_face_confidence:.2f}")
+        print(f"MediaPipe Face Expand: {args.mediapipe_face_expand}px")
+        print(f"MediaPipe Hand Margin: {args.mediapipe_hand_margin}px")
+        print(f"MediaPipe Face Shrink: {args.mediapipe_face_shrink:.2f}")
+    if resize_output:
+        print(f"Resize Output: {resize_output[0]}x{resize_output[1]}")
     print("-" * 60)
     
     # Initialize processor
@@ -1306,11 +1594,14 @@ def main():
             mediapipe_pose_confidence=args.mediapipe_pose_confidence,
             mediapipe_hands_confidence=args.mediapipe_hands_confidence,
             mediapipe_face_confidence=args.mediapipe_face_confidence,
-            brighten_face_hands=not args.no_brighten_face_hands,
-            brightness_boost=args.brightness_boost,
+            mediapipe_face_expand=args.mediapipe_face_expand,
+            mediapipe_hand_margin=args.mediapipe_hand_margin,
+            mediapipe_face_shrink=args.mediapipe_face_shrink,
+            output_size=resize_output,
             background_color=args.background_color,
             background_blur_size=args.background_blur_size,
-            background_brightness=args.background_brightness
+            background_brightness=args.background_brightness,
+            face_hands_only=args.face_hands_only
         )
         
         # Process video

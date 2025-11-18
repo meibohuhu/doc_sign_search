@@ -154,6 +154,16 @@ class TrainingArguments(HFTrainingArguments):
     num_lora_modules: int = -1
     use_liger: bool = True
 
+    ###### mh 11/15/2025: roi masks for fbcf
+    enable_fbcf: bool = field(default=False, metadata={"help": "Enable Foreground-Background Consistency Finetuning losses."})
+    fbcf_lambda: float = field(default=0.2, metadata={"help": "Weight for background KL regularization."})
+    fg_loss_weight: float = field(default=1.0, metadata={"help": "Foreground-only CE loss weight."})
+    bg_loss_weight: float = field(default=1.0, metadata={"help": "Additional multiplier applied to background KL before lambda."})
+    fbcf_sampling_mode: bool = field(default=False, metadata={"help": "Use single-path sampling instead of full forward. More efficient but each sample only sees one view per step."})
+    fbcf_sampling_ratio_original: float = field(default=0.4, metadata={"help": "Sampling ratio for original video view (default: 0.4 = 40%)."})
+    fbcf_sampling_ratio_foreground: float = field(default=0.4, metadata={"help": "Sampling ratio for foreground-only view (default: 0.4 = 40%)."})
+    fbcf_sampling_ratio_background: float = field(default=0.2, metadata={"help": "Sampling ratio for background-only view (default: 0.2 = 20%)."})
+
 @dataclass
 class DPOArguments(DPOConfigTRL):
     cache_dir: Optional[str] = field(default=None)
@@ -294,3 +304,11 @@ class DataArguments:
     video_resized_height: int = field(default=None)
     fps: Optional[int] = field(default=None, metadata={"help": "Frames per second for video data."})
     nframes: Optional[int] = field(default=None, metadata={"help": "Number of frames for video data."})
+    #### mh: 2025-11-15: add mask 
+    mask_folder: Optional[str] = field(default=None, metadata={"help": "Directory containing per-video ROI mask npz files."})
+    mask_file_suffix: str = field(default=".npz", metadata={"help": "File suffix for mask archives (include dot)."})
+    mask_key: str = field(default="mask", metadata={"help": "Key inside mask archive referencing the mask array."})
+    mask_dilation: int = field(default=0, metadata={"help": "Spatial dilation kernel (odd >1) applied to masks (0 disables)."})
+    mask_blur_kernel: int = field(default=0, metadata={"help": "Gaussian blur kernel (odd >1) applied to masks (0 disables)."})
+    fbcf_bg_noise_std: float = field(default=0.0, metadata={"help": "Stddev for Gaussian noise injected into background-only videos."})
+    #############################################

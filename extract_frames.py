@@ -85,7 +85,7 @@ def extract_frames(video_path, num_frames=5, output_dir=None):
 
 
 if __name__ == "__main__":
-    video_path = "/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_320x320/fzDHRCKr7wU_4-8-rgb_front.mp4"
+    video_path = "/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_720_mask_archived/1Npqw3j6-w0_7-8-rgb_front_sam_masked.mp4"
     
-    extract_frames(video_path, num_frames=5)
+    extract_frames(video_path, num_frames=10)
 
