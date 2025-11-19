@@ -76,8 +76,8 @@ class QwenViTMAE(nn.Module):
         else:
             qwen_model = Qwen2VLForConditionalGeneration.from_pretrained(
                 model_id,
-                    torch_dtype=torch.float32,
-                    trust_remote_code=True
+                torch_dtype=torch.float32,
+                trust_remote_code=True
             )
         
         # Extract vision encoder
@@ -1011,12 +1011,16 @@ class QwenViTMAE(nn.Module):
         target = pixel_values_videos  # [N, patch_pixel_dim]
         
         # Normalize target patches if enabled
+        # Note: pred does NOT need normalization - the network will learn to output normalized values
         if self.norm_pix_loss:
-            mean = target.mean(dim=-1, keepdim=True)
+            # Per-patch normalization: normalize each patch independently
+            # This removes patch-level brightness/contrast variations
+            mean = target.mean(dim=-1, keepdim=True)  # Per-patch normalization
             var = target.var(dim=-1, keepdim=True)
             target = (target - mean) / (var + 1.e-6)**.5
         
         # Compute MSE loss per patch
+        # pred is NOT normalized - network learns to output normalized values automatically
         loss = (pred - target) ** 2  # [N, patch_pixel_dim]
         loss = loss.mean(dim=-1)  # [N], mean loss per patch
         
