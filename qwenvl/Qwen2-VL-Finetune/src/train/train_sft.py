@@ -255,6 +255,41 @@ def train():
         model.enable_input_require_grads()
         training_args.gradient_checkpointing_kwargs = {"use_reentrant": True}
 
+    # mh: 2025-11-18: Handle vision tower: respect unfreeze_topk_vision if specified (before LoRA)
+    # This applies when LoRA is NOT enabled
+    unfreeze_topk_vision = getattr(training_args, "unfreeze_topk_vision", 0)
+    if not training_args.lora_enable:
+        if unfreeze_topk_vision > 0:
+            # Only unfreeze top k layers (even if freeze_vision_tower=True/False)
+            if hasattr(model, "visual") and hasattr(model.visual, "blocks"):
+                # First, freeze all vision blocks
+                for blk in model.visual.blocks:
+                    for p in blk.parameters():
+                        p.requires_grad = False
+                # Then, unfreeze only the last k blocks
+                for blk in model.visual.blocks[-unfreeze_topk_vision:]:
+                    for p in blk.parameters():
+                        p.requires_grad = True
+                rank0_print(f"✅ Unfroze top {unfreeze_topk_vision} Vision Encoder blocks (indices {list(range(len(model.visual.blocks) - unfreeze_topk_vision, len(model.visual.blocks)))})")
+            # Also handle other vision parameters (like patch_embed, norm, etc.)
+            # But exclude blocks (which we already handled above) and merger (handled separately)
+            for name, param in model.named_parameters():
+                if "visual" in name and "blocks" not in name and "merger" not in name:
+                    # Keep other vision components frozen when using unfreeze_topk_vision
+                    param.requires_grad = False
+        elif not training_args.freeze_vision_tower:
+            # Unfreeze all vision parameters (when unfreeze_topk_vision=0 or not set)
+            # But exclude merger (handled separately)
+            for name, param in model.named_parameters():
+                if "visual" in name and "merger" not in name:
+                    param.requires_grad = True
+        
+        # mh: 2025-11-18: Handle merger separately (not affected by vision tower freeze/unfreeze logic)
+        if not training_args.freeze_merger:
+            for name, param in model.named_parameters():
+                if "merger" in name:
+                    param.requires_grad = True
+
     if training_args.lora_enable:
         lora_namespan_exclude = training_args.lora_namespan_exclude
         peft_config = LoraConfig(
@@ -277,8 +312,8 @@ def train():
         # So I just made it this way.
         # Need to be fixed in the future.
 
-        # mh: 2025-11-18: Handle vision tower: respect unfreeze_topk_vision if specified
-        unfreeze_topk_vision = getattr(training_args, "unfreeze_topk_vision", 0)
+        # mh: 2025-11-18: Re-apply vision tower unfreeze logic after LoRA (get_peft_model re-freezes)
+        # This ensures unfreeze_topk_vision works correctly even with LoRA enabled
         if unfreeze_topk_vision > 0:
             # Only unfreeze top k layers (even if freeze_vision_tower=True)
             if hasattr(model, "visual") and hasattr(model.visual, "blocks"):
@@ -292,17 +327,18 @@ def train():
                         p.requires_grad = True
                 rank0_print(f"✅ Unfroze top {unfreeze_topk_vision} Vision Encoder blocks (indices {list(range(len(model.visual.blocks) - unfreeze_topk_vision, len(model.visual.blocks)))})")
             # Also handle other vision parameters (like patch_embed, norm, etc.)
-            # But exclude blocks (which we already handled above)
+            # But exclude blocks (which we already handled above) and merger (handled separately)
             for name, param in model.named_parameters():
-                if "visual" in name and "blocks" not in name:
+                if "visual" in name and "blocks" not in name and "merger" not in name:
                     # Keep other vision components frozen when using unfreeze_topk_vision
                     param.requires_grad = False
         elif not training_args.freeze_vision_tower:
-            # Unfreeze all vision parameters
+            # Unfreeze all vision parameters (but exclude merger, handled separately)
             for name, param in model.named_parameters():
-                if "visual" in name:
+                if "visual" in name and "merger" not in name:
                     param.requires_grad = True
 
+        # mh: 2025-11-18: Handle merger separately (not affected by vision tower freeze/unfreeze logic)
         if not training_args.freeze_merger:
             for name, param in model.named_parameters():
                 if "merger" in name:

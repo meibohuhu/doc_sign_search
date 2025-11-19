@@ -232,7 +232,7 @@ def train_mae(args):
         mask_ratio=args.mask_ratio,  # Pass mask_ratio to trainer
         callbacks=callbacks,  # Add memory clearing callback
     )
-    
+        
     # Resume from checkpoint if available
     checkpoint = None
     if args.resume_from_checkpoint is not None:
@@ -253,10 +253,10 @@ def train_mae(args):
     
     # Save final encoder for downstream tasks (on main process only)
     if trainer.is_world_process_zero():
-        print("Saving final encoder...")
-        encoder_path = Path(args.output_dir) / 'mae_encoder_final.pth'
-        torch.save(model.visual.state_dict(), encoder_path)
-        print(f'Training completed! Encoder saved to {encoder_path}')
+    print("Saving final encoder...")
+    encoder_path = Path(args.output_dir) / 'mae_encoder_final.pth'
+    torch.save(model.visual.state_dict(), encoder_path)
+    print(f'Training completed! Encoder saved to {encoder_path}')
 
 
 if __name__ == '__main__':

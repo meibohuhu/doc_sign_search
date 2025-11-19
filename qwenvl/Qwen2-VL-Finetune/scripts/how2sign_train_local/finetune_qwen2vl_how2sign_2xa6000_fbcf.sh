@@ -122,7 +122,7 @@ deepspeed src/train/train_sft.py \
   --bf16 True \
   --disable_flash_attn2 True \
   --gradient_checkpointing True \
-  --lora_enable True \
+  --lora_enable False \
   --lora_rank 16 \
   --lora_alpha 32 \
   --vision_lr 2e-5 \
