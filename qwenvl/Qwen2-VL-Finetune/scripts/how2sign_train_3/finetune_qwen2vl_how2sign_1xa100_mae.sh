@@ -167,8 +167,7 @@ deepspeed src/train/train_qwen_mae.py \
     --save_interval 1000 \
     --save_total_limit 2 \
     --bf16 \
-    --gradient_checkpointing \
-    --dataloader_pin_memory False
+    --gradient_checkpointing
 
 echo "Training completed! Check logs at: $LOG_FILE"
 

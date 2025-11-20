@@ -1,63 +1,47 @@
-# InternVL Requirements
+# InternVL Requirements (Simple Installation - No Spack Required)
 # Generated based on actual conda environment installation
 # Note: Some versions differ from INSTALLATION.md (using actual installed versions)
 #
 # Python version: 3.10.19 (INSTALLATION.md says 3.9, but actual is 3.10)
 # CUDA version: 12.1 (cu121)
 #
+# Prerequisites:
+#   - System should have g++/gcc compiler available (check with: g++ --version)
+#   - System should have CUDA toolkit available (check with: nvcc --version)
+#   - If CUDA_HOME is not set, you may need to set it:
+#     export CUDA_HOME=/usr/local/cuda  # or wherever CUDA is installed
+#
 # Installation (MUST follow this order):
 #   1. Create conda environment:
 #      conda create -n internvl python=3.10 -y
 #      conda activate internvl
 #
-#   2. Load compiler and CUDA toolchains (REQUIRED for flash-attn compilation):
-#      # The system uses "blindfold" to hide system compilers, so you MUST load via spack
-#      # If using spack (recommended):
-#      spack load /lhqcen5                 # GCC toolchain (provides g++, gcc, gfortran)
-#      # Note: If you see "gcc is already loaded", that's fine - continue to next step
-#      spack load cuda@12.4.0/obxqih4      # CUDA toolkit (provides nvcc, headers, libs)
-#      
-#      # Set CUDA environment variables:
-#      export CUDA_HOME=$(spack location -i cuda@12.4.0/obxqih4)
-#      export PATH=$CUDA_HOME/bin:$PATH
-#      export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
-#      
-#      # IMPORTANT: Explicitly add GCC bin to PATH (blindfold may still hide it):
-#      export GCC_HOME=$(spack location -i /lhqcen5)
-#      export PATH=$GCC_HOME/bin:$PATH
-#      
-#      # Verify compiler and CUDA are available:
-#      g++ --version  # Should show "g++ (Spack GCC) 12.4.1", NOT "blindfold" error
-#      nvcc --version  # Should show CUDA compiler version
-#      echo "CUDA_HOME: $CUDA_HOME"  # Should show CUDA installation path
-#      # If /lhqcen5 is not available, try: spack load gcc@12.3.1/<hash>
-#      #   (find hash with: spack find -l gcc@12.3.1)
-#
-#   3. Install build dependencies for flash-attn:
+#   2. Install build dependencies for flash-attn:
 #      pip install psutil packaging ninja
 #
-#   4. Install PyTorch with CUDA support FIRST (required for flash-attn):
+#   3. Install PyTorch with CUDA support FIRST (required for flash-attn):
 #      pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
 #
-#   5. Install flash-attn (requires PyTorch, CUDA, compiler, and build dependencies):
-#      # IMPORTANT: Ensure compiler and CUDA are loaded (step 2) before this step!
-#      # Verify environment is set up correctly:
-#      #   - g++ --version  # Should show "g++ (Spack GCC) 12.4.1", NOT "blindfold" error
-#      #   - nvcc --version  # Should show CUDA compiler version
-#      #   - echo $CUDA_HOME  # Should show CUDA installation path
-#      #   - echo $GCC_HOME  # Should show GCC installation path
+#   4. Install flash-attn (requires PyTorch, CUDA, and compiler):
+#      # Verify environment:
+#      #   - g++ --version  # Should show compiler version
+#      #   - nvcc --version  # Should show CUDA compiler version (if available)
+#      #   - echo $CUDA_HOME  # Should show CUDA path (may be empty if CUDA is in system PATH)
 #      pip install flash-attn==2.5.7 --no-build-isolation
+#      # Alternative if above fails, try:
+#      #   pip install flash-attn==2.5.7 --no-build-isolation --no-deps
 #      # Note: This compilation may take 10-15 minutes. Be patient!
-#      # If compilation fails with "g++ not found" or "blindfold" error:
-#      #   - Re-run step 2 to ensure GCC_HOME is in PATH
-#      #   - Check: which g++  # Should point to spack GCC, not /tools/bin/blindfold/g++
-#      # If compilation fails with "CUDA_HOME not set":
-#      #   - Re-run step 2 to ensure CUDA_HOME is set
-#      #   - Check: nvcc --version  # Should work
-#      # You can skip flash-attn if it fails (it's optional for some use cases, but recommended)
+#      # If compilation fails, check:
+#      #   - Is g++ available? (run: g++ --version)
+#      #   - Is CUDA_HOME set? (run: echo $CUDA_HOME)
+#      #   - Is nvcc available? (run: nvcc --version)
+#      #   - If using spack environment, use requirements_internvl.txt instead
 #
-#   6. Install other requirements:
-#      pip install -r requirements_internvl.txt
+#   5. Install other requirements:
+#      pip install -r requirements_internvl_simple.txt
+#
+# Note: If your system uses "blindfold" to hide compilers (like some HPC clusters),
+#       you may need to use requirements_internvl.txt which includes spack setup.
 
 # Core ML/DL libraries
 # NOTE: PyTorch packages are NOT included here because they require PyTorch's index
@@ -78,7 +62,7 @@ safetensors==0.6.2
 deepspeed==0.18.2
 # NOTE: flash-attn is NOT included here because:
 #   1. It requires PyTorch to be installed first
-#   2. It requires CUDA_HOME to be set and nvcc to be available
+#   2. It requires CUDA_HOME to be set and nvcc to be available (or CUDA in system PATH)
 #   3. It needs to be compiled from source
 # Install it separately after setting up CUDA and PyTorch:
 #   pip install flash-attn==2.5.7 --no-build-isolation
