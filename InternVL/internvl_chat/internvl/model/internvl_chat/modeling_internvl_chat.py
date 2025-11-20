@@ -180,15 +180,18 @@ class InternVLChatModel(PreTrainedModel):
         if torch.distributed.is_initialized():
             should_log = torch.distributed.get_rank() == 0
         if should_log:
-            print(f'pixel_values.shape: {pixel_values.shape}')
+            # print(f'pixel_values.shape: {pixel_values.shape}')
     ###### added
-            print(f'dynamic ViT batch size: {vit_batch_size}, images per sample: {vit_batch_size / B}, dynamic token length: {N}')
-            print(f'input_embeds.shape: {input_embeds.shape}, vit_embeds.shape: {vit_embeds.shape}')
-## input_embeds.shape: torch.Size([9295, 2048]), vit_embeds.shape: torch.Size([128, 64, 2048])
+            # vit_batch_size is the total number of frames/images across all samples in the batch
+            # after concat_pad_data_collator concatenates pixel_values from multiple samples
+            # images per sample = vit_batch_size / B shows the average frames per sample
+            # print(f'dynamic ViT batch size: {vit_batch_size} (total frames in batch), batch_size B: {B}, images per sample (avg): {vit_batch_size / B:.2f}, dynamic token length: {N}')
+            # print(f'input_embeds.shape: {input_embeds.shape}, vit_embeds.shape: {vit_embeds.shape}')
+### input_embeds.shape: torch.Size([9295, 2048]), vit_embeds.shape: torch.Size([128, 64, 2048])
             if statistics is not None:
                 num_samples, num_padding_tokens, num_padding_images = statistics.tolist()
                 self.num_samples += num_samples
-                print(f'total_samples={self.num_samples}, {num_samples=}, {num_padding_tokens=}, {num_padding_images=}')
+                # print(f'total_samples={self.num_samples}, {num_samples=}, {num_padding_tokens=}, {num_padding_images=}')
 
     # 步骤 3: 找到所有 IMG_CONTEXT_TOKEN 的位置
     # 并将这些位置的 embeddings 替换为 vision patch embeddings
@@ -305,9 +308,9 @@ class InternVLChatModel(PreTrainedModel):
         vit_embeds = vit_embeds.reshape(vit_embeds.shape[0], h, w, -1)
         vit_embeds = self.pixel_shuffle(vit_embeds, scale_factor=self.downsample_ratio)
         vit_embeds = vit_embeds.reshape(vit_embeds.shape[0], -1, vit_embeds.shape[-1])
-        print(f'vit_embeds.shape before mlp1: {vit_embeds.shape}')
+        # print(f'vit_embeds.shape before mlp1: {vit_embeds.shape}')
         vit_embeds = self.mlp1(vit_embeds)
-        print(f'vit_embeds.shape after mlp1: {vit_embeds.shape}')
+        # print(f'vit_embeds.shape after mlp1: {vit_embeds.shape}')
         return vit_embeds
 
 

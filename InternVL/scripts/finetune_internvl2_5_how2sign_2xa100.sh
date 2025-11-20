@@ -1,19 +1,19 @@
 #!/bin/bash -l
 # NOTE the -l flag!
 #
-# InternVL2.5-4B How2Sign Fine-Tuning on 2×A100 GPUs
+# InternVL2.5-2B How2Sign Fine-Tuning on 2×A100 GPUs
 # Single-node recipe using DeepSpeed ZeRO-2 by default, with optional ZeRO-3 + CPU offload
 # Memory guidance:
 #   - Default (ZeRO-2): 8k seq / 16k packed / 96 frames works on 2×A100 40 GB.
 #   - Enable ZeRO-3 by exporting USE_ZERO_STAGE3=1 to uplift defaults to 12k seq / 20k packed / 128 frames.
 #   - You can still override any MAX_* env if you need tighter or looser bounds.
 
-#SBATCH --job-name=internvl25_how2sign_2xa100
+#SBATCH --job-name=internvl25_how2sign_2xa100_2B
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
 #SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=16
+#SBATCH --cpus-per-task=12
 #SBATCH --time=00:10:00
 #SBATCH --gpus-per-node=a100:2
 #SBATCH --partition tier3
@@ -27,6 +27,9 @@ if ! spack find --loaded /lhqcen5 >/dev/null 2>&1; then
 fi
 if ! spack find --loaded cuda@12.4.0/obxqih4 >/dev/null 2>&1; then
     spack load cuda@12.4.0/obxqih4
+fi
+if ! command -v gcc >/dev/null 2>&1; then
+    spack load gcc >/dev/null 2>&1 || true
 fi
 
 # Activate fine-tuning environment
@@ -64,8 +67,8 @@ export PYTHONUNBUFFERED=1
 cd /home/mh2803/projects/sign_language_llm/InternVL
 
 # Model and data configuration
-MODEL_NAME="OpenGVLab/InternVL2_5-4B"
-OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_4b_2xa100"
+MODEL_NAME="OpenGVLab/InternVL2_5-2B"
+OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100_little"
 META_PATH="/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_under10s_meta.json"
 IMAGE_ROOT="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/"
 
@@ -85,11 +88,11 @@ DEFAULT_MAX_NUM_FRAME=96
 DEEPSPEED_CONFIG="internvl_chat/zero_stage2_config.json"
 if [ "$USE_ZERO_STAGE3" -eq 1 ]; then
     DEEPSPEED_CONFIG="internvl_chat/zero_stage3_config.json"
-    DEFAULT_MAX_SEQ_LENGTH=5461
+    DEFAULT_MAX_SEQ_LENGTH=10240
     DEFAULT_MAX_PACKED_TOKENS=16384
     DEFAULT_MAX_BUFFER_SIZE=20
-    DEFAULT_NUM_IMAGES_EXPECTED=64
-    DEFAULT_MAX_NUM_FRAME=64
+    DEFAULT_NUM_IMAGES_EXPECTED=128
+    DEFAULT_MAX_NUM_FRAME=128
 fi
 
 MAX_SEQ_LENGTH=${MAX_SEQ_LENGTH:-$DEFAULT_MAX_SEQ_LENGTH}
@@ -98,7 +101,7 @@ MAX_BUFFER_SIZE=${MAX_BUFFER_SIZE:-$DEFAULT_MAX_BUFFER_SIZE}
 NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-$DEFAULT_NUM_IMAGES_EXPECTED}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-$DEFAULT_MAX_NUM_FRAME}
 
-echo "🚀 Starting InternVL2.5-4B How2Sign Training on 2×A100 (DeepSpeed ZeRO-2)"
+echo "🚀 Starting InternVL2.5-2B How2Sign Training on 2×A100 (DeepSpeed ZeRO-2)"
 echo "======================================================"
 echo "Model: $MODEL_NAME"
 echo "Meta Path: $META_PATH"
@@ -119,7 +122,7 @@ if [ ! -d "$OUTPUT_DIR" ]; then
     mkdir -p "$OUTPUT_DIR"
 fi
 
-MODEL_CACHE_DIR="/home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-4B"
+MODEL_CACHE_DIR="/home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B"
 if [ -d "$MODEL_CACHE_DIR" ]; then
     echo "✅ Model found in cache: $MODEL_CACHE_DIR"
     echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" | cut -f1)"
@@ -133,7 +136,7 @@ import os
 os.environ["HF_HUB_TIMEOUT"] = "600"
 os.environ["HF_HUB_DOWNLOAD_TIMEOUT"] = "600"
 os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "0"
-MODEL_NAME = "OpenGVLab/InternVL2_5-4B"
+MODEL_NAME = "OpenGVLab/InternVL2_5-2B"
 try:
     from transformers import AutoTokenizer, AutoModel
     print("Downloading tokenizer...")
@@ -185,12 +188,12 @@ torchrun --nproc_per_node=$NUM_DEVICES --master_port=$MASTER_PORT \
     --freeze_llm True \
     --freeze_backbone False \
     --freeze_mlp False \
-    --unfreeze_vit_layers 2 \
-    --use_llm_lora 16 \
-    --use_backbone_lora 0 \
+    --unfreeze_vit_layers 8 \
+    --use_llm_lora 8 \
+    --use_backbone_lora 16 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
-    --max_steps 8000 \
+    --max_steps 16000 \
     --save_strategy epoch \
     --save_total_limit 2 \
     --logging_steps 1 \

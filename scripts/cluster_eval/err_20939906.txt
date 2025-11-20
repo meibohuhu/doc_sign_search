@@ -1,22 +1,0 @@
-/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
-  warnings.warn(
-Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:09<00:09,  9.81s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.05s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.62s/it]
-/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
-  warnings.warn(
-Traceback (most recent call last):
-  File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 29, in <module>
-    from internvl.dist_utils import init_dist
-  File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/dist_utils.py", line 6, in <module>
-    import deepspeed
-  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/__init__.py", line 25, in <module>
-    from . import ops
-  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/ops/__init__.py", line 15, in <module>
-    from ..git_version_info import compatible_ops as __compatible_ops__
-  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/git_version_info.py", line 29, in <module>
-    op_compatible = builder.is_compatible()
-  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/ops/op_builder/fp_quantizer.py", line 35, in is_compatible
-    sys_cuda_major, _ = installed_cuda_version()
-  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/ops/op_builder/builder.py", line 51, in installed_cuda_version
-    raise MissingCUDAException("CUDA_HOME does not exist, unable to compile CUDA op(s)")
-deepspeed.ops.op_builder.builder.MissingCUDAException: CUDA_HOME does not exist, unable to compile CUDA op(s)

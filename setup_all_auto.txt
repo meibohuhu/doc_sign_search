@@ -1,0 +1,214 @@
+#!/bin/bash
+
+# 配置信息 - 请替换以下placeholder
+GITHUB_TOKEN="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"
+AWS_ACCESS_KEY_ID="AKIAUM3V5HXQFKA5FW5M"
+AWS_SECRET_ACCESS_KEY="NuoLAaxMWgvN2t0CmEAiBBlGs9qoMKKP8tXpMvWJ"
+HUGGINGFACE_TOKEN="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"
+
+# setup anaconda ###############################################################################
+echo "正在下载Anaconda..."
+wget https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
+
+echo "正在安装Anaconda..."
+# 使用静默安装，-b 表示batch mode，-p 指定安装路径
+bash Anaconda3-2025.06-0-Linux-x86_64.sh -b -p $HOME/anaconda3
+
+echo "正在初始化conda..."
+# 重新加载bashrc以使conda可用
+eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
+
+
+echo "验证conda安装..."
+conda --version
+
+
+
+# setup github ###############################################################################
+echo "正在安装GitHub CLI..."
+# 根据系统安装GitHub CLI
+if command -v apt-get &> /dev/null; then
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
+    sudo apt install gh -y
+elif command -v yum &> /dev/null; then
+    sudo dnf install 'dnf-command(config-manager)'
+    sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+    sudo dnf install gh -y
+fi
+
+echo "正在设置SSH密钥..."
+# 确保.ssh目录存在
+mkdir -p ~/.ssh
+cd ~/.ssh
+
+# 生成SSH密钥，使用正确的语法避免echo参数问题
+ssh-keygen -t rsa -C 'jiamianw@adobe.com' -f ~/.ssh/id_rsa -N ""
+
+echo "正在启动ssh-agent并添加密钥..."
+# 启动ssh-agent并添加密钥
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+echo "正在使用GitHub CLI登录..."
+# 使用GitHub CLI登录
+echo "$GITHUB_TOKEN" | gh auth login --with-token
+
+echo "正在添加SSH密钥到GitHub..."
+# 添加SSH密钥到GitHub
+gh ssh-key add ~/.ssh/id_rsa.pub --title "setup-script-key"
+
+echo "正在测试GitHub连接..."
+# 测试GitHub连接，自动接受host key
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+ssh -T git@github.com
+
+# setup repo ###############################################################################
+echo "正在克隆仓库..."
+# 确保目录存在
+mkdir -p /code
+cd /code
+git clone git@github.com:jiamianw_adobe/RAG-R1.git
+
+# setup env searchr1, copied from search-r1 ###############################################################################
+echo "接受 ToS..."
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+echo "正在创建searchr1环境..."
+$HOME/anaconda3/bin/conda create -n searchr1 python=3.9 -y
+
+echo "正在进入项目目录..."
+cd /code/RAG-R1
+
+echo "正在激活searchr1环境并安装包..."
+# 激活环境并安装包
+conda activate searchr1
+
+echo "正在安装torch..."
+# install torch [or you can skip this step and let vllm to install the correct version for you]
+pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+
+echo "正在安装verl..."
+# verl
+pip install -e .
+
+echo "正在安装vllm..."
+# install vllm
+pip install vllm==0.4.2 
+
+
+echo "正在安装wandb..."
+pip install wandb 
+
+echo "正在安装兼容的torch版本..."
+# 安装vllm 0.4.2需要的torch版本
+pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cu121 --force-reinstall
+
+echo "正在重新安装xformers..."
+# 重新安装xformers以匹配torch 2.3.0
+pip install xformers==0.0.26.post1 --force-reinstall
+
+pip cache purge
+
+pip install flash-attn --no-build-isolation  --no-deps
+
+pip install einops 
+
+# setup env searchr1colpali copied from colpali ###############################################################################
+echo "正在创建searchr1colpali环境..."
+conda deactivate
+conda create -n searchr1colpali python=3.11 -y
+conda activate searchr1colpali
+
+echo "正在安装colpali相关包..."
+pip install colpali-engine # from PyPi
+pip install git+https://github.com/illuin-tech/colpali # from source
+pip install "colpali-engine[train]"
+pip install fastapi
+pip install pytesseract
+pip install uvicorn
+pip install fitz frontend pymupdf easyocr
+pip install openai
+pip install llama-index-core
+
+
+conda deactivate 
+
+# setup huggingface ###############################################################################
+echo "正在登录Huggingface..."
+# 使用正确的登录方式
+huggingface-cli login --token "$HUGGINGFACE_TOKEN"
+
+
+# setup data ###############################################################################
+echo "正在设置AWS CLI..."
+# aws configure - 使用非交互式方式设置
+aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+aws configure set default.region "us-east-2"
+aws configure set default.output "json"
+
+echo "正在设置数据目录..."
+# in the future, put all the data onto the /mnt/localssd/
+
+### MMLongBench
+mkdir -p /mnt/localssd
+cd /mnt/localssd
+mkdir -p MMLongBench
+cd MMLongBench
+
+echo "正在下载MMLongBench数据..."
+aws s3 cp s3://ruizhang/BigHorn/MMLongBench-Doc.tar.gz ./ --region us-east-2
+
+echo "正在解压数据..."
+tar -xf MMLongBench-Doc.tar.gz
+
+echo "正在复制samples.json..."
+cp /mnt/remotes/sensei-fs/users/jianc/VQA_dataset/MMLongBench-Doc/data/samples.json ./
+
+
+# download pdf files from HF
+conda deactivate 
+conda activate searchr1colpali
+cd /code/RAG-R1/scripts
+sh download_mmlongbench_pdf.sh
+# two pdf are failed. 
+
+
+### SlideVQA
+echo "正在prepare SlideVQA数据..."
+cd /mnt/localssd
+mkdir SVRAG
+cd SVRAG
+aws s3 cp s3://ruizhang/BigHorn/ColPhi_train_imagesv2.tar ./ 
+tar -xf ColPhi_train_imagesv2.tar 
+cp /mnt/remotes/sensei-fs/users/jianc/VQA_dataset/SlideVQA/annotations/qa/*.jsonl ./
+
+
+### VisRBench
+echo "正在prepare VisRBench数据..."
+cd /mnt/localssd
+mkdir VisRBench_internal
+cd VisRBench_internal
+aws s3 cp s3://ruizhang/jianc/VisRBench.tar ./
+tar -xvf VisRBench.tar
+
+
+
+
+# setup wandb ###############################################################################
+echo "正在登录wandb..."
+wandb login B3e24ff3a0a94347d7e3ff92e16840cdde6e3719
+
+
+echo "设置完成！"
+
+# enable conda env  ############################################################################### 
+
+# 永久初始化conda并激活base环境
+echo "正在永久启用conda..."
+$HOME/anaconda3/bin/conda init bash
+exec bash
+

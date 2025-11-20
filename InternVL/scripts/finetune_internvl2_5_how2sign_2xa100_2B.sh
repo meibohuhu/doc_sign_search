@@ -14,7 +14,7 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --time=48:10:00
+#SBATCH --time=00:10:00
 #SBATCH --gpus-per-node=a100:2
 #SBATCH --partition tier3
 #SBATCH --mem=128G
@@ -28,16 +28,19 @@ fi
 if ! spack find --loaded cuda@12.4.0/obxqih4 >/dev/null 2>&1; then
     spack load cuda@12.4.0/obxqih4
 fi
-if ! command -v gcc >/dev/null 2>&1; then
-    spack load gcc >/dev/null 2>&1 || true
-fi
+
+# Explicit CUDA environment setup (required before training)
+CUDA_ROOT="$(spack location -i /obxqih4)"
+export CUDA_HOME="$CUDA_ROOT"
+export PATH="$CUDA_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$CUDA_HOME/lib64:${LD_LIBRARY_PATH:-}"
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
 
 # Activate fine-tuning environment
 source /home/mh2803/miniconda3/bin/activate /home/mh2803/miniconda3/envs/internvl
 export PATH="/home/mh2803/miniconda3/envs/internvl/bin:$PATH"
 export PYTHONPATH="/home/mh2803/projects/sign_language_llm/InternVL:/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat:${PYTHONPATH:-}"
 export OMP_NUM_THREADS=8
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export DS_BUILD_OPS=0
 export DS_BUILD_FUSED_ADAM=0
 export DS_BUILD_CUDA_EXT=0
@@ -68,7 +71,7 @@ cd /home/mh2803/projects/sign_language_llm/InternVL
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100"
+OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100_1"
 META_PATH="/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_under10s_meta.json"
 IMAGE_ROOT="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/"
 
@@ -78,9 +81,13 @@ NUM_DEVICES=${NUM_DEVICES:-2}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
 # Memory envelopes (defaults can be overridden via env vars)
-USE_ZERO_STAGE3=${USE_ZERO_STAGE3:-0}
+# Force ZeRO-2 by explicitly setting to 0 (ignoring any external env var)
+# NOTE: With torchrun, both ZeRO-2 and ZeRO-3 work fine with HuggingFace Trainer's no_sync
+# To use ZeRO-3, uncomment the line below and comment out the USE_ZERO_STAGE3=0 line
+USE_ZERO_STAGE3=1
+export USE_ZERO_STAGE3
 DEFAULT_MAX_SEQ_LENGTH=8192
-DEFAULT_MAX_PACKED_TOKENS=16384
+DEFAULT_MAX_PACKED_TOKENS=12288
 DEFAULT_MAX_BUFFER_SIZE=20
 DEFAULT_NUM_IMAGES_EXPECTED=96
 DEFAULT_MAX_NUM_FRAME=96
@@ -88,11 +95,11 @@ DEFAULT_MAX_NUM_FRAME=96
 DEEPSPEED_CONFIG="internvl_chat/zero_stage2_config.json"
 if [ "$USE_ZERO_STAGE3" -eq 1 ]; then
     DEEPSPEED_CONFIG="internvl_chat/zero_stage3_config.json"
-    DEFAULT_MAX_SEQ_LENGTH=10240
-    DEFAULT_MAX_PACKED_TOKENS=16384
+    DEFAULT_MAX_SEQ_LENGTH=8192
+    DEFAULT_MAX_PACKED_TOKENS=12288
     DEFAULT_MAX_BUFFER_SIZE=20
-    DEFAULT_NUM_IMAGES_EXPECTED=128
-    DEFAULT_MAX_NUM_FRAME=128
+    DEFAULT_NUM_IMAGES_EXPECTED=96
+    DEFAULT_MAX_NUM_FRAME=96
 fi
 
 MAX_SEQ_LENGTH=${MAX_SEQ_LENGTH:-$DEFAULT_MAX_SEQ_LENGTH}
@@ -101,7 +108,11 @@ MAX_BUFFER_SIZE=${MAX_BUFFER_SIZE:-$DEFAULT_MAX_BUFFER_SIZE}
 NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-$DEFAULT_NUM_IMAGES_EXPECTED}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-$DEFAULT_MAX_NUM_FRAME}
 
-echo "🚀 Starting InternVL2.5-2B How2Sign Training on 2×A100 (DeepSpeed ZeRO-2)"
+if [ "$USE_ZERO_STAGE3" -eq 1 ]; then
+    echo "🚀 Starting InternVL2.5-2B How2Sign Training on 2×A100 (DeepSpeed ZeRO-3)"
+else
+    echo "🚀 Starting InternVL2.5-2B How2Sign Training on 2×A100 (DeepSpeed ZeRO-2)"
+fi
 echo "======================================================"
 echo "Model: $MODEL_NAME"
 echo "Meta Path: $META_PATH"
@@ -111,6 +122,7 @@ echo "Global Batch Size: $GLOBAL_BATCH_SIZE"
 echo "Per-Device Batch Size: $BATCH_PER_DEVICE"
 echo "World Size: $NUM_DEVICES"
 echo "Gradient Accumulation Steps: $GRAD_ACCUM_STEPS"
+echo "USE_ZERO_STAGE3: $USE_ZERO_STAGE3"
 echo "Deepspeed Config: $DEEPSPEED_CONFIG"
 echo "Max Seq Length: $MAX_SEQ_LENGTH"
 echo "Max Packed Tokens: $MAX_PACKED_TOKENS"
@@ -176,7 +188,6 @@ torchrun --nproc_per_node=$NUM_DEVICES --master_port=$MASTER_PORT \
     --meta_path "$META_PATH" \
     --conv_style internvl2_5 \
     --do_train True \
-    --num_train_epochs 3 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --learning_rate 2e-5 \
@@ -186,15 +197,16 @@ torchrun --nproc_per_node=$NUM_DEVICES --master_port=$MASTER_PORT \
     --down_sample_ratio 0.5 \
     --pad2square False \
     --freeze_llm True \
-    --freeze_backbone False \
+    --freeze_backbone True \
     --freeze_mlp False \
-    --unfreeze_vit_layers 8 \
+    --unfreeze_vit_layers 4 \
     --use_llm_lora 8 \
-    --use_backbone_lora 16 \
+    --use_backbone_lora 4 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
-    --max_steps 8000 \
-    --save_strategy epoch \
+    --max_steps 20000 \
+    --save_strategy steps \
+    --save_steps 4000 \
     --save_total_limit 2 \
     --logging_steps 1 \
     --logging_first_step True \

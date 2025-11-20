@@ -1,9 +1,0 @@
-{
-  "how2sign_under10s": {
-    "root": "/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/",
-    "annotation": "/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_under10s_internvl.jsonl",
-    "data_augment": false,
-    "repeat_time": 1,
-    "length": 24880
-  }
-}

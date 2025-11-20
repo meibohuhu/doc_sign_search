@@ -1,0 +1,266 @@
+#!/bin/bash
+
+# 配置信息 - 请替换以下placeholder
+GITHUB_TOKEN="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"
+AWS_ACCESS_KEY_ID="AKIAUM3V5HXQFKA5FW5M"
+AWS_SECRET_ACCESS_KEY="NuoLAaxMWgvN2t0CmEAiBBlGs9qoMKKP8tXpMvWJ"
+HUGGINGFACE_TOKEN="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"
+
+
+# 项目路径
+QWENVL_DIR="/code"
+REQUIREMENTS_FILE="/code/sign_language_llm/requirements_qwenvl.txt"
+GITHUB_REPO="git@github.com:meibohuhu/sign_language_llm.git"  # Qwen2-VL-Finetune 仓库地址
+
+# 视频下载配置（可选，可通过环境变量覆盖）
+VIDEO_DATASET_NAME="${VIDEO_DATASET_NAME:-PhoenixHu/sign_mllm_how_224}"  # Hugging Face 数据集名称
+VIDEO_OUTPUT_DIR="${VIDEO_OUTPUT_DIR:-/mnt/localssd/sign_mllm}"  # 视频输出目录
+FORCE_DOWNLOAD_VIDEOS="${FORCE_DOWNLOAD_VIDEOS:-0}"  # 是否强制重新下载（1=是，0=否）
+
+# setup anaconda ###############################################################################
+echo "正在下载Anaconda..."
+wget https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
+
+echo "正在安装Anaconda..."
+# 使用静默安装，-b 表示batch mode，-p 指定安装路径
+bash Anaconda3-2025.06-0-Linux-x86_64.sh -b -p $HOME/anaconda3
+
+echo "正在初始化conda..."
+# 重新加载bashrc以使conda可用
+eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
+
+
+echo "验证conda安装..."
+conda --version
+
+
+# setup github ###############################################################################
+echo "正在安装GitHub CLI..."
+# 根据系统安装GitHub CLI
+if command -v apt-get &> /dev/null; then
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
+    sudo apt install gh -y
+elif command -v yum &> /dev/null; then
+    sudo dnf install 'dnf-command(config-manager)'
+    sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+    sudo dnf install gh -y
+fi
+
+echo "正在设置SSH密钥..."
+# 确保.ssh目录存在
+mkdir -p ~/.ssh
+cd ~/.ssh
+
+# 生成SSH密钥，使用正确的语法避免echo参数问题
+ssh-keygen -t rsa -C 'mh2803@rit.edu' -f ~/.ssh/id_rsa -N ""
+
+echo "正在启动ssh-agent并添加密钥..."
+# 启动ssh-agent并添加密钥
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+echo "正在使用GitHub CLI登录..."
+# 使用GitHub CLI登录
+echo "$GITHUB_TOKEN" | gh auth login --with-token
+
+echo "正在添加SSH密钥到GitHub..."
+# 添加SSH密钥到GitHub
+gh ssh-key add ~/.ssh/id_rsa.pub --title "setup-script-key"
+
+echo "正在测试GitHub连接..."
+# 测试GitHub连接，自动接受host key
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+ssh -T git@github.com
+
+# setup repo ###############################################################################
+echo "正在克隆仓库..."
+# 确保目录存在
+mkdir -p /code
+cd /code
+
+# 检查仓库是否已存在
+if [ -d "${QWENVL_DIR}/.git" ]; then
+    echo "仓库已存在于 ${QWENVL_DIR}，跳过克隆"
+    cd ${QWENVL_DIR}
+    echo "正在更新仓库..."
+    git pull || echo "更新失败，请手动检查"
+else
+    echo "正在从 ${GITHUB_REPO} 克隆仓库..."
+    git clone ${GITHUB_REPO} ${QWENVL_DIR}
+    cd ${QWENVL_DIR}
+fi
+
+# setup qwenvl conda environment ###############################################################################
+echo "接受 ToS..."
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+echo "正在创建qwenvl环境..."
+CONDA_ENV_NAME="qwenvl"
+
+# 检查环境是否已存在
+if conda env list | grep -q "^${CONDA_ENV_NAME} "; then
+    echo "环境 ${CONDA_ENV_NAME} 已存在，跳过创建"
+else
+    # 创建环境，使用Python 3.10（匹配实际qwenvl环境）
+    $HOME/anaconda3/bin/conda create -n ${CONDA_ENV_NAME} python=3.10 -y
+fi
+
+echo "正在激活qwenvl环境..."
+# 激活环境
+conda activate ${CONDA_ENV_NAME}
+
+# 确保在项目目录
+echo "正在进入项目目录..."
+cd ${QWENVL_DIR}
+
+# 检查requirements_qwenvl.txt文件是否存在
+if [ ! -f "${REQUIREMENTS_FILE}" ]; then
+    echo "⚠️  警告: 未找到 requirements_qwenvl.txt 文件"
+    echo "   请确保 ${REQUIREMENTS_FILE} 存在"
+    echo "   如果文件在其他位置，请修改脚本中的 REQUIREMENTS_FILE 变量"
+    exit 1
+fi
+
+# 安装依赖 - 使用requirements_qwenvl.txt
+echo "正在使用requirements_qwenvl.txt安装依赖..."
+# 确保环境已激活（如果环境不存在，前面已经创建了）
+if ! conda env list | grep -q "^${CONDA_ENV_NAME} "; then
+    echo "环境不存在，先创建基础环境..."
+    $HOME/anaconda3/bin/conda create -n ${CONDA_ENV_NAME} python=3.10 -y
+fi
+conda activate ${CONDA_ENV_NAME}
+echo "正在使用pip安装依赖..."
+pip install -r "${REQUIREMENTS_FILE}" --extra-index-url https://download.pytorch.org/whl/cu124
+
+# 安装qwen-vl-utils
+echo "正在安装qwen-vl-utils..."
+pip install qwen-vl-utils
+
+# 安装flash-attn（必须在其他包之后安装）
+echo "正在安装flash-attn..."
+pip install flash-attn --no-build-isolation --no-deps
+
+# 清理pip缓存
+echo "正在清理pip缓存..."
+pip cache purge
+
+# setup huggingface ###############################################################################
+echo "正在登录Huggingface..."
+if [ -n "$HUGGINGFACE_TOKEN" ]; then
+    huggingface-cli login --token "$HUGGINGFACE_TOKEN"
+    export HF_TOKEN="$HUGGINGFACE_TOKEN"
+    export HUGGINGFACE_TOKEN="$HUGGINGFACE_TOKEN"
+else
+    echo "⚠️  警告: HUGGINGFACE_TOKEN 未设置，跳过HuggingFace登录"
+fi
+
+# download and extract videos ###############################################################################
+echo "正在下载和解压视频..."
+DOWNLOAD_SCRIPT="${QWENVL_DIR}/download_and_extract_videos_from_hf.py"
+
+# 检查下载脚本是否存在
+if [ ! -f "$DOWNLOAD_SCRIPT" ]; then
+    echo "⚠️  警告: 未找到下载脚本 $DOWNLOAD_SCRIPT"
+    echo "   跳过视频下载步骤"
+else
+    # 检查视频是否已存在
+    if [ -d "$VIDEO_OUTPUT_DIR" ] && [ "$(ls -A $VIDEO_OUTPUT_DIR 2>/dev/null)" ]; then
+        echo "📁 视频目录已存在且不为空: $VIDEO_OUTPUT_DIR"
+        echo "   跳过下载步骤（如需重新下载，请删除该目录或设置 FORCE_DOWNLOAD_VIDEOS=1）"
+        
+        # 如果设置了强制下载，则继续下载
+        if [ "${FORCE_DOWNLOAD_VIDEOS:-0}" != "1" ]; then
+            echo "✅ 使用现有视频文件"
+        else
+            echo "🔄 强制下载模式：将重新下载视频"
+            python "$DOWNLOAD_SCRIPT" \
+                --dataset_name "$VIDEO_DATASET_NAME" \
+                --output_dir "$VIDEO_OUTPUT_DIR" \
+                --token "$HUGGINGFACE_TOKEN" \
+                --remove_archives
+        fi
+    else
+        echo "📥 开始下载视频数据集: $VIDEO_DATASET_NAME"
+        echo "📁 输出目录: $VIDEO_OUTPUT_DIR"
+        
+        # 运行下载脚本（使用conda环境中的python）
+        python "$DOWNLOAD_SCRIPT" \
+            --dataset_name "$VIDEO_DATASET_NAME" \
+            --output_dir "$VIDEO_OUTPUT_DIR" \
+            --token "$HUGGINGFACE_TOKEN" \
+            --remove_archives
+        
+        if [ $? -eq 0 ]; then
+            echo "✅ 视频下载和解压完成！"
+            echo "📁 视频位置: $VIDEO_OUTPUT_DIR"
+        else
+            echo "⚠️  警告: 视频下载失败，请检查网络连接和数据集名称"
+        fi
+    fi
+fi
+
+# 设置环境变量
+echo "正在设置环境变量..."
+export PYTHONPATH="${QWENVL_DIR}/src:${PYTHONPATH:-}"
+export TOKENIZERS_PARALLELISM=false
+export OMP_NUM_THREADS=8
+
+# 添加到bashrc以便永久生效
+if ! grep -q "export PYTHONPATH.*/code/src" ~/.bashrc 2>/dev/null; then
+    echo "" >> ~/.bashrc
+    echo "# Qwen2-VL-Finetune environment" >> ~/.bashrc
+    echo "export PYTHONPATH=\"${QWENVL_DIR}/src:\${PYTHONPATH:-}\"" >> ~/.bashrc
+    echo "export TOKENIZERS_PARALLELISM=false" >> ~/.bashrc
+fi
+
+# 验证安装 ###############################################################################
+echo ""
+echo "正在验证安装..."
+python -c "import torch; print(f'PyTorch版本: {torch.__version__}')"
+python -c "import torch; print(f'CUDA可用: {torch.cuda.is_available()}')"
+if python -c "import torch; exit(0 if torch.cuda.is_available() else 1)" 2>/dev/null; then
+    python -c "import torch; print(f'CUDA版本: {torch.version.cuda}')"
+    python -c "import torch; print(f'GPU数量: {torch.cuda.device_count()}')"
+fi
+
+python -c "import transformers; print(f'Transformers版本: {transformers.__version__}')"
+python -c "import deepspeed; print(f'DeepSpeed版本: {deepspeed.__version__}')"
+python -c "import peft; print(f'PEFT版本: {peft.__version__}')"
+
+# 检查关键包
+if python -c "import qwen_vl_utils" 2>/dev/null; then
+    echo "✅ qwen-vl-utils 安装成功"
+else
+    echo "⚠️  警告: qwen-vl-utils 导入失败"
+fi
+
+if python -c "import flash_attn" 2>/dev/null; then
+    echo "✅ flash-attn 安装成功"
+else
+    echo "⚠️  警告: flash-attn 导入失败（可能需要编译，这可能需要一些时间）"
+fi
+
+# enable conda env ############################################################################### 
+echo ""
+echo "正在永久启用conda..."
+# 永久初始化conda并激活base环境
+$HOME/anaconda3/bin/conda init bash
+
+echo ""
+echo "=========================================="
+echo "✅ Qwen2-VL-Finetune 环境设置完成！"
+echo "=========================================="
+echo "环境名称: ${CONDA_ENV_NAME}"
+echo "项目路径: ${QWENVL_DIR}"
+echo ""
+echo "使用方法:"
+echo "  1. 激活环境: conda activate ${CONDA_ENV_NAME}"
+echo "  2. 进入项目: cd ${QWENVL_DIR}"
+echo "  3. 运行训练脚本"
+echo ""
+echo "⚠️  注意: 请重新打开终端或运行 'source ~/.bashrc' 以使conda初始化生效"
+echo "=========================================="
+

@@ -132,7 +132,7 @@ class InternVLChatModel(PreTrainedModel):
             if statistics is not None:
                 num_samples, num_effective_tokens, num_padding_tokens, num_padding_images = statistics.tolist()
                 self.num_samples += num_samples
-                print(f'total_samples={self.num_samples}, {num_samples=}, {num_padding_tokens=}, {num_padding_images=}, {num_effective_tokens=}')
+                # print(f'total_samples={self.num_samples}, {num_samples=}, {num_padding_tokens=}, {num_padding_images=}, {num_effective_tokens=}')
 
         ignore = False
         input_ids = input_ids.reshape(B * N)

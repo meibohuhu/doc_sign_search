@@ -1,496 +1,0 @@
-/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
-  warnings.warn(
-Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
-/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
-  warnings.warn(
-[W1110 16:50:10.747691479 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
-[W1110 16:50:10.760631188 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,105 >> loading file ./tokenizer.model from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,106 >> loading file added_tokens.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,106 >> loading file special_tokens_map.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,106 >> loading file tokenizer_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,106 >> loading file tokenizer.json from cache at None
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,135 >> loading file ./tokenizer.model from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,135 >> loading file added_tokens.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,135 >> loading file special_tokens_map.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,136 >> loading file tokenizer_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
-[INFO|tokenization_utils_base.py:2027] 2025-11-10 16:50:12,136 >> loading file tokenizer.json from cache at None
-[WARNING|logging.py:314] 2025-11-10 16:50:12,284 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
-[WARNING|logging.py:314] 2025-11-10 16:50:12,311 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
-[INFO|configuration_utils.py:729] 2025-11-10 16:50:12,453 >> loading configuration file config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
-[INFO|configuration_utils.py:792] 2025-11-10 16:50:12,455 >> Model config InternVLChatConfig {
-  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
-  "architectures": [
-    "InternVLChatModel"
-  ],
-  "auto_map": {
-    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
-    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
-    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
-  },
-  "downsample_ratio": 0.5,
-  "dynamic_image_size": true,
-  "force_image_size": 448,
-  "hidden_size": 2048,
-  "llm_config": {
-    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
-    "add_cross_attention": false,
-    "architectures": [
-      "InternLM2ForCausalLM"
-    ],
-    "attn_implementation": "flash_attention_2",
-    "auto_map": {
-      "AutoConfig": "configuration_internlm2.InternLM2Config",
-      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
-      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
-      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
-    },
-    "bad_words_ids": null,
-    "begin_suppress_tokens": null,
-    "bias": false,
-    "bos_token_id": 1,
-    "chunk_size_feed_forward": 0,
-    "cross_attention_hidden_size": null,
-    "decoder_start_token_id": null,
-    "diversity_penalty": 0.0,
-    "do_sample": false,
-    "early_stopping": false,
-    "encoder_no_repeat_ngram_size": 0,
-    "eos_token_id": 2,
-    "exponential_decay_length_penalty": null,
-    "finetuning_task": null,
-    "forced_bos_token_id": null,
-    "forced_eos_token_id": null,
-    "hidden_act": "silu",
-    "hidden_size": 2048,
-    "id2label": {
-      "0": "LABEL_0",
-      "1": "LABEL_1"
-    },
-    "initializer_range": 0.02,
-    "intermediate_size": 8192,
-    "is_decoder": false,
-    "is_encoder_decoder": false,
-    "label2id": {
-      "LABEL_0": 0,
-      "LABEL_1": 1
-    },
-    "length_penalty": 1.0,
-    "max_length": 20,
-    "max_position_embeddings": 32768,
-    "min_length": 0,
-    "model_type": "internlm2",
-    "no_repeat_ngram_size": 0,
-    "num_attention_heads": 16,
-    "num_beam_groups": 1,
-    "num_beams": 1,
-    "num_hidden_layers": 24,
-    "num_key_value_heads": 8,
-    "num_return_sequences": 1,
-    "output_attentions": false,
-    "output_hidden_states": false,
-    "output_scores": false,
-    "pad_token_id": 2,
-    "prefix": null,
-    "pretraining_tp": 1,
-    "problem_type": null,
-    "pruned_heads": {},
-    "remove_invalid_values": false,
-    "repetition_penalty": 1.0,
-    "return_dict": true,
-    "return_dict_in_generate": false,
-    "rms_norm_eps": 1e-05,
-    "rope_scaling": {
-      "factor": 2.0,
-      "type": "dynamic"
-    },
-    "rope_theta": 1000000,
-    "sep_token_id": null,
-    "suppress_tokens": null,
-    "task_specific_params": null,
-    "temperature": 1.0,
-    "tf_legacy_loss": false,
-    "tie_encoder_decoder": false,
-    "tie_word_embeddings": false,
-    "tokenizer_class": null,
-    "top_k": 50,
-    "top_p": 1.0,
-    "torch_dtype": "bfloat16",
-    "torchscript": false,
-    "transformers_version": "4.37.2",
-    "typical_p": 1.0,
-    "use_bfloat16": true,
-    "use_cache": true,
-    "vocab_size": 92553
-  },
-  "max_dynamic_patch": 12,
-  "min_dynamic_patch": 1,
-  "model_type": "internvl_chat",
-  "pad2square": false,
-  "ps_version": "v2",
-  "select_layer": -1,
-  "template": "internvl2_5",
-  "tie_word_embeddings": false,
-  "torch_dtype": "bfloat16",
-  "transformers_version": null,
-  "use_backbone_lora": 0,
-  "use_llm_lora": 0,
-  "use_thumbnail": true,
-  "vision_config": {
-    "_name_or_path": "",
-    "add_cross_attention": false,
-    "architectures": [
-      "InternVisionModel"
-    ],
-    "attention_dropout": 0.0,
-    "bad_words_ids": null,
-    "begin_suppress_tokens": null,
-    "bos_token_id": null,
-    "chunk_size_feed_forward": 0,
-    "cross_attention_hidden_size": null,
-    "decoder_start_token_id": null,
-    "diversity_penalty": 0.0,
-    "do_sample": false,
-    "drop_path_rate": 0.0,
-    "dropout": 0.0,
-    "early_stopping": false,
-    "encoder_no_repeat_ngram_size": 0,
-    "eos_token_id": null,
-    "exponential_decay_length_penalty": null,
-    "finetuning_task": null,
-    "forced_bos_token_id": null,
-    "forced_eos_token_id": null,
-    "hidden_act": "gelu",
-    "hidden_size": 1024,
-    "id2label": {
-      "0": "LABEL_0",
-      "1": "LABEL_1"
-    },
-    "image_size": 448,
-    "initializer_factor": 1.0,
-    "initializer_range": 0.02,
-    "intermediate_size": 4096,
-    "is_decoder": false,
-    "is_encoder_decoder": false,
-    "label2id": {
-      "LABEL_0": 0,
-      "LABEL_1": 1
-    },
-    "layer_norm_eps": 1e-06,
-    "length_penalty": 1.0,
-    "max_length": 20,
-    "min_length": 0,
-    "model_type": "intern_vit_6b",
-    "no_repeat_ngram_size": 0,
-    "norm_type": "layer_norm",
-    "num_attention_heads": 16,
-    "num_beam_groups": 1,
-    "num_beams": 1,
-    "num_channels": 3,
-    "num_hidden_layers": 24,
-    "num_return_sequences": 1,
-    "output_attentions": false,
-    "output_hidden_states": false,
-    "output_scores": false,
-    "pad_token_id": null,
-    "patch_size": 14,
-    "prefix": null,
-    "problem_type": null,
-    "pruned_heads": {},
-    "qk_normalization": false,
-    "qkv_bias": true,
-    "remove_invalid_values": false,
-    "repetition_penalty": 1.0,
-    "return_dict": true,
-    "return_dict_in_generate": false,
-    "sep_token_id": null,
-    "suppress_tokens": null,
-    "task_specific_params": null,
-    "temperature": 1.0,
-    "tf_legacy_loss": false,
-    "tie_encoder_decoder": false,
-    "tie_word_embeddings": true,
-    "tokenizer_class": null,
-    "top_k": 50,
-    "top_p": 1.0,
-    "torch_dtype": "bfloat16",
-    "torchscript": false,
-    "transformers_version": "4.37.2",
-    "typical_p": 1.0,
-    "use_bfloat16": true,
-    "use_flash_attn": true
-  }
-}
-
-[INFO|modeling_utils.py:3476] 2025-11-10 16:50:12,457 >> loading weights file model.safetensors from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
-[INFO|modeling_utils.py:1426] 2025-11-10 16:50:12,474 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
-[INFO|modeling_utils.py:3582] 2025-11-10 16:50:12,474 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
-[INFO|configuration_utils.py:826] 2025-11-10 16:50:12,491 >> Generate config GenerationConfig {}
-
-[INFO|configuration_utils.py:729] 2025-11-10 16:50:12,498 >> loading configuration file config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
-[INFO|configuration_utils.py:792] 2025-11-10 16:50:12,499 >> Model config InternVLChatConfig {
-  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
-  "architectures": [
-    "InternVLChatModel"
-  ],
-  "auto_map": {
-    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
-    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
-    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
-  },
-  "downsample_ratio": 0.5,
-  "dynamic_image_size": true,
-  "force_image_size": 448,
-  "hidden_size": 2048,
-  "llm_config": {
-    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
-    "add_cross_attention": false,
-    "architectures": [
-      "InternLM2ForCausalLM"
-    ],
-    "attn_implementation": "flash_attention_2",
-    "auto_map": {
-      "AutoConfig": "configuration_internlm2.InternLM2Config",
-      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
-      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
-      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
-    },
-    "bad_words_ids": null,
-    "begin_suppress_tokens": null,
-    "bias": false,
-    "bos_token_id": 1,
-    "chunk_size_feed_forward": 0,
-    "cross_attention_hidden_size": null,
-    "decoder_start_token_id": null,
-    "diversity_penalty": 0.0,
-    "do_sample": false,
-    "early_stopping": false,
-    "encoder_no_repeat_ngram_size": 0,
-    "eos_token_id": 2,
-    "exponential_decay_length_penalty": null,
-    "finetuning_task": null,
-    "forced_bos_token_id": null,
-    "forced_eos_token_id": null,
-    "hidden_act": "silu",
-    "hidden_size": 2048,
-    "id2label": {
-      "0": "LABEL_0",
-      "1": "LABEL_1"
-    },
-    "initializer_range": 0.02,
-    "intermediate_size": 8192,
-    "is_decoder": false,
-    "is_encoder_decoder": false,
-    "label2id": {
-      "LABEL_0": 0,
-      "LABEL_1": 1
-    },
-    "length_penalty": 1.0,
-    "max_length": 20,
-    "max_position_embeddings": 32768,
-    "min_length": 0,
-    "model_type": "internlm2",
-    "no_repeat_ngram_size": 0,
-    "num_attention_heads": 16,
-    "num_beam_groups": 1,
-    "num_beams": 1,
-    "num_hidden_layers": 24,
-    "num_key_value_heads": 8,
-    "num_return_sequences": 1,
-    "output_attentions": false,
-    "output_hidden_states": false,
-    "output_scores": false,
-    "pad_token_id": 2,
-    "prefix": null,
-    "pretraining_tp": 1,
-    "problem_type": null,
-    "pruned_heads": {},
-    "remove_invalid_values": false,
-    "repetition_penalty": 1.0,
-    "return_dict": true,
-    "return_dict_in_generate": false,
-    "rms_norm_eps": 1e-05,
-    "rope_scaling": {
-      "factor": 2.0,
-      "type": "dynamic"
-    },
-    "rope_theta": 1000000,
-    "sep_token_id": null,
-    "suppress_tokens": null,
-    "task_specific_params": null,
-    "temperature": 1.0,
-    "tf_legacy_loss": false,
-    "tie_encoder_decoder": false,
-    "tie_word_embeddings": false,
-    "tokenizer_class": null,
-    "top_k": 50,
-    "top_p": 1.0,
-    "torch_dtype": "bfloat16",
-    "torchscript": false,
-    "transformers_version": "4.37.2",
-    "typical_p": 1.0,
-    "use_bfloat16": true,
-    "use_cache": true,
-    "vocab_size": 92553
-  },
-  "max_dynamic_patch": 12,
-  "min_dynamic_patch": 1,
-  "model_type": "internvl_chat",
-  "pad2square": false,
-  "ps_version": "v2",
-  "select_layer": -1,
-  "template": "internvl2_5",
-  "tie_word_embeddings": false,
-  "torch_dtype": "bfloat16",
-  "transformers_version": null,
-  "use_backbone_lora": 0,
-  "use_llm_lora": 0,
-  "use_thumbnail": true,
-  "vision_config": {
-    "_name_or_path": "",
-    "add_cross_attention": false,
-    "architectures": [
-      "InternVisionModel"
-    ],
-    "attention_dropout": 0.0,
-    "bad_words_ids": null,
-    "begin_suppress_tokens": null,
-    "bos_token_id": null,
-    "chunk_size_feed_forward": 0,
-    "cross_attention_hidden_size": null,
-    "decoder_start_token_id": null,
-    "diversity_penalty": 0.0,
-    "do_sample": false,
-    "drop_path_rate": 0.0,
-    "dropout": 0.0,
-    "early_stopping": false,
-    "encoder_no_repeat_ngram_size": 0,
-    "eos_token_id": null,
-    "exponential_decay_length_penalty": null,
-    "finetuning_task": null,
-    "forced_bos_token_id": null,
-    "forced_eos_token_id": null,
-    "hidden_act": "gelu",
-    "hidden_size": 1024,
-    "id2label": {
-      "0": "LABEL_0",
-      "1": "LABEL_1"
-    },
-    "image_size": 448,
-    "initializer_factor": 1.0,
-    "initializer_range": 0.02,
-    "intermediate_size": 4096,
-    "is_decoder": false,
-    "is_encoder_decoder": false,
-    "label2id": {
-      "LABEL_0": 0,
-      "LABEL_1": 1
-    },
-    "layer_norm_eps": 1e-06,
-    "length_penalty": 1.0,
-    "max_length": 20,
-    "min_length": 0,
-    "model_type": "intern_vit_6b",
-    "no_repeat_ngram_size": 0,
-    "norm_type": "layer_norm",
-    "num_attention_heads": 16,
-    "num_beam_groups": 1,
-    "num_beams": 1,
-    "num_channels": 3,
-    "num_hidden_layers": 24,
-    "num_return_sequences": 1,
-    "output_attentions": false,
-    "output_hidden_states": false,
-    "output_scores": false,
-    "pad_token_id": null,
-    "patch_size": 14,
-    "prefix": null,
-    "problem_type": null,
-    "pruned_heads": {},
-    "qk_normalization": false,
-    "qkv_bias": true,
-    "remove_invalid_values": false,
-    "repetition_penalty": 1.0,
-    "return_dict": true,
-    "return_dict_in_generate": false,
-    "sep_token_id": null,
-    "suppress_tokens": null,
-    "task_specific_params": null,
-    "temperature": 1.0,
-    "tf_legacy_loss": false,
-    "tie_encoder_decoder": false,
-    "tie_word_embeddings": true,
-    "tokenizer_class": null,
-    "top_k": 50,
-    "top_p": 1.0,
-    "torch_dtype": "bfloat16",
-    "torchscript": false,
-    "transformers_version": "4.37.2",
-    "typical_p": 1.0,
-    "use_bfloat16": true,
-    "use_flash_attn": true
-  }
-}
-
-[INFO|modeling_utils.py:3476] 2025-11-10 16:50:12,501 >> loading weights file model.safetensors from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
-[INFO|modeling_utils.py:1426] 2025-11-10 16:50:12,525 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
-[INFO|modeling_utils.py:3582] 2025-11-10 16:50:12,525 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
-[INFO|configuration_utils.py:826] 2025-11-10 16:50:12,547 >> Generate config GenerationConfig {}
-
-[INFO|configuration_utils.py:826] 2025-11-10 16:50:13,498 >> Generate config GenerationConfig {
-  "bos_token_id": 1,
-  "eos_token_id": 2,
-  "pad_token_id": 2
-}
-
-[INFO|configuration_utils.py:826] 2025-11-10 16:50:13,606 >> Generate config GenerationConfig {
-  "bos_token_id": 1,
-  "eos_token_id": 2,
-  "pad_token_id": 2
-}
-
-[INFO|modeling_utils.py:4350] 2025-11-10 16:50:28,166 >> All model checkpoint weights were used when initializing InternVLChatModel.
-
-[INFO|modeling_utils.py:4358] 2025-11-10 16:50:28,166 >> All the weights of InternVLChatModel were initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B.
-If your task is similar to the task the model of the checkpoint was trained on, you can already use InternVLChatModel for predictions without further training.
-[INFO|modeling_utils.py:4350] 2025-11-10 16:50:28,172 >> All model checkpoint weights were used when initializing InternVLChatModel.
-
-[INFO|modeling_utils.py:4358] 2025-11-10 16:50:28,173 >> All the weights of InternVLChatModel were initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B.
-If your task is similar to the task the model of the checkpoint was trained on, you can already use InternVLChatModel for predictions without further training.
-[INFO|configuration_utils.py:781] 2025-11-10 16:50:28,231 >> loading configuration file generation_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
-[INFO|configuration_utils.py:826] 2025-11-10 16:50:28,231 >> Generate config GenerationConfig {
-  "eos_token_id": [
-    92542,
-    92543
-  ]
-}
-
-[INFO|configuration_utils.py:781] 2025-11-10 16:50:28,234 >> loading configuration file generation_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
-[INFO|configuration_utils.py:826] 2025-11-10 16:50:28,234 >> Generate config GenerationConfig {
-  "eos_token_id": [
-    92542,
-    92543
-  ]
-}
-
-[INFO|trainer.py:522] 2025-11-10 16:50:29,718 >> max_steps is given, it will override any value given in num_train_epochs
-[INFO|trainer.py:571] 2025-11-10 16:50:29,718 >> Using auto half precision backend
-[INFO|trainer.py:522] 2025-11-10 16:50:30,102 >> max_steps is given, it will override any value given in num_train_epochs
-[INFO|trainer.py:571] 2025-11-10 16:50:30,102 >> Using auto half precision backend
-[INFO|trainer.py:1721] 2025-11-10 16:50:37,396 >> ***** Running training *****
-[INFO|trainer.py:1722] 2025-11-10 16:50:37,396 >>   Num examples = 32,000
-[INFO|trainer.py:1723] 2025-11-10 16:50:37,396 >>   Num Epochs = 9,223,372,036,854,775,807
-[INFO|trainer.py:1724] 2025-11-10 16:50:37,396 >>   Instantaneous batch size per device = 1
-[INFO|trainer.py:1727] 2025-11-10 16:50:37,396 >>   Total train batch size (w. parallel, distributed & accumulation) = 4
-[INFO|trainer.py:1728] 2025-11-10 16:50:37,396 >>   Gradient Accumulation steps = 4
-[INFO|trainer.py:1729] 2025-11-10 16:50:37,396 >>   Total optimization steps = 8,000
-[INFO|trainer.py:1730] 2025-11-10 16:50:37,402 >>   Number of trainable parameters = 224,391,168
-  0%|          | 0/8000 [00:00<?, ?it/s][INFO|trainer.py:1721] 2025-11-10 16:50:37,682 >> ***** Running training *****
-[INFO|trainer.py:1722] 2025-11-10 16:50:37,682 >>   Num examples = 32,000
-[INFO|trainer.py:1723] 2025-11-10 16:50:37,682 >>   Num Epochs = 9,223,372,036,854,775,807
-[INFO|trainer.py:1724] 2025-11-10 16:50:37,682 >>   Instantaneous batch size per device = 1
-[INFO|trainer.py:1727] 2025-11-10 16:50:37,682 >>   Total train batch size (w. parallel, distributed & accumulation) = 4
-[INFO|trainer.py:1728] 2025-11-10 16:50:37,682 >>   Gradient Accumulation steps = 4
-[INFO|trainer.py:1729] 2025-11-10 16:50:37,682 >>   Total optimization steps = 8,000
-[INFO|trainer.py:1730] 2025-11-10 16:50:37,688 >>   Number of trainable parameters = 224,391,168
-  0%|          | 0/8000 [00:00<?, ?it/s]  0%|          | 1/8000 [00:56<124:49:48, 56.18s/it]                                                      0%|          | 1/8000 [00:56<124:49:48, 56.18s/it]  0%|          | 1/8000 [00:55<124:12:41, 55.90s/it]                                                      0%|          | 1/8000 [00:55<124:12:41, 55.90s/it]  0%|          | 2/8000 [01:17<79:31:04, 35.79s/it]                                                      0%|          | 2/8000 [01:17<79:31:04, 35.79s/it]  0%|          | 2/8000 [01:17<79:18:45, 35.70s/it]                                                      0%|          | 2/8000 [01:17<79:18:45, 35.70s/it]  0%|          | 3/8000 [01:39<65:47:02, 29.61s/it]  0%|          | 3/8000 [01:39<65:37:32, 29.54s/it]                                                     0%|          | 3/8000 [01:39<65:47:02, 29.61s/it]                                                     0%|          | 3/8000 [01:39<65:37:32, 29.54s/it]  0%|          | 4/8000 [02:01<58:58:17, 26.55s/it]                                                     0%|          | 4/8000 [02:01<58:58:17, 26.55s/it]  0%|          | 4/8000 [02:01<58:54:43, 26.52s/it]                                                     0%|          | 4/8000 [02:01<58:54:43, 26.52s/it]  0%|          | 5/8000 [02:27<58:14:22, 26.22s/it]  0%|          | 5/8000 [02:27<58:10:08, 26.19s/it]                                                                                                        0%|          | 5/8000 [02:29<58:10:08, 26.19s/it]  0%|          | 5/8000 [02:29<58:14:22, 26.22s/it]  0%|          | 6/8000 [02:51<56:20:14, 25.37s/it]                                                     0%|          | 6/8000 [02:50<56:18:03, 25.35s/it]                                                     0%|          | 6/8000 [02:51<56:20:14, 25.37s/it]  0%|          | 6/8000 [02:50<56:18:03, 25.35s/it]  0%|          | 7/8000 [03:12<53:40:51, 24.18s/it]                                                     0%|          | 7/8000 [03:12<53:40:51, 24.18s/it]  0%|          | 7/8000 [03:12<53:39:31, 24.17s/it]                                                     0%|          | 7/8000 [03:12<53:39:31, 24.17s/it]  0%|          | 8/8000 [03:34<51:46:54, 23.33s/it]                                                     0%|          | 8/8000 [03:34<51:46:54, 23.33s/it]  0%|          | 8/8000 [03:34<51:49:08, 23.34s/it]                                                     0%|          | 8/8000 [03:34<51:49:08, 23.34s/it]  0%|          | 9/8000 [03:55<50:23:35, 22.70s/it]                                                     0%|          | 9/8000 [03:55<50:23:35, 22.70s/it]  0%|          | 9/8000 [03:55<50:24:42, 22.71s/it]                                                     0%|          | 9/8000 [03:55<50:24:42, 22.71s/it]  0%|          | 10/8000 [04:17<49:27:29, 22.28s/it]                                                      0%|          | 10/8000 [04:17<49:27:29, 22.28s/it]  0%|          | 10/8000 [04:16<49:28:12, 22.29s/it]                                                      0%|          | 10/8000 [04:16<49:28:12, 22.29s/it]  0%|          | 11/8000 [04:38<48:43:24, 21.96s/it]                                                      0%|          | 11/8000 [04:38<48:43:24, 21.96s/it]  0%|          | 11/8000 [04:38<48:40:53, 21.94s/it]                                                      0%|          | 11/8000 [04:38<48:40:53, 21.94s/it]  0%|          | 12/8000 [04:59<48:29:12, 21.85s/it]                                                      0%|          | 12/8000 [04:59<48:29:12, 21.85s/it]  0%|          | 12/8000 [04:59<48:29:55, 21.86s/it]                                                      0%|          | 12/8000 [04:59<48:29:55, 21.86s/it]  0%|          | 13/8000 [05:21<48:23:38, 21.81s/it]                                                      0%|          | 13/8000 [05:21<48:23:38, 21.81s/it]  0%|          | 13/8000 [05:21<48:26:37, 21.84s/it]                                                      0%|          | 13/8000 [05:21<48:26:37, 21.84s/it]  0%|          | 14/8000 [05:45<49:39:01, 22.38s/it]                                                      0%|          | 14/8000 [05:45<49:38:13, 22.38s/it]                                                      0%|          | 14/8000 [05:45<49:39:01, 22.38s/it]  0%|          | 14/8000 [05:45<49:38:13, 22.38s/it]  0%|          | 15/8000 [06:07<49:14:22, 22.20s/it]                                                      0%|          | 15/8000 [06:06<49:13:20, 22.19s/it]                                                      0%|          | 15/8000 [06:07<49:14:22, 22.20s/it]  0%|          | 15/8000 [06:06<49:13:20, 22.19s/it]  0%|          | 16/8000 [06:28<48:56:59, 22.07s/it]  0%|          | 16/8000 [06:28<48:57:36, 22.08s/it]                                                                                                          0%|          | 16/8000 [06:32<48:57:36, 22.08s/it]  0%|          | 16/8000 [06:32<48:56:59, 22.07s/it]  0%|          | 17/8000 [06:54<51:19:12, 23.14s/it]                                                      0%|          | 17/8000 [06:54<51:19:12, 23.14s/it]  0%|          | 17/8000 [06:54<51:20:00, 23.15s/it]                                                      0%|          | 17/8000 [06:54<51:20:00, 23.15s/it]  0%|          | 18/8000 [07:16<50:17:33, 22.68s/it]                                                      0%|          | 18/8000 [07:16<50:17:33, 22.68s/it]  0%|          | 18/8000 [07:15<50:17:27, 22.68s/it]                                                      0%|          | 18/8000 [07:15<50:17:27, 22.68s/it][2025-11-10T16:57:56.013] error: *** JOB 20937522 ON skl-a-29 CANCELLED AT 2025-11-10T16:57:56 DUE TO TIME LIMIT ***

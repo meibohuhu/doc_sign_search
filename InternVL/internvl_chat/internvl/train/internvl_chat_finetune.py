@@ -47,7 +47,8 @@ from internvl.train.constants import (BOX_END_TOKEN, BOX_START_TOKEN,
 from internvl.train.dataset import (ConcatDataset, TCSLoader,
                                     WeightedConcatDataset, build_transform,
                                     check_conversations_repetition,
-                                    dynamic_preprocess, preprocess,
+                                    dynamic_preprocess, get_frame_indices,
+                                    preprocess,
                                     preprocess_internlm,
                                     preprocess_internvl2_5, preprocess_mpt,
                                     preprocess_phi3)
@@ -86,25 +87,28 @@ class InternVLTrainer(Trainer):
         return super().create_optimizer()
 
     def training_step(self, model, inputs):
-        return super().training_step(model, inputs)
+        result = super().training_step(model, inputs)
+        # Clear CUDA cache after each step to reduce memory pressure
+        # This helps prevent pytorch allocator cache flushes in DeepSpeed ZeRO-3
+        # The warning suggests ensuring all ranks flush their caches at the same time
+        if torch.cuda.is_available():
+            try:
+                # Try to use DeepSpeed's accelerator if available (recommended for ZeRO-3)
+                from deepspeed import get_accelerator
+                # Synchronize all ranks before clearing cache
+                if dist.is_initialized():
+                    dist.barrier()
+                get_accelerator().empty_cache()
+            except (ImportError, AttributeError):
+                # Fallback to PyTorch's empty_cache if DeepSpeed accelerator not available
+                if dist.is_initialized():
+                    dist.barrier()
+                torch.cuda.empty_cache()
+        return result
 
 ###########
 
 ##### mhu added code 1108 #####
-def _uniform_sample_indices(total: int, target: int) -> List[int]:
-    if total <= target:
-        return list(range(total))
-    return np.linspace(0, total - 1, target, dtype=int).tolist()
-
-
-def _random_window_indices(total: int, target: int) -> List[int]:
-    if total <= target:
-        return list(range(total))
-    start_max = total - target
-    start = random.randint(0, start_max)
-    return list(range(start, start + target))
-
-
 def _load_video_locally(
     video_path: str,
     max_num_frames: int,
@@ -112,42 +116,84 @@ def _load_video_locally(
     sample: str = 'rand',
     clip: Optional[Iterable[int]] = None,
 ) -> List[Image.Image]:
+    """
+    Load video frames locally using decord or OpenCV as fallback.
+    Uses the same sampling strategy as read_frames_decord in dataset.py.
+    """
     load_errors: List[str] = []
-
-    target_frames = max_num_frames
-    if clip and len(clip) == 2:
-        clip_start, clip_end = clip
-    else:
-        clip_start, clip_end = None, None
 
     # Try decord first
     try:
         from decord import VideoReader, cpu
-
         vr = VideoReader(video_path, ctx=cpu(0))
         total_frames = len(vr)
-        if clip_start is not None and clip_end is not None:
-            clip_start = max(0, int(clip_start))
-            clip_end = min(total_frames, int(clip_end))
+        fps = vr.get_avg_fps()
+        duration = total_frames / float(fps) if fps > 0 else 0
+        
+        # Handle clip parameter (same as read_frames_decord)
+        if clip and len(clip) == 2:
+            start, end = clip
+            duration = end - start
+            vlen = int(duration * fps) if fps > 0 else total_frames
+            start_index = int(start * fps) if fps > 0 else 0
         else:
-            clip_start, clip_end = 0, total_frames
+            vlen = total_frames
+            start_index = 0
 
-        available = max(0, clip_end - clip_start)
-        if available == 0:
-            raise RuntimeError('Decord returned zero frames')
-
-        if sample == 'uniform':
-            indices = _uniform_sample_indices(available, target_frames)
-        else:
-            indices = _random_window_indices(available, min(available, target_frames))
-        indices = np.clip(np.array(indices) + clip_start, 0, total_frames - 1)
-        frames = vr.get_batch(indices).asnumpy()
-        images = [Image.fromarray(frame) for frame in frames]
-        if len(images) < min_num_frames and available >= min_num_frames:
-            extra_idx = _uniform_sample_indices(available, min_num_frames)
-            extra_idx = np.clip(np.array(extra_idx) + clip_start, 0, total_frames - 1)
-            frames = vr.get_batch(extra_idx).asnumpy()
-            images = [Image.fromarray(frame) for frame in frames]
+        # Sample every other frame (take 1 frame out of every 2 frames)
+        # Randomly choose starting position (0 or 1) for better diversity
+        start_offset = np.random.randint(0, 2)  # 0 or 1
+        frame_indices = list(range(start_offset, vlen, 2))  # [0,2,4,...] or [1,3,5,...]
+        
+        # If we have more frames than max_num_frames, uniformly drop some to maintain even distribution
+        if len(frame_indices) > max_num_frames:
+            # Uniformly sample max_num_frames frames to maintain even distribution
+            # Use linspace to get evenly distributed indices
+            indices_to_keep = np.linspace(0, len(frame_indices) - 1, max_num_frames, dtype=int)
+            frame_indices = [frame_indices[i] for i in indices_to_keep]
+        
+        # Ensure we have at least min_num_frames if video has enough frames
+        if len(frame_indices) < min_num_frames and vlen >= min_num_frames:
+            # If we don't have enough, uniformly sample additional frames from the remaining frames
+            remaining_indices = [i for i in range(vlen) if i not in frame_indices]
+            needed = min_num_frames - len(frame_indices)
+            if len(remaining_indices) >= needed:
+                # Uniformly sample from remaining frames
+                if len(remaining_indices) == needed:
+                    additional = remaining_indices
+                else:
+                    indices_to_add = np.linspace(0, len(remaining_indices) - 1, needed, dtype=int)
+                    additional = [remaining_indices[i] for i in indices_to_add]
+                frame_indices = sorted(frame_indices + additional)
+        
+        # Adjust indices if clip is specified
+        if clip and len(clip) == 2:
+            frame_indices = [f + start_index for f in frame_indices]
+        
+        # Clip indices to valid range
+        frame_indices = [min(max(int(idx), 0), total_frames - 1) for idx in frame_indices]
+        
+        # Remove duplicates again after clipping (clipping may cause multiple indices to map to the same value)
+        seen = set()
+        unique_indices = []
+        for idx in frame_indices:
+            if idx not in seen:
+                seen.add(idx)
+                unique_indices.append(idx)
+        frame_indices = unique_indices
+        
+        # # Debug info: show video stats and sampling info
+        # if not dist.is_initialized() or dist.get_rank() == 0:
+        #     worker_info = get_worker_info()
+        #     if worker_info is None or worker_info.id == 0:
+        #         print(f'[Video Sampling] path={os.path.basename(video_path)}, '
+        #               f'total_frames={total_frames}, vlen={vlen}, '
+        #               f'min={min_num_frames}, max={max_num_frames}, '
+        #               f'selected={len(frame_indices)} frames')
+        
+        # print(f'frame_indices: {frame_indices}')
+        frames = vr.get_batch(frame_indices).asnumpy()  # (T, H, W, C), np.uint8
+        images = [Image.fromarray(frames[i]) for i in range(frames.shape[0])]
         return images
     except Exception as exc:  # noqa: BLE001
         load_errors.append(f'decord: {exc}')
@@ -160,62 +206,83 @@ def _load_video_locally(
         if not cap.isOpened():
             raise RuntimeError('cv2.VideoCapture failed to open file')
 
-        frames: List[Image.Image] = []
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) or 0
+        fps = cap.get(cv2.CAP_PROP_FPS) or 1.0
         if total_frames == 0:
             raise RuntimeError('cv2 reported zero frames')
 
-        if clip_start is not None and clip_end is not None:
-            clip_start = max(0, int(clip_start))
-            clip_end = min(total_frames, int(clip_end))
+        # Handle clip parameter
+        if clip and len(clip) == 2:
+            start, end = clip
+            duration = end - start
+            vlen = int(duration * fps)
+            start_index = int(start * fps)
         else:
-            clip_start, clip_end = 0, total_frames
+            vlen = total_frames
+            start_index = 0
 
-        available = max(0, clip_end - clip_start)
-        if available == 0:
-            raise RuntimeError('cv2 clip produced zero frames')
+        # Sample every other frame (take 1 frame out of every 2 frames)
+        # Randomly choose starting position (0 or 1) for better diversity
+        start_offset = np.random.randint(0, 2)  # 0 or 1
+        frame_indices = list(range(start_offset, vlen, 2))  # [0,2,4,...] or [1,3,5,...]
+        
+        # If we have more frames than max_num_frames, uniformly drop some to maintain even distribution
+        if len(frame_indices) > max_num_frames:
+            # Uniformly sample max_num_frames frames to maintain even distribution
+            # Use linspace to get evenly distributed indices
+            indices_to_keep = np.linspace(0, len(frame_indices) - 1, max_num_frames, dtype=int)
+            frame_indices = [frame_indices[i] for i in indices_to_keep]
+        
+        # Ensure we have at least min_num_frames if video has enough frames
+        if len(frame_indices) < min_num_frames and vlen >= min_num_frames:
+            # If we don't have enough, uniformly sample additional frames from the remaining frames
+            remaining_indices = [i for i in range(vlen) if i not in frame_indices]
+            needed = min_num_frames - len(frame_indices)
+            if len(remaining_indices) >= needed:
+                # Uniformly sample from remaining frames
+                if len(remaining_indices) == needed:
+                    additional = remaining_indices
+                else:
+                    indices_to_add = np.linspace(0, len(remaining_indices) - 1, needed, dtype=int)
+                    additional = [remaining_indices[i] for i in indices_to_add]
+                frame_indices = sorted(frame_indices + additional)
+        
+        # Adjust indices if clip is specified
+        if clip and len(clip) == 2:
+            frame_indices = [f + start_index for f in frame_indices]
+        
+        # Clip indices to valid range
+        frame_indices = [min(max(int(idx), 0), total_frames - 1) for idx in frame_indices]
+        
+        # Remove duplicates again after clipping (clipping may cause multiple indices to map to the same value)
+        seen = set()
+        unique_indices = []
+        for idx in frame_indices:
+            if idx not in seen:
+                seen.add(idx)
+                unique_indices.append(idx)
+        frame_indices = unique_indices
 
-        if sample == 'uniform':
-            indices = _uniform_sample_indices(available, target_frames)
-        else:
-            indices = _random_window_indices(available, min(available, target_frames))
-        indices = [idx + clip_start for idx in indices]
-
+        # Read frames using OpenCV
+        frames: List[Image.Image] = []
+        frame_set = set(frame_indices)
         retrieved = 0
+        
         for frame_idx in range(total_frames):
             success, frame = cap.read()
             if not success:
                 break
-            if frame_idx not in indices:
-                continue
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            frames.append(Image.fromarray(frame_rgb))
-            retrieved += 1
-            if retrieved >= len(indices):
-                break
+            if frame_idx in frame_set:
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                frames.append(Image.fromarray(frame_rgb))
+                retrieved += 1
+                if retrieved >= len(frame_indices):
+                    break
 
         cap.release()
 
         if len(frames) == 0:
             raise RuntimeError('cv2 did not return any frames')
-
-        if len(frames) < min_num_frames and available >= min_num_frames:
-            # Re-sample uniformly to satisfy minimum frames if possible
-            extra_indices = _uniform_sample_indices(available, min_num_frames)
-            extra_indices = [idx + clip_start for idx in extra_indices]
-            frames = []
-            cap = cv2.VideoCapture(video_path)
-            for frame_idx in range(total_frames):
-                success, frame = cap.read()
-                if not success:
-                    break
-                if frame_idx not in extra_indices:
-                    continue
-                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                frames.append(Image.fromarray(frame_rgb))
-                if len(frames) >= len(extra_indices):
-                    break
-            cap.release()
 
         return frames
     except Exception as exc:  # noqa: BLE001
@@ -688,11 +755,12 @@ class LazySupervisedDataset(Dataset):
         # Get the video file path
         video_file = data_item['video']
         video_path = os.path.join(self.root, video_file)
+        # print(f"video_path here: {video_path}")
         ## mhu added code 1108 #####
-        if not dist.is_initialized() or dist.get_rank() == 0:
-            worker_info = get_worker_info()
-            if worker_info is None or worker_info.id == 0:
-                print(f"video_path here: {video_path}")
+        # if not dist.is_initialized() or dist.get_rank() == 0:
+        #     worker_info = get_worker_info()
+            # if worker_info is None or worker_info.id == 0:
+            #     print(f"video_path here: {video_path}")
 
 
         #  mhu 11/13 added code ##### Load the video frames using tcs_loader when available, otherwise fall back to local decoding
@@ -943,7 +1011,9 @@ def build_datasets(
             allow_overflow=data_args.allow_overflow,
             allow_deduplicated_ds_name=False,
         )
-        print(f'train_dataset.shape after packed: {train_dataset.shape}')
+        print(f'train_dataset after packed: PackedDataset with {len(datasets)} source datasets, '
+              f'num_images_expected={data_args.num_images_expected}, '
+              f'max_packed_tokens={data_args.max_packed_tokens}')
     elif data_args.use_data_resampling:
         total_length = sum(lengths)
         weights = [l / total_length for l in lengths]
@@ -1043,7 +1113,21 @@ def main():
                   REF_END_TOKEN, BOX_START_TOKEN, BOX_END_TOKEN]
     num_new_tokens = tokenizer.add_tokens(token_list, special_tokens=True)
     img_context_token_id = tokenizer.convert_tokens_to_ids(IMG_CONTEXT_TOKEN)
-    tcs_loader = TCSLoader('~/petreloss.conf') if has_tcs_loader else None
+    # Initialize TCSLoader if petrel_client is available and config file exists
+    tcs_loader = None
+    if has_tcs_loader:
+        conf_path = os.path.expanduser('~/petreloss.conf')
+        if os.path.exists(conf_path):
+            try:
+                tcs_loader = TCSLoader(conf_path)
+                logger.info(f'TCSLoader initialized successfully with config: {conf_path}')
+            except Exception as e:
+                logger.warning(f'Failed to initialize TCSLoader: {e}. Will use local file loading.')
+                tcs_loader = None
+        else:
+            logger.warning(f'TCSLoader config file not found: {conf_path}. Will use local file loading.')
+    else:
+        logger.info('petrel_client not installed. Will use local file loading.')
 
     if data_args.use_packed_ds:
         replace_internlm2_attention_class()
@@ -1190,6 +1274,8 @@ def main():
     if model_args.freeze_mlp:
         _freeze_params(model.mlp1)
 
+### mh 11/17: The notation [model_args.unfreeze_vit_layers:] means "from index 2 to the end" Layers 0-1: Frozen ✗
+# Layers 2-23: Trainable ✓
     if model_args.unfreeze_vit_layers != 0:
         layers = model.vision_model.encoder.layers[model_args.unfreeze_vit_layers:]
         for k, v in layers.named_parameters():

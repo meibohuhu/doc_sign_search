@@ -448,7 +448,7 @@ class InternVisionModel(PreTrainedModel):
             output_hidden_states=output_hidden_states,
             return_dict=return_dict,
         )
-        print(f'encoder_outputs.last_hidden_state.shape: {encoder_outputs.last_hidden_state.shape}')
+        # print(f'encoder_outputs.last_hidden_state.shape: {encoder_outputs.last_hidden_state.shape}')
         last_hidden_state = encoder_outputs.last_hidden_state
          # 3. Pooled output (class token) 得到最终的特征
         pooled_output = last_hidden_state[:, 0, :] 

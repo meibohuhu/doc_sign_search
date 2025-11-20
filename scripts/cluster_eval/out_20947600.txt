@@ -1,0 +1,298 @@
+✅ Using conda environment: /home/mh2803/miniconda3/envs/qwenvl
+📝 Log file: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100/training_20251119_125610.log
+🚀 Qwen2-VL FBCF training on 1xA100
+Model          : Qwen/Qwen2.5-VL-3B-Instruct
+Data JSON      : /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_with_masks.json
+Video folder   : /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Mask folder    : /home/mh2803/projects/sign_language_llm/how2sign/masks/
+Output dir     : /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100
+Batch/GPU      : 1
+Grad accum     : 4
+fps            : 12
+DeepSpeed      : ZeRO-3
+FBCF Sampling  : Per-sample random (40% original, 40% foreground, 20% background)
+
+CUDA available: True
+GPU count: 1
+  GPU 0: NVIDIA A100-PCIE-40GB (39.4 GB)
+
+🏃 Launching training with DeepSpeed...
+📝 Logging to: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100/training_20251119_125610.log
+
+[2025-11-19 12:56:18,475] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Found 254 lora modules: ['model.language_model.embed_tokens', 'model.language_model.layers.0.self_attn.q_proj', 'model.language_model.layers.0.self_attn.k_proj', 'model.language_model.layers.0.self_attn.v_proj', 'model.language_model.layers.0.self_attn.o_proj', 'model.language_model.layers.0.mlp.gate_proj', 'model.language_model.layers.0.mlp.up_proj', 'model.language_model.layers.0.mlp.down_proj', 'model.language_model.layers.1.self_attn.q_proj', 'model.language_model.layers.1.self_attn.k_proj', 'model.language_model.layers.1.self_attn.v_proj', 'model.language_model.layers.1.self_attn.o_proj', 'model.language_model.layers.1.mlp.gate_proj', 'model.language_model.layers.1.mlp.up_proj', 'model.language_model.layers.1.mlp.down_proj', 'model.language_model.layers.2.self_attn.q_proj', 'model.language_model.layers.2.self_attn.k_proj', 'model.language_model.layers.2.self_attn.v_proj', 'model.language_model.layers.2.self_attn.o_proj', 'model.language_model.layers.2.mlp.gate_proj', 'model.language_model.layers.2.mlp.up_proj', 'model.language_model.layers.2.mlp.down_proj', 'model.language_model.layers.3.self_attn.q_proj', 'model.language_model.layers.3.self_attn.k_proj', 'model.language_model.layers.3.self_attn.v_proj', 'model.language_model.layers.3.self_attn.o_proj', 'model.language_model.layers.3.mlp.gate_proj', 'model.language_model.layers.3.mlp.up_proj', 'model.language_model.layers.3.mlp.down_proj', 'model.language_model.layers.4.self_attn.q_proj', 'model.language_model.layers.4.self_attn.k_proj', 'model.language_model.layers.4.self_attn.v_proj', 'model.language_model.layers.4.self_attn.o_proj', 'model.language_model.layers.4.mlp.gate_proj', 'model.language_model.layers.4.mlp.up_proj', 'model.language_model.layers.4.mlp.down_proj', 'model.language_model.layers.5.self_attn.q_proj', 'model.language_model.layers.5.self_attn.k_proj', 'model.language_model.layers.5.self_attn.v_proj', 'model.language_model.layers.5.self_attn.o_proj', 'model.language_model.layers.5.mlp.gate_proj', 'model.language_model.layers.5.mlp.up_proj', 'model.language_model.layers.5.mlp.down_proj', 'model.language_model.layers.6.self_attn.q_proj', 'model.language_model.layers.6.self_attn.k_proj', 'model.language_model.layers.6.self_attn.v_proj', 'model.language_model.layers.6.self_attn.o_proj', 'model.language_model.layers.6.mlp.gate_proj', 'model.language_model.layers.6.mlp.up_proj', 'model.language_model.layers.6.mlp.down_proj', 'model.language_model.layers.7.self_attn.q_proj', 'model.language_model.layers.7.self_attn.k_proj', 'model.language_model.layers.7.self_attn.v_proj', 'model.language_model.layers.7.self_attn.o_proj', 'model.language_model.layers.7.mlp.gate_proj', 'model.language_model.layers.7.mlp.up_proj', 'model.language_model.layers.7.mlp.down_proj', 'model.language_model.layers.8.self_attn.q_proj', 'model.language_model.layers.8.self_attn.k_proj', 'model.language_model.layers.8.self_attn.v_proj', 'model.language_model.layers.8.self_attn.o_proj', 'model.language_model.layers.8.mlp.gate_proj', 'model.language_model.layers.8.mlp.up_proj', 'model.language_model.layers.8.mlp.down_proj', 'model.language_model.layers.9.self_attn.q_proj', 'model.language_model.layers.9.self_attn.k_proj', 'model.language_model.layers.9.self_attn.v_proj', 'model.language_model.layers.9.self_attn.o_proj', 'model.language_model.layers.9.mlp.gate_proj', 'model.language_model.layers.9.mlp.up_proj', 'model.language_model.layers.9.mlp.down_proj', 'model.language_model.layers.10.self_attn.q_proj', 'model.language_model.layers.10.self_attn.k_proj', 'model.language_model.layers.10.self_attn.v_proj', 'model.language_model.layers.10.self_attn.o_proj', 'model.language_model.layers.10.mlp.gate_proj', 'model.language_model.layers.10.mlp.up_proj', 'model.language_model.layers.10.mlp.down_proj', 'model.language_model.layers.11.self_attn.q_proj', 'model.language_model.layers.11.self_attn.k_proj', 'model.language_model.layers.11.self_attn.v_proj', 'model.language_model.layers.11.self_attn.o_proj', 'model.language_model.layers.11.mlp.gate_proj', 'model.language_model.layers.11.mlp.up_proj', 'model.language_model.layers.11.mlp.down_proj', 'model.language_model.layers.12.self_attn.q_proj', 'model.language_model.layers.12.self_attn.k_proj', 'model.language_model.layers.12.self_attn.v_proj', 'model.language_model.layers.12.self_attn.o_proj', 'model.language_model.layers.12.mlp.gate_proj', 'model.language_model.layers.12.mlp.up_proj', 'model.language_model.layers.12.mlp.down_proj', 'model.language_model.layers.13.self_attn.q_proj', 'model.language_model.layers.13.self_attn.k_proj', 'model.language_model.layers.13.self_attn.v_proj', 'model.language_model.layers.13.self_attn.o_proj', 'model.language_model.layers.13.mlp.gate_proj', 'model.language_model.layers.13.mlp.up_proj', 'model.language_model.layers.13.mlp.down_proj', 'model.language_model.layers.14.self_attn.q_proj', 'model.language_model.layers.14.self_attn.k_proj', 'model.language_model.layers.14.self_attn.v_proj', 'model.language_model.layers.14.self_attn.o_proj', 'model.language_model.layers.14.mlp.gate_proj', 'model.language_model.layers.14.mlp.up_proj', 'model.language_model.layers.14.mlp.down_proj', 'model.language_model.layers.15.self_attn.q_proj', 'model.language_model.layers.15.self_attn.k_proj', 'model.language_model.layers.15.self_attn.v_proj', 'model.language_model.layers.15.self_attn.o_proj', 'model.language_model.layers.15.mlp.gate_proj', 'model.language_model.layers.15.mlp.up_proj', 'model.language_model.layers.15.mlp.down_proj', 'model.language_model.layers.16.self_attn.q_proj', 'model.language_model.layers.16.self_attn.k_proj', 'model.language_model.layers.16.self_attn.v_proj', 'model.language_model.layers.16.self_attn.o_proj', 'model.language_model.layers.16.mlp.gate_proj', 'model.language_model.layers.16.mlp.up_proj', 'model.language_model.layers.16.mlp.down_proj', 'model.language_model.layers.17.self_attn.q_proj', 'model.language_model.layers.17.self_attn.k_proj', 'model.language_model.layers.17.self_attn.v_proj', 'model.language_model.layers.17.self_attn.o_proj', 'model.language_model.layers.17.mlp.gate_proj', 'model.language_model.layers.17.mlp.up_proj', 'model.language_model.layers.17.mlp.down_proj', 'model.language_model.layers.18.self_attn.q_proj', 'model.language_model.layers.18.self_attn.k_proj', 'model.language_model.layers.18.self_attn.v_proj', 'model.language_model.layers.18.self_attn.o_proj', 'model.language_model.layers.18.mlp.gate_proj', 'model.language_model.layers.18.mlp.up_proj', 'model.language_model.layers.18.mlp.down_proj', 'model.language_model.layers.19.self_attn.q_proj', 'model.language_model.layers.19.self_attn.k_proj', 'model.language_model.layers.19.self_attn.v_proj', 'model.language_model.layers.19.self_attn.o_proj', 'model.language_model.layers.19.mlp.gate_proj', 'model.language_model.layers.19.mlp.up_proj', 'model.language_model.layers.19.mlp.down_proj', 'model.language_model.layers.20.self_attn.q_proj', 'model.language_model.layers.20.self_attn.k_proj', 'model.language_model.layers.20.self_attn.v_proj', 'model.language_model.layers.20.self_attn.o_proj', 'model.language_model.layers.20.mlp.gate_proj', 'model.language_model.layers.20.mlp.up_proj', 'model.language_model.layers.20.mlp.down_proj', 'model.language_model.layers.21.self_attn.q_proj', 'model.language_model.layers.21.self_attn.k_proj', 'model.language_model.layers.21.self_attn.v_proj', 'model.language_model.layers.21.self_attn.o_proj', 'model.language_model.layers.21.mlp.gate_proj', 'model.language_model.layers.21.mlp.up_proj', 'model.language_model.layers.21.mlp.down_proj', 'model.language_model.layers.22.self_attn.q_proj', 'model.language_model.layers.22.self_attn.k_proj', 'model.language_model.layers.22.self_attn.v_proj', 'model.language_model.layers.22.self_attn.o_proj', 'model.language_model.layers.22.mlp.gate_proj', 'model.language_model.layers.22.mlp.up_proj', 'model.language_model.layers.22.mlp.down_proj', 'model.language_model.layers.23.self_attn.q_proj', 'model.language_model.layers.23.self_attn.k_proj', 'model.language_model.layers.23.self_attn.v_proj', 'model.language_model.layers.23.self_attn.o_proj', 'model.language_model.layers.23.mlp.gate_proj', 'model.language_model.layers.23.mlp.up_proj', 'model.language_model.layers.23.mlp.down_proj', 'model.language_model.layers.24.self_attn.q_proj', 'model.language_model.layers.24.self_attn.k_proj', 'model.language_model.layers.24.self_attn.v_proj', 'model.language_model.layers.24.self_attn.o_proj', 'model.language_model.layers.24.mlp.gate_proj', 'model.language_model.layers.24.mlp.up_proj', 'model.language_model.layers.24.mlp.down_proj', 'model.language_model.layers.25.self_attn.q_proj', 'model.language_model.layers.25.self_attn.k_proj', 'model.language_model.layers.25.self_attn.v_proj', 'model.language_model.layers.25.self_attn.o_proj', 'model.language_model.layers.25.mlp.gate_proj', 'model.language_model.layers.25.mlp.up_proj', 'model.language_model.layers.25.mlp.down_proj', 'model.language_model.layers.26.self_attn.q_proj', 'model.language_model.layers.26.self_attn.k_proj', 'model.language_model.layers.26.self_attn.v_proj', 'model.language_model.layers.26.self_attn.o_proj', 'model.language_model.layers.26.mlp.gate_proj', 'model.language_model.layers.26.mlp.up_proj', 'model.language_model.layers.26.mlp.down_proj', 'model.language_model.layers.27.self_attn.q_proj', 'model.language_model.layers.27.self_attn.k_proj', 'model.language_model.layers.27.self_attn.v_proj', 'model.language_model.layers.27.self_attn.o_proj', 'model.language_model.layers.27.mlp.gate_proj', 'model.language_model.layers.27.mlp.up_proj', 'model.language_model.layers.27.mlp.down_proj', 'model.language_model.layers.28.self_attn.q_proj', 'model.language_model.layers.28.self_attn.k_proj', 'model.language_model.layers.28.self_attn.v_proj', 'model.language_model.layers.28.self_attn.o_proj', 'model.language_model.layers.28.mlp.gate_proj', 'model.language_model.layers.28.mlp.up_proj', 'model.language_model.layers.28.mlp.down_proj', 'model.language_model.layers.29.self_attn.q_proj', 'model.language_model.layers.29.self_attn.k_proj', 'model.language_model.layers.29.self_attn.v_proj', 'model.language_model.layers.29.self_attn.o_proj', 'model.language_model.layers.29.mlp.gate_proj', 'model.language_model.layers.29.mlp.up_proj', 'model.language_model.layers.29.mlp.down_proj', 'model.language_model.layers.30.self_attn.q_proj', 'model.language_model.layers.30.self_attn.k_proj', 'model.language_model.layers.30.self_attn.v_proj', 'model.language_model.layers.30.self_attn.o_proj', 'model.language_model.layers.30.mlp.gate_proj', 'model.language_model.layers.30.mlp.up_proj', 'model.language_model.layers.30.mlp.down_proj', 'model.language_model.layers.31.self_attn.q_proj', 'model.language_model.layers.31.self_attn.k_proj', 'model.language_model.layers.31.self_attn.v_proj', 'model.language_model.layers.31.self_attn.o_proj', 'model.language_model.layers.31.mlp.gate_proj', 'model.language_model.layers.31.mlp.up_proj', 'model.language_model.layers.31.mlp.down_proj', 'model.language_model.layers.32.self_attn.q_proj', 'model.language_model.layers.32.self_attn.k_proj', 'model.language_model.layers.32.self_attn.v_proj', 'model.language_model.layers.32.self_attn.o_proj', 'model.language_model.layers.32.mlp.gate_proj', 'model.language_model.layers.32.mlp.up_proj', 'model.language_model.layers.32.mlp.down_proj', 'model.language_model.layers.33.self_attn.q_proj', 'model.language_model.layers.33.self_attn.k_proj', 'model.language_model.layers.33.self_attn.v_proj', 'model.language_model.layers.33.self_attn.o_proj', 'model.language_model.layers.33.mlp.gate_proj', 'model.language_model.layers.33.mlp.up_proj', 'model.language_model.layers.33.mlp.down_proj', 'model.language_model.layers.34.self_attn.q_proj', 'model.language_model.layers.34.self_attn.k_proj', 'model.language_model.layers.34.self_attn.v_proj', 'model.language_model.layers.34.self_attn.o_proj', 'model.language_model.layers.34.mlp.gate_proj', 'model.language_model.layers.34.mlp.up_proj', 'model.language_model.layers.34.mlp.down_proj', 'model.language_model.layers.35.self_attn.q_proj', 'model.language_model.layers.35.self_attn.k_proj', 'model.language_model.layers.35.self_attn.v_proj', 'model.language_model.layers.35.self_attn.o_proj', 'model.language_model.layers.35.mlp.gate_proj', 'model.language_model.layers.35.mlp.up_proj', 'model.language_model.layers.35.mlp.down_proj', 'lm_head']
+Adding LoRA to the model...
+✅ Unfroze top 8 Vision Encoder blocks (indices [24, 25, 26, 27, 28, 29, 30, 31])
+
+======================================================================
+📋 Model Training Configuration Check
+======================================================================
+
+🔍 Vision Encoder (ViT):
+  Total blocks: 32
+  Trainable blocks: 8
+  Trainable block indices: [24, 25, 26, 27, 28, 29, 30, 31]
+  freeze_vision_tower: True
+  unfreeze_topk_vision: 8
+
+🔗 Merger:
+  Trainable: True
+  Parameter count: 5
+  freeze_merger: False
+
+🧠 LLM LoRA:
+  lora_enable: True
+  LLM LoRA modules: 254
+  LoRA module names (first 10): ['base_model.model.model.language_model.embed_tokens', 'base_model.model.model.language_model.layers.0.self_attn.q_proj', 'base_model.model.model.language_model.layers.0.self_attn.k_proj', 'base_model.model.model.language_model.layers.0.self_attn.v_proj', 'base_model.model.model.language_model.layers.0.self_attn.o_proj', 'base_model.model.model.language_model.layers.0.mlp.gate_proj', 'base_model.model.model.language_model.layers.0.mlp.up_proj', 'base_model.model.model.language_model.layers.0.mlp.down_proj', 'base_model.model.model.language_model.layers.1.self_attn.q_proj', 'base_model.model.model.language_model.layers.1.self_attn.k_proj'] ...
+  (Total 254 LoRA modules)
+  freeze_llm: True
+
+📊 Summary:
+  ✅ ViT layers unfrozen: 8/32
+  ✅ Merger training: True
+  ✅ LLM LoRA training: True
+======================================================================
+
+No valid checkpoints found, starting fresh training
+Parameter Offload - Persistent parameters statistics: param_count = 806, numel = 11732992
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+{'loss_bg': 9.4375, 'epoch': 0}
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+{'loss_bg': 8.5, 'epoch': 0}
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+{'loss_bg': 9.125, 'epoch': 0}
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+{'loss_bg': 9.1875, 'epoch': 0}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 4.821019649505615, 'epoch': 0.04}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 3.0472726821899414, 'epoch': 0.04}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 1.8768483400344849, 'epoch': 0.04}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 4.229101657867432, 'epoch': 0.04}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 8.1875, 'epoch': 0.08}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 9.4375, 'epoch': 0.08}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 8.375, 'epoch': 0.08}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 9.0625, 'epoch': 0.08}
+📊 Sampling (step 3): original for all 1 samples (rand=0.238)
+{'loss_full': 3.0935888290405273, 'epoch': 0.12}
+📊 Sampling (step 3): original for all 1 samples (rand=0.238)
+{'loss_full': 4.976291656494141, 'epoch': 0.12}
+📊 Sampling (step 3): original for all 1 samples (rand=0.238)
+{'loss_full': 4.0362372398376465, 'epoch': 0.12}
+📊 Sampling (step 3): original for all 1 samples (rand=0.238)
+{'loss_full': 2.619176149368286, 'epoch': 0.12}
+📊 Sampling (step 4): original for all 1 samples (rand=0.236)
+{'loss_full': 2.932905435562134, 'epoch': 0.17}
+📊 Sampling (step 4): original for all 1 samples (rand=0.236)
+{'loss_full': 4.474836826324463, 'epoch': 0.17}
+📊 Sampling (step 4): original for all 1 samples (rand=0.236)
+{'loss_full': 3.1790976524353027, 'epoch': 0.17}
+📊 Sampling (step 4): original for all 1 samples (rand=0.236)
+{'loss_full': 4.563335418701172, 'epoch': 0.17}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+{'loss_fg': 3.0223300457000732, 'epoch': 0.21}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+{'loss_fg': 3.9078993797302246, 'epoch': 0.21}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+{'loss_fg': 3.1077747344970703, 'epoch': 0.21}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+{'loss_fg': 3.3037257194519043, 'epoch': 0.21}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+{'loss_fg': 3.089670181274414, 'epoch': 0.25}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+{'loss_fg': 2.307276487350464, 'epoch': 0.25}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+{'loss_fg': 3.555856704711914, 'epoch': 0.25}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+{'loss_fg': 2.642117500305176, 'epoch': 0.25}
+📊 Sampling (step 7): original for all 1 samples (rand=0.324)
+{'loss_full': 3.1325933933258057, 'epoch': 0.29}
+📊 Sampling (step 7): original for all 1 samples (rand=0.324)
+{'loss_full': 3.2075629234313965, 'epoch': 0.29}
+📊 Sampling (step 7): original for all 1 samples (rand=0.324)
+{'loss_full': 3.9789085388183594, 'epoch': 0.29}
+📊 Sampling (step 7): original for all 1 samples (rand=0.324)
+{'loss_full': 3.8676233291625977, 'epoch': 0.29}
+📊 Sampling (step 8): original for all 1 samples (rand=0.227)
+{'loss_full': 2.4958713054656982, 'epoch': 0.33}
+📊 Sampling (step 8): original for all 1 samples (rand=0.227)
+{'loss_full': 3.442646026611328, 'epoch': 0.33}
+📊 Sampling (step 8): original for all 1 samples (rand=0.227)
+{'loss_full': 4.591233730316162, 'epoch': 0.33}
+📊 Sampling (step 8): original for all 1 samples (rand=0.227)
+{'loss_full': 3.698641300201416, 'epoch': 0.33}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+{'loss_fg': 3.40814208984375, 'epoch': 0.38}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+{'loss_fg': 3.1848793029785156, 'epoch': 0.38}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+{'loss_fg': 3.7216787338256836, 'epoch': 0.38}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+{'loss_fg': 3.340975761413574, 'epoch': 0.38}
+{'loss': 3.1283, 'grad_norm': 26.19558179485543, 'learning_rate': 1.9910000000000004e-05, 'epoch': 0.42}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+{'loss_fg': 3.7459824085235596, 'epoch': 0.42}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+{'loss_fg': 4.31359338760376, 'epoch': 0.42}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+{'loss_fg': 4.181190490722656, 'epoch': 0.42}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+{'loss_fg': 2.86736798286438, 'epoch': 0.42}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 2.6379196643829346, 'epoch': 0.46}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 3.5966289043426514, 'epoch': 0.46}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 5.2572526931762695, 'epoch': 0.46}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 3.560321807861328, 'epoch': 0.46}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+{'loss_fg': 4.875331401824951, 'epoch': 0.5}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+{'loss_fg': 3.533233165740967, 'epoch': 0.5}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+{'loss_fg': 3.508359909057617, 'epoch': 0.5}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+{'loss_fg': 3.038607120513916, 'epoch': 0.5}
+📊 Mask coverage: 96/96 (100.0%)
+📊 Sampling (step 13): original for all 1 samples (rand=0.259)
+{'loss_full': 5.113459587097168, 'epoch': 0.54}
+📊 Sampling (step 13): original for all 1 samples (rand=0.259)
+{'loss_full': 3.2564549446105957, 'epoch': 0.54}
+📊 Sampling (step 13): original for all 1 samples (rand=0.259)
+{'loss_full': 3.5026774406433105, 'epoch': 0.54}
+📊 Sampling (step 13): original for all 1 samples (rand=0.259)
+{'loss_full': 3.9919114112854004, 'epoch': 0.54}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+{'loss_full': 3.692490339279175, 'epoch': 0.58}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+{'loss_full': 3.459749937057495, 'epoch': 0.58}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+{'loss_full': 3.3675308227539062, 'epoch': 0.58}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+{'loss_full': 2.2913849353790283, 'epoch': 0.58}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 8.6875, 'epoch': 0.62}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 9.375, 'epoch': 0.62}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 8.625, 'epoch': 0.62}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 8.8125, 'epoch': 0.62}
+📊 Sampling (step 16): original for all 1 samples (rand=0.362)
+{'loss_full': 2.6800107955932617, 'epoch': 0.67}
+📊 Sampling (step 16): original for all 1 samples (rand=0.362)
+{'loss_full': 4.2580671310424805, 'epoch': 0.67}
+📊 Sampling (step 16): original for all 1 samples (rand=0.362)
+{'loss_full': 2.720921516418457, 'epoch': 0.67}
+📊 Sampling (step 16): original for all 1 samples (rand=0.362)
+{'loss_full': 3.120236873626709, 'epoch': 0.67}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 2.6940858364105225, 'epoch': 0.71}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 3.594306230545044, 'epoch': 0.71}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 1.8580689430236816, 'epoch': 0.71}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 2.5667929649353027, 'epoch': 0.71}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 2.1547465324401855, 'epoch': 0.75}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 3.541147470474243, 'epoch': 0.75}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 1.6936907768249512, 'epoch': 0.75}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 3.3856608867645264, 'epoch': 0.75}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 3.025618076324463, 'epoch': 0.79}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 3.7462844848632812, 'epoch': 0.79}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 3.8876278400421143, 'epoch': 0.79}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 4.633030891418457, 'epoch': 0.79}
+{'loss': 3.2613, 'grad_norm': 71.3309684239003, 'learning_rate': 1.9810000000000002e-05, 'epoch': 0.83}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 9.375, 'epoch': 0.83}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 8.5625, 'epoch': 0.83}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 9.0625, 'epoch': 0.83}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 9.5, 'epoch': 0.83}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 3.43222713470459, 'epoch': 0.88}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 2.9018898010253906, 'epoch': 0.88}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 4.311689376831055, 'epoch': 0.88}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 3.361295223236084, 'epoch': 0.88}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+{'loss_bg': 8.6875, 'epoch': 0.92}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+{'loss_bg': 8.25, 'epoch': 0.92}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+{'loss_bg': 9.1875, 'epoch': 0.92}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+{'loss_bg': 9.5625, 'epoch': 0.92}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 8.375, 'epoch': 0.96}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 8.5625, 'epoch': 0.96}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 8.875, 'epoch': 0.96}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 8.875, 'epoch': 0.96}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 3.758648633956909, 'epoch': 1.0}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 3.002028465270996, 'epoch': 1.0}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 3.3904736042022705, 'epoch': 1.0}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 2.3317489624023438, 'epoch': 1.0}
+📊 Sampling (step 25): original for all 1 samples (rand=0.377)
+{'loss_full': 4.946892261505127, 'epoch': 1.04}
+📊 Sampling (step 25): original for all 1 samples (rand=0.377)
+{'loss_full': 2.379722833633423, 'epoch': 1.04}
+📊 Sampling (step 25): original for all 1 samples (rand=0.377)
+{'loss_full': 2.857368230819702, 'epoch': 1.04}
+📊 Sampling (step 25): original for all 1 samples (rand=0.377)
+{'loss_full': 2.6767802238464355, 'epoch': 1.04}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 3.1122329235076904, 'epoch': 1.08}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 3.034770965576172, 'epoch': 1.08}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 3.8149008750915527, 'epoch': 1.08}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 4.492513656616211, 'epoch': 1.08}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+{'loss_fg': 2.6605169773101807, 'epoch': 1.12}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+{'loss_fg': 3.5589518547058105, 'epoch': 1.12}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+{'loss_fg': 4.383662700653076, 'epoch': 1.12}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+{'loss_fg': 1.9154622554779053, 'epoch': 1.12}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 2.305373430252075, 'epoch': 1.17}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 3.2701871395111084, 'epoch': 1.17}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 2.182753086090088, 'epoch': 1.17}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 4.317536354064941, 'epoch': 1.17}
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+{'loss_fg': 3.0079450607299805, 'epoch': 1.21}
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+{'loss_fg': 3.4687938690185547, 'epoch': 1.21}
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+{'loss_fg': 2.534907102584839, 'epoch': 1.21}

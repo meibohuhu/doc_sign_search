@@ -1,0 +1,135 @@
+# InternVL Requirements
+# Generated based on actual conda environment installation
+# Note: Some versions differ from INSTALLATION.md (using actual installed versions)
+#
+# Python version: 3.10.19 (INSTALLATION.md says 3.9, but actual is 3.10)
+# CUDA version: 12.1 (cu121)
+#
+# Installation (MUST follow this order):
+#   1. Create conda environment:
+#      conda create -n internvl python=3.10 -y
+#      conda activate internvl
+#
+#   2. Load compiler and CUDA toolchains (REQUIRED for flash-attn compilation):
+#      # The system uses "blindfold" to hide system compilers, so you MUST load via spack
+#      # If using spack (recommended):
+#      spack load /lhqcen5                 # GCC toolchain (provides g++, gcc, gfortran)
+#      # Note: If you see "gcc is already loaded", that's fine - continue to next step
+#      spack load cuda@12.4.0/obxqih4      # CUDA toolkit (provides nvcc, headers, libs)
+#      
+#      # Set CUDA environment variables:
+#      export CUDA_HOME=$(spack location -i cuda@12.4.0/obxqih4)
+#      export PATH=$CUDA_HOME/bin:$PATH
+#      export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+#      
+#      # IMPORTANT: Explicitly add GCC bin to PATH (blindfold may still hide it):
+#      export GCC_HOME=$(spack location -i /lhqcen5)
+#      export PATH=$GCC_HOME/bin:$PATH
+#      
+#      # Verify compiler and CUDA are available:
+#      g++ --version  # Should show "g++ (Spack GCC) 12.4.1", NOT "blindfold" error
+#      nvcc --version  # Should show CUDA compiler version
+#      echo "CUDA_HOME: $CUDA_HOME"  # Should show CUDA installation path
+#      # If /lhqcen5 is not available, try: spack load gcc@12.3.1/<hash>
+#      #   (find hash with: spack find -l gcc@12.3.1)
+#
+#   3. Install build dependencies for flash-attn:
+#      pip install psutil packaging ninja
+#
+#   4. Install PyTorch with CUDA support FIRST (required for flash-attn):
+#      pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+#
+#   5. Install flash-attn (requires PyTorch, CUDA, compiler, and build dependencies):
+#      # IMPORTANT: Ensure compiler and CUDA are loaded (step 2) before this step!
+#      # Verify environment is set up correctly:
+#      #   - g++ --version  # Should show "g++ (Spack GCC) 12.4.1", NOT "blindfold" error
+#      #   - nvcc --version  # Should show CUDA compiler version
+#      #   - echo $CUDA_HOME  # Should show CUDA installation path
+#      #   - echo $GCC_HOME  # Should show GCC installation path
+#      pip install flash-attn==2.5.7 --no-build-isolation
+#      # Note: This compilation may take 10-15 minutes. Be patient!
+#      # If compilation fails with "g++ not found" or "blindfold" error:
+#      #   - Re-run step 2 to ensure GCC_HOME is in PATH
+#      #   - Check: which g++  # Should point to spack GCC, not /tools/bin/blindfold/g++
+#      # If compilation fails with "CUDA_HOME not set":
+#      #   - Re-run step 2 to ensure CUDA_HOME is set
+#      #   - Check: nvcc --version  # Should work
+#      # You can skip flash-attn if it fails (it's optional for some use cases, but recommended)
+#
+#   6. Install other requirements:
+#      pip install -r requirements_internvl.txt
+
+# Core ML/DL libraries
+# NOTE: PyTorch packages are NOT included here because they require PyTorch's index
+# Install them separately using:
+#   pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+# Actual installed versions: torch==2.4.0+cu121, torchvision==0.19.0+cu121, torchaudio==2.4.0+cu121
+
+# Transformers and related
+transformers==4.37.2
+tokenizers==0.15.1
+accelerate==0.34.2
+peft==0.10.0
+bitsandbytes==0.42.0
+huggingface-hub==0.36.0
+safetensors==0.6.2
+
+# Training and optimization
+deepspeed==0.18.2
+# NOTE: flash-attn is NOT included here because:
+#   1. It requires PyTorch to be installed first
+#   2. It requires CUDA_HOME to be set and nvcc to be available
+#   3. It needs to be compiled from source
+# Install it separately after setting up CUDA and PyTorch:
+#   pip install flash-attn==2.5.7 --no-build-isolation
+# Note: INSTALLATION.md says 2.3.6, but actual is 2.5.7
+# If flash-attn installation fails, you can skip it (some features may be slower)
+
+# Vision and image processing
+timm==0.9.12
+opencv-python==4.11.0.86
+pillow==11.3.0
+imageio==2.37.2
+decord==0.6.0
+
+# Data processing
+numpy==1.26.4
+scipy==1.15.3
+pandas==2.3.3
+scikit-learn==1.7.2
+einops==0.6.1
+einops-exts==0.0.4
+
+# Text processing
+sentencepiece==0.1.99
+pycocoevalcap==1.2
+pycocotools==2.0.10
+
+# Utilities
+tqdm==4.67.1
+yacs==0.1.8
+termcolor==3.2.0
+shortuuid==1.0.13
+orjson==3.11.4
+pyyaml==6.0.3
+requests==2.32.5  # Used by core libraries (huggingface-hub, etc.)
+tensorboard==2.20.0
+tensorboardX==2.6.4
+
+# Classification and segmentation (optional)
+openmim==0.3.9
+gdown==5.2.0
+yapf==0.40.1
+
+# Additional dependencies
+datasets==4.4.1
+filelock==3.14.0
+packaging==24.2
+psutil==7.1.3  # Required for flash-attn build
+ninja==1.13.0  # Required for flash-attn build
+
+# Note: 
+# - mmcv-full==1.6.2 and apex are optional for segmentation
+#   They are not included here as they require special installation
+# See INSTALLATION.md for details
+

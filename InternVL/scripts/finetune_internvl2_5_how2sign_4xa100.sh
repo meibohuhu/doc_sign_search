@@ -28,6 +28,13 @@ fi
 if ! spack find --loaded cuda@12.4.0/obxqih4 >/dev/null 2>&1; then
     spack load cuda@12.4.0/obxqih4
 fi
+
+# Explicit CUDA environment setup (required before training)
+CUDA_ROOT="$(spack location -i /obxqih4)"
+export CUDA_HOME="$CUDA_ROOT"
+export PATH="$CUDA_HOME/bin:$PATH"
+export LD_LIBRARY_PATH="$CUDA_HOME/lib64:${LD_LIBRARY_PATH:-}"
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
 if ! command -v gcc >/dev/null 2>&1; then
     spack load gcc >/dev/null 2>&1 || true
 fi
@@ -37,18 +44,11 @@ source /home/mh2803/miniconda3/bin/activate /home/mh2803/miniconda3/envs/internv
 export PATH="/home/mh2803/miniconda3/envs/internvl/bin:$PATH"
 export PYTHONPATH="/home/mh2803/projects/sign_language_llm/InternVL:/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat:${PYTHONPATH:-}"
 export OMP_NUM_THREADS=16
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export DS_BUILD_OPS=0
 export DS_BUILD_FUSED_ADAM=0
 export DS_BUILD_CUDA_EXT=0
 export DS_BUILD_CPU_ADAM=0
 export DEEPSPEED_CPU_ADAM=1
-if [ -z "${CUDA_HOME:-}" ]; then
-    CUDA_HOME="$(spack location -i /obxqih4)"
-    export CUDA_HOME
-    export PATH="${CUDA_HOME}/bin:${PATH}"
-    export LD_LIBRARY_PATH="${CUDA_HOME}/lib64:${LD_LIBRARY_PATH:-}"
-fi
 export DS_BUILD_OPS=0
 
 # Network and Hugging Face configuration
@@ -68,17 +68,17 @@ cd /home/mh2803/projects/sign_language_llm/InternVL
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_4xa100"
-META_PATH="/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_under10s_meta.json"
+OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100_1"
+META_PATH="/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json"
 IMAGE_ROOT="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/"
 
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-16}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-12}
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
 NUM_DEVICES=${NUM_DEVICES:-4}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
 # Memory envelopes (defaults can be overridden via env vars)
-USE_ZERO_STAGE3=${USE_ZERO_STAGE3:-0}
+USE_ZERO_STAGE3=${USE_ZERO_STAGE3:-1}
 DEFAULT_MAX_SEQ_LENGTH=8192
 DEFAULT_MAX_PACKED_TOKENS=16384
 DEFAULT_MAX_BUFFER_SIZE=20
@@ -88,8 +88,9 @@ DEFAULT_MAX_NUM_FRAME=96
 DEEPSPEED_CONFIG="internvl_chat/zero_stage2_config.json"
 if [ "$USE_ZERO_STAGE3" -eq 1 ]; then
     DEEPSPEED_CONFIG="internvl_chat/zero_stage3_config.json"
-    DEFAULT_MAX_SEQ_LENGTH=8192
-    DEFAULT_MAX_PACKED_TOKENS=16384
+    # Tighten envelopes under ZeRO-3 by default to avoid CUDA OOM on 4×A100
+    DEFAULT_MAX_SEQ_LENGTH=7168
+    DEFAULT_MAX_PACKED_TOKENS=12288
     DEFAULT_MAX_BUFFER_SIZE=20
     DEFAULT_NUM_IMAGES_EXPECTED=96
     DEFAULT_MAX_NUM_FRAME=96
@@ -190,10 +191,9 @@ torchrun --nproc_per_node=$NUM_DEVICES --master_port=$MASTER_PORT \
     --freeze_mlp False \
     --unfreeze_vit_layers 8 \
     --use_llm_lora 8 \
-    --use_backbone_lora 16 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
-    --max_steps 8000 \
+    --max_steps 16000 \
     --save_strategy epoch \
     --save_total_limit 2 \
     --logging_steps 1 \
