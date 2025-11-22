@@ -1,0 +1,551 @@
+✅ Using conda environment: /home/mh2803/miniconda3/envs/qwenvl
+📝 Log file: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_2xa100/training_20251120_220159.log
+🚀 Qwen2-VL FBCF training on 1xA100
+Model          : Qwen/Qwen2.5-VL-3B-Instruct
+Data JSON      : /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_with_masks.json
+Video folder   : /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Mask folder    : /home/mh2803/projects/sign_language_llm/how2sign/masks/
+Output dir     : /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_2xa100
+Batch/GPU      : 2
+Grad accum     : 2
+fps            : 12
+DeepSpeed      : ZeRO-3
+FBCF Sampling  : Per-sample random (40% original, 40% foreground, 20% background)
+
+CUDA available: True
+GPU count: 2
+  GPU 0: NVIDIA A100-PCIE-40GB (39.4 GB)
+  GPU 1: NVIDIA A100-PCIE-40GB (39.4 GB)
+
+🏃 Launching training with DeepSpeed...
+📝 Logging to: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_2xa100/training_20251120_220159.log
+
+[2025-11-20 22:02:13,675] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Found 254 lora modules: ['model.language_model.embed_tokens', 'model.language_model.layers.0.self_attn.q_proj', 'model.language_model.layers.0.self_attn.k_proj', 'model.language_model.layers.0.self_attn.v_proj', 'model.language_model.layers.0.self_attn.o_proj', 'model.language_model.layers.0.mlp.gate_proj', 'model.language_model.layers.0.mlp.up_proj', 'model.language_model.layers.0.mlp.down_proj', 'model.language_model.layers.1.self_attn.q_proj', 'model.language_model.layers.1.self_attn.k_proj', 'model.language_model.layers.1.self_attn.v_proj', 'model.language_model.layers.1.self_attn.o_proj', 'model.language_model.layers.1.mlp.gate_proj', 'model.language_model.layers.1.mlp.up_proj', 'model.language_model.layers.1.mlp.down_proj', 'model.language_model.layers.2.self_attn.q_proj', 'model.language_model.layers.2.self_attn.k_proj', 'model.language_model.layers.2.self_attn.v_proj', 'model.language_model.layers.2.self_attn.o_proj', 'model.language_model.layers.2.mlp.gate_proj', 'model.language_model.layers.2.mlp.up_proj', 'model.language_model.layers.2.mlp.down_proj', 'model.language_model.layers.3.self_attn.q_proj', 'model.language_model.layers.3.self_attn.k_proj', 'model.language_model.layers.3.self_attn.v_proj', 'model.language_model.layers.3.self_attn.o_proj', 'model.language_model.layers.3.mlp.gate_proj', 'model.language_model.layers.3.mlp.up_proj', 'model.language_model.layers.3.mlp.down_proj', 'model.language_model.layers.4.self_attn.q_proj', 'model.language_model.layers.4.self_attn.k_proj', 'model.language_model.layers.4.self_attn.v_proj', 'model.language_model.layers.4.self_attn.o_proj', 'model.language_model.layers.4.mlp.gate_proj', 'model.language_model.layers.4.mlp.up_proj', 'model.language_model.layers.4.mlp.down_proj', 'model.language_model.layers.5.self_attn.q_proj', 'model.language_model.layers.5.self_attn.k_proj', 'model.language_model.layers.5.self_attn.v_proj', 'model.language_model.layers.5.self_attn.o_proj', 'model.language_model.layers.5.mlp.gate_proj', 'model.language_model.layers.5.mlp.up_proj', 'model.language_model.layers.5.mlp.down_proj', 'model.language_model.layers.6.self_attn.q_proj', 'model.language_model.layers.6.self_attn.k_proj', 'model.language_model.layers.6.self_attn.v_proj', 'model.language_model.layers.6.self_attn.o_proj', 'model.language_model.layers.6.mlp.gate_proj', 'model.language_model.layers.6.mlp.up_proj', 'model.language_model.layers.6.mlp.down_proj', 'model.language_model.layers.7.self_attn.q_proj', 'model.language_model.layers.7.self_attn.k_proj', 'model.language_model.layers.7.self_attn.v_proj', 'model.language_model.layers.7.self_attn.o_proj', 'model.language_model.layers.7.mlp.gate_proj', 'model.language_model.layers.7.mlp.up_proj', 'model.language_model.layers.7.mlp.down_proj', 'model.language_model.layers.8.self_attn.q_proj', 'model.language_model.layers.8.self_attn.k_proj', 'model.language_model.layers.8.self_attn.v_proj', 'model.language_model.layers.8.self_attn.o_proj', 'model.language_model.layers.8.mlp.gate_proj', 'model.language_model.layers.8.mlp.up_proj', 'model.language_model.layers.8.mlp.down_proj', 'model.language_model.layers.9.self_attn.q_proj', 'model.language_model.layers.9.self_attn.k_proj', 'model.language_model.layers.9.self_attn.v_proj', 'model.language_model.layers.9.self_attn.o_proj', 'model.language_model.layers.9.mlp.gate_proj', 'model.language_model.layers.9.mlp.up_proj', 'model.language_model.layers.9.mlp.down_proj', 'model.language_model.layers.10.self_attn.q_proj', 'model.language_model.layers.10.self_attn.k_proj', 'model.language_model.layers.10.self_attn.v_proj', 'model.language_model.layers.10.self_attn.o_proj', 'model.language_model.layers.10.mlp.gate_proj', 'model.language_model.layers.10.mlp.up_proj', 'model.language_model.layers.10.mlp.down_proj', 'model.language_model.layers.11.self_attn.q_proj', 'model.language_model.layers.11.self_attn.k_proj', 'model.language_model.layers.11.self_attn.v_proj', 'model.language_model.layers.11.self_attn.o_proj', 'model.language_model.layers.11.mlp.gate_proj', 'model.language_model.layers.11.mlp.up_proj', 'model.language_model.layers.11.mlp.down_proj', 'model.language_model.layers.12.self_attn.q_proj', 'model.language_model.layers.12.self_attn.k_proj', 'model.language_model.layers.12.self_attn.v_proj', 'model.language_model.layers.12.self_attn.o_proj', 'model.language_model.layers.12.mlp.gate_proj', 'model.language_model.layers.12.mlp.up_proj', 'model.language_model.layers.12.mlp.down_proj', 'model.language_model.layers.13.self_attn.q_proj', 'model.language_model.layers.13.self_attn.k_proj', 'model.language_model.layers.13.self_attn.v_proj', 'model.language_model.layers.13.self_attn.o_proj', 'model.language_model.layers.13.mlp.gate_proj', 'model.language_model.layers.13.mlp.up_proj', 'model.language_model.layers.13.mlp.down_proj', 'model.language_model.layers.14.self_attn.q_proj', 'model.language_model.layers.14.self_attn.k_proj', 'model.language_model.layers.14.self_attn.v_proj', 'model.language_model.layers.14.self_attn.o_proj', 'model.language_model.layers.14.mlp.gate_proj', 'model.language_model.layers.14.mlp.up_proj', 'model.language_model.layers.14.mlp.down_proj', 'model.language_model.layers.15.self_attn.q_proj', 'model.language_model.layers.15.self_attn.k_proj', 'model.language_model.layers.15.self_attn.v_proj', 'model.language_model.layers.15.self_attn.o_proj', 'model.language_model.layers.15.mlp.gate_proj', 'model.language_model.layers.15.mlp.up_proj', 'model.language_model.layers.15.mlp.down_proj', 'model.language_model.layers.16.self_attn.q_proj', 'model.language_model.layers.16.self_attn.k_proj', 'model.language_model.layers.16.self_attn.v_proj', 'model.language_model.layers.16.self_attn.o_proj', 'model.language_model.layers.16.mlp.gate_proj', 'model.language_model.layers.16.mlp.up_proj', 'model.language_model.layers.16.mlp.down_proj', 'model.language_model.layers.17.self_attn.q_proj', 'model.language_model.layers.17.self_attn.k_proj', 'model.language_model.layers.17.self_attn.v_proj', 'model.language_model.layers.17.self_attn.o_proj', 'model.language_model.layers.17.mlp.gate_proj', 'model.language_model.layers.17.mlp.up_proj', 'model.language_model.layers.17.mlp.down_proj', 'model.language_model.layers.18.self_attn.q_proj', 'model.language_model.layers.18.self_attn.k_proj', 'model.language_model.layers.18.self_attn.v_proj', 'model.language_model.layers.18.self_attn.o_proj', 'model.language_model.layers.18.mlp.gate_proj', 'model.language_model.layers.18.mlp.up_proj', 'model.language_model.layers.18.mlp.down_proj', 'model.language_model.layers.19.self_attn.q_proj', 'model.language_model.layers.19.self_attn.k_proj', 'model.language_model.layers.19.self_attn.v_proj', 'model.language_model.layers.19.self_attn.o_proj', 'model.language_model.layers.19.mlp.gate_proj', 'model.language_model.layers.19.mlp.up_proj', 'model.language_model.layers.19.mlp.down_proj', 'model.language_model.layers.20.self_attn.q_proj', 'model.language_model.layers.20.self_attn.k_proj', 'model.language_model.layers.20.self_attn.v_proj', 'model.language_model.layers.20.self_attn.o_proj', 'model.language_model.layers.20.mlp.gate_proj', 'model.language_model.layers.20.mlp.up_proj', 'model.language_model.layers.20.mlp.down_proj', 'model.language_model.layers.21.self_attn.q_proj', 'model.language_model.layers.21.self_attn.k_proj', 'model.language_model.layers.21.self_attn.v_proj', 'model.language_model.layers.21.self_attn.o_proj', 'model.language_model.layers.21.mlp.gate_proj', 'model.language_model.layers.21.mlp.up_proj', 'model.language_model.layers.21.mlp.down_proj', 'model.language_model.layers.22.self_attn.q_proj', 'model.language_model.layers.22.self_attn.k_proj', 'model.language_model.layers.22.self_attn.v_proj', 'model.language_model.layers.22.self_attn.o_proj', 'model.language_model.layers.22.mlp.gate_proj', 'model.language_model.layers.22.mlp.up_proj', 'model.language_model.layers.22.mlp.down_proj', 'model.language_model.layers.23.self_attn.q_proj', 'model.language_model.layers.23.self_attn.k_proj', 'model.language_model.layers.23.self_attn.v_proj', 'model.language_model.layers.23.self_attn.o_proj', 'model.language_model.layers.23.mlp.gate_proj', 'model.language_model.layers.23.mlp.up_proj', 'model.language_model.layers.23.mlp.down_proj', 'model.language_model.layers.24.self_attn.q_proj', 'model.language_model.layers.24.self_attn.k_proj', 'model.language_model.layers.24.self_attn.v_proj', 'model.language_model.layers.24.self_attn.o_proj', 'model.language_model.layers.24.mlp.gate_proj', 'model.language_model.layers.24.mlp.up_proj', 'model.language_model.layers.24.mlp.down_proj', 'model.language_model.layers.25.self_attn.q_proj', 'model.language_model.layers.25.self_attn.k_proj', 'model.language_model.layers.25.self_attn.v_proj', 'model.language_model.layers.25.self_attn.o_proj', 'model.language_model.layers.25.mlp.gate_proj', 'model.language_model.layers.25.mlp.up_proj', 'model.language_model.layers.25.mlp.down_proj', 'model.language_model.layers.26.self_attn.q_proj', 'model.language_model.layers.26.self_attn.k_proj', 'model.language_model.layers.26.self_attn.v_proj', 'model.language_model.layers.26.self_attn.o_proj', 'model.language_model.layers.26.mlp.gate_proj', 'model.language_model.layers.26.mlp.up_proj', 'model.language_model.layers.26.mlp.down_proj', 'model.language_model.layers.27.self_attn.q_proj', 'model.language_model.layers.27.self_attn.k_proj', 'model.language_model.layers.27.self_attn.v_proj', 'model.language_model.layers.27.self_attn.o_proj', 'model.language_model.layers.27.mlp.gate_proj', 'model.language_model.layers.27.mlp.up_proj', 'model.language_model.layers.27.mlp.down_proj', 'model.language_model.layers.28.self_attn.q_proj', 'model.language_model.layers.28.self_attn.k_proj', 'model.language_model.layers.28.self_attn.v_proj', 'model.language_model.layers.28.self_attn.o_proj', 'model.language_model.layers.28.mlp.gate_proj', 'model.language_model.layers.28.mlp.up_proj', 'model.language_model.layers.28.mlp.down_proj', 'model.language_model.layers.29.self_attn.q_proj', 'model.language_model.layers.29.self_attn.k_proj', 'model.language_model.layers.29.self_attn.v_proj', 'model.language_model.layers.29.self_attn.o_proj', 'model.language_model.layers.29.mlp.gate_proj', 'model.language_model.layers.29.mlp.up_proj', 'model.language_model.layers.29.mlp.down_proj', 'model.language_model.layers.30.self_attn.q_proj', 'model.language_model.layers.30.self_attn.k_proj', 'model.language_model.layers.30.self_attn.v_proj', 'model.language_model.layers.30.self_attn.o_proj', 'model.language_model.layers.30.mlp.gate_proj', 'model.language_model.layers.30.mlp.up_proj', 'model.language_model.layers.30.mlp.down_proj', 'model.language_model.layers.31.self_attn.q_proj', 'model.language_model.layers.31.self_attn.k_proj', 'model.language_model.layers.31.self_attn.v_proj', 'model.language_model.layers.31.self_attn.o_proj', 'model.language_model.layers.31.mlp.gate_proj', 'model.language_model.layers.31.mlp.up_proj', 'model.language_model.layers.31.mlp.down_proj', 'model.language_model.layers.32.self_attn.q_proj', 'model.language_model.layers.32.self_attn.k_proj', 'model.language_model.layers.32.self_attn.v_proj', 'model.language_model.layers.32.self_attn.o_proj', 'model.language_model.layers.32.mlp.gate_proj', 'model.language_model.layers.32.mlp.up_proj', 'model.language_model.layers.32.mlp.down_proj', 'model.language_model.layers.33.self_attn.q_proj', 'model.language_model.layers.33.self_attn.k_proj', 'model.language_model.layers.33.self_attn.v_proj', 'model.language_model.layers.33.self_attn.o_proj', 'model.language_model.layers.33.mlp.gate_proj', 'model.language_model.layers.33.mlp.up_proj', 'model.language_model.layers.33.mlp.down_proj', 'model.language_model.layers.34.self_attn.q_proj', 'model.language_model.layers.34.self_attn.k_proj', 'model.language_model.layers.34.self_attn.v_proj', 'model.language_model.layers.34.self_attn.o_proj', 'model.language_model.layers.34.mlp.gate_proj', 'model.language_model.layers.34.mlp.up_proj', 'model.language_model.layers.34.mlp.down_proj', 'model.language_model.layers.35.self_attn.q_proj', 'model.language_model.layers.35.self_attn.k_proj', 'model.language_model.layers.35.self_attn.v_proj', 'model.language_model.layers.35.self_attn.o_proj', 'model.language_model.layers.35.mlp.gate_proj', 'model.language_model.layers.35.mlp.up_proj', 'model.language_model.layers.35.mlp.down_proj', 'lm_head']
+Adding LoRA to the model...
+✅ Unfroze top 8 Vision Encoder blocks (indices [24, 25, 26, 27, 28, 29, 30, 31])
+
+======================================================================
+📋 Model Training Configuration Check
+======================================================================
+
+🔍 Vision Encoder (ViT):
+  Total blocks: 32
+  Trainable blocks: 8
+  Trainable block indices: [24, 25, 26, 27, 28, 29, 30, 31]
+  freeze_vision_tower: True
+  unfreeze_topk_vision: 8
+
+🔗 Merger:
+  Trainable: True
+  Parameter count: 5
+  freeze_merger: False
+
+🧠 LLM LoRA:
+  lora_enable: True
+  LLM LoRA modules: 254
+  LoRA module names (first 10): ['base_model.model.model.language_model.embed_tokens', 'base_model.model.model.language_model.layers.0.self_attn.q_proj', 'base_model.model.model.language_model.layers.0.self_attn.k_proj', 'base_model.model.model.language_model.layers.0.self_attn.v_proj', 'base_model.model.model.language_model.layers.0.self_attn.o_proj', 'base_model.model.model.language_model.layers.0.mlp.gate_proj', 'base_model.model.model.language_model.layers.0.mlp.up_proj', 'base_model.model.model.language_model.layers.0.mlp.down_proj', 'base_model.model.model.language_model.layers.1.self_attn.q_proj', 'base_model.model.model.language_model.layers.1.self_attn.k_proj'] ...
+  (Total 254 LoRA modules)
+  freeze_llm: True
+
+📊 Summary:
+  ✅ ViT layers unfrozen: 8/32
+  ✅ Merger training: True
+  ✅ LLM LoRA training: True
+======================================================================
+
+No valid checkpoints found, starting fresh training
+No valid checkpoints found, starting fresh training
+Parameter Offload - Persistent parameters statistics: param_count = 914, numel = 15755264
+{'loss_bg': 9.4375, 'epoch': 0}
+{'loss_bg': 9.125, 'epoch': 0}
+{'loss_full': 4.820188522338867, 'epoch': 0.04}
+{'loss_full': 1.8812077045440674, 'epoch': 0.04}
+{'loss_bg': 8.1875, 'epoch': 0.08}
+{'loss_bg': 8.375, 'epoch': 0.08}
+{'loss_full': 3.0949866771698, 'epoch': 0.12}
+{'loss_full': 4.058953285217285, 'epoch': 0.12}
+{'loss_full': 2.960974931716919, 'epoch': 0.17}
+{'loss_full': 3.1863512992858887, 'epoch': 0.17}
+{'loss_fg': 3.0432279109954834, 'epoch': 0.21}
+{'loss_fg': 3.1221656799316406, 'epoch': 0.21}
+{'loss_fg': 3.103214979171753, 'epoch': 0.25}
+{'loss_fg': 3.5861988067626953, 'epoch': 0.25}
+{'loss_full': 3.2820770740509033, 'epoch': 0.29}
+{'loss_full': 4.023073673248291, 'epoch': 0.29}
+{'loss_full': 2.537013292312622, 'epoch': 0.33}
+{'loss_full': 4.6430983543396, 'epoch': 0.33}
+{'loss_fg': 3.451476812362671, 'epoch': 0.38}
+{'loss_fg': 3.7474052906036377, 'epoch': 0.38}
+{'loss': 3.1454, 'grad_norm': 20.0045166015625, 'learning_rate': 1.9910000000000004e-05, 'epoch': 0.42}
+{'loss_fg': 3.7613117694854736, 'epoch': 0.42}
+{'loss_fg': 4.237548828125, 'epoch': 0.42}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_fg': 2.6510422229766846, 'epoch': 0.46}
+{'loss_fg': 5.259472846984863, 'epoch': 0.46}
+{'loss_fg': 4.875537872314453, 'epoch': 0.5}
+{'loss_fg': 3.517406940460205, 'epoch': 0.5}
+{'loss_full': 5.217920303344727, 'epoch': 0.54}
+{'loss_full': 3.520341634750366, 'epoch': 0.54}
+{'loss_full': 3.702737331390381, 'epoch': 0.58}
+{'loss_full': 3.372523307800293, 'epoch': 0.58}
+{'loss_bg': 8.6875, 'epoch': 0.62}
+{'loss_bg': 8.6875, 'epoch': 0.62}
+{'loss_full': 2.6765317916870117, 'epoch': 0.67}
+{'loss_full': 2.783402919769287, 'epoch': 0.67}
+{'loss_fg': 2.750460624694824, 'epoch': 0.71}
+{'loss_fg': 2.2885260581970215, 'epoch': 0.71}
+{'loss_full': 2.536825180053711, 'epoch': 0.75}
+{'loss_full': 1.782304286956787, 'epoch': 0.75}
+{'loss_fg': 3.024484872817993, 'epoch': 0.79}
+{'loss_fg': 4.290991306304932, 'epoch': 0.79}
+{'loss': 3.3287, 'grad_norm': 59.9114990234375, 'learning_rate': 1.9810000000000002e-05, 'epoch': 0.83}
+{'loss_bg': 9.4375, 'epoch': 0.83}
+{'loss_bg': 9.1875, 'epoch': 0.83}
+{'loss_full': 3.4735898971557617, 'epoch': 0.88}
+{'loss_full': 4.418756484985352, 'epoch': 0.88}
+{'loss_bg': 8.8125, 'epoch': 0.92}
+{'loss_bg': 9.1875, 'epoch': 0.92}
+{'loss_bg': 8.5, 'epoch': 0.96}
+{'loss_bg': 8.875, 'epoch': 0.96}
+{'loss_fg': 3.8310861587524414, 'epoch': 1.0}
+{'loss_fg': 3.450819253921509, 'epoch': 1.0}
+{'loss_full': 5.087698459625244, 'epoch': 1.04}
+{'loss_full': 2.882723093032837, 'epoch': 1.04}
+{'loss_fg': 3.17598032951355, 'epoch': 1.08}
+{'loss_fg': 3.8754615783691406, 'epoch': 1.08}
+{'loss_fg': 2.7566962242126465, 'epoch': 1.12}
+{'loss_fg': 4.495319843292236, 'epoch': 1.12}
+{'loss_full': 2.3237743377685547, 'epoch': 1.17}
+{'loss_full': 2.259145498275757, 'epoch': 1.17}
+{'loss_fg': 3.1001739501953125, 'epoch': 1.21}
+{'loss_fg': 2.5569746494293213, 'epoch': 1.21}
+{'loss': 2.8072, 'grad_norm': 23.461793899536133, 'learning_rate': 1.9710000000000003e-05, 'epoch': 1.25}
+{'loss_fg': 3.7351391315460205, 'epoch': 1.25}
+{'loss_fg': 3.1444332599639893, 'epoch': 1.25}
+{'loss_full': 2.908616781234741, 'epoch': 1.29}
+{'loss_full': 4.157321453094482, 'epoch': 1.29}
+{'loss_full': 4.874512672424316, 'epoch': 1.33}
+{'loss_full': 1.654115915298462, 'epoch': 1.33}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_fg': 1.9875069856643677, 'epoch': 1.38}
+{'loss_fg': 4.681243896484375, 'epoch': 1.38}
+{'loss_fg': 1.6830006837844849, 'epoch': 1.42}
+{'loss_fg': 3.8699803352355957, 'epoch': 1.42}
+{'loss_fg': 3.377110004425049, 'epoch': 1.46}
+{'loss_fg': 3.8685901165008545, 'epoch': 1.46}
+{'loss_full': 3.303983449935913, 'epoch': 1.5}
+{'loss_full': 4.042672157287598, 'epoch': 1.5}
+{'loss_fg': 2.7039966583251953, 'epoch': 1.54}
+{'loss_fg': 2.673649311065674, 'epoch': 1.54}
+{'loss_fg': 4.038890361785889, 'epoch': 1.58}
+{'loss_fg': 2.886096954345703, 'epoch': 1.58}
+{'loss_full': 2.1196064949035645, 'epoch': 1.62}
+{'loss_full': 3.060290813446045, 'epoch': 1.62}
+{'loss': 3.2869, 'grad_norm': 11.357105255126953, 'learning_rate': 1.9610000000000004e-05, 'epoch': 1.67}
+{'loss_fg': 2.9872772693634033, 'epoch': 1.67}
+{'loss_fg': 2.979470729827881, 'epoch': 1.67}
+{'loss_full': 3.414058208465576, 'epoch': 1.71}
+{'loss_full': 3.237628221511841, 'epoch': 1.71}
+{'loss_fg': 2.644784450531006, 'epoch': 1.75}
+{'loss_fg': 2.5522632598876953, 'epoch': 1.75}
+{'loss_full': 3.609485149383545, 'epoch': 1.79}
+{'loss_full': 2.5867388248443604, 'epoch': 1.79}
+{'loss_fg': 3.8842639923095703, 'epoch': 1.83}
+{'loss_fg': 2.910019636154175, 'epoch': 1.83}
+{'loss_full': 3.789698600769043, 'epoch': 1.88}
+{'loss_full': 2.871615171432495, 'epoch': 1.88}
+{'loss_bg': 8.5625, 'epoch': 1.92}
+{'loss_bg': 9.3125, 'epoch': 1.92}
+{'loss_full': 3.123461961746216, 'epoch': 1.96}
+{'loss_full': 3.5769262313842773, 'epoch': 1.96}
+{'loss_fg': 3.9548864364624023, 'epoch': 2.0}
+{'loss_fg': 4.680200576782227, 'epoch': 2.0}
+{'loss_full': 3.2049190998077393, 'epoch': 2.04}
+{'loss_full': 3.104093074798584, 'epoch': 2.04}
+{'loss': 3.0332, 'grad_norm': 12.943970680236816, 'learning_rate': 1.951e-05, 'epoch': 2.08}
+{'loss_fg': 3.181565284729004, 'epoch': 2.08}
+{'loss_fg': 3.5697989463806152, 'epoch': 2.08}
+{'loss_full': 2.9852795600891113, 'epoch': 2.12}
+{'loss_full': 2.6071648597717285, 'epoch': 2.12}
+{'loss_bg': 8.9375, 'epoch': 2.17}
+{'loss_bg': 8.875, 'epoch': 2.17}
+{'loss_fg': 2.5948004722595215, 'epoch': 2.21}
+{'loss_fg': 3.422323703765869, 'epoch': 2.21}
+{'loss_bg': 8.0, 'epoch': 2.25}
+{'loss_bg': 9.375, 'epoch': 2.25}
+{'loss_full': 3.8980677127838135, 'epoch': 2.29}
+{'loss_full': 3.8595337867736816, 'epoch': 2.29}
+{'loss_bg': 9.125, 'epoch': 2.33}
+{'loss_bg': 8.0625, 'epoch': 2.33}
+{'loss_full': 4.668122291564941, 'epoch': 2.38}
+{'loss_full': 3.4686055183410645, 'epoch': 2.38}
+{'loss_fg': 2.435260772705078, 'epoch': 2.42}
+{'loss_fg': 3.3711698055267334, 'epoch': 2.42}
+{'loss_full': 1.8581278324127197, 'epoch': 2.46}
+{'loss_full': 3.334839344024658, 'epoch': 2.46}
+{'loss': 2.7219, 'grad_norm': 51.41209411621094, 'learning_rate': 1.9410000000000002e-05, 'epoch': 2.5}
+{'loss_full': 2.9992895126342773, 'epoch': 2.5}
+{'loss_full': 3.4108340740203857, 'epoch': 2.5}
+{'loss_fg': 1.0159457921981812, 'epoch': 2.54}
+{'loss_fg': 3.3929078578948975, 'epoch': 2.54}
+{'loss_bg': 9.1875, 'epoch': 2.58}
+{'loss_bg': 10.25, 'epoch': 2.58}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_fg': 2.7511744499206543, 'epoch': 2.62}
+{'loss_fg': 2.31622314453125, 'epoch': 2.62}
+{'loss_fg': 3.081164836883545, 'epoch': 2.67}
+{'loss_fg': 3.608342170715332, 'epoch': 2.67}
+{'loss_fg': 2.835425615310669, 'epoch': 2.71}
+{'loss_fg': 2.870246410369873, 'epoch': 2.71}
+{'loss_full': 3.1392784118652344, 'epoch': 2.75}
+{'loss_full': 2.5374910831451416, 'epoch': 2.75}
+{'loss_full': 2.9351909160614014, 'epoch': 2.79}
+{'loss_full': 3.4864563941955566, 'epoch': 2.79}
+{'loss_fg': 2.821195125579834, 'epoch': 2.83}
+{'loss_fg': 3.4605720043182373, 'epoch': 2.83}
+{'loss_fg': 1.6054911613464355, 'epoch': 2.88}
+{'loss_fg': 3.400047779083252, 'epoch': 2.88}
+{'loss': 2.8551, 'grad_norm': 12.327486038208008, 'learning_rate': 1.9310000000000003e-05, 'epoch': 2.92}
+{'loss_bg': 8.375, 'epoch': 2.92}
+{'loss_bg': 8.6875, 'epoch': 2.92}
+[2025-11-20 22:12:41,667] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_full': 2.645352363586426, 'epoch': 2.96}
+{'loss_full': 1.8406171798706055, 'epoch': 2.96}
+{'loss_full': 4.009000301361084, 'epoch': 3.0}
+{'loss_full': 3.289363384246826, 'epoch': 3.0}
+{'loss_full': 1.1311672925949097, 'epoch': 3.04}
+{'loss_full': 2.9407362937927246, 'epoch': 3.04}
+{'loss_bg': 9.4375, 'epoch': 3.08}
+{'loss_bg': 7.71875, 'epoch': 3.08}
+{'loss_fg': 2.709547758102417, 'epoch': 3.12}
+{'loss_fg': 3.3260977268218994, 'epoch': 3.12}
+{'loss_full': 2.6544928550720215, 'epoch': 3.17}
+{'loss_full': 2.0925185680389404, 'epoch': 3.17}
+{'loss_fg': 2.646486759185791, 'epoch': 3.21}
+{'loss_fg': 2.1220908164978027, 'epoch': 3.21}
+{'loss_bg': 8.875, 'epoch': 3.25}
+{'loss_bg': 8.125, 'epoch': 3.25}
+{'loss_full': 3.4276838302612305, 'epoch': 3.29}
+{'loss_full': 2.7344624996185303, 'epoch': 3.29}
+{'loss': 2.5103, 'grad_norm': 11.981372833251953, 'learning_rate': 1.921e-05, 'epoch': 3.33}
+{'loss_full': 3.2608437538146973, 'epoch': 3.33}
+{'loss_full': 3.5011777877807617, 'epoch': 3.33}
+{'loss_fg': 4.212319850921631, 'epoch': 3.38}
+{'loss_fg': 2.9829025268554688, 'epoch': 3.38}
+{'loss_full': 3.7702243328094482, 'epoch': 3.42}
+{'loss_full': 4.4154815673828125, 'epoch': 3.42}
+{'loss_fg': 2.953065872192383, 'epoch': 3.46}
+{'loss_fg': 2.2652134895324707, 'epoch': 3.46}
+{'loss_fg': 2.4703876972198486, 'epoch': 3.5}
+{'loss_fg': 3.4430508613586426, 'epoch': 3.5}
+{'loss_full': 2.401878595352173, 'epoch': 3.54}
+{'loss_full': 3.4598846435546875, 'epoch': 3.54}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_fg': 2.3047146797180176, 'epoch': 3.58}
+{'loss_fg': 1.4679734706878662, 'epoch': 3.58}
+{'loss_full': 2.8171985149383545, 'epoch': 3.62}
+{'loss_full': 3.3469202518463135, 'epoch': 3.62}
+{'loss_full': 2.9503800868988037, 'epoch': 3.67}
+{'loss_full': 3.1039249897003174, 'epoch': 3.67}
+{'loss_full': 3.318234920501709, 'epoch': 3.71}
+{'loss_full': 2.8612866401672363, 'epoch': 3.71}
+{'loss': 2.9752, 'grad_norm': 14.146151542663574, 'learning_rate': 1.911e-05, 'epoch': 3.75}
+{'loss_full': 3.945674180984497, 'epoch': 3.75}
+{'loss_full': 3.7763848304748535, 'epoch': 3.75}
+{'loss_full': 1.8775774240493774, 'epoch': 3.79}
+{'loss_full': 3.1249351501464844, 'epoch': 3.79}
+{'loss_fg': 3.547302722930908, 'epoch': 3.83}
+{'loss_fg': 2.5160250663757324, 'epoch': 3.83}
+{'loss_bg': 9.0, 'epoch': 3.88}
+{'loss_bg': 8.25, 'epoch': 3.88}
+{'loss_fg': 3.3189291954040527, 'epoch': 3.92}
+{'loss_fg': 4.258623123168945, 'epoch': 3.92}
+{'loss_fg': 2.5303795337677, 'epoch': 3.96}
+{'loss_fg': 2.2251524925231934, 'epoch': 3.96}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_full': 4.054299354553223, 'epoch': 4.0}
+{'loss_full': 3.5061817169189453, 'epoch': 4.0}
+{'loss_full': 2.5434858798980713, 'epoch': 4.04}
+{'loss_full': 2.3282055854797363, 'epoch': 4.04}
+{'loss_full': 2.4324357509613037, 'epoch': 4.08}
+{'loss_full': 3.101060628890991, 'epoch': 4.08}
+{'loss_fg': 3.1255991458892822, 'epoch': 4.12}
+{'loss_fg': 2.8845574855804443, 'epoch': 4.12}
+{'loss': 2.8696, 'grad_norm': 17.649354934692383, 'learning_rate': 1.9010000000000003e-05, 'epoch': 4.17}
+{'loss_full': 3.160226345062256, 'epoch': 4.17}
+{'loss_full': 3.3013272285461426, 'epoch': 4.17}
+{'loss_fg': 1.944371223449707, 'epoch': 4.21}
+{'loss_fg': 3.3396284580230713, 'epoch': 4.21}
+{'loss_full': 4.195095062255859, 'epoch': 4.25}
+{'loss_full': 1.9353139400482178, 'epoch': 4.25}
+{'loss_bg': 8.375, 'epoch': 4.29}
+{'loss_bg': 8.0625, 'epoch': 4.29}
+{'loss_bg': 8.9375, 'epoch': 4.33}
+{'loss_bg': 8.75, 'epoch': 4.33}
+{'loss_bg': 8.75, 'epoch': 4.38}
+{'loss_bg': 9.25, 'epoch': 4.38}
+{'loss_fg': 3.439488172531128, 'epoch': 4.42}
+{'loss_fg': 1.7903517484664917, 'epoch': 4.42}
+{'loss_full': 3.6712565422058105, 'epoch': 4.46}
+{'loss_full': 3.743476629257202, 'epoch': 4.46}
+{'loss_full': 2.101271629333496, 'epoch': 4.5}
+{'loss_full': 3.324282646179199, 'epoch': 4.5}
+{'loss_full': 3.4524283409118652, 'epoch': 4.54}
+{'loss_full': 3.5412790775299072, 'epoch': 4.54}
+{'loss': 2.5667, 'grad_norm': 9.667255401611328, 'learning_rate': 1.891e-05, 'epoch': 4.58}
+{'loss_bg': 8.1875, 'epoch': 4.58}
+{'loss_bg': 8.6875, 'epoch': 4.58}
+{'loss_bg': 8.3125, 'epoch': 4.62}
+{'loss_bg': 8.0625, 'epoch': 4.62}
+{'loss_fg': 2.44278621673584, 'epoch': 4.67}
+{'loss_fg': 2.6520907878875732, 'epoch': 4.67}
+{'loss_full': 2.1523094177246094, 'epoch': 4.71}
+{'loss_full': 2.9689600467681885, 'epoch': 4.71}
+{'loss_full': 3.531187057495117, 'epoch': 4.75}
+{'loss_full': 2.448629856109619, 'epoch': 4.75}
+{'loss_bg': 7.4375, 'epoch': 4.79}
+{'loss_bg': 10.125, 'epoch': 4.79}
+{'loss_bg': 8.25, 'epoch': 4.83}
+{'loss_bg': 7.65625, 'epoch': 4.83}
+{'loss_full': 2.8934919834136963, 'epoch': 4.88}
+{'loss_full': 0.8314678072929382, 'epoch': 4.88}
+{'loss_fg': 2.7640767097473145, 'epoch': 4.92}
+{'loss_fg': 2.892045736312866, 'epoch': 4.92}
+{'loss_bg': 7.875, 'epoch': 4.96}
+{'loss_bg': 7.28125, 'epoch': 4.96}
+{'loss': 2.138, 'grad_norm': 10.853684425354004, 'learning_rate': 1.881e-05, 'epoch': 5.0}
+{'loss_fg': 2.7287282943725586, 'epoch': 5.0}
+{'loss_fg': 3.2230305671691895, 'epoch': 5.0}
+{'loss_full': 3.7352399826049805, 'epoch': 5.04}
+{'loss_full': 3.161623477935791, 'epoch': 5.04}
+{'loss_fg': 2.5715012550354004, 'epoch': 5.08}
+{'loss_fg': 2.8015754222869873, 'epoch': 5.08}
+{'loss_full': 2.893174886703491, 'epoch': 5.12}
+{'loss_full': 2.1992177963256836, 'epoch': 5.12}
+{'loss_bg': 6.28125, 'epoch': 5.17}
+{'loss_bg': 8.375, 'epoch': 5.17}
+{'loss_bg': 6.78125, 'epoch': 5.21}
+{'loss_bg': 6.8125, 'epoch': 5.21}
+[2025-11-20 22:19:36,606] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 2.1976449489593506, 'epoch': 5.25}
+{'loss_fg': 2.890270948410034, 'epoch': 5.25}
+{'loss_full': 2.4060301780700684, 'epoch': 5.29}
+{'loss_full': 1.7575664520263672, 'epoch': 5.29}
+{'loss_bg': 6.03125, 'epoch': 5.33}
+{'loss_bg': 8.0, 'epoch': 5.33}
+{'loss_fg': 2.840332269668579, 'epoch': 5.38}
+{'loss_fg': 2.4016308784484863, 'epoch': 5.38}
+{'loss': 2.4104, 'grad_norm': 10.682066917419434, 'learning_rate': 1.8710000000000002e-05, 'epoch': 5.42}
+{'loss_fg': 1.3237676620483398, 'epoch': 5.42}
+{'loss_fg': 2.8598434925079346, 'epoch': 5.42}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_full': 3.589759111404419, 'epoch': 5.46}
+{'loss_full': 4.121988296508789, 'epoch': 5.46}
+{'loss_fg': 0.4868980646133423, 'epoch': 5.5}
+{'loss_fg': 2.8979504108428955, 'epoch': 5.5}
+{'loss_fg': 2.5663442611694336, 'epoch': 5.54}
+{'loss_fg': 3.0553903579711914, 'epoch': 5.54}
+{'loss_fg': 3.255171537399292, 'epoch': 5.58}
+{'loss_fg': 2.288649559020996, 'epoch': 5.58}
+{'loss_fg': 3.52046537399292, 'epoch': 5.62}
+{'loss_fg': 3.133030652999878, 'epoch': 5.62}
+{'loss_fg': 2.42230224609375, 'epoch': 5.67}
+{'loss_fg': 3.112945795059204, 'epoch': 5.67}
+{'loss_full': 1.7781717777252197, 'epoch': 5.71}
+{'loss_full': 2.406839370727539, 'epoch': 5.71}
+{'loss_full': 3.5827131271362305, 'epoch': 5.75}
+{'loss_full': 5.340765476226807, 'epoch': 5.75}
+{'loss_full': 3.9173810482025146, 'epoch': 5.79}
+{'loss_full': 4.525729656219482, 'epoch': 5.79}
+{'loss': 3.2133, 'grad_norm': 227.757568359375, 'learning_rate': 1.8610000000000003e-05, 'epoch': 5.83}
+{'loss_fg': 2.426931381225586, 'epoch': 5.83}
+{'loss_fg': 2.9111886024475098, 'epoch': 5.83}
+{'loss_fg': 1.9238685369491577, 'epoch': 5.88}
+{'loss_fg': 2.5475311279296875, 'epoch': 5.88}
+{'loss_fg': 3.104473829269409, 'epoch': 5.92}
+{'loss_fg': 3.018284320831299, 'epoch': 5.92}
+{'loss_bg': 7.3125, 'epoch': 5.96}
+{'loss_bg': 8.125, 'epoch': 5.96}
+{'loss_fg': 3.0457825660705566, 'epoch': 6.0}
+{'loss_fg': 2.4251205921173096, 'epoch': 6.0}
+{'loss_bg': 6.96875, 'epoch': 6.04}
+{'loss_bg': 6.6875, 'epoch': 6.04}
+{'loss_full': 2.0272364616394043, 'epoch': 6.08}
+{'loss_full': 2.6219422817230225, 'epoch': 6.08}
+{'loss_fg': 0.5910606384277344, 'epoch': 6.12}
+{'loss_fg': 2.363264560699463, 'epoch': 6.12}
+{'loss_fg': 2.6729815006256104, 'epoch': 6.17}
+{'loss_fg': 2.6847612857818604, 'epoch': 6.17}
+{'loss_full': 3.078319787979126, 'epoch': 6.21}
+{'loss_full': 1.7926766872406006, 'epoch': 6.21}
+{'loss': 2.4624, 'grad_norm': 12.948261260986328, 'learning_rate': 1.851e-05, 'epoch': 6.25}
+{'loss_bg': 7.40625, 'epoch': 6.25}
+{'loss_bg': 7.21875, 'epoch': 6.25}
+{'loss_fg': 1.2109339237213135, 'epoch': 6.29}
+{'loss_fg': 2.787198066711426, 'epoch': 6.29}
+{'loss_bg': 7.53125, 'epoch': 6.33}
+{'loss_bg': 6.71875, 'epoch': 6.33}
+{'loss_bg': 11.1875, 'epoch': 6.38}
+{'loss_bg': 7.78125, 'epoch': 6.38}
+{'loss_full': 3.343677043914795, 'epoch': 6.42}
+{'loss_full': 3.1070468425750732, 'epoch': 6.42}
+{'loss_fg': 2.9129390716552734, 'epoch': 6.46}
+{'loss_fg': 3.504814624786377, 'epoch': 6.46}
+{'loss_fg': 2.158236026763916, 'epoch': 6.5}
+{'loss_fg': 2.3574109077453613, 'epoch': 6.5}
+{'loss_fg': 2.717533826828003, 'epoch': 6.54}
+{'loss_fg': 3.3423023223876953, 'epoch': 6.54}
+{'loss_fg': 1.6649831533432007, 'epoch': 6.58}
+{'loss_fg': 2.3374788761138916, 'epoch': 6.58}
+{'loss_full': 2.4127237796783447, 'epoch': 6.62}
+{'loss_full': 1.9303559064865112, 'epoch': 6.62}
+{'loss': 2.3459, 'grad_norm': 11.515632629394531, 'learning_rate': 1.841e-05, 'epoch': 6.67}
+{'loss_full': 3.6279141902923584, 'epoch': 6.67}
+{'loss_full': 3.687350034713745, 'epoch': 6.67}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_fg': 2.580012321472168, 'epoch': 6.71}
+{'loss_fg': 2.8461568355560303, 'epoch': 6.71}
+{'loss_full': 3.190337657928467, 'epoch': 6.75}
+{'loss_full': 2.7256550788879395, 'epoch': 6.75}
+{'loss_fg': 3.184699773788452, 'epoch': 6.79}
+{'loss_fg': 2.860307455062866, 'epoch': 6.79}
+{'loss_full': 2.663621425628662, 'epoch': 6.83}
+{'loss_full': 2.7694196701049805, 'epoch': 6.83}
+{'loss_full': 2.7513983249664307, 'epoch': 6.88}
+{'loss_full': 3.150444984436035, 'epoch': 6.88}
+{'loss_full': 2.131410837173462, 'epoch': 6.92}
+{'loss_full': 2.0164501667022705, 'epoch': 6.92}
+{'loss_full': 2.042574882507324, 'epoch': 6.96}
+{'loss_full': 2.764866590499878, 'epoch': 6.96}
+{'loss_fg': 2.3219165802001953, 'epoch': 7.0}
+{'loss_fg': 1.8594322204589844, 'epoch': 7.0}
+{'loss_full': 1.9984768629074097, 'epoch': 7.04}
+{'loss_full': 3.176279067993164, 'epoch': 7.04}
+{'loss': 2.7453, 'grad_norm': 8.225845336914062, 'learning_rate': 1.8310000000000003e-05, 'epoch': 7.08}
+{'loss_fg': 3.2963850498199463, 'epoch': 7.08}
+{'loss_fg': 2.092101812362671, 'epoch': 7.08}
+{'loss_fg': 2.4546234607696533, 'epoch': 7.12}
+{'loss_fg': 3.678466320037842, 'epoch': 7.12}
+{'loss_full': 1.6143088340759277, 'epoch': 7.17}
+{'loss_full': 1.7294683456420898, 'epoch': 7.17}
+{'loss_full': 1.6415979862213135, 'epoch': 7.21}
+{'loss_full': 2.8815248012542725, 'epoch': 7.21}
+{'loss_bg': 8.6875, 'epoch': 7.25}
+{'loss_bg': 11.375, 'epoch': 7.25}
+{'loss_fg': 3.096836805343628, 'epoch': 7.29}
+{'loss_fg': 2.270425319671631, 'epoch': 7.29}
+{'loss_full': 3.1161694526672363, 'epoch': 7.33}
+{'loss_full': 3.7280354499816895, 'epoch': 7.33}
+{'loss_bg': 8.375, 'epoch': 7.38}
+{'loss_bg': 7.53125, 'epoch': 7.38}
+{'loss_bg': 7.0625, 'epoch': 7.42}
+{'loss_bg': 8.25, 'epoch': 7.42}
+{'loss_bg': 7.46875, 'epoch': 7.46}
+{'loss_bg': 9.5625, 'epoch': 7.46}
+{'loss': 2.1553, 'grad_norm': 34.646820068359375, 'learning_rate': 1.821e-05, 'epoch': 7.5}
+{'loss_full': 3.067026138305664, 'epoch': 7.5}
+{'loss_full': 2.256272554397583, 'epoch': 7.5}
+{'loss_fg': 2.5274622440338135, 'epoch': 7.54}
+{'loss_fg': 2.754163980484009, 'epoch': 7.54}
+{'loss_fg': 2.715101480484009, 'epoch': 7.58}
+{'loss_fg': 2.7907514572143555, 'epoch': 7.58}
+{'loss_full': 5.2406229972839355, 'epoch': 7.62}
+{'loss_full': 1.5443894863128662, 'epoch': 7.62}
+{'loss_full': 2.07477068901062, 'epoch': 7.67}
+{'loss_full': 2.219407081604004, 'epoch': 7.67}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_bg': 7.3125, 'epoch': 7.71}
+{'loss_bg': 6.4375, 'epoch': 7.71}
+[2025-11-20 22:26:36,843] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_full': 3.0534026622772217, 'epoch': 7.75}
+{'loss_full': 4.117168426513672, 'epoch': 7.75}
+{'loss_full': 2.3705267906188965, 'epoch': 7.79}
+{'loss_full': 2.162792444229126, 'epoch': 7.79}
+{'loss_fg': 2.2875537872314453, 'epoch': 7.83}
+{'loss_fg': 3.1702427864074707, 'epoch': 7.83}
+{'loss_fg': 2.6057333946228027, 'epoch': 7.88}
+{'loss_fg': 2.666050910949707, 'epoch': 7.88}
+{'loss': 2.5165, 'grad_norm': 12.162967681884766, 'learning_rate': 1.811e-05, 'epoch': 7.92}
+{'loss_full': 2.581921100616455, 'epoch': 7.92}
+{'loss_full': 2.34993839263916, 'epoch': 7.92}
+{'loss_fg': 1.7561776638031006, 'epoch': 7.96}
+{'loss_fg': 3.235851764678955, 'epoch': 7.96}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_full': 1.5371512174606323, 'epoch': 8.0}
+{'loss_full': 3.1224241256713867, 'epoch': 8.0}
+{'loss_fg': 2.1418473720550537, 'epoch': 8.04}
+{'loss_fg': 1.9830563068389893, 'epoch': 8.04}
+{'loss_bg': 8.125, 'epoch': 8.08}
+{'loss_bg': 6.90625, 'epoch': 8.08}
+{'loss_fg': 1.026761531829834, 'epoch': 8.12}
+{'loss_fg': 2.6607699394226074, 'epoch': 8.12}
+{'loss_fg': 2.8076837062835693, 'epoch': 8.17}
+{'loss_fg': 1.4717844724655151, 'epoch': 8.17}
+{'loss_fg': 2.1621150970458984, 'epoch': 8.21}
+{'loss_fg': 2.4402785301208496, 'epoch': 8.21}
+{'loss_full': 1.6490463018417358, 'epoch': 8.25}
+{'loss_full': 4.475433826446533, 'epoch': 8.25}
+{'loss_full': 1.4867421388626099, 'epoch': 8.29}
+{'loss_full': 2.481118679046631, 'epoch': 8.29}
+{'loss': 2.1848, 'grad_norm': 9.895319938659668, 'learning_rate': 1.8010000000000002e-05, 'epoch': 8.33}
+{'loss_full': 3.575967311859131, 'epoch': 8.33}
+{'loss_full': 2.43233323097229, 'epoch': 8.33}
+{'loss_full': 3.3005454540252686, 'epoch': 8.38}
+{'loss_full': 2.1858856678009033, 'epoch': 8.38}
+{'loss_fg': 3.121542453765869, 'epoch': 8.42}
+{'loss_fg': 2.8231332302093506, 'epoch': 8.42}
+{'loss_full': 2.232738733291626, 'epoch': 8.46}
+{'loss_full': 1.8095173835754395, 'epoch': 8.46}
+{'loss_full': 1.2311345338821411, 'epoch': 8.5}
+{'loss_full': 3.201265335083008, 'epoch': 8.5}
+{'loss_fg': 2.9574973583221436, 'epoch': 8.54}
+{'loss_fg': 1.468408226966858, 'epoch': 8.54}
+{'loss_full': 3.1088855266571045, 'epoch': 8.58}
+{'loss_full': 3.112055778503418, 'epoch': 8.58}
+{'loss_fg': 1.514149785041809, 'epoch': 8.62}
+{'loss_fg': 2.12564754486084, 'epoch': 8.62}
+{'loss_full': 2.710942268371582, 'epoch': 8.67}
+{'loss_full': 1.662330150604248, 'epoch': 8.67}
+{'loss_fg': 2.372915506362915, 'epoch': 8.71}
+{'loss_fg': 2.5841355323791504, 'epoch': 8.71}
+{'loss': 2.5147, 'grad_norm': 12.526056289672852, 'learning_rate': 1.791e-05, 'epoch': 8.75}
+{'loss_full': 2.5773417949676514, 'epoch': 8.75}
+{'loss_full': 2.2214832305908203, 'epoch': 8.75}
+{'loss_fg': 3.0482263565063477, 'epoch': 8.79}
+{'loss_fg': 1.9732290506362915, 'epoch': 8.79}
+{'loss_full': 2.7413296699523926, 'epoch': 8.83}
+{'loss_full': 2.945537805557251, 'epoch': 8.83}
+{'loss_full': 3.313371419906616, 'epoch': 8.88}
+{'loss_full': 1.7058329582214355, 'epoch': 8.88}
+{'loss_fg': 1.9414453506469727, 'epoch': 8.92}
+{'loss_fg': 2.682291030883789, 'epoch': 8.92}
+{'loss_full': 2.8767006397247314, 'epoch': 8.96}
+{'loss_full': 2.476418972015381, 'epoch': 8.96}
+{'loss_bg': 6.5, 'epoch': 9.0}
+{'loss_bg': 7.875, 'epoch': 9.0}
+{'loss_bg': 6.96875, 'epoch': 9.04}
+{'loss_bg': 7.1875, 'epoch': 9.04}
+📊 Mask coverage: 96/96 (100.0%)
+{'loss_full': 1.1700773239135742, 'epoch': 9.08}
+{'loss_full': 1.283234715461731, 'epoch': 9.08}
+{'loss_fg': 1.2983450889587402, 'epoch': 9.12}
+{'loss_fg': 3.024022340774536, 'epoch': 9.12}
+{'loss': 2.3018, 'grad_norm': 17.995615005493164, 'learning_rate': 1.781e-05, 'epoch': 9.17}
+{'loss_fg': 2.4665145874023438, 'epoch': 9.17}
+{'loss_fg': 3.156552314758301, 'epoch': 9.17}
+{'loss_full': 2.461702585220337, 'epoch': 9.21}
+{'loss_full': 2.6304984092712402, 'epoch': 9.21}
+{'loss_fg': 1.4889864921569824, 'epoch': 9.25}
+{'loss_fg': 4.314934730529785, 'epoch': 9.25}
+{'loss_full': 3.097973346710205, 'epoch': 9.29}
+{'loss_full': 1.312207818031311, 'epoch': 9.29}
+{'loss_full': 2.0601863861083984, 'epoch': 9.33}
+{'loss_full': 2.718999147415161, 'epoch': 9.33}
+{'loss_fg': 2.109464168548584, 'epoch': 9.38}
+{'loss_fg': 2.1515533924102783, 'epoch': 9.38}
+{'loss_fg': 3.9895410537719727, 'epoch': 9.42}
+{'loss_fg': 2.109912633895874, 'epoch': 9.42}
+{'loss_full': 2.567563533782959, 'epoch': 9.46}
+{'loss_full': 1.2995803356170654, 'epoch': 9.46}
+{'loss_bg': 7.0625, 'epoch': 9.5}

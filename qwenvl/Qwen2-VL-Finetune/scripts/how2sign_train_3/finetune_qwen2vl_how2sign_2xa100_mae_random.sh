@@ -1,19 +1,19 @@
 #!/bin/bash -l
 # NOTE the -l flag!
 #
-# Qwen2VL MAE Pre-training on 1xA100 GPU
+# Qwen2VL MAE Pre-training on 2xA100 GPUs
 # Masked Autoencoder for vision encoder pre-training
 
-#SBATCH --job-name=qwen2vl_mae_1xa100_random
+#SBATCH --job-name=qwen2vl_mae_2xa100_random
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
 #SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=00:10:00
-#SBATCH --gpus-per-node=a100:1
+#SBATCH --time=24:00:00
+#SBATCH --gpus-per-node=a100:2
 #SBATCH --partition tier3
-#SBATCH --mem=64g
+#SBATCH --mem=128g
 
 spack load /lhqcen5
 spack load cuda@12.4.0/obxqih4
@@ -37,11 +37,8 @@ fi
 
 export PYTHONPATH="/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src:$PYTHONPATH"
 export OMP_NUM_THREADS=16
-# Memory optimization: use expandable segments and set max split size to reduce fragmentation
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True,max_split_size_mb:128
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export TOKENIZERS_PARALLELISM=false  # Disable tokenizers parallelism warnings in multi-process environment
-# Enable memory efficient attention if available
-export PYTORCH_ENABLE_MPS_FALLBACK=1
 
 # Network and Hugging Face configuration
 export HF_HUB_DISABLE_TELEMETRY=1
@@ -53,8 +50,11 @@ export HF_HUB_TIMEOUT=600
 export HF_HUB_DOWNLOAD_TIMEOUT=600
 export HF_HUB_ENABLE_HF_TRANSFER=1
 
-# Disable wandb (Weights & Biases) to avoid API key issues in non-interactive environments
-export WANDB_DISABLED=1
+# Set random master port to avoid port conflicts
+# Generate a random port between 29500-29999
+MASTER_PORT=${MASTER_PORT:-$(shuf -i 29500-29999 -n 1)}
+export MASTER_PORT
+echo "Using MASTER_PORT: $MASTER_PORT"
 
 # Change to Qwen2-VL-Finetune directory
 cd /home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune
@@ -73,9 +73,9 @@ VIDEO_BASE_PATH="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clip
 
 # Training configuration
 PER_DEVICE_BS=1  # Batch size per device (reduced for memory)
-GRAD_ACCUM=4     # Gradient accumulation steps (increased to maintain effective batch size and reduce memory)
-FPS=4           # Frames per second (increased from 4, can try 8 or 12 with optimizations below)
-MASK_RATIO=0.80 # Mask ratio (0.75 or 0.90)
+GRAD_ACCUM=4     # Gradient accumulation steps (increased to maintain effective batch size)
+FPS=4           # Frames per second
+MASK_RATIO=0.80  # Mask ratio (0.75 or 0.90)
 
 # MAE model configuration
 DECODER_DIM=384  # Reduced from 512 to save memory
@@ -86,7 +86,7 @@ MLP_RATIO=4.0
 # Vision encoder training configuration
 # Set UNFREEZE_TOPK_VISION to train only top k layers (0 = train all layers)
 # Example: UNFREEZE_TOPK_VISION=4 will train only the last 4 layers of vision encoder
-UNFREEZE_TOPK_VISION=4  # 0 = train all layers, >0 = train only top k layers
+UNFREEZE_TOPK_VISION=8  # 0 = train all layers, >0 = train only top k layers
 
 # Training hyperparameters
 LEARNING_RATE=1e-4
@@ -94,9 +94,8 @@ WEIGHT_DECAY=0.05
 NUM_EPOCHS=100
 MAX_GRAD_NORM=1.0
 
-
 # Output configuration
-OUTPUT_DIR="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_mae_1xa100_random"
+OUTPUT_DIR="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_mae_2xa100_random"
 LOG_DIR="${OUTPUT_DIR}/logs"
 mkdir -p "${OUTPUT_DIR}"
 mkdir -p "${LOG_DIR}"
@@ -129,10 +128,11 @@ else
     echo "Vision Encoder  : All layers trainable"
 fi
 echo "DeepSpeed       : ZeRO-3"
+echo "Master Port     : $MASTER_PORT"
 echo "Log File        : $LOG_FILE"
 echo "=========================================="
 
-# Run training with DeepSpeed ZeRO-3 for efficient GPU training
+# Run training with DeepSpeed ZeRO-3 for efficient multi-GPU training
 echo "🏃 Starting MAE training with DeepSpeed..."
 deepspeed src/train/train_qwen_mae.py \
     --deepspeed scripts/zero3_qwen2vl.json \
@@ -161,45 +161,12 @@ deepspeed src/train/train_qwen_mae.py \
     --video_min_pixels $((224 * 224)) \
     --video_max_pixels $((224 * 224)) \
     --fps $FPS \
-    --num_workers 2 \
-    --log_interval 10 \
+    --num_workers 4 \
     --save_strategy steps \
-    --save_interval 1000 \
+    --save_interval 10000 \
     --save_total_limit 2 \
     --bf16 \
     --gradient_checkpointing
 
 echo "Training completed! Check logs at: $LOG_FILE"
-
-# ============================================================================
-# Memory Optimization Tips for Higher FPS:
-# ============================================================================
-# If you still get OOM with higher FPS, try these additional optimizations:
-#
-# 1. Further reduce decoder size:
-#    DECODER_DIM=192  (from 256)
-#    DECODER_DEPTH=3  (from 4)
-#    DECODER_HEADS=6  (from 8)
-#
-# 2. Reduce trainable vision layers:
-#    UNFREEZE_TOPK_VISION=1  (from 2, only train last layer)
-#
-# 3. Increase gradient accumulation:
-#    GRAD_ACCUM=8  (from 4, reduces memory per step)
-#
-# 4. Reduce video resolution (if acceptable):
-#    --video_resized_width 192  (from 224)
-#    --video_resized_height 192
-#    --video_min_pixels $((192 * 192))
-#    --video_max_pixels $((192 * 192))
-#
-# 5. Use lower mask ratio (processes fewer patches):
-#    MASK_RATIO=0.90  (masks more, processes less)
-#
-# 6. Enable optimizer CPU offload in DeepSpeed config:
-#    Set "offload_optimizer": {"device": "cpu"} in zero3_qwen2vl.json
-#
-# 7. Reduce num_workers to save CPU memory:
-#    --num_workers 1  (from 2)
-# ============================================================================
 

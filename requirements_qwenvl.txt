@@ -1,14 +1,17 @@
 # Core ML/DL libraries
-torch==2.6.0+cu124
-torchvision==0.21.0+cu124
-torchaudio==2.6.0+cu124
+# NOTE: PyTorch packages with CUDA support require PyTorch's index
+# If you need to install PyTorch (e.g., for a new environment):
+#   pip install torch==2.5.1+cu121 torchvision==0.20.1+cu121 torchaudio==2.5.1+cu121 --index-url https://download.pytorch.org/whl/cu121
+# Current qwenvl environment has: torch==2.5.1+cu121, torchvision==0.20.1+cu121, torchaudio==2.5.1+cu121
 transformers @ git+https://github.com/huggingface/transformers@f22cb1e8689905091acb07e238b670aadde1e4ee
 
 # Training and optimization
-accelerate==1.10.1
+accelerate>=1.4.0  # Required by trl 0.23.0
 deepspeed==0.17.6
-peft==0.17.1
-flash_attn==2.7.4.post1
+peft==0.13.2
+# flash_attn==2.7.4.post1  # Install separately after torch is installed:
+#   pip install flash-attn==2.7.4.post1 --no-build-isolation
+#   Or if already installed, skip this line
 liger_kernel==0.6.2
 
 # Qwen2VL specific
@@ -16,12 +19,12 @@ qwen-vl-utils==0.0.14
 
 # Video processing
 decord==0.6.0
-av==15.1.0
+av==12.3.0
 opencv-python==4.12.0.88
 
 # Data processing
-datasets==4.1.1
-numpy==1.26.4
+datasets==3.1.0
+numpy>=1.26.0  # Python 3.10 compatible (current: 2.1.2)
 pandas==2.3.3
 pillow==11.0.0
 

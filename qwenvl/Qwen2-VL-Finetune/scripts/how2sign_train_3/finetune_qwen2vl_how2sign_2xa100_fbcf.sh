@@ -1,18 +1,18 @@
 #!/bin/bash -l
 # NOTE the -l flag!
 #
-# Qwen2VL Foreground-Background Consistency Finetuning on 1xA100 GPU
+# Qwen2VL Foreground-Background Consistency Finetuning on 2xA100 GPU
 
-#SBATCH --job-name=qwen2vl_fbcf_1xa100
+#SBATCH --job-name=qwen2vl_fbcf_2xa100
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
 #SBATCH --output=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/out_%j.txt
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=00:20:00
-#SBATCH --gpus-per-node=a100:1
+#SBATCH --time=00:30:00
+#SBATCH --gpus-per-node=a100:2
 #SBATCH --partition tier3
-#SBATCH --mem=64g
+#SBATCH --mem=128g
 
 spack load /lhqcen5
 spack load cuda@12.4.0/obxqih4
@@ -43,12 +43,12 @@ export CUDA_LAUNCH_BLOCKING=0
 # Network and Hugging Face configuration
 export HF_HUB_DISABLE_TELEMETRY=1
 export HF_HUB_DISABLE_PROGRESS_BARS=1
+export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HUB_OFFLINE=0
 export HF_DATASETS_OFFLINE=0
 export TRANSFORMERS_OFFLINE=0
 export HF_HUB_TIMEOUT=600
 export HF_HUB_DOWNLOAD_TIMEOUT=600
-export HF_HUB_ENABLE_HF_TRANSFER=1
 
 # Disable wandb (Weights & Biases) to avoid API key issues in non-interactive environments
 export WANDB_DISABLED=1
@@ -60,40 +60,42 @@ cd /home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune
 MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
 
 # Data configuration
-DATA_PATH="/home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json"
+DATA_PATH="/home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_with_masks.json"
 IMAGE_FOLDER="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/"
-MASK_FOLDER="/shared/rc/llm-gen-agent/mhu/videos/train_crop_videos_720_mask"
+MASK_FOLDER="/home/mh2803/projects/sign_language_llm/how2sign/masks/"
 
-# Training configuration for 1xA100 GPU
+# Training configuration for 2xA100 GPU
 GLOBAL_BATCH_SIZE=4
 PER_DEVICE_BS=1
-NUM_DEVICES=1
+NUM_DEVICES=2
 GRAD_ACCUM=$((GLOBAL_BATCH_SIZE / (PER_DEVICE_BS * NUM_DEVICES)))
 FPS=12
 
 # Output configuration
-OUTPUT_DIR="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100"
+OUTPUT_DIR="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_2xa100"
 mkdir -p "$OUTPUT_DIR"
 
 # Log file with timestamp
 LOG_FILE="${OUTPUT_DIR}/training_$(date +%Y%m%d_%H%M%S).log"
 echo "📝 Log file: $LOG_FILE"
 
-echo "🚀 Qwen2-VL FBCF training on 1xA100"
+echo "🚀 Qwen2-VL FBCF training on 2xA100"
 echo "Model          : $MODEL_NAME"
 echo "Data JSON      : $DATA_PATH"
 echo "Video folder   : $IMAGE_FOLDER"
 echo "Mask folder    : $MASK_FOLDER"
 echo "Output dir     : $OUTPUT_DIR"
-echo "Batch/GPU      : $PER_DEVICE_BS"
+echo "Batch/GPU      : $NUM_DEVICES"
 echo "Grad accum     : $GRAD_ACCUM"
 echo "fps            : $FPS"
 echo "DeepSpeed      : ZeRO-3"
-echo "FBCF Sampling  : Per-sample random (40% original, 40% foreground, 20% background)"
+echo "FBCF Sampling  : Per-sample random (20% original, 60% foreground, 20% background)"
+echo "                Note: Reduced original ratio for two-stage training (FBCF -> Full Video FT)"
+echo "FBCF Lambda    : 0.1 (reduced from 0.2 for Stage 1 - gentle background regularization)"
 echo ""
 
 python - <<'PY'
-import torch, os                                           
+import torch, os
 print(f"CUDA available: {torch.cuda.is_available()}")
 print(f"GPU count: {torch.cuda.device_count()}")
 if torch.cuda.is_available():
@@ -120,12 +122,12 @@ deepspeed src/train/train_sft.py \
   --mask_blur_kernel 5 \
   --fbcf_bg_noise_std 0.05 \
   --enable_fbcf True \
-  --fbcf_lambda 0.2 \
+  --fbcf_lambda 0.1 \
   --fg_loss_weight 1.0 \
   --bg_loss_weight 1.0 \
   --fbcf_sampling_mode True \
-  --fbcf_sampling_ratio_original 0.4 \
-  --fbcf_sampling_ratio_foreground 0.4 \
+  --fbcf_sampling_ratio_original 0.2 \
+  --fbcf_sampling_ratio_foreground 0.6 \
   --fbcf_sampling_ratio_background 0.2 \
   --output_dir "$OUTPUT_DIR" \
   --num_train_epochs 1 \
@@ -141,7 +143,6 @@ deepspeed src/train/train_sft.py \
   --learning_rate 2e-5 \
   --dataloader_num_workers 2 \
   --dataloader_pin_memory False \
-  --logging_steps 10 \
   --save_strategy steps \
   --save_steps 1000 \
   --save_total_limit 1 \
@@ -156,7 +157,7 @@ deepspeed src/train/train_sft.py \
   --lora_enable True \
   --lora_rank 8 \
   --lora_alpha 16 \
-  --vision_lr 2e-5 \
+  --vision_lr 1e-5 \
   --merger_lr 2e-5 \
   --report_to none
 

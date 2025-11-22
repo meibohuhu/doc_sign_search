@@ -149,7 +149,7 @@ class SupervisedDataset(Dataset):
                                     if check_mask_path and os.path.exists(check_mask_path):
                                         mask_count += 1
                         coverage = 100 * mask_count / total_checked
-                        print(f"📊 Mask coverage: {mask_count}/{total_checked} ({coverage:.1f}%)")
+                        # print(f"📊 Mask coverage: {mask_count}/{total_checked} ({coverage:.1f}%)")
                         if mask_count == 0:
                             print(f"  ⚠️  WARNING: No mask files found! FBCF will not be applied.")
                         elif mask_count < total_checked * 0.5:

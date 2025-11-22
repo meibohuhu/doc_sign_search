@@ -1,0 +1,100 @@
+✅ Using conda environment: /home/mh2803/miniconda3/envs/qwenvl
+Using MASTER_PORT: 29891
+==========================================
+Qwen2VL MAE Pre-training Configuration
+==========================================
+Model           : Qwen/Qwen2.5-VL-3B-Instruct
+Data Path       : /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json
+Video Base Path : /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Output Dir      : /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_mae_2xa100_random
+Mask Ratio      : 0.80
+Mask Strategy   : mu (mask-unit like Hiera)
+Mask Unit Size  : 4x4 (for block/mu strategies)
+FPS             : 4
+Batch Size      : 1 per device
+Grad Accum      : 4
+Learning Rate   : 1e-4
+Epochs          : 100
+Decoder Dim     : 384
+Decoder Depth   : 6
+Decoder Heads   : 12
+Vision Encoder  : Top 8 layers trainable
+DeepSpeed       : ZeRO-3
+Master Port     : 29891
+Log File        : /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_mae_2xa100_random/logs/mae_training_20251120_214835.log
+==========================================
+🏃 Starting MAE training with DeepSpeed...
+[2025-11-20 21:50:39,463] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Loading processor from Qwen/Qwen2.5-VL-3B-Instruct...Loading processor from Qwen/Qwen2.5-VL-3B-Instruct...
+
+Creating MAE model...
+Loading Qwen2-VL from Qwen/Qwen2.5-VL-3B-Instruct...
+Creating MAE model...
+Loading Qwen2-VL from Qwen/Qwen2.5-VL-3B-Instruct...
+Vision encoder: 8/32 top layers trainable (layers 25-32)
+Loading dataset from /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json...
+Using video base path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Vision encoder: 8/32 top layers trainable (layers 25-32)
+Loading dataset from /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json...
+Using video base path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Loaded 30711 samples for MAE pre-training
+Loaded 30711 samples for MAE pre-training
+
+Global training steps: 1535600 (15356 steps/epoch × 100 epochs, 30711 samples, 2 GPUs)
+
+Initializing decoder_pred with dummy forward...
+
+Global training steps: 1535600 (15356 steps/epoch × 100 epochs, 30711 samples, 2 GPUs)
+
+Initializing decoder_pred with dummy forward...
+Detected patch_pixel_dim: 1176 (creating decoder_pred layer with dtype torch.float32)
+
+======================================================================
+🎭 Masking Strategy: RANDOM
+======================================================================
+  Strategy: random
+  Mask Ratio: 0.8
+======================================================================
+
+Detected patch_pixel_dim: 1176 (creating decoder_pred layer with dtype torch.float32)
+
+======================================================================
+🎭 Masking Strategy: RANDOM
+======================================================================
+  Strategy: random
+  Mask Ratio: 0.8
+======================================================================
+
+[RANDOM Masking] ✓ Confirmed using random patch-level masking
+  - Total patches: 6400
+  - Visible patches: 1279 (20.0%)
+  - Masked patches: 5121 (80.0%)
+  - Each patch independently masked/visible
+
+[RANDOM Masking] ✓ Confirmed using random patch-level masking
+  - Total patches: 6400
+  - Visible patches: 1279 (20.0%)
+  - Masked patches: 5121 (80.0%)
+  - Each patch independently masked/visible
+
+decoder_pred initialized successfully
+decoder_pred initialized successfully
+Starting training for 100 epochs...
+Starting training for 100 epochs...
+Parameter Offload - Persistent parameters statistics: param_count = 280, numel = 546712
+{'loss': 1.1326, 'grad_norm': 0.5367214679718018, 'learning_rate': 9.999765563948945e-05, 'epoch': 0.0}
+{'loss': 0.8732, 'grad_norm': 0.2747034728527069, 'learning_rate': 9.999505079447774e-05, 'epoch': 0.01}
+{'loss': 0.7636, 'grad_norm': 0.13685482740402222, 'learning_rate': 9.999244594946601e-05, 'epoch': 0.01}
+{'loss': 0.7203, 'grad_norm': 0.07488055527210236, 'learning_rate': 9.998984110445428e-05, 'epoch': 0.01}
+{'loss': 0.7063, 'grad_norm': 0.08973603695631027, 'learning_rate': 9.998723625944257e-05, 'epoch': 0.01}
+{'loss': 0.704, 'grad_norm': 0.06567749381065369, 'learning_rate': 9.998463141443086e-05, 'epoch': 0.02}
+{'loss': 0.689, 'grad_norm': 0.06692720204591751, 'learning_rate': 9.998202656941913e-05, 'epoch': 0.02}
+{'loss': 0.6961, 'grad_norm': 0.022887565195560455, 'learning_rate': 9.99794217244074e-05, 'epoch': 0.02}
+{'loss': 0.6963, 'grad_norm': 0.058499082922935486, 'learning_rate': 9.997681687939569e-05, 'epoch': 0.02}
+{'loss': 0.6915, 'grad_norm': 0.01977045089006424, 'learning_rate': 9.997421203438396e-05, 'epoch': 0.03}
+{'loss': 0.6726, 'grad_norm': 0.05269978940486908, 'learning_rate': 9.997160718937224e-05, 'epoch': 0.03}
+{'loss': 0.6755, 'grad_norm': 0.030627815052866936, 'learning_rate': 9.996900234436052e-05, 'epoch': 0.03}
+{'loss': 0.7001, 'grad_norm': 0.03436332941055298, 'learning_rate': 9.99663974993488e-05, 'epoch': 0.03}
+{'loss': 0.6881, 'grad_norm': 0.026956936344504356, 'learning_rate': 9.996379265433707e-05, 'epoch': 0.04}
+{'loss': 0.6871, 'grad_norm': 0.06373795866966248, 'learning_rate': 9.996118780932536e-05, 'epoch': 0.04}
+{'loss': 0.6806, 'grad_norm': 0.054220784455537796, 'learning_rate': 9.995858296431363e-05, 'epoch': 0.04}
