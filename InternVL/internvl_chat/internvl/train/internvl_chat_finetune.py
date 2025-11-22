@@ -106,6 +106,70 @@ class InternVLTrainer(Trainer):
                 torch.cuda.empty_cache()
         return result
 
+    def _save_checkpoint(self, model, trial, metrics=None):
+        """
+        Override _save_checkpoint to handle directory rename errors gracefully.
+        This fixes the issue where tmp-checkpoint-{step} directory may be deleted
+        or missing during rename operation in distributed training.
+        """
+        import shutil
+        from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
+        
+        # Get the staging and final output directories before calling parent method
+        checkpoint_folder = f"{PREFIX_CHECKPOINT_DIR}-{self.state.global_step}"
+        run_dir = self._get_output_dir(trial=trial)
+        staging_output_dir = os.path.join(run_dir, f"tmp-{checkpoint_folder}")
+        output_dir = os.path.join(run_dir, checkpoint_folder)
+        
+        # Call parent method to save checkpoint
+        try:
+            super()._save_checkpoint(model, trial, metrics=metrics)
+        except FileNotFoundError as e:
+            # Check if the error is about the staging directory not existing during rename
+            if "tmp-checkpoint" in str(e) or staging_output_dir in str(e):
+                # Check if the final checkpoint directory exists (may have been renamed by another process)
+                if os.path.exists(output_dir):
+                    # Checkpoint was successfully saved, just the rename failed
+                    # This can happen in distributed training when another process already renamed it
+                    logger.warning(f"Checkpoint save completed but rename failed. "
+                                 f"Checkpoint exists at {output_dir}. "
+                                 f"Original error: {e}")
+                    # Don't re-raise, checkpoint is actually saved
+                    return
+                else:
+                    # Checkpoint save actually failed
+                    logger.error(f"Checkpoint save failed: {e}")
+                    raise
+            else:
+                # Some other FileNotFoundError, re-raise it
+                raise
+        
+        # After parent method returns, verify the checkpoint was saved correctly
+        # If staging directory still exists, try to rename it
+        if os.path.exists(staging_output_dir) and not os.path.exists(output_dir):
+            # Parent's rename may have failed silently, try our own rename
+            try:
+                # Ensure all processes are synchronized before rename
+                if dist.is_initialized():
+                    dist.barrier()
+                os.rename(staging_output_dir, output_dir)
+                logger.info(f"Successfully renamed checkpoint from {staging_output_dir} to {output_dir}")
+            except (FileNotFoundError, OSError) as e:
+                # If staging directory doesn't exist, check if final directory exists
+                if os.path.exists(output_dir):
+                    # Checkpoint was already renamed (possibly by another process)
+                    logger.warning(f"Checkpoint directory {output_dir} already exists. "
+                                 f"Staging directory {staging_output_dir} was missing. "
+                                 f"This may indicate a race condition in distributed training.")
+                else:
+                    # Try using shutil.move as fallback (works across filesystems)
+                    try:
+                        shutil.move(staging_output_dir, output_dir)
+                        logger.info(f"Successfully moved checkpoint from {staging_output_dir} to {output_dir} using shutil.move")
+                    except Exception as e2:
+                        logger.error(f"Failed to rename/move checkpoint directory: {e2}")
+                        # Don't raise, checkpoint files may still be saved
+
 ###########
 
 ##### mhu added code 1108 #####

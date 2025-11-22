@@ -218,18 +218,48 @@ class QwenSFTTrainer(Trainer):
     #
     #     return super().training_step(model, inputs)
 
-### mh 11/15/2025: FBCF loss functions
+### mh 11/15/2025: FBCF loss functions 
     def _background_uniform_loss(self, logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
+        """
+        Compute KL divergence between model output and uniform distribution.
+        Memory-optimized version: computes KL efficiently with minimal intermediate storage.
+        
+        KL(p||u) = sum_i p_i * log(p_i / u_i) = sum_i p_i * log(p_i) - sum_i p_i * log(u_i)
+                 = sum_i p_i * log(p_i) - log(1/vocab_size) * sum_i p_i
+                 = sum_i p_i * log(p_i) + log(vocab_size)
+        
+        Note: We still need to compute probs for KL, but we sum immediately to reduce memory.
+        """
         vocab_size = logits.size(-1)
-        label_mask = (labels != IGNORE_INDEX).to(logits.device, logits.dtype)
-        if label_mask.sum() == 0:
+        # Use bool mask for better memory efficiency
+        label_mask = (labels != IGNORE_INDEX).to(logits.device)
+        mask_sum = label_mask.sum()
+        if mask_sum == 0:
             return logits.new_zeros(())
+        
+        uniform_log_prob = math.log(vocab_size)
+        
+        # Compute log_softmax (more stable than softmax then log)
         log_probs = F.log_softmax(logits, dim=-1)
-        probs = log_probs.exp()
-        uniform_log_prob = -math.log(vocab_size)
-        kl = (probs * (log_probs - uniform_log_prob)).sum(dim=-1)
-        kl = kl * label_mask
-        return kl.sum() / label_mask.sum()
+        
+        # Compute KL divergence per token: sum(exp(log_probs) * log_probs) + uniform_log_prob
+        # We compute probs but immediately reduce dimension by summing over vocab
+        # This reduces memory compared to keeping full probs tensor around
+        probs = log_probs.exp()  # [batch_size, seq_len, vocab_size]
+        # Sum over vocab dimension immediately: [batch_size, seq_len]
+        kl_per_token = (probs * log_probs).sum(dim=-1) + uniform_log_prob
+        
+        # Apply mask and compute mean (avoid recomputing mask_sum)
+        kl = kl_per_token * label_mask.to(kl_per_token.dtype)
+        kl_sum = kl.sum()
+        # Convert mask_sum to same dtype as kl_per_token for division
+        mask_sum_float = mask_sum.to(kl_per_token.dtype)
+        
+        # Note: del doesn't immediately free GPU memory, but helps with reference counting
+        # The tensors will be freed when out of scope anyway
+        del log_probs, probs, kl_per_token, kl
+        
+        return kl_sum / mask_sum
 
     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None, **kwargs):
         if not getattr(self.args, "enable_fbcf", False):
@@ -349,7 +379,7 @@ class QwenSFTTrainer(Trainer):
             use_bg = torch.tensor(view_type == 2, device=device).expand(batch_size)
             
             # Debug: Log sampling distribution
-            print(f"📊 Sampling (step {step}): {view_name} for all {batch_size} samples (rand={rand_value:.3f})", flush=True)
+            # print(f"📊 Sampling (step {step}): {view_name} for all {batch_size} samples (rand={rand_value:.3f})", flush=True)
             
             total_loss = None
             log_metrics = {}
@@ -406,7 +436,13 @@ class QwenSFTTrainer(Trainer):
                     # For background KL loss, we need logits, not just loss
                     # In DeepSpeed ZeRO-3, when labels are provided, the model may only return loss
                     # So we need to remove labels temporarily to get logits, then compute KL loss manually
+                    # Memory optimization: disable unnecessary outputs to reduce memory usage
                     model_inputs_for_logits = {k: v for k, v in model_inputs.items() if k != "labels"}
+                    model_inputs_for_logits["output_attentions"] = False
+                    model_inputs_for_logits["output_hidden_states"] = False
+                    
+                    # Forward pass to get logits
+                    # Note: Keep autocast enabled to match training precision (bf16/fp16)
                     outputs = model(**model_inputs_for_logits)
                     
                     # Get logits from outputs
@@ -415,8 +451,19 @@ class QwenSFTTrainer(Trainer):
                         raise ValueError("Cannot get logits from model outputs for background KL loss computation. "
                                        "The model must return logits when labels are not provided.")
                     
-                    # Compute background KL loss
+                    # Compute background KL loss (memory-optimized)
                     loss_bg = self._background_uniform_loss(bg_logits, labels)
+                    
+                    # Immediately free logits to reduce memory pressure
+                    # Note: In DeepSpeed training, memory is managed automatically, so manual
+                    # cache clearing may not be necessary and can cause performance overhead
+                    del bg_logits, outputs
+                    # Only clear cache if not using DeepSpeed (to avoid performance penalty)
+                    # In DeepSpeed, the framework manages memory more efficiently
+                    use_deepspeed = hasattr(self.args, 'deepspeed') and self.args.deepspeed is not None
+                    if torch.cuda.is_available() and not use_deepspeed:
+                        torch.cuda.empty_cache()  # Clear GPU cache (only for non-DeepSpeed)
+                    
                     total_loss = self.args.fbcf_lambda * self.args.bg_loss_weight * loss_bg
                     log_metrics = {"loss_bg": loss_bg.detach()}
             

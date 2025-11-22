@@ -92,76 +92,105 @@ class MAEVideoDataset(Dataset):
             pixel_values_videos: [N, patch_pixel_dim] - flattened video patches
             video_grid_thw: [num_videos, 3] - (T, H, W) for each video
         """
-        sample = self.data[idx]
+        # Skip logic: if current sample fails, directly try next sample without retry, 限制跳过的数量：最多连续跳过 100 个样本，如果都失败才报错
+        max_skip = 100  # Maximum number of samples to skip before giving up
+        for skip_count in range(max_skip):
+            actual_idx = None
+            sample = None
+            video_file = None
+            try:
+                # Use modulo to wrap around if we go past the end of the dataset
+                actual_idx = (idx + skip_count) % len(self.data)
+                sample = self.data[actual_idx]
+                
+                # Extract video path
+                if isinstance(sample, dict):
+                    if 'video' in sample:
+                        video_file = sample['video']
+                    elif 'video_path' in sample:
+                        video_file = sample['video_path']
+                    elif 'image' in sample:  # fallback for image data
+                        video_file = sample['image']
+                    else:
+                        raise ValueError(f"Sample {actual_idx} does not contain 'video' or 'video_path' key")
+                else:
+                    video_file = sample
+                
+                # Resolve video path
+                if not os.path.isabs(video_file):
+                    # If video_base_path is provided, use it as base path
+                    if self.video_base_path:
+                        video_file = os.path.join(self.video_base_path, video_file)
+                    else:
+                        # Otherwise, try relative to data file directory
+                        data_file_path = self.data_path[0] if isinstance(self.data_path, list) else self.data_path
+                        video_file = os.path.join(os.path.dirname(data_file_path), video_file)
+                
+                if not os.path.exists(video_file) and not video_file.startswith("http"):
+                    raise FileNotFoundError(f"Video file not found: {video_file}")
+                
+                # Load video using processor
+                video_input, video_kwargs = get_video_info(
+                    video_file, 
+                    self.video_min_pixels, 
+                    self.video_max_pixels, 
+                    self.video_resized_width, 
+                    self.video_resized_height, 
+                    self.fps, 
+                    self.nframes
+                )
+                
+                # Process video to get patches
+                # Qwen2-VL processor may require text input, so we pass empty text for MAE
+                # MAE is self-supervised and only needs video data (no text labels)
+                try:
+                    # Try without text first (some processors support this)
+                    inputs = self.processor(
+                        videos=[video_input],
+                        padding=False,
+                        do_resize=False,
+                        return_tensors='pt',
+                        **video_kwargs
+                    )
+                except (TypeError, ValueError) as e:
+                    # If processor requires text, pass empty string
+                    inputs = self.processor(
+                        text=[""],  # Empty text for MAE (no text labels needed)
+                        videos=[video_input],
+                        padding=False,
+                        do_resize=False,
+                        return_tensors='pt',
+                        **video_kwargs
+                    )
+                
+                # Extract pixel_values_videos and video_grid_thw
+                pixel_values_videos = inputs['pixel_values_videos']  # [N, patch_pixel_dim]
+                video_grid_thw = inputs['video_grid_thw']  # [num_videos, 3] where num_videos=1
+                
+                return {
+                    'pixel_values_videos': pixel_values_videos.squeeze(0),  # [N, patch_pixel_dim]
+                    'video_grid_thw': video_grid_thw.squeeze(0),  # [1, 3] -> [3]
+                }
+                
+            except Exception as e:
+                # Log the error and directly skip to next sample (no retry)
+                video_file_info = 'unknown'
+                if sample is not None:
+                    if isinstance(sample, dict):
+                        video_file_info = sample.get('video', sample.get('video_path', 'unknown'))
+                    else:
+                        video_file_info = str(sample)[:100]
+                elif video_file is not None:
+                    video_file_info = str(video_file)[:100]
+                    
+                error_msg = str(e)[:200]
+                print(f"⚠️  Warning: Skipping sample {actual_idx if actual_idx is not None else idx} (video: {video_file_info}). Error: {error_msg}")
+                
+                # Continue to next sample immediately (no retry)
+                continue
         
-        # Extract video path
-        if isinstance(sample, dict):
-            if 'video' in sample:
-                video_file = sample['video']
-            elif 'video_path' in sample:
-                video_file = sample['video_path']
-            elif 'image' in sample:  # fallback for image data
-                video_file = sample['image']
-            else:
-                raise ValueError(f"Sample {idx} does not contain 'video' or 'video_path' key")
-        else:
-            video_file = sample
-        
-        # Resolve video path
-        if not os.path.isabs(video_file):
-            # If video_base_path is provided, use it as base path
-            if self.video_base_path:
-                video_file = os.path.join(self.video_base_path, video_file)
-            else:
-                # Otherwise, try relative to data file directory
-                data_file_path = self.data_path[0] if isinstance(self.data_path, list) else self.data_path
-                video_file = os.path.join(os.path.dirname(data_file_path), video_file)
-        
-        if not os.path.exists(video_file) and not video_file.startswith("http"):
-            raise FileNotFoundError(f"Video file not found: {video_file}")
-        
-        # Load video using processor
-        video_input, video_kwargs = get_video_info(
-            video_file, 
-            self.video_min_pixels, 
-            self.video_max_pixels, 
-            self.video_resized_width, 
-            self.video_resized_height, 
-            self.fps, 
-            self.nframes
-        )
-        
-        # Process video to get patches
-        # Qwen2-VL processor may require text input, so we pass empty text for MAE
-        # MAE is self-supervised and only needs video data (no text labels)
-        try:
-            # Try without text first (some processors support this)
-            inputs = self.processor(
-                videos=[video_input],
-                padding=False,
-                do_resize=False,
-                return_tensors='pt',
-                **video_kwargs
-            )
-        except (TypeError, ValueError) as e:
-            # If processor requires text, pass empty string
-            inputs = self.processor(
-                text=[""],  # Empty text for MAE (no text labels needed)
-                videos=[video_input],
-                padding=False,
-                do_resize=False,
-                return_tensors='pt',
-                **video_kwargs
-            )
-        
-        # Extract pixel_values_videos and video_grid_thw
-        pixel_values_videos = inputs['pixel_values_videos']  # [N, patch_pixel_dim]
-        video_grid_thw = inputs['video_grid_thw']  # [num_videos, 3] where num_videos=1
-        
-        return {
-            'pixel_values_videos': pixel_values_videos.squeeze(0),  # [N, patch_pixel_dim]
-            'video_grid_thw': video_grid_thw.squeeze(0),  # [1, 3] -> [3]
-        }
+        # If we've skipped max_skip samples without success, raise an error
+        raise RuntimeError(f"Failed to load any valid sample after skipping {max_skip} samples starting from index {idx}")
 
 
 class DataCollatorForMAEDataset(object):

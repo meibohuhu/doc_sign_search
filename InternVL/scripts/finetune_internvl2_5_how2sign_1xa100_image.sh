@@ -1,10 +1,10 @@
 #!/bin/bash -l
 # NOTE the -l flag!
 #
-# InternVL2.5-2B How2Sign Fine-Tuning on 2×A100 GPUs
+# InternVL2.5-2B How2Sign Fine-Tuning on 1×A100 GPUs
 # Single-node recipe using DeepSpeed ZeRO-2 by default, with optional ZeRO-3 + CPU offload
 # Memory guidance:
-#   - Default (ZeRO-2): 8k seq / 16k packed / 96 frames works on 2×A100 40 GB.
+#   - Default (ZeRO-2): 8k seq / 16k packed / 96 frames works on 1×A100 40 GB.
 #   - Enable ZeRO-3 by exporting USE_ZERO_STAGE3=1 to uplift defaults to 12k seq / 20k packed / 128 frames.
 #   - You can still override any MAX_* env if you need tighter or looser bounds.
 
@@ -14,8 +14,8 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --time=00:08:00
-#SBATCH --gpus-per-node=a100:2
+#SBATCH --time=00:15:00
+#SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
 #SBATCH --mem=64G
 
@@ -71,11 +71,11 @@ cd /home/mh2803/projects/sign_language_llm/InternVL
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100_1"
-META_PATH="/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_under10s_meta.json"
+OUTPUT_DIR="/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_1xa100_image"
+META_PATH="/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json"
 IMAGE_ROOT="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/"
 
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-8}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-4}
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
 NUM_DEVICES=${NUM_DEVICES:-2}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
@@ -199,14 +199,14 @@ torchrun --nproc_per_node=$NUM_DEVICES --master_port=$MASTER_PORT \
     --freeze_llm True \
     --freeze_backbone True \
     --freeze_mlp False \
-    --unfreeze_vit_layers 4 \
-    --use_llm_lora 8 \
+    --unfreeze_vit_layers 16\
+    --use_llm_lora 16 \
     --use_backbone_lora 0 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
-    --max_steps 20000 \
+    --max_steps 25 \
     --save_strategy steps \
-    --save_steps 4000 \
+    --save_steps 10 \
     --save_total_limit 2 \
     --logging_steps 1 \
     --logging_first_step True \

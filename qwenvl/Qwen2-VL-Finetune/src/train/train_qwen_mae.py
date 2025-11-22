@@ -242,21 +242,35 @@ def train_mae(args):
     else:
         checkpoint = get_last_checkpoint(training_args.output_dir) if os.path.isdir(training_args.output_dir) else None
     
-    # Train
+    # Train with error handling
     print(f"Starting training for {args.num_epochs} epochs...")
-    train_result = trainer.train(resume_from_checkpoint=checkpoint)
-    
-    # Save final model
-    print("Saving final model...")
-    trainer.save_model()
-    trainer.save_state()
-    
-    # Save final encoder for downstream tasks (on main process only)
-    if trainer.is_world_process_zero():
-        print("Saving final encoder...")
-        encoder_path = Path(args.output_dir) / 'mae_encoder_final.pth'
-        torch.save(model.visual.state_dict(), encoder_path)
-        print(f'Training completed! Encoder saved to {encoder_path}')
+    try:
+        train_result = trainer.train(resume_from_checkpoint=checkpoint)
+        
+        # Save final model
+        print("Saving final model...")
+        trainer.save_model()
+        trainer.save_state()
+        
+        # Save final encoder for downstream tasks (on main process only)
+        if trainer.is_world_process_zero():
+            print("Saving final encoder...")
+            encoder_path = Path(args.output_dir) / 'mae_encoder_final.pth'
+            torch.save(model.visual.state_dict(), encoder_path)
+            print(f'Training completed! Encoder saved to {encoder_path}')
+    except KeyboardInterrupt:
+        print("\n⚠️  Training interrupted by user.")
+        if trainer.is_world_process_zero():
+            print(f"Training stopped at step {trainer.state.global_step}")
+        raise
+    except Exception as e:
+        print(f"\n❌ Training failed with error: {e}")
+        if trainer.is_world_process_zero():
+            print(f"Training stopped at step {trainer.state.global_step}")
+            import traceback
+            print("Full traceback:")
+            traceback.print_exc()
+        raise
 
 
 if __name__ == '__main__':

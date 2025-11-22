@@ -139,6 +139,42 @@ class PackedDataset(IterableDataset):
         if self.allow_empty_data:
             logger.warning('allow_empty_data is enabled, note that empty data may be generated!')
 
+
+####### mh 11/19/2025: add estimated length for epoch calculation #######
+        # Calculate estimated length for epoch calculation
+        # PackedDataset packs multiple samples into one, so the length is approximately
+        # the original dataset length divided by average images per packed sample
+        # We estimate based on num_images_expected: each packed sample targets num_images_expected images
+        # Assuming each original sample has ~1-2 images on average (conservative estimate)
+        self._estimated_length = None
+        if len(self.datasets) > 0:
+            total_orig_length = sum(len(ds) for ds in self.datasets_orig if hasattr(ds, '__len__'))
+            if total_orig_length > 0:
+                # Estimate: each packed sample contains roughly num_images_expected images
+                # If each original sample has ~1 image, then packed length ≈ original_length / num_images_expected
+                # We use a conservative estimate to avoid overestimating epoch progress
+                # Using num_images_expected as divisor gives a reasonable estimate
+                self._estimated_length = max(1, total_orig_length // max(1, self.num_images_expected))
+                if get_rank() == 0:
+                    logger.info(f'PackedDataset estimated length: {self._estimated_length} (original: {total_orig_length}, num_images_expected: {self.num_images_expected})')
+                    logger.info(f'  Note: This is an estimate for epoch calculation. Actual packed samples may vary.')
+
+    def __len__(self):
+        """
+        Return estimated length for epoch calculation.
+        PackedDataset is an IterableDataset, so this is an approximation.
+        The estimate assumes each original sample has ~1 image on average,
+        so packed length ≈ original_length / num_images_expected.
+        """
+        if self._estimated_length is not None:
+            return self._estimated_length
+        # Fallback: use original dataset length if we can't estimate
+        # This ensures Trainer can calculate epoch progress, even if not perfectly accurate
+        total_orig_length = sum(len(ds) for ds in self.datasets_orig if hasattr(ds, '__len__'))
+        if total_orig_length > 0:
+            return max(1, total_orig_length // max(1, self.num_images_expected))
+        return 1000000  # Large fallback value
+
     def load_state_dict(self, state_dict, custom_infos=None):
 
         self.worker_custom_infos = custom_infos

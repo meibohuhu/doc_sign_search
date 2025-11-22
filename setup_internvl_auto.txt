@@ -6,17 +6,6 @@ AWS_ACCESS_KEY_ID="AKIAUM3V5HXQFKA5FW5M"
 AWS_SECRET_ACCESS_KEY="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"
 HUGGINGFACE_TOKEN="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"
 
-
-# 项目路径
-INTERNVL_DIR="/code"
-REQUIREMENTS_FILE="/code/sign_language_llm/requirements_internvl.txt"
-GITHUB_REPO="git@github.com:meibohuhu/sign_language_llm.git"  # InternVL 仓库地址
-
-# 视频下载配置（可选，可通过环境变量覆盖）
-VIDEO_DATASET_NAME="${VIDEO_DATASET_NAME:-PhoenixHu/sign_mllm_how_224}"  # Hugging Face 数据集名称
-VIDEO_OUTPUT_DIR="${VIDEO_OUTPUT_DIR:-/mnt/localssd/sign_mllm}"  # 视频输出目录
-FORCE_DOWNLOAD_VIDEOS="${FORCE_DOWNLOAD_VIDEOS:-0}"  # 是否强制重新下载（1=是，0=否）
-
 # setup anaconda ###############################################################################
 echo "正在下载Anaconda..."
 wget https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
@@ -28,7 +17,6 @@ bash Anaconda3-2025.06-0-Linux-x86_64.sh -b -p $HOME/anaconda3
 echo "正在初始化conda..."
 # 重新加载bashrc以使conda可用
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
-
 
 echo "验证conda安装..."
 conda --version
@@ -81,15 +69,15 @@ mkdir -p /code
 cd /code
 
 # 检查仓库是否已存在
-if [ -d "${INTERNVL_DIR}/.git" ]; then
-    echo "仓库已存在于 ${INTERNVL_DIR}，跳过克隆"
-    cd ${INTERNVL_DIR}
+if [ -d "/code/sign_language_llm/.git" ]; then
+    echo "仓库已存在于 /code/sign_language_llm，跳过克隆"
+    cd /code/sign_language_llm
     echo "正在更新仓库..."
     git pull || echo "更新失败，请手动检查"
 else
-    echo "正在从 ${GITHUB_REPO} 克隆仓库..."
-    git clone ${GITHUB_REPO} ${INTERNVL_DIR}
-    cd ${INTERNVL_DIR}
+    echo "正在从 git@github.com:meibohuhu/sign_language_llm.git 克隆仓库..."
+    git clone git@github.com:meibohuhu/sign_language_llm.git
+    cd /code/sign_language_llm
 fi
 
 # setup internvl conda environment ###############################################################################
@@ -98,43 +86,29 @@ $HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.
 $HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 
 echo "正在创建internvl环境..."
-CONDA_ENV_NAME="internvl"
-
 # 检查环境是否已存在
-if conda env list | grep -q "^${CONDA_ENV_NAME} "; then
-    echo "环境 ${CONDA_ENV_NAME} 已存在，跳过创建"
+if conda env list | grep -q "^internvl "; then
+    echo "环境 internvl 已存在，跳过创建"
 else
-    # 创建环境，使用Python 3.10
-    $HOME/anaconda3/bin/conda create -n ${CONDA_ENV_NAME} python=3.10 -y
+    echo "正在创建新环境 internvl..."
+    $HOME/anaconda3/bin/conda create -n internvl python=3.10 -y
 fi
 
-echo "正在激活internvl环境..."
-# 激活环境
-conda activate ${CONDA_ENV_NAME}
-
-# 确保在项目目录
 echo "正在进入项目目录..."
-cd ${INTERNVL_DIR}
+cd /code/sign_language_llm
 
-# 检查requirements_internvl.txt文件是否存在
-if [ ! -f "${REQUIREMENTS_FILE}" ]; then
-    echo "⚠️  警告: 未找到 检查requirements_internvl.txt 文件"
-    echo "   请确保 ${REQUIREMENTS_FILE} 存在"
-    echo "   如果文件在其他位置，请修改脚本中的 REQUIREMENTS_FILE 变量"
-    exit 1
-fi
+echo "正在激活internvl环境并安装包..."
+# 激活环境并安装包
+conda activate internvl
 
-# 步骤1: 安装构建依赖（flash-attn需要）
+############ 安装包
 echo "正在安装构建依赖（psutil, packaging, ninja）..."
 pip install psutil packaging ninja
 
-# 步骤2: 安装PyTorch with CUDA support（必须在flash-attn之前）
 echo "正在安装PyTorch with CUDA 12.1..."
 pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
 
-# 步骤3: 安装flash-attn
 echo "正在安装flash-attn..."
-echo "  注意: 这可能需要10-15分钟进行编译，请耐心等待..."
 if pip install flash-attn==2.5.7 --no-build-isolation; then
     echo "✅ flash-attn 安装成功"
 else
@@ -142,27 +116,23 @@ else
     pip install flash-attn==2.5.7 --no-build-isolation --no-deps || echo "⚠️  flash-attn 安装失败，但可以继续（某些功能可能较慢）"
 fi
 
-# 步骤4: 安装其他依赖
 echo "正在使用requirements_internvl.txt安装其他依赖..."
-pip install -r "${REQUIREMENTS_FILE}"
+pip install -r /code/sign_language_llm/requirements_internvl.txt
 
-# 清理pip缓存
-echo "正在清理pip缓存..."
 pip cache purge
+
 
 # setup huggingface ###############################################################################
 echo "正在登录Huggingface..."
-if [ -n "$HUGGINGFACE_TOKEN" ]; then
-    huggingface-cli login --token "$HUGGINGFACE_TOKEN"
-    export HF_TOKEN="$HUGGINGFACE_TOKEN"
-    export HUGGINGFACE_TOKEN="$HUGGINGFACE_TOKEN"
-else
-    echo "⚠️  警告: HUGGINGFACE_TOKEN 未设置，跳过HuggingFace登录"
-fi
+# 使用正确的登录方式
+huggingface-cli login --token "$HUGGINGFACE_TOKEN"
 
 # download and extract videos ###############################################################################
 echo "正在下载和解压视频..."
-DOWNLOAD_SCRIPT="${INTERNVL_DIR}/download_and_extract_videos_from_hf.py"
+DOWNLOAD_SCRIPT="/code/sign_language_llm/download_and_extract_videos_from_hf.py"
+VIDEO_DATASET_NAME="${VIDEO_DATASET_NAME:-PhoenixHu/sign_mllm_how_224}"
+VIDEO_OUTPUT_DIR="${VIDEO_OUTPUT_DIR:-/mnt/localssd/sign_mllm}"
+FORCE_DOWNLOAD_VIDEOS="${FORCE_DOWNLOAD_VIDEOS:-0}"
 
 # 检查下载脚本是否存在
 if [ ! -f "$DOWNLOAD_SCRIPT" ]; then
@@ -207,57 +177,23 @@ fi
 
 # 设置环境变量
 echo "正在设置环境变量..."
-export PYTHONPATH="${INTERNVL_DIR}:${PYTHONPATH:-}"
+export PYTHONPATH="/code/sign_language_llm:${PYTHONPATH:-}"
 export TOKENIZERS_PARALLELISM=false
 export OMP_NUM_THREADS=8
 
 # 添加到bashrc以便永久生效
-if ! grep -q "export PYTHONPATH.*/code" ~/.bashrc 2>/dev/null; then
+if ! grep -q "export PYTHONPATH.*/code/sign_language_llm" ~/.bashrc 2>/dev/null; then
     echo "" >> ~/.bashrc
     echo "# InternVL environment" >> ~/.bashrc
-    echo "export PYTHONPATH=\"${INTERNVL_DIR}:\${PYTHONPATH:-}\"" >> ~/.bashrc
+    echo "export PYTHONPATH=\"/code/sign_language_llm:\${PYTHONPATH:-}\"" >> ~/.bashrc
     echo "export TOKENIZERS_PARALLELISM=false" >> ~/.bashrc
 fi
 
-# 验证安装 ###############################################################################
-echo ""
-echo "正在验证安装..."
-python -c "import torch; print(f'PyTorch版本: {torch.__version__}')"
-python -c "import torch; print(f'CUDA可用: {torch.cuda.is_available()}')"
-if python -c "import torch; exit(0 if torch.cuda.is_available() else 1)" 2>/dev/null; then
-    python -c "import torch; print(f'CUDA版本: {torch.version.cuda}')"
-    python -c "import torch; print(f'GPU数量: {torch.cuda.device_count()}')"
-fi
+echo "设置完成！"
 
-python -c "import transformers; print(f'Transformers版本: {transformers.__version__}')"
-python -c "import deepspeed; print(f'DeepSpeed版本: {deepspeed.__version__}')"
-python -c "import peft; print(f'PEFT版本: {peft.__version__}')"
+# enable conda env  ############################################################################### 
 
-# 检查关键包
-if python -c "import flash_attn" 2>/dev/null; then
-    echo "✅ flash-attn 安装成功"
-else
-    echo "⚠️  警告: flash-attn 导入失败（可能需要编译，这可能需要一些时间）"
-fi
-
-# enable conda env ############################################################################### 
-echo ""
-echo "正在永久启用conda..."
 # 永久初始化conda并激活base环境
+echo "正在永久启用conda..."
 $HOME/anaconda3/bin/conda init bash
-
-echo ""
-echo "=========================================="
-echo "✅ InternVL 环境设置完成！"
-echo "=========================================="
-echo "环境名称: ${CONDA_ENV_NAME}"
-echo "项目路径: ${INTERNVL_DIR}"
-echo ""
-echo "使用方法:"
-echo "  1. 激活环境: conda activate ${CONDA_ENV_NAME}"
-echo "  2. 进入项目: cd ${INTERNVL_DIR}"
-echo "  3. 运行训练脚本"
-echo ""
-echo "⚠️  注意: 请重新打开终端或运行 'source ~/.bashrc' 以使conda初始化生效"
-echo "=========================================="
-
+exec bash
