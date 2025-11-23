@@ -20,7 +20,7 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"0,1"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"2,3"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -28,7 +28,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_18fps"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_18fps_12unfreeze"
 META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
 IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
@@ -120,9 +120,9 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --down_sample_ratio 0.5 \
     --pad2square False \
     --freeze_llm True \
-    --freeze_backbone False \
+    --freeze_backbone True \
     --freeze_mlp False \
-    --unfreeze_vit_layers 0 \
+    --unfreeze_vit_layers 12 \
     --use_llm_lora 16 \
     --use_backbone_lora 0 \
     --bf16 True \
