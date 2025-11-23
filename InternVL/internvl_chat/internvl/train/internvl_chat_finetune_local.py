@@ -390,14 +390,14 @@ def _load_video_locally(
                 unique_indices.append(idx)
         frame_indices = unique_indices
 
-        # Debug info: show video stats and sampling info
-        if not dist.is_initialized() or dist.get_rank() == 0:
-            worker_info = get_worker_info()
-            if worker_info is None or worker_info.id == 0:
-                print(f'[Video Sampling] path={os.path.basename(video_path)}, '
-                      f'total_frames={total_frames}, vlen={vlen}, '
-                      f'min={min_num_frames}, max={max_num_frames}, '
-                      f'sample={sample}, selected={len(frame_indices)} frames')
+        # # Debug info: show video stats and sampling info
+        # if not dist.is_initialized() or dist.get_rank() == 0:
+        #     worker_info = get_worker_info()
+        #     if worker_info is None or worker_info.id == 0:
+        #         print(f'[Video Sampling] path={os.path.basename(video_path)}, '
+        #               f'total_frames={total_frames}, vlen={vlen}, '
+        #               f'min={min_num_frames}, max={max_num_frames}, '
+        #               f'sample={sample}, selected={len(frame_indices)} frames')
         
         frames = vr.get_batch(frame_indices).asnumpy()  # (T, H, W, C), np.uint8
         images = [Image.fromarray(frames[i]) for i in range(frames.shape[0])]

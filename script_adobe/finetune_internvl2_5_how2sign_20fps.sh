@@ -20,7 +20,7 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"4,5,6,7"}
+GPU_IDS=${GPU_IDS:-"6,7"}
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -128,7 +128,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --use_backbone_lora 0 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
-    --max_steps 8000 \
+    --max_steps 5000 \
     --save_strategy steps \
     --save_steps 1500 \
     --logging_steps 10 \

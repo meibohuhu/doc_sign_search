@@ -41,7 +41,7 @@ NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-128}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-128}
 
 # Video frame sampling method
-SAMPLING_METHOD='fps12.0'
+SAMPLING_METHOD='fps15.0'
 
 echo "🚀 Starting InternVL2.5-2B How2Sign Training on 2×A6000"
 echo "======================================================"
@@ -115,7 +115,6 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --use_backbone_lora 0 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
-    --max_steps 8000 \
     --save_strategy epoch \
     --save_total_limit 2 \
     --logging_steps 10 \

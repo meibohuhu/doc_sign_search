@@ -20,7 +20,7 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"0,1"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"4,5"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -28,7 +28,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_18fps"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_16fps"
 META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
 IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
@@ -54,7 +54,7 @@ NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-160}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
 
 # Video frame sampling method
-SAMPLING_METHOD='fps18.0'
+SAMPLING_METHOD='fps16.0'
 
 echo "🚀 Starting InternVL2.5-2B How2Sign Training on 4*A100"
 echo "======================================================"
