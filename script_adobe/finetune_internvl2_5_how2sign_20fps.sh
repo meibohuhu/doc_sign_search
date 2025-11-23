@@ -28,7 +28,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/sensi-fs-3/users/jiamianw/checkpoint/doc_sign_search/finetune_internvl2_5_how2sign_18fps"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_20fps"
 META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
 IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
