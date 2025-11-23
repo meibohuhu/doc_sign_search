@@ -43,10 +43,15 @@ def init_dist(launcher, backend='nccl', **kwargs):
 
 
 def _init_dist_pytorch(backend, **kwargs):
-    # TODO: use local_rank instead of rank % num_gpus
-    rank = int(os.environ['RANK'])
-    num_gpus = torch.cuda.device_count()
-    torch.cuda.set_device(rank % num_gpus)
+    #### mhu 1119: use deepspeed.init_distributed instead of dist.init_process_group
+    # Use LOCAL_RANK if available (set by torchrun), otherwise use RANK % num_gpus
+    if 'LOCAL_RANK' in os.environ:
+        local_rank = int(os.environ['LOCAL_RANK'])
+    else:
+        rank = int(os.environ.get('RANK', 0))
+        num_gpus = torch.cuda.device_count()
+        local_rank = rank % num_gpus
+    torch.cuda.set_device(local_rank)
     # dist.init_process_group(backend=backend, **kwargs)
     deepspeed.init_distributed(dist_backend=backend)
 

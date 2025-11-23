@@ -69,15 +69,15 @@ mkdir -p /code
 cd /code
 
 # 检查仓库是否已存在
-if [ -d "/code/sign_language_llm/.git" ]; then
-    echo "仓库已存在于 /code/sign_language_llm，跳过克隆"
-    cd /code/sign_language_llm
+if [ -d "/code/doc_sign_search/.git" ]; then
+    echo "仓库已存在于 /code/doc_sign_search"
+    cd /code/doc_sign_search
     echo "正在更新仓库..."
     git pull || echo "更新失败，请手动检查"
 else
-    echo "正在从 git@github.com:meibohuhu/sign_language_llm.git 克隆仓库..."
-    git clone git@github.com:meibohuhu/sign_language_llm.git
-    cd /code/sign_language_llm
+    echo "正在从 git@github.com:meibohuhu/doc_sign_search.git 克隆仓库..."
+    git clone git@github.com:meibohuhu/doc_sign_search.git
+    cd /code/doc_sign_search
 fi
 
 # setup qwenvl conda environment ###############################################################################
@@ -95,7 +95,7 @@ else
 fi
 
 echo "正在进入项目目录..."
-cd /code/sign_language_llm
+cd /code/doc_sign_search
 
 echo "正在激活qwenvl环境并安装包..."
 # 激活环境并安装包
@@ -117,7 +117,7 @@ else
 fi
 
 echo "正在使用requirements_qwenvl.txt安装其他依赖..."
-pip install -r /code/sign_language_llm/requirements_qwenvl.txt
+pip install -r /code/doc_sign_search/requirements_qwenvl.txt
 
 pip cache purge
 
@@ -129,7 +129,7 @@ huggingface-cli login --token "$HUGGINGFACE_TOKEN"
 
 # download and extract videos ###############################################################################
 echo "正在下载和解压视频..."
-DOWNLOAD_SCRIPT="/code/sign_language_llm/download_and_extract_videos_from_hf.py"
+DOWNLOAD_SCRIPT="/code/doc_sign_search/download_and_extract_videos_from_hf.py"
 VIDEO_DATASET_NAME="${VIDEO_DATASET_NAME:-PhoenixHu/sign_mllm_how_224}"
 VIDEO_OUTPUT_DIR="${VIDEO_OUTPUT_DIR:-/mnt/localssd/sign_mllm}"
 FORCE_DOWNLOAD_VIDEOS="${FORCE_DOWNLOAD_VIDEOS:-0}"

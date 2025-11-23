@@ -1,0 +1,1235 @@
+[2025-11-22 13:46:31,881] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+[2025-11-22 13:46:31,881] [INFO] [runner.py:630:main] cmd = /home/ztao/anaconda3/envs/internvl/bin/python3.1 -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=27816 --enable_each_rank_log=None --log_level=info internvl_chat/internvl/train/internvl_chat_finetune_local.py --model_name_or_path OpenGVLab/InternVL2_5-2B --output_dir /local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000 --overwrite_output_dir --meta_path /local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json --conv_style internvl2_5 --do_train True --num_train_epochs 3 --per_device_train_batch_size 1 --gradient_accumulation_steps 4 --learning_rate 2e-5 --vision_select_layer -1 --force_image_size 224 --dynamic_image_size False --down_sample_ratio 0.5 --pad2square False --freeze_llm True --freeze_backbone False --freeze_mlp False --unfreeze_vit_layers 0 --use_llm_lora 16 --use_backbone_lora 0 --bf16 True --max_seq_length 12288 --max_steps 8000 --save_strategy epoch --save_total_limit 2 --logging_steps 10 --logging_first_step True --evaluation_strategy no --report_to none --disable_tqdm False --grad_checkpoint True --dataloader_num_workers 4 --dataloader_pin_memory True --remove_unused_columns False --group_by_length False --use_packed_ds True --max_packed_tokens 12288 --max_buffer_size 20 --deepspeed internvl_chat/zero_stage3_config.json --optim adamw_torch --ddp_find_unused_parameters False --num_images_expected 128 --min_num_frame 32 --max_num_frame 128 --sampling_method random_start_every2.0 --warmup_ratio 0.03 --weight_decay 0.01 --lr_scheduler_type cosine --strict_mode False --loss_reduction square --loss_reduction_all_gather True
+[2025-11-22 13:46:34,882] [INFO] [launch.py:162:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2025-11-22 13:46:34,882] [INFO] [launch.py:168:main] nnodes=1, num_local_procs=2, node_rank=0
+[2025-11-22 13:46:34,882] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2025-11-22 13:46:34,882] [INFO] [launch.py:180:main] dist_world_size=2
+[2025-11-22 13:46:34,882] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0,1
+[2025-11-22 13:46:34,883] [INFO] [launch.py:272:main] process 3653367 spawned with command: ['/home/ztao/anaconda3/envs/internvl/bin/python3.1', '-u', 'internvl_chat/internvl/train/internvl_chat_finetune_local.py', '--local_rank=0', '--model_name_or_path', 'OpenGVLab/InternVL2_5-2B', '--output_dir', '/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000', '--overwrite_output_dir', '--meta_path', '/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json', '--conv_style', 'internvl2_5', '--do_train', 'True', '--num_train_epochs', '3', '--per_device_train_batch_size', '1', '--gradient_accumulation_steps', '4', '--learning_rate', '2e-5', '--vision_select_layer', '-1', '--force_image_size', '224', '--dynamic_image_size', 'False', '--down_sample_ratio', '0.5', '--pad2square', 'False', '--freeze_llm', 'True', '--freeze_backbone', 'False', '--freeze_mlp', 'False', '--unfreeze_vit_layers', '0', '--use_llm_lora', '16', '--use_backbone_lora', '0', '--bf16', 'True', '--max_seq_length', '12288', '--max_steps', '8000', '--save_strategy', 'epoch', '--save_total_limit', '2', '--logging_steps', '10', '--logging_first_step', 'True', '--evaluation_strategy', 'no', '--report_to', 'none', '--disable_tqdm', 'False', '--grad_checkpoint', 'True', '--dataloader_num_workers', '4', '--dataloader_pin_memory', 'True', '--remove_unused_columns', 'False', '--group_by_length', 'False', '--use_packed_ds', 'True', '--max_packed_tokens', '12288', '--max_buffer_size', '20', '--deepspeed', 'internvl_chat/zero_stage3_config.json', '--optim', 'adamw_torch', '--ddp_find_unused_parameters', 'False', '--num_images_expected', '128', '--min_num_frame', '32', '--max_num_frame', '128', '--sampling_method', 'random_start_every2.0', '--warmup_ratio', '0.03', '--weight_decay', '0.01', '--lr_scheduler_type', 'cosine', '--strict_mode', 'False', '--loss_reduction', 'square', '--loss_reduction_all_gather', 'True']
+[2025-11-22 13:46:34,883] [INFO] [launch.py:272:main] process 3653368 spawned with command: ['/home/ztao/anaconda3/envs/internvl/bin/python3.1', '-u', 'internvl_chat/internvl/train/internvl_chat_finetune_local.py', '--local_rank=1', '--model_name_or_path', 'OpenGVLab/InternVL2_5-2B', '--output_dir', '/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000', '--overwrite_output_dir', '--meta_path', '/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json', '--conv_style', 'internvl2_5', '--do_train', 'True', '--num_train_epochs', '3', '--per_device_train_batch_size', '1', '--gradient_accumulation_steps', '4', '--learning_rate', '2e-5', '--vision_select_layer', '-1', '--force_image_size', '224', '--dynamic_image_size', 'False', '--down_sample_ratio', '0.5', '--pad2square', 'False', '--freeze_llm', 'True', '--freeze_backbone', 'False', '--freeze_mlp', 'False', '--unfreeze_vit_layers', '0', '--use_llm_lora', '16', '--use_backbone_lora', '0', '--bf16', 'True', '--max_seq_length', '12288', '--max_steps', '8000', '--save_strategy', 'epoch', '--save_total_limit', '2', '--logging_steps', '10', '--logging_first_step', 'True', '--evaluation_strategy', 'no', '--report_to', 'none', '--disable_tqdm', 'False', '--grad_checkpoint', 'True', '--dataloader_num_workers', '4', '--dataloader_pin_memory', 'True', '--remove_unused_columns', 'False', '--group_by_length', 'False', '--use_packed_ds', 'True', '--max_packed_tokens', '12288', '--max_buffer_size', '20', '--deepspeed', 'internvl_chat/zero_stage3_config.json', '--optim', 'adamw_torch', '--ddp_find_unused_parameters', 'False', '--num_images_expected', '128', '--min_num_frame', '32', '--max_num_frame', '128', '--sampling_method', 'random_start_every2.0', '--warmup_ratio', '0.03', '--weight_decay', '0.01', '--lr_scheduler_type', 'cosine', '--strict_mode', 'False', '--loss_reduction', 'square', '--loss_reduction_all_gather', 'True']
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+11/22/2025 13:46:40 - WARNING - __main__ - Process rank: 1, device: cuda:1, n_gpu: 1distributed training: True, 16-bits training: False
+11/22/2025 13:46:40 - WARNING - __main__ - Process rank: 0, device: cuda:0, n_gpu: 1distributed training: True, 16-bits training: False
+11/22/2025 13:46:40 - INFO - __main__ - Training/evaluation parameters TrainingArguments(
+_n_gpu=1,
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+bf16=True,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=4,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=False,
+ddp_timeout=1800,
+debug=[],
+deepspeed=internvl_chat/zero_stage3_config.json,
+disable_tqdm=False,
+dispatch_batches=None,
+do_eval=False,
+do_predict=False,
+do_train=True,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_steps=None,
+evaluation_strategy=no,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=4,
+gradient_checkpointing=False,
+gradient_checkpointing_kwargs=None,
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=False,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=2e-05,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=passive,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000/runs/Nov22_13-46-40_ztao-SCU,
+logging_first_step=True,
+logging_nan_inf_filter=True,
+logging_steps=10,
+logging_strategy=steps,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+max_grad_norm=1.0,
+max_steps=8000,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3.0,
+optim=adamw_torch,
+optim_args=None,
+output_dir=/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=1,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=False,
+report_to=[],
+resume_from_checkpoint=None,
+run_name=/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=500,
+save_strategy=epoch,
+save_total_limit=2,
+seed=42,
+skip_memory_metrics=True,
+split_batches=False,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_mps_device=False,
+warmup_ratio=0.03,
+warmup_steps=0,
+weight_decay=0.01,
+)
+11/22/2025 13:46:40 - INFO - __main__ - Loading Tokenizer: OpenGVLab/InternVL2_5-2B
+[INFO|tokenization_utils_base.py:2027] 2025-11-22 13:46:41,092 >> loading file ./tokenizer.model from cache at /home/ztao/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
+[INFO|tokenization_utils_base.py:2027] 2025-11-22 13:46:41,092 >> loading file added_tokens.json from cache at /home/ztao/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-22 13:46:41,092 >> loading file special_tokens_map.json from cache at /home/ztao/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-22 13:46:41,092 >> loading file tokenizer_config.json from cache at /home/ztao/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-22 13:46:41,092 >> loading file tokenizer.json from cache at None
+[WARNING|logging.py:314] 2025-11-22 13:46:41,247 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[WARNING|logging.py:314] 2025-11-22 13:46:41,253 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Replace INTERNLM2_ATTENTION_CLASSES to support packed training!!
+Replace QWEN2_ATTENTION_CLASSES to support packed training!!
+Replace PHI3_ATTENTION_CLASSES to support packed training!!
+Replace LLAMA_ATTENTION_CLASSES to support packed training!!
+11/22/2025 13:46:41 - INFO - __main__ - petrel_client not installed. Will use local file loading.
+Replace INTERNLM2_ATTENTION_CLASSES to support packed training!!
+Replace QWEN2_ATTENTION_CLASSES to support packed training!!
+Replace PHI3_ATTENTION_CLASSES to support packed training!!
+Replace LLAMA_ATTENTION_CLASSES to support packed training!!
+11/22/2025 13:46:41 - INFO - __main__ - Loading InternVLChatModel...
+[INFO|configuration_utils.py:729] 2025-11-22 13:46:41,415 >> loading configuration file config.json from cache at /home/ztao/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
+[INFO|configuration_utils.py:792] 2025-11-22 13:46:41,419 >> Model config InternVLChatConfig {
+  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
+  "architectures": [
+    "InternVLChatModel"
+  ],
+  "auto_map": {
+    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
+    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
+    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
+  },
+  "downsample_ratio": 0.5,
+  "dynamic_image_size": true,
+  "force_image_size": 448,
+  "hidden_size": 2048,
+  "llm_config": {
+    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternLM2ForCausalLM"
+    ],
+    "attn_implementation": "flash_attention_2",
+    "auto_map": {
+      "AutoConfig": "configuration_internlm2.InternLM2Config",
+      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
+    },
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bias": false,
+    "bos_token_id": 1,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": 2,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "silu",
+    "hidden_size": 2048,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "initializer_range": 0.02,
+    "intermediate_size": 8192,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "max_position_embeddings": 32768,
+    "min_length": 0,
+    "model_type": "internlm2",
+    "no_repeat_ngram_size": 0,
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_hidden_layers": 24,
+    "num_key_value_heads": 8,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": 2,
+    "prefix": null,
+    "pretraining_tp": 1,
+    "problem_type": null,
+    "pruned_heads": {},
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "rms_norm_eps": 1e-05,
+    "rope_scaling": {
+      "factor": 2.0,
+      "type": "dynamic"
+    },
+    "rope_theta": 1000000,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": false,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_cache": true,
+    "vocab_size": 92553
+  },
+  "max_dynamic_patch": 12,
+  "min_dynamic_patch": 1,
+  "model_type": "internvl_chat",
+  "pad2square": false,
+  "ps_version": "v2",
+  "select_layer": -1,
+  "template": "internvl2_5",
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": null,
+  "use_backbone_lora": 0,
+  "use_llm_lora": 0,
+  "use_thumbnail": true,
+  "vision_config": {
+    "_name_or_path": "",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternVisionModel"
+    ],
+    "attention_dropout": 0.0,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "drop_path_rate": 0.0,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": null,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "gelu",
+    "hidden_size": 1024,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "image_size": 448,
+    "initializer_factor": 1.0,
+    "initializer_range": 0.02,
+    "intermediate_size": 4096,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "layer_norm_eps": 1e-06,
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "min_length": 0,
+    "model_type": "intern_vit_6b",
+    "no_repeat_ngram_size": 0,
+    "norm_type": "layer_norm",
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_channels": 3,
+    "num_hidden_layers": 24,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": null,
+    "patch_size": 14,
+    "prefix": null,
+    "problem_type": null,
+    "pruned_heads": {},
+    "qk_normalization": false,
+    "qkv_bias": true,
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": true,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_flash_attn": true
+  }
+}
+
+11/22/2025 13:46:41 - INFO - __main__ - Using flash_attention_2 for InternLM
+[INFO|modeling_utils.py:3476] 2025-11-22 13:46:41,422 >> loading weights file model.safetensors from cache at /home/ztao/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
+[INFO|modeling_utils.py:1426] 2025-11-22 13:46:41,445 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
+[INFO|modeling_utils.py:3582] 2025-11-22 13:46:41,445 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
+[INFO|configuration_utils.py:826] 2025-11-22 13:46:41,454 >> Generate config GenerationConfig {}
+
+patch_embedding.weight.shape: torch.Size([0])
+patch_embedding.weight.shape: torch.Size([0])
+[INFO|configuration_utils.py:826] 2025-11-22 13:46:41,792 >> Generate config GenerationConfig {
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "pad_token_id": 2
+}
+
+[INFO|modeling_utils.py:4350] 2025-11-22 13:46:45,829 >> All model checkpoint weights were used when initializing InternVLChatModel.
+
+[INFO|modeling_utils.py:4358] 2025-11-22 13:46:45,829 >> All the weights of InternVLChatModel were initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use InternVLChatModel for predictions without further training.
+[INFO|configuration_utils.py:781] 2025-11-22 13:46:45,892 >> loading configuration file generation_config.json from cache at /home/ztao/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
+[INFO|configuration_utils.py:826] 2025-11-22 13:46:45,893 >> Generate config GenerationConfig {
+  "eos_token_id": [
+    92542,
+    92543
+  ]
+}
+
+11/22/2025 13:46:45 - WARNING - internvl.model.internvl_chat.modeling_intern_vit - Position embedding is empty under ZeRO partitioning; reinitializing before resize.
+train_dataset after packed: PackedDataset with 1 source datasets, num_images_expected=128, max_packed_tokens=12288
+11/22/2025 13:46:46 - INFO - __main__ - Finished
+11/22/2025 13:46:46 - INFO - __main__ - model.config.force_image_size: 448
+11/22/2025 13:46:46 - INFO - __main__ - data_args.force_image_size: 224
+11/22/2025 13:46:46 - INFO - __main__ - model.config.vision_config.image_size: 448
+11/22/2025 13:46:46 - INFO - __main__ - Resizing position embedding from 448 to 224...
+11/22/2025 13:46:46 - WARNING - internvl.model.internvl_chat.modeling_intern_vit - Position embedding is empty under ZeRO partitioning; reinitializing before resize.
+11/22/2025 13:46:46 - INFO - __main__ - [Dataset] num_image_token: 64
+11/22/2025 13:46:46 - INFO - __main__ - [Dataset] dynamic_image_size: False
+11/22/2025 13:46:46 - INFO - __main__ - [Dataset] use_thumbnail: False
+11/22/2025 13:46:46 - INFO - __main__ - [Dataset] min_dynamic_patch: 1, max_dynamic_patch: 12
+11/22/2025 13:46:46 - INFO - __main__ - Formatting inputs...Skip in lazy mode
+11/22/2025 13:46:46 - INFO - __main__ - Add dataset: how2sign_under10s with length: 30711
+11/22/2025 13:46:46 - INFO - internvl.train.dataset_packed - Loaded dataset to pack: ['how2sign_under10s'], self.num_images_expected=128, self.max_packed_tokens=12288, self.replacement=False, self.allow_overflow=False
+11/22/2025 13:46:46 - INFO - internvl.train.dataset_packed - Sampling prob for each dataset:
+how2sign_under10s        : 100.00%
+11/22/2025 13:46:46 - INFO - internvl.train.dataset_packed - PackedDataset estimated length: 239 (original: 30711, num_images_expected: 128)
+11/22/2025 13:46:46 - INFO - internvl.train.dataset_packed -   Note: This is an estimate for epoch calculation. Actual packed samples may vary.
+train_dataset after packed: PackedDataset with 1 source datasets, num_images_expected=128, max_packed_tokens=12288
+trainable params: 15,728,640 || all params: 1,904,875,520 || trainable%: 0.8257043483870274
+trainable params: 15,728,640 || all params: 1,904,875,520 || trainable%: 0.8257043483870274
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.embeddings.class_embedding
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.embeddings.position_embedding
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.embeddings.patch_embedding.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.embeddings.patch_embedding.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.0.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.1.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.2.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.3.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.4.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.5.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.6.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.7.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.8.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.9.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.10.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.11.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.12.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.13.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.14.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.15.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.16.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.17.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.18.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.19.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.20.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.21.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.22.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.ls1
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.ls2
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.attn.qkv.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.attn.qkv.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.attn.proj.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.attn.proj.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc2.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.norm1.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.norm1.bias
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.norm2.weight
+11/22/2025 13:46:46 - INFO - __main__ - vision_model.encoder.layers.23.norm2.bias
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wqkv.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wqkv.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wo.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wo.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w1.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w1.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w3.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w3.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w2.lora_A.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w2.lora_B.default.weight
+11/22/2025 13:46:46 - INFO - __main__ - mlp1.0.weight
+11/22/2025 13:46:46 - INFO - __main__ - mlp1.0.bias
+11/22/2025 13:46:46 - INFO - __main__ - mlp1.1.weight
+11/22/2025 13:46:46 - INFO - __main__ - mlp1.1.bias
+11/22/2025 13:46:46 - INFO - __main__ - mlp1.3.weight
+11/22/2025 13:46:46 - INFO - __main__ - mlp1.3.bias
+[INFO|trainer.py:522] 2025-11-22 13:46:46,302 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:571] 2025-11-22 13:46:46,302 >> Using auto half precision backend
+11/22/2025 13:46:46 - INFO - __main__ - ✅ Patched accelerator.no_sync for DeepSpeed ZeRO Stage 2/3 compatibility
+11/22/2025 13:46:46 - INFO - __main__ - Patching accelerator.no_sync for DeepSpeed ZeRO Stage 2/3 compatibility...
+11/22/2025 13:46:46 - INFO - __main__ - ✅ Successfully patched accelerator.no_sync
+Installed CUDA version 12.4 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+Installed CUDA version 12.4 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+Adam Optimizer #0 is created with AVX512 arithmetic capability.
+Config: alpha=0.000020, betas=(0.900000, 0.999000), weight_decay=0.010000, adam_w=1
+Parameter Offload - Persistent parameters statistics: param_count = 0, numel = 0
+[INFO|trainer.py:1721] 2025-11-22 13:46:54,470 >> ***** Running training *****
+[INFO|trainer.py:1722] 2025-11-22 13:46:54,470 >>   Num examples = 239
+[INFO|trainer.py:1723] 2025-11-22 13:46:54,470 >>   Num Epochs = 136
+[INFO|trainer.py:1724] 2025-11-22 13:46:54,470 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:1727] 2025-11-22 13:46:54,470 >>   Total train batch size (w. parallel, distributed & accumulation) = 8
+[INFO|trainer.py:1728] 2025-11-22 13:46:54,470 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2025-11-22 13:46:54,470 >>   Total optimization steps = 8,000
+[INFO|trainer.py:1730] 2025-11-22 13:46:54,474 >>   Number of trainable parameters = 331,549,696
+
+  0%|          | 0/8000 [00:00<?, ?it/s]petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+[Video Sampling] path=22qgKXLM0j4_17-5-rgb_front.mp4, total_frames=259, vlen=259, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+petrel_client is not installed. Using PIL to load images.
+[Video Sampling] path=c0uMDWywVf0_0-5-rgb_front.mp4, total_frames=373, vlen=373, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=1PCzfhknC_s_3-8-rgb_front.mp4, total_frames=83, vlen=83, min=32, max=128, sample=random_start_every2.0, selected=41 frames
+[Video Sampling] path=1zRg1-tq9Uc_3-8-rgb_front.mp4, total_frames=127, vlen=127, min=32, max=128, sample=random_start_every2.0, selected=63 frames
+[Video Sampling] path=EQ4tPCXpWsg_5-8-rgb_front.mp4, total_frames=46, vlen=46, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=195T2UrPC8s_7-8-rgb_front.mp4, total_frames=8, vlen=8, min=32, max=128, sample=random_start_every2.0, selected=4 frames
+[Video Sampling] path=4MIPkK7F4GM_4-5-rgb_front.mp4, total_frames=56, vlen=56, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=43zfrZ1Zh2w_15-8-rgb_front.mp4, total_frames=220, vlen=220, min=32, max=128, sample=random_start_every2.0, selected=110 frames
+[Video Sampling] path=10VglhbVIwI_2-5-rgb_front.mp4, total_frames=289, vlen=289, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=2-JvO5SCsCc_9-8-rgb_front.mp4, total_frames=265, vlen=265, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=-aNfi7CP8vM_10-3-rgb_front.mp4, total_frames=220, vlen=220, min=32, max=128, sample=random_start_every2.0, selected=110 frames
+[Video Sampling] path=fFk8oRYSMq0_7-5-rgb_front.mp4, total_frames=128, vlen=128, min=32, max=128, sample=random_start_every2.0, selected=64 frames
+[Video Sampling] path=DoASe1QfXuI_5-3-rgb_front.mp4, total_frames=379, vlen=379, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=5L334OJnp7w_0-5-rgb_front.mp4, total_frames=5, vlen=5, min=32, max=128, sample=random_start_every2.0, selected=2 frames
+[Video Sampling] path=1iQ5DtFbgT4_2-8-rgb_front.mp4, total_frames=125, vlen=125, min=32, max=128, sample=random_start_every2.0, selected=62 frames
+[Video Sampling] path=-Aiz9jYxt4g_10-8-rgb_front.mp4, total_frames=38, vlen=38, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+
+  0%|          | 1/8000 [00:38<85:43:28, 38.58s/it]
+                                                   
+{'loss': 3.8351, 'learning_rate': 8.333333333333334e-08, 'epoch': 0.02}
+
+  0%|          | 1/8000 [00:38<85:43:28, 38.58s/it][Video Sampling] path=b0KaiY9OZa8_8-5-rgb_front.mp4, total_frames=137, vlen=137, min=32, max=128, sample=random_start_every2.0, selected=69 frames
+[Video Sampling] path=1Eq8tHs0zGA_10-5-rgb_front.mp4, total_frames=106, vlen=106, min=32, max=128, sample=random_start_every2.0, selected=53 frames
+[Video Sampling] path=1GlHmFJA0LQ_15-8-rgb_front.mp4, total_frames=156, vlen=156, min=32, max=128, sample=random_start_every2.0, selected=78 frames
+[Video Sampling] path=FQsLcgxOReU_5-5-rgb_front.mp4, total_frames=207, vlen=207, min=32, max=128, sample=random_start_every2.0, selected=103 frames
+[Video Sampling] path=2bmQGJTwp3g_5-8-rgb_front.mp4, total_frames=221, vlen=221, min=32, max=128, sample=random_start_every2.0, selected=110 frames
+[Video Sampling] path=CxT4a1Gtkjo_11-1-rgb_front.mp4, total_frames=127, vlen=127, min=32, max=128, sample=random_start_every2.0, selected=63 frames
+[Video Sampling] path=-6PZkp-zC78_2-5-rgb_front.mp4, total_frames=132, vlen=132, min=32, max=128, sample=random_start_every2.0, selected=66 frames
+[Video Sampling] path=aBvr3KFxFRw_10-5-rgb_front.mp4, total_frames=214, vlen=214, min=32, max=128, sample=random_start_every2.0, selected=107 frames
+[Video Sampling] path=-7H7ZHO_4Ao_5-8-rgb_front.mp4, total_frames=366, vlen=366, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=1g8yWLfws8I_3-8-rgb_front.mp4, total_frames=83, vlen=83, min=32, max=128, sample=random_start_every2.0, selected=42 frames
+[Video Sampling] path=b1wLBVvtPCI_0-5-rgb_front.mp4, total_frames=390, vlen=390, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=1D29htgrRv4_4-5-rgb_front.mp4, total_frames=262, vlen=262, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+
+  0%|          | 2/8000 [00:55<58:02:31, 26.13s/it][Video Sampling] path=CKearM4IZws_6-8-rgb_front.mp4, total_frames=176, vlen=176, min=32, max=128, sample=random_start_every2.0, selected=88 frames
+[Video Sampling] path=11aqPfA6Zgo_7-8-rgb_front.mp4, total_frames=195, vlen=195, min=32, max=128, sample=random_start_every2.0, selected=97 frames
+[Video Sampling] path=EauGmYmH6rc_8-5-rgb_front.mp4, total_frames=94, vlen=94, min=32, max=128, sample=random_start_every2.0, selected=47 frames
+[Video Sampling] path=E_uBBA0Cdh0_7-5-rgb_front.mp4, total_frames=124, vlen=124, min=32, max=128, sample=random_start_every2.0, selected=62 frames
+[Video Sampling] path=1l6MC-9BQa0_16-5-rgb_front.mp4, total_frames=292, vlen=292, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=58xX_6AShZQ_12-5-rgb_front.mp4, total_frames=172, vlen=172, min=32, max=128, sample=random_start_every2.0, selected=86 frames
+
+  0%|          | 3/8000 [01:13<48:58:08, 22.04s/it][Video Sampling] path=aPlDljTG2Bo_24-1-rgb_front.mp4, total_frames=97, vlen=97, min=32, max=128, sample=random_start_every2.0, selected=48 frames
+[Video Sampling] path=395INfhRQB8_3-8-rgb_front.mp4, total_frames=216, vlen=216, min=32, max=128, sample=random_start_every2.0, selected=108 frames
+[Video Sampling] path=2l9_6UKlhmM_4-8-rgb_front.mp4, total_frames=96, vlen=96, min=32, max=128, sample=random_start_every2.0, selected=48 frames
+[Video Sampling] path=11nApVmQepI_15-8-rgb_front.mp4, total_frames=89, vlen=89, min=32, max=128, sample=random_start_every2.0, selected=44 frames
+[Video Sampling] path=0HObK-sd2ds_12-5-rgb_front.mp4, total_frames=54, vlen=54, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=1VHODMDPRbo_14-5-rgb_front.mp4, total_frames=58, vlen=58, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=5O8kZa59YZU_3-8-rgb_front.mp4, total_frames=123, vlen=123, min=32, max=128, sample=random_start_every2.0, selected=61 frames
+[Video Sampling] path=0za4Bypd9Y8_1-5-rgb_front.mp4, total_frames=148, vlen=148, min=32, max=128, sample=random_start_every2.0, selected=74 frames
+[Video Sampling] path=cdwEY8_WfZA_7-8-rgb_front.mp4, total_frames=492, vlen=492, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=0EjXICFqrKo_10-8-rgb_front.mp4, total_frames=45, vlen=45, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=bUM8cFhqG64_1-8-rgb_front.mp4, total_frames=354, vlen=354, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+
+  0%|          | 4/8000 [01:30<44:55:13, 20.22s/it][Video Sampling] path=a9CgIaOL6WQ_7-5-rgb_front.mp4, total_frames=48, vlen=48, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=3rW6wKS5nTU_13-5-rgb_front.mp4, total_frames=199, vlen=199, min=32, max=128, sample=random_start_every2.0, selected=99 frames
+[Video Sampling] path=BQoH1leUUlk_7-5-rgb_front.mp4, total_frames=72, vlen=72, min=32, max=128, sample=random_start_every2.0, selected=36 frames
+[Video Sampling] path=3yeunpfsN_Q_5-3-rgb_front.mp4, total_frames=28, vlen=28, min=32, max=128, sample=random_start_every2.0, selected=14 frames
+[Video Sampling] path=Fm3GUFEh5LM_10-8-rgb_front.mp4, total_frames=40, vlen=40, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=FJgO-FICHlA_5-5-rgb_front.mp4, total_frames=85, vlen=85, min=32, max=128, sample=random_start_every2.0, selected=43 frames
+[Video Sampling] path=3tyfxL2wO-M_10-8-rgb_front.mp4, total_frames=93, vlen=93, min=32, max=128, sample=random_start_every2.0, selected=47 frames
+[Video Sampling] path=22iGdujk5HE_4-5-rgb_front.mp4, total_frames=120, vlen=120, min=32, max=128, sample=random_start_every2.0, selected=60 frames
+[Video Sampling] path=1SozYg3ZXKM_19-5-rgb_front.mp4, total_frames=57, vlen=57, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=0DU7wWLK-QU_16-8-rgb_front.mp4, total_frames=78, vlen=78, min=32, max=128, sample=random_start_every2.0, selected=39 frames
+[Video Sampling] path=1DAuiP69Xtg_1-5-rgb_front.mp4, total_frames=192, vlen=192, min=32, max=128, sample=random_start_every2.0, selected=96 frames
+[Video Sampling] path=5VX_yUTOwcU_10-3-rgb_front.mp4, total_frames=182, vlen=182, min=32, max=128, sample=random_start_every2.0, selected=91 frames
+[Video Sampling] path=19FB-dmluQw_16-3-rgb_front.mp4, total_frames=81, vlen=81, min=32, max=128, sample=random_start_every2.0, selected=41 frames
+[Video Sampling] path=-1fUFbij2s0_3-5-rgb_front.mp4, total_frames=49, vlen=49, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=1P0oKY4FNyI_13-8-rgb_front.mp4, total_frames=124, vlen=124, min=32, max=128, sample=random_start_every2.0, selected=62 frames
+[Video Sampling] path=ez2bCEZMTgc_10-5-rgb_front.mp4, total_frames=162, vlen=162, min=32, max=128, sample=random_start_every2.0, selected=81 frames
+[Video Sampling] path=-9_jI7kWiQY_4-8-rgb_front.mp4, total_frames=40, vlen=40, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=-AFID_P6YU0_11-8-rgb_front.mp4, total_frames=38, vlen=38, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=DX3KWLldIJc_3-8-rgb_front.mp4, total_frames=164, vlen=164, min=32, max=128, sample=random_start_every2.0, selected=82 frames
+[Video Sampling] path=1QBezkHsXd4_8-8-rgb_front.mp4, total_frames=23, vlen=23, min=32, max=128, sample=random_start_every2.0, selected=11 frames
+[Video Sampling] path=1WWRpyZXTnU_9-5-rgb_front.mp4, total_frames=498, vlen=498, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=aCc-DzPTDo4_30-5-rgb_front.mp4, total_frames=157, vlen=157, min=32, max=128, sample=random_start_every2.0, selected=79 frames
+
+  0%|          | 5/8000 [01:47<42:38:16, 19.20s/it][Video Sampling] path=E-zi5MLGq_U_5-8-rgb_front.mp4, total_frames=74, vlen=74, min=32, max=128, sample=random_start_every2.0, selected=37 frames
+[Video Sampling] path=aSjHu-I75bE_4-5-rgb_front.mp4, total_frames=79, vlen=79, min=32, max=128, sample=random_start_every2.0, selected=40 frames
+[Video Sampling] path=002pHlZGEQ8_4-5-rgb_front.mp4, total_frames=37, vlen=37, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=1ia4jmyCnyk_4-8-rgb_front.mp4, total_frames=146, vlen=146, min=32, max=128, sample=random_start_every2.0, selected=73 frames
+[Video Sampling] path=2c0pN0EgeJA_4-5-rgb_front.mp4, total_frames=141, vlen=141, min=32, max=128, sample=random_start_every2.0, selected=71 frames
+[Video Sampling] path=Ch6nqZwWgbw_11-5-rgb_front.mp4, total_frames=85, vlen=85, min=32, max=128, sample=random_start_every2.0, selected=43 frames
+[Video Sampling] path=ebl8tXLXops_6-8-rgb_front.mp4, total_frames=46, vlen=46, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=DQudsojO17s_13-8-rgb_front.mp4, total_frames=16, vlen=16, min=32, max=128, sample=random_start_every2.0, selected=8 frames
+[Video Sampling] path=bfNbGx1yLdE_4-4-rgb_front.mp4, total_frames=67, vlen=67, min=32, max=128, sample=random_start_every2.0, selected=33 frames
+[Video Sampling] path=0Ft9bREx_G0_9-8-rgb_front.mp4, total_frames=134, vlen=134, min=32, max=128, sample=random_start_every2.0, selected=67 frames
+[Video Sampling] path=EOHrybLEPs4_5-11-rgb_front.mp4, total_frames=146, vlen=146, min=32, max=128, sample=random_start_every2.0, selected=73 frames
+[Video Sampling] path=bV7YzyvngPo_8-5-rgb_front.mp4, total_frames=141, vlen=141, min=32, max=128, sample=random_start_every2.0, selected=71 frames
+[Video Sampling] path=1naXxInoJBU_3-8-rgb_front.mp4, total_frames=72, vlen=72, min=32, max=128, sample=random_start_every2.0, selected=36 frames
+[Video Sampling] path=20qFsdFD3io_38-8-rgb_front.mp4, total_frames=8, vlen=8, min=32, max=128, sample=random_start_every2.0, selected=4 frames
+[Video Sampling] path=1pHupPNh9OE_2-11-rgb_front.mp4, total_frames=142, vlen=142, min=32, max=128, sample=random_start_every2.0, selected=71 frames
+
+  0%|          | 6/8000 [02:05<41:15:40, 18.58s/it][Video Sampling] path=bL2Lb4XEQdQ_18-9-rgb_front.mp4, total_frames=22, vlen=22, min=32, max=128, sample=random_start_every2.0, selected=11 frames
+[Video Sampling] path=1Yp-xuljnDM_16-8-rgb_front.mp4, total_frames=42, vlen=42, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=2Fq1vWH06us_2-5-rgb_front.mp4, total_frames=171, vlen=171, min=32, max=128, sample=random_start_every2.0, selected=86 frames
+[Video Sampling] path=bL2Lb4XEQdQ_23-9-rgb_front.mp4, total_frames=49, vlen=49, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=-e9uexlpA4g_0-5-rgb_front.mp4, total_frames=180, vlen=180, min=32, max=128, sample=random_start_every2.0, selected=90 frames
+[Video Sampling] path=C_DbdCYZc5s_1-5-rgb_front.mp4, total_frames=61, vlen=61, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=DcnH1GxziLs_10-8-rgb_front.mp4, total_frames=318, vlen=318, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=0sYti1jhaww_0-8-rgb_front.mp4, total_frames=73, vlen=73, min=32, max=128, sample=random_start_every2.0, selected=36 frames
+[Video Sampling] path=0CPT0O-r-70_6-8-rgb_front.mp4, total_frames=103, vlen=103, min=32, max=128, sample=random_start_every2.0, selected=52 frames
+[Video Sampling] path=07EGkSiMsL0_13-5-rgb_front.mp4, total_frames=275, vlen=275, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=BlhCuryvt88_40-8-rgb_front.mp4, total_frames=32, vlen=32, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+
+  0%|          | 7/8000 [02:22<40:16:19, 18.14s/it][Video Sampling] path=dZztN9Ewuzo_26-5-rgb_front.mp4, total_frames=19, vlen=19, min=32, max=128, sample=random_start_every2.0, selected=10 frames
+[Video Sampling] path=2VaCIOSpIWc_13-8-rgb_front.mp4, total_frames=116, vlen=116, min=32, max=128, sample=random_start_every2.0, selected=58 frames
+[Video Sampling] path=11aqPfA6Zgo_1-8-rgb_front.mp4, total_frames=53, vlen=53, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=3ntc51P5qjI_14-8-rgb_front.mp4, total_frames=93, vlen=93, min=32, max=128, sample=random_start_every2.0, selected=46 frames
+[Video Sampling] path=0x-kl7MK6fc_3-5-rgb_front.mp4, total_frames=148, vlen=148, min=32, max=128, sample=random_start_every2.0, selected=74 frames
+[Video Sampling] path=CuqR-BVLU9k_8-8-rgb_front.mp4, total_frames=26, vlen=26, min=32, max=128, sample=random_start_every2.0, selected=13 frames
+[Video Sampling] path=3-fARE8grc0_26-8-rgb_front.mp4, total_frames=47, vlen=47, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=ED008VqMDJU_15-3-rgb_front.mp4, total_frames=141, vlen=141, min=32, max=128, sample=random_start_every2.0, selected=71 frames
+[Video Sampling] path=1avHo4qZ86Q_8-8-rgb_front.mp4, total_frames=128, vlen=128, min=32, max=128, sample=random_start_every2.0, selected=64 frames
+[Video Sampling] path=218kpyi1X7k_1-8-rgb_front.mp4, total_frames=105, vlen=105, min=32, max=128, sample=random_start_every2.0, selected=53 frames
+[Video Sampling] path=EA5TtaqpJ9w_28-4-rgb_front.mp4, total_frames=146, vlen=146, min=32, max=128, sample=random_start_every2.0, selected=73 frames
+[Video Sampling] path=0EjXICFqrKo_9-8-rgb_front.mp4, total_frames=38, vlen=38, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=1cp9sjT_1Tc_5-8-rgb_front.mp4, total_frames=9, vlen=9, min=32, max=128, sample=random_start_every2.0, selected=5 frames
+[Video Sampling] path=btSrRQAWN6k_5-4-rgb_front.mp4, total_frames=107, vlen=107, min=32, max=128, sample=random_start_every2.0, selected=54 frames
+[Video Sampling] path=1EidpMNIaJE_5-5-rgb_front.mp4, total_frames=286, vlen=286, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=Db5SUQvNsHc_2-1-rgb_front.mp4, total_frames=100, vlen=100, min=32, max=128, sample=random_start_every2.0, selected=50 frames
+
+  0%|          | 8/8000 [02:39<39:43:43, 17.90s/it][Video Sampling] path=0-_hOoXzsWw_11-5-rgb_front.mp4, total_frames=168, vlen=168, min=32, max=128, sample=random_start_every2.0, selected=84 frames
+[Video Sampling] path=aewpNjI88kw_9-5-rgb_front.mp4, total_frames=75, vlen=75, min=32, max=128, sample=random_start_every2.0, selected=38 frames
+[Video Sampling] path=F0Cu-UAAR8I_0-8-rgb_front.mp4, total_frames=131, vlen=131, min=32, max=128, sample=random_start_every2.0, selected=66 frames
+[Video Sampling] path=-BrxzwEb3E8_7-8-rgb_front.mp4, total_frames=444, vlen=444, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=2-zlrJXlOGA_1-8-rgb_front.mp4, total_frames=66, vlen=66, min=32, max=128, sample=random_start_every2.0, selected=33 frames
+
+  0%|          | 9/8000 [02:57<39:23:18, 17.74s/it][Video Sampling] path=13xhoBKaViM_0-8-rgb_front.mp4, total_frames=31, vlen=31, min=32, max=128, sample=random_start_every2.0, selected=15 frames
+[Video Sampling] path=1--HXyOH4kg_3-5-rgb_front.mp4, total_frames=184, vlen=184, min=32, max=128, sample=random_start_every2.0, selected=92 frames
+[Video Sampling] path=5VseAeFbfgI_20-8-rgb_front.mp4, total_frames=285, vlen=285, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+
+  0%|          | 10/8000 [03:14<38:40:22, 17.42s/it]
+                                                    
+{'loss': 4.214, 'learning_rate': 8.333333333333333e-07, 'epoch': 0.17}
+
+  0%|          | 10/8000 [03:14<38:40:22, 17.42s/it][Video Sampling] path=1DFNcceDcYY_2-5-rgb_front.mp4, total_frames=139, vlen=139, min=32, max=128, sample=random_start_every2.0, selected=69 frames
+[Video Sampling] path=-8XxBfXAzyo_8-8-rgb_front.mp4, total_frames=230, vlen=230, min=32, max=128, sample=random_start_every2.0, selected=115 frames
+
+  0%|          | 11/8000 [03:31<38:37:34, 17.41s/it][Video Sampling] path=bnIoz-4U3xw_16-8-rgb_front.mp4, total_frames=184, vlen=184, min=32, max=128, sample=random_start_every2.0, selected=92 frames
+[Video Sampling] path=1nAiestkr0Q_0-11-rgb_front.mp4, total_frames=17, vlen=17, min=32, max=128, sample=random_start_every2.0, selected=9 frames
+[Video Sampling] path=DOUfX5-ExYc_13-3-rgb_front.mp4, total_frames=27, vlen=27, min=32, max=128, sample=random_start_every2.0, selected=14 frames
+[Video Sampling] path=ChWHBubzC3E_1-8-rgb_front.mp4, total_frames=189, vlen=189, min=32, max=128, sample=random_start_every2.0, selected=94 frames
+[Video Sampling] path=bLSpqPnZ15Y_13-1-rgb_front.mp4, total_frames=124, vlen=124, min=32, max=128, sample=random_start_every2.0, selected=62 frames
+
+  0%|          | 12/8000 [03:48<38:29:58, 17.35s/it][Video Sampling] path=1EeikJuDNao_6-5-rgb_front.mp4, total_frames=204, vlen=204, min=32, max=128, sample=random_start_every2.0, selected=102 frames
+[Video Sampling] path=1ei1kVTw23A_27-8-rgb_front.mp4, total_frames=55, vlen=55, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+
+  0%|          | 13/8000 [04:05<38:27:44, 17.34s/it][Video Sampling] path=07U8pEf63Pw_14-5-rgb_front.mp4, total_frames=32, vlen=32, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=EdJgTx0iFeE_10-5-rgb_front.mp4, total_frames=123, vlen=123, min=32, max=128, sample=random_start_every2.0, selected=62 frames
+[Video Sampling] path=eTtHXMC1Tco_2-5-rgb_front.mp4, total_frames=289, vlen=289, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=e9UWZ3kkA7Y_10-8-rgb_front.mp4, total_frames=177, vlen=177, min=32, max=128, sample=random_start_every2.0, selected=88 frames
+
+  0%|          | 14/8000 [04:22<38:02:39, 17.15s/it][Video Sampling] path=a8zoNzPmXik_7-8-rgb_front.mp4, total_frames=96, vlen=96, min=32, max=128, sample=random_start_every2.0, selected=48 frames
+[Video Sampling] path=1ND0o3AeO1k_5-5-rgb_front.mp4, total_frames=103, vlen=103, min=32, max=128, sample=random_start_every2.0, selected=51 frames
+[Video Sampling] path=cZbKzFhPbsg_4-8-rgb_front.mp4, total_frames=234, vlen=234, min=32, max=128, sample=random_start_every2.0, selected=117 frames
+[Video Sampling] path=cVe-33JxCEo_0-8-rgb_front.mp4, total_frames=223, vlen=223, min=32, max=128, sample=random_start_every2.0, selected=112 frames
+
+  0%|          | 15/8000 [04:39<37:53:21, 17.08s/it][Video Sampling] path=1PhHBWErK9Q_10-8-rgb_front.mp4, total_frames=76, vlen=76, min=32, max=128, sample=random_start_every2.0, selected=38 frames
+[Video Sampling] path=0Dv5umFVqv8_3-8-rgb_front.mp4, total_frames=163, vlen=163, min=32, max=128, sample=random_start_every2.0, selected=82 frames
+[Video Sampling] path=1kMlu1Z5DWM_2-8-rgb_front.mp4, total_frames=109, vlen=109, min=32, max=128, sample=random_start_every2.0, selected=54 frames
+
+  0%|          | 16/8000 [04:56<37:38:37, 16.97s/it][Video Sampling] path=eRlK5VRBfNY_4-3-rgb_front.mp4, total_frames=292, vlen=292, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=5vSvXTHeD5I_4-8-rgb_front.mp4, total_frames=201, vlen=201, min=32, max=128, sample=random_start_every2.0, selected=100 frames
+
+  0%|          | 17/8000 [05:13<37:28:32, 16.90s/it][Video Sampling] path=1mR-3aBnMFo_11-8-rgb_front.mp4, total_frames=292, vlen=292, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=16iJ0z4FUqc_28-8-rgb_front.mp4, total_frames=30, vlen=30, min=32, max=128, sample=random_start_every2.0, selected=15 frames
+[Video Sampling] path=3tyfxL2wO-M_0-8-rgb_front.mp4, total_frames=4, vlen=4, min=32, max=128, sample=random_start_every2.0, selected=2 frames
+[Video Sampling] path=1jeK8PkhsR4_7-8-rgb_front.mp4, total_frames=112, vlen=112, min=32, max=128, sample=random_start_every2.0, selected=56 frames
+[Video Sampling] path=0JLA3FdXedM_4-5-rgb_front.mp4, total_frames=293, vlen=293, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+
+  0%|          | 18/8000 [05:29<37:20:37, 16.84s/it][Video Sampling] path=0-bR2rq-qps_17-5-rgb_front.mp4, total_frames=143, vlen=143, min=32, max=128, sample=random_start_every2.0, selected=71 frames
+[Video Sampling] path=CyLfNgMZmc0_14-8-rgb_front.mp4, total_frames=16, vlen=16, min=32, max=128, sample=random_start_every2.0, selected=8 frames
+
+  0%|          | 19/8000 [05:46<37:16:18, 16.81s/it][Video Sampling] path=2Z3CpALUO9o_41-8-rgb_front.mp4, total_frames=77, vlen=77, min=32, max=128, sample=random_start_every2.0, selected=38 frames
+[Video Sampling] path=1IRHEhx1lBs_17-5-rgb_front.mp4, total_frames=9, vlen=9, min=32, max=128, sample=random_start_every2.0, selected=4 frames
+[Video Sampling] path=1UvxqsvKq3o_0-5-rgb_front.mp4, total_frames=55, vlen=55, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=16_CbprlCb0_6-8-rgb_front.mp4, total_frames=94, vlen=94, min=32, max=128, sample=random_start_every2.0, selected=47 frames
+[Video Sampling] path=-_6Fmz29bhU_16-1-rgb_front.mp4, total_frames=36, vlen=36, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=00xgNW3M4-4_21-3-rgb_front.mp4, total_frames=50, vlen=50, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=exmbwktwuLs_4-5-rgb_front.mp4, total_frames=223, vlen=223, min=32, max=128, sample=random_start_every2.0, selected=111 frames
+[Video Sampling] path=cKmtmtqeUkI_3-9-rgb_front.mp4, total_frames=154, vlen=154, min=32, max=128, sample=random_start_every2.0, selected=77 frames
+[Video Sampling] path=2i72vxkUJAs_3-5-rgb_front.mp4, total_frames=147, vlen=147, min=32, max=128, sample=random_start_every2.0, selected=73 frames
+
+  0%|          | 20/8000 [06:03<37:11:36, 16.78s/it]
+                                                    
+{'loss': 4.2492, 'learning_rate': 1.6666666666666667e-06, 'epoch': 0.33}
+
+  0%|          | 20/8000 [06:03<37:11:36, 16.78s/it][Video Sampling] path=1eGSa8J2kko_0-8-rgb_front.mp4, total_frames=112, vlen=112, min=32, max=128, sample=random_start_every2.0, selected=56 frames
+[Video Sampling] path=aAJxGyiEEHU_0-5-rgb_front.mp4, total_frames=263, vlen=263, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+[Video Sampling] path=03WUE9zzQY4_12-8-rgb_front.mp4, total_frames=37, vlen=37, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+
+  0%|          | 21/8000 [06:20<37:31:23, 16.93s/it][Video Sampling] path=49P4e1DLm6w_3-5-rgb_front.mp4, total_frames=64, vlen=64, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=d_cJXrKUy7M_8-5-rgb_front.mp4, total_frames=228, vlen=228, min=32, max=128, sample=random_start_every2.0, selected=114 frames
+[Video Sampling] path=ezKICyY-HKY_1-2-rgb_front.mp4, total_frames=187, vlen=187, min=32, max=128, sample=random_start_every2.0, selected=93 frames
+[Video Sampling] path=1zQf384LX3M_10-8-rgb_front.mp4, total_frames=179, vlen=179, min=32, max=128, sample=random_start_every2.0, selected=90 frames
+
+  0%|          | 22/8000 [06:37<37:17:19, 16.83s/it][Video Sampling] path=EZA2N6-oiEc_10-5-rgb_front.mp4, total_frames=148, vlen=148, min=32, max=128, sample=random_start_every2.0, selected=74 frames
+
+  0%|          | 23/8000 [06:54<37:30:54, 16.93s/it][Video Sampling] path=aewpNjI88kw_5-5-rgb_front.mp4, total_frames=167, vlen=167, min=32, max=128, sample=random_start_every2.0, selected=83 frames
+[Video Sampling] path=bvyUUBpwesg_8-3-rgb_front.mp4, total_frames=81, vlen=81, min=32, max=128, sample=random_start_every2.0, selected=41 frames
+[Video Sampling] path=10om04b2LIw_3-8-rgb_front.mp4, total_frames=56, vlen=56, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=1RgGCJ0hw6k_14-5-rgb_front.mp4, total_frames=26, vlen=26, min=32, max=128, sample=random_start_every2.0, selected=13 frames
+[Video Sampling] path=CGLHWM9BTzw_5-8-rgb_front.mp4, total_frames=377, vlen=377, min=32, max=128, sample=random_start_every2.0, selected=128 frames
+
+  0%|          | 24/8000 [07:10<37:12:49, 16.80s/it][Video Sampling] path=-aEP1MfoUSU_4-8-rgb_front.mp4, total_frames=231, vlen=231, min=32, max=128, sample=random_start_every2.0, selected=116 frames
+[Video Sampling] path=bypEEFgkWyw_4-8-rgb_front.mp4, total_frames=34, vlen=34, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=16n946j6kpM_12-8-rgb_front.mp4, total_frames=9, vlen=9, min=32, max=128, sample=random_start_every2.0, selected=4 frames
+[Video Sampling] path=1Dd3HPlgDWw_6-5-rgb_front.mp4, total_frames=57, vlen=57, min=32, max=128, sample=random_start_every2.0, selected=32 frames
+[Video Sampling] path=-_6Fmz29bhU_3-1-rgb_front.mp4, total_frames=52, vlen=52, min=32, max=128, sample=random_start_every2.0, selected=32 frames

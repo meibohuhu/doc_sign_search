@@ -25,10 +25,12 @@ activate_env "/local1/mhu/miniconda3" || \
 }
 
 export PYTHONPATH="/local1/mhu/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src:${PYTHONPATH:-}"
-export OMP_NUM_THREADS=8
-export PYTORCH_ALLOC_CONF=expandable_segments:True
+export OMP_NUM_THREADS=4
+export PYTORCH_ALLOC_CONF=expandable_segments:True,max_split_size_mb:128
 export HF_HUB_DISABLE_TELEMETRY=1
 export HF_HUB_ENABLE_HF_TRANSFER=1
+# Clear GPU cache periodically
+export CUDA_LAUNCH_BLOCKING=0
 
 cd /local1/mhu/sign_language_llm/qwenvl/Qwen2-VL-Finetune
 
@@ -38,7 +40,7 @@ IMAGE_FOLDER="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224
 MASK_FOLDER="/local1/mhu/sign_language_llm/how2sign/masks"
 OUTPUT_DIR="/local1/mhu/sign_language_llm/qwenvl/outputs/qwen2vl_how2sign_2xa6000_fbcf"
 
-GLOBAL_BATCH_SIZE=4
+GLOBAL_BATCH_SIZE=8
 PER_DEVICE_BS=1
 NUM_DEVICES=2
 GRAD_ACCUM=$((GLOBAL_BATCH_SIZE / (PER_DEVICE_BS * NUM_DEVICES)))
@@ -59,8 +61,9 @@ echo "Output dir     : $OUTPUT_DIR"
 echo "Batch/GPU      : $PER_DEVICE_BS"
 echo "Grad accum     : $GRAD_ACCUM"
 echo "fps            : $FPS"
-echo "DeepSpeed      : ZeRO-3"
-echo "FBCF Sampling  : Per-sample random (40% original, 40% foreground, 20% background)"
+echo "DeepSpeed      : ZeRO-3 with CPU offload"
+echo "FBCF Sampling  : Per-step deterministic (40% original, 40% foreground, 20% background)"
+echo "Memory optimizations: FPS=$FPS, LoRA rank=8, unfreeze_topk_vision=2, workers=2"
 echo ""
 
 python - <<'PY'
@@ -79,6 +82,7 @@ echo "📝 Logging to: $LOG_FILE"
 echo ""
 
 # Run training and log both stdout and stderr to file, while also displaying on terminal
+# Note: Using zero3_qwen2vl.json which includes CPU offload for optimizer and parameters
 deepspeed src/train/train_sft.py \
   --deepspeed scripts/zero3_qwen2vl.json \
   --model_id "$MODEL_NAME" \
@@ -110,6 +114,8 @@ deepspeed src/train/train_sft.py \
   --fps $FPS \
   --max_grad_norm 1.0 \
   --learning_rate 2e-5 \
+  --dataloader_num_workers 2 \
+  --dataloader_pin_memory False \
   --logging_steps 10 \
   --save_strategy steps \
   --save_steps 1000 \
@@ -118,13 +124,13 @@ deepspeed src/train/train_sft.py \
   --freeze_llm True \
   --freeze_vision_tower False \
   --freeze_merger False \
-  --unfreeze_topk_vision 4 \
+  --unfreeze_topk_vision 8 \
   --bf16 True \
   --disable_flash_attn2 True \
   --gradient_checkpointing True \
-  --lora_enable False \
-  --lora_rank 16 \
-  --lora_alpha 32 \
+  --lora_enable True \
+  --lora_rank 8 \
+  --lora_alpha 16 \
   --vision_lr 2e-5 \
   --merger_lr 2e-5 \
   2>&1 | tee "$LOG_FILE"
