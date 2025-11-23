@@ -5,9 +5,9 @@
 # Anaconda is installed at $HOME/anaconda3 by setup script
 # Environment name: internvl
 # Initialize and activate conda environment
-source "$HOME/anaconda3/etc/profile.d/conda.sh"
-conda activate internvl
-echo "✅ Conda environment activated: internvl"
+# source "$HOME/anaconda3/etc/profile.d/conda.sh"
+# conda activate internvl
+# echo "✅ Conda environment activated: internvl"
 
 # Essential environment variables
 export PYTHONPATH="/code/doc_sign_search/InternVL/internvl_chat:${PYTHONPATH:-}"
@@ -20,7 +20,7 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"0,1"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"0,1,2,3"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -34,8 +34,8 @@ IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
 # Optimized training configuration
 # Note: NUM_DEVICES is automatically calculated from GPU_IDS above
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-32}
-BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
+BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
 # Memory envelopes (defaults can be overridden via env vars)
@@ -127,7 +127,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --use_backbone_lora 0 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
-    --max_steps 5000 \
+    --max_steps 4000 \
     --save_strategy steps \
     --save_steps 1000 \
     --logging_steps 10 \
@@ -145,7 +145,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --max_buffer_size $MAX_BUFFER_SIZE \
     --deepspeed "$DEEPSPEED_CONFIG" \
     --optim adamw_torch \
-    --ddp_find_unused_parameters False \
+    --ddp_find_unused_parameters True \
     --num_images_expected $NUM_IMAGES_EXPECTED \
     --min_num_frame 32 \
     --max_num_frame $MAX_NUM_FRAME \
