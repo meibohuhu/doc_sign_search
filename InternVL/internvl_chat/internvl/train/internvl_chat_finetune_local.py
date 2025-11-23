@@ -86,6 +86,73 @@ class InternVLTrainer(Trainer):
         # Use standard Trainer optimizer creation
         return super().create_optimizer()
 
+### mh1122 ##### ERROR: [rank0]: AssertionError: no_sync context manager is incompatible with gradient partitioning logic of ZeRO stage 2
+### incompatibility between no_sync and gradient partitioning logic of ZeRO stage 2
+    def _patch_no_sync_for_zero(self):
+        """Patch accelerator's no_sync method to handle ZeRO Stage 2/3.
+        
+        ZeRO Stage 2 and 3 are incompatible with no_sync during gradient accumulation
+        because they partition gradients. The accelerator's no_sync method is a 
+        contextmanager that internally calls DeepSpeed engine's no_sync, which fails.
+        We patch it to directly return nullcontext() without calling any DeepSpeed methods.
+        """
+        # Only patch if DeepSpeed is enabled
+        if not self.is_deepspeed_enabled:
+            return
+        
+        # Check if already patched
+        if hasattr(self.accelerator, '_internvl_no_sync_patched'):
+            return
+        
+        import contextlib
+        from contextlib import contextmanager
+        
+        # Store original no_sync method
+        if not hasattr(self.accelerator, '_original_no_sync'):
+            self.accelerator._original_no_sync = self.accelerator.no_sync
+        
+        # Create a patched no_sync that always returns nullcontext for ZeRO
+        @contextmanager
+        def no_sync_patched(model):
+            """Patched no_sync that returns nullcontext for ZeRO Stage 2/3.
+            
+            For ZeRO Stage 2/3, return nullcontext instead of trying to use no_sync.
+            This bypasses the DeepSpeed no_sync assertion error.
+            """
+            # Just yield - this creates a no-op context manager
+            yield
+        
+        # Replace the method directly
+        # The contextmanager decorator creates a function that returns a context manager
+        self.accelerator.no_sync = no_sync_patched
+        
+        # Mark as patched
+        self.accelerator._internvl_no_sync_patched = True
+        
+        # Log patch application (only on main process)
+        try:
+            if dist.is_initialized() and dist.get_rank() == 0:
+                logger.info("✅ Patched accelerator.no_sync for DeepSpeed ZeRO Stage 2/3 compatibility")
+            elif not dist.is_initialized():
+                logger.info("✅ Patched accelerator.no_sync for DeepSpeed ZeRO Stage 2/3 compatibility")
+        except:
+            pass
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Patch accelerator after initialization if DeepSpeed is enabled
+        if hasattr(self, 'accelerator') and self.is_deepspeed_enabled:
+            self._patch_no_sync_for_zero()
+
+    def train(self, resume_from_checkpoint=None, trial=None, ignore_keys_for_eval=None, **kwargs):
+        """Override train method to ensure patch is applied before training starts."""
+        # Force patch before training starts (after model preparation)
+        if hasattr(self, 'accelerator') and self.is_deepspeed_enabled:
+            self._patch_no_sync_for_zero()
+        return super().train(resume_from_checkpoint=resume_from_checkpoint, trial=trial, 
+                            ignore_keys_for_eval=ignore_keys_for_eval, **kwargs)
+
+#####################################################
     def training_step(self, model, inputs):
         # mh 1119: CRITICAL: Patch must be applied BEFORE calling super().training_step()
         # because super() will call accelerator.accumulate() which calls no_sync()
@@ -177,7 +244,96 @@ class InternVLTrainer(Trainer):
 
 ###########
 
-##### mhu added code 1108 #####
+##### mhu added code 1122 #####
+def _compute_frame_indices(
+    sample: str,
+    vlen: int,
+    input_fps: float,
+    max_num_frames: int,
+    min_num_frames: int,
+    start_index: int = 0,
+) -> List[int]:
+    """
+    Compute frame indices based on sampling strategy.
+    
+    Args:
+        sample: Sampling strategy. Supports:
+            - 'fpsX.X': FPS-based sampling (e.g., 'fps2.0', 'fps12.0')
+            - 'random_start_every2': Random start frame, then sample every 2 frames
+            - Other strategies can be added here
+        vlen: Video length (number of frames in the clip)
+        input_fps: Original video FPS
+        max_num_frames: Maximum number of frames to sample
+        min_num_frames: Minimum number of frames to sample
+        start_index: Starting frame index offset (for clip parameter)
+    
+    Returns:
+        List of frame indices (relative to start_index)
+    """
+    frame_indices: List[int] = []
+    
+    if 'fps' in sample:
+        # FPS-based sampling (same as InternVL's get_frame_indices)
+        # Format: 'fpsX.X' where X.X is the target FPS
+        output_fps = float(sample[3:])
+        duration = float(vlen) / input_fps if input_fps > 0 else 0
+        delta = 1 / output_fps  # gap between frames
+        frame_seconds = np.arange(0 + delta / 2, duration + delta / 2, delta)
+        frame_indices = np.around(frame_seconds * input_fps).astype(int).tolist()
+        frame_indices = [e for e in frame_indices if e < vlen]
+        
+        # Apply max_num_frames limit: uniformly drop some to maintain even distribution
+        if max_num_frames > 0 and len(frame_indices) > max_num_frames:
+            indices_to_keep = np.linspace(0, len(frame_indices) - 1, max_num_frames, dtype=int)
+            frame_indices = [frame_indices[i] for i in indices_to_keep]
+    
+    elif sample == 'random_start_every2':
+        # Randomly choose a start frame, then sample every 2 frames
+        if vlen > 0:
+            # Randomly choose starting position from [0, vlen-1]
+            start_offset = np.random.randint(0, max(1, vlen))
+            # Sample every 2 frames starting from start_offset
+            frame_indices = list(range(start_offset, vlen, 2))
+            
+            # If we have more frames than max_num_frames, truncate from the end
+            if len(frame_indices) > max_num_frames:
+                frame_indices = frame_indices[:max_num_frames]
+    
+    else:
+        # Default: Sample every other frame (take 1 frame out of every 2 frames)
+        # Randomly choose starting position (0 or 1) for better diversity
+        start_offset = np.random.randint(0, 2)  # 0 or 1
+        frame_indices = list(range(start_offset, vlen, 2))  # [0,2,4,...] or [1,3,5,...]
+        
+        # If we have more frames than max_num_frames, uniformly drop some to maintain even distribution
+        if len(frame_indices) > max_num_frames:
+            indices_to_keep = np.linspace(0, len(frame_indices) - 1, max_num_frames, dtype=int)
+            frame_indices = [frame_indices[i] for i in indices_to_keep]
+    
+    # Ensure we have at least min_num_frames if video has enough frames
+    if len(frame_indices) < min_num_frames and vlen >= min_num_frames:
+        # If we don't have enough, uniformly sample additional frames from the remaining frames
+        remaining_indices = [i for i in range(vlen) if i not in frame_indices]
+        needed = min_num_frames - len(frame_indices)
+        if len(remaining_indices) >= needed:
+            # Uniformly sample from remaining frames
+            if len(remaining_indices) == needed:
+                additional = remaining_indices
+            else:
+                indices_to_add = np.linspace(0, len(remaining_indices) - 1, needed, dtype=int)
+                additional = [remaining_indices[i] for i in indices_to_add]
+            frame_indices = sorted(frame_indices + additional)
+    
+    # Adjust indices if start_index is specified (for clip parameter)
+    if start_index > 0:
+        frame_indices = [f + start_index for f in frame_indices]
+    
+    # Remove duplicates and sort
+    frame_indices = sorted(list(set(frame_indices)))
+    # print(f'frame_indices: {frame_indices}')
+    return frame_indices
+
+
 def _load_video_locally(
     video_path: str,
     max_num_frames: int,
@@ -187,7 +343,10 @@ def _load_video_locally(
 ) -> List[Image.Image]:
     """
     Load video frames locally using decord or OpenCV as fallback.
-    Uses the same sampling strategy as read_frames_decord in dataset.py.
+    Supports multiple sampling strategies:
+    - 'fpsX.X': FPS-based sampling (e.g., 'fps2.0', 'fps12.0')
+    - 'random_start_every2': Random start frame, then sample every 2 frames
+    - Default: Sample every other frame with random start (0 or 1)
     """
     load_errors: List[str] = []
 
@@ -209,40 +368,20 @@ def _load_video_locally(
             vlen = total_frames
             start_index = 0
 
-        # Sample every other frame (take 1 frame out of every 2 frames)
-        # Randomly choose starting position (0 or 1) for better diversity
-        start_offset = np.random.randint(0, 2)  # 0 or 1
-        frame_indices = list(range(start_offset, vlen, 2))  # [0,2,4,...] or [1,3,5,...]
-        
-        # If we have more frames than max_num_frames, uniformly drop some to maintain even distribution
-        if len(frame_indices) > max_num_frames:
-            # Uniformly sample max_num_frames frames to maintain even distribution
-            # Use linspace to get evenly distributed indices
-            indices_to_keep = np.linspace(0, len(frame_indices) - 1, max_num_frames, dtype=int)
-            frame_indices = [frame_indices[i] for i in indices_to_keep]
-        
-        # Ensure we have at least min_num_frames if video has enough frames
-        if len(frame_indices) < min_num_frames and vlen >= min_num_frames:
-            # If we don't have enough, uniformly sample additional frames from the remaining frames
-            remaining_indices = [i for i in range(vlen) if i not in frame_indices]
-            needed = min_num_frames - len(frame_indices)
-            if len(remaining_indices) >= needed:
-                # Uniformly sample from remaining frames
-                if len(remaining_indices) == needed:
-                    additional = remaining_indices
-                else:
-                    indices_to_add = np.linspace(0, len(remaining_indices) - 1, needed, dtype=int)
-                    additional = [remaining_indices[i] for i in indices_to_add]
-                frame_indices = sorted(frame_indices + additional)
-        
-        # Adjust indices if clip is specified
-        if clip and len(clip) == 2:
-            frame_indices = [f + start_index for f in frame_indices]
+        # Compute frame indices based on sampling strategy
+        frame_indices = _compute_frame_indices(
+            sample=sample,
+            vlen=vlen,
+            input_fps=fps,
+            max_num_frames=max_num_frames,
+            min_num_frames=min_num_frames,
+            start_index=start_index,
+        )
         
         # Clip indices to valid range
         frame_indices = [min(max(int(idx), 0), total_frames - 1) for idx in frame_indices]
         
-        # Remove duplicates again after clipping (clipping may cause multiple indices to map to the same value)
+        # Remove duplicates after clipping
         seen = set()
         unique_indices = []
         for idx in frame_indices:
@@ -250,7 +389,7 @@ def _load_video_locally(
                 seen.add(idx)
                 unique_indices.append(idx)
         frame_indices = unique_indices
-        
+
         # # Debug info: show video stats and sampling info
         # if not dist.is_initialized() or dist.get_rank() == 0:
         #     worker_info = get_worker_info()
@@ -258,9 +397,8 @@ def _load_video_locally(
         #         print(f'[Video Sampling] path={os.path.basename(video_path)}, '
         #               f'total_frames={total_frames}, vlen={vlen}, '
         #               f'min={min_num_frames}, max={max_num_frames}, '
-        #               f'selected={len(frame_indices)} frames')
+        #               f'sample={sample}, selected={len(frame_indices)} frames')
         
-        # print(f'frame_indices: {frame_indices}')
         frames = vr.get_batch(frame_indices).asnumpy()  # (T, H, W, C), np.uint8
         images = [Image.fromarray(frames[i]) for i in range(frames.shape[0])]
         return images
@@ -290,40 +428,20 @@ def _load_video_locally(
             vlen = total_frames
             start_index = 0
 
-        # Sample every other frame (take 1 frame out of every 2 frames)
-        # Randomly choose starting position (0 or 1) for better diversity
-        start_offset = np.random.randint(0, 2)  # 0 or 1
-        frame_indices = list(range(start_offset, vlen, 2))  # [0,2,4,...] or [1,3,5,...]
-        
-        # If we have more frames than max_num_frames, uniformly drop some to maintain even distribution
-        if len(frame_indices) > max_num_frames:
-            # Uniformly sample max_num_frames frames to maintain even distribution
-            # Use linspace to get evenly distributed indices
-            indices_to_keep = np.linspace(0, len(frame_indices) - 1, max_num_frames, dtype=int)
-            frame_indices = [frame_indices[i] for i in indices_to_keep]
-        
-        # Ensure we have at least min_num_frames if video has enough frames
-        if len(frame_indices) < min_num_frames and vlen >= min_num_frames:
-            # If we don't have enough, uniformly sample additional frames from the remaining frames
-            remaining_indices = [i for i in range(vlen) if i not in frame_indices]
-            needed = min_num_frames - len(frame_indices)
-            if len(remaining_indices) >= needed:
-                # Uniformly sample from remaining frames
-                if len(remaining_indices) == needed:
-                    additional = remaining_indices
-                else:
-                    indices_to_add = np.linspace(0, len(remaining_indices) - 1, needed, dtype=int)
-                    additional = [remaining_indices[i] for i in indices_to_add]
-                frame_indices = sorted(frame_indices + additional)
-        
-        # Adjust indices if clip is specified
-        if clip and len(clip) == 2:
-            frame_indices = [f + start_index for f in frame_indices]
+        # Compute frame indices based on sampling strategy
+        frame_indices = _compute_frame_indices(
+            sample=sample,
+            vlen=vlen,
+            input_fps=fps,
+            max_num_frames=max_num_frames,
+            min_num_frames=min_num_frames,
+            start_index=start_index,
+        )
         
         # Clip indices to valid range
         frame_indices = [min(max(int(idx), 0), total_frames - 1) for idx in frame_indices]
         
-        # Remove duplicates again after clipping (clipping may cause multiple indices to map to the same value)
+        # Remove duplicates after clipping
         seen = set()
         unique_indices = []
         for idx in frame_indices:
@@ -504,6 +622,20 @@ class DataTrainingArguments:
         default=32,
         metadata={'help': 'The maximum number of frames for video data. Default is 32.'},
     )
+     # mhu 1122 added code
+    sampling_method: str = field(
+        default='rand',
+        metadata={
+            'help': (
+                'Video frame sampling method. Options: '
+                "'rand' (default: every 2 frames with random start 0/1), "
+                "'fpsX.X' (FPS-based sampling, e.g., 'fps2.0', 'fps12.0'), "
+                "'random_start_every2' (random start frame, then every 2 frames). "
+                'Default is rand.'
+            )
+        },
+    )
+    ##########################################################################
     normalize_type: Literal['imagenet', 'clip', 'siglip'] = field(
         default='imagenet',
         metadata={'help': 'The normalization type for the image. Default is imagenet.'},
@@ -1016,6 +1148,7 @@ def build_datasets(
     max_dynamic_patch=12,
     min_num_frame=8,
     max_num_frame=32,
+    sampling_method='rand',
     normalize_type='imagenet',
 ):
     datasets = []
@@ -1046,6 +1179,7 @@ def build_datasets(
             max_dynamic_patch=max_num,
             min_num_frame=min_num_frame,
             max_num_frame=max_num_frame,
+            sampling_method=sampling_method,   ##### mh 1122 added code
             repeat_time=repeat_time,
             normalize_type=normalize_type,
             # hyperparameters for packed training
@@ -1105,6 +1239,9 @@ def len2weight(x, loss_reduction):
 
 
 def main():
+    #### mh1122: set ACCELERATE_GRADIENT_ACCUMULATION_STEPS to 1 to avoid memory leak
+    os.environ['ACCELERATE_GRADIENT_ACCUMULATION_STEPS'] = '1'
+
     # Apply necessary patches for the transformers library
     replace_llama_rmsnorm_with_fused_rmsnorm()
     replace_train_sampler()
@@ -1315,7 +1452,7 @@ def main():
         dynamic_image_size=data_args.dynamic_image_size, use_thumbnail=data_args.use_thumbnail,
         min_dynamic_patch=data_args.min_dynamic_patch, max_dynamic_patch=data_args.max_dynamic_patch,
         normalize_type=data_args.normalize_type, min_num_frame=data_args.min_num_frame,
-        max_num_frame=data_args.max_num_frame)
+        max_num_frame=data_args.max_num_frame, sampling_method=data_args.sampling_method) ###### mh 1122 added code
 
     def _freeze_params(module):
         for param in module.parameters():
