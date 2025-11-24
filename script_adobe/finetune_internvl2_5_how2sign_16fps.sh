@@ -130,6 +130,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --max_steps 5000 \
     --save_strategy steps \
     --save_steps 1000 \
+    --save_total_limit 2 \
     --logging_steps 10 \
     --logging_first_step True \
     --evaluation_strategy no \
