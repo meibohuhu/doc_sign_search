@@ -10,7 +10,7 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=24:00:00
+#SBATCH --time=48:00:00
 #SBATCH --gpus-per-node=a100:2
 #SBATCH --partition tier3
 #SBATCH --mem=128g
@@ -136,7 +136,7 @@ torchrun --nproc_per_node=2 --nnodes=1 --master_port=29501 src/train/train_sft.p
     --freeze_vision_tower True \
     --freeze_llm True \
     --freeze_merger False \
-    --unfreeze_topk_vision 4 \
+    --unfreeze_topk_vision 8 \
     --bf16 True \
     --fp16 False \
     --disable_flash_attn2 False \

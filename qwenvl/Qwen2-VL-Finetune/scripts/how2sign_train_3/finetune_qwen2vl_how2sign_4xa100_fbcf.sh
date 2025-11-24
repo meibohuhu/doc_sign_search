@@ -104,11 +104,6 @@ if torch.cuda.is_available():
         print(f"  GPU {idx}: {prop.name} ({prop.total_memory/1024**3:.1f} GB)")
 PY
 
-echo ""
-echo "🏃 Launching training with DeepSpeed..."
-echo "📝 Logging to: $LOG_FILE"
-echo ""
-
 # Run training and log both stdout and stderr to file, while also displaying on terminal
 deepspeed src/train/train_sft.py \
   --deepspeed scripts/zero3_qwen2vl.json \

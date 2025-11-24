@@ -95,7 +95,7 @@ NUM_EPOCHS=100
 MAX_GRAD_NORM=1.0
 
 # Output configuration
-OUTPUT_DIR="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_mae_2xa100_mu"
+OUTPUT_DIR="/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_mae_2xa100_mu_all"
 LOG_DIR="${OUTPUT_DIR}/logs"
 mkdir -p "${OUTPUT_DIR}"
 mkdir -p "${LOG_DIR}"

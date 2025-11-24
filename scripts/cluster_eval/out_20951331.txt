@@ -1,0 +1,207 @@
+✅ Using conda environment: /home/mh2803/miniconda3/envs/qwenvl
+📝 Log file: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100/training_20251124_062134.log
+🚀 Qwen2-VL FBCF training on 1xA100
+Model          : Qwen/Qwen2.5-VL-3B-Instruct
+Data JSON      : /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json
+Video folder   : /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Mask folder    : /shared/rc/llm-gen-agent/mhu/videos/train_crop_videos_720_mask
+Output dir     : /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100
+Batch/GPU      : 1
+Grad accum     : 2
+fps            : 10
+DeepSpeed      : ZeRO-3
+FBCF Sampling  : Per-sample random (40% original, 40% foreground, 20% background)
+
+CUDA available: True
+GPU count: 1
+  GPU 0: NVIDIA A100-PCIE-40GB (39.4 GB)
+
+🏃 Launching training with DeepSpeed...
+📝 Logging to: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100/training_20251124_062134.log
+
+[2025-11-24 06:22:00,376] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Found 254 lora modules: ['model.language_model.embed_tokens', 'model.language_model.layers.0.self_attn.q_proj', 'model.language_model.layers.0.self_attn.k_proj', 'model.language_model.layers.0.self_attn.v_proj', 'model.language_model.layers.0.self_attn.o_proj', 'model.language_model.layers.0.mlp.gate_proj', 'model.language_model.layers.0.mlp.up_proj', 'model.language_model.layers.0.mlp.down_proj', 'model.language_model.layers.1.self_attn.q_proj', 'model.language_model.layers.1.self_attn.k_proj', 'model.language_model.layers.1.self_attn.v_proj', 'model.language_model.layers.1.self_attn.o_proj', 'model.language_model.layers.1.mlp.gate_proj', 'model.language_model.layers.1.mlp.up_proj', 'model.language_model.layers.1.mlp.down_proj', 'model.language_model.layers.2.self_attn.q_proj', 'model.language_model.layers.2.self_attn.k_proj', 'model.language_model.layers.2.self_attn.v_proj', 'model.language_model.layers.2.self_attn.o_proj', 'model.language_model.layers.2.mlp.gate_proj', 'model.language_model.layers.2.mlp.up_proj', 'model.language_model.layers.2.mlp.down_proj', 'model.language_model.layers.3.self_attn.q_proj', 'model.language_model.layers.3.self_attn.k_proj', 'model.language_model.layers.3.self_attn.v_proj', 'model.language_model.layers.3.self_attn.o_proj', 'model.language_model.layers.3.mlp.gate_proj', 'model.language_model.layers.3.mlp.up_proj', 'model.language_model.layers.3.mlp.down_proj', 'model.language_model.layers.4.self_attn.q_proj', 'model.language_model.layers.4.self_attn.k_proj', 'model.language_model.layers.4.self_attn.v_proj', 'model.language_model.layers.4.self_attn.o_proj', 'model.language_model.layers.4.mlp.gate_proj', 'model.language_model.layers.4.mlp.up_proj', 'model.language_model.layers.4.mlp.down_proj', 'model.language_model.layers.5.self_attn.q_proj', 'model.language_model.layers.5.self_attn.k_proj', 'model.language_model.layers.5.self_attn.v_proj', 'model.language_model.layers.5.self_attn.o_proj', 'model.language_model.layers.5.mlp.gate_proj', 'model.language_model.layers.5.mlp.up_proj', 'model.language_model.layers.5.mlp.down_proj', 'model.language_model.layers.6.self_attn.q_proj', 'model.language_model.layers.6.self_attn.k_proj', 'model.language_model.layers.6.self_attn.v_proj', 'model.language_model.layers.6.self_attn.o_proj', 'model.language_model.layers.6.mlp.gate_proj', 'model.language_model.layers.6.mlp.up_proj', 'model.language_model.layers.6.mlp.down_proj', 'model.language_model.layers.7.self_attn.q_proj', 'model.language_model.layers.7.self_attn.k_proj', 'model.language_model.layers.7.self_attn.v_proj', 'model.language_model.layers.7.self_attn.o_proj', 'model.language_model.layers.7.mlp.gate_proj', 'model.language_model.layers.7.mlp.up_proj', 'model.language_model.layers.7.mlp.down_proj', 'model.language_model.layers.8.self_attn.q_proj', 'model.language_model.layers.8.self_attn.k_proj', 'model.language_model.layers.8.self_attn.v_proj', 'model.language_model.layers.8.self_attn.o_proj', 'model.language_model.layers.8.mlp.gate_proj', 'model.language_model.layers.8.mlp.up_proj', 'model.language_model.layers.8.mlp.down_proj', 'model.language_model.layers.9.self_attn.q_proj', 'model.language_model.layers.9.self_attn.k_proj', 'model.language_model.layers.9.self_attn.v_proj', 'model.language_model.layers.9.self_attn.o_proj', 'model.language_model.layers.9.mlp.gate_proj', 'model.language_model.layers.9.mlp.up_proj', 'model.language_model.layers.9.mlp.down_proj', 'model.language_model.layers.10.self_attn.q_proj', 'model.language_model.layers.10.self_attn.k_proj', 'model.language_model.layers.10.self_attn.v_proj', 'model.language_model.layers.10.self_attn.o_proj', 'model.language_model.layers.10.mlp.gate_proj', 'model.language_model.layers.10.mlp.up_proj', 'model.language_model.layers.10.mlp.down_proj', 'model.language_model.layers.11.self_attn.q_proj', 'model.language_model.layers.11.self_attn.k_proj', 'model.language_model.layers.11.self_attn.v_proj', 'model.language_model.layers.11.self_attn.o_proj', 'model.language_model.layers.11.mlp.gate_proj', 'model.language_model.layers.11.mlp.up_proj', 'model.language_model.layers.11.mlp.down_proj', 'model.language_model.layers.12.self_attn.q_proj', 'model.language_model.layers.12.self_attn.k_proj', 'model.language_model.layers.12.self_attn.v_proj', 'model.language_model.layers.12.self_attn.o_proj', 'model.language_model.layers.12.mlp.gate_proj', 'model.language_model.layers.12.mlp.up_proj', 'model.language_model.layers.12.mlp.down_proj', 'model.language_model.layers.13.self_attn.q_proj', 'model.language_model.layers.13.self_attn.k_proj', 'model.language_model.layers.13.self_attn.v_proj', 'model.language_model.layers.13.self_attn.o_proj', 'model.language_model.layers.13.mlp.gate_proj', 'model.language_model.layers.13.mlp.up_proj', 'model.language_model.layers.13.mlp.down_proj', 'model.language_model.layers.14.self_attn.q_proj', 'model.language_model.layers.14.self_attn.k_proj', 'model.language_model.layers.14.self_attn.v_proj', 'model.language_model.layers.14.self_attn.o_proj', 'model.language_model.layers.14.mlp.gate_proj', 'model.language_model.layers.14.mlp.up_proj', 'model.language_model.layers.14.mlp.down_proj', 'model.language_model.layers.15.self_attn.q_proj', 'model.language_model.layers.15.self_attn.k_proj', 'model.language_model.layers.15.self_attn.v_proj', 'model.language_model.layers.15.self_attn.o_proj', 'model.language_model.layers.15.mlp.gate_proj', 'model.language_model.layers.15.mlp.up_proj', 'model.language_model.layers.15.mlp.down_proj', 'model.language_model.layers.16.self_attn.q_proj', 'model.language_model.layers.16.self_attn.k_proj', 'model.language_model.layers.16.self_attn.v_proj', 'model.language_model.layers.16.self_attn.o_proj', 'model.language_model.layers.16.mlp.gate_proj', 'model.language_model.layers.16.mlp.up_proj', 'model.language_model.layers.16.mlp.down_proj', 'model.language_model.layers.17.self_attn.q_proj', 'model.language_model.layers.17.self_attn.k_proj', 'model.language_model.layers.17.self_attn.v_proj', 'model.language_model.layers.17.self_attn.o_proj', 'model.language_model.layers.17.mlp.gate_proj', 'model.language_model.layers.17.mlp.up_proj', 'model.language_model.layers.17.mlp.down_proj', 'model.language_model.layers.18.self_attn.q_proj', 'model.language_model.layers.18.self_attn.k_proj', 'model.language_model.layers.18.self_attn.v_proj', 'model.language_model.layers.18.self_attn.o_proj', 'model.language_model.layers.18.mlp.gate_proj', 'model.language_model.layers.18.mlp.up_proj', 'model.language_model.layers.18.mlp.down_proj', 'model.language_model.layers.19.self_attn.q_proj', 'model.language_model.layers.19.self_attn.k_proj', 'model.language_model.layers.19.self_attn.v_proj', 'model.language_model.layers.19.self_attn.o_proj', 'model.language_model.layers.19.mlp.gate_proj', 'model.language_model.layers.19.mlp.up_proj', 'model.language_model.layers.19.mlp.down_proj', 'model.language_model.layers.20.self_attn.q_proj', 'model.language_model.layers.20.self_attn.k_proj', 'model.language_model.layers.20.self_attn.v_proj', 'model.language_model.layers.20.self_attn.o_proj', 'model.language_model.layers.20.mlp.gate_proj', 'model.language_model.layers.20.mlp.up_proj', 'model.language_model.layers.20.mlp.down_proj', 'model.language_model.layers.21.self_attn.q_proj', 'model.language_model.layers.21.self_attn.k_proj', 'model.language_model.layers.21.self_attn.v_proj', 'model.language_model.layers.21.self_attn.o_proj', 'model.language_model.layers.21.mlp.gate_proj', 'model.language_model.layers.21.mlp.up_proj', 'model.language_model.layers.21.mlp.down_proj', 'model.language_model.layers.22.self_attn.q_proj', 'model.language_model.layers.22.self_attn.k_proj', 'model.language_model.layers.22.self_attn.v_proj', 'model.language_model.layers.22.self_attn.o_proj', 'model.language_model.layers.22.mlp.gate_proj', 'model.language_model.layers.22.mlp.up_proj', 'model.language_model.layers.22.mlp.down_proj', 'model.language_model.layers.23.self_attn.q_proj', 'model.language_model.layers.23.self_attn.k_proj', 'model.language_model.layers.23.self_attn.v_proj', 'model.language_model.layers.23.self_attn.o_proj', 'model.language_model.layers.23.mlp.gate_proj', 'model.language_model.layers.23.mlp.up_proj', 'model.language_model.layers.23.mlp.down_proj', 'model.language_model.layers.24.self_attn.q_proj', 'model.language_model.layers.24.self_attn.k_proj', 'model.language_model.layers.24.self_attn.v_proj', 'model.language_model.layers.24.self_attn.o_proj', 'model.language_model.layers.24.mlp.gate_proj', 'model.language_model.layers.24.mlp.up_proj', 'model.language_model.layers.24.mlp.down_proj', 'model.language_model.layers.25.self_attn.q_proj', 'model.language_model.layers.25.self_attn.k_proj', 'model.language_model.layers.25.self_attn.v_proj', 'model.language_model.layers.25.self_attn.o_proj', 'model.language_model.layers.25.mlp.gate_proj', 'model.language_model.layers.25.mlp.up_proj', 'model.language_model.layers.25.mlp.down_proj', 'model.language_model.layers.26.self_attn.q_proj', 'model.language_model.layers.26.self_attn.k_proj', 'model.language_model.layers.26.self_attn.v_proj', 'model.language_model.layers.26.self_attn.o_proj', 'model.language_model.layers.26.mlp.gate_proj', 'model.language_model.layers.26.mlp.up_proj', 'model.language_model.layers.26.mlp.down_proj', 'model.language_model.layers.27.self_attn.q_proj', 'model.language_model.layers.27.self_attn.k_proj', 'model.language_model.layers.27.self_attn.v_proj', 'model.language_model.layers.27.self_attn.o_proj', 'model.language_model.layers.27.mlp.gate_proj', 'model.language_model.layers.27.mlp.up_proj', 'model.language_model.layers.27.mlp.down_proj', 'model.language_model.layers.28.self_attn.q_proj', 'model.language_model.layers.28.self_attn.k_proj', 'model.language_model.layers.28.self_attn.v_proj', 'model.language_model.layers.28.self_attn.o_proj', 'model.language_model.layers.28.mlp.gate_proj', 'model.language_model.layers.28.mlp.up_proj', 'model.language_model.layers.28.mlp.down_proj', 'model.language_model.layers.29.self_attn.q_proj', 'model.language_model.layers.29.self_attn.k_proj', 'model.language_model.layers.29.self_attn.v_proj', 'model.language_model.layers.29.self_attn.o_proj', 'model.language_model.layers.29.mlp.gate_proj', 'model.language_model.layers.29.mlp.up_proj', 'model.language_model.layers.29.mlp.down_proj', 'model.language_model.layers.30.self_attn.q_proj', 'model.language_model.layers.30.self_attn.k_proj', 'model.language_model.layers.30.self_attn.v_proj', 'model.language_model.layers.30.self_attn.o_proj', 'model.language_model.layers.30.mlp.gate_proj', 'model.language_model.layers.30.mlp.up_proj', 'model.language_model.layers.30.mlp.down_proj', 'model.language_model.layers.31.self_attn.q_proj', 'model.language_model.layers.31.self_attn.k_proj', 'model.language_model.layers.31.self_attn.v_proj', 'model.language_model.layers.31.self_attn.o_proj', 'model.language_model.layers.31.mlp.gate_proj', 'model.language_model.layers.31.mlp.up_proj', 'model.language_model.layers.31.mlp.down_proj', 'model.language_model.layers.32.self_attn.q_proj', 'model.language_model.layers.32.self_attn.k_proj', 'model.language_model.layers.32.self_attn.v_proj', 'model.language_model.layers.32.self_attn.o_proj', 'model.language_model.layers.32.mlp.gate_proj', 'model.language_model.layers.32.mlp.up_proj', 'model.language_model.layers.32.mlp.down_proj', 'model.language_model.layers.33.self_attn.q_proj', 'model.language_model.layers.33.self_attn.k_proj', 'model.language_model.layers.33.self_attn.v_proj', 'model.language_model.layers.33.self_attn.o_proj', 'model.language_model.layers.33.mlp.gate_proj', 'model.language_model.layers.33.mlp.up_proj', 'model.language_model.layers.33.mlp.down_proj', 'model.language_model.layers.34.self_attn.q_proj', 'model.language_model.layers.34.self_attn.k_proj', 'model.language_model.layers.34.self_attn.v_proj', 'model.language_model.layers.34.self_attn.o_proj', 'model.language_model.layers.34.mlp.gate_proj', 'model.language_model.layers.34.mlp.up_proj', 'model.language_model.layers.34.mlp.down_proj', 'model.language_model.layers.35.self_attn.q_proj', 'model.language_model.layers.35.self_attn.k_proj', 'model.language_model.layers.35.self_attn.v_proj', 'model.language_model.layers.35.self_attn.o_proj', 'model.language_model.layers.35.mlp.gate_proj', 'model.language_model.layers.35.mlp.up_proj', 'model.language_model.layers.35.mlp.down_proj', 'lm_head']
+Adding LoRA to the model...
+✅ Unfroze top 8 Vision Encoder blocks (indices [24, 25, 26, 27, 28, 29, 30, 31])
+
+======================================================================
+📋 Model Training Configuration Check
+======================================================================
+
+🔍 Vision Encoder (ViT):
+  Total blocks: 32
+  Trainable blocks: 8
+  Trainable block indices: [24, 25, 26, 27, 28, 29, 30, 31]
+  freeze_vision_tower: True
+  unfreeze_topk_vision: 8
+
+🔗 Merger:
+  Trainable: True
+  Parameter count: 5
+  freeze_merger: False
+
+🧠 LLM LoRA:
+  lora_enable: True
+  LLM LoRA modules: 254
+  LoRA module names (first 10): ['base_model.model.model.language_model.embed_tokens', 'base_model.model.model.language_model.layers.0.self_attn.q_proj', 'base_model.model.model.language_model.layers.0.self_attn.k_proj', 'base_model.model.model.language_model.layers.0.self_attn.v_proj', 'base_model.model.model.language_model.layers.0.self_attn.o_proj', 'base_model.model.model.language_model.layers.0.mlp.gate_proj', 'base_model.model.model.language_model.layers.0.mlp.up_proj', 'base_model.model.model.language_model.layers.0.mlp.down_proj', 'base_model.model.model.language_model.layers.1.self_attn.q_proj', 'base_model.model.model.language_model.layers.1.self_attn.k_proj'] ...
+  (Total 254 LoRA modules)
+  freeze_llm: True
+
+📊 Summary:
+  ✅ ViT layers unfrozen: 8/32
+  ✅ Merger training: True
+  ✅ LLM LoRA training: True
+======================================================================
+
+No valid checkpoints found, starting fresh training
+Parameter Offload - Persistent parameters statistics: param_count = 806, numel = 11732992
+{'loss_bg': 9.625, 'epoch': 0}
+{'loss_bg': 8.625, 'epoch': 0}
+{'loss_full': 3.1754868030548096, 'epoch': 0.0}
+{'loss_full': 2.929077386856079, 'epoch': 0.0}
+{'loss_bg': 8.75, 'epoch': 0.0}
+{'loss_bg': 8.5, 'epoch': 0.0}
+{'loss_fg': 4.264230251312256, 'epoch': 0.0}
+{'loss_fg': 2.9333200454711914, 'epoch': 0.0}
+[2025-11-24 06:24:39,381] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 4.160589694976807, 'epoch': 0.0}
+{'loss_fg': 3.237545967102051, 'epoch': 0.0}
+[2025-11-24 06:24:54,292] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 3.022386312484741, 'epoch': 0.0}
+{'loss_fg': 4.079802513122559, 'epoch': 0.0}
+{'loss_fg': 3.8581581115722656, 'epoch': 0.0}
+{'loss_fg': 4.6378397941589355, 'epoch': 0.0}
+{'loss_fg': 3.9023029804229736, 'epoch': 0.0}
+{'loss_fg': 3.496264934539795, 'epoch': 0.0}
+{'loss_fg': 4.305215358734131, 'epoch': 0.0}
+{'loss_fg': 3.8971009254455566, 'epoch': 0.0}
+{'loss_fg': 2.965806484222412, 'epoch': 0.0}
+{'loss_fg': 2.8285725116729736, 'epoch': 0.0}
+[2025-11-24 06:25:24,863] [WARNING] [stage3.py:2171:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss': 3.2398, 'grad_norm': 31.586368560791016, 'learning_rate': 1.9910000000000004e-05, 'epoch': 0.0}
+{'loss_fg': 4.038278579711914, 'epoch': 0.0}
+{'loss_fg': 4.07269287109375, 'epoch': 0.0}
+[2025-11-24 06:25:31,322] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 3.573789119720459, 'epoch': 0.0}
+{'loss_fg': 4.227456092834473, 'epoch': 0.0}
+{'loss_fg': 3.034390449523926, 'epoch': 0.0}
+{'loss_fg': 3.2033963203430176, 'epoch': 0.0}
+[2025-11-24 06:25:45,081] [WARNING] [stage3.py:2171:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 3.4283013343811035, 'epoch': 0.0}
+{'loss_fg': 1.9198006391525269, 'epoch': 0.0}
+{'loss_full': 4.672680854797363, 'epoch': 0.0}
+{'loss_full': 3.41827392578125, 'epoch': 0.0}
+{'loss_bg': 9.0, 'epoch': 0.0}
+{'loss_bg': 8.75, 'epoch': 0.0}
+{'loss_fg': 2.8133411407470703, 'epoch': 0.0}
+{'loss_fg': 2.850261688232422, 'epoch': 0.0}
+[2025-11-24 06:26:16,437] [WARNING] [stage3.py:2171:step] 3 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 3.8790173530578613, 'epoch': 0.0}
+{'loss_fg': 4.366610527038574, 'epoch': 0.0}
+{'loss_full': 3.4387147426605225, 'epoch': 0.0}
+{'loss_full': 3.012238025665283, 'epoch': 0.0}
+{'loss_fg': 4.687636375427246, 'epoch': 0.0}
+{'loss_fg': 2.6890690326690674, 'epoch': 0.0}
+{'loss': 3.3436, 'grad_norm': 74.24559020996094, 'learning_rate': 1.9810000000000002e-05, 'epoch': 0.0}
+{'loss_bg': 9.125, 'epoch': 0.0}
+{'loss_bg': 10.4375, 'epoch': 0.0}
+{'loss_full': 3.7591147422790527, 'epoch': 0.0}
+{'loss_full': 2.6276450157165527, 'epoch': 0.0}
+{'loss_bg': 9.375, 'epoch': 0.0}
+{'loss_bg': 8.375, 'epoch': 0.0}
+{'loss_bg': 8.75, 'epoch': 0.0}
+{'loss_bg': 8.75, 'epoch': 0.0}
+[2025-11-24 06:27:04,377] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 4.2531046867370605, 'epoch': 0.0}
+{'loss_fg': 3.577958822250366, 'epoch': 0.0}
+[2025-11-24 06:27:15,017] [WARNING] [stage3.py:2171:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 4.345059871673584, 'epoch': 0.0}
+{'loss_fg': 2.4581754207611084, 'epoch': 0.0}
+{'loss_fg': 3.249534845352173, 'epoch': 0.0}
+{'loss_fg': 2.4762444496154785, 'epoch': 0.0}
+{'loss_fg': 2.4771323204040527, 'epoch': 0.0}
+{'loss_fg': 2.883986473083496, 'epoch': 0.0}
+[2025-11-24 06:27:33,373] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_full': 2.190129041671753, 'epoch': 0.0}
+{'loss_full': 3.159640312194824, 'epoch': 0.0}
+{'loss_fg': 4.059718132019043, 'epoch': 0.0}
+{'loss_fg': 3.1703429222106934, 'epoch': 0.0}
+{'loss': 2.7828, 'grad_norm': 31.216867446899414, 'learning_rate': 1.9710000000000003e-05, 'epoch': 0.0}
+{'loss_fg': 3.14223313331604, 'epoch': 0.0}
+{'loss_fg': 3.3919806480407715, 'epoch': 0.0}
+[2025-11-24 06:27:51,984] [WARNING] [stage3.py:2171:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_full': 3.188551902770996, 'epoch': 0.0}
+{'loss_full': 4.996740341186523, 'epoch': 0.0}
+{'loss_full': 2.158416271209717, 'epoch': 0.0}
+{'loss_full': 2.4370198249816895, 'epoch': 0.0}
+[2025-11-24 06:28:08,432] [WARNING] [stage3.py:2171:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 3.0706899166107178, 'epoch': 0.0}
+{'loss_fg': 2.3626670837402344, 'epoch': 0.0}
+{'loss_fg': 1.8073735237121582, 'epoch': 0.0}
+{'loss_fg': 3.211287260055542, 'epoch': 0.0}
+{'loss_fg': 3.7705605030059814, 'epoch': 0.0}
+{'loss_fg': 2.600640296936035, 'epoch': 0.0}
+[2025-11-24 06:28:26,139] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 3.2422003746032715, 'epoch': 0.0}
+{'loss_fg': 4.0643534660339355, 'epoch': 0.0}
+[2025-11-24 06:28:32,769] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_fg': 3.6317784786224365, 'epoch': 0.0}
+{'loss_fg': 3.5480923652648926, 'epoch': 0.0}
+{'loss_fg': 3.460803508758545, 'epoch': 0.0}
+{'loss_fg': 2.1439146995544434, 'epoch': 0.0}
+{'loss_fg': 3.288062334060669, 'epoch': 0.0}
+{'loss_fg': 3.410451889038086, 'epoch': 0.0}
+{'loss': 3.1464, 'grad_norm': 33.762176513671875, 'learning_rate': 1.9610000000000004e-05, 'epoch': 0.0}
+{'loss_fg': 1.7991044521331787, 'epoch': 0.0}
+{'loss_fg': 3.520055055618286, 'epoch': 0.0}
+{'loss_fg': 2.3485426902770996, 'epoch': 0.0}
+{'loss_fg': 2.9603707790374756, 'epoch': 0.0}
+{'loss_fg': 2.270137310028076, 'epoch': 0.0}
+{'loss_fg': 3.150000810623169, 'epoch': 0.0}
+{'loss_full': 3.849395513534546, 'epoch': 0.0}
+{'loss_full': 3.2484934329986572, 'epoch': 0.0}
+{'loss_fg': 3.017117977142334, 'epoch': 0.0}
+{'loss_fg': 2.346745014190674, 'epoch': 0.0}
+{'loss_fg': 2.7916078567504883, 'epoch': 0.0}
+{'loss_fg': 1.7667243480682373, 'epoch': 0.0}
+[2025-11-24 06:29:28,565] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_bg': 8.8125, 'epoch': 0.0}
+{'loss_bg': 8.4375, 'epoch': 0.0}
+{'loss_fg': 3.3597404956817627, 'epoch': 0.0}
+{'loss_fg': 2.684159755706787, 'epoch': 0.0}
+{'loss_fg': 2.468073606491089, 'epoch': 0.0}
+{'loss_fg': 2.7738494873046875, 'epoch': 0.0}
+{'loss_full': 2.8538389205932617, 'epoch': 0.0}
+{'loss_full': 3.0658276081085205, 'epoch': 0.0}
+{'loss': 2.6863, 'grad_norm': 23.92845344543457, 'learning_rate': 1.951e-05, 'epoch': 0.0}
+{'loss_fg': 1.933144450187683, 'epoch': 0.0}
+{'loss_fg': 3.2161483764648438, 'epoch': 0.0}
+{'loss_fg': 3.650879144668579, 'epoch': 0.0}
+{'loss_fg': 3.2715883255004883, 'epoch': 0.0}
+[2025-11-24 06:30:08,481] [WARNING] [stage3.py:2171:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss_bg': 8.9375, 'epoch': 0.0}
+{'loss_bg': 9.25, 'epoch': 0.0}
+{'loss_fg': 2.6458520889282227, 'epoch': 0.0}
+{'loss_fg': 3.474536657333374, 'epoch': 0.0}
+{'loss_bg': 8.875, 'epoch': 0.0}
+{'loss_bg': 8.75, 'epoch': 0.0}
+{'loss_full': 3.462522268295288, 'epoch': 0.0}
+{'loss_full': 3.6398539543151855, 'epoch': 0.0}
+{'loss_bg': 8.875, 'epoch': 0.0}
+{'loss_bg': 8.875, 'epoch': 0.0}
+{'loss_full': 2.7629990577697754, 'epoch': 0.0}
+{'loss_full': 2.4767708778381348, 'epoch': 0.0}
+{'loss_fg': 2.521711587905884, 'epoch': 0.0}
+{'loss_fg': 3.690398931503296, 'epoch': 0.0}
+{'loss_fg': 3.331505060195923, 'epoch': 0.0}
+{'loss_fg': 2.9259965419769287, 'epoch': 0.0}
+{'loss': 2.6857, 'grad_norm': 28.80681800842285, 'learning_rate': 1.9410000000000002e-05, 'epoch': 0.0}
+{'loss_fg': 3.747382640838623, 'epoch': 0.0}
+{'loss_fg': 2.6749424934387207, 'epoch': 0.0}
+{'loss_fg': 4.26528263092041, 'epoch': 0.0}
+{'loss_fg': 4.182371139526367, 'epoch': 0.0}
+{'loss_bg': 8.8125, 'epoch': 0.0}
+[2025-11-24 06:31:32,918] [ERROR] [launch.py:341:sigkill_handler] ['/home/mh2803/miniconda3/envs/qwenvl/bin/python3.10', '-u', 'src/train/train_sft.py', '--local_rank=0', '--deepspeed', 'scripts/zero3_qwen2vl.json', '--model_id', 'Qwen/Qwen2.5-VL-3B-Instruct', '--data_path', '/home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json', '--image_folder', '/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/', '--mask_folder', '/shared/rc/llm-gen-agent/mhu/videos/train_crop_videos_720_mask', '--mask_file_suffix', '.npz', '--mask_key', 'mask', '--mask_dilation', '3', '--mask_blur_kernel', '5', '--fbcf_bg_noise_std', '0.05', '--enable_fbcf', 'True', '--fbcf_lambda', '0.2', '--fg_loss_weight', '1.0', '--bg_loss_weight', '1.0', '--fbcf_sampling_mode', 'True', '--fbcf_sampling_ratio_original', '0.2', '--fbcf_sampling_ratio_foreground', '0.6', '--fbcf_sampling_ratio_background', '0.2', '--output_dir', '/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_1xa100', '--num_train_epochs', '1', '--max_steps', '2000', '--per_device_train_batch_size', '1', '--gradient_accumulation_steps', '2', '--video_min_pixels', '50176', '--video_max_pixels', '50176', '--video_resized_width', '224', '--video_resized_height', '224', '--fps', '10', '--max_grad_norm', '1.0', '--learning_rate', '2e-5', '--dataloader_num_workers', '2', '--dataloader_pin_memory', 'False', '--logging_steps', '10', '--save_strategy', 'steps', '--save_steps', '1000', '--save_total_limit', '1', '--use_liger', 'True', '--freeze_llm', 'True', '--freeze_vision_tower', 'True', '--freeze_merger', 'False', '--unfreeze_topk_vision', '8', '--bf16', 'True', '--disable_flash_attn2', 'False', '--gradient_checkpointing', 'True', '--lora_enable', 'True', '--lora_rank', '16', '--lora_alpha', '32', '--vision_lr', '2e-5', '--merger_lr', '2e-5', '--report_to', 'none'] exits with return code = 1
+Detected VISIBLE_DEVICES=0: setting --include=localhost:0
+
+❌ Training failed (exit 1)

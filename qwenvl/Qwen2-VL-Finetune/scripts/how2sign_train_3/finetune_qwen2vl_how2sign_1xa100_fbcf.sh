@@ -36,7 +36,7 @@ fi
 
 export PYTHONPATH="/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src:$PYTHONPATH"
 export OMP_NUM_THREADS=4
-export PYTORCH_ALLOC_CONF=expandable_segments:True,max_split_size_mb:128
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True,max_split_size_mb:128
 # Clear GPU cache periodically
 export CUDA_LAUNCH_BLOCKING=0
 
@@ -124,8 +124,8 @@ deepspeed src/train/train_sft.py \
   --fg_loss_weight 1.0 \
   --bg_loss_weight 1.0 \
   --fbcf_sampling_mode True \
-  --fbcf_sampling_ratio_original 0.4 \
-  --fbcf_sampling_ratio_foreground 0.4 \
+  --fbcf_sampling_ratio_original 0.2 \
+  --fbcf_sampling_ratio_foreground 0.6 \
   --fbcf_sampling_ratio_background 0.2 \
   --output_dir "$OUTPUT_DIR" \
   --num_train_epochs 1 \
