@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Upload video files to Hugging Face dataset repository
+Upload video/mask files to Hugging Face dataset repository
 Supports both individual file upload and archive-based upload (for rate limit issues)
+Supports .mp4 (videos) and .npz (masks) files
 """
 
 import os
@@ -20,18 +21,20 @@ def upload_videos_packaged(
     dataset_name: str,
     token: str = None,
     archive_size_gb: float = 5.0,
-    resume: bool = True
+    resume: bool = True,
+    file_ext: str = "*.npz"
 ):
     """
-    Upload videos by packaging them into tar.gz archives first
+    Upload files by packaging them into tar.gz archives first
     This helps avoid rate limits when uploading many small files
     
     Args:
-        video_dir: Path to directory containing video files
+        video_dir: Path to directory containing files
         dataset_name: Hugging Face dataset name
         token: Hugging Face authentication token
         archive_size_gb: Target size for each archive in GB (default: 5.0)
         resume: If True, skip archives that already exist (default: True)
+        file_ext: File extension pattern to match (default: "*.npz")
     """
     # Login to Hugging Face
     if token is None:
@@ -78,12 +81,23 @@ def upload_videos_packaged(
         print(f"Creating repository {repo_id}...")
         create_repo(repo_id=repo_id, repo_type=repo_type, exist_ok=False)
     
-    # Get all video files
-    video_path = Path(video_dir)
-    video_files = sorted(list(video_path.glob("*.mp4")))
+    # Get all files matching the extension
+    file_path = Path(video_dir)
+    all_files = sorted(list(file_path.glob(file_ext)))
     
-    print(f"\nFound {len(video_files)} video files")
-    total_size_gb = sum(f.stat().st_size for f in video_files) / (1024**3)
+    # Determine archive prefix based on file extension
+    if file_ext == "*.npz":
+        archive_prefix = "masks_"
+        file_type = "mask"
+    elif file_ext == "*.mp4":
+        archive_prefix = "videos_"
+        file_type = "video"
+    else:
+        archive_prefix = "files_"
+        file_type = "file"
+    
+    print(f"\nFound {len(all_files)} {file_type} files")
+    total_size_gb = sum(f.stat().st_size for f in all_files) / (1024**3)
     print(f"Total size: {total_size_gb:.2f} GB")
     
     # Check existing archives if resume
@@ -91,7 +105,7 @@ def upload_videos_packaged(
     if resume:
         try:
             repo_files = api.list_repo_files(repo_id=repo_id, repo_type=repo_type)
-            existing_archives = {f for f in repo_files if f.startswith("videos_") and f.endswith(".tar.gz")}
+            existing_archives = {f for f in repo_files if f.startswith(archive_prefix) and f.endswith(".tar.gz")}
             print(f"Found {len(existing_archives)} existing archive(s), will skip them")
         except Exception as e:
             print(f"Could not check existing files: {e}")
@@ -105,23 +119,23 @@ def upload_videos_packaged(
     
     print(f"\nCreating archives (target size: {archive_size_gb:.2f} GB per archive)...")
     
-    for video_file in tqdm(video_files, desc="Organizing files"):
-        file_size = video_file.stat().st_size
+    for file in tqdm(all_files, desc="Organizing files"):
+        file_size = file.stat().st_size
         
         # If adding this file would exceed the size limit, finalize current archive
         if current_size + file_size > archive_size_bytes and current_archive_files:
-            archive_name = f"videos_{archive_idx:05d}.tar.gz"
+            archive_name = f"{archive_prefix}{archive_idx:05d}.tar.gz"
             archives_to_create.append((archive_name, current_archive_files.copy()))
             current_archive_files = []
             current_size = 0
             archive_idx += 1
         
-        current_archive_files.append(video_file)
+        current_archive_files.append(file)
         current_size += file_size
     
     # Don't forget the last archive
     if current_archive_files:
-        archive_name = f"videos_{archive_idx:05d}.tar.gz"
+        archive_name = f"{archive_prefix}{archive_idx:05d}.tar.gz"
         archives_to_create.append((archive_name, current_archive_files.copy()))
     
     print(f"Will create {len(archives_to_create)} archive(s)")
@@ -150,8 +164,8 @@ def upload_videos_packaged(
                 # Create tar.gz archive
                 print(f"\nCreating {archive_name} ({len(archive_files)} files)...")
                 with tarfile.open(archive_path, "w:gz") as tar:
-                    for video_file in tqdm(archive_files, desc=f"  Adding files to {archive_name}", leave=False):
-                        tar.add(video_file, arcname=video_file.name)
+                    for file in tqdm(archive_files, desc=f"  Adding files to {archive_name}", leave=False):
+                        tar.add(file, arcname=file.name)
                 
                 archive_size = archive_path.stat().st_size / (1024**2)
                 print(f"  Archive size: {archive_size:.2f} MB")
@@ -198,19 +212,21 @@ def upload_videos(
     batch_size: int = 5,
     delay_seconds: float = 1.0,
     max_retries: int = 3,
-    resume: bool = True
+    resume: bool = True,
+    file_ext: str = "*.npz"
 ):
     """
-    Upload video files individually with rate limiting and retry logic
+    Upload files individually with rate limiting and retry logic
     
     Args:
-        video_dir: Path to directory containing video files
+        video_dir: Path to directory containing files
         dataset_name: Hugging Face dataset name
         token: Hugging Face authentication token
         batch_size: Number of files to upload in parallel (default: 5, lower for rate limits)
         delay_seconds: Delay between batches in seconds (default: 1.0)
         max_retries: Maximum retries for failed uploads (default: 3)
         resume: If True, skip files that already exist (default: True)
+        file_ext: File extension pattern to match (default: "*.npz")
     """
     # Login to Hugging Face
     if token is None:
@@ -257,12 +273,15 @@ def upload_videos(
         print(f"Creating repository {repo_id}...")
         create_repo(repo_id=repo_id, repo_type=repo_type, exist_ok=False)
     
-    # Get all video files
-    video_path = Path(video_dir)
-    video_files = sorted(list(video_path.glob("*.mp4")))
+    # Get all files matching the extension
+    file_path = Path(video_dir)
+    all_files = sorted(list(file_path.glob(file_ext)))
     
-    print(f"\nFound {len(video_files)} video files")
-    total_size_gb = sum(f.stat().st_size for f in video_files) / (1024**3)
+    # Determine file type and extension for checking
+    ext_suffix = file_ext.replace("*", "")
+    
+    print(f"\nFound {len(all_files)} files")
+    total_size_gb = sum(f.stat().st_size for f in all_files) / (1024**3)
     print(f"Total size: {total_size_gb:.2f} GB")
     
     # Get already uploaded files if resume
@@ -270,13 +289,13 @@ def upload_videos(
     if resume:
         try:
             repo_files = api.list_repo_files(repo_id=repo_id, repo_type=repo_type)
-            uploaded_files = {f for f in repo_files if f.endswith('.mp4')}
+            uploaded_files = {f for f in repo_files if f.endswith(ext_suffix)}
             print(f"Found {len(uploaded_files)} already uploaded files, will skip them")
         except Exception as e:
             print(f"Could not check existing files: {e}")
     
     # Filter out already uploaded files
-    files_to_upload = [f for f in video_files if f.name not in uploaded_files]
+    files_to_upload = [f for f in all_files if f.name not in uploaded_files]
     
     if not files_to_upload:
         print(f"All files already uploaded!")
@@ -285,16 +304,16 @@ def upload_videos(
     print(f"Uploading {len(files_to_upload)} files with {batch_size} parallel workers...")
     print(f"Delay between batches: {delay_seconds}s, Max retries: {max_retries}")
     
-    def upload_single_file(video_file, retry_count=0):
+    def upload_single_file(file, retry_count=0):
         """Upload a single file with retry logic"""
         try:
             api.upload_file(
-                path_or_fileobj=str(video_file),
-                path_in_repo=video_file.name,
+                path_or_fileobj=str(file),
+                path_in_repo=file.name,
                 repo_id=repo_id,
                 repo_type=repo_type,
             )
-            return (True, video_file.name, None)
+            return (True, file.name, None)
         except Exception as e:
             error_str = str(e)
             # Check if it's a rate limit error
@@ -303,8 +322,8 @@ def upload_videos(
                     # Exponential backoff for rate limits
                     wait_time = (2 ** retry_count) * delay_seconds
                     time.sleep(wait_time)
-                    return upload_single_file(video_file, retry_count + 1)
-            return (False, video_file.name, error_str)
+                    return upload_single_file(file, retry_count + 1)
+            return (False, file.name, error_str)
     
     # Upload in batches
     uploaded_count = 0
@@ -336,7 +355,7 @@ def upload_videos(
     # Summary
     print(f"\n{'='*70}")
     print(f"Upload Summary:")
-    print(f"  Total files: {len(video_files)}")
+    print(f"  Total files: {len(all_files)}")
     print(f"  Uploaded: {uploaded_count}")
     print(f"  Already existed: {len(uploaded_files)}")
     print(f"  Failed: {len(failed_files)}")
@@ -369,14 +388,20 @@ Examples:
     parser.add_argument(
         "--video_dir",
         type=str,
-        default="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224",
-        help="Path to directory containing video files"
+        default="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_720_mask",
+        help="Path to directory containing files"
     )
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default="PhoenixHu/sign_mllm_how_224",
+        default="PhoenixHu/sign_mllm_how2sign_720_mask",
         help="Hugging Face dataset name"
+    )
+    parser.add_argument(
+        "--file_ext",
+        type=str,
+        default="*.npz",
+        help="File extension pattern to match (default: *.npz for masks, use *.mp4 for videos)"
     )
     parser.add_argument(
         "--mode",
@@ -434,7 +459,8 @@ Examples:
             dataset_name=args.dataset_name,
             token=args.token,
             archive_size_gb=args.archive_size,
-            resume=not args.no_resume
+            resume=not args.no_resume,
+            file_ext=args.file_ext
         )
     else:
         upload_videos(
@@ -444,5 +470,6 @@ Examples:
             batch_size=args.batch_size,
             delay_seconds=args.delay,
             max_retries=args.max_retries,
-            resume=not args.no_resume
+            resume=not args.no_resume,
+            file_ext=args.file_ext
         )

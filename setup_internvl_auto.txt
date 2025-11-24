@@ -42,7 +42,7 @@ mkdir -p ~/.ssh
 cd ~/.ssh
 
 # 生成SSH密钥，使用正确的语法避免echo参数问题
-ssh-keygen -t rsa -C 'mh2803@rit.edu' -f ~/.ssh/id_rsa -N ""
+ssh-keygen -t rsa -C 'mh2803_internvl@rit.edu' -f ~/.ssh/id_rsa -N ""
 
 echo "正在启动ssh-agent并添加密钥..."
 # 启动ssh-agent并添加密钥

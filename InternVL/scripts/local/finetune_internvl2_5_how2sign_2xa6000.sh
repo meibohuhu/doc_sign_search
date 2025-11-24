@@ -127,7 +127,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --dataloader_pin_memory True \
     --remove_unused_columns False \
     --group_by_length False \
-    --use_packed_ds True \
+    --use_packed_ds False \
     --max_packed_tokens $MAX_PACKED_TOKENS \
     --max_buffer_size $MAX_BUFFER_SIZE \
     --deepspeed "$DEEPSPEED_CONFIG" \
