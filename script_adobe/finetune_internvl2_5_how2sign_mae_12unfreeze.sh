@@ -47,15 +47,11 @@ MASK_STRATEGY=${MASK_STRATEGY:-random}
 DECODER_DIM=${DECODER_DIM:-384}
 DECODER_DEPTH=${DECODER_DEPTH:-6}
 DECODER_HEADS=${DECODER_HEADS:-12}
-FREEZE_ENCODER=${FREEZE_ENCODER:-False}
-UNFREEZE_TOPK_VISION=${UNFREEZE_TOPK_VISION:-0}
+UNFREEZE_TOPK_VISION=${UNFREEZE_TOPK_VISION:-12}
 
 export MASTER_PORT=29508
 LOG_FILE="${OUTPUT_DIR}/mae_training_$(date +%Y%m%d_%H%M%S).log"
 
-FREEZE_ARGS=""
-[ "$FREEZE_ENCODER" = "True" ] && FREEZE_ARGS="--freeze_encoder True"
-[ "$UNFREEZE_TOPK_VISION" -gt 0 ] && [ -z "$FREEZE_ARGS" ] && FREEZE_ARGS="--unfreeze_topk_vision $UNFREEZE_TOPK_VISION"
 
 mkdir -p "$OUTPUT_DIR"
 [ -f "$META_PATH" ] || { echo "❌ Meta file not found: $META_PATH"; exit 1; }
@@ -84,7 +80,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --decoder_heads $DECODER_HEADS \
     --norm_pix_loss True \
     --spacetime_mask True \
-    $FREEZE_ARGS \
+    --unfreeze_topk_vision $UNFREEZE_TOPK_VISION \
     --save_strategy steps \
     --save_total_limit 2 \
     --save_interval  10000 \
