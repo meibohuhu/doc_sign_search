@@ -1,0 +1,170 @@
+🎬 Qwen2VL Checkpoint-5000 Evaluation
+======================================
+Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_4xa100_samples/checkpoint-1000
+Model Base: Qwen/Qwen2.5-VL-3B-Instruct
+Video Folder: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Question File: /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_with_masks.json
+Output Dir: /home/mh2803/projects/sign_language_llm/outputs/
+
+✅ GPU: NVIDIA A100-PCIE-40GB
+💾 Memory: 42.3GB
+
+🚀 Loading model from checkpoint...
+   Checkpoint: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_4xa100_samples/checkpoint-1000
+
+1️⃣ Loading base model...
+   ✅ Base model loaded
+
+2️⃣ Loading vision tower + merger...
+   File size: 6.99 GB
+   🔄 Loading checkpoint (this may take 30-60 seconds)...
+   ✅ Loaded 824 keys from disk
+
+   🔧 Cleaning key prefixes...
+   ✅ Cleaned 824 keys
+
+   📝 Sample cleaned keys:
+      - model.visual.patch_embed.proj.weight
+      - model.visual.blocks.0.norm1.weight
+      - model.visual.blocks.0.norm2.weight
+      - model.visual.blocks.0.attn.qkv.weight
+      - model.visual.blocks.0.attn.qkv.bias
+
+   📊 Components in checkpoint:
+      Vision tower: 390 keys
+      Merger: 5 keys
+      Total: 824 keys
+
+   ✅ Full vision tower found in checkpoint!
+
+   🔄 Loading weights into model...
+      ✅ Loaded: 462/824 parameters
+      Missing: 362 (normal for LoRA)
+      Unexpected: 361
+
+   📊 Vision parameters in model: 668,684,288
+      ✅ Full vision tower present (668,684,288 params)
+
+3️⃣ Loading LoRA weights (LLM)...
+   ✅ LoRA loaded
+
+4️⃣ Loading processor...
+   ✅ Processor loaded
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+   🎯 Vision tower: FULLY TRAINED
+   🎯 Merger: TRAINED (from checkpoint) ✅
+   🎯 LLM: TRAINED (via LoRA) ✅
+======================================================================
+
+📂 Loading test data from: /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_with_masks.json
+   Limited to 20 samples
+   Total samples: 20
+
+🎬 Starting evaluation...
+======================================================================
+
+
+──────────────────────────────────────────────────────────────────────
+[1/20] -00cp1iGiDw_1-5-rgb_front.mp4
+Ground truth: If you like to find more about my services you can visit my website canineheadstart.com.
+Prediction:   First thing you want is your frame.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[2/20] -00cp1iGiDw_10_11-5-rgb_front.mp4
+Ground truth: So that is one option. Another option is if you know your dog has fleas there is something called cap star and this is a product that is oral product.
+Prediction:   Alright, so you want to get as far away from the head as you can.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/20] -00cp1iGiDw_12-5-rgb_front.mp4
+Ground truth: It works right away and it will actually kill all of the fleas that are on the dog for the next 24 hours and it start working in about 30 minutes.
+Prediction:   Alright, so you want to get as close as possible without actually touching it.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[4/20] -00cp1iGiDw_13-5-rgb_front.mp4
+Ground truth: So if you taken your dog to a place or a friends house or to a training school and you believe that there are fleas there and your dog may have gotten fleas this is a great product to use when you are about to leave before you bring your dog to your home.
+Prediction:   All right, so you want to make sure that you get it on the inside of the wheel, all the way around the wheel, and then set it aside to dry.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[5/20] -00cp1iGiDw_14-5-rgb_front.mp4
+Ground truth: Again this is a oral preventive and this is also a oral preventive.
+Prediction:   Alright, so you want to get as much of this off the tooth as you can.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[6/20] -00cp1iGiDw_15-5-rgb_front.mp4
+Ground truth: We are going to be talking about external flea prevention in the next video.
+Prediction:   First thing you want is a good quality camera.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[7/20] -00cp1iGiDw_2-5-rgb_front.mp4
+Ground truth: So we are going to be talking about flea prevention in this short video clip.
+Prediction:   ALAS, NO, IT'S THE KNEE. SEE THOSE OTHER KNEES, ALAS, NO.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[8/20] -00cp1iGiDw_3-5-rgb_front.mp4
+Ground truth: There are a number of products out there that you can use on your dog obviously one way to prevent fleas is not have you dog go out side but that is not really realistic.
+Prediction:   Thank you for listening, and I'll leave the rest for you to discover.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[9/20] -00cp1iGiDw_4-5-rgb_front.mp4
+Ground truth: So we are going to be talking about products that you can use to prevent fleas.
+Prediction:   So, we're going to be talking about flea prevention in the next video.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[10/20] -00cp1iGiDw_5-5-rgb_front.mp4
+Ground truth: In the last of couple of years there has been a increase of different types of options out there that you can use.
+Prediction:   First, you want your head to be up and your ear to be to the outside.
+✅ Partial match (has some words)
+
+======================================================================
+✅ Results saved: /home/mh2803/projects/sign_language_llm/outputs/checkpoint4000_results_20251124_130455.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+
+============================================================
+EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1102
+  Precision:        0.1318
+  Recall:           0.1004
+  ROUGE-L F1:       0.1012
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1516
+  BLEU2: 0.0493
+  BLEU3: 0.0261
+  BLEU4: 0.0174
+
+📋 Summary:
+  Total Samples:    20
+============================================================
+
+📊 Metrics saved: /home/mh2803/projects/sign_language_llm/outputs/metrics_20251124_130455.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 20
+   Successful: 20
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+
+🎉 Evaluation job completed!

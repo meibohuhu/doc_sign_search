@@ -65,7 +65,7 @@ IMAGE_FOLDER="/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_s
 MASK_FOLDER="/shared/rc/llm-gen-agent/mhu/videos/train_crop_videos_720_mask"
 
 # Training configuration for 4xA100 GPU
-GLOBAL_BATCH_SIZE=32
+GLOBAL_BATCH_SIZE=16
 PER_DEVICE_BS=1
 NUM_DEVICES=4
 GRAD_ACCUM=$((GLOBAL_BATCH_SIZE / (PER_DEVICE_BS * NUM_DEVICES)))
@@ -149,15 +149,14 @@ deepspeed src/train/train_sft.py \
   --save_total_limit 1 \
   --use_liger True \
   --freeze_llm True \
-  --freeze_vision_tower True \
+  --freeze_vision_tower False \
   --freeze_merger False \
-  --unfreeze_topk_vision 8 \
   --bf16 True \
   --disable_flash_attn2 False \
   --gradient_checkpointing True \
   --lora_enable True \
-  --lora_rank 8 \
-  --lora_alpha 16 \
+  --lora_rank 16 \
+  --lora_alpha 32 \
   --vision_lr 1e-5 \
   --merger_lr 2e-5 \
   --report_to none
