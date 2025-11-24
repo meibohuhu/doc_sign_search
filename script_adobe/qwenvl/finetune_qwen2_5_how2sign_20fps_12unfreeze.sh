@@ -31,8 +31,8 @@ DATA_PATH="/code/doc_sign_search/how2sign/video/segmented_train_videos_corrupted
 IMAGE_FOLDER="/mnt/localssd/sign_mllm"
 
 # Optimized training configuration
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
-BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
+BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-4}
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
 export MASTER_PORT=29508
