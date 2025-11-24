@@ -27,7 +27,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # Model and data configuration
 MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
 OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/qwen2_5_vl_how2sign_20fps_12unfreeze"
-DATA_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
+DATA_PATH="/code/doc_sign_search/how2sign/video/segmented_train_videos_corrupted_removed.json"
 IMAGE_FOLDER="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
 # Optimized training configuration
@@ -64,7 +64,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --save_strategy epoch \
     --save_total_limit 3 \
     --use_liger True \
-    --freeze_vision_tower False \
+    --freeze_vision_tower True \
     --freeze_llm True \
     --freeze_merger False \
     --unfreeze_topk_vision 12 \
