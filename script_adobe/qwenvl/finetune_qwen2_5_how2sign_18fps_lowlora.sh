@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# InternVL2.5-2B How2Sign Fine-Tuning on 4*A100
+# InternVL2.5-2B How2Sign Fine-Tuning on 2*A100
 # Set up conda environment - matches setup_internvl_auto.txt
 # Anaconda is installed at $HOME/anaconda3 by setup script
 # Environment name: internvl
@@ -31,7 +31,7 @@ DATA_PATH="/code/doc_sign_search/how2sign/video/segmented_train_videos_corrupted
 IMAGE_FOLDER="/mnt/localssd/sign_mllm"
 
 # Optimized training configuration
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-32}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
