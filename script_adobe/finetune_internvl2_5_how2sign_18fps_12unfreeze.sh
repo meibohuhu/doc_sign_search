@@ -42,13 +42,11 @@ GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * 
 DEEPSPEED_CONFIG="internvl_chat/zero_stage3_config.json"
 
 # DEFAULT_MAX_SEQ_LENGTH=12288
-# DEFAULT_MAX_PACKED_TOKENS=12288
 # DEFAULT_MAX_BUFFER_SIZE=20
 # DEFAULT_NUM_IMAGES_EXPECTED=128
 # DEFAULT_MAX_NUM_FRAME=128
 
 MAX_SEQ_LENGTH=${MAX_SEQ_LENGTH:-16384}
-MAX_PACKED_TOKENS=${MAX_PACKED_TOKENS:-16384}
 MAX_BUFFER_SIZE=${MAX_BUFFER_SIZE:-20}
 NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-160}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
@@ -144,7 +142,6 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --remove_unused_columns False \
     --group_by_length False \
     --use_packed_ds False \
-    --max_packed_tokens $MAX_PACKED_TOKENS \
     --max_buffer_size $MAX_BUFFER_SIZE \
     --deepspeed "$DEEPSPEED_CONFIG" \
     --optim adamw_torch \

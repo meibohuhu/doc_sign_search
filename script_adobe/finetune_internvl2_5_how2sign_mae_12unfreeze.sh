@@ -1,27 +1,42 @@
 #!/bin/bash
-set -e
+#
+# InternVL2.5-2B How2Sign Fine-Tuning on 4*A100
+# Set up conda environment - matches setup_internvl_auto.txt
+# Anaconda is installed at $HOME/anaconda3 by setup script
+# Environment name: internvl
+# Initialize and activate conda environment
+# source "$HOME/anaconda3/etc/profile.d/conda.sh"
+# conda activate internvl
+# echo "✅ Conda environment activated: internvl"
 
-export PYTHONPATH="/local1/mhu/sign_language_llm/InternVL:/local1/mhu/sign_language_llm/InternVL/internvl_chat:${PYTHONPATH:-}"
-export OMP_NUM_THREADS=8
-export PYTORCH_ALLOC_CONF=expandable_segments:True
-export DS_BUILD_OPS=0
-export DS_BUILD_FUSED_ADAM=0
-export DS_BUILD_CUDA_EXT=0
-export DS_BUILD_CPU_ADAM=0
-export DEEPSPEED_CPU_ADAM=1
+# Essential environment variables
+export PYTHONPATH="/code/doc_sign_search/InternVL/internvl_chat:${PYTHONPATH:-}"
+export TOKENIZERS_PARALLELISM=false
 export PYTHONUNBUFFERED=1
+export PYTORCH_ALLOC_CONF=expandable_segments:True
 
-cd /local1/mhu/sign_language_llm/InternVL
+# Change to InternVL directory
+cd /code/doc_sign_search/InternVL
 
+# GPU configuration
+# Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
+GPU_IDS=${GPU_IDS:-"4,5,6,7"}  # Default: use GPU 0, 1, 2, 3
+export CUDA_VISIBLE_DEVICES=$GPU_IDS
+
+# Calculate number of devices from GPU_IDS
+NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
+
+# Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_mae_2xa6000"
-META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json"
-VIDEO_BASE_PATH="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/internvl2_5_2B_mae_how2sign"
+META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
+VIDEO_BASE_PATH="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-8}
-BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
-NUM_DEVICES=${NUM_DEVICES:-2}
-GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
+# Optimized training configuration
+# Note: NUM_DEVICES is automatically calculated from GPU_IDS above
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
+BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
+GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
 IMAGE_SIZE=${IMAGE_SIZE:-224}
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-8}
@@ -35,18 +50,18 @@ DECODER_HEADS=${DECODER_HEADS:-12}
 FREEZE_ENCODER=${FREEZE_ENCODER:-False}
 UNFREEZE_TOPK_VISION=${UNFREEZE_TOPK_VISION:-0}
 
-mkdir -p "$OUTPUT_DIR"
-[ -f "$META_PATH" ] || { echo "❌ Meta file not found: $META_PATH"; exit 1; }
-[ -d "$VIDEO_BASE_PATH" ] || { echo "❌ Video folder not found: $VIDEO_BASE_PATH"; exit 1; }
-
-MASTER_PORT=${MASTER_PORT:-$(shuf -i 20000-29999 -n 1)}
+export MASTER_PORT=29508
 LOG_FILE="${OUTPUT_DIR}/mae_training_$(date +%Y%m%d_%H%M%S).log"
 
 FREEZE_ARGS=""
 [ "$FREEZE_ENCODER" = "True" ] && FREEZE_ARGS="--freeze_encoder True"
 [ "$UNFREEZE_TOPK_VISION" -gt 0 ] && [ -z "$FREEZE_ARGS" ] && FREEZE_ARGS="--unfreeze_topk_vision $UNFREEZE_TOPK_VISION"
 
-deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
+mkdir -p "$OUTPUT_DIR"
+[ -f "$META_PATH" ] || { echo "❌ Meta file not found: $META_PATH"; exit 1; }
+[ -d "$VIDEO_BASE_PATH" ] || { echo "❌ Video folder not found: $VIDEO_BASE_PATH"; exit 1; }
+
+deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     internvl_chat/internvl/train/train_internvl_mae.py \
     --model_id "$MODEL_NAME" \
     --output_dir "$OUTPUT_DIR" \
@@ -72,7 +87,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     $FREEZE_ARGS \
     --save_strategy steps \
     --save_total_limit 2 \
-    --save_interval 1000 \
+    --save_interval  10000 \
     --log_interval 10 \
     --num_workers 4 \
     --bf16 \

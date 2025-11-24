@@ -379,7 +379,7 @@ class QwenSFTTrainer(Trainer):
             use_bg = torch.tensor(view_type == 2, device=device).expand(batch_size)
             
             # Debug: Log sampling distribution
-            # print(f"📊 Sampling (step {step}): {view_name} for all {batch_size} samples (rand={rand_value:.3f})", flush=True)
+            print(f"📊 Sampling (step {step}): {view_name} for all {batch_size} samples (rand={rand_value:.3f})", flush=True)
             
             total_loss = None
             log_metrics = {}
@@ -519,7 +519,7 @@ class QwenSFTTrainer(Trainer):
                         scalar_logs[key] = value
                 self.log(scalar_logs)
             
-            print(f"log_metrics: {log_metrics}")
+            # print(f"log_metrics: {log_metrics}")
             print(f"total_loss: {total_loss}")
             return (total_loss, outputs) if return_outputs else total_loss
 ################################################################################

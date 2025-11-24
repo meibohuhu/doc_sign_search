@@ -115,6 +115,7 @@ slurm-*.out
 
 # Large dataset directories
 dailymoth-70h/
+how2sign/video/train_crop_videos_720_mask/
 
 # Output directories
 output_cluster/

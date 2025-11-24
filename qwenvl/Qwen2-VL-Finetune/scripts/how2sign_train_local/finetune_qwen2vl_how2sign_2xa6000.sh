@@ -49,7 +49,7 @@ cd /local1/mhu/sign_language_llm/qwenvl/Qwen2-VL-Finetune
 MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
 
 # Optimized training configuration for 2xA6000 GPUs (48GB each, similar to A100)
-GLOBAL_BATCH_SIZE=2
+GLOBAL_BATCH_SIZE=8
 BATCH_PER_DEVICE=1
 NUM_DEVICES=2
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
@@ -227,7 +227,7 @@ deepspeed src/train/train_sft.py \
     --data_path "$DATA_PATH" \
     --image_folder "$IMAGE_FOLDER" \
     --output_dir "$OUTPUT_DIR" \
-    --num_train_epochs 3 \
+    --num_train_epochs 7 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --video_min_pixels $((224 * 224)) \
@@ -238,7 +238,6 @@ deepspeed src/train/train_sft.py \
     --logging_steps 1 \
     --save_strategy epoch \
     --save_total_limit 2 \
-    --max_steps 14000 \
     --use_liger True \
     --freeze_vision_tower True \
     --freeze_llm True \
@@ -249,8 +248,8 @@ deepspeed src/train/train_sft.py \
     --disable_flash_attn2 True \
     --gradient_checkpointing True \
     --lora_enable True \
-    --lora_rank 4 \
-    --lora_alpha 8 \
+    --lora_rank 16 \
+    --lora_alpha 32 \
     --vision_lr 2e-5 \
     --merger_lr 2e-5 \
     --report_to none

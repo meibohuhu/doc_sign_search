@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F
 
 ## mh: 2025-11-15: mask utils
-@lru_cache(maxsize=512)
+@lru_cache(maxsize=256)
 def _load_npz(mask_path: str, key: str) -> np.ndarray:
     with np.load(mask_path, allow_pickle=False) as data:
         if key not in data:
