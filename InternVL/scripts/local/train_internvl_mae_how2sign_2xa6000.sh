@@ -23,28 +23,12 @@ BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
 NUM_DEVICES=${NUM_DEVICES:-2}
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
-IMAGE_SIZE=${IMAGE_SIZE:-224}
-MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-8}
-MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-48}
-SAMPLING_METHOD=${SAMPLING_METHOD:-random_start_every2}
-MASK_RATIO=${MASK_RATIO:-0.80}
-MASK_STRATEGY=${MASK_STRATEGY:-random}
-DECODER_DIM=${DECODER_DIM:-384}
-DECODER_DEPTH=${DECODER_DEPTH:-6}
-DECODER_HEADS=${DECODER_HEADS:-12}
-FREEZE_ENCODER=${FREEZE_ENCODER:-False}
-UNFREEZE_TOPK_VISION=${UNFREEZE_TOPK_VISION:-0}
-
 mkdir -p "$OUTPUT_DIR"
 [ -f "$META_PATH" ] || { echo "❌ Meta file not found: $META_PATH"; exit 1; }
 [ -d "$VIDEO_BASE_PATH" ] || { echo "❌ Video folder not found: $VIDEO_BASE_PATH"; exit 1; }
 
 MASTER_PORT=${MASTER_PORT:-$(shuf -i 20000-29999 -n 1)}
 LOG_FILE="${OUTPUT_DIR}/mae_training_$(date +%Y%m%d_%H%M%S).log"
-
-FREEZE_ARGS=""
-[ "$FREEZE_ENCODER" = "True" ] && FREEZE_ARGS="--freeze_encoder True"
-[ "$UNFREEZE_TOPK_VISION" -gt 0 ] && [ -z "$FREEZE_ARGS" ] && FREEZE_ARGS="--unfreeze_topk_vision $UNFREEZE_TOPK_VISION"
 
 deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     internvl_chat/internvl/train/train_internvl_mae.py \
@@ -58,23 +42,22 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --learning_rate 1.5e-4 \
     --weight_decay 0.05 \
     --max_grad_norm 1.0 \
-    --image_size $IMAGE_SIZE \
-    --min_num_frames $MIN_NUM_FRAMES \
-    --max_num_frames $MAX_NUM_FRAMES \
-    --sampling_method "$SAMPLING_METHOD" \
-    --mask_ratio $MASK_RATIO \
-    --mask_strategy "$MASK_STRATEGY" \
-    --decoder_dim $DECODER_DIM \
-    --decoder_depth $DECODER_DEPTH \
-    --decoder_heads $DECODER_HEADS \
+    --image_size 224 \
+    --min_num_frames 8 \
+    --max_num_frames 48 \
+    --sampling_method random_start_every2 \
+    --mask_ratio 0.80 \
+    --mask_strategy random \
+    --decoder_dim 384 \
+    --decoder_depth 6 \
+    --decoder_heads 12 \
     --norm_pix_loss True \
     --spacetime_mask True \
-    $FREEZE_ARGS \
     --save_strategy steps \
     --save_total_limit 2 \
     --save_interval 1000 \
     --log_interval 10 \
-    --num_workers 4 \
+    --num_workers 2 \
     --bf16 \
     --gradient_checkpointing \
     --deepspeed internvl_chat/zero_stage3_config.json \

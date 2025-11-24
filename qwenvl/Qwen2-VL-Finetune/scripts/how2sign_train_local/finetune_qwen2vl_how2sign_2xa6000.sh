@@ -54,33 +54,6 @@ BATCH_PER_DEVICE=1
 NUM_DEVICES=2
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
-echo "🚀 Starting Qwen2VL How2Sign Training on 2xA6000 (LOCAL DEBUG)"
-echo "==============================================================="
-echo "Model: $MODEL_NAME"
-echo "Training Mode: Vision Encoder (Top Layers) + Projector (Merger) + LoRA"
-echo "LLM: FROZEN (with LoRA)"
-echo "LoRA: ENABLED"
-echo "Vision Layers: Unfrozen"
-echo "Projector (Merger): UNFROZEN"
-echo "DeepSpeed: ZeRO-3"
-echo "Global Batch Size: $GLOBAL_BATCH_SIZE"
-echo "Per-Device Batch Size: $BATCH_PER_DEVICE"
-echo "Gradient Accumulation Steps: $GRAD_ACCUM_STEPS"
-echo "Number of GPUs: $NUM_DEVICES"
-echo ""
-
-# Check GPU availability
-echo "🔍 Checking GPU availability..."
-python -c "
-import torch
-print(f'CUDA available: {torch.cuda.is_available()}')
-print(f'GPU count: {torch.cuda.device_count()}')
-if torch.cuda.is_available():
-    for i in range(torch.cuda.device_count()):
-        print(f'  GPU {i}: {torch.cuda.get_device_name(i)}')
-        print(f'    Memory: {torch.cuda.get_device_properties(i).total_memory / 1024**3:.2f} GB')
-"
-echo ""
 
 # Check if model is already cached
 MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct"
@@ -91,71 +64,10 @@ else
     echo "⚠️  Model not found in cache, will download during training"
 fi
 
-# Pre-download model components to avoid timeout issues during training
-echo "📥 Pre-downloading model components..."
-python -c "
-import os
-import sys
-os.environ['HF_HUB_TIMEOUT'] = '600'
-os.environ['HF_HUB_DOWNLOAD_TIMEOUT'] = '600'
-os.environ['HF_HUB_ENABLE_HF_TRANSFER'] = '1'
 
-try:
-    from transformers import AutoTokenizer, AutoProcessor
-    from transformers.models.qwen2_vl import Qwen2VLForConditionalGeneration
-    
-    print('Downloading tokenizer...')
-    tokenizer = AutoTokenizer.from_pretrained('$MODEL_NAME', trust_remote_code=True)
-    print('✅ Tokenizer downloaded successfully!')
-    
-    print('Downloading processor...')
-    processor = AutoProcessor.from_pretrained('$MODEL_NAME', trust_remote_code=True)
-    print('✅ Processor downloaded successfully!')
-    
-    print('Downloading model config...')
-    model = Qwen2VLForConditionalGeneration.from_pretrained('$MODEL_NAME', trust_remote_code=True, torch_dtype='auto')
-    print('✅ Model config downloaded successfully!')
-    
-    print('🎉 All model components downloaded successfully!')
-    
-except Exception as e:
-    print(f'⚠️  Warning: Some components failed to download: {e}')
-    print('This might be due to network issues, but training will continue...')
-    print('The model will be downloaded during training if needed.')
-"
-echo ""
-
-# Test network connectivity
-echo "🌐 Testing network connectivity..."
-if ping -c 1 huggingface.co > /dev/null 2>&1; then
-    echo "✅ Network connectivity to Hugging Face is working"
-else
-    echo "⚠️  Warning: Cannot reach huggingface.co - training will use cached models"
-fi
-echo ""
-
-# Verify data paths exist
-echo "📂 Verifying data paths..."
 DATA_PATH="/local1/mhu/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json"
 IMAGE_FOLDER="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
-if [ -f "$DATA_PATH" ]; then
-    echo "✅ Data file found: $DATA_PATH"
-    echo "   File size: $(du -sh $DATA_PATH | cut -f1)"
-else
-    echo "❌ Data file not found: $DATA_PATH"
-    exit 1
-fi
-
-if [ -d "$IMAGE_FOLDER" ]; then
-    echo "✅ Image folder found: $IMAGE_FOLDER"
-    IMAGE_COUNT=$(find "$IMAGE_FOLDER" -type f \( -name "*.mp4" -o -name "*.avi" -o -name "*.mov" \) | wc -l)
-    echo "   Video files: $IMAGE_COUNT"
-else
-    echo "❌ Image folder not found: $IMAGE_FOLDER"
-    exit 1
-fi
-echo ""
 
 # Create output directory
 OUTPUT_DIR="/local1/mhu/sign_language_llm/qwenvl/outputs/qwen2vl_how2sign_2xa6000_top2_debug"
@@ -163,60 +75,6 @@ mkdir -p "$OUTPUT_DIR"
 echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
 
-# Check and install required dependencies
-echo "📦 Checking required dependencies..."
-python -c "
-import sys
-import subprocess
-
-missing_packages = []
-# Map of (module_name, package_name) for import checking
-required_packages = [
-    ('trl', 'trl'),
-    ('transformers', 'transformers'),
-    ('accelerate', 'accelerate'),
-    ('peft', 'peft'),
-    ('deepspeed', 'deepspeed'),
-    ('liger_kernel', 'liger_kernel'),
-    ('qwen_vl_utils', 'qwen-vl-utils'),  # Try qwen_vl_utils first
-    ('hf_transfer', 'hf_transfer'),  # Required for fast HuggingFace downloads
-]
-
-# Special handling for qwen-vl-utils (might be imported differently)
-for module_name, package_name in required_packages:
-    try:
-        if module_name == 'qwen_vl_utils':
-            # Try multiple possible import names
-            try:
-                import qwen_vl_utils
-            except ImportError:
-                try:
-                    from qwen_vl_utils import QwenVLUtils
-                except ImportError:
-                    raise ImportError
-        else:
-            __import__(module_name)
-        print(f'✅ {package_name} is installed')
-    except (ImportError, ModuleNotFoundError):
-        print(f'❌ {package_name} is missing')
-        missing_packages.append(package_name)
-
-if missing_packages:
-    print(f'\n⚠️  Missing packages: {missing_packages}')
-    print('Installing missing packages...')
-    for pkg in missing_packages:
-        print(f'  Installing {pkg}...')
-        try:
-            subprocess.check_call([sys.executable, '-m', 'pip', 'install', pkg], 
-                                 stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
-            print(f'  ✅ {pkg} installed successfully')
-        except subprocess.CalledProcessError as e:
-            print(f'  ⚠️  Failed to install {pkg}, but continuing...')
-    print('✅ Dependency check complete!')
-else:
-    print('✅ All required packages are installed!')
-"
-echo ""
 
 # Run training with DeepSpeed ZeRO-3 for efficient multi-GPU training
 # Enable gradient checkpointing to tame activation memory growth while keeping the top vision blocks trainable.

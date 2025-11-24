@@ -15,6 +15,23 @@ export TOKENIZERS_PARALLELISM=false
 export PYTHONUNBUFFERED=1
 export PYTORCH_ALLOC_CONF=expandable_segments:True
 
+# DeepSpeed build configuration (matching local script)
+export DS_BUILD_OPS=0
+export DS_BUILD_FUSED_ADAM=0
+export DS_BUILD_CUDA_EXT=0
+export DS_BUILD_CPU_ADAM=0
+export DEEPSPEED_CPU_ADAM=1
+
+# NCCL configuration for distributed training
+export NCCL_TIMEOUT=1800  # Increase timeout to 30 minutes (default is 10 minutes)
+export NCCL_DEBUG=INFO    # Enable NCCL debug logging
+export NCCL_DEBUG_SUBSYS=ALL  # Log all NCCL subsystems
+export NCCL_IB_DISABLE=0  # Enable InfiniBand if available
+export NCCL_SOCKET_IFNAME=^docker0,lo  # Use all interfaces except docker and loopback
+export NCCL_P2P_DISABLE=0  # Enable P2P communication
+export NCCL_SHM_DISABLE=0  # Enable shared memory
+export OMP_NUM_THREADS=8   # Limit OpenMP threads
+
 # Change to InternVL directory
 cd /code/doc_sign_search/InternVL
 
@@ -38,19 +55,10 @@ GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
-IMAGE_SIZE=${IMAGE_SIZE:-224}
-MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-8}
-MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-64}
-SAMPLING_METHOD=${SAMPLING_METHOD:-random_start_every2}
-MASK_RATIO=${MASK_RATIO:-0.80}
-MASK_STRATEGY=${MASK_STRATEGY:-random}
-DECODER_DIM=${DECODER_DIM:-384}
-DECODER_DEPTH=${DECODER_DEPTH:-6}
-DECODER_HEADS=${DECODER_HEADS:-12}
-UNFREEZE_TOPK_VISION=${UNFREEZE_TOPK_VISION:-12}
-
 export MASTER_PORT=29508
 LOG_FILE="${OUTPUT_DIR}/mae_training_$(date +%Y%m%d_%H%M%S).log"
+NCCL_DEBUG_FILE="${OUTPUT_DIR}/nccl_debug_$(date +%Y%m%d_%H%M%S).log"
+export NCCL_DEBUG_FILE="$NCCL_DEBUG_FILE"
 
 
 mkdir -p "$OUTPUT_DIR"
@@ -69,23 +77,23 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --learning_rate 1.5e-4 \
     --weight_decay 0.05 \
     --max_grad_norm 1.0 \
-    --image_size $IMAGE_SIZE \
-    --min_num_frames $MIN_NUM_FRAMES \
-    --max_num_frames $MAX_NUM_FRAMES \
-    --sampling_method "$SAMPLING_METHOD" \
-    --mask_ratio $MASK_RATIO \
-    --mask_strategy "$MASK_STRATEGY" \
-    --decoder_dim $DECODER_DIM \
-    --decoder_depth $DECODER_DEPTH \
-    --decoder_heads $DECODER_HEADS \
+    --image_size 224 \
+    --min_num_frames 8 \
+    --max_num_frames 48 \
+    --sampling_method random_start_every2 \
+    --mask_ratio 0.80 \
+    --mask_strategy random \
+    --decoder_dim 384 \
+    --decoder_depth 6 \
+    --decoder_heads 12 \
     --norm_pix_loss True \
     --spacetime_mask True \
-    --unfreeze_topk_vision $UNFREEZE_TOPK_VISION \
+    --unfreeze_topk_vision 12 \
     --save_strategy steps \
     --save_total_limit 2 \
-    --save_interval  10000 \
+    --save_interval  5000 \
     --log_interval 10 \
-    --num_workers 4 \
+    --num_workers 2 \
     --bf16 \
     --gradient_checkpointing \
     --deepspeed internvl_chat/zero_stage3_config.json \
