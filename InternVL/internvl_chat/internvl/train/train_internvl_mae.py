@@ -159,6 +159,39 @@ class MAETrainer(Trainer):
         )
         
         return (loss, {'pred': pred, 'mask': mask}) if return_outputs else loss
+    
+    ### mh: 2025-11-24: Rotate checkpoints to enforce save_total_limit
+    def _save_checkpoint(self, model, trial, metrics=None):
+        """
+        Override _save_checkpoint to ensure save_total_limit is enforced.
+        This ensures old checkpoints are deleted according to save_total_limit setting.
+        """
+        from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
+        
+        # Get output directory before calling parent method
+        run_dir = self._get_output_dir(trial=trial)
+        checkpoint_saved = False
+        
+        # Call parent method to save checkpoint
+        try:
+            super()._save_checkpoint(model, trial, metrics=metrics)
+            checkpoint_saved = True
+        except Exception as e:
+            # Log error but don't fail if checkpoint save had issues
+            logger.warning(f"Checkpoint save encountered an issue: {e}")
+            # Check if checkpoint directory was created despite the error
+            checkpoint_folder = f"{PREFIX_CHECKPOINT_DIR}-{self.state.global_step}"
+            output_dir = os.path.join(run_dir, checkpoint_folder)
+            if os.path.exists(output_dir):
+                checkpoint_saved = True
+        
+        # Rotate checkpoints to enforce save_total_limit
+        # This ensures old checkpoints are deleted according to save_total_limit setting
+        # Only rotate if checkpoint was successfully saved
+        if checkpoint_saved and self.args.should_save and hasattr(self.args, 'save_total_limit') and self.args.save_total_limit is not None and self.args.save_total_limit > 0:
+            # Solely rely on numerical checkpoint id for rotation.
+            # mtime is not reliable especially on some fuse fs in cloud environments.
+            self._rotate_checkpoints(use_mtime=False, output_dir=run_dir)
 
 
 def train_mae(args):

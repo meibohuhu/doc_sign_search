@@ -285,3 +285,4 @@ def _adaptive_roi_masking(self, video_grid_thw, roi_mask_patches, device):
 如果方案2效果不理想，可以尝试**方案3 (ROI-Aware Hybrid Masking)**，它提供了更细粒度的控制。
 
 
+

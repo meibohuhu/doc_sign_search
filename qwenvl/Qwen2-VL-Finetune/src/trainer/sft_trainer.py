@@ -208,6 +208,13 @@ class QwenSFTTrainer(Trainer):
 
             if self.args.push_to_hub:
                 self._push_from_checkpoint(output_dir)
+                
+            ### mh: 2025-11-24: Rotate checkpoints to enforce save_total_limit
+            # Rotate checkpoints to enforce save_total_limit
+            if self.args.should_save:
+                # Solely rely on numerical checkpoint id for rotation.
+                # mtime is not reliable especially on some fuse fs in cloud environments.
+                self._rotate_checkpoints(use_mtime=False, output_dir=run_dir)
         else:
             super(QwenSFTTrainer, self)._save_checkpoint(model, trial)
 

@@ -94,7 +94,8 @@ deepspeed src/train/train_sft.py \
     --max_grad_norm 1.0 \
     --learning_rate 2e-5 \
     --logging_steps 1 \
-    --save_strategy epoch \
+    --save_strategy steps \
+    --save_steps 10 \
     --save_total_limit 2 \
     --use_liger True \
     --freeze_vision_tower True \

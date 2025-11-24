@@ -194,8 +194,10 @@ class InternVLTrainer(Trainer):
         output_dir = os.path.join(run_dir, checkpoint_folder)
         
         # Call parent method to save checkpoint
+        checkpoint_saved = False
         try:
             super()._save_checkpoint(model, trial, metrics=metrics)
+            checkpoint_saved = True
         except FileNotFoundError as e:
             # Check if the error is about the staging directory not existing during rename
             if "tmp-checkpoint" in str(e) or staging_output_dir in str(e):
@@ -207,7 +209,7 @@ class InternVLTrainer(Trainer):
                                  f"Checkpoint exists at {output_dir}. "
                                  f"Original error: {e}")
                     # Don't re-raise, checkpoint is actually saved
-                    return
+                    checkpoint_saved = True
                 else:
                     # Checkpoint save actually failed
                     logger.error(f"Checkpoint save failed: {e}")
@@ -241,6 +243,15 @@ class InternVLTrainer(Trainer):
                     except Exception as e2:
                         logger.error(f"Failed to rename/move checkpoint directory: {e2}")
                         # Don't raise, checkpoint files may still be saved
+                        
+        ### mh: 2025-11-24: Rotate checkpoints to enforce save_total_limit
+        # Rotate checkpoints to enforce save_total_limit
+        # This ensures old checkpoints are deleted according to save_total_limit setting
+        # Only rotate if checkpoint was successfully saved
+        if checkpoint_saved and self.args.should_save and hasattr(self.args, 'save_total_limit') and self.args.save_total_limit is not None and self.args.save_total_limit > 0:
+            # Solely rely on numerical checkpoint id for rotation.
+            # mtime is not reliable especially on some fuse fs in cloud environments.
+            self._rotate_checkpoints(use_mtime=False, output_dir=run_dir)
 
 ###########
 

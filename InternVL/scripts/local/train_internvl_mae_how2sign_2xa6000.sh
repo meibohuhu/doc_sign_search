@@ -14,7 +14,7 @@ export PYTHONUNBUFFERED=1
 cd /local1/mhu/sign_language_llm/InternVL
 
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_mae_2xa6000"
+OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_mae_2xa6000/checkpoints"
 META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json"
 VIDEO_BASE_PATH="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
@@ -55,8 +55,8 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --spacetime_mask True \
     --save_strategy steps \
     --save_total_limit 2 \
-    --save_interval 1000 \
-    --log_interval 10 \
+    --save_interval 5 \
+    --log_interval 2 \
     --num_workers 2 \
     --bf16 \
     --gradient_checkpointing \
