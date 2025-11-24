@@ -61,23 +61,6 @@ GRAD_ACCUM=4     # Gradient accumulation steps (increased to maintain effective 
 FPS=4           # Frames per second
 MASK_RATIO=0.80  # Mask ratio (0.75 or 0.90)
 
-# MAE model configuration
-DECODER_DIM=384  # Reduced from 512 to save memory
-DECODER_DEPTH=6  # Reduced from 8 to save memory
-DECODER_HEADS=12 # Reduced from 16 to save memory
-MLP_RATIO=4.0
-
-# Vision encoder training configuration
-# Set UNFREEZE_TOPK_VISION to train only top k layers (0 = train all layers)
-# Example: UNFREEZE_TOPK_VISION=4 will train only the last 4 layers of vision encoder
-UNFREEZE_TOPK_VISION=8  # 0 = train all layers, >0 = train only top k layers
-
-# Training hyperparameters
-LEARNING_RATE=1e-4
-WEIGHT_DECAY=0.05
-NUM_EPOCHS=5
-MAX_GRAD_NORM=1.0
-
 # Output configuration
 OUTPUT_DIR="/local1/mhu/sign_language_llm/qwenvl/outputs/qwen2vl_mae_2xa6000"
 LOG_DIR="${OUTPUT_DIR}/logs"
@@ -87,33 +70,6 @@ mkdir -p "${LOG_DIR}"
 # Generate log file name with timestamp
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 LOG_FILE="${LOG_DIR}/mae_training_${TIMESTAMP}.log"
-
-echo "=========================================="
-echo "Qwen2VL MAE Pre-training Configuration"
-echo "=========================================="
-echo "Model           : $MODEL_NAME"
-echo "Data Path       : $DATA_PATH"
-echo "Video Base Path : ${VIDEO_BASE_PATH:-'(not set, using JSON file directory)'}"
-echo "Output Dir      : $OUTPUT_DIR"
-echo "Mask Ratio      : $MASK_RATIO"
-echo "Mask Strategy   : tube (time-tube masking, recommended for sign language)"
-echo "Mask Unit Size  : 4x4 (for block/mu strategies)"
-echo "FPS             : $FPS"
-echo "Batch Size      : $PER_DEVICE_BS per device"
-echo "Grad Accum      : $GRAD_ACCUM"
-echo "Learning Rate   : $LEARNING_RATE"
-echo "Epochs          : $NUM_EPOCHS"
-echo "Decoder Dim     : $DECODER_DIM"
-echo "Decoder Depth   : $DECODER_DEPTH"
-echo "Decoder Heads   : $DECODER_HEADS"
-if [ "$UNFREEZE_TOPK_VISION" -gt 0 ]; then
-    echo "Vision Encoder  : Top $UNFREEZE_TOPK_VISION layers trainable"
-else
-    echo "Vision Encoder  : All layers trainable"
-fi
-echo "DeepSpeed       : ZeRO-3"
-echo "Log File        : $LOG_FILE"
-echo "=========================================="
 
 # Check if running in background mode (set RUN_BACKGROUND=1 to enable)
 RUN_BACKGROUND="${RUN_BACKGROUND:-0}"
@@ -137,19 +93,19 @@ if [ "$RUN_BACKGROUND" -eq 1 ]; then
         --mask_ratio $MASK_RATIO \
         --mask_strategy random \
         --mask_unit_size 2 2 \
-        --decoder_dim $DECODER_DIM \
-        --decoder_depth $DECODER_DEPTH \
-        --decoder_heads $DECODER_HEADS \
-        --mlp_ratio $MLP_RATIO \
+        --decoder_dim 384 \
+        --decoder_depth 6 \
+        --decoder_heads 12 \
+        --mlp_ratio 4.0 \
         --norm_pix_loss True \
         --spacetime_mask True \
-        --unfreeze_topk_vision $UNFREEZE_TOPK_VISION \
+        --unfreeze_topk_vision 8 \
         --batch_size $PER_DEVICE_BS \
         --gradient_accumulation_steps $GRAD_ACCUM \
-        --num_epochs $NUM_EPOCHS \
-        --learning_rate $LEARNING_RATE \
-        --weight_decay $WEIGHT_DECAY \
-        --max_grad_norm $MAX_GRAD_NORM \
+        --num_epochs 5 \
+        --learning_rate 1e-4 \
+        --weight_decay 0.05 \
+        --max_grad_norm 1.0 \
         --video_resized_width 224 \
         --video_resized_height 224 \
         --video_min_pixels $((224 * 224)) \
@@ -180,19 +136,19 @@ else
         --mask_ratio $MASK_RATIO \
         --mask_strategy mu \
         --mask_unit_size 2 2 \
-        --decoder_dim $DECODER_DIM \
-        --decoder_depth $DECODER_DEPTH \
-        --decoder_heads $DECODER_HEADS \
-        --mlp_ratio $MLP_RATIO \
+        --decoder_dim 384 \
+        --decoder_depth 6 \
+        --decoder_heads 12 \
+        --mlp_ratio 4.0 \
         --norm_pix_loss True \
         --spacetime_mask True \
-        --unfreeze_topk_vision $UNFREEZE_TOPK_VISION \
+        --unfreeze_topk_vision 8 \
         --batch_size $PER_DEVICE_BS \
         --gradient_accumulation_steps $GRAD_ACCUM \
-        --num_epochs $NUM_EPOCHS \
-        --learning_rate $LEARNING_RATE \
-        --weight_decay $WEIGHT_DECAY \
-        --max_grad_norm $MAX_GRAD_NORM \
+        --num_epochs 5 \
+        --learning_rate 1e-4 \
+        --weight_decay 0.05 \
+        --max_grad_norm 1.0 \
         --video_resized_width 224 \
         --video_resized_height 224 \
         --video_min_pixels $((224 * 224)) \
