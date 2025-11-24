@@ -28,7 +28,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/internvl2_5_2B_mae_how2sign"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/internvl2_5_2B_mae_how2sign_12unfreeze"
 META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
 VIDEO_BASE_PATH="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
