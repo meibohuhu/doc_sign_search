@@ -1,0 +1,902 @@
+✅ Using conda environment: /home/mh2803/miniconda3/envs/qwenvl
+📝 Log file: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_4xa100/training_20251126_060119.log
+🚀 Qwen2-VL FBCF training on 4xA100
+Model          : Qwen/Qwen2.5-VL-3B-Instruct
+Data JSON      : /home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json
+Video folder   : /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Mask folder    : /shared/rc/llm-gen-agent/mhu/videos/train_crop_videos_720_mask
+Output dir     : /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_4xa100
+Batch/GPU      : 4
+Grad accum     : 4
+fps            : 12
+DeepSpeed      : ZeRO-3
+FBCF Sampling  : Per-sample random (20% original, 60% foreground, 20% background)
+                Note: Reduced original ratio for two-stage training (FBCF -> Full Video FT)
+FBCF Lambda    : 0.1 (reduced from 0.2 for Stage 1 - gentle background regularization)
+
+CUDA available: True
+GPU count: 4
+  GPU 0: NVIDIA A100-PCIE-40GB (39.4 GB)
+  GPU 1: NVIDIA A100-PCIE-40GB (39.4 GB)
+  GPU 2: NVIDIA A100-PCIE-40GB (39.4 GB)
+  GPU 3: NVIDIA A100-PCIE-40GB (39.4 GB)
+
+🏃 Launching training with DeepSpeed...
+📝 Logging to: /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_4xa100/training_20251126_060119.log
+
+[2025-11-26 06:03:20,721] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Found 254 lora modules: ['model.language_model.embed_tokens', 'model.language_model.layers.0.self_attn.q_proj', 'model.language_model.layers.0.self_attn.k_proj', 'model.language_model.layers.0.self_attn.v_proj', 'model.language_model.layers.0.self_attn.o_proj', 'model.language_model.layers.0.mlp.gate_proj', 'model.language_model.layers.0.mlp.up_proj', 'model.language_model.layers.0.mlp.down_proj', 'model.language_model.layers.1.self_attn.q_proj', 'model.language_model.layers.1.self_attn.k_proj', 'model.language_model.layers.1.self_attn.v_proj', 'model.language_model.layers.1.self_attn.o_proj', 'model.language_model.layers.1.mlp.gate_proj', 'model.language_model.layers.1.mlp.up_proj', 'model.language_model.layers.1.mlp.down_proj', 'model.language_model.layers.2.self_attn.q_proj', 'model.language_model.layers.2.self_attn.k_proj', 'model.language_model.layers.2.self_attn.v_proj', 'model.language_model.layers.2.self_attn.o_proj', 'model.language_model.layers.2.mlp.gate_proj', 'model.language_model.layers.2.mlp.up_proj', 'model.language_model.layers.2.mlp.down_proj', 'model.language_model.layers.3.self_attn.q_proj', 'model.language_model.layers.3.self_attn.k_proj', 'model.language_model.layers.3.self_attn.v_proj', 'model.language_model.layers.3.self_attn.o_proj', 'model.language_model.layers.3.mlp.gate_proj', 'model.language_model.layers.3.mlp.up_proj', 'model.language_model.layers.3.mlp.down_proj', 'model.language_model.layers.4.self_attn.q_proj', 'model.language_model.layers.4.self_attn.k_proj', 'model.language_model.layers.4.self_attn.v_proj', 'model.language_model.layers.4.self_attn.o_proj', 'model.language_model.layers.4.mlp.gate_proj', 'model.language_model.layers.4.mlp.up_proj', 'model.language_model.layers.4.mlp.down_proj', 'model.language_model.layers.5.self_attn.q_proj', 'model.language_model.layers.5.self_attn.k_proj', 'model.language_model.layers.5.self_attn.v_proj', 'model.language_model.layers.5.self_attn.o_proj', 'model.language_model.layers.5.mlp.gate_proj', 'model.language_model.layers.5.mlp.up_proj', 'model.language_model.layers.5.mlp.down_proj', 'model.language_model.layers.6.self_attn.q_proj', 'model.language_model.layers.6.self_attn.k_proj', 'model.language_model.layers.6.self_attn.v_proj', 'model.language_model.layers.6.self_attn.o_proj', 'model.language_model.layers.6.mlp.gate_proj', 'model.language_model.layers.6.mlp.up_proj', 'model.language_model.layers.6.mlp.down_proj', 'model.language_model.layers.7.self_attn.q_proj', 'model.language_model.layers.7.self_attn.k_proj', 'model.language_model.layers.7.self_attn.v_proj', 'model.language_model.layers.7.self_attn.o_proj', 'model.language_model.layers.7.mlp.gate_proj', 'model.language_model.layers.7.mlp.up_proj', 'model.language_model.layers.7.mlp.down_proj', 'model.language_model.layers.8.self_attn.q_proj', 'model.language_model.layers.8.self_attn.k_proj', 'model.language_model.layers.8.self_attn.v_proj', 'model.language_model.layers.8.self_attn.o_proj', 'model.language_model.layers.8.mlp.gate_proj', 'model.language_model.layers.8.mlp.up_proj', 'model.language_model.layers.8.mlp.down_proj', 'model.language_model.layers.9.self_attn.q_proj', 'model.language_model.layers.9.self_attn.k_proj', 'model.language_model.layers.9.self_attn.v_proj', 'model.language_model.layers.9.self_attn.o_proj', 'model.language_model.layers.9.mlp.gate_proj', 'model.language_model.layers.9.mlp.up_proj', 'model.language_model.layers.9.mlp.down_proj', 'model.language_model.layers.10.self_attn.q_proj', 'model.language_model.layers.10.self_attn.k_proj', 'model.language_model.layers.10.self_attn.v_proj', 'model.language_model.layers.10.self_attn.o_proj', 'model.language_model.layers.10.mlp.gate_proj', 'model.language_model.layers.10.mlp.up_proj', 'model.language_model.layers.10.mlp.down_proj', 'model.language_model.layers.11.self_attn.q_proj', 'model.language_model.layers.11.self_attn.k_proj', 'model.language_model.layers.11.self_attn.v_proj', 'model.language_model.layers.11.self_attn.o_proj', 'model.language_model.layers.11.mlp.gate_proj', 'model.language_model.layers.11.mlp.up_proj', 'model.language_model.layers.11.mlp.down_proj', 'model.language_model.layers.12.self_attn.q_proj', 'model.language_model.layers.12.self_attn.k_proj', 'model.language_model.layers.12.self_attn.v_proj', 'model.language_model.layers.12.self_attn.o_proj', 'model.language_model.layers.12.mlp.gate_proj', 'model.language_model.layers.12.mlp.up_proj', 'model.language_model.layers.12.mlp.down_proj', 'model.language_model.layers.13.self_attn.q_proj', 'model.language_model.layers.13.self_attn.k_proj', 'model.language_model.layers.13.self_attn.v_proj', 'model.language_model.layers.13.self_attn.o_proj', 'model.language_model.layers.13.mlp.gate_proj', 'model.language_model.layers.13.mlp.up_proj', 'model.language_model.layers.13.mlp.down_proj', 'model.language_model.layers.14.self_attn.q_proj', 'model.language_model.layers.14.self_attn.k_proj', 'model.language_model.layers.14.self_attn.v_proj', 'model.language_model.layers.14.self_attn.o_proj', 'model.language_model.layers.14.mlp.gate_proj', 'model.language_model.layers.14.mlp.up_proj', 'model.language_model.layers.14.mlp.down_proj', 'model.language_model.layers.15.self_attn.q_proj', 'model.language_model.layers.15.self_attn.k_proj', 'model.language_model.layers.15.self_attn.v_proj', 'model.language_model.layers.15.self_attn.o_proj', 'model.language_model.layers.15.mlp.gate_proj', 'model.language_model.layers.15.mlp.up_proj', 'model.language_model.layers.15.mlp.down_proj', 'model.language_model.layers.16.self_attn.q_proj', 'model.language_model.layers.16.self_attn.k_proj', 'model.language_model.layers.16.self_attn.v_proj', 'model.language_model.layers.16.self_attn.o_proj', 'model.language_model.layers.16.mlp.gate_proj', 'model.language_model.layers.16.mlp.up_proj', 'model.language_model.layers.16.mlp.down_proj', 'model.language_model.layers.17.self_attn.q_proj', 'model.language_model.layers.17.self_attn.k_proj', 'model.language_model.layers.17.self_attn.v_proj', 'model.language_model.layers.17.self_attn.o_proj', 'model.language_model.layers.17.mlp.gate_proj', 'model.language_model.layers.17.mlp.up_proj', 'model.language_model.layers.17.mlp.down_proj', 'model.language_model.layers.18.self_attn.q_proj', 'model.language_model.layers.18.self_attn.k_proj', 'model.language_model.layers.18.self_attn.v_proj', 'model.language_model.layers.18.self_attn.o_proj', 'model.language_model.layers.18.mlp.gate_proj', 'model.language_model.layers.18.mlp.up_proj', 'model.language_model.layers.18.mlp.down_proj', 'model.language_model.layers.19.self_attn.q_proj', 'model.language_model.layers.19.self_attn.k_proj', 'model.language_model.layers.19.self_attn.v_proj', 'model.language_model.layers.19.self_attn.o_proj', 'model.language_model.layers.19.mlp.gate_proj', 'model.language_model.layers.19.mlp.up_proj', 'model.language_model.layers.19.mlp.down_proj', 'model.language_model.layers.20.self_attn.q_proj', 'model.language_model.layers.20.self_attn.k_proj', 'model.language_model.layers.20.self_attn.v_proj', 'model.language_model.layers.20.self_attn.o_proj', 'model.language_model.layers.20.mlp.gate_proj', 'model.language_model.layers.20.mlp.up_proj', 'model.language_model.layers.20.mlp.down_proj', 'model.language_model.layers.21.self_attn.q_proj', 'model.language_model.layers.21.self_attn.k_proj', 'model.language_model.layers.21.self_attn.v_proj', 'model.language_model.layers.21.self_attn.o_proj', 'model.language_model.layers.21.mlp.gate_proj', 'model.language_model.layers.21.mlp.up_proj', 'model.language_model.layers.21.mlp.down_proj', 'model.language_model.layers.22.self_attn.q_proj', 'model.language_model.layers.22.self_attn.k_proj', 'model.language_model.layers.22.self_attn.v_proj', 'model.language_model.layers.22.self_attn.o_proj', 'model.language_model.layers.22.mlp.gate_proj', 'model.language_model.layers.22.mlp.up_proj', 'model.language_model.layers.22.mlp.down_proj', 'model.language_model.layers.23.self_attn.q_proj', 'model.language_model.layers.23.self_attn.k_proj', 'model.language_model.layers.23.self_attn.v_proj', 'model.language_model.layers.23.self_attn.o_proj', 'model.language_model.layers.23.mlp.gate_proj', 'model.language_model.layers.23.mlp.up_proj', 'model.language_model.layers.23.mlp.down_proj', 'model.language_model.layers.24.self_attn.q_proj', 'model.language_model.layers.24.self_attn.k_proj', 'model.language_model.layers.24.self_attn.v_proj', 'model.language_model.layers.24.self_attn.o_proj', 'model.language_model.layers.24.mlp.gate_proj', 'model.language_model.layers.24.mlp.up_proj', 'model.language_model.layers.24.mlp.down_proj', 'model.language_model.layers.25.self_attn.q_proj', 'model.language_model.layers.25.self_attn.k_proj', 'model.language_model.layers.25.self_attn.v_proj', 'model.language_model.layers.25.self_attn.o_proj', 'model.language_model.layers.25.mlp.gate_proj', 'model.language_model.layers.25.mlp.up_proj', 'model.language_model.layers.25.mlp.down_proj', 'model.language_model.layers.26.self_attn.q_proj', 'model.language_model.layers.26.self_attn.k_proj', 'model.language_model.layers.26.self_attn.v_proj', 'model.language_model.layers.26.self_attn.o_proj', 'model.language_model.layers.26.mlp.gate_proj', 'model.language_model.layers.26.mlp.up_proj', 'model.language_model.layers.26.mlp.down_proj', 'model.language_model.layers.27.self_attn.q_proj', 'model.language_model.layers.27.self_attn.k_proj', 'model.language_model.layers.27.self_attn.v_proj', 'model.language_model.layers.27.self_attn.o_proj', 'model.language_model.layers.27.mlp.gate_proj', 'model.language_model.layers.27.mlp.up_proj', 'model.language_model.layers.27.mlp.down_proj', 'model.language_model.layers.28.self_attn.q_proj', 'model.language_model.layers.28.self_attn.k_proj', 'model.language_model.layers.28.self_attn.v_proj', 'model.language_model.layers.28.self_attn.o_proj', 'model.language_model.layers.28.mlp.gate_proj', 'model.language_model.layers.28.mlp.up_proj', 'model.language_model.layers.28.mlp.down_proj', 'model.language_model.layers.29.self_attn.q_proj', 'model.language_model.layers.29.self_attn.k_proj', 'model.language_model.layers.29.self_attn.v_proj', 'model.language_model.layers.29.self_attn.o_proj', 'model.language_model.layers.29.mlp.gate_proj', 'model.language_model.layers.29.mlp.up_proj', 'model.language_model.layers.29.mlp.down_proj', 'model.language_model.layers.30.self_attn.q_proj', 'model.language_model.layers.30.self_attn.k_proj', 'model.language_model.layers.30.self_attn.v_proj', 'model.language_model.layers.30.self_attn.o_proj', 'model.language_model.layers.30.mlp.gate_proj', 'model.language_model.layers.30.mlp.up_proj', 'model.language_model.layers.30.mlp.down_proj', 'model.language_model.layers.31.self_attn.q_proj', 'model.language_model.layers.31.self_attn.k_proj', 'model.language_model.layers.31.self_attn.v_proj', 'model.language_model.layers.31.self_attn.o_proj', 'model.language_model.layers.31.mlp.gate_proj', 'model.language_model.layers.31.mlp.up_proj', 'model.language_model.layers.31.mlp.down_proj', 'model.language_model.layers.32.self_attn.q_proj', 'model.language_model.layers.32.self_attn.k_proj', 'model.language_model.layers.32.self_attn.v_proj', 'model.language_model.layers.32.self_attn.o_proj', 'model.language_model.layers.32.mlp.gate_proj', 'model.language_model.layers.32.mlp.up_proj', 'model.language_model.layers.32.mlp.down_proj', 'model.language_model.layers.33.self_attn.q_proj', 'model.language_model.layers.33.self_attn.k_proj', 'model.language_model.layers.33.self_attn.v_proj', 'model.language_model.layers.33.self_attn.o_proj', 'model.language_model.layers.33.mlp.gate_proj', 'model.language_model.layers.33.mlp.up_proj', 'model.language_model.layers.33.mlp.down_proj', 'model.language_model.layers.34.self_attn.q_proj', 'model.language_model.layers.34.self_attn.k_proj', 'model.language_model.layers.34.self_attn.v_proj', 'model.language_model.layers.34.self_attn.o_proj', 'model.language_model.layers.34.mlp.gate_proj', 'model.language_model.layers.34.mlp.up_proj', 'model.language_model.layers.34.mlp.down_proj', 'model.language_model.layers.35.self_attn.q_proj', 'model.language_model.layers.35.self_attn.k_proj', 'model.language_model.layers.35.self_attn.v_proj', 'model.language_model.layers.35.self_attn.o_proj', 'model.language_model.layers.35.mlp.gate_proj', 'model.language_model.layers.35.mlp.up_proj', 'model.language_model.layers.35.mlp.down_proj', 'lm_head']
+Adding LoRA to the model...
+
+======================================================================
+📋 Model Training Configuration Check
+======================================================================
+
+🔍 Vision Encoder (ViT):
+  Total blocks: 32
+  Trainable blocks: 32
+  Trainable block indices: [0, 1, 2, 3, 4] ... [27, 28, 29, 30, 31]
+  (Showing first 5 and last 5 of 32 blocks)
+  freeze_vision_tower: False
+  unfreeze_topk_vision: 0
+
+🔗 Merger:
+  Trainable: True
+  Parameter count: 5
+  freeze_merger: False
+
+🧠 LLM LoRA:
+  lora_enable: True
+  LLM LoRA modules: 254
+  LoRA module names (first 10): ['base_model.model.model.language_model.embed_tokens', 'base_model.model.model.language_model.layers.0.self_attn.q_proj', 'base_model.model.model.language_model.layers.0.self_attn.k_proj', 'base_model.model.model.language_model.layers.0.self_attn.v_proj', 'base_model.model.model.language_model.layers.0.self_attn.o_proj', 'base_model.model.model.language_model.layers.0.mlp.gate_proj', 'base_model.model.model.language_model.layers.0.mlp.up_proj', 'base_model.model.model.language_model.layers.0.mlp.down_proj', 'base_model.model.model.language_model.layers.1.self_attn.q_proj', 'base_model.model.model.language_model.layers.1.self_attn.k_proj'] ...
+  (Total 254 LoRA modules)
+  freeze_llm: True
+
+📊 Summary:
+  ✅ ViT layers unfrozen: 32/32
+  ✅ Merger training: True
+  ✅ LLM LoRA training: True
+======================================================================
+
+No valid checkpoints found, starting fresh trainingNo valid checkpoints found, starting fresh training
+
+No valid checkpoints found, starting fresh training
+No valid checkpoints found, starting fresh training
+Parameter Offload - Persistent parameters statistics: param_count = 806, numel = 11732992
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)📊 Sampling (step 0): background for all 1 samples (rand=0.844)📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+
+
+{'loss_bg': 9.625, 'epoch': 0}
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+{'loss_bg': 8.75, 'epoch': 0}
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+{'loss_bg': 9.0, 'epoch': 0}
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+📊 Sampling (step 0): background for all 1 samples (rand=0.844)
+{'loss_bg': 8.5, 'epoch': 0}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 4.240695476531982, 'epoch': 0.0}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 4.2092413902282715, 'epoch': 0.0}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 3.058063507080078, 'epoch': 0.0}
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+📊 Sampling (step 1): original for all 1 samples (rand=0.134)
+{'loss_full': 5.1544189453125, 'epoch': 0.0}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 9.1875, 'epoch': 0.0}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 8.9375, 'epoch': 0.0}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 9.1875, 'epoch': 0.0}
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+📊 Sampling (step 2): background for all 1 samples (rand=0.956)
+{'loss_bg': 9.3125, 'epoch': 0.0}
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+{'loss_fg': 4.379753589630127, 'epoch': 0.0}
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+
+{'loss_fg': 3.430525779724121, 'epoch': 0.0}
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+{'loss_fg': 2.4660215377807617, 'epoch': 0.0}
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+📊 Sampling (step 3): foreground for all 1 samples (rand=0.238)
+{'loss_fg': 3.338590383529663, 'epoch': 0.0}
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+{'loss_fg': 2.493338108062744, 'epoch': 0.0}
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+{'loss_fg': 2.039588689804077, 'epoch': 0.0}
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+{'loss_fg': 3.733097791671753, 'epoch': 0.0}
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+📊 Sampling (step 4): foreground for all 1 samples (rand=0.236)
+{'loss_fg': 3.893465995788574, 'epoch': 0.0}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+{'loss_fg': 1.994565725326538, 'epoch': 0.0}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+{'loss_fg': 2.590674638748169, 'epoch': 0.0}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+{'loss_fg': 3.352111577987671, 'epoch': 0.0}
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+📊 Sampling (step 5): foreground for all 1 samples (rand=0.623)
+
+{'loss_fg': 3.4329934120178223, 'epoch': 0.0}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+
+
+
+{'loss_fg': 2.5177102088928223, 'epoch': 0.0}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+{'loss_fg': 2.1675968170166016, 'epoch': 0.0}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+{'loss_fg': 3.737128973007202, 'epoch': 0.0}
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+📊 Sampling (step 6): foreground for all 1 samples (rand=0.793)
+{'loss_fg': 2.8451688289642334, 'epoch': 0.0}
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+{'loss_fg': 2.793605327606201, 'epoch': 0.0}
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+{'loss_fg': 2.632802963256836, 'epoch': 0.0}
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+{'loss_fg': 4.164302349090576, 'epoch': 0.0}
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+📊 Sampling (step 7): foreground for all 1 samples (rand=0.324)
+{'loss_fg': 2.872899055480957, 'epoch': 0.0}
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+{'loss_fg': 3.3129496574401855, 'epoch': 0.0}
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+{'loss_fg': 3.682462215423584, 'epoch': 0.0}
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+{'loss_fg': 2.8535473346710205, 'epoch': 0.0}
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+📊 Sampling (step 8): foreground for all 1 samples (rand=0.227)
+{'loss_fg': 3.1488234996795654, 'epoch': 0.0}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+{'loss_fg': 4.022128582000732, 'epoch': 0.0}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+
+{'loss_fg': 2.2749412059783936, 'epoch': 0.0}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+{'loss_fg': 2.8749616146087646, 'epoch': 0.0}
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+
+📊 Sampling (step 9): foreground for all 1 samples (rand=0.463)
+{'loss_fg': 1.9679198265075684, 'epoch': 0.0}
+{'loss': 2.8766, 'grad_norm': 25.82050895690918, 'learning_rate': 1.9970000000000004e-05, 'epoch': 0.01}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+{'loss_fg': 3.3130218982696533, 'epoch': 0.01}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+
+{'loss_fg': 2.96460223197937, 'epoch': 0.01}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+
+{'loss_fg': 2.898975372314453, 'epoch': 0.01}
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+📊 Sampling (step 10): foreground for all 1 samples (rand=0.571)
+{'loss_fg': 3.1888506412506104, 'epoch': 0.01}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 3.523665428161621, 'epoch': 0.01}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 3.760745048522949, 'epoch': 0.01}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 2.929020404815674, 'epoch': 0.01}
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+📊 Sampling (step 11): foreground for all 1 samples (rand=0.452)
+{'loss_fg': 3.0105457305908203, 'epoch': 0.01}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+{'loss_fg': 3.4919159412384033, 'epoch': 0.01}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+
+
+
+{'loss_fg': 2.6584250926971436, 'epoch': 0.01}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+{'loss_fg': 2.5865654945373535, 'epoch': 0.01}
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+📊 Sampling (step 12): foreground for all 1 samples (rand=0.475)
+{'loss_fg': 2.974022150039673, 'epoch': 0.01}
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+{'loss_fg': 2.7090184688568115, 'epoch': 0.01}
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+{'loss_fg': 2.77207088470459, 'epoch': 0.01}
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+{'loss_fg': 3.0869200229644775, 'epoch': 0.01}
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+
+📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)📊 Sampling (step 13): foreground for all 1 samples (rand=0.259)
+
+{'loss_fg': 2.954787492752075, 'epoch': 0.01}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+{'loss_full': 2.9853615760803223, 'epoch': 0.01}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+{'loss_full': 2.6153388023376465, 'epoch': 0.01}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+
+{'loss_full': 3.336625099182129, 'epoch': 0.01}
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+📊 Sampling (step 14): original for all 1 samples (rand=0.107)
+{'loss_full': 3.201917886734009, 'epoch': 0.01}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 9.125, 'epoch': 0.01}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 8.5625, 'epoch': 0.01}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 9.0625, 'epoch': 0.01}
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+📊 Sampling (step 15): background for all 1 samples (rand=0.965)
+{'loss_bg': 8.9375, 'epoch': 0.01}
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+{'loss_fg': 3.216247797012329, 'epoch': 0.01}
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+{'loss_fg': 4.57919979095459, 'epoch': 0.01}
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+{'loss_fg': 3.6760499477386475, 'epoch': 0.01}
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+📊 Sampling (step 16): foreground for all 1 samples (rand=0.362)
+
+{'loss_fg': 2.464478015899658, 'epoch': 0.01}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 2.7833340167999268, 'epoch': 0.01}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 3.7376086711883545, 'epoch': 0.01}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 3.626552104949951, 'epoch': 0.01}
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+📊 Sampling (step 17): foreground for all 1 samples (rand=0.522)
+{'loss_fg': 2.811490058898926, 'epoch': 0.01}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 5.276056289672852, 'epoch': 0.01}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 2.8648362159729004, 'epoch': 0.01}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 2.614436149597168, 'epoch': 0.01}
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+
+📊 Sampling (step 18): original for all 1 samples (rand=0.181)
+{'loss_full': 2.7878875732421875, 'epoch': 0.01}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 2.725106954574585, 'epoch': 0.01}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 3.378962278366089, 'epoch': 0.01}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 2.9924588203430176, 'epoch': 0.01}
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+
+📊 Sampling (step 19): foreground for all 1 samples (rand=0.677)
+{'loss_fg': 2.542525291442871, 'epoch': 0.01}
+{'loss': 2.8651, 'grad_norm': 16.213455200195312, 'learning_rate': 1.993666666666667e-05, 'epoch': 0.01}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 9.25, 'epoch': 0.01}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 10.25, 'epoch': 0.01}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 8.3125, 'epoch': 0.01}
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+📊 Sampling (step 20): background for all 1 samples (rand=0.906)
+{'loss_bg': 8.5, 'epoch': 0.01}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 3.499603748321533, 'epoch': 0.01}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 3.5234477519989014, 'epoch': 0.01}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 3.865171194076538, 'epoch': 0.01}
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+📊 Sampling (step 21): original for all 1 samples (rand=0.165)
+{'loss_full': 2.966569423675537, 'epoch': 0.01}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+{'loss_bg': 8.375, 'epoch': 0.01}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+{'loss_bg': 8.0625, 'epoch': 0.01}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+
+{'loss_bg': 8.5, 'epoch': 0.01}
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+📊 Sampling (step 22): background for all 1 samples (rand=0.958)
+{'loss_bg': 9.5625, 'epoch': 0.01}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 8.0625, 'epoch': 0.01}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 9.0625, 'epoch': 0.01}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 8.3125, 'epoch': 0.01}
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+📊 Sampling (step 23): background for all 1 samples (rand=0.925)
+{'loss_bg': 9.0, 'epoch': 0.01}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 3.071690320968628, 'epoch': 0.01}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+
+
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 2.877788782119751, 'epoch': 0.01}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 2.773371696472168, 'epoch': 0.01}
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+📊 Sampling (step 24): foreground for all 1 samples (rand=0.712)
+{'loss_fg': 2.9919018745422363, 'epoch': 0.01}
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+{'loss_fg': 1.9250454902648926, 'epoch': 0.01}
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+{'loss_fg': 3.2789604663848877, 'epoch': 0.01}
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+{'loss_fg': 2.779728651046753, 'epoch': 0.01}
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+📊 Sampling (step 25): foreground for all 1 samples (rand=0.377)
+{'loss_fg': 2.808710813522339, 'epoch': 0.01}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 2.724273681640625, 'epoch': 0.01}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 3.1746349334716797, 'epoch': 0.01}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 2.262873649597168, 'epoch': 0.01}
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+📊 Sampling (step 26): foreground for all 1 samples (rand=0.747)
+{'loss_fg': 3.289011001586914, 'epoch': 0.01}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+{'loss_fg': 3.7878828048706055, 'epoch': 0.01}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+
+
+
+{'loss_fg': 3.2255537509918213, 'epoch': 0.01}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+{'loss_fg': 2.9359383583068848, 'epoch': 0.01}
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+
+📊 Sampling (step 27): foreground for all 1 samples (rand=0.648)
+{'loss_fg': 3.3838186264038086, 'epoch': 0.01}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 3.4404375553131104, 'epoch': 0.01}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 4.582559585571289, 'epoch': 0.01}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 3.603106737136841, 'epoch': 0.01}
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+📊 Sampling (step 28): original for all 1 samples (rand=0.113)
+{'loss_full': 2.373955488204956, 'epoch': 0.01}
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+{'loss_fg': 2.617947578430176, 'epoch': 0.02}
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+{'loss_fg': 4.034860134124756, 'epoch': 0.02}
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+{'loss_fg': 3.669513463973999, 'epoch': 0.02}
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+📊 Sampling (step 29): foreground for all 1 samples (rand=0.548)
+{'loss_fg': 2.724320411682129, 'epoch': 0.02}
+{'loss': 2.4163, 'grad_norm': 17.255828857421875, 'learning_rate': 1.9903333333333333e-05, 'epoch': 0.02}
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+{'loss_fg': 3.7346808910369873, 'epoch': 0.02}
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+{'loss_fg': 2.4262571334838867, 'epoch': 0.02}
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+
+
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+{'loss_fg': 3.3701682090759277, 'epoch': 0.02}
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+📊 Sampling (step 30): foreground for all 1 samples (rand=0.539)
+{'loss_fg': 2.5227372646331787, 'epoch': 0.02}
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+{'loss_full': 3.4763927459716797, 'epoch': 0.02}
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+{'loss_full': 4.560276031494141, 'epoch': 0.02}
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+{'loss_full': 2.3991122245788574, 'epoch': 0.02}
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+📊 Sampling (step 31): original for all 1 samples (rand=0.012)
+{'loss_full': 2.544001579284668, 'epoch': 0.02}
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+{'loss_full': 4.340502738952637, 'epoch': 0.02}
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+{'loss_full': 2.648242235183716, 'epoch': 0.02}
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+{'loss_full': 2.807419776916504, 'epoch': 0.02}
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+📊 Sampling (step 32): original for all 1 samples (rand=0.077)
+{'loss_full': 4.705601692199707, 'epoch': 0.02}
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+{'loss_fg': 1.3909279108047485, 'epoch': 0.02}
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+{'loss_fg': 2.4531168937683105, 'epoch': 0.02}
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+{'loss_fg': 2.7370822429656982, 'epoch': 0.02}
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+
+📊 Sampling (step 33): foreground for all 1 samples (rand=0.570)
+{'loss_fg': 1.9562604427337646, 'epoch': 0.02}
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+{'loss_fg': 2.210630416870117, 'epoch': 0.02}
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+{'loss_fg': 3.1978611946105957, 'epoch': 0.02}
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+{'loss_fg': 2.1616463661193848, 'epoch': 0.02}
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+📊 Sampling (step 34): foreground for all 1 samples (rand=0.529)
+{'loss_fg': 2.384732723236084, 'epoch': 0.02}
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+{'loss_fg': 2.961583137512207, 'epoch': 0.02}
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+{'loss_fg': 4.16851282119751, 'epoch': 0.02}
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+{'loss_fg': 2.583580732345581, 'epoch': 0.02}
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)📊 Sampling (step 35): foreground for all 1 samples (rand=0.549)
+
+{'loss_fg': 3.441777229309082, 'epoch': 0.02}
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+{'loss_fg': 3.6328227519989014, 'epoch': 0.02}
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+{'loss_fg': 3.6452507972717285, 'epoch': 0.02}
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+
+
+
+{'loss_fg': 2.26829195022583, 'epoch': 0.02}
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+📊 Sampling (step 36): foreground for all 1 samples (rand=0.329)
+{'loss_fg': 3.220796585083008, 'epoch': 0.02}
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+{'loss_fg': 1.9444199800491333, 'epoch': 0.02}
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+{'loss_fg': 3.2855827808380127, 'epoch': 0.02}
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+{'loss_fg': 3.639432430267334, 'epoch': 0.02}
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+📊 Sampling (step 37): foreground for all 1 samples (rand=0.682)
+{'loss_fg': 2.730449914932251, 'epoch': 0.02}
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+{'loss_fg': 2.8470799922943115, 'epoch': 0.02}
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+{'loss_fg': 3.176575183868408, 'epoch': 0.02}
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+{'loss_fg': 4.418095111846924, 'epoch': 0.02}
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+📊 Sampling (step 38): foreground for all 1 samples (rand=0.639)
+{'loss_fg': 3.2172322273254395, 'epoch': 0.02}
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+{'loss_fg': 2.8209128379821777, 'epoch': 0.02}
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+{'loss_fg': 2.529510974884033, 'epoch': 0.02}
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+{'loss_fg': 3.441192865371704, 'epoch': 0.02}
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+📊 Sampling (step 39): foreground for all 1 samples (rand=0.210)
+{'loss_fg': 1.8564245700836182, 'epoch': 0.02}
+{'loss': 3.0455, 'grad_norm': 17.95123291015625, 'learning_rate': 1.987e-05, 'epoch': 0.02}
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+{'loss_fg': 2.7433457374572754, 'epoch': 0.02}
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+{'loss_fg': 2.7039308547973633, 'epoch': 0.02}
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+{'loss_fg': 2.5769076347351074, 'epoch': 0.02}
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+📊 Sampling (step 40): foreground for all 1 samples (rand=0.459)
+{'loss_fg': 3.3293516635894775, 'epoch': 0.02}
+📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)
+📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)
+📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)
+📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)
+{'loss_fg': 2.926954746246338, 'epoch': 0.02}
+📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)
+📊 Sampling (step 41): foreground for all 1 samples (rand=0.381)
+
+
+[2025-11-26 07:06:55,563] [ERROR] [launch.py:341:sigkill_handler] ['/home/mh2803/miniconda3/envs/qwenvl/bin/python3.10', '-u', 'src/train/train_sft.py', '--local_rank=3', '--deepspeed', 'scripts/zero3_qwen2vl.json', '--model_id', 'Qwen/Qwen2.5-VL-3B-Instruct', '--data_path', '/home/mh2803/projects/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json', '--image_folder', '/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/', '--mask_folder', '/shared/rc/llm-gen-agent/mhu/videos/train_crop_videos_720_mask', '--mask_file_suffix', '.npz', '--mask_key', 'mask', '--mask_dilation', '3', '--mask_blur_kernel', '5', '--fbcf_bg_noise_std', '0.05', '--enable_fbcf', 'True', '--fbcf_lambda', '0.1', '--fg_loss_weight', '1.0', '--bg_loss_weight', '1.0', '--fbcf_sampling_mode', 'True', '--fbcf_sampling_ratio_original', '0.2', '--fbcf_sampling_ratio_foreground', '0.6', '--fbcf_sampling_ratio_background', '0.2', '--output_dir', '/shared/rc/llm-gen-agent/mhu/qwen2.5vl/1119/qwen2vl_fbcf_4xa100', '--num_train_epochs', '1', '--max_steps', '6000', '--per_device_train_batch_size', '1', '--gradient_accumulation_steps', '4', '--video_min_pixels', '50176', '--video_max_pixels', '50176', '--video_resized_width', '224', '--video_resized_height', '224', '--fps', '12', '--max_grad_norm', '1.0', '--learning_rate', '2e-5', '--logging_steps', '10', '--dataloader_num_workers', '2', '--dataloader_pin_memory', 'False', '--save_strategy', 'steps', '--save_steps', '1000', '--save_total_limit', '1', '--use_liger', 'True', '--freeze_llm', 'True', '--freeze_vision_tower', 'False', '--freeze_merger', 'False', '--bf16', 'True', '--disable_flash_attn2', 'False', '--gradient_checkpointing', 'True', '--lora_enable', 'True', '--lora_rank', '16', '--lora_alpha', '32', '--vision_lr', '1e-5', '--merger_lr', '2e-5', '--report_to', 'none'] exits with return code = -6
+Detected VISIBLE_DEVICES=0,1,2,3: setting --include=localhost:0,1,2,3
+
+❌ Training failed (exit 250)

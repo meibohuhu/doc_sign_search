@@ -1,0 +1,1164 @@
+/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+[W1111 15:13:53.875728396 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[W1111 15:13:53.877982836 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[W1111 15:13:53.881736637 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[W1111 15:13:53.882546498 CUDAAllocatorConfig.h:28] Warning: expandable_segments not supported on this platform (function operator())
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,930 >> loading file ./tokenizer.model from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,930 >> loading file added_tokens.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,930 >> loading file special_tokens_map.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,930 >> loading file tokenizer_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,930 >> loading file tokenizer.json from cache at None
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,935 >> loading file ./tokenizer.model from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,935 >> loading file added_tokens.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,935 >> loading file special_tokens_map.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,935 >> loading file tokenizer_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,935 >> loading file tokenizer.json from cache at None
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,936 >> loading file ./tokenizer.model from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,936 >> loading file added_tokens.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,936 >> loading file special_tokens_map.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,936 >> loading file tokenizer_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,936 >> loading file tokenizer.json from cache at None
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,937 >> loading file ./tokenizer.model from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,937 >> loading file added_tokens.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,937 >> loading file special_tokens_map.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,937 >> loading file tokenizer_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
+[INFO|tokenization_utils_base.py:2027] 2025-11-11 15:13:55,937 >> loading file tokenizer.json from cache at None
+[WARNING|logging.py:314] 2025-11-11 15:13:56,128 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[WARNING|logging.py:314] 2025-11-11 15:13:56,130 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[WARNING|logging.py:314] 2025-11-11 15:13:56,134 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[WARNING|logging.py:314] 2025-11-11 15:13:56,141 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+[INFO|configuration_utils.py:729] 2025-11-11 15:13:56,322 >> loading configuration file config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
+[INFO|configuration_utils.py:792] 2025-11-11 15:13:56,324 >> Model config InternVLChatConfig {
+  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
+  "architectures": [
+    "InternVLChatModel"
+  ],
+  "auto_map": {
+    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
+    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
+    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
+  },
+  "downsample_ratio": 0.5,
+  "dynamic_image_size": true,
+  "force_image_size": 448,
+  "hidden_size": 2048,
+  "llm_config": {
+    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternLM2ForCausalLM"
+    ],
+    "attn_implementation": "flash_attention_2",
+    "auto_map": {
+      "AutoConfig": "configuration_internlm2.InternLM2Config",
+      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
+    },
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bias": false,
+    "bos_token_id": 1,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": 2,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "silu",
+    "hidden_size": 2048,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "initializer_range": 0.02,
+    "intermediate_size": 8192,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "max_position_embeddings": 32768,
+    "min_length": 0,
+    "model_type": "internlm2",
+    "no_repeat_ngram_size": 0,
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_hidden_layers": 24,
+    "num_key_value_heads": 8,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": 2,
+    "prefix": null,
+    "pretraining_tp": 1,
+    "problem_type": null,
+    "pruned_heads": {},
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "rms_norm_eps": 1e-05,
+    "rope_scaling": {
+      "factor": 2.0,
+      "type": "dynamic"
+    },
+    "rope_theta": 1000000,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": false,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_cache": true,
+    "vocab_size": 92553
+  },
+  "max_dynamic_patch": 12,
+  "min_dynamic_patch": 1,
+  "model_type": "internvl_chat",
+  "pad2square": false,
+  "ps_version": "v2",
+  "select_layer": -1,
+  "template": "internvl2_5",
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": null,
+  "use_backbone_lora": 0,
+  "use_llm_lora": 0,
+  "use_thumbnail": true,
+  "vision_config": {
+    "_name_or_path": "",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternVisionModel"
+    ],
+    "attention_dropout": 0.0,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "drop_path_rate": 0.0,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": null,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "gelu",
+    "hidden_size": 1024,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "image_size": 448,
+    "initializer_factor": 1.0,
+    "initializer_range": 0.02,
+    "intermediate_size": 4096,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "layer_norm_eps": 1e-06,
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "min_length": 0,
+    "model_type": "intern_vit_6b",
+    "no_repeat_ngram_size": 0,
+    "norm_type": "layer_norm",
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_channels": 3,
+    "num_hidden_layers": 24,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": null,
+    "patch_size": 14,
+    "prefix": null,
+    "problem_type": null,
+    "pruned_heads": {},
+    "qk_normalization": false,
+    "qkv_bias": true,
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": true,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_flash_attn": true
+  }
+}
+
+[INFO|modeling_utils.py:3476] 2025-11-11 15:13:56,325 >> loading weights file model.safetensors from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
+[INFO|configuration_utils.py:729] 2025-11-11 15:13:56,328 >> loading configuration file config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
+[INFO|configuration_utils.py:792] 2025-11-11 15:13:56,329 >> Model config InternVLChatConfig {
+  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
+  "architectures": [
+    "InternVLChatModel"
+  ],
+  "auto_map": {
+    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
+    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
+    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
+  },
+  "downsample_ratio": 0.5,
+  "dynamic_image_size": true,
+  "force_image_size": 448,
+  "hidden_size": 2048,
+  "llm_config": {
+    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternLM2ForCausalLM"
+    ],
+    "attn_implementation": "flash_attention_2",
+    "auto_map": {
+      "AutoConfig": "configuration_internlm2.InternLM2Config",
+      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
+    },
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bias": false,
+    "bos_token_id": 1,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": 2,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "silu",
+    "hidden_size": 2048,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "initializer_range": 0.02,
+    "intermediate_size": 8192,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "max_position_embeddings": 32768,
+    "min_length": 0,
+    "model_type": "internlm2",
+    "no_repeat_ngram_size": 0,
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_hidden_layers": 24,
+    "num_key_value_heads": 8,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": 2,
+    "prefix": null,
+    "pretraining_tp": 1,
+    "problem_type": null,
+    "pruned_heads": {},
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "rms_norm_eps": 1e-05,
+    "rope_scaling": {
+      "factor": 2.0,
+      "type": "dynamic"
+    },
+    "rope_theta": 1000000,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": false,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_cache": true,
+    "vocab_size": 92553
+  },
+  "max_dynamic_patch": 12,
+  "min_dynamic_patch": 1,
+  "model_type": "internvl_chat",
+  "pad2square": false,
+  "ps_version": "v2",
+  "select_layer": -1,
+  "template": "internvl2_5",
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": null,
+  "use_backbone_lora": 0,
+  "use_llm_lora": 0,
+  "use_thumbnail": true,
+  "vision_config": {
+    "_name_or_path": "",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternVisionModel"
+    ],
+    "attention_dropout": 0.0,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "drop_path_rate": 0.0,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": null,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "gelu",
+    "hidden_size": 1024,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "image_size": 448,
+    "initializer_factor": 1.0,
+    "initializer_range": 0.02,
+    "intermediate_size": 4096,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "layer_norm_eps": 1e-06,
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "min_length": 0,
+    "model_type": "intern_vit_6b",
+    "no_repeat_ngram_size": 0,
+    "norm_type": "layer_norm",
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_channels": 3,
+    "num_hidden_layers": 24,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": null,
+    "patch_size": 14,
+    "prefix": null,
+    "problem_type": null,
+    "pruned_heads": {},
+    "qk_normalization": false,
+    "qkv_bias": true,
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": true,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_flash_attn": true
+  }
+}
+
+[INFO|modeling_utils.py:3476] 2025-11-11 15:13:56,331 >> loading weights file model.safetensors from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
+[INFO|configuration_utils.py:729] 2025-11-11 15:13:56,334 >> loading configuration file config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
+[INFO|configuration_utils.py:792] 2025-11-11 15:13:56,336 >> Model config InternVLChatConfig {
+  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
+  "architectures": [
+    "InternVLChatModel"
+  ],
+  "auto_map": {
+    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
+    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
+    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
+  },
+  "downsample_ratio": 0.5,
+  "dynamic_image_size": true,
+  "force_image_size": 448,
+  "hidden_size": 2048,
+  "llm_config": {
+    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternLM2ForCausalLM"
+    ],
+    "attn_implementation": "flash_attention_2",
+    "auto_map": {
+      "AutoConfig": "configuration_internlm2.InternLM2Config",
+      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
+    },
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bias": false,
+    "bos_token_id": 1,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": 2,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "silu",
+    "hidden_size": 2048,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "initializer_range": 0.02,
+    "intermediate_size": 8192,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "max_position_embeddings": 32768,
+    "min_length": 0,
+    "model_type": "internlm2",
+    "no_repeat_ngram_size": 0,
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_hidden_layers": 24,
+    "num_key_value_heads": 8,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": 2,
+    "prefix": null,
+    "pretraining_tp": 1,
+    "problem_type": null,
+    "pruned_heads": {},
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "rms_norm_eps": 1e-05,
+    "rope_scaling": {
+      "factor": 2.0,
+      "type": "dynamic"
+    },
+    "rope_theta": 1000000,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": false,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_cache": true,
+    "vocab_size": 92553
+  },
+  "max_dynamic_patch": 12,
+  "min_dynamic_patch": 1,
+  "model_type": "internvl_chat",
+  "pad2square": false,
+  "ps_version": "v2",
+  "select_layer": -1,
+  "template": "internvl2_5",
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": null,
+  "use_backbone_lora": 0,
+  "use_llm_lora": 0,
+  "use_thumbnail": true,
+  "vision_config": {
+    "_name_or_path": "",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternVisionModel"
+    ],
+    "attention_dropout": 0.0,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "drop_path_rate": 0.0,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": null,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "gelu",
+    "hidden_size": 1024,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "image_size": 448,
+    "initializer_factor": 1.0,
+    "initializer_range": 0.02,
+    "intermediate_size": 4096,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "layer_norm_eps": 1e-06,
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "min_length": 0,
+    "model_type": "intern_vit_6b",
+    "no_repeat_ngram_size": 0,
+    "norm_type": "layer_norm",
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_channels": 3,
+    "num_hidden_layers": 24,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": null,
+    "patch_size": 14,
+    "prefix": null,
+    "problem_type": null,
+    "pruned_heads": {},
+    "qk_normalization": false,
+    "qkv_bias": true,
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": true,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_flash_attn": true
+  }
+}
+
+[INFO|configuration_utils.py:729] 2025-11-11 15:13:56,337 >> loading configuration file config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
+[INFO|modeling_utils.py:3476] 2025-11-11 15:13:56,337 >> loading weights file model.safetensors from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
+[INFO|configuration_utils.py:792] 2025-11-11 15:13:56,338 >> Model config InternVLChatConfig {
+  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
+  "architectures": [
+    "InternVLChatModel"
+  ],
+  "auto_map": {
+    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
+    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
+    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
+  },
+  "downsample_ratio": 0.5,
+  "dynamic_image_size": true,
+  "force_image_size": 448,
+  "hidden_size": 2048,
+  "llm_config": {
+    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternLM2ForCausalLM"
+    ],
+    "attn_implementation": "flash_attention_2",
+    "auto_map": {
+      "AutoConfig": "configuration_internlm2.InternLM2Config",
+      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
+      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
+    },
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bias": false,
+    "bos_token_id": 1,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": 2,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "silu",
+    "hidden_size": 2048,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "initializer_range": 0.02,
+    "intermediate_size": 8192,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "max_position_embeddings": 32768,
+    "min_length": 0,
+    "model_type": "internlm2",
+    "no_repeat_ngram_size": 0,
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_hidden_layers": 24,
+    "num_key_value_heads": 8,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": 2,
+    "prefix": null,
+    "pretraining_tp": 1,
+    "problem_type": null,
+    "pruned_heads": {},
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "rms_norm_eps": 1e-05,
+    "rope_scaling": {
+      "factor": 2.0,
+      "type": "dynamic"
+    },
+    "rope_theta": 1000000,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": false,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_cache": true,
+    "vocab_size": 92553
+  },
+  "max_dynamic_patch": 12,
+  "min_dynamic_patch": 1,
+  "model_type": "internvl_chat",
+  "pad2square": false,
+  "ps_version": "v2",
+  "select_layer": -1,
+  "template": "internvl2_5",
+  "tie_word_embeddings": false,
+  "torch_dtype": "bfloat16",
+  "transformers_version": null,
+  "use_backbone_lora": 0,
+  "use_llm_lora": 0,
+  "use_thumbnail": true,
+  "vision_config": {
+    "_name_or_path": "",
+    "add_cross_attention": false,
+    "architectures": [
+      "InternVisionModel"
+    ],
+    "attention_dropout": 0.0,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "chunk_size_feed_forward": 0,
+    "cross_attention_hidden_size": null,
+    "decoder_start_token_id": null,
+    "diversity_penalty": 0.0,
+    "do_sample": false,
+    "drop_path_rate": 0.0,
+    "dropout": 0.0,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "eos_token_id": null,
+    "exponential_decay_length_penalty": null,
+    "finetuning_task": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "hidden_act": "gelu",
+    "hidden_size": 1024,
+    "id2label": {
+      "0": "LABEL_0",
+      "1": "LABEL_1"
+    },
+    "image_size": 448,
+    "initializer_factor": 1.0,
+    "initializer_range": 0.02,
+    "intermediate_size": 4096,
+    "is_decoder": false,
+    "is_encoder_decoder": false,
+    "label2id": {
+      "LABEL_0": 0,
+      "LABEL_1": 1
+    },
+    "layer_norm_eps": 1e-06,
+    "length_penalty": 1.0,
+    "max_length": 20,
+    "min_length": 0,
+    "model_type": "intern_vit_6b",
+    "no_repeat_ngram_size": 0,
+    "norm_type": "layer_norm",
+    "num_attention_heads": 16,
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_channels": 3,
+    "num_hidden_layers": 24,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_scores": false,
+    "pad_token_id": null,
+    "patch_size": 14,
+    "prefix": null,
+    "problem_type": null,
+    "pruned_heads": {},
+    "qk_normalization": false,
+    "qkv_bias": true,
+    "remove_invalid_values": false,
+    "repetition_penalty": 1.0,
+    "return_dict": true,
+    "return_dict_in_generate": false,
+    "sep_token_id": null,
+    "suppress_tokens": null,
+    "task_specific_params": null,
+    "temperature": 1.0,
+    "tf_legacy_loss": false,
+    "tie_encoder_decoder": false,
+    "tie_word_embeddings": true,
+    "tokenizer_class": null,
+    "top_k": 50,
+    "top_p": 1.0,
+    "torch_dtype": "bfloat16",
+    "torchscript": false,
+    "transformers_version": "4.37.2",
+    "typical_p": 1.0,
+    "use_bfloat16": true,
+    "use_flash_attn": true
+  }
+}
+
+[INFO|modeling_utils.py:3476] 2025-11-11 15:13:56,340 >> loading weights file model.safetensors from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
+[INFO|modeling_utils.py:1426] 2025-11-11 15:13:56,342 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
+[INFO|modeling_utils.py:3582] 2025-11-11 15:13:56,343 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
+[INFO|modeling_utils.py:1426] 2025-11-11 15:13:56,349 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
+[INFO|modeling_utils.py:3582] 2025-11-11 15:13:56,349 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
+[INFO|modeling_utils.py:1426] 2025-11-11 15:13:56,355 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
+[INFO|modeling_utils.py:3582] 2025-11-11 15:13:56,355 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:56,357 >> Generate config GenerationConfig {}
+
+[INFO|modeling_utils.py:1426] 2025-11-11 15:13:56,360 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
+[INFO|modeling_utils.py:3582] 2025-11-11 15:13:56,360 >> Detected DeepSpeed ZeRO-3: activating zero.init() for this model
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:56,365 >> Generate config GenerationConfig {}
+
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:56,369 >> Generate config GenerationConfig {}
+
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:56,374 >> Generate config GenerationConfig {}
+
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:58,479 >> Generate config GenerationConfig {
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "pad_token_id": 2
+}
+
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:59,329 >> Generate config GenerationConfig {
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "pad_token_id": 2
+}
+
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:59,502 >> Generate config GenerationConfig {
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "pad_token_id": 2
+}
+
+[INFO|configuration_utils.py:826] 2025-11-11 15:13:59,573 >> Generate config GenerationConfig {
+  "bos_token_id": 1,
+  "eos_token_id": 2,
+  "pad_token_id": 2
+}
+
+[INFO|modeling_utils.py:4350] 2025-11-11 15:14:15,986 >> All model checkpoint weights were used when initializing InternVLChatModel.
+
+[INFO|modeling_utils.py:4358] 2025-11-11 15:14:15,986 >> All the weights of InternVLChatModel were initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use InternVLChatModel for predictions without further training.
+[INFO|modeling_utils.py:4350] 2025-11-11 15:14:15,988 >> All model checkpoint weights were used when initializing InternVLChatModel.
+
+[INFO|modeling_utils.py:4358] 2025-11-11 15:14:15,988 >> All the weights of InternVLChatModel were initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use InternVLChatModel for predictions without further training.
+[INFO|modeling_utils.py:4350] 2025-11-11 15:14:15,990 >> All model checkpoint weights were used when initializing InternVLChatModel.
+
+[INFO|modeling_utils.py:4350] 2025-11-11 15:14:15,989 >> All model checkpoint weights were used when initializing InternVLChatModel.
+
+[INFO|modeling_utils.py:4358] 2025-11-11 15:14:15,990 >> All the weights of InternVLChatModel were initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use InternVLChatModel for predictions without further training.
+[INFO|modeling_utils.py:4358] 2025-11-11 15:14:15,990 >> All the weights of InternVLChatModel were initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use InternVLChatModel for predictions without further training.
+[INFO|configuration_utils.py:781] 2025-11-11 15:14:16,044 >> loading configuration file generation_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
+[INFO|configuration_utils.py:826] 2025-11-11 15:14:16,044 >> Generate config GenerationConfig {
+  "eos_token_id": [
+    92542,
+    92543
+  ]
+}
+
+[INFO|configuration_utils.py:781] 2025-11-11 15:14:16,046 >> loading configuration file generation_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
+[INFO|configuration_utils.py:826] 2025-11-11 15:14:16,046 >> Generate config GenerationConfig {
+  "eos_token_id": [
+    92542,
+    92543
+  ]
+}
+
+[INFO|configuration_utils.py:781] 2025-11-11 15:14:16,048 >> loading configuration file generation_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
+[INFO|configuration_utils.py:826] 2025-11-11 15:14:16,049 >> Generate config GenerationConfig {
+  "eos_token_id": [
+    92542,
+    92543
+  ]
+}
+
+[INFO|configuration_utils.py:781] 2025-11-11 15:14:16,053 >> loading configuration file generation_config.json from cache at /home/mh2803/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
+[INFO|configuration_utils.py:826] 2025-11-11 15:14:16,054 >> Generate config GenerationConfig {
+  "eos_token_id": [
+    92542,
+    92543
+  ]
+}
+
+[INFO|trainer.py:522] 2025-11-11 15:14:18,885 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:571] 2025-11-11 15:14:18,885 >> Using auto half precision backend
+[INFO|trainer.py:522] 2025-11-11 15:14:20,180 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:571] 2025-11-11 15:14:20,180 >> Using auto half precision backend
+[INFO|trainer.py:522] 2025-11-11 15:14:20,573 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:571] 2025-11-11 15:14:20,573 >> Using auto half precision backend
+[INFO|trainer.py:522] 2025-11-11 15:14:20,688 >> max_steps is given, it will override any value given in num_train_epochs
+[INFO|trainer.py:571] 2025-11-11 15:14:20,688 >> Using auto half precision backend
+[INFO|trainer.py:1721] 2025-11-11 15:14:28,291 >> ***** Running training *****
+[INFO|trainer.py:1722] 2025-11-11 15:14:28,292 >>   Num examples = 32,000
+[INFO|trainer.py:1723] 2025-11-11 15:14:28,292 >>   Num Epochs = 9,223,372,036,854,775,807
+[INFO|trainer.py:1724] 2025-11-11 15:14:28,292 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:1727] 2025-11-11 15:14:28,292 >>   Total train batch size (w. parallel, distributed & accumulation) = 4
+[INFO|trainer.py:1728] 2025-11-11 15:14:28,292 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2025-11-11 15:14:28,292 >>   Total optimization steps = 8,000
+[INFO|trainer.py:1730] 2025-11-11 15:14:28,297 >>   Number of trainable parameters = 228,323,328
+  0%|          | 0/8000 [00:00<?, ?it/s][INFO|trainer.py:1721] 2025-11-11 15:14:28,578 >> ***** Running training *****
+[INFO|trainer.py:1722] 2025-11-11 15:14:28,578 >>   Num examples = 32,000
+[INFO|trainer.py:1723] 2025-11-11 15:14:28,578 >>   Num Epochs = 9,223,372,036,854,775,807
+[INFO|trainer.py:1724] 2025-11-11 15:14:28,578 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:1727] 2025-11-11 15:14:28,578 >>   Total train batch size (w. parallel, distributed & accumulation) = 4
+[INFO|trainer.py:1728] 2025-11-11 15:14:28,578 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2025-11-11 15:14:28,578 >>   Total optimization steps = 8,000
+[INFO|trainer.py:1730] 2025-11-11 15:14:28,584 >>   Number of trainable parameters = 228,323,328
+  0%|          | 0/8000 [00:00<?, ?it/s][INFO|trainer.py:1721] 2025-11-11 15:14:29,074 >> ***** Running training *****
+[INFO|trainer.py:1722] 2025-11-11 15:14:29,074 >>   Num examples = 32,000
+[INFO|trainer.py:1721] 2025-11-11 15:14:29,074 >> ***** Running training *****
+[INFO|trainer.py:1723] 2025-11-11 15:14:29,074 >>   Num Epochs = 9,223,372,036,854,775,807
+[INFO|trainer.py:1724] 2025-11-11 15:14:29,074 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:1722] 2025-11-11 15:14:29,074 >>   Num examples = 32,000
+[INFO|trainer.py:1727] 2025-11-11 15:14:29,074 >>   Total train batch size (w. parallel, distributed & accumulation) = 4
+[INFO|trainer.py:1723] 2025-11-11 15:14:29,074 >>   Num Epochs = 9,223,372,036,854,775,807
+[INFO|trainer.py:1728] 2025-11-11 15:14:29,074 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1724] 2025-11-11 15:14:29,074 >>   Instantaneous batch size per device = 1
+[INFO|trainer.py:1729] 2025-11-11 15:14:29,074 >>   Total optimization steps = 8,000
+[INFO|trainer.py:1727] 2025-11-11 15:14:29,074 >>   Total train batch size (w. parallel, distributed & accumulation) = 4
+[INFO|trainer.py:1728] 2025-11-11 15:14:29,074 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2025-11-11 15:14:29,074 >>   Total optimization steps = 8,000
+[INFO|trainer.py:1730] 2025-11-11 15:14:29,080 >>   Number of trainable parameters = 228,323,328
+[INFO|trainer.py:1730] 2025-11-11 15:14:29,080 >>   Number of trainable parameters = 228,323,328
+  0%|          | 0/8000 [00:00<?, ?it/s]  0%|          | 0/8000 [00:00<?, ?it/s][rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1325, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1310, in main
+[rank0]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1539, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1869, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs)
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 164, in training_step
+[rank0]:     return super().training_step(model, inputs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 2772, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 2795, in compute_loss
+[rank0]:     outputs = model(**inputs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2179, in forward
+[rank0]:     loss = self.module(*inputs, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1603, in _call_impl
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/model/internvl_chat/modeling_internvl_chat.py", line 228, in forward
+[rank0]:     loss = loss_fct(shift_logits, shift_labels)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/modules/loss.py", line 1188, in forward
+[rank0]:     return F.cross_entropy(input, target, weight=self.weight,
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/nn/functional.py", line 3104, in cross_entropy
+[rank0]:     return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.21 GiB. GPU 0 has a total capacity of 39.38 GiB of which 406.69 MiB is free. Process 17461 has 10.53 GiB memory in use. Process 17459 has 10.53 GiB memory in use. Including non-PyTorch memory, this process has 7.32 GiB memory in use. Process 17462 has 10.53 GiB memory in use. Of the allocated memory 6.36 GiB is allocated by PyTorch, and 149.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1325, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1310, in main
+[rank0]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1539, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1869, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs)
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 164, in training_step
+[rank0]:     return super().training_step(model, inputs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 2781, in training_step
+[rank0]:     self.accelerator.backward(loss)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/accelerate/accelerator.py", line 2188, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 166, in backward
+[rank0]:     self.engine.backward(loss, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2356, in backward
+[rank0]:     self._do_optimizer_backward(loss, retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2297, in _do_optimizer_backward
+[rank0]:     self.optimizer.backward(loss, retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/zero/stage3.py", line 2341, in backward
+[rank0]:     self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 65, in backward
+[rank0]:     scaled_loss.backward(retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+[rank0]:     torch.autograd.backward(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/autograd/graph.py", line 768, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.21 GiB. GPU 0 has a total capacity of 39.38 GiB of which 566.69 MiB is free. Process 17461 has 10.68 GiB memory in use. Process 17459 has 10.47 GiB memory in use. Process 17460 has 7.32 GiB memory in use. Including non-PyTorch memory, this process has 10.47 GiB memory in use. Of the allocated memory 9.53 GiB is allocated by PyTorch, and 120.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1325, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1310, in main
+[rank0]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1539, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1869, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs)
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 164, in training_step
+[rank0]:     return super().training_step(model, inputs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 2781, in training_step
+[rank0]:     self.accelerator.backward(loss)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/accelerate/accelerator.py", line 2188, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 166, in backward
+[rank0]:     self.engine.backward(loss, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2356, in backward
+[rank0]:     self._do_optimizer_backward(loss, retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2297, in _do_optimizer_backward
+[rank0]:     self.optimizer.backward(loss, retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/zero/stage3.py", line 2341, in backward
+[rank0]:     self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 65, in backward
+[rank0]:     scaled_loss.backward(retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+[rank0]:     torch.autograd.backward(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/autograd/graph.py", line 768, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.21 GiB. GPU 0 has a total capacity of 39.38 GiB of which 586.69 MiB is free. Including non-PyTorch memory, this process has 10.47 GiB memory in use. Process 17459 has 10.47 GiB memory in use. Process 17460 has 7.32 GiB memory in use. Process 17462 has 10.47 GiB memory in use. Of the allocated memory 9.53 GiB is allocated by PyTorch, and 120.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1325, in <module>
+[rank0]:     main()
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 1310, in main
+[rank0]:     train_result = trainer.train(resume_from_checkpoint=checkpoint)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1539, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 1869, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs)
+[rank0]:   File "/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat/internvl/train/internvl_chat_finetune.py", line 164, in training_step
+[rank0]:     return super().training_step(model, inputs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/transformers/trainer.py", line 2781, in training_step
+[rank0]:     self.accelerator.backward(loss)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/accelerate/accelerator.py", line 2188, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 166, in backward
+[rank0]:     self.engine.backward(loss, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2356, in backward
+[rank0]:     self._do_optimizer_backward(loss, retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2297, in _do_optimizer_backward
+[rank0]:     self.optimizer.backward(loss, retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/zero/stage3.py", line 2341, in backward
+[rank0]:     self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 65, in backward
+[rank0]:     scaled_loss.backward(retain_graph=retain_graph)
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+[rank0]:     torch.autograd.backward(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/autograd/graph.py", line 768, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.21 GiB. GPU 0 has a total capacity of 39.38 GiB of which 566.69 MiB is free. Process 17461 has 10.68 GiB memory in use. Including non-PyTorch memory, this process has 10.47 GiB memory in use. Process 17460 has 7.32 GiB memory in use. Process 17462 has 10.47 GiB memory in use. Of the allocated memory 9.53 GiB is allocated by PyTorch, and 120.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+W1111 15:15:20.365000 140642609125184 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 17459 closing signal SIGTERM
+W1111 15:15:20.366000 140642609125184 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 17461 closing signal SIGTERM
+W1111 15:15:20.366000 140642609125184 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 17462 closing signal SIGTERM
+E1111 15:15:23.948000 140642609125184 torch/distributed/elastic/multiprocessing/api.py:833] failed (exitcode: 1) local_rank: 1 (pid: 17460) of binary: /home/mh2803/miniconda3/envs/internvl/bin/python3.10
+Traceback (most recent call last):
+  File "/home/mh2803/miniconda3/envs/internvl/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 348, in wrapper
+    return f(*args, **kwargs)
+  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/distributed/run.py", line 901, in main
+    run(args)
+  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/mh2803/miniconda3/envs/internvl/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+internvl_chat/internvl/train/internvl_chat_finetune.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-11-11_15:15:20
+  host      : skl-a-60.rc.rit.edu
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 17460)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
