@@ -357,17 +357,24 @@ class QwenSFTTrainer(Trainer):
                 # Fallback to default if all ratios are 0
                 ratio_orig, ratio_fg, ratio_bg = 0.4, 0.4, 0.2
             
-            # Get current training step for deterministic seed
+            # Get current training step and epoch for deterministic seed
             step = getattr(self.state, 'global_step', 0) if hasattr(self, 'state') else 0
+            current_epoch = getattr(self.state, 'epoch', 0.0) if hasattr(self, 'state') else 0.0
             
             # Generate a single deterministic random value for this step
-            # This ensures all processes select the same view type for this step
+            # Combine step and epoch to ensure different epochs use different view types
+            # This ensures all processes select the same view type for this step within the same epoch
             import random
-            random.seed(step)
+            # Use epoch as part of seed to ensure different epochs have different distributions
+            # This creates augmentation effect: same video in different epochs gets different view types
+            seed = int(step * 1000 + current_epoch * 100)  # Combine step and epoch for unique seed per epoch 每个 step 整个 batch 使用同一个 view 类型（保持分布式训练同步）
+# 不同 epoch 的相同 step 使用不同的随机种子，产生不同的 view 类型
+            random.seed(seed)
             rand_value = random.random()  # [0, 1)
-            
+            # print(f"rand_value: {rand_value}")
             # Determine view type for this step based on ratios
             # All samples in this step will use the same view type
+            print(f'random number: {rand_value}')
             threshold_orig = ratio_orig
             threshold_fg = ratio_orig + ratio_fg
             if rand_value < threshold_orig:
@@ -386,7 +393,7 @@ class QwenSFTTrainer(Trainer):
             use_bg = torch.tensor(view_type == 2, device=device).expand(batch_size)
             
             # Debug: Log sampling distribution
-            print(f"📊 Sampling (step {step}): {view_name} for all {batch_size} samples (rand={rand_value:.3f})", flush=True)
+            # print(f"📊 Sampling (step {step}): {view_name} for all {batch_size} samples (rand={rand_value:.3f})", flush=True)
             
             total_loss = None
             log_metrics = {}
@@ -444,7 +451,9 @@ class QwenSFTTrainer(Trainer):
                     # In DeepSpeed ZeRO-3, when labels are provided, the model may only return loss
                     # So we need to remove labels temporarily to get logits, then compute KL loss manually
                     # Memory optimization: disable unnecessary outputs to reduce memory usage
+                    # Create a new dict to avoid retaining references to original inputs
                     model_inputs_for_logits = {k: v for k, v in model_inputs.items() if k != "labels"}
+                    model_inputs_for_logits = dict(model_inputs_for_logits)  # Create new dict to break references
                     model_inputs_for_logits["output_attentions"] = False
                     model_inputs_for_logits["output_hidden_states"] = False
                     
@@ -461,10 +470,10 @@ class QwenSFTTrainer(Trainer):
                     # Compute background KL loss (memory-optimized)
                     loss_bg = self._background_uniform_loss(bg_logits, labels)
                     
-                    # Immediately free logits to reduce memory pressure
+                    # Immediately free logits and intermediate variables to reduce memory pressure
                     # Note: In DeepSpeed training, memory is managed automatically, so manual
                     # cache clearing may not be necessary and can cause performance overhead
-                    del bg_logits, outputs
+                    del bg_logits, outputs, model_inputs_for_logits
                     # Only clear cache if not using DeepSpeed (to avoid performance penalty)
                     # In DeepSpeed, the framework manages memory more efficiently
                     use_deepspeed = hasattr(self.args, 'deepspeed') and self.args.deepspeed is not None

@@ -1,7 +1,7 @@
 {
   "how2sign": {
-    "root": "/home/mh2803/projects/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/",
-    "annotation": "/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/test_how2sign_internvl.jsonl",
+    "root": "/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224",
+    "annotation": "/local1/mhu/sign_language_llm/InternVL/data/how2sign/test_how2sign_internvl_sample110.jsonl",
     "data_augment": false,
     "repeat_time": 1,
     "length": 24880

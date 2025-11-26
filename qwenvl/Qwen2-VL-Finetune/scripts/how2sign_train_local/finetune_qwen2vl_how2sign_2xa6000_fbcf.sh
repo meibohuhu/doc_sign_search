@@ -13,25 +13,30 @@ IMAGE_FOLDER="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224
 MASK_FOLDER="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_720_mask"
 OUTPUT_DIR="/local1/mhu/sign_language_llm/qwenvl/outputs/qwen2vl_how2sign_2xa6000_fbcf"
 
-GLOBAL_BATCH_SIZE=4
+GLOBAL_BATCH_SIZE=8
 PER_DEVICE_BS=1
 NUM_DEVICES=2
 GRAD_ACCUM=$((GLOBAL_BATCH_SIZE / (PER_DEVICE_BS * NUM_DEVICES)))
-FPS=12
+FPS=15
 
 mkdir -p "$OUTPUT_DIR"
 
-# Enable NCCL debug logging for gradient synchronization issues
-export NCCL_DEBUG=INFO
-export NCCL_DEBUG_SUBSYS=ALL
+# Log file setup
+LOG_FILE="$OUTPUT_DIR/training_$(date +%Y%m%d_%H%M%S).log"
+echo "📝 Training log will be saved to: $LOG_FILE"
+echo "📝 Training started at $(date)" | tee -a "$LOG_FILE"
+
+# NCCL settings (reduced logging for better performance)
+export NCCL_DEBUG=WARN  # Reduced from INFO to WARN to reduce overhead
 export NCCL_IB_DISABLE=0
 export NCCL_SOCKET_IFNAME=lo
-# Save NCCL logs to file
+# Save NCCL logs to file (only warnings/errors)
 export NCCL_DEBUG_FILE="$OUTPUT_DIR/nccl_debug_%h_%p.log"
 
-# Enable DeepSpeed logging
-export DS_LOG_LEVEL=INFO
+# Enable DeepSpeed logging (reduced for better performance)
+export DS_LOG_LEVEL=WARN  # Reduced from INFO to WARN
 
+# Run training with logging (tee to both file and stdout)
 deepspeed src/train/train_sft.py \
   --deepspeed scripts/zero3_qwen2vl.json \
   --model_id "$MODEL_NAME" \
@@ -47,7 +52,7 @@ deepspeed src/train/train_sft.py \
   --fbcf_lambda 0.15 \
   --fg_loss_weight 1.0 \
   --bg_loss_weight 1.0 \
-  --fbcf_sampling_mode False \
+  --fbcf_sampling_mode True \
   --fbcf_sampling_ratio_original 0.20 \
   --fbcf_sampling_ratio_foreground 0.60 \
   --fbcf_sampling_ratio_background 0.20 \
@@ -61,8 +66,11 @@ deepspeed src/train/train_sft.py \
   --fps $FPS \
   --max_grad_norm 1.0 \
   --learning_rate 2e-5 \
-  --dataloader_num_workers 2 \
-  --dataloader_pin_memory False \
+  --warmup_ratio 0.03 \
+  --weight_decay 0.01 \
+  --dataloader_num_workers 4 \
+  --dataloader_pin_memory True \
+  --dataloader_prefetch_factor 4 \
   --logging_steps 10 \
   --save_strategy steps \
   --save_steps 1000 \
@@ -79,5 +87,10 @@ deepspeed src/train/train_sft.py \
   --lora_alpha 32 \
   --vision_lr 2e-5 \
   --merger_lr 2e-5 \
-  --ddp_find_unused_parameters True
+  --ddp_find_unused_parameters True \
+  2>&1 | tee -a "$LOG_FILE"
+
+# Log completion
+echo "📝 Training completed at $(date)" | tee -a "$LOG_FILE"
+echo "📝 Log file saved to: $LOG_FILE"
 

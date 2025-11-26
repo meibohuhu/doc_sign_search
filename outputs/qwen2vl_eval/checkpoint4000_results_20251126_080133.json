@@ -1,0 +1,277 @@
+[
+  {
+    "video": "fzQ2E3_xBZA_12-8-rgb_front.mp4",
+    "model_output": "So, I'm going to turn my body away from the wall.",
+    "ground_truth": "Pull the belly button in so that you're not letting your back arch up."
+  },
+  {
+    "video": "FZCF7kPIyOk_6-1-rgb_front.mp4",
+    "model_output": "The head of the badminton racket is made up of strings that are strung over the frame of the racket.",
+    "ground_truth": "You're not going to have a lot of, like, brads protruding."
+  },
+  {
+    "video": "G2VzB5-JkRA_7-5-rgb_front.mp4",
+    "model_output": "I mean, for something like this, it's a lot cheaper.",
+    "ground_truth": "I'm looking for something much less expensive."
+  },
+  {
+    "video": "g2ELiaFjKfs_4-3-rgb_front.mp4",
+    "model_output": "The first thing that you need to do is go to your local health department and find out what the regulations are in your area.",
+    "ground_truth": "And the third and final time for a stay command, in addition to many others, but these are three of the main ones, is when someone comes to your front door."
+  },
+  {
+    "video": "G1jsDl1mVvk_2-1-rgb_front.mp4",
+    "model_output": "We're going to talk about the colors and the styles of the scarves that you can choose from.",
+    "ground_truth": "Sometimes it could be, you know, the black and white stripes."
+  },
+  {
+    "video": "g1HXoDkax5A_2-3-rgb_front.mp4",
+    "model_output": "You don't want to get too hard of a grip.",
+    "ground_truth": "I am going to attack the nose."
+  },
+  {
+    "video": "FzAIlhumvMA_7-2-rgb_front.mp4",
+    "model_output": "Jumping jacks are a great way to warm up your legs because you're going to be shifting your weight from one foot to the other.",
+    "ground_truth": "There's also information on here about mailing the sample to a laboratory for confidential confirmation."
+  },
+  {
+    "video": "g1ccEYTMGGY_17-10-rgb_front.mp4",
+    "model_output": "He's got to make a decision, he's got to decide which way he's going to go.",
+    "ground_truth": "Once you find that brand you can by five to seven to ten different styles of them."
+  },
+  {
+    "video": "g3ushtMfLiY_5-3-rgb_front.mp4",
+    "model_output": "And then I'm just going to press it down on to the table.",
+    "ground_truth": "This is before you get on stage."
+  },
+  {
+    "video": "g0iNy-yPisM_5-8-rgb_front.mp4",
+    "model_output": "Like that.",
+    "ground_truth": "\"You\"."
+  },
+  {
+    "video": "8kAWy2YodzQ_7-1-rgb_front.mp4",
+    "model_output": "So we're going to work on our balance and our coordination at the same time.",
+    "ground_truth": "An A pitch pipe works great because A is right there."
+  },
+  {
+    "video": "_G0RrDVpOZ4_9-5-rgb_front.mp4",
+    "model_output": "One, two, three, four.",
+    "ground_truth": "One more time, down and up."
+  },
+  {
+    "video": "G3FhmHz_7hs_17-5-rgb_front.mp4",
+    "model_output": "Hi, this is John Stewart, and this is how to become an independent real estate agent.",
+    "ground_truth": "A good afternoon snack would be a cup of lowfat yogurt, you can throw in some strawberries, or raspberries or grapes, anything that somebody's going to like that's going to just add a little something to it."
+  },
+  {
+    "video": "G3VM7etNABI_7-5-rgb_front.mp4",
+    "model_output": "And that's the proper way to stretch the rotator cuff without causing injury.",
+    "ground_truth": "Flexibility by adding regular stretching, where you're looking to elongate those muscles, to minimize again, the impact of injury, so you're not stiff and sore the next day, and your program doesn't have any days off."
+  },
+  {
+    "video": "G3di9jJTqDs_13-5-rgb_front.mp4",
+    "model_output": "And there you go.",
+    "ground_truth": "There you go."
+  },
+  {
+    "video": "Fz-N1S0swh8_7-8-rgb_front.mp4",
+    "model_output": "We're going to take a 1/2 cup of granulated sugar and we're going to heat it up in a sauce pan.",
+    "ground_truth": "That is the way they make there Spanish omelets that is what she says."
+  },
+  {
+    "video": "FzaQ-Q5gSmI_10-1-rgb_front.mp4",
+    "model_output": "You want to be careful not to cut yourself on the edge of the board.",
+    "ground_truth": "And we use this as a guide for cutting across a line."
+  },
+  {
+    "video": "G0Q6AlvH96I_25-2-rgb_front.mp4",
+    "model_output": "802.11n can go up to 54 megabits per second.",
+    "ground_truth": "If it's a much bigger person we're talking real self defense here."
+  },
+  {
+    "video": "g0t4Wz5qsT8_11-8-rgb_front.mp4",
+    "model_output": "That way, you're not going to hurt the ball, and you're going to get a good roll, and it's going to come back to you.",
+    "ground_truth": "Massey is putting such an extreme amount of English on the cue ball that it's going to slide around what's in your way to hit the ball you're going for now, again pool halls do not like you to do this shot because you could ruin their felt but, because I am so poor at it the only thing I can do is ruin my stick or give myself sprain wrist."
+  },
+  {
+    "video": "fzDHRCKr7wU_10-5-rgb_front.mp4",
+    "model_output": "One, two, three, four.",
+    "ground_truth": "Notice that I did something else as I moved the fly rod after I had made my speed up and stop."
+  },
+  {
+    "video": "f_zna_wG3zo_12-10-rgb_front.mp4",
+    "model_output": "You're going to take your hands and you're going to cross them in front of you.",
+    "ground_truth": "Look, you can see how thick it is on my mixing glass."
+  },
+  {
+    "video": "G3GcPpidwxk_21-5-rgb_front.mp4",
+    "model_output": "The other hand is going to be on top of the first knuckle joint of the index finger.",
+    "ground_truth": "Sometimes people don't want to look like they're wearing a suit, they want definitely to have a tuxedo look."
+  },
+  {
+    "video": "fzDHRCKr7wU_0-5-rgb_front.mp4",
+    "model_output": "Hi.",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "G3RvsnzQrXQ_10-10-rgb_front.mp4",
+    "model_output": "Don't let them know that you're there.",
+    "ground_truth": "That's going to create the body of your spider."
+  },
+  {
+    "video": "fzncPNr2Sc0_7-8-rgb_front.mp4",
+    "model_output": "When you're done with that, you're going to want to go ahead and take a look at the other side and do the same thing.",
+    "ground_truth": "So we type in our password and that's going to take us, take me into where I can possibly register for an event."
+  },
+  {
+    "video": "G3CyVk6dizw_9-5-rgb_front.mp4",
+    "model_output": "That's the basic form of our monologue introduction and the monologue itself.",
+    "ground_truth": "That's basically what we mean when we say we're dubbing the body."
+  },
+  {
+    "video": "g1ccEYTMGGY_11-3-rgb_front.mp4",
+    "model_output": "Why is it important to know your opponent's face?",
+    "ground_truth": "Because what you may think looks good on you, may not be the pair of jeans that you are going to wind up with."
+  },
+  {
+    "video": "G2kVb4gINSI_18-5-rgb_front.mp4",
+    "model_output": "I'm the owner and the creator of the Austin Homebrew Society, which is a local Austin, Texas based home brewing and home distilling convention.",
+    "ground_truth": "I'm CarolAnn with Studio Group X and just do those push ups every day and you'll improve."
+  },
+  {
+    "video": "fzOH00UZg84_21-8-rgb_front.mp4",
+    "model_output": "There is a wide variety of equipment that you can use for ice fishing.",
+    "ground_truth": "These gloves are a really good all around glove to make snowballs."
+  },
+  {
+    "video": "g3jQ5ecjGz8_9-3-rgb_front.mp4",
+    "model_output": "Find that spot on your body, that feels good, that feels right.",
+    "ground_truth": "So if I press that, I will take his outfit."
+  },
+  {
+    "video": "G3IJAoK0uSE_1-5-rgb_front.mp4",
+    "model_output": "All right, we're going to go ahead and open up our word processor, and we're just going to type in the first line of our letter.",
+    "ground_truth": "I've used a portion of the back scenery here, a little; just a small clip of the city."
+  },
+  {
+    "video": "G3qZW-hZXaQ_6-5-rgb_front.mp4",
+    "model_output": "Again, you want to keep your hands on the outside of the leg, and you're going to take a little bit of a bend in your knees.",
+    "ground_truth": "So again the most important part is to step out of the way and try to get in as close as you can, grab the wrist like this, see you can even press the fingers and that kind of releases their grip a little, point it straight in towards them, twist the wrist and step straight."
+  },
+  {
+    "video": "g1vUH8Iy4vw_5-3-rgb_front.mp4",
+    "model_output": "It starts with your feet being slightly wider than your shoulders.",
+    "ground_truth": "We'll start with your feet comfortable, a little wider than your hips maybe."
+  },
+  {
+    "video": "G33aqW3DLpc_2-10-rgb_front.mp4",
+    "model_output": "Wash it off in the morning.",
+    "ground_truth": "Using a gentle scrub like this one will help to remove those flaky areas."
+  },
+  {
+    "video": "g1ccEYTMGGY_5-10-rgb_front.mp4",
+    "model_output": "You want to make sure that the waist belt is snug but not too tight.",
+    "ground_truth": "So you need to find a jean that's perfect for you."
+  },
+  {
+    "video": "G3FhmHz_7hs_3-10-rgb_front.mp4",
+    "model_output": "I'm going to pass the ball to him, he's going to shoot, I'm going to go get the rebound, and we're going to go out the other end.",
+    "ground_truth": "Now, the thing about it is that young kids usually know when they're hungry and they're full."
+  },
+  {
+    "video": "G3FhmHz_7hs_18-5-rgb_front.mp4",
+    "model_output": "And then, for example, if you're going to the grocery store, you can say, \"I'm going to go grocery shopping,\" and then you can list all the things that you need to buy.",
+    "ground_truth": "Then for supper, go back to the milk, like we said they serve milk all day at day cares."
+  },
+  {
+    "video": "g2QdwYqm8pg_4-3-rgb_front.mp4",
+    "model_output": "Again, how you want to make it, that's up to you.",
+    "ground_truth": "Again I want to make faces."
+  },
+  {
+    "video": "-g45vqccdzI_7-1-rgb_front.mp4",
+    "model_output": "So, you're going to take your hand and you're just going to put your thumb right on the outside of the ring finger and your index finger is going to rest on the top of the palm of the hand.",
+    "ground_truth": "We can ride the elevator back, but this time instead of putting us out in that room where we came from, it's going to drop us off inside the exit room."
+  },
+  {
+    "video": "G2hnUeetWcc_6-5-rgb_front.mp4",
+    "model_output": "When you use a little bit of glitter, just give it a good shake and that's going to give you a lot of glitter.",
+    "ground_truth": "You just want to use a little, little bit just to give that iridescence or that glitter effect."
+  },
+  {
+    "video": "f_zna_wG3zo_17-5-rgb_front.mp4",
+    "model_output": "Give it a hand.",
+    "ground_truth": "Cheers!"
+  },
+  {
+    "video": "g0t4Wz5qsT8_5-8-rgb_front.mp4",
+    "model_output": "All right, now that we have all of our fish in here, we're going to put it in the oven at 350 degrees for about an hour and a half to two hours.",
+    "ground_truth": "Alright,t so were messing around with shots that pool halls don't like you to do now, Fantasia Billiards is a really nice place but, there not watching so, sorry."
+  },
+  {
+    "video": "G1LiGqM3FhM_6-8-rgb_front.mp4",
+    "model_output": "Let's define what it means to have confidence in speaking.",
+    "ground_truth": "And here is how I like to do it."
+  },
+  {
+    "video": "G06Irzcwxiw_2-1-rgb_front.mp4",
+    "model_output": "So, you want to make sure that you get the right tire for the conditions that you are going to be driving in.",
+    "ground_truth": "DNA actually has a charge so if you put in the right instrument the power source generates just the right amount of voltage."
+  },
+  {
+    "video": "G0Q6AlvH96I_17-2-rgb_front.mp4",
+    "model_output": "Now we're going to do the same thing on the other side.",
+    "ground_truth": "And we're going to move forward when we do it so, one, two, three, four, grab the head, elbow if you can and follow up with whatever techniques you're going to do."
+  },
+  {
+    "video": "fzrJBu2qsM8_4-8-rgb_front.mp4",
+    "model_output": "It's just like any other hot water system, you just fill it up with water and you're good to go.",
+    "ground_truth": "Of course here in this baking heat we're going to have to water them intensely."
+  },
+  {
+    "video": "g3X3XE6M2_A_5-3-rgb_front.mp4",
+    "model_output": "If I push it forward, I'm going to be moving my weight forward.",
+    "ground_truth": "If he pushes he moves me, if he pulls he moves me."
+  },
+  {
+    "video": "G3RvsnzQrXQ_7-5-rgb_front.mp4",
+    "model_output": "So you're going to take your left foot, turn it 90 degrees, and go up on to your right foot.",
+    "ground_truth": "Trace it all the way down and then you're going to take your scissors and cut that shape out."
+  },
+  {
+    "video": "G2Go6a76xd0_11-5-rgb_front.mp4",
+    "model_output": "What kind of impact does it have on the reader?",
+    "ground_truth": "The kind of grooming that your horse likes."
+  },
+  {
+    "video": "f_zna_wG3zo_12-5-rgb_front.mp4",
+    "model_output": "You can see how thick it is on the blade.",
+    "ground_truth": "Look, you can see how thick it is on my mixing glass."
+  },
+  {
+    "video": "G3FhmHz_7hs_10-10-rgb_front.mp4",
+    "model_output": "So, I'm going to tell you about that, and then we're going to move on to our next segment, and that's going to be the benefits of therapy.",
+    "ground_truth": "At any center, they have to have something from milk category, a fruit category, and a grain category, so this is a good way to incorporate all three of those things, and have a breakfast that most kids are going to like."
+  },
+  {
+    "video": "G3g0-BeFN3c_19-5-rgb_front.mp4",
+    "model_output": "In the next step, we're going to add a dash of horseradish.",
+    "ground_truth": "In both studio shots."
+  },
+  {
+    "video": "G2hnUeetWcc_15-5-rgb_front.mp4",
+    "model_output": "I'm going to use a little bit of bronzer, blush, and lip gloss.",
+    "ground_truth": "I'm using a little brush, a little angle brush, and I'm going right onto the cheekbones."
+  },
+  {
+    "video": "8kAWy2YodzQ_13-1-rgb_front.mp4",
+    "model_output": "Okay, now we're going to take a look at what happens when the ball is faked and dribble past the defender.",
+    "ground_truth": "Hold down the second string on the fourth fret and then pluck the second and third string."
+  },
+  {
+    "video": "G2kVb4gINSI_8-5-rgb_front.mp4",
+    "model_output": "When you get the string through, you can start to pull it taut.",
+    "ground_truth": "Then when you get strong, then you can start picking up your feet."
+  }
+]

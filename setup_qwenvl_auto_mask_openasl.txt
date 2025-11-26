@@ -1,0 +1,251 @@
+#!/bin/bash
+
+# 配置信息 - 请替换以下placeholder
+GITHUB_TOKEN="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"
+AWS_ACCESS_KEY_ID="AKIAUM3V5HXQFKA5FW5M"
+AWS_SECRET_ACCESS_KEY="NuoLAaxMWgvN2t0CmEAiBBlGs9qoMKKP8tXpMvWJ"
+HUGGINGFACE_TOKEN="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"
+
+# setup anaconda ###############################################################################
+echo "正在下载Anaconda..."
+wget https://repo.anaconda.com/archive/Anaconda3-2025.06-0-Linux-x86_64.sh
+
+echo "正在安装Anaconda..."
+# 使用静默安装，-b 表示batch mode，-p 指定安装路径
+bash Anaconda3-2025.06-0-Linux-x86_64.sh -b -p $HOME/anaconda3
+
+echo "正在初始化conda..."
+# 重新加载bashrc以使conda可用
+eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
+
+echo "验证conda安装..."
+conda --version
+
+
+# setup github ###############################################################################
+echo "正在安装GitHub CLI..."
+# 根据系统安装GitHub CLI
+if command -v apt-get &> /dev/null; then
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+    sudo apt update
+    sudo apt install gh -y
+elif command -v yum &> /dev/null; then
+    sudo dnf install 'dnf-command(config-manager)'
+    sudo dnf config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+    sudo dnf install gh -y
+fi
+
+echo "正在设置SSH密钥..."
+# 确保.ssh目录存在
+mkdir -p ~/.ssh
+cd ~/.ssh
+
+# 生成SSH密钥，使用正确的语法避免echo参数问题
+ssh-keygen -t rsa -C 'mh2803_qwenvl@rit.edu' -f ~/.ssh/id_rsa -N ""
+
+echo "正在启动ssh-agent并添加密钥..."
+# 启动ssh-agent并添加密钥
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+echo "正在使用GitHub CLI登录..."
+# 使用GitHub CLI登录
+echo "$GITHUB_TOKEN" | gh auth login --with-token
+
+echo "正在添加SSH密钥到GitHub..."
+# 添加SSH密钥到GitHub
+gh ssh-key add ~/.ssh/id_rsa.pub --title "setup-script-key"
+
+echo "正在测试GitHub连接..."
+# 测试GitHub连接，自动接受host key
+ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+ssh -T git@github.com
+
+# setup repo ###############################################################################
+echo "正在克隆仓库..."
+# 确保目录存在
+mkdir -p /code
+cd /code
+
+# 检查仓库是否已存在
+if [ -d "/code/doc_sign_search/.git" ]; then
+    echo "仓库已存在于 /code/doc_sign_search"
+    cd /code/doc_sign_search
+    echo "正在更新仓库..."
+    git pull || echo "更新失败，请手动检查"
+else
+    echo "正在从 git@github.com:meibohuhu/doc_sign_search.git 克隆仓库..."
+    git clone git@github.com:meibohuhu/doc_sign_search.git
+    cd /code/doc_sign_search
+fi
+
+# setup qwenvl conda environment ###############################################################################
+echo "接受 ToS..."
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+echo "正在创建qwenvl环境..."
+# 检查环境是否已存在
+if conda env list | grep -q "^qwenvl "; then
+    echo "环境 qwenvl 已存在，跳过创建"
+else
+    echo "正在创建新环境 qwenvl..."
+    $HOME/anaconda3/bin/conda create -n qwenvl python=3.10 -y
+fi
+
+echo "正在进入项目目录..."
+cd /code/doc_sign_search
+
+echo "正在激活qwenvl环境并安装包..."
+# 激活环境并安装包
+conda activate qwenvl
+
+############ 安装包
+echo "正在安装构建依赖（psutil, packaging, ninja）..."
+pip install psutil packaging ninja
+
+echo "正在安装PyTorch with CUDA 12.1..."
+pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+
+echo "正在安装flash-attn..."
+if pip install flash-attn==2.5.7 --no-build-isolation; then
+    echo "✅ flash-attn 安装成功"
+else
+    echo "⚠️  第一次安装失败，尝试使用 --no-deps 选项..."
+    pip install flash-attn==2.5.7 --no-build-isolation --no-deps || echo "⚠️  flash-attn 安装失败，但可以继续（某些功能可能较慢）"
+fi
+
+echo "正在使用requirements_qwenvl.txt安装其他依赖..."
+pip install -r /code/doc_sign_search/requirements_qwenvl.txt
+
+pip cache purge
+
+
+# setup huggingface ###############################################################################
+echo "正在登录Huggingface..."
+# 使用正确的登录方式
+huggingface-cli login --token "$HUGGINGFACE_TOKEN"
+
+# download and extract videos ###############################################################################
+echo "正在下载和解压视频..."
+DOWNLOAD_SCRIPT="/code/doc_sign_search/download_and_extract_videos_from_hf.py"
+VIDEO_DATASET_NAME="${VIDEO_DATASET_NAME:-PhoenixHu/sign_mllm_openasl_videos}"
+VIDEO_OUTPUT_DIR="${VIDEO_OUTPUT_DIR:-/mnt/localssd/sign_mllm_openasl_videos}"
+FORCE_DOWNLOAD_VIDEOS="${FORCE_DOWNLOAD_VIDEOS:-0}"
+
+# 检查下载脚本是否存在
+if [ ! -f "$DOWNLOAD_SCRIPT" ]; then
+    echo "⚠️  警告: 未找到下载脚本 $DOWNLOAD_SCRIPT"
+    echo "   跳过视频下载步骤"
+else
+    # 检查视频是否已存在
+    if [ -d "$VIDEO_OUTPUT_DIR" ] && [ "$(ls -A $VIDEO_OUTPUT_DIR 2>/dev/null)" ]; then
+        echo "📁 视频目录已存在且不为空: $VIDEO_OUTPUT_DIR"
+        echo "   跳过下载步骤（如需重新下载，请删除该目录或设置 FORCE_DOWNLOAD_VIDEOS=1）"
+        
+        # 如果设置了强制下载，则继续下载
+        if [ "${FORCE_DOWNLOAD_VIDEOS:-0}" != "1" ]; then
+            echo "✅ 使用现有视频文件"
+        else
+            echo "🔄 强制下载模式：将重新下载视频"
+            python "$DOWNLOAD_SCRIPT" \
+                --dataset_name "$VIDEO_DATASET_NAME" \
+                --output_dir "$VIDEO_OUTPUT_DIR" \
+                --token "$HUGGINGFACE_TOKEN" \
+                --remove_archives
+        fi
+    else
+        echo "📥 开始下载视频数据集: $VIDEO_DATASET_NAME"
+        echo "📁 输出目录: $VIDEO_OUTPUT_DIR"
+        
+        # 运行下载脚本（使用conda环境中的python）
+        python "$DOWNLOAD_SCRIPT" \
+            --dataset_name "$VIDEO_DATASET_NAME" \
+            --output_dir "$VIDEO_OUTPUT_DIR" \
+            --token "$HUGGINGFACE_TOKEN" \
+            --remove_archives
+        
+        if [ $? -eq 0 ]; then
+            echo "✅ 视频下载和解压完成！"
+            echo "📁 视频位置: $VIDEO_OUTPUT_DIR"
+        else
+            echo "⚠️  警告: 视频下载失败，请检查网络连接和数据集名称"
+        fi
+    fi
+fi
+
+# download and extract masks ###############################################################################
+echo "正在下载和解压masks..."
+DOWNLOAD_SCRIPT="/code/doc_sign_search/download_and_extract_videos_from_hf.py"
+MASK_DATASET_NAME="${MASK_DATASET_NAME:-PhoenixHu/sign_mllm_how2sign_720_mask}"
+MASK_OUTPUT_DIR="${MASK_OUTPUT_DIR:-/mnt/localssd/sign_mllm_how2sign_720_mask}"
+FORCE_DOWNLOAD_MASKS="${FORCE_DOWNLOAD_MASKS:-0}"
+
+# 检查下载脚本是否存在
+if [ ! -f "$DOWNLOAD_SCRIPT" ]; then
+    echo "⚠️  警告: 未找到下载脚本 $DOWNLOAD_SCRIPT"
+    echo "   跳过mask下载步骤"
+else
+    # 检查mask是否已存在
+    if [ -d "$MASK_OUTPUT_DIR" ] && [ "$(ls -A $MASK_OUTPUT_DIR 2>/dev/null)" ]; then
+        echo "📁 Mask目录已存在且不为空: $MASK_OUTPUT_DIR"
+        echo "   跳过下载步骤（如需重新下载，请删除该目录或设置 FORCE_DOWNLOAD_MASKS=1）"
+        
+        # 如果设置了强制下载，则继续下载
+        if [ "${FORCE_DOWNLOAD_MASKS:-0}" != "1" ]; then
+            echo "✅ 使用现有mask文件"
+        else
+            echo "🔄 强制下载模式：将重新下载masks"
+            python "$DOWNLOAD_SCRIPT" \
+                --mode dataset \
+                --dataset_name "$MASK_DATASET_NAME" \
+                --output_dir "$MASK_OUTPUT_DIR" \
+                --token "$HUGGINGFACE_TOKEN" \
+                --archive_pattern "masks_*.tar.gz" \
+                --remove_archives
+        fi
+    else
+        echo "📥 开始下载mask数据集: $MASK_DATASET_NAME"
+        echo "📁 输出目录: $MASK_OUTPUT_DIR"
+        
+        # 运行下载脚本（使用conda环境中的python）
+        python "$DOWNLOAD_SCRIPT" \
+            --mode dataset \
+            --dataset_name "$MASK_DATASET_NAME" \
+            --output_dir "$MASK_OUTPUT_DIR" \
+            --token "$HUGGINGFACE_TOKEN" \
+            --archive_pattern "masks_*.tar.gz" \
+            --remove_archives
+        
+        if [ $? -eq 0 ]; then
+            echo "✅ Mask下载和解压完成！"
+            echo "📁 Mask位置: $MASK_OUTPUT_DIR"
+        else
+            echo "⚠️  警告: Mask下载失败，请检查网络连接和数据集名称"
+        fi
+    fi
+fi
+
+# 设置环境变量
+echo "正在设置环境变量..."
+export PYTHONPATH="/code/sign_language_llm:${PYTHONPATH:-}"
+export TOKENIZERS_PARALLELISM=false
+export OMP_NUM_THREADS=8
+
+# 添加到bashrc以便永久生效
+if ! grep -q "export PYTHONPATH.*/code/sign_language_llm" ~/.bashrc 2>/dev/null; then
+    echo "" >> ~/.bashrc
+    echo "# QwenVL environment" >> ~/.bashrc
+    echo "export PYTHONPATH=\"/code/sign_language_llm:\${PYTHONPATH:-}\"" >> ~/.bashrc
+    echo "export TOKENIZERS_PARALLELISM=false" >> ~/.bashrc
+fi
+
+echo "设置完成！"
+
+# enable conda env  ############################################################################### 
+
+# 永久初始化conda并激活base环境
+echo "正在永久启用conda..."
+$HOME/anaconda3/bin/conda init bash
+exec bash

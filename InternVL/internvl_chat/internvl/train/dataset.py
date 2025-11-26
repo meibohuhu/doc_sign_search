@@ -92,8 +92,10 @@ def get_frame_indices(num_frames, vlen, sample='rand', fix_start=None, input_fps
         frame_indices = np.around(frame_seconds * input_fps).astype(int)
         frame_indices = [e for e in frame_indices if e < vlen]
         if max_num_frames > 0 and len(frame_indices) > max_num_frames:
-            frame_indices = frame_indices[:max_num_frames]
-            # frame_indices = np.linspace(0 + delta / 2, duration + delta / 2, endpoint=False, num=max_num_frames)
+            # frame_indices = frame_indices[:max_num_frames]
+            print(f'sampling method: {sample} len(frame_indices): {len(frame_indices)}')
+            frame_indices = np.linspace(0 + delta / 2, duration + delta / 2, endpoint=False, num=max_num_frames)
+    
     else:
         raise ValueError
     return frame_indices
