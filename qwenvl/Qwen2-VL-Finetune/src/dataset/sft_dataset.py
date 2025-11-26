@@ -277,8 +277,12 @@ class SupervisedDataset(Dataset):
                                     # Expand mask from [N, 1] to [N, feature_dim] to match video_pixels
                                     if mask_tensor.dim() == 2 and mask_tensor.shape[1] == 1:
                                         mask_tensor = mask_tensor.expand(-1, video_pixels.shape[1])
-                                    fg_pixels = video_pixels * mask_tensor  ## 前景：mask区域保留
-                                    bg_pixels = video_pixels * (1 - mask_tensor) ## 背景：mask区域置0
+                                    # Use clone() to avoid modifying original video_pixels, then release mask_tensor reference
+                                    fg_pixels = (video_pixels * mask_tensor).clone()  ## 前景：mask区域保留
+                                    # Create inverse mask and compute bg_pixels
+                                    inv_mask = 1 - mask_tensor
+                                    bg_pixels = (video_pixels * inv_mask).clone()  ## 背景：mask区域置0
+                                    del inv_mask  # Release inverse mask immediately
                                 else:
                                     print(f"⚠️  WARNING: Shape mismatch - mask_tensor: {mask_tensor.shape}, video_pixels: {video_pixels.shape}")
                                     fg_pixels = None
@@ -286,9 +290,11 @@ class SupervisedDataset(Dataset):
                                     
                                 # Apply background noise if enabled and bg_pixels was created
                                 if bg_pixels is not None and self.bg_noise_std > 0:
-                                    ## addd noise to bg pixels 背景添加噪声
+                                    ## add noise to bg pixels 背景添加噪声
                                     noise = torch.randn_like(video_pixels) * self.bg_noise_std
-                                    bg_pixels = bg_pixels + noise * (1 - mask_tensor)
+                                    # Use in-place operation to save memory
+                                    bg_pixels.add_(noise * (1 - mask_tensor))
+                                    del noise  # Release noise tensor immediately
                         all_pixel_values.append(video_pixels) # 原始video
                         if fg_pixels is not None and bg_pixels is not None:
                             all_pixel_values_fg.append(fg_pixels)  # 前景video  
@@ -420,10 +426,14 @@ class SupervisedDataset(Dataset):
             T, C, H, W = mask_tensor.shape
             mask_tensor_flat = mask_tensor.view(T * H * W, C)  # [T*H*W, 1]
             mask_tensors.append(mask_tensor_flat)
+            # Release original mask_tensor to save memory
+            del mask_tensor
         
         # Concatenate masks for all videos
         mask_stack = torch.cat(mask_tensors, dim=0)  # [sum(T*H*W), 1]
         mask_stack = mask_stack.to(video_tensor.device, dtype=video_tensor.dtype)
+        # Release intermediate list to save memory
+        del mask_tensors
         
         return mask_stack
 ###########################################
@@ -496,10 +506,12 @@ class DataCollatorForSupervisedDataset(object):
             if len(batch_pixel_video_fg_values) != len(batch_pixel_video_values):
                 print(f"⚠️  WARNING: fg_pixels count ({len(batch_pixel_video_fg_values)}) != original video count ({len(batch_pixel_video_values)})")
             data_dict["pixel_values_videos_fg"] = torch.cat(batch_pixel_video_fg_values, dim=0)
+            del batch_pixel_video_fg_values  # Release list to save memory
         if len(batch_pixel_video_bg_values) > 0:
             if len(batch_pixel_video_bg_values) != len(batch_pixel_video_values):
                 print(f"⚠️  WARNING: bg_pixels count ({len(batch_pixel_video_bg_values)}) != original video count ({len(batch_pixel_video_values)})")
             data_dict["pixel_values_videos_bg"] = torch.cat(batch_pixel_video_bg_values, dim=0)
+            del batch_pixel_video_bg_values  # Release list to save memory
         ###########################################
         if len(batch_second_per_grid_ts) > 0:
             data_dict["second_per_grid_ts"] = batch_second_per_grid_ts

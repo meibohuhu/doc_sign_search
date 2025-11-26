@@ -192,7 +192,7 @@ class MAETrainer(Trainer):
             # Solely rely on numerical checkpoint id for rotation.
             # mtime is not reliable especially on some fuse fs in cloud environments.
             self._rotate_checkpoints(use_mtime=False, output_dir=run_dir)
-
+###########################################################
 
 def train_mae(args):
     # Create model

@@ -44,7 +44,7 @@ from internvl.train.constants import (BOX_END_TOKEN, BOX_START_TOKEN,
                                       IMG_START_TOKEN, QUAD_END_TOKEN,
                                       QUAD_START_TOKEN, REF_END_TOKEN,
                                       REF_START_TOKEN)
-from internvl.train.dataset import (ConcatDataset, TCSLoader,
+from internvl.train.dataset import (ConcatDataset, TCSLoader, get_frame_indices,
                                     WeightedConcatDataset, build_transform,
                                     check_conversations_repetition,
                                     dynamic_preprocess, get_frame_indices,
@@ -193,11 +193,13 @@ class InternVLTrainer(Trainer):
         staging_output_dir = os.path.join(run_dir, f"tmp-{checkpoint_folder}")
         output_dir = os.path.join(run_dir, checkpoint_folder)
         
-        # Call parent method to save checkpoint
+        # mh: 2025-11-24: Call parent method to save checkpoint
         checkpoint_saved = False
         try:
             super()._save_checkpoint(model, trial, metrics=metrics)
             checkpoint_saved = True
+        #####################################################
+
         except FileNotFoundError as e:
             # Check if the error is about the staging directory not existing during rename
             if "tmp-checkpoint" in str(e) or staging_output_dir in str(e):
@@ -243,7 +245,7 @@ class InternVLTrainer(Trainer):
                     except Exception as e2:
                         logger.error(f"Failed to rename/move checkpoint directory: {e2}")
                         # Don't raise, checkpoint files may still be saved
-                        
+
         ### mh: 2025-11-24: Rotate checkpoints to enforce save_total_limit
         # Rotate checkpoints to enforce save_total_limit
         # This ensures old checkpoints are deleted according to save_total_limit setting
@@ -401,14 +403,14 @@ def _load_video_locally(
                 unique_indices.append(idx)
         frame_indices = unique_indices
 
-        # # Debug info: show video stats and sampling info
+        # # # Debug info: show video stats and sampling info
         # if not dist.is_initialized() or dist.get_rank() == 0:
         #     worker_info = get_worker_info()
         #     if worker_info is None or worker_info.id == 0:
         #         print(f'[Video Sampling] path={os.path.basename(video_path)}, '
         #               f'total_frames={total_frames}, vlen={vlen}, '
         #               f'min={min_num_frames}, max={max_num_frames}, '
-        #               f'sample={sample}, selected={len(frame_indices)} frames')
+        #               f'sample={sample}, selected={frame_indices} frames')
         
         frames = vr.get_batch(frame_indices).asnumpy()  # (T, H, W, C), np.uint8
         images = [Image.fromarray(frames[i]) for i in range(frames.shape[0])]
@@ -488,6 +490,65 @@ def _load_video_locally(
 
     error_msgs = '; '.join(load_errors) or 'unknown'
     raise RuntimeError(f'Failed to load video locally ({error_msgs})')
+
+
+def _load_video_locally_1(
+    video_path: str,
+    max_num_frames: int,
+    min_num_frames: int,
+    sample: str = 'rand',
+    clip: Optional[Iterable[int]] = None,
+) -> List[Image.Image]:
+    """
+    Load video frames locally using read_frames_decord logic as default.
+    This method uses the same frame sampling logic as read_frames_decord from dataset.py.
+    Supports sampling strategies: 'rand', 'middle', 'fpsX.X'
+    """
+    from decord import VideoReader
+    
+    video_reader = VideoReader(video_path, num_threads=1)
+    vlen = len(video_reader)
+    fps = video_reader.get_avg_fps()
+    duration = vlen / float(fps) if fps > 0 else 0
+    
+    # Handle clip parameter (same as read_frames_decord)
+    if clip and len(clip) == 2:
+        start, end = clip
+        duration = end - start
+        vlen = int(duration * fps) if fps > 0 else vlen
+        start_index = int(start * fps) if fps > 0 else 0
+    else:
+        start_index = 0
+
+    # Randomly select number of frames (same as read_frames_decord)
+    t_num_frames = np.random.randint(min_num_frames, max_num_frames + 1)
+    
+    # Get frame indices using get_frame_indices (same as read_frames_decord)
+    frame_indices = get_frame_indices(
+        t_num_frames, vlen, sample=sample, fix_start=None,
+        input_fps=fps, max_num_frames=max_num_frames
+    )
+    
+    # Adjust indices if clip is specified (same as read_frames_decord)
+    if clip and len(clip) == 2:
+        frame_indices = [f + start_index for f in frame_indices]
+    
+    # Clip indices to valid range
+    frame_indices = [min(max(int(idx), 0), len(video_reader) - 1) for idx in frame_indices]
+    
+    # Remove duplicates after clipping
+    seen = set()
+    unique_indices = []
+    for idx in frame_indices:
+        if idx not in seen:
+            seen.add(idx)
+            unique_indices.append(idx)
+    frame_indices = unique_indices
+    print(f'frame_indices: {frame_indices}')
+    # Get frames using get_batch (same as read_frames_decord)
+    frames = video_reader.get_batch(frame_indices).asnumpy()  # (T, H, W, C), np.uint8
+    images = [Image.fromarray(frames[i]) for i in range(frames.shape[0])]
+    return images
 ###################################################################################
 
 

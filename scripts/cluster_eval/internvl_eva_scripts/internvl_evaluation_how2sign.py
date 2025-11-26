@@ -18,9 +18,20 @@ import numpy as np
 os.environ["DISABLE_FLASH_ATTN"] = "1"
 warnings.filterwarnings("ignore")
 
-# Add InternVL paths
-sys.path.insert(0, '/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat')
-sys.path.insert(0, '/home/mh2803/projects/sign_language_llm/InternVL')
+# Add InternVL paths - auto-detect project root
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(script_dir, '../../..'))
+internvl_chat_path = os.path.join(project_root, 'InternVL/internvl_chat')
+internvl_path = os.path.join(project_root, 'InternVL')
+if os.path.exists(internvl_chat_path):
+    sys.path.insert(0, internvl_chat_path)
+if os.path.exists(internvl_path):
+    sys.path.insert(0, internvl_path)
+# Fallback to hardcoded paths if auto-detection fails
+if '/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat' not in sys.path:
+    sys.path.insert(0, '/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat')
+if '/home/mh2803/projects/sign_language_llm/InternVL' not in sys.path:
+    sys.path.insert(0, '/home/mh2803/projects/sign_language_llm/InternVL')
 
 from internvl.model.internvl_chat import InternVLChatModel, InternVLChatConfig
 from internvl.model.internlm2.modeling_internlm2 import InternLM2ForCausalLM
@@ -238,7 +249,74 @@ def _load_video_locally(
     error_msgs = '; '.join(load_errors) or 'unknown'
     raise RuntimeError(f'Failed to load video locally ({error_msgs})')
 
-def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2-26B"):
+def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
+    """
+    Load InternVL base model (without checkpoint)
+    """
+    print("🚀 Loading InternVL base model...")
+    print(f"   Model: {base_model_name}")
+    
+    # Step 1: Load base model config
+    print("\n1️⃣ Loading base model config...")
+    config = InternVLChatConfig.from_pretrained(base_model_name, trust_remote_code=True)
+    print("   ✅ Config loaded")
+    
+    # Step 2: Load model
+    print(f"\n2️⃣ Loading base model...")
+    model = InternVLChatModel.from_pretrained(
+        base_model_name,
+        torch_dtype=torch.bfloat16,
+        trust_remote_code=True,
+        device_map="auto"
+    )
+    print("   ✅ Model loaded from base model")
+    
+    # Step 2.5: Update model config to match training settings
+    # Training uses: force_image_size=224, down_sample_ratio=0.5
+    # This ensures num_image_token matches training (64 for 224x224 with ratio 0.5)
+    force_image_size = 224
+    down_sample_ratio = 0.5
+    patch_size = model.patch_size
+    
+    # Resize vision model if needed
+    if hasattr(model.config, 'force_image_size') and model.config.force_image_size != force_image_size:
+        print(f"   🔧 Resizing vision model from {model.config.vision_config.image_size} to {force_image_size}")
+        model.vision_model.resize_pos_embeddings(
+            old_size=model.config.vision_config.image_size,
+            new_size=force_image_size,
+            patch_size=patch_size
+        )
+        model.config.vision_config.image_size = force_image_size
+    
+    # Update config and recalculate num_image_token
+    model.config.force_image_size = force_image_size
+    model.config.downsample_ratio = down_sample_ratio
+    model.downsample_ratio = down_sample_ratio
+    model.num_image_token = int((force_image_size // patch_size) ** 2 * (down_sample_ratio ** 2))
+    print(f"   🔧 Updated config: force_image_size={force_image_size}, down_sample_ratio={down_sample_ratio}")
+    print(f"   🔧 num_image_token={model.num_image_token}")
+    
+    # Step 3: Load tokenizer
+    print(f"\n3️⃣ Loading tokenizer...")
+    tokenizer = AutoTokenizer.from_pretrained(
+        base_model_name,
+        trust_remote_code=True,
+        use_fast=False
+    )
+    # Set model_max_length to match training (12288 for InternVL2.5-2B)
+    # This ensures evaluation uses the same sequence length limit as training
+    tokenizer.model_max_length = 12288
+    print(f"   ✅ Tokenizer loaded (model_max_length: {tokenizer.model_max_length})")
+    
+    model.eval()
+    
+    print(f"\n{'='*70}")
+    print(f"✅ COMPLETE BASE MODEL LOADED SUCCESSFULLY!")
+    print(f"{'='*70}\n")
+    
+    return model, tokenizer
+
+def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2B"):
     """
     Load InternVL trained model from checkpoint
     """
@@ -260,6 +338,16 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2-26B
             device_map="auto"
         )
         print("   ✅ Model loaded from checkpoint")
+        # Check if num_image_token matches training (should be 64 for 224x224 with ratio 0.5)
+        expected_num_image_token = int((224 // 14) ** 2 * (0.5 ** 2))  # 64
+        if model.num_image_token != expected_num_image_token:
+            print(f"   ⚠️  Warning: num_image_token={model.num_image_token} doesn't match expected {expected_num_image_token}")
+            print(f"   🔧 Updating to match training config...")
+            model.config.force_image_size = 224
+            model.config.downsample_ratio = 0.5
+            model.downsample_ratio = 0.5
+            model.num_image_token = expected_num_image_token
+            print(f"   ✅ Updated num_image_token to {model.num_image_token}")
     except Exception as e:
         print(f"   ⚠️  Failed to load from checkpoint, trying base model: {e}")
         # Fallback to base model if checkpoint loading fails
@@ -270,6 +358,22 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2-26B
             device_map="auto"
         )
         print("   ✅ Model loaded from base model")
+        # Apply training config to base model
+        force_image_size = 224
+        down_sample_ratio = 0.5
+        patch_size = model.patch_size
+        if hasattr(model.config, 'force_image_size') and model.config.force_image_size != force_image_size:
+            model.vision_model.resize_pos_embeddings(
+                old_size=model.config.vision_config.image_size,
+                new_size=force_image_size,
+                patch_size=patch_size
+            )
+            model.config.vision_config.image_size = force_image_size
+        model.config.force_image_size = force_image_size
+        model.config.downsample_ratio = down_sample_ratio
+        model.downsample_ratio = down_sample_ratio
+        model.num_image_token = int((force_image_size // patch_size) ** 2 * (down_sample_ratio ** 2))
+        print(f"   🔧 Updated config: num_image_token={model.num_image_token}")
     
     # Step 3: Load tokenizer
     print(f"\n3️⃣ Loading tokenizer...")
@@ -279,7 +383,10 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2-26B
         trust_remote_code=True,
         use_fast=False
     )
-    print("   ✅ Tokenizer loaded")
+    # Set model_max_length to match training (12288 for InternVL2.5-2B)
+    # This ensures evaluation uses the same sequence length limit as training
+    tokenizer.model_max_length = 12288
+    print(f"   ✅ Tokenizer loaded (model_max_length: {tokenizer.model_max_length})")
     
     model.eval()
     
@@ -301,10 +408,19 @@ def eval_model(args):
     
     # Load model
     try:
-        model, tokenizer = load_trained_model(
-            args.checkpoint_path, 
-            args.model_base
-        )
+        if args.checkpoint_path and os.path.exists(str(args.checkpoint_path)):
+            # Load from checkpoint
+            model, tokenizer = load_trained_model(
+                args.checkpoint_path, 
+                args.model_base
+            )
+        else:
+            # Load base model only
+            if args.checkpoint_path:
+                print(f"ℹ️  Checkpoint path '{args.checkpoint_path}' doesn't exist, loading base model...")
+            else:
+                print("ℹ️  No checkpoint path provided, loading base model...")
+            model, tokenizer = load_base_model(args.model_base)
     except Exception as e:
         print(f"\n❌ FAILED TO LOAD MODEL!")
         print(f"Error: {e}")
@@ -316,7 +432,7 @@ def eval_model(args):
     print(f"📂 Loading test data from: {args.question_file}")
     data_dict = []
     
-    # Check if file is JSONL (each line is a JSON object) or JSON (array)
+    # Check if file is JSONL (each line is a JSON object) or JSON (array or meta config)
     with open(args.question_file, 'r', encoding='utf-8') as f:
         first_line = f.readline().strip()
         f.seek(0)  # Reset to beginning
@@ -324,6 +440,43 @@ def eval_model(args):
         if first_line.startswith('['):
             # JSON array format (qwenvl style)
             data_dict = json.load(f)
+        elif first_line.startswith('{'):
+            # Could be JSON object (meta config) or JSONL format
+            # Try to parse as JSON object first
+            try:
+                meta_data = json.load(f)
+                # Check if it's a meta config file (has 'how2sign' key with 'annotation' field)
+                if isinstance(meta_data, dict) and 'how2sign' in meta_data:
+                    annotation_file = meta_data['how2sign'].get('annotation')
+                    if annotation_file and os.path.exists(annotation_file):
+                        print(f"   Detected meta config file, loading annotation from: {annotation_file}")
+                        # Load the actual JSONL file
+                        with open(annotation_file, 'r', encoding='utf-8') as ann_f:
+                            for line in ann_f:
+                                line = line.strip()
+                                if line:
+                                    try:
+                                        data_dict.append(json.loads(line))
+                                    except json.JSONDecodeError as e:
+                                        print(f"⚠️  Warning: Failed to parse line: {line[:100]}... Error: {e}")
+                                        continue
+                    else:
+                        print(f"⚠️  Warning: Annotation file not found or not specified in meta config")
+                        print(f"   Meta data: {meta_data}")
+                else:
+                    # Not a meta config, treat as single JSON object (unlikely for evaluation)
+                    print(f"⚠️  Warning: File is a JSON object but not a meta config. Expected JSONL or JSON array.")
+            except json.JSONDecodeError:
+                # Not valid JSON, treat as JSONL format
+                f.seek(0)
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        try:
+                            data_dict.append(json.loads(line))
+                        except json.JSONDecodeError as e:
+                            print(f"⚠️  Warning: Failed to parse line: {line[:100]}... Error: {e}")
+                            continue
         else:
             # JSONL format (InternVL style) - each line is a JSON object
             for line in f:
@@ -340,6 +493,13 @@ def eval_model(args):
         print(f"   Limited to {args.max_samples} samples")
     
     print(f"   Total samples: {len(data_dict)}\n")
+    
+    # Validate that we loaded some data
+    if len(data_dict) == 0:
+        print(f"\n❌ ERROR: No data loaded from {args.question_file}")
+        print(f"   Please check that the file exists and is in the correct format (JSONL or JSON array).")
+        print(f"   Expected format: JSONL (one JSON object per line) or JSON array.")
+        return
     
     os.makedirs(args.out_dir, exist_ok=True)
     
@@ -360,27 +520,19 @@ def eval_model(args):
             video_file = source["video"]
             video_path = os.path.join(args.video_folder, video_file)
             
-            # Extract question and ground truth based on format
+            # Use default prompt for all evaluations (ignore question from jsonl file)
+            default_prompt = "Translate the American Sign Language in this video to English."
+            fq = default_prompt
+            
+            # Extract ground truth from conversations or source
             conversations = source.get('conversations', [])
             if len(conversations) >= 2:
-                # InternVL format: [{"from": "human", "value": "..."}, {"from": "gpt", "value": "..."}]
-                if "from" in conversations[0]:
-                    # InternVL format
-                    question_text = conversations[0].get('value', '')
-                    # Extract question without <video> tag if present
-                    if '<video>' in question_text:
-                        fq = question_text.split('<video>', 1)[-1].strip()
-                        if not fq:
-                            fq = "Translate the American Sign Language in this video to English."
-                    else:
-                        fq = question_text if question_text else "Translate the American Sign Language in this video to English."
+                # Get ground truth from the second conversation (assistant's response)
+                if "from" in conversations[1]:
                     ground_truth = conversations[1].get('value', '')
                 else:
-                    # qwenvl format: [{"role": "user", ...}, {"role": "assistant", ...}]
-                    fq = "Translate the American Sign Language in this video to English."
                     ground_truth = conversations[1].get('value', '')
             else:
-                fq = "Translate the American Sign Language in this video to English."
                 ground_truth = source.get('answer', source.get('ground_truth', ''))
             
             if not os.path.exists(video_path):
@@ -410,32 +562,68 @@ def eval_model(args):
                 })
                 continue
             
-            # Generate special tokens for each video frame (same as training code)
-            # Format: Frame-1: <image>\nFrame-2: <image>\n...
-            special_tokens = '\n'.join(['Frame-{}: <image>'.format(i + 1) for i in range(len(image_list))])
+            # Check if we have too many frames (would exceed sequence length)
+            # Use the same max_seq_length as training (12288) to match training behavior
+            num_image_token = model.num_image_token
+            max_seq_length = tokenizer.model_max_length  # Use tokenizer's model_max_length (12288)
+            # Estimate: each frame needs num_image_token tokens, plus text tokens
+            # Use conservative estimate: allow max 80% of sequence length for safety
+            max_frames_allowed = int((max_seq_length * 0.8) / num_image_token)
             
-            # Prepare question with video frames (same format as training)
-            question = f"{special_tokens}\n{fq}"
+            if len(image_list) > max_frames_allowed:
+                # Reduce number of frames to fit within sequence length
+                if max_frames_allowed < args.min_num_frames:
+                    print(f"\n⚠️  [{idx}/{len(data_dict)}] Video {video_file} has too many frames ({len(image_list)}), skipping")
+                    results.append({
+                        "video": video_file,
+                        "model_output": f"ERROR: Too many frames ({len(image_list)}) for sequence length (max: {max_frames_allowed})",
+                        "ground_truth": ground_truth
+                    })
+                    continue
+                # Uniformly sample frames to reduce count
+                step = len(image_list) / max_frames_allowed
+                indices = [int(i * step) for i in range(max_frames_allowed)]
+                image_list = [image_list[i] for i in indices if i < len(image_list)]
+                print(f"\n⚠️  [{idx}/{len(data_dict)}] Reduced frames to {len(image_list)} (from original) to fit sequence length")
             
             # Transform each frame image and stack them (same as training code)
             pixel_values = [transform(image) for image in image_list]
             pixel_values = torch.stack(pixel_values).to(torch.bfloat16).cuda()
+            # Shape should be [num_frames, channels, height, width] (not [batch, num_frames, ...])
+            # InternVL expects pixel_values without batch dimension for video frames
             
-            # Generate using model.chat() (same as InternVL evaluation)
+            # Generate prompt with <image> placeholders (same format as training)
+            # Training code uses: Frame-1: <image>\nFrame-2: <image>\n...
+            # Each <image> represents 1 frame, and will be replaced with num_image_token IMG_CONTEXT_TOKENs
+            special_tokens = '\n'.join(['Frame-{}: <image>'.format(i + 1) for i in range(len(image_list))])
+            question = f"{special_tokens}\n{fq}"
+            
+            # num_patches_list tells model how many frames each <image> placeholder represents
+            # For training format, each <image> represents 1 frame
+            # So num_patches_list = [1] * num_frames
+            num_patches_list = [1] * len(image_list)
+            
+            # Generate using model.chat() (same parameters as Qwen2VL evaluation)
             generation_config = dict(
-                num_beams=5,
-                max_new_tokens=args.max_new_tokens,
-                min_new_tokens=1,
-                do_sample=True,
-                temperature=0.7,
+                num_beams=5,                    # Beam search for better quality
+                do_sample=True,                 # Enable sampling for better diversity
+                temperature=0.7,                # Temperature for generation (0.7 is a good balance)
+                top_p=0.9,                      # Nucleus sampling
+                top_k=50,                       # Top-k sampling
+                length_penalty=1.0,             # Length penalty (1.0 = neutral)
+                no_repeat_ngram_size=4,        # Prevent 4-gram repetition
+                repetition_penalty=1.1,         # Slight penalty for token repetition
+                min_length=1,                   # Minimum output length
+                max_new_tokens=args.max_new_tokens  # Maximum tokens to generate
             )
             
             with torch.no_grad():
                 output = model.chat(
                     tokenizer=tokenizer,
-                    pixel_values=pixel_values.unsqueeze(0),
+                    pixel_values=pixel_values,  # [num_frames, C, H, W]
                     question=question,
                     generation_config=generation_config,
+                    num_patches_list=num_patches_list,  # Each <image> represents 1 frame
                     verbose=False
                 )
             
@@ -505,7 +693,14 @@ def eval_model(args):
     if references and predictions:
         try:
             print(f"📊 Calculating evaluation metrics...\n")
-            sys.path.append('/home/mh2803/projects/sign_language_llm/evaluation')
+            # Auto-detect evaluation path
+            script_dir_eval = os.path.dirname(os.path.abspath(__file__))
+            project_root_eval = os.path.abspath(os.path.join(script_dir_eval, '../../..'))
+            eval_path = os.path.join(project_root_eval, 'evaluation')
+            if os.path.exists(eval_path):
+                sys.path.append(eval_path)
+            else:
+                sys.path.append('/home/mh2803/projects/sign_language_llm/evaluation')
             from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results
             
             eval_results = comprehensive_evaluation(references, predictions)
@@ -530,15 +725,18 @@ def eval_model(args):
     print(f"   Total samples: {len(results)}")
     print(f"   Successful: {successful}")
     print(f"   Failed: {len(results) - successful}")
-    print(f"   Success rate: {successful/len(results)*100:.1f}%")
+    if len(results) > 0:
+        print(f"   Success rate: {successful/len(results)*100:.1f}%")
+    else:
+        print(f"   Success rate: N/A (no samples processed)")
     print(f"{'='*70}\n")
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate InternVL trained checkpoint on test set")
-    parser.add_argument("--checkpoint-path", type=str, required=True,
-                       help="Path to checkpoint directory")
+    parser.add_argument("--checkpoint-path", type=str, default=None,
+                       help="Path to checkpoint directory (optional, if not provided, will use base model)")
     parser.add_argument("--model-base", type=str, 
-                       default="OpenGVLab/InternVL2-26B",
+                       default="OpenGVLab/InternVL2_5-2B",
                        help="Base model name")
     parser.add_argument("--video-folder", type=str, required=True,
                        help="Folder containing test videos")
@@ -562,7 +760,7 @@ def main():
     args = parser.parse_args()
     
     # Validate paths
-    if not os.path.exists(args.checkpoint_path):
+    if args.checkpoint_path is not None and not os.path.exists(args.checkpoint_path):
         print(f"❌ Checkpoint not found: {args.checkpoint_path}")
         return
     if not os.path.exists(args.video_folder):

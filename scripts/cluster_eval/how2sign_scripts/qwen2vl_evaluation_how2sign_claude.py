@@ -312,6 +312,14 @@ def eval_model(args):
         
         except Exception as e:
             print(f"\n❌ Error on sample {idx}: {e}")
+            import traceback
+            traceback.print_exc()
+            # Extract ground truth based on format
+            conversations = source.get('conversations', [])
+            if len(conversations) >= 2:
+                gt = conversations[1].get('value', 'unknown')
+            else:
+                gt = source.get('answer', source.get('ground_truth', 'unknown'))
             results.append({
                 "video": source.get("video", "unknown"),
                 "model_output": f"ERROR: {str(e)}",
@@ -372,9 +380,9 @@ def main():
                        help="Folder containing test videos")
     parser.add_argument("--question-file", type=str, required=True,
                        help="JSON file with test questions")
-    parser.add_argument("--out-dir", type=str, required=True,
+    parser.add_argument("--min-pixels", type=int, default=224*224,
                        help="Output directory for results")
-    parser.add_argument("--max-samples", type=int, default=None,
+    parser.add_argument("--max-pixels", type=int, default=224*224,
                        help="Limit number of samples (for testing)")
     parser.add_argument("--max-new-tokens", type=int, default=128,
                        help="Max tokens to generate")

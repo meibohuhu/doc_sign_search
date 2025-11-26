@@ -98,10 +98,9 @@ deepspeed src/train/train_sft.py \
     --save_steps 10 \
     --save_total_limit 2 \
     --use_liger True \
-    --freeze_vision_tower True \
+    --freeze_vision_tower False \
     --freeze_llm True \
     --freeze_merger False \
-    --unfreeze_topk_vision 4 \
     --bf16 True \
     --fp16 False \
     --disable_flash_attn2 True \
