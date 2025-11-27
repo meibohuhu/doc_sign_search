@@ -39,7 +39,7 @@ BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
 # Memory envelopes (defaults can be overridden via env vars)
-DEEPSPEED_CONFIG="internvl_chat/zero_stage3_config.json"
+DEEPSPEED_CONFIG="internvl_chat/zero_stage1_config.json"
 
 # DEFAULT_MAX_SEQ_LENGTH=12288
 # DEFAULT_MAX_BUFFER_SIZE=20

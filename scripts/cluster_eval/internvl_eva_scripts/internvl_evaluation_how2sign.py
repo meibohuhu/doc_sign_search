@@ -590,8 +590,58 @@ def eval_model(args):
             # Use default prompt template (will be formatted with actual frame count after loading)
             # default_prompt = "Translate the American Sign Language in this video to English."
             # default_prompt_template = "Please describe each action change in this video based on the frame transitions. This video contains {num_frames} frames. For each action change, describe ONLY the physical movements: (1) what changes (hand movements, gestures, body positions), (2) how it changes (the transition and motion), and (3) when it changes (the sequence of changes). IMPORTANT: Only describe observable physical actions and movements. Do NOT include any interpretations, speculations, meanings, or explanations (such as 'possibly indicating', 'suggesting', 'rhythmic manner', etc.). Focus strictly on describing the physical actions and movements that you can see."
-            default_prompt = "Observe this ASL video and describe in detail how the person's hand gestures and facial expressions change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. Only describe the physical movements you can see - do not include background information, interpretations, or speculations."
-            fq = default_prompt  # Will be set after loading frames
+            # default_prompt = "Observe this ASL video and describe in detail how the person's hand gestures and facial expressions change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. Only describe the physical movements you can see - do not include background information, interpretations, or speculations."
+            fq = """
+You are an ASL motion-description annotator.
+Describe each video frame accurately, objectively, and with full linguistic detail.
+Do NOT translate the signs into English words. Do NOT infer meaning.
+Only describe observable physical movement.
+
+For each frame, report the following fields exactly:
+
+Right hand:
+- Handshape: (e.g., 1-hand, 5-hand, claw, fist, V-hand, bent-V, open-B, flat-O)
+- Palm orientation: (up, down, left, right, inward, outward)
+- Location in signing space: (upper/lower/center-left/center-right, near-face, near-chest, mid-space, side, neutral space)
+- Movement: 
+  - direction (up, down, toward body, away, left, right, circular, arc)
+  - speed (slow, medium, fast)
+  - path type (straight, curved, arc, repeated)
+  - start → end positions
+
+Left hand:
+- (Same structure as right hand; if static, write "no movement")
+
+Hand interaction:
+- Contact: (touch, brush, tap, cross, stack, approach-without-touch)
+- Relative position: (above/below, in front/behind, left/right, near/far)
+- Synchrony: (simultaneous movement / alternating movement)
+- Repetition count (1×, 2×, 3× if visible)
+
+Face / Non-manual markers (NMM):
+- Eyebrows: (raised, furrowed, neutral)
+- Eyes: (wide, squinting, blinking)
+- Mouth morphemes: (open, "oo", "mm", "ah", pursed, puffed)
+- Head movement: (tilt left/right, nod, shake, forward/backward)
+- Body posture: (lean forward/backward, shoulder shift)
+
+Formatting Requirements:
+Use this exact format:
+
+Frame X:
+Right hand: [handshape, palm orientation, location, movement]
+Left hand: [handshape, palm orientation, location, movement]
+Interaction: [contact / relative positioning / repetition]
+Face/NMM: [eyebrows, eyes, mouth shape, head movement, body posture]
+
+Rules:
+- Be extremely specific about movement path and spatial location.
+- Mention start and end positions for any movement.
+- Mention when a hand remains still.
+- Do not guess the sign or English meaning.
+- Keep descriptions factual, not interpretive.
+- If unsure, use "approximately".
+"""# Will be set after loading frames
             
             # Extract ground truth from conversations or source
             conversations = source.get('conversations', [])

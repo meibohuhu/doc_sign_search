@@ -1,0 +1,7 @@
+[
+  {
+    "video": "1L0GSTIb9Vs_4-5-rgb_front.mp4",
+    "model_output": "Frame 1:\n- Right hand: V-hand, palm orientation down, location mid-space, movement approximately straight forward.\n- Left hand: No movement.\n- Interaction: No interaction.\n- Face/NMM: No facial or non-manual markers visible.\n\nFrame 2:\n- Both hands: No movement.\n\nFrame 3:\n- Left hand (approximately): Open, palm facing upwards.\n- Right hand (no movement).\n\nFrame 4:\n- Left and right hands: No interaction.\n\nFrame 5:\n- Right and left hands: Approximately clenched into fists.\n\nFrame 6:\n- Right hands: Clenched fists, palms facing inward.\n- Left hands: No movements.\n\nFrame 7:\n- Right left hand: Clenching into a fist.\n- Right right hand: Approximately open, palm facing outward.\n- Left left hand: No movements.\n- Left right hand: No interaction.",
+    "ground_truth": "The male of the species is white with black wings and very very long tail feathers."
+  }
+]
