@@ -31,8 +31,8 @@ DATA_PATH="/code/doc_sign_search/script_adobe/1125/merged_train.json"
 IMAGE_FOLDER="/mnt/localssd/sign_mllm_openasl_videos"
 
 # Optimized training configuration
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
-BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
+BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-4}
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
 export MASTER_PORT=29508
@@ -49,7 +49,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --data_path "$DATA_PATH" \
     --image_folder "$IMAGE_FOLDER" \
     --output_dir "$OUTPUT_DIR" \
-    --num_train_epochs 5 \
+    --num_train_epochs 4 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --video_min_pixels $((224 * 224)) \
@@ -62,7 +62,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --weight_decay 0.01 \
     --logging_steps 10 \
     --save_strategy epoch \
-    --save_total_limit 3 \
+    --save_total_limit 2 \
     --use_liger True \
     --freeze_vision_tower False \
     --freeze_llm True \

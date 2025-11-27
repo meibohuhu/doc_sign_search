@@ -16,7 +16,7 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /local1/mhu/sign_language_llm
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"0,1"}  # Default: use GPU 0 and 1
+GPU_IDS=${GPU_IDS:-"1"}  # Default: use GPU 0 and 1
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
@@ -31,10 +31,10 @@ QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/internvl_eval/}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-3}  # Set to a number to limit samples, empty for full evaluation
+MAX_SAMPLES=${MAX_SAMPLES:-1}  # Set to a number to limit samples, empty for full evaluation
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-10}  # Minimum number of frames (set to 6 to ensure 6 frames)
 MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-128}  # Maximum number of frames (set to 6 to fix at 6 frames)
-SAMPLING_METHOD=${SAMPLING_METHOD:-fps1.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
+SAMPLING_METHOD=${SAMPLING_METHOD:-fps12.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
 IMAGE_SIZE=${IMAGE_SIZE:-224}
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-8192}
 EXPORT_FRAMES=${EXPORT_FRAMES:-false}  # Set to "true" to enable frame export

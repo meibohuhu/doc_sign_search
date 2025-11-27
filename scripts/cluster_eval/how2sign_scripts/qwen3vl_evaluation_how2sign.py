@@ -189,7 +189,32 @@ def eval_model(args):
         try:
             # fq= "Observe this ASL video and describe in detail how the person's hand gestures change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. Only describe the physical movements you can see - do not include background information, interpretations, or speculations."
             # fq = "Observe this ASL video and describe in detail how the person's hand gestures change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. CRITICAL RULES: (1) Only describe the physical movements you can directly observe. (2) Use factual, objective language only. (3) FORBIDDEN WORDS AND PHRASES - DO NOT USE: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that', or any other interpretive or speculative language. (4) Describe ONLY what you see: hand positions, finger states, movements, locations, and transitions. Do NOT describe what the gestures might mean, what they could represent, or what they seem to indicate."
-            fq = "Describe concisely. Format:\n\nRight hand: [position, finger states, palm orientation]\nLeft hand: [position, finger states, palm orientation]\nFace: [expression]\n\nBe brief and factual. No interpretations."
+            # fq = "Describe concisely. Format:\n\nRight hand: [position, finger states, palm orientation]\nLeft hand: [position, finger states, palm orientation]\nFace: [expression]\n\nBe brief and factual. No interpretations."
+            fq = PROMPT_ASL_SEGMENT = """
+You are an ASL motion-description annotator.
+
+Instead of describing every frame, summarize the video into 6-10 temporal segments.
+Each segment should represent a stable movement pattern or change in handshape/position.
+
+For EACH segment, describe:
+
+Segment X:
+- Time range: (approx.)
+- Right hand: handshape, palm orientation, location, movement path
+- Left hand: same fields
+- Hand interaction: contact, relative position, synchrony
+- Movement summary: direction, speed, repetition, changes
+- Face/NMM: eyebrows, mouth shape, head movement, body posture
+
+Rules:
+- DO NOT describe every frame individually.
+- DO NOT infer meaning; only describe observable motion.
+- Capture movement transitions and changes between segments.
+- Keep segments concise but precise.
+"""
+
+
+
             video_file = source["video"]
             video_path = os.path.join(args.video_folder, video_file)
             
@@ -243,10 +268,13 @@ def eval_model(args):
                     # Process each frame separately
                     frame_descriptions = []
                     for frame_idx, frame in enumerate(frames):
+                        # Format prompt with frame index
+                        frame_prompt = fq.format(index=frame_idx + 1) if "{index}" in fq else fq
+                        
                         # Create content with single image
                         content = [
                             {"type": "image", "image": frame},
-                            {"type": "text", "text": fq}
+                            {"type": "text", "text": frame_prompt}
                         ]
                         messages = [{"role": "user", "content": content}]
                         
@@ -311,6 +339,11 @@ def eval_model(args):
                 # Add fps if provided
                 if args.video_fps is not None:
                     video_content["fps"] = args.video_fps
+                    if idx <= 3:  # Print for first few samples
+                        print(f"\n📹 [{idx}/{len(data_dict)}] Using video input with fps={args.video_fps} for {video_file}")
+                else:
+                    if idx <= 3:  # Print for first few samples
+                        print(f"\n📹 [{idx}/{len(data_dict)}] Using video input (no fps specified, auto-detect) for {video_file}")
                 
                 messages = [
                     {

@@ -18,7 +18,7 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /local1/mhu/sign_language_llm
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"0,1"}  # Default: use GPU 0 and 1
+GPU_IDS=${GPU_IDS:-"1"}  # Default: use GPU 0 and 1
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
@@ -32,12 +32,12 @@ QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/seg
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/qwen3vl_eval/}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-2}  # Set to a number to limit samples, empty for full evaluation
-MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-1024}
-VIDEO_FPS=${VIDEO_FPS:-1}  # Optional: FPS for video processing
-USE_FRAMES=${USE_FRAMES:-true}  # Set to true to extract frames and use as images
+MAX_SAMPLES=${MAX_SAMPLES:-1}  # Set to a number to limit samples, empty for full evaluation
+MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-9000}
+VIDEO_FPS=${VIDEO_FPS:-10}  # Optional: FPS for video processing
+USE_FRAMES=${USE_FRAMES:-false}  # Set to true to extract frames and use as images
 NUM_FRAMES=${NUM_FRAMES:-}  # Optional: Number of frames to extract (if empty, use fps-based sampling)
-SAVE_FRAMES=${SAVE_FRAMES:-true}  # Set to true to save extracted frames to disk
+SAVE_FRAMES=${SAVE_FRAMES:-false}  # Set to true to save extracted frames to disk
 
 echo "🎬 Qwen3-VL-2B How2Sign Evaluation on 2×A6000"
 echo "=================================================="
