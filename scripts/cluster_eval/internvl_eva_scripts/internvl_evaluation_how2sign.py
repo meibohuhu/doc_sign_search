@@ -176,6 +176,9 @@ def _load_video_locally(
                 seen.add(idx)
                 unique_indices.append(idx)
         frame_indices = unique_indices
+        
+        # Print sampled frame indices for debugging
+        print(f"   📊 Sampled {len(frame_indices)} frames: {frame_indices} (video total: {total_frames}, fps: {fps:.2f})")
 
         frames = vr.get_batch(frame_indices).asnumpy()
         images = [Image.fromarray(frames[i]) for i in range(frames.shape[0])]
@@ -221,6 +224,9 @@ def _load_video_locally(
                 seen.add(idx)
                 unique_indices.append(idx)
         frame_indices = unique_indices
+        
+        # Print sampled frame indices for debugging
+        print(f"   📊 Sampled {len(frame_indices)} frames: {frame_indices} (video total: {total_frames}, fps: {fps:.2f})")
 
         frames: List[Image.Image] = []
         frame_set = set(frame_indices)
@@ -248,6 +254,60 @@ def _load_video_locally(
 
     error_msgs = '; '.join(load_errors) or 'unknown'
     raise RuntimeError(f'Failed to load video locally ({error_msgs})')
+
+def extract_and_export_frames(
+    video_path: str,
+    output_folder: str,
+    max_num_frames: int,
+    min_num_frames: int,
+    sample: str = 'rand',
+    clip: Optional[Iterable[int]] = None,
+    video_name: Optional[str] = None,
+) -> str:
+    """
+    Extract frames from video and export them to a folder.
+    
+    Args:
+        video_path: Path to the video file
+        output_folder: Folder to save extracted frames
+        max_num_frames: Maximum number of frames to extract
+        min_num_frames: Minimum number of frames to extract
+        sample: Sampling method (same as _load_video_locally)
+        clip: Optional clip parameter (start, end) in seconds
+        video_name: Optional video name for folder naming (if None, uses video filename)
+    
+    Returns:
+        Path to the folder containing extracted frames
+    """
+    # Generate output folder name
+    if video_name is None:
+        video_name = os.path.splitext(os.path.basename(video_path))[0]
+    
+    # Sanitize video_name for filesystem (remove invalid characters)
+    video_name = "".join(c for c in video_name if c.isalnum() or c in ('-', '_', '.'))
+    
+    frame_output_dir = os.path.join(output_folder, video_name)
+    os.makedirs(frame_output_dir, exist_ok=True)
+    
+    # Load video frames
+    try:
+        image_list = _load_video_locally(
+            video_path,
+            max_num_frames=max_num_frames,
+            min_num_frames=min_num_frames,
+            sample=sample,
+            clip=clip
+        )
+    except Exception as e:
+        raise RuntimeError(f"Failed to load video frames: {e}")
+    
+    # Save frames to folder
+    for idx, image in enumerate(image_list):
+        frame_filename = f"frame_{idx:04d}.jpg"
+        frame_path = os.path.join(frame_output_dir, frame_filename)
+        image.save(frame_path, quality=95)
+    
+    return frame_output_dir
 
 def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     """
@@ -503,6 +563,13 @@ def eval_model(args):
     
     os.makedirs(args.out_dir, exist_ok=True)
     
+    # Create frames export folder if enabled
+    frames_export_dir = None
+    if args.export_frames:
+        frames_export_dir = os.path.join(args.out_dir, "extracted_frames")
+        os.makedirs(frames_export_dir, exist_ok=True)
+        print(f"📁 Frames will be exported to: {frames_export_dir}\n")
+    
     results = []
     references = []
     predictions = []
@@ -520,9 +587,11 @@ def eval_model(args):
             video_file = source["video"]
             video_path = os.path.join(args.video_folder, video_file)
             
-            # Use default prompt for all evaluations (ignore question from jsonl file)
-            default_prompt = "Translate the American Sign Language in this video to English."
-            fq = default_prompt
+            # Use default prompt template (will be formatted with actual frame count after loading)
+            # default_prompt = "Translate the American Sign Language in this video to English."
+            # default_prompt_template = "Please describe each action change in this video based on the frame transitions. This video contains {num_frames} frames. For each action change, describe ONLY the physical movements: (1) what changes (hand movements, gestures, body positions), (2) how it changes (the transition and motion), and (3) when it changes (the sequence of changes). IMPORTANT: Only describe observable physical actions and movements. Do NOT include any interpretations, speculations, meanings, or explanations (such as 'possibly indicating', 'suggesting', 'rhythmic manner', etc.). Focus strictly on describing the physical actions and movements that you can see."
+            default_prompt = "Observe this ASL video and describe in detail how the person's hand gestures and facial expressions change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. Only describe the physical movements you can see - do not include background information, interpretations, or speculations."
+            fq = default_prompt  # Will be set after loading frames
             
             # Extract ground truth from conversations or source
             conversations = source.get('conversations', [])
@@ -546,6 +615,7 @@ def eval_model(args):
             
             # Load video frames using the same method as training code
             try:
+                print(f"\n📹 [{idx}/{len(data_dict)}] Loading video: {video_file}")
                 image_list = _load_video_locally(
                     video_path,
                     max_num_frames=args.max_num_frames,
@@ -553,6 +623,12 @@ def eval_model(args):
                     sample=args.sampling_method,
                     clip=None
                 )
+                print(f"   ✅ Loaded {len(image_list)} frames")
+                
+                # Format prompt with actual number of frames
+                num_frames = len(image_list)
+                # fq = default_prompt_template.format(num_frames=num_frames)
+                # print(f"   📝 Prompt configured for {num_frames} frames (describe each action change)")
             except Exception as e:
                 print(f"\n⚠️  [{idx}/{len(data_dict)}] Failed to load video {video_file}: {e}")
                 results.append({
@@ -561,6 +637,23 @@ def eval_model(args):
                     "ground_truth": ground_truth
                 })
                 continue
+            
+            # Export frames to folder if enabled
+            if args.export_frames and frames_export_dir:
+                try:
+                    frame_folder = extract_and_export_frames(
+                        video_path=video_path,
+                        output_folder=frames_export_dir,
+                        max_num_frames=args.max_num_frames,
+                        min_num_frames=args.min_num_frames,
+                        sample=args.sampling_method,
+                        clip=None,
+                        video_name=os.path.splitext(video_file)[0]
+                    )
+                    if idx <= 10:  # Print for first 10 samples
+                        print(f"   📁 Frames exported to: {frame_folder} ({len(image_list)} frames)")
+                except Exception as e:
+                    print(f"\n⚠️  [{idx}/{len(data_dict)}] Failed to export frames for {video_file}: {e}")
             
             # Check if we have too many frames (would exceed sequence length)
             # Use the same max_seq_length as training (12288) to match training behavior
@@ -729,6 +822,8 @@ def eval_model(args):
         print(f"   Success rate: {successful/len(results)*100:.1f}%")
     else:
         print(f"   Success rate: N/A (no samples processed)")
+    if args.export_frames and frames_export_dir:
+        print(f"   📁 Extracted frames saved to: {frames_export_dir}")
     print(f"{'='*70}\n")
 
 def main():
@@ -756,6 +851,8 @@ def main():
                        help="Video frame sampling method: 'fpsX.X' (e.g., 'fps12.0'), 'rand' (default), 'random_start_every2'")
     parser.add_argument("--image-size", type=int, default=448,
                        help="Image size for processing")
+    parser.add_argument("--export-frames", action="store_true",
+                       help="Export extracted video frames to folder (saved in out_dir/extracted_frames)")
     
     args = parser.parse_args()
     

@@ -23,20 +23,21 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # Configuration
 # Set CHECKPOINT_PATH to empty string or unset to use base model only
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
-# CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Empty by default - will use base model
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_18fps/checkpoint-3000}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Empty by default - will use base model
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_18fps/checkpoint-3000}"
 MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-2B}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/}"
 QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json}"
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/internvl_eval/}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-15}  # Set to a number to limit samples, empty for full evaluation
-MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}
-MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-160}
-SAMPLING_METHOD=${SAMPLING_METHOD:-fps18.0}
+MAX_SAMPLES=${MAX_SAMPLES:-3}  # Set to a number to limit samples, empty for full evaluation
+MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-10}  # Minimum number of frames (set to 6 to ensure 6 frames)
+MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-128}  # Maximum number of frames (set to 6 to fix at 6 frames)
+SAMPLING_METHOD=${SAMPLING_METHOD:-fps1.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
 IMAGE_SIZE=${IMAGE_SIZE:-224}
-MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
+MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-8192}
+EXPORT_FRAMES=${EXPORT_FRAMES:-false}  # Set to "true" to enable frame export
 
 echo "🎬 InternVL2.5-2B How2Sign Evaluation on 2×A6000"
 echo "=================================================="
@@ -60,6 +61,11 @@ if [ -n "$MAX_SAMPLES" ]; then
     echo "Max Samples (limited): $MAX_SAMPLES"
 else
     echo "Max Samples: Full evaluation"
+fi
+if [ "$EXPORT_FRAMES" = "true" ]; then
+    echo "Export Frames: Enabled (frames will be saved to $OUT_DIR/extracted_frames/)"
+else
+    echo "Export Frames: Disabled"
 fi
 echo ""
 
@@ -115,6 +121,11 @@ fi
 # Add max-samples if specified
 if [ -n "$MAX_SAMPLES" ]; then
     EVAL_ARGS+=(--max-samples "$MAX_SAMPLES")
+fi
+
+# Add export-frames if enabled
+if [ "$EXPORT_FRAMES" = "true" ]; then
+    EVAL_ARGS+=(--export-frames)
 fi
 
 # Run evaluation

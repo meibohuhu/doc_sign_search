@@ -1,7 +1,7 @@
 {
   "how2sign": {
     "root": "/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/",
-    "annotation": "/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl_local.jsonl",
+    "annotation": "/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl_sample120.jsonl",
     "data_augment": false,
     "repeat_time": 1,
     "length": 24880
