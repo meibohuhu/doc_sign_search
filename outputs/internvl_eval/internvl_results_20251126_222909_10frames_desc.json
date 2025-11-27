@@ -1,0 +1,17 @@
+[
+  {
+    "video": "--7E2sU6zP4_10-5-rgb_front.mp4",
+    "model_output": "The video features a person wearing a blue top against a green background. Throughout the sequence, the individual performs a series of hand movements and gestures. Initially, the hands are positioned near the chest, with fingers spread apart. As the video progresses, the person brings their hands together in front of their face in a clapping motion. Subsequently, the hands move apart again, with the fingers spread once more. Towards the end of the video, the person raises both hands to shoulder height, palms facing outward, and then brings the hands together in a prayer-like position. The movements are fluid and deliberate, suggesting a form of expressive communication or performance.",
+    "ground_truth": "And I call them decorative elements because basically all they're meant to do is to enrich and color the page."
+  },
+  {
+    "video": "--7E2sU6zP4_11-5-rgb_front.mp4",
+    "model_output": "The video features a person wearing a blue top against a green background. Throughout the sequence, the individual performs a series of hand movements and gestures. In the initial frame, the person's hands are positioned in front of them, with fingers spread apart. As the video progresses, the person brings their hands together in front of their chest, then moves them apart again. Subsequently, the hands move in a circular motion around the torso. Towards the end of the video, the person raises both hands to shoulder level, palms facing outward, and then brings them down to the sides of the body. The movements are fluid and continuous, with no significant pauses or changes in the background.",
+    "ground_truth": "So they don't really have much of a symbolic meaning other than maybe life is richer, life is beautiful, but they've become so beautifully stylized and so you find them in different illuminative being rendered in very different ways."
+  },
+  {
+    "video": "--7E2sU6zP4_12-5-rgb_front.mp4",
+    "model_output": "The video features a person wearing a blue top, seated against a green background. Throughout the sequence, the individual performs a series of hand movements and gestures. Initially, the hands are clasped together in front of the chest. Then, the hands move to the sides of the body, with the elbows bent and palms facing inward. Subsequently, the hands transition to a clapping motion, moving from the sides to the front of the body. Finally, the hands return to the initial clasped position.",
+    "ground_truth": "Now this is very, this is actually an insert of a kind of an envelope for stationary, and this is a very Italian design."
+  }
+]

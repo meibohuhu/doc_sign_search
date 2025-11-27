@@ -18,7 +18,7 @@ cd /code/doc_sign_search/qwenvl/Qwen2-VL-Finetune
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"4,5,6,7"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"0,1,2,3"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -27,7 +27,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # Model and data configuration
 MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
 OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/qwen2_5_vl_openasl_18fps"
-DATA_PATH="/local1/mhu/sign_language_llm/script_adobe/1125/merged_train.json"
+DATA_PATH="/code/doc_sign_search/script_adobe/1125/merged_train.json"
 IMAGE_FOLDER="/mnt/localssd/sign_mllm_openasl_videos"
 
 # Optimized training configuration
@@ -74,7 +74,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --lora_enable True \
     --lora_rank 16 \
     --lora_alpha 32 \
-    --vision_lr 2e-5 \
+    --vision_lr 1e-5 \
     --merger_lr 2e-5 \
     --report_to none \
     2>&1 | tee "$LOG_FILE"

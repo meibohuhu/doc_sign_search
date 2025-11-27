@@ -289,3 +289,7 @@ def _adaptive_roi_masking(self, video_grid_thw, roi_mask_patches, device):
 
 
 
+
+
+
+

@@ -18,8 +18,8 @@ OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2
 META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json"
 VIDEO_BASE_PATH="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-8}
-BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-4}
+BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
 NUM_DEVICES=${NUM_DEVICES:-2}
 GRAD_ACCUM_STEPS=$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))
 
@@ -44,7 +44,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --max_grad_norm 1.0 \
     --image_size 224 \
     --min_num_frames 8 \
-    --max_num_frames 48 \
+    --max_num_frames 8 \
     --sampling_method random_start_every2 \
     --mask_ratio 0.80 \
     --mask_strategy random \
@@ -55,7 +55,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --spacetime_mask True \
     --save_strategy steps \
     --save_total_limit 2 \
-    --save_interval 5 \
+    --save_interval 50 \
     --log_interval 2 \
     --num_workers 2 \
     --bf16 \
