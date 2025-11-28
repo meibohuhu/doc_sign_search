@@ -115,7 +115,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --num_train_epochs 6 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
-    --learning_rate 4e-5 \
+    --learning_rate 6e-5 \
     --vision_select_layer -1 \
     --force_image_size 224 \
     --max_dynamic_patch 6 \
