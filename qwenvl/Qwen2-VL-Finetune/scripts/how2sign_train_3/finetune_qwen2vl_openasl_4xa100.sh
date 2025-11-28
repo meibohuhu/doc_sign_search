@@ -55,7 +55,7 @@ deepspeed src/train/train_sft.py \
     --data_path /home/mh2803/projects/sign_language_llm/openasl/merged_train.json \
     --image_folder /shared/rc/llm-gen-agent/mhu/videos/open_asl/cropped_videos_openasl/ \
     --output_dir /shared/rc/llm-gen-agent/mhu/qwen2.5vl/1126/qwen2vl_openasl_4xa100/ \
-    --num_train_epochs 3 \
+    --num_train_epochs 4 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --video_min_pixels $((224 * 224)) \
@@ -77,8 +77,8 @@ deepspeed src/train/train_sft.py \
     --disable_flash_attn2 False \
     --gradient_checkpointing True \
     --lora_enable True \
-    --lora_rank 32 \
-    --lora_alpha 64 \
+    --lora_rank 16 \
+    --lora_alpha 32 \
     --vision_lr 5e-6 \
     --merger_lr 2e-5 \
     --report_to none

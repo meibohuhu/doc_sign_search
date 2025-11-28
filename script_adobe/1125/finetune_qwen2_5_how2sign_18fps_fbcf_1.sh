@@ -72,7 +72,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --video_max_pixels $((224 * 224)) \
     --fps 18 \
     --max_grad_norm 1.0 \
-    --learning_rate 3e-5 \
+    --learning_rate 4e-5 \
     --lr_scheduler_type cosine \
     --warmup_ratio 0.03 \
     --weight_decay 0.01 \
@@ -94,7 +94,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --lora_rank 16 \
     --lora_alpha 32 \
     --vision_lr 2e-5 \
-    --merger_lr 3e-5 \
+    --merger_lr 4e-5 \
     --ddp_find_unused_parameters True \
     --report_to none \
     2>&1 | tee "$LOG_FILE"

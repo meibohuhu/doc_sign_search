@@ -140,7 +140,6 @@ torchrun --nproc_per_node=2 --nnodes=1 --master_port=29501 src/train/train_sft.p
     --fp16 False \
     --disable_flash_attn2 False \
     --gradient_checkpointing True \
-    --ddp_find_unused_parameters True \
     --lora_enable False \
     --vision_lr 3e-5 \
     --merger_lr 3e-5 \
