@@ -91,8 +91,8 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --disable_flash_attn2 False \
     --gradient_checkpointing True \
     --lora_enable True \
-    --lora_rank 16 \
-    --lora_alpha 32 \
+    --lora_rank 32 \
+    --lora_alpha 64 \
     --vision_lr 2e-5 \
     --merger_lr 4e-5 \
     --ddp_find_unused_parameters True \

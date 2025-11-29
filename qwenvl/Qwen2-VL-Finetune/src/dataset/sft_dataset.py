@@ -68,6 +68,8 @@ class SupervisedDataset(Dataset):
         self.mask_blur_kernel = data_args.mask_blur_kernel
         self.bg_noise_std = data_args.fbcf_bg_noise_std
         self.use_masks = self.mask_root is not None
+        # Check if sampling mode is enabled (for lazy loading optimization)
+        self.sampling_mode = getattr(data_args, "fbcf_sampling_mode", False)
         
         # Debug: Count how many samples have mask files (only check first 100 to avoid slowdown)
         if self.use_masks and self.mask_root:
@@ -129,31 +131,6 @@ class SupervisedDataset(Dataset):
                     videos = []
                     
                     # mh: 2025-11-15: Debug: Check mask statistics on first call
-                    if self.use_masks and not self._mask_stats_checked and i == 0 and attempt == 0:
-                        self._mask_stats_checked = True
-                        # Count masks for first 100 samples
-                        mask_count = 0
-                        total_checked = min(100, len(self.list_data_dict))
-                        for check_idx in range(total_checked):
-                            check_sample = self.list_data_dict[check_idx]
-                            if "video" in check_sample:
-                                check_videos = check_sample["video"]
-                                if isinstance(check_videos, str):
-                                    check_videos = [check_videos]
-                                for check_video in check_videos:
-                                    if not check_video.startswith("http") and not os.path.isabs(check_video):
-                                        check_video_path = os.path.join(video_folder, check_video)
-                                    else:
-                                        check_video_path = check_video
-                                    check_mask_path = self._resolve_mask_path(check_video_path)
-                                    if check_mask_path and os.path.exists(check_mask_path):
-                                        mask_count += 1
-                        coverage = 100 * mask_count / total_checked
-                        # print(f"📊 Mask coverage: {mask_count}/{total_checked} ({coverage:.1f}%)")
-                        if mask_count == 0:
-                            print(f"  ⚠️  WARNING: No mask files found! FBCF will not be applied.")
-                        elif mask_count < total_checked * 0.5:
-                            print(f"  ⚠️  WARNING: Less than 50% of videos have masks. FBCF will only apply to videos with masks.")
                     ###########################################
                     for video_file in video_files:
                         # Handle different path scenarios
@@ -263,7 +240,15 @@ class SupervisedDataset(Dataset):
                         video_pixels = inputs[pixel_key]
                         fg_pixels = None
                         bg_pixels = None
-                        if self.use_masks and len(video_mask_paths) >= video_curr_count + num_videos:
+                        
+                        # In sampling mode, we don't compute fg/bg pixels here to save memory
+                        # They will be computed on-demand in the trainer based on selected view_type
+                        if self.sampling_mode:
+                            # Lazy loading: only save mask paths, don't compute pixels
+                            # The trainer will compute fg/bg pixels on-demand based on view_type
+                            pass  # Skip pixel computation, mask paths are already in video_mask_paths
+                        elif self.use_masks and len(video_mask_paths) >= video_curr_count + num_videos:
+                            # Full forward mode: compute all pixels (for backward compatibility)
                             mask_slice = video_mask_paths[video_curr_count : video_curr_count + num_videos]
                             # Get video_grid_thw to extract frame information
                             video_grid_thw = inputs[grid_key]  # shape: [num_videos, 3] where 3 = [T, H, W]
@@ -295,6 +280,7 @@ class SupervisedDataset(Dataset):
                                     # Use in-place operation to save memory
                                     bg_pixels.add_(noise * (1 - mask_tensor))
                                     del noise  # Release noise tensor immediately
+                        
                         all_pixel_values.append(video_pixels) # 原始video
                         if fg_pixels is not None and bg_pixels is not None:
                             all_pixel_values_fg.append(fg_pixels)  # 前景video  
@@ -343,11 +329,18 @@ class SupervisedDataset(Dataset):
                     data_dict[grid_key] = image_thw
 
                     ## mh: 2025-11-15: add fg and bg pixel values
-                    if pixel_key == "pixel_values_videos" and len(all_pixel_values_fg) > 0:
-                        pixel_values_fg = torch.cat(all_pixel_values_fg, dim=0)
-                        pixel_values_bg = torch.cat(all_pixel_values_bg, dim=0)
-                        data_dict["pixel_values_videos_fg"] = pixel_values_fg
-                        data_dict["pixel_values_videos_bg"] = pixel_values_bg
+                    if pixel_key == "pixel_values_videos":
+                        if self.sampling_mode:
+                            # Lazy loading: save mask paths for on-demand computation in trainer
+                            # This saves ~66% memory by not pre-computing fg/bg pixels
+                            if self.use_masks and len(video_mask_paths) > 0:
+                                data_dict["video_mask_paths"] = video_mask_paths  # Save mask paths
+                        elif len(all_pixel_values_fg) > 0:
+                            # Full forward mode: compute all pixels (for backward compatibility)
+                            pixel_values_fg = torch.cat(all_pixel_values_fg, dim=0)
+                            pixel_values_bg = torch.cat(all_pixel_values_bg, dim=0)
+                            data_dict["pixel_values_videos_fg"] = pixel_values_fg
+                            data_dict["pixel_values_videos_bg"] = pixel_values_bg
                     ###########################################
                 if len(all_second_gird) > 0:
                     second_gird = all_second_gird
@@ -455,12 +448,16 @@ class DataCollatorForSupervisedDataset(object):
         batch_video_thw = []
         batch_image_thw = []
         batch_second_per_grid_ts = []
+        batch_video_mask_paths = []  # For lazy loading in sampling mode
         ###########################################
         for example in examples:
             keys = example.keys()
             if "pixel_values_videos" in keys:
                 batch_pixel_video_values.append(example["pixel_values_videos"])
                 batch_video_thw.append(example["video_grid_thw"])
+                # Collect mask paths for lazy loading (sampling mode)
+                if "video_mask_paths" in keys:
+                    batch_video_mask_paths.append(example["video_mask_paths"])
             ## mh: 2025-11-15: add fg and bg pixel values
             if "pixel_values_videos_fg" in keys:
                 batch_pixel_video_fg_values.append(example["pixel_values_videos_fg"])
@@ -501,6 +498,10 @@ class DataCollatorForSupervisedDataset(object):
             video_thw = torch.cat(batch_video_thw, dim=0)
             data_dict["pixel_values_videos"] = pixel_video_values
             data_dict["video_grid_thw"] = video_thw
+            # Add mask paths for lazy loading (sampling mode)
+            if len(batch_video_mask_paths) > 0:
+                # Flatten list of lists into single list
+                data_dict["video_mask_paths"] = [path for paths in batch_video_mask_paths for path in paths]
         ### mh: 2025-11-15: add fg and bg pixel values
         if len(batch_pixel_video_fg_values) > 0:
             if len(batch_pixel_video_fg_values) != len(batch_pixel_video_values):
