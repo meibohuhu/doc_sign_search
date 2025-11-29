@@ -268,6 +268,69 @@ class QwenSFTTrainer(Trainer):
         
         return kl_sum / mask_sum
 
+    def _compute_pixels_on_demand(self, video_pixels, video_mask_paths, video_grid_thw, view_type):
+        """
+        Compute fg or bg pixels on-demand based on view_type.
+        This is called in sampling mode to save memory by only computing the needed pixels.
+        
+        Args:
+            video_pixels: Original video pixels [num_patches, feature_dim]
+            video_mask_paths: List of mask file paths
+            video_grid_thw: Video grid shape [num_videos, 3] where 3 = [T, H, W]
+            view_type: 0=original, 1=foreground, 2=background
+        
+        Returns:
+            Computed pixels tensor or None if computation fails
+        """
+        if view_type == 0:
+            # Original view: return original pixels
+            return video_pixels
+        
+        if not video_mask_paths or len(video_mask_paths) == 0:
+            return None
+        
+        # Get dataset instance to access mask building methods
+        if not hasattr(self, 'train_dataset') or self.train_dataset is None:
+            return None
+        
+        dataset = self.train_dataset
+        if not hasattr(dataset, '_build_video_mask_tensor'):
+            return None
+        
+        # Build mask tensor
+        mask_tensor = dataset._build_video_mask_tensor(video_mask_paths, video_pixels, video_grid_thw)
+        if mask_tensor is None:
+            return None
+        
+        # Ensure shapes match
+        if mask_tensor.shape[0] != video_pixels.shape[0]:
+            return None
+        
+        # Expand mask to match video_pixels feature dimension
+        if mask_tensor.dim() == 2 and mask_tensor.shape[1] == 1:
+            mask_tensor = mask_tensor.expand(-1, video_pixels.shape[1])
+        
+        if view_type == 1:
+            # Foreground: mask region preserved
+            fg_pixels = (video_pixels * mask_tensor).clone()
+            del mask_tensor
+            return fg_pixels
+        else:  # view_type == 2
+            # Background: mask region zeroed, with optional noise
+            inv_mask = 1 - mask_tensor
+            bg_pixels = (video_pixels * inv_mask).clone()
+            del inv_mask
+            
+            # Apply background noise if enabled
+            bg_noise_std = getattr(dataset, 'bg_noise_std', 0)
+            if bg_noise_std > 0:
+                noise = torch.randn_like(video_pixels) * bg_noise_std
+                bg_pixels.add_(noise * (1 - mask_tensor))
+                del noise
+            
+            del mask_tensor
+            return bg_pixels
+
     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None, **kwargs):
         if not getattr(self.args, "enable_fbcf", False):
             return super().compute_loss(model, inputs, return_outputs=return_outputs)
@@ -276,8 +339,11 @@ class QwenSFTTrainer(Trainer):
         use_sampling = getattr(self.args, "fbcf_sampling_mode", False)
         
         shared_inputs = inputs.copy()
+        # In sampling mode, fg/bg pixels are computed on-demand, so they may not be in inputs
+        # In full forward mode, they are pre-computed in dataset
         fg_pixels = shared_inputs.pop("pixel_values_videos_fg", None)
         bg_pixels = shared_inputs.pop("pixel_values_videos_bg", None)
+        video_mask_paths = shared_inputs.pop("video_mask_paths", None)  # For lazy loading
 
         # Debug: Check if fg_pixels and bg_pixels are correctly applied
         if "pixel_values_videos" in shared_inputs:
@@ -362,19 +428,19 @@ class QwenSFTTrainer(Trainer):
             current_epoch = getattr(self.state, 'epoch', 0.0) if hasattr(self, 'state') else 0.0
             
             # Generate a single deterministic random value for this step
+            # IMPORTANT: Use torch random generator for better distributed training compatibility
             # Combine step and epoch to ensure different epochs use different view types
             # This ensures all processes select the same view type for this step within the same epoch
-            import random
-            # Use epoch as part of seed to ensure different epochs have different distributions
-            # This creates augmentation effect: same video in different epochs gets different view types
+            # Use torch random to ensure synchronization across distributed processes
             seed = int(step * 1000 + current_epoch * 100)  # Combine step and epoch for unique seed per epoch 每个 step 整个 batch 使用同一个 view 类型（保持分布式训练同步）
-# 不同 epoch 的相同 step 使用不同的随机种子，产生不同的 view 类型
-            random.seed(seed)
-            rand_value = random.random()  # [0, 1)
-            # print(f"rand_value: {rand_value}")
+            # 不同 epoch 的相同 step 使用不同的随机种子，产生不同的 view 类型
+            # Use torch Generator for better distributed training compatibility
+            generator = torch.Generator(device=device)
+            generator.manual_seed(seed)
+            rand_value = torch.rand(1, generator=generator, device=device).item()  # [0, 1)
             # Determine view type for this step based on ratios
             # All samples in this step will use the same view type
-            print(f'random number: {rand_value}')
+            print(f'Step {step}: random number: {rand_value:.4f}', flush=True)
             threshold_orig = ratio_orig
             threshold_fg = ratio_orig + ratio_fg
             if rand_value < threshold_orig:
@@ -395,6 +461,11 @@ class QwenSFTTrainer(Trainer):
             # Debug: Log sampling distribution
             # print(f"📊 Sampling (step {step}): {view_name} for all {batch_size} samples (rand={rand_value:.3f})", flush=True)
             
+            # Synchronize all processes before forward pass to avoid hanging
+            # This ensures all processes are ready before switching view types
+            if torch.cuda.is_available():
+                torch.cuda.synchronize(device)
+            
             total_loss = None
             log_metrics = {}
             
@@ -404,44 +475,62 @@ class QwenSFTTrainer(Trainer):
             if view_type == 0:
                 # Original view: standard CE loss
                 model_inputs = {k: v for k, v in shared_inputs.items() 
-                              if k not in ["pixel_values_videos_fg", "pixel_values_videos_bg"]}
+                              if k not in ["pixel_values_videos_fg", "pixel_values_videos_bg", "video_mask_paths"]}
                 outputs = model(**model_inputs)
                 total_loss = outputs.loss
                 log_metrics = {"loss_full": total_loss.detach()}
                 
             elif view_type == 1:
                 # Foreground view: CE loss with fg_loss_weight
+                # Try to get fg_pixels: either pre-computed or compute on-demand
+                if fg_pixels is None and video_mask_paths is not None:
+                    # Lazy loading: compute fg_pixels on-demand
+                    video_pixels = shared_inputs.get("pixel_values_videos")
+                    video_grid_thw = shared_inputs.get("video_grid_thw")
+                    if video_pixels is not None and video_grid_thw is not None:
+                        fg_pixels = self._compute_pixels_on_demand(video_pixels, video_mask_paths, video_grid_thw, view_type=1)
+                
                 if fg_pixels is None:
                     # Fallback to original if fg_pixels not available
                     print(f"⚠️  WARNING: fg_pixels is None, falling back to original view", flush=True)
                     model_inputs = {k: v for k, v in shared_inputs.items() 
-                                  if k not in ["pixel_values_videos_fg", "pixel_values_videos_bg"]}
+                                  if k not in ["pixel_values_videos_fg", "pixel_values_videos_bg", "video_mask_paths"]}
                     outputs = model(**model_inputs)
                     total_loss = outputs.loss
                     log_metrics = {"loss_full": total_loss.detach()}
                 else:
                     # Use foreground pixels
                     model_inputs = {k: v for k, v in shared_inputs.items() 
-                                  if k not in ["pixel_values_videos", "pixel_values_videos_bg"]}
+                                  if k not in ["pixel_values_videos", "pixel_values_videos_bg", "pixel_values_videos_fg", "video_mask_paths"]}
                     model_inputs["pixel_values_videos"] = fg_pixels
                     outputs = model(**model_inputs)
                     total_loss = self.args.fg_loss_weight * outputs.loss
                     log_metrics = {"loss_fg": outputs.loss.detach()}
+                    # Clean up computed pixels to save memory
+                    del fg_pixels
                     
             else:  # view_type == 2
                 # Background view: KL loss for uniform distribution
+                # Try to get bg_pixels: either pre-computed or compute on-demand
+                if bg_pixels is None and video_mask_paths is not None:
+                    # Lazy loading: compute bg_pixels on-demand
+                    video_pixels = shared_inputs.get("pixel_values_videos")
+                    video_grid_thw = shared_inputs.get("video_grid_thw")
+                    if video_pixels is not None and video_grid_thw is not None:
+                        bg_pixels = self._compute_pixels_on_demand(video_pixels, video_mask_paths, video_grid_thw, view_type=2)
+                
                 if bg_pixels is None:
                     # Fallback to original if bg_pixels not available
                     print(f"⚠️  WARNING: bg_pixels is None, falling back to original view", flush=True)
                     model_inputs = {k: v for k, v in shared_inputs.items() 
-                                  if k not in ["pixel_values_videos_fg", "pixel_values_videos_bg"]}
+                                  if k not in ["pixel_values_videos_fg", "pixel_values_videos_bg", "video_mask_paths"]}
                     outputs = model(**model_inputs)
                     total_loss = outputs.loss
                     log_metrics = {"loss_full": total_loss.detach()}
                 else:
                     # Use background pixels
                     model_inputs = {k: v for k, v in shared_inputs.items() 
-                                  if k not in ["pixel_values_videos", "pixel_values_videos_fg"]}
+                                  if k not in ["pixel_values_videos", "pixel_values_videos_fg", "pixel_values_videos_bg", "video_mask_paths"]}
                     model_inputs["pixel_values_videos"] = bg_pixels
                     labels = model_inputs.get("labels")
                     if labels is None:
@@ -470,18 +559,41 @@ class QwenSFTTrainer(Trainer):
                     # Compute background KL loss (memory-optimized)
                     loss_bg = self._background_uniform_loss(bg_logits, labels)
                     
+                    # Calculate total loss before cleanup
+                    total_loss = self.args.fbcf_lambda * self.args.bg_loss_weight * loss_bg
+                    log_metrics = {"loss_bg": loss_bg.detach()}
+                    
+                    # Store outputs for return_outputs before cleanup
+                    # Create a minimal outputs object if return_outputs is needed
+                    if return_outputs:
+                        # Create a minimal outputs object with just loss (for compatibility)
+                        # Note: We can't return the full outputs since we removed labels for KL loss computation
+                        # The caller should handle this case appropriately
+                        from types import SimpleNamespace
+                        minimal_outputs = SimpleNamespace()
+                        minimal_outputs.loss = total_loss
+                        minimal_outputs.logits = None  # Not available after cleanup
+                        # Keep a reference to outputs for return_outputs
+                        saved_outputs = minimal_outputs
+                    else:
+                        saved_outputs = None
+                    
                     # Immediately free logits and intermediate variables to reduce memory pressure
                     # Note: In DeepSpeed training, memory is managed automatically, so manual
                     # cache clearing may not be necessary and can cause performance overhead
-                    del bg_logits, outputs, model_inputs_for_logits
+                    del bg_logits, bg_pixels  # Clean up computed bg_pixels
+                    if not return_outputs:
+                        del outputs  # Only delete if not needed
+                    del model_inputs_for_logits
                     # Only clear cache if not using DeepSpeed (to avoid performance penalty)
                     # In DeepSpeed, the framework manages memory more efficiently
                     use_deepspeed = hasattr(self.args, 'deepspeed') and self.args.deepspeed is not None
                     if torch.cuda.is_available() and not use_deepspeed:
                         torch.cuda.empty_cache()  # Clear GPU cache (only for non-DeepSpeed)
                     
-                    total_loss = self.args.fbcf_lambda * self.args.bg_loss_weight * loss_bg
-                    log_metrics = {"loss_bg": loss_bg.detach()}
+                    # Set outputs for return if needed
+                    if return_outputs:
+                        outputs = saved_outputs
             
         
             # Log metrics
@@ -502,42 +614,8 @@ class QwenSFTTrainer(Trainer):
             else:
                 return total_loss
         else:
-            # Full forward mode (original implementation)
-            outputs = model(**shared_inputs)
-            total_loss = outputs.loss   ## # 原始video的标准CE loss
-            log_metrics = {"loss_full": total_loss.detach()}
-
-            if fg_pixels is not None:
-                fg_inputs = dict(shared_inputs)
-                fg_inputs["pixel_values_videos"] = fg_pixels
-                fg_outputs = model(**fg_inputs)
-                loss_fg = fg_outputs.loss
-                total_loss = total_loss + self.args.fg_loss_weight * loss_fg   # 前景video的CE loss  
-                log_metrics["loss_fg"] = loss_fg.detach()
-
-            if bg_pixels is not None:
-                bg_inputs = dict(shared_inputs)
-                labels = bg_inputs.pop("labels", None)
-                if labels is None:
-                    raise ValueError("Labels are required to compute background KL loss.")
-                bg_inputs["pixel_values_videos"] = bg_pixels
-                bg_outputs = model(**bg_inputs)
-                loss_bg = self._background_uniform_loss(bg_outputs.logits, labels)
-                total_loss = total_loss + self.args.fbcf_lambda * self.args.bg_loss_weight * loss_bg # 背景video的KL散度（鼓励均匀分布）
-                log_metrics["loss_bg"] = loss_bg.detach()
-
-            if log_metrics:
-                scalar_logs = {}
-                for key, value in log_metrics.items():
-                    if torch.is_tensor(value):
-                        scalar_logs[key] = value.detach().float().mean().item()
-                    else:
-                        scalar_logs[key] = value
-                self.log(scalar_logs)
-            
-            # print(f"log_metrics: {log_metrics}")
-            print(f"total_loss: {total_loss}")
-            return (total_loss, outputs) if return_outputs else total_loss
+            # Fallback: if sampling mode is disabled, use standard loss computation
+            return super().compute_loss(model, inputs, return_outputs=return_outputs)
 ################################################################################
 
     def prediction_step(self, model, inputs, prediction_loss_only, ignore_keys=None):

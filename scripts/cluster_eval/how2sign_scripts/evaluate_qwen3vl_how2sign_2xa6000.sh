@@ -32,9 +32,9 @@ QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/seg
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/qwen3vl_eval/}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-1}  # Set to a number to limit samples, empty for full evaluation
+MAX_SAMPLES=${MAX_SAMPLES:-3}  # Set to a number to limit samples, empty for full evaluation
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-9000}
-VIDEO_FPS=${VIDEO_FPS:-10}  # Optional: FPS for video processing
+VIDEO_FPS=${VIDEO_FPS:-12}  # Optional: FPS for video processing
 USE_FRAMES=${USE_FRAMES:-false}  # Set to true to extract frames and use as images
 NUM_FRAMES=${NUM_FRAMES:-}  # Optional: Number of frames to extract (if empty, use fps-based sampling)
 SAVE_FRAMES=${SAVE_FRAMES:-false}  # Set to true to save extracted frames to disk

@@ -1,5 +1,5 @@
 import os
-from functools import lru_cache
+# from functools import lru_cache
 from typing import Optional
 
 import numpy as np
@@ -7,7 +7,7 @@ import torch
 import torch.nn.functional as F
 
 ## mh: 2025-11-15: mask utils
-@lru_cache(maxsize=128)  # Reduced from 256 to save memory
+# @lru_cache(maxsize=16)  # Reduced from 256 to save memory, 11-29: disabled due to memory issues, always stuck
 def _load_npz(mask_path: str, key: str) -> np.ndarray:
     with np.load(mask_path, allow_pickle=False) as data:
         if key not in data:

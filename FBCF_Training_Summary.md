@@ -101,28 +101,113 @@ total_loss = loss_full + fg_loss_weight * loss_fg + fbcf_lambda * bg_loss_weight
   - 代码位置: `sft_trainer.py:354-360`
 
 ### 内存优化
-- **Background KL Loss**: 使用内存优化的实现
+
+#### 1. Background KL Loss 优化
+- **实现**: 使用内存优化的实现
   - 立即对vocab维度求和，减少中间tensor的内存占用
   - 代码位置: `sft_trainer.py:222-262`
 - **DeepSpeed兼容**: 自动检测是否使用DeepSpeed，避免不必要的cache清理
 
+#### 2. Lazy Loading 策略（Sampling Mode）
+- **问题**: 原先在 DataLoader 中预计算所有 fg_pixels 和 bg_pixels，导致：
+  - DataLoader workers 内存压力过大（OOM）
+  - Workers 频繁崩溃和重启
+  - 训练速度逐渐变慢（内存累积）
+  
+- **解决方案**: 在 Sampling Mode 下实现 Lazy Loading
+  - **数据加载阶段** (`sft_dataset.py`):
+    - 只存储 `video_mask_paths`（mask文件路径）
+    - **不预计算** `fg_pixels` 和 `bg_pixels`
+    - 只加载原始 `video_pixels`
+    - 代码位置: `sft_dataset.py:244-249`
+  
+  - **训练阶段** (`sft_trainer.py`):
+    - 在 `compute_loss` 中根据随机选择的 `view_type` 按需计算
+    - 使用 `_compute_pixels_on_demand` 方法动态计算需要的 pixels
+    - 只计算当前 step 需要的 view（original/foreground/background）
+    - 计算完成后立即释放临时变量（`del mask_tensor`, `del inv_mask` 等）
+    - 代码位置: `sft_trainer.py:271-332`, `sft_trainer.py:450-520`
+  
+- **优势**:
+  - ✅ **大幅减少内存占用**: 不再同时存储3种view的pixels
+  - ✅ **避免DataLoader崩溃**: Workers不再因为内存压力而OOM
+  - ✅ **训练稳定性提升**: 减少workers重启，训练速度更稳定
+  - ✅ **按需计算**: 只计算当前需要的view，节省计算资源
+  
+- **权衡**:
+  - ⚠️ **轻微计算开销**: 每次forward需要动态计算mask和pixels
+  - ⚠️ **I/O开销**: 需要从磁盘加载mask文件（但通常mask文件较小）
+
+#### 3. DataLoader 参数优化
+- **dataloader_num_workers**: `4 → 2` (减少50%的worker进程)
+- **dataloader_prefetch_factor**: `4 → 2` (减少预取数据量)
+- **dataloader_persistent_workers**: `False` (workers在每个epoch后重启，定期清理内存)
+- **目的**: 进一步减少内存压力，提高训练稳定性
+
 ## 📝 训练流程
+
+### Full Forward Mode 流程
 
 1. **数据加载**:
    - 加载原始视频帧
    - 从mask文件夹加载对应的mask文件
-   - 生成前景视频 (应用mask)
-   - 生成背景视频 (应用反mask)
+   - **预计算**前景视频 (应用mask)
+   - **预计算**背景视频 (应用反mask)
+   - 同时存储 `video_pixels`, `fg_pixels`, `bg_pixels`
 
 2. **训练循环**:
-   - **Full Mode**: 对三种view都进行前向传播，计算各自的loss并加权求和
-   - **Sampling Mode**: 根据配置的比例随机选择一种view，只计算对应的loss
-     - 每个step随机选择view类型（基于step的确定性随机种子，确保分布式训练一致性）
-     - 同一个视频在不同step/epoch中会以不同的view出现，增加数据多样性
+   - 对三种view都进行前向传播
+   - 计算各自的loss并加权求和
+   - `total_loss = loss_full + fg_loss_weight * loss_fg + fbcf_lambda * bg_loss_weight * loss_bg`
 
 3. **Loss反向传播**:
    - 计算total_loss
    - 反向传播更新模型参数
+
+### Sampling Mode 流程（当前实现 - Lazy Loading）
+
+1. **数据加载** (`sft_dataset.py`):
+   - 加载原始视频帧 → `video_pixels`
+   - 从mask文件夹获取mask文件路径 → `video_mask_paths`
+   - **不预计算**前景和背景pixels（Lazy Loading）
+   - 只存储mask路径，节省内存
+
+2. **训练循环** (`sft_trainer.py`):
+   - **Step 1**: 随机选择view类型（基于step的确定性随机种子）
+     - 使用 `torch.Generator` 确保分布式训练同步
+     - 根据配置的比例选择：Original / Foreground / Background
+   
+   - **Step 2**: 按需计算pixels（如果需要）
+     - **Original view**: 直接使用 `video_pixels`
+     - **Foreground view**: 调用 `_compute_pixels_on_demand(..., view_type=1)`
+       - 加载mask文件
+       - 构建mask tensor
+       - 计算 `fg_pixels = video_pixels * mask_tensor`
+       - 立即释放临时变量
+     - **Background view**: 调用 `_compute_pixels_on_demand(..., view_type=2)`
+       - 加载mask文件
+       - 构建mask tensor
+       - 计算 `bg_pixels = video_pixels * (1 - mask_tensor)`
+       - 可选：添加背景噪声
+       - 立即释放临时变量
+   
+   - **Step 3**: 前向传播和Loss计算
+     - 使用计算得到的pixels进行前向传播
+     - 根据view类型计算对应的loss：
+       - Original: `total_loss = loss_full`
+       - Foreground: `total_loss = fg_loss_weight * loss_fg`
+       - Background: `total_loss = fbcf_lambda * bg_loss_weight * loss_bg`
+
+3. **Loss反向传播**:
+   - 计算total_loss
+   - 反向传播更新模型参数
+   - 释放计算过程中的临时变量
+
+### 关键改进点
+
+- **内存效率**: 不再同时存储3种view的pixels，只在需要时计算
+- **稳定性**: 避免DataLoader workers因内存压力而崩溃
+- **灵活性**: 根据实际需要的view类型动态计算，节省资源
 
 ## 🔄 数据多样性分析
 
@@ -213,8 +298,23 @@ total_loss = loss_full + fg_loss_weight * loss_fg + fbcf_lambda * bg_loss_weight
 
 ### 当前使用的比例
 根据代码库中的训练脚本，当前主要使用：
-- **Original: 20%**, **Foreground: 60%**, **Background: 20%** (在部分脚本中)
-- **Original: 40%**, **Foreground: 40%**, **Background: 20%** (默认值)
+- **Original: 40%**, **Foreground: 40%**, **Background: 20%** (默认值，推荐用于训练)
+- **Original: 20%**, **Foreground: 60%**, **Background: 20%** (在部分脚本中，更强调前景学习)
+
+**当前训练脚本配置** (`finetune_qwen2vl_how2sign_2xa6000_fbcf.sh`):
+```bash
+--fbcf_sampling_mode True \
+--fbcf_sampling_ratio_original 0.40 \
+--fbcf_sampling_ratio_foreground 0.40 \
+--fbcf_sampling_ratio_background 0.20 \
+--fbcf_lambda 0.15 \
+--fg_loss_weight 1.0 \
+--bg_loss_weight 1.0 \
+--fbcf_bg_noise_std 0.05 \
+--dataloader_num_workers 2 \
+--dataloader_prefetch_factor 2 \
+--dataloader_persistent_workers False
+```
 
 ⚠️ **注意**: 如果直接用于evaluation，建议使用**方案1（60/30/10）**，因为evaluation时使用的是原始视频。
 
@@ -233,6 +333,103 @@ total_loss = loss_full + fg_loss_weight * loss_fg + fbcf_lambda * bg_loss_weight
 3. **采样比例**: 在Sampling Mode中，采样比例会影响不同view的训练频率
 4. **内存管理**: Full Mode需要更多GPU内存，Sampling Mode更节省内存但训练可能更慢收敛
 5. **Evaluation一致性**: 如果模型主要用于evaluation，建议Original比例 ≥ 50%，确保模型在原始视频上表现最佳
+
+## 🔄 当前实现与原先版本的区别
+
+### 版本演进历史
+
+#### 原先版本（v1.0）
+**特点**:
+- 在 DataLoader 中预计算所有 view 的 pixels
+- 同时存储 `video_pixels`, `fg_pixels`, `bg_pixels`
+- 内存消耗：3倍 video pixels
+
+**问题**:
+- ❌ DataLoader workers 内存压力过大（OOM）
+- ❌ Workers 频繁崩溃和重启
+- ❌ 训练速度逐渐变慢（内存累积问题）
+- ❌ 需要大量GPU内存
+
+**代码位置**:
+- `sft_dataset.py`: 在 `__getitem__` 中预计算所有 pixels
+- `sft_trainer.py`: 直接使用预计算的 pixels
+
+#### 当前版本（v2.0 - Lazy Loading）
+**特点**:
+- 在 Sampling Mode 下实现 Lazy Loading
+- 只存储 mask 路径，不预计算 pixels
+- 在 trainer 中按需计算需要的 view
+
+**改进**:
+- ✅ **内存占用大幅减少**: 不再同时存储3种view的pixels
+- ✅ **避免DataLoader崩溃**: Workers不再因为内存压力而OOM
+- ✅ **训练稳定性提升**: 减少workers重启，训练速度更稳定
+- ✅ **按需计算**: 只计算当前需要的view，节省计算资源
+
+**实现细节**:
+
+1. **数据加载阶段** (`sft_dataset.py`):
+   ```python
+   # Sampling Mode: 只存储mask路径，不计算pixels
+   if self.sampling_mode:
+       # Lazy loading: only save mask paths, don't compute pixels
+       # The trainer will compute fg/bg pixels on-demand based on view_type
+       pass  # Skip pixel computation, mask paths are already in video_mask_paths
+   ```
+
+2. **训练阶段** (`sft_trainer.py`):
+   ```python
+   # 根据view_type按需计算
+   if view_type == 0:
+       pixels = video_pixels  # Original: 直接使用
+   elif view_type == 1:
+       pixels = self._compute_pixels_on_demand(..., view_type=1)  # Foreground: 按需计算
+   else:
+       pixels = self._compute_pixels_on_demand(..., view_type=2)  # Background: 按需计算
+   ```
+
+3. **按需计算方法** (`_compute_pixels_on_demand`):
+   - 加载mask文件
+   - 构建mask tensor
+   - 根据view_type计算对应的pixels
+   - 立即释放临时变量（`del mask_tensor`, `del inv_mask`）
+
+**代码位置**:
+- `sft_dataset.py:244-249`: Lazy loading逻辑
+- `sft_trainer.py:271-332`: `_compute_pixels_on_demand`方法
+- `sft_trainer.py:450-520`: Sampling Mode中的按需计算
+
+**DataLoader参数优化**:
+- `dataloader_num_workers`: `4 → 2`
+- `dataloader_prefetch_factor`: `4 → 2`
+- `dataloader_persistent_workers`: `False`
+
+### 对比总结
+
+| 特性 | 原先版本 (v1.0) | 当前版本 (v2.0) |
+|------|----------------|----------------|
+| **内存占用** | 高（3倍pixels） | 低（1倍pixels + mask路径） |
+| **DataLoader稳定性** | ❌ 频繁崩溃 | ✅ 稳定运行 |
+| **训练速度** | ❌ 逐渐变慢 | ✅ 稳定速度 |
+| **计算时机** | 数据加载时预计算 | 训练时按需计算 |
+| **适用模式** | Full Forward Mode | Sampling Mode |
+| **I/O开销** | 低（一次性加载） | 中等（按需加载mask） |
+| **计算开销** | 低（预计算） | 中等（按需计算） |
+
+### 使用建议
+
+1. **Sampling Mode（推荐）**: 使用当前版本的 Lazy Loading 实现
+   - 内存占用低
+   - 训练稳定
+   - 适合大规模训练
+
+2. **Full Forward Mode**: 仍使用原先的预计算方式
+   - 如果内存充足
+   - 需要每个step同时看到所有view
+
+3. **参数调优**:
+   - 如果仍然遇到内存问题，可以进一步减少 `dataloader_num_workers` 到 1
+   - 如果训练速度可以接受，可以保持当前参数设置
 
 
 

@@ -8,7 +8,7 @@ export PYTHONPATH="/local1/mhu/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src:${
 cd /local1/mhu/sign_language_llm/qwenvl/Qwen2-VL-Finetune
 
 MODEL_NAME="Qwen/Qwen2.5-VL-3B-Instruct"
-DATA_PATH="/local1/mhu/sign_language_llm/how2sign/video/segmented_train_videos_with_masks.json"
+DATA_PATH="/local1/mhu/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json"
 IMAGE_FOLDER="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 MASK_FOLDER="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_720_mask"
 OUTPUT_DIR="/local1/mhu/sign_language_llm/qwenvl/outputs/qwen2vl_how2sign_2xa6000_fbcf"
@@ -17,7 +17,7 @@ GLOBAL_BATCH_SIZE=8
 PER_DEVICE_BS=1
 NUM_DEVICES=2
 GRAD_ACCUM=$((GLOBAL_BATCH_SIZE / (PER_DEVICE_BS * NUM_DEVICES)))
-FPS=15
+FPS=12
 
 mkdir -p "$OUTPUT_DIR"
 
@@ -53,8 +53,8 @@ deepspeed src/train/train_sft.py \
   --fg_loss_weight 1.0 \
   --bg_loss_weight 1.0 \
   --fbcf_sampling_mode True \
-  --fbcf_sampling_ratio_original 0.20 \
-  --fbcf_sampling_ratio_foreground 0.60 \
+  --fbcf_sampling_ratio_original 0.40 \
+  --fbcf_sampling_ratio_foreground 0.40 \
   --fbcf_sampling_ratio_background 0.20 \
   --output_dir "$OUTPUT_DIR" \
   --num_train_epochs 1 \
@@ -68,9 +68,10 @@ deepspeed src/train/train_sft.py \
   --learning_rate 2e-5 \
   --warmup_ratio 0.03 \
   --weight_decay 0.01 \
-  --dataloader_num_workers 4 \
+  --dataloader_num_workers 2 \
   --dataloader_pin_memory True \
-  --dataloader_prefetch_factor 4 \
+  --dataloader_prefetch_factor 2 \
+  --dataloader_persistent_workers False \
   --logging_steps 10 \
   --save_strategy steps \
   --save_steps 1000 \

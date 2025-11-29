@@ -190,27 +190,26 @@ def eval_model(args):
             # fq= "Observe this ASL video and describe in detail how the person's hand gestures change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. Only describe the physical movements you can see - do not include background information, interpretations, or speculations."
             # fq = "Observe this ASL video and describe in detail how the person's hand gestures change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. CRITICAL RULES: (1) Only describe the physical movements you can directly observe. (2) Use factual, objective language only. (3) FORBIDDEN WORDS AND PHRASES - DO NOT USE: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that', or any other interpretive or speculative language. (4) Describe ONLY what you see: hand positions, finger states, movements, locations, and transitions. Do NOT describe what the gestures might mean, what they could represent, or what they seem to indicate."
             # fq = "Describe concisely. Format:\n\nRight hand: [position, finger states, palm orientation]\nLeft hand: [position, finger states, palm orientation]\nFace: [expression]\n\nBe brief and factual. No interpretations."
-            fq = PROMPT_ASL_SEGMENT = """
+            fq = """
 You are an ASL motion-description annotator.
 
-Instead of describing every frame, summarize the video into 6-10 temporal segments.
-Each segment should represent a stable movement pattern or change in handshape/position.
+Describe each distinct action/movement in the video. For EACH action, provide:
 
-For EACH segment, describe:
-
-Segment X:
-- Time range: (approx.)
-- Right hand: handshape, palm orientation, location, movement path
-- Left hand: same fields
+Action X:
+- Frame range: [start_frame, end_frame]
+- Right hand: handshape, palm orientation, location, movement path, finger positions
+- Left hand: handshape, palm orientation, location, movement path, finger positions
 - Hand interaction: contact, relative position, synchrony
-- Movement summary: direction, speed, repetition, changes
+- Movement details: direction, speed, repetition, transitions
 - Face/NMM: eyebrows, mouth shape, head movement, body posture
 
 Rules:
-- DO NOT describe every frame individually.
+- Describe EVERY distinct action/movement you observe.
 - DO NOT infer meaning; only describe observable motion.
-- Capture movement transitions and changes between segments.
-- Keep segments concise but precise.
+- Capture all movement transitions and changes.
+- Be detailed and precise for each action.
+- Use factual, objective language only.
+- FORBIDDEN WORDS: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that'.
 """
 
 
