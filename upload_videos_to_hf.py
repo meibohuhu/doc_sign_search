@@ -420,6 +420,7 @@ def upload_multiple_checkpoints(
     
     Each subdirectory will be uploaded as a separate checkpoint in the same repository,
     preserving the subdirectory structure.
+    Also uploads log files from the same folder as the checkpoints.
     """
     # Find all subdirectories that look like checkpoints
     checkpoint_dirs = []
@@ -476,6 +477,53 @@ def upload_multiple_checkpoints(
         except Exception as e:
             print(f"✗ Failed to upload {ckpt_dir.name}: {e}")
             total_failed += 1
+    
+    # Upload log files from the parent folder (same folder containing checkpoints)
+    print(f"\n{'='*70}")
+    print(f"Uploading log files from checkpoint folder...")
+    print(f"{'='*70}")
+    
+    log_files = list(checkpoint_path.glob("*.log"))
+    if log_files:
+        print(f"Found {len(log_files)} log file(s) in {checkpoint_path}")
+        
+        # Get already uploaded files if resume
+        uploaded_files = set()
+        if resume:
+            try:
+                repo_files = api.list_repo_files(repo_id=model_name, repo_type="model")
+                uploaded_files = set(repo_files)
+            except Exception as e:
+                print(f"Could not check existing files: {e}")
+        
+        log_uploaded = 0
+        log_failed = 0
+        
+        for log_file in log_files:
+            if log_file.name in uploaded_files and resume:
+                print(f"  ⊙ {log_file.name} already exists, skipping...")
+                continue
+            
+            try:
+                file_size_mb = log_file.stat().st_size / (1024**2)
+                print(f"  Uploading {log_file.name} ({file_size_mb:.2f} MB)...")
+                
+                api.upload_file(
+                    path_or_fileobj=str(log_file),
+                    path_in_repo=log_file.name,
+                    repo_id=model_name,
+                    repo_type="model",
+                )
+                log_uploaded += 1
+                print(f"  ✓ Uploaded {log_file.name}")
+                time.sleep(0.5)
+            except Exception as e:
+                log_failed += 1
+                print(f"  ✗ Error uploading {log_file.name}: {str(e)[:100]}")
+        
+        print(f"\nLog files upload summary: {log_uploaded} uploaded, {log_failed} failed")
+    else:
+        print(f"No log files found in {checkpoint_path}")
     
     # Final summary
     print(f"\n{'='*70}")
@@ -707,7 +755,7 @@ def upload_checkpoint(
     if include_patterns is None:
         include_patterns = [
             "*.pt", "*.pth", "*.ckpt", "*.safetensors", "*.bin",
-            "*.json", "*.txt", "*.yaml", "*.yml", "*.md",
+            "*.json", "*.txt", "*.yaml", "*.yml", "*.md", "*.log",
             "*.jinja", "*.py",  # Template and Python scripts
             "tokenizer*", "vocab*", "config*", "model*", "generation*",
             # Training-related files
@@ -720,7 +768,8 @@ def upload_checkpoint(
         ]
     
     if exclude_patterns is None:
-        exclude_patterns = ["*.log", "*.swp", "*.tmp", "__pycache__"]
+        exclude_patterns = ["*.swp", "*.tmp", "__pycache__"]
+        # Note: *.log files are now included by default to preserve training logs with checkpoints
     
     # Handle multiple checkpoints
     checkpoint_path = Path(checkpoint_dir)
