@@ -16,27 +16,33 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /local1/mhu/sign_language_llm
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"1"}  # Default: use GPU 0 and 1
+GPU_IDS=${GPU_IDS:-"0"}  # Default: use GPU 0 and 1
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Configuration
 # Set CHECKPOINT_PATH to empty string or unset to use base model only
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Empty by default - will use base model
-# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_18fps/checkpoint-3000}"
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Empty by default - will use base model
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-1919}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2874}"
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2399}"
+
+
 MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-2B}"
-VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/}"
-QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json}"
+VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224}"
+# QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
+QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl}"
+
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/internvl_eval/}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-1}  # Set to a number to limit samples, empty for full evaluation
-MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-10}  # Minimum number of frames (set to 6 to ensure 6 frames)
-MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-128}  # Maximum number of frames (set to 6 to fix at 6 frames)
-SAMPLING_METHOD=${SAMPLING_METHOD:-fps12.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
+MAX_SAMPLES=${MAX_SAMPLES:-550}  # Set to a number to limit samples, empty for full evaluation
+MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}  # Minimum number of frames (set to 6 to ensure 6 frames)
+MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-130}  # Maximum number of frames (set to 6 to fix at 6 frames)
+SAMPLING_METHOD=${SAMPLING_METHOD:-fps16.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
 IMAGE_SIZE=${IMAGE_SIZE:-224}
-MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-8192}
+MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
 EXPORT_FRAMES=${EXPORT_FRAMES:-false}  # Set to "true" to enable frame export
 
 echo "🎬 InternVL2.5-2B How2Sign Evaluation on 2×A6000"

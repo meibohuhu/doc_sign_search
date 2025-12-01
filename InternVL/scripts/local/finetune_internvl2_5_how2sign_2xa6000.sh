@@ -27,6 +27,15 @@ OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2
 META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
 IMAGE_ROOT="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
+# Resume from checkpoint (optional)
+# Set RESUME_FROM_CHECKPOINT to continue training from a checkpoint
+# This will resume training state (epoch, step, optimizer, etc.) from the checkpoint
+# Example usage:
+#   RESUME_FROM_CHECKPOINT="/local1/mhu/sign_language_llm/InternVL/checkpoints/internvl2_5_2B_2xa100_mae/checkpoint-20000" bash finetune_internvl2_5_how2sign_2xa6000.sh
+# Or uncomment the line below to set it directly:
+# RESUME_FROM_CHECKPOINT="/local1/mhu/sign_language_llm/InternVL/checkpoints/internvl2_5_2B_2xa100_mae/checkpoint-20000"
+RESUME_FROM_CHECKPOINT=${RESUME_FROM_CHECKPOINT:-""}  # Empty by default (train from scratch)
+
 # Optimized training configuration
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-4}
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
@@ -45,6 +54,11 @@ SAMPLING_METHOD='fps15.0'
 
 echo "🚀 Starting InternVL2.5-2B How2Sign Training on 2×A6000"
 echo "======================================================"
+if [ -n "$RESUME_FROM_CHECKPOINT" ]; then
+    echo "Resume from checkpoint: $RESUME_FROM_CHECKPOINT"
+else
+    echo "Training from scratch"
+fi
 echo "Model: $MODEL_NAME"
 echo "Output Dir: $OUTPUT_DIR"
 echo "GPU IDs: $GPU_IDS (CUDA_VISIBLE_DEVICES: $CUDA_VISIBLE_DEVICES)"
@@ -63,13 +77,36 @@ mkdir -p "$OUTPUT_DIR"
 echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
 
-# Check if model is already cached
-MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B"
-if [ -d "$MODEL_CACHE_DIR" ]; then
-    echo "✅ Model found in cache: $MODEL_CACHE_DIR"
-    echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" 2>/dev/null | cut -f1 || echo 'N/A')"
+# Check checkpoint if resuming
+if [ -n "$RESUME_FROM_CHECKPOINT" ]; then
+    if [ ! -d "$RESUME_FROM_CHECKPOINT" ]; then
+        echo "❌ Error: Checkpoint path does not exist: $RESUME_FROM_CHECKPOINT"
+        exit 1
+    fi
+    
+    # Check if checkpoint has required files
+    if [ ! -f "$RESUME_FROM_CHECKPOINT/model.safetensors" ] && [ ! -f "$RESUME_FROM_CHECKPOINT/pytorch_model.bin" ]; then
+        echo "⚠️  Warning: Checkpoint may not have model weights (model.safetensors or pytorch_model.bin not found)"
+        echo "   Will attempt to resume anyway..."
+    fi
+    
+    if [ -f "$RESUME_FROM_CHECKPOINT/trainer_state.json" ]; then
+        echo "✅ Checkpoint found with training state"
+        # Extract step info from trainer_state.json
+        STEP_INFO=$(python3 -c "import json; state = json.load(open('$RESUME_FROM_CHECKPOINT/trainer_state.json')); print(f\"Step: {state.get('global_step', 'N/A')}, Epoch: {state.get('epoch', 'N/A'):.2f}\")" 2>/dev/null || echo "Step info unavailable")
+        echo "   Previous training: $STEP_INFO"
+    else
+        echo "⚠️  Warning: trainer_state.json not found, training will start from epoch 0"
+    fi
 else
-    echo "⚠️  Model not found in cache, will download during training"
+    # Check if model is already cached (only when training from scratch)
+    MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B"
+    if [ -d "$MODEL_CACHE_DIR" ]; then
+        echo "✅ Model found in cache: $MODEL_CACHE_DIR"
+        echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" 2>/dev/null | cut -f1 || echo 'N/A')"
+    else
+        echo "⚠️  Model not found in cache, will download during training"
+    fi
 fi
 
 # Set launcher to pytorch for local training (not SLURM cluster)
@@ -87,18 +124,28 @@ LOG_FILE="${OUTPUT_DIR}/training_$(date +%Y%m%d_%H%M%S).log"
 echo "📝 Log file: $LOG_FILE"
 echo ""
 
+# Build training arguments
+TRAIN_ARGS=(
+    --model_name_or_path "$MODEL_NAME"
+    --output_dir "$OUTPUT_DIR"
+    --overwrite_output_dir
+    --meta_path "$META_PATH"
+    --conv_style internvl2_5
+    --do_train True
+    --num_train_epochs 5
+)
+
+# Add resume_from_checkpoint if specified
+if [ -n "$RESUME_FROM_CHECKPOINT" ]; then
+    TRAIN_ARGS+=(--resume_from_checkpoint "$RESUME_FROM_CHECKPOINT")
+fi
+
 # Run training with DeepSpeed launcher (like qwenvl) to avoid no_sync compatibility issues
 # with ZeRO Stage 2/3. DeepSpeed launcher handles gradient accumulation correctly.
 # Note: CUDA_VISIBLE_DEVICES is already set above, so deepspeed will use the specified GPUs
 deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     internvl_chat/internvl/train/internvl_chat_finetune_local.py \
-    --model_name_or_path "$MODEL_NAME" \
-    --output_dir "$OUTPUT_DIR" \
-    --overwrite_output_dir \
-    --meta_path "$META_PATH" \
-    --conv_style internvl2_5 \
-    --do_train True \
-    --num_train_epochs 5 \
+    "${TRAIN_ARGS[@]}" \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --learning_rate 2e-5 \

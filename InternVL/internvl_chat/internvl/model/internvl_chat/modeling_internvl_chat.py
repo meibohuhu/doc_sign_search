@@ -260,6 +260,11 @@ class InternVLChatModel(PreTrainedModel):
             # Enable model parallelism
             shift_labels = shift_labels.to(shift_logits.device)
             loss = loss_fct(shift_logits, shift_labels)
+            
+            # # mhu 11/30: Handle NaN/Inf loss: set it to 0.0 to prevent training issues
+            # if torch.isnan(loss) or torch.isinf(loss):
+            #     loss = torch.tensor(0.0, device=loss.device, dtype=loss.dtype, requires_grad=True)
+            
             if ignore_flag:
                 loss = loss * 0.0
 

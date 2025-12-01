@@ -55,12 +55,12 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --spacetime_mask True \
     --save_strategy steps \
     --save_total_limit 2 \
-    --save_interval 50 \
+    --save_interval 20 \
     --log_interval 2 \
     --num_workers 2 \
     --bf16 \
     --gradient_checkpointing \
-    --deepspeed internvl_chat/zero_stage3_config.json \
+    --deepspeed internvl_chat/zero_stage1_config.json \
     --local_rank -1 \
     2>&1 | tee "$LOG_FILE"
 
