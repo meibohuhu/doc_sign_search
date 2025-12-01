@@ -15,23 +15,24 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 # Change to project directory
 cd /local1/mhu/sign_language_llm
 
-# GPU configuration
-GPU_IDS=${GPU_IDS:-"0,1"}  # Default: use GPU 0 and 1
+# Configuration
+# GPU configuration - Specify which GPU to use here
+GPU_IDS=${GPU_IDS:-"1"}  # Change this to "0", "1", etc. to use different physical GPU
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
-# Configuration
 # Set CHECKPOINT_PATH to empty string or unset to use base model only
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
-# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000}"  # Empty by default - will use base model
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000}"  # Empty by default - will use base model
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"
 MODEL_BASE="${MODEL_BASE:-Qwen/Qwen2.5-VL-3B-Instruct}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/}"
-QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_110_samples.json}"
+# QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_110_samples.json}"
+QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_550_samples.json}"
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/qwen2vl_eval/}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-55}  # Set to a number to limit samples, empty for full evaluation
+MAX_SAMPLES=${MAX_SAMPLES:-550}  # Set to a number to limit samples, empty for full evaluation
 MIN_PIXELS=${MIN_PIXELS:-$((224*224))}  # Match training: 224x224
 MAX_PIXELS=${MAX_PIXELS:-$((224*224))}  # Match training: 224x224
 VIDEO_FPS=${VIDEO_FPS:-18}  # Match training FPS
@@ -113,6 +114,9 @@ fi
 if [ -n "$MAX_SAMPLES" ]; then
     EVAL_ARGS+=(--max-samples "$MAX_SAMPLES")
 fi
+
+# Add CUDA device (always use first visible GPU, which is cuda:0 after CUDA_VISIBLE_DEVICES filtering)
+EVAL_ARGS+=(--cuda-device "0")
 
 # Run evaluation
 echo "🚀 Starting evaluation..."

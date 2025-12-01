@@ -370,6 +370,10 @@ def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     
     model.eval()
     
+    # Disable gradients for all parameters to save memory
+    for param in model.parameters():
+        param.requires_grad = False
+    
     print(f"\n{'='*70}")
     print(f"✅ COMPLETE BASE MODEL LOADED SUCCESSFULLY!")
     print(f"{'='*70}\n")
@@ -450,6 +454,10 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
     
     model.eval()
     
+    # Disable gradients for all parameters to save memory
+    for param in model.parameters():
+        param.requires_grad = False
+    
     print(f"\n{'='*70}")
     print(f"✅ COMPLETE MODEL LOADED SUCCESSFULLY!")
     print(f"{'='*70}\n")
@@ -465,6 +473,10 @@ def eval_model(args):
     
     print(f"✅ GPU: {torch.cuda.get_device_name(0)}")
     print(f"💾 Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f}GB\n")
+    
+    # Disable gradient computation globally to save memory
+    torch.set_grad_enabled(False)
+    print("🔒 Gradient computation disabled globally for memory optimization")
     
     # Load model
     try:
@@ -487,6 +499,12 @@ def eval_model(args):
         import traceback
         traceback.print_exc()
         return
+    
+    # Ensure model is in eval mode and disable gradients for all parameters
+    model.eval()
+    for param in model.parameters():
+        param.requires_grad = False
+    print("🔒 All model parameters set to requires_grad=False")
     
     # Load test data (support both JSON and JSONL formats)
     print(f"📂 Loading test data from: {args.question_file}")
@@ -588,60 +606,61 @@ def eval_model(args):
             video_path = os.path.join(args.video_folder, video_file)
             
             # Use default prompt template (will be formatted with actual frame count after loading)
-            # default_prompt = "Translate the American Sign Language in this video to English."
+            fq = "Translate the American Sign Language in this video to English."
             # default_prompt_template = "Please describe each action change in this video based on the frame transitions. This video contains {num_frames} frames. For each action change, describe ONLY the physical movements: (1) what changes (hand movements, gestures, body positions), (2) how it changes (the transition and motion), and (3) when it changes (the sequence of changes). IMPORTANT: Only describe observable physical actions and movements. Do NOT include any interpretations, speculations, meanings, or explanations (such as 'possibly indicating', 'suggesting', 'rhythmic manner', etc.). Focus strictly on describing the physical actions and movements that you can see."
             # default_prompt = "Observe this ASL video and describe in detail how the person's hand gestures and facial expressions change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. Only describe the physical movements you can see - do not include background information, interpretations, or speculations."
-            fq = """
-You are an ASL motion-description annotator.
-Describe each video frame accurately, objectively, and with full linguistic detail.
-Do NOT translate the signs into English words. Do NOT infer meaning.
-Only describe observable physical movement.
+#             fq = """
+# You are an ASL motion-description annotator.
+# Describe each video frame accurately, objectively, and with full linguistic detail.
+# Do NOT translate the signs into English words. Do NOT infer meaning.
+# Only describe observable physical movement.
 
-For each frame, report the following fields exactly:
+# For each frame, report the following fields exactly:
 
-Right hand:
-- Handshape: (e.g., 1-hand, 5-hand, claw, fist, V-hand, bent-V, open-B, flat-O)
-- Palm orientation: (up, down, left, right, inward, outward)
-- Location in signing space: (upper/lower/center-left/center-right, near-face, near-chest, mid-space, side, neutral space)
-- Movement: 
-  - direction (up, down, toward body, away, left, right, circular, arc)
-  - speed (slow, medium, fast)
-  - path type (straight, curved, arc, repeated)
-  - start → end positions
+# Right hand:
+# - Handshape: (e.g., 1-hand, 5-hand, claw, fist, V-hand, bent-V, open-B, flat-O)
+# - Palm orientation: (up, down, left, right, inward, outward)
+# - Location in signing space: (upper/lower/center-left/center-right, near-face, near-chest, mid-space, side, neutral space)
+# - Movement: 
+#   - direction (up, down, toward body, away, left, right, circular, arc)
+#   - speed (slow, medium, fast)
+#   - path type (straight, curved, arc, repeated)
+#   - start → end positions
 
-Left hand:
-- (Same structure as right hand; if static, write "no movement")
+# Left hand:
+# - (Same structure as right hand; if static, write "no movement")
 
-Hand interaction:
-- Contact: (touch, brush, tap, cross, stack, approach-without-touch)
-- Relative position: (above/below, in front/behind, left/right, near/far)
-- Synchrony: (simultaneous movement / alternating movement)
-- Repetition count (1×, 2×, 3× if visible)
+# Hand interaction:
+# - Contact: (touch, brush, tap, cross, stack, approach-without-touch)
+# - Relative position: (above/below, in front/behind, left/right, near/far)
+# - Synchrony: (simultaneous movement / alternating movement)
+# - Repetition count (1×, 2×, 3× if visible)
 
-Face / Non-manual markers (NMM):
-- Eyebrows: (raised, furrowed, neutral)
-- Eyes: (wide, squinting, blinking)
-- Mouth morphemes: (open, "oo", "mm", "ah", pursed, puffed)
-- Head movement: (tilt left/right, nod, shake, forward/backward)
-- Body posture: (lean forward/backward, shoulder shift)
+# Face / Non-manual markers (NMM):
+# - Eyebrows: (raised, furrowed, neutral)
+# - Eyes: (wide, squinting, blinking)
+# - Mouth morphemes: (open, "oo", "mm", "ah", pursed, puffed)
+# - Head movement: (tilt left/right, nod, shake, forward/backward)
+# - Body posture: (lean forward/backward, shoulder shift)
 
-Formatting Requirements:
-Use this exact format:
+# Formatting Requirements:
+# Use this exact format:
 
-Frame X:
-Right hand: [handshape, palm orientation, location, movement]
-Left hand: [handshape, palm orientation, location, movement]
-Interaction: [contact / relative positioning / repetition]
-Face/NMM: [eyebrows, eyes, mouth shape, head movement, body posture]
+# Frame X:
+# Right hand: [handshape, palm orientation, location, movement]
+# Left hand: [handshape, palm orientation, location, movement]
+# Interaction: [contact / relative positioning / repetition]
+# Face/NMM: [eyebrows, eyes, mouth shape, head movement, body posture]
 
-Rules:
-- Be extremely specific about movement path and spatial location.
-- Mention start and end positions for any movement.
-- Mention when a hand remains still.
-- Do not guess the sign or English meaning.
-- Keep descriptions factual, not interpretive.
-- If unsure, use "approximately".
-"""# Will be set after loading frames
+# Rules:
+# - Be extremely specific about movement path and spatial location.
+# - Mention start and end positions for any movement.
+# - Mention when a hand remains still.
+# - Do not guess the sign or English meaning.
+# - Keep descriptions factual, not interpretive.
+# - If unsure, use "approximately".
+# """
+# Will be set after loading frames
             
             # Extract ground truth from conversations or source
             conversations = source.get('conversations', [])
@@ -730,10 +749,16 @@ Rules:
                 print(f"\n⚠️  [{idx}/{len(data_dict)}] Reduced frames to {len(image_list)} (from original) to fit sequence length")
             
             # Transform each frame image and stack them (same as training code)
-            pixel_values = [transform(image) for image in image_list]
+            # Disable gradient tracking during transformation to save memory
+            with torch.no_grad():
+                pixel_values = [transform(image) for image in image_list]
             pixel_values = torch.stack(pixel_values).to(torch.bfloat16).cuda()
             # Shape should be [num_frames, channels, height, width] (not [batch, num_frames, ...])
             # InternVL expects pixel_values without batch dimension for video frames
+            
+            # Clear cache before inference
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
             
             # Generate prompt with <image> placeholders (same format as training)
             # Training code uses: Frame-1: <image>\nFrame-2: <image>\n...
@@ -760,7 +785,10 @@ Rules:
                 max_new_tokens=args.max_new_tokens  # Maximum tokens to generate
             )
             
+            # Use no_grad context with explicit gradient disabling
             with torch.no_grad():
+                # Ensure gradient is disabled (redundant but explicit for safety)
+                torch.set_grad_enabled(False)
                 output = model.chat(
                     tokenizer=tokenizer,
                     pixel_values=pixel_values,  # [num_frames, C, H, W]
@@ -770,9 +798,12 @@ Rules:
                     verbose=False
                 )
             
-            # Clear cache
+            # Explicitly delete pixel_values and clear cache
+            del pixel_values
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
+                # Force synchronization to ensure memory is freed
+                torch.cuda.synchronize()
             
             # Store results
             references.append(ground_truth)

@@ -29,20 +29,25 @@ if '/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src' not in
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
 from peft import PeftModel
 
-def load_trained_model(checkpoint_path, base_model_name="Qwen/Qwen2.5-VL-3B-Instruct"):
+def load_trained_model(checkpoint_path, base_model_name="Qwen/Qwen2.5-VL-3B-Instruct", device="cuda:0"):
     """
     Load complete trained model with CORRECT key prefix handling
+    
+    Args:
+        checkpoint_path: Path to checkpoint directory
+        base_model_name: Base model name
+        device: CUDA device to use (e.g., "cuda:0", "cuda:1")
     """
     print("🚀 Loading model from checkpoint...")
     print(f"   Checkpoint: {checkpoint_path}")
+    print(f"   Device: {device}")
     
     # Step 1: Load base model
     print("\n1️⃣ Loading base model...")
-    # Use single device for inference to avoid device mismatch issues
-    # For multi-GPU inference, use device_map="auto" but ensure inputs are on the same device
+    # Use specified device for inference
     model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         base_model_name,
-        device_map="cuda:0",  # Use single GPU to avoid device mismatch
+        device_map=device,  # Use specified device
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
         low_cpu_mem_usage=True
@@ -213,6 +218,18 @@ def load_trained_model(checkpoint_path, base_model_name="Qwen/Qwen2.5-VL-3B-Inst
     
     model.eval()
     
+    # Speed optimization: Compile model for faster inference (PyTorch 2.0+)
+    try:
+        if hasattr(torch, 'compile'):
+            print(f"\n🚀 Compiling model for faster inference...")
+            model = torch.compile(model, mode="reduce-overhead", fullgraph=False)
+            print(f"   ✅ Model compiled successfully")
+        else:
+            print(f"\n⚠️  torch.compile not available (requires PyTorch 2.0+)")
+    except Exception as e:
+        print(f"\n⚠️  Model compilation failed: {e}")
+        print(f"   Continuing without compilation...")
+    
     print(f"\n{'='*70}")
     print(f"✅ COMPLETE MODEL LOADED SUCCESSFULLY!")
     print(f"{'='*70}")
@@ -227,22 +244,59 @@ def load_trained_model(checkpoint_path, base_model_name="Qwen/Qwen2.5-VL-3B-Inst
     return model, processor, tokenizer
 
 def eval_model(args):
-    device = "cuda"
-    
     if not torch.cuda.is_available():
         print("❌ CUDA not available!")
         return
     
-    print(f"✅ GPU: {torch.cuda.get_device_name(0)}")
-    print(f"💾 Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f}GB\n")
+    # Speed optimization: Disable gradient computation globally
+    torch.set_grad_enabled(False)
+    
+    # Detect available GPUs and determine device
+    num_gpus = torch.cuda.device_count()
+    print(f"✅ Available GPUs: {num_gpus}")
+    for i in range(num_gpus):
+        print(f"   GPU {i}: {torch.cuda.get_device_name(i)} ({torch.cuda.get_device_properties(i).total_memory / 1e9:.1f}GB)")
+    print()
+    
+    # Determine device to use
+    # Use the device specified in args, or default to cuda:0
+    if hasattr(args, 'cuda_device') and args.cuda_device is not None:
+        device_id = args.cuda_device
+    else:
+        # Default to 0 (first visible GPU after CUDA_VISIBLE_DEVICES filtering)
+        device_id = 0
+    
+    # Validate device ID
+    if device_id >= num_gpus:
+        print(f"❌ Error: Requested GPU {device_id} but only {num_gpus} GPU(s) available!")
+        print(f"   Available GPU IDs: 0 to {num_gpus - 1}")
+        print(f"   💡 Tip: After CUDA_VISIBLE_DEVICES filtering, Python renumbers GPUs from 0.")
+        print(f"   💡 If you set CUDA_VISIBLE_DEVICES to a single GPU (e.g., '1'), use device ID 0, not 1!")
+        if num_gpus == 1:
+            print(f"   💡 Auto-fixing: Using device 0 (the only available GPU)...")
+            device_id = 0
+        else:
+            print(f"   ❌ Cannot auto-fix: Multiple GPUs available but requested invalid device ID.")
+            return
+    
+    if num_gpus == 0:
+        print("❌ No GPUs available!")
+        return
+    
+    device = f"cuda:{device_id}"
+    print(f"📌 Using device: {device}")
     
     # Load model
+    # Use the specified device for model loading
+    model_device = device
+    
     try:
         if args.checkpoint_path and os.path.exists(str(args.checkpoint_path)):
             # Load from checkpoint
             model, processor, tokenizer = load_trained_model(
                 args.checkpoint_path, 
-                args.model_base
+                args.model_base,
+                device=model_device
             )
         else:
             # Load base model only
@@ -254,7 +308,7 @@ def eval_model(args):
             from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
             model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 args.model_base,
-                device_map="cuda:0",  # Use single GPU to avoid device mismatch
+                device_map=model_device,  # Use specified device
                 torch_dtype=torch.bfloat16,
                 trust_remote_code=True,
                 low_cpu_mem_usage=True
@@ -262,7 +316,19 @@ def eval_model(args):
             processor = AutoProcessor.from_pretrained(args.model_base, trust_remote_code=True)
             tokenizer = processor.tokenizer
             model.eval()
+            
+            # Speed optimization: Compile model for faster inference
+            try:
+                if hasattr(torch, 'compile'):
+                    print("🚀 Compiling model for faster inference...")
+                    model = torch.compile(model, mode="reduce-overhead", fullgraph=False)
+                    print("   ✅ Model compiled successfully")
+            except Exception as e:
+                print(f"   ⚠️  Model compilation failed: {e}, continuing without compilation...")
+            
             print("✅ Base model loaded")
+        
+        # Device is already set above, no need to reassign
     except Exception as e:
         print(f"\n❌ FAILED TO LOAD MODEL!")
         print(f"Error: {e}")
@@ -272,8 +338,19 @@ def eval_model(args):
     
     # Load test data
     print(f"📂 Loading test data from: {args.question_file}")
-    with open(args.question_file, 'r') as f:
-        data_dict = json.load(f)
+    
+    # Check if file is JSONL format (one JSON object per line)
+    is_jsonl = args.question_file.endswith('.jsonl')
+    
+    if is_jsonl:
+        data_dict = []
+        with open(args.question_file, 'r', encoding='utf-8') as f:
+            for line in f:
+                if line.strip():
+                    data_dict.append(json.loads(line))
+    else:
+        with open(args.question_file, 'r', encoding='utf-8') as f:
+            data_dict = json.load(f)
     
     if args.max_samples:
         data_dict = data_dict[:args.max_samples]
@@ -281,19 +358,56 @@ def eval_model(args):
     
     print(f"   Total samples: {len(data_dict)}\n")
     
+    # Speed optimization: Pre-validate all video paths
+    print(f"🔍 Pre-validating video paths...")
+    valid_samples = []
+    invalid_samples = []
+    
+    for source in data_dict:
+        video_file = source.get("video", "")
+        video_path = os.path.join(args.video_folder, video_file)
+        if os.path.exists(video_path):
+            valid_samples.append(source)
+        else:
+            invalid_samples.append((source, video_file))
+    
+    print(f"   ✅ Valid videos: {len(valid_samples)}")
+    print(f"   ❌ Missing videos: {len(invalid_samples)}")
+    if invalid_samples:
+        print(f"   First 5 missing: {[v[1] for v in invalid_samples[:5]]}")
+    print()
+    
     os.makedirs(args.out_dir, exist_ok=True)
     
+    # Speed optimization: Pre-allocate lists for valid samples
     results = []
     references = []
     predictions = []
     
+    # Add error entries for invalid samples first
+    for source, video_file in invalid_samples:
+        conversations = source.get('conversations', [])
+        if len(conversations) >= 2:
+            ground_truth = conversations[1].get('value', '')
+        else:
+            ground_truth = source.get('answer', source.get('ground_truth', ''))
+        
+        results.append({
+            "video": video_file,
+            "model_output": "ERROR: Video not found",
+            "ground_truth": ground_truth
+        })
+    
     print(f"🎬 Starting evaluation...")
     print(f"{'='*70}\n")
     
+    # Speed optimization: Pre-import and prepare common objects
+    from qwen_vl_utils import process_vision_info
+    fq_text = "Translate the American Sign Language in this video to English."
+    
     # Process samples
-    for idx, source in enumerate(tqdm(data_dict, desc="Evaluating"), 1):
+    for idx, source in enumerate(tqdm(valid_samples, desc="Evaluating"), 1):
         try:
-            fq = "Translate the American Sign Language in this video to English."
             video_file = source["video"]
             video_path = os.path.join(args.video_folder, video_file)
             
@@ -304,27 +418,16 @@ def eval_model(args):
             else:
                 ground_truth = source.get('answer', source.get('ground_truth', ''))
             
-            if not os.path.exists(video_path):
-                print(f"\n⚠️  [{idx}/{len(data_dict)}] Video not found: {video_file}")
-                results.append({
-                    "video": video_file,
-                    "model_output": "ERROR: Video not found",
-                    "ground_truth": ground_truth
-                })
-                continue
-            
-            # Prepare input
+            # Prepare input (video path already validated)
             conversation = [{
                 "role": "user",
                 "content": [
                     {"type": "video", "video": video_path, "fps": args.video_fps},
-                    {"type": "text", "text": fq}
+                    {"type": "text", "text": fq_text}
                 ]
             }]
             
-            # Process
-            from qwen_vl_utils import process_vision_info
-            
+            # Process - optimized order
             text = processor.apply_chat_template(
                 conversation, 
                 tokenize=False, 
@@ -342,40 +445,45 @@ def eval_model(args):
                 min_pixels=args.min_pixels,
                 max_pixels=args.max_pixels
             )
-            # Move inputs to cuda:0 (model is loaded on cuda:0)
-            # Ensure all input tensors are on the same device as the model
-            inputs = {k: v.to("cuda:0") if isinstance(v, torch.Tensor) else v 
+            
+            # Speed optimization: Move inputs to device in single operation
+            # Use the same device as the model (ensures consistency)
+            # Device is set to match where model is loaded (cuda:0 by default)
+            inputs = {k: v.to(device) if isinstance(v, torch.Tensor) else v 
                      for k, v in inputs.items()}
             
-            # Generate
-            with torch.no_grad():
-                with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
-                    output_ids = model.generate(
-                            **inputs,
-                            num_beams=5,                    # Beam search for better quality
-                            do_sample=True,                 # Enable sampling for better diversity
-                            temperature=0.7,                # Temperature for generation (0.7 is a good balance)
-                            top_p=0.9,                      # Nucleus sampling
-                            top_k=50,                      # Top-k sampling
-                            length_penalty=1.0,            # Length penalty (1.0 = neutral)
-                            no_repeat_ngram_size=4,        # Prevent 4-gram repetition
-                            repetition_penalty=1.1,        # Slight penalty for token repetition
-                            min_length=1,                   # Minimum output length
-                            max_new_tokens=args.max_new_tokens  # Maximum tokens to generate
-                        )
-                    generated_ids = [
-                        out[len(inp):] 
-                        for inp, out in zip(inputs['input_ids'], output_ids)
-                    ]
-                    output = processor.batch_decode(
-                        generated_ids, 
-                        skip_special_tokens=True, 
-                        clean_up_tokenization_spaces=True
-                    )[0]
+            # Generate (gradient already disabled globally)
+            with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
+                output_ids = model.generate(
+                    **inputs,
+                    num_beams=5,                    # Beam search for better quality
+                    do_sample=True,                 # Enable sampling for better diversity
+                    temperature=0.7,                # Temperature for generation (0.7 is a good balance)
+                    top_p=0.9,                      # Nucleus sampling
+                    top_k=50,                      # Top-k sampling
+                    length_penalty=1.0,            # Length penalty (1.0 = neutral)
+                    no_repeat_ngram_size=4,        # Prevent 4-gram repetition
+                    repetition_penalty=1.1,        # Slight penalty for token repetition
+                    min_length=1,                   # Minimum output length
+                    max_new_tokens=args.max_new_tokens  # Maximum tokens to generate
+                )
+                generated_ids = [
+                    out[len(inp):] 
+                    for inp, out in zip(inputs['input_ids'], output_ids)
+                ]
+                output = processor.batch_decode(
+                    generated_ids, 
+                    skip_special_tokens=True, 
+                    clean_up_tokenization_spaces=True
+                )[0]
             
-            # Clear cache
+            # Speed optimization: Clear intermediate tensors and cache more efficiently
+            del inputs, output_ids, generated_ids
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
+                # Only synchronize periodically to reduce overhead
+                if idx % 10 == 0:
+                    torch.cuda.synchronize()
             
             # Store results
             references.append(ground_truth)
@@ -390,7 +498,7 @@ def eval_model(args):
             # Print first 10 examples
             if idx <= 10:
                 print(f"\n{'─'*70}")
-                print(f"[{idx}/{len(data_dict)}] {video_file}")
+                print(f"[{idx}/{len(valid_samples)}] {video_file}")
                 print(f"Ground truth: {ground_truth}")
                 print(f"Prediction:   {output}")
                 
@@ -424,7 +532,7 @@ def eval_model(args):
     output_file = f"checkpoint4000_results_{timestamp}.json"
     output_path = os.path.join(args.out_dir, output_file)
     
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
     print(f"\n{'='*70}")
@@ -491,6 +599,8 @@ def main():
                        help="Min pixels for video processing (MUST match training!)")
     parser.add_argument("--max-pixels", type=int, default=224*224,
                        help="Max pixels for video processing (MUST match training!)")
+    parser.add_argument("--cuda-device", type=int, default=0,
+                       help="CUDA device ID to use (relative to CUDA_VISIBLE_DEVICES). Default: 0")
     
     args = parser.parse_args()
     

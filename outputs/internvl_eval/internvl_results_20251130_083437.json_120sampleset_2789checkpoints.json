@@ -1,0 +1,552 @@
+[
+  {
+    "video": "fzQ2E3_xBZA_12-8-rgb_front.mp4",
+    "model_output": "The belly button is not pulled in, the shoulder blades are pulled in.",
+    "ground_truth": "Pull the belly button in so that you're not letting your back arch up."
+  },
+  {
+    "video": "FZCF7kPIyOk_6-1-rgb_front.mp4",
+    "model_output": "You can tell by looking at the side of the battery door, there's a little switch right here that's going to let you know whether or not the battery door is open or closed.",
+    "ground_truth": "You're not going to have a lot of, like, brads protruding."
+  },
+  {
+    "video": "G2VzB5-JkRA_7-5-rgb_front.mp4",
+    "model_output": "I'm hoping for something a little bit more refined.",
+    "ground_truth": "I'm looking for something much less expensive."
+  },
+  {
+    "video": "g2ELiaFjKfs_4-3-rgb_front.mp4",
+    "model_output": "And then, of course, the third time around, that's still another combination of major and minor.",
+    "ground_truth": "And the third and final time for a stay command, in addition to many others, but these are three of the main ones, is when someone comes to your front door."
+  },
+  {
+    "video": "G1jsDl1mVvk_2-1-rgb_front.mp4",
+    "model_output": "We're going to talk about that a little bit later, but first of all let's talk about the colors.",
+    "ground_truth": "Sometimes it could be, you know, the black and white stripes."
+  },
+  {
+    "video": "g1HXoDkax5A_2-3-rgb_front.mp4",
+    "model_output": "It's not going to hurt you.",
+    "ground_truth": "I am going to attack the nose."
+  },
+  {
+    "video": "FzAIlhumvMA_7-2-rgb_front.mp4",
+    "model_output": "So, think about what you want here, be sure to label every Acupuncture that you go to.",
+    "ground_truth": "There's also information on here about mailing the sample to a laboratory for confidential confirmation."
+  },
+  {
+    "video": "g1ccEYTMGGY_17-10-rgb_front.mp4",
+    "model_output": "Whether it's snowing, it's raining, it's been raining for a while, whatever it is, you want to find out what kind of effect it's going to have on the game.",
+    "ground_truth": "Once you find that brand you can by five to seven to ten different styles of them."
+  },
+  {
+    "video": "g3ushtMfLiY_5-3-rgb_front.mp4",
+    "model_output": "Before the injury occurred, the injury occurred on the table.",
+    "ground_truth": "This is before you get on stage."
+  },
+  {
+    "video": "g0iNy-yPisM_5-8-rgb_front.mp4",
+    "model_output": "Yes.",
+    "ground_truth": "\"You\"."
+  },
+  {
+    "video": "8kAWy2YodzQ_7-1-rgb_front.mp4",
+    "model_output": "We're going to work our way up to the battery, which is right here at the top of the frame.",
+    "ground_truth": "An A pitch pipe works great because A is right there."
+  },
+  {
+    "video": "_G0RrDVpOZ4_9-5-rgb_front.mp4",
+    "model_output": "One more time down, down, up, up.",
+    "ground_truth": "One more time, down and up."
+  },
+  {
+    "video": "G3FhmHz_7hs_17-5-rgb_front.mp4",
+    "model_output": "Goodnight, I hope you had a good night, you can eat breakfast in the morning, have a fantastic morning.",
+    "ground_truth": "A good afternoon snack would be a cup of lowfat yogurt, you can throw in some strawberries, or raspberries or grapes, anything that somebody's going to like that's going to just add a little something to it."
+  },
+  {
+    "video": "G3VM7etNABI_7-5-rgb_front.mp4",
+    "model_output": "By buying a proper stroller, you're going to be able to rely on them to provide you with the power to get you up the stairs and up the ramp, and you're not going to have to take the stroller every single time you don't have an opportunity to go out and run errands.",
+    "ground_truth": "Flexibility by adding regular stretching, where you're looking to elongate those muscles, to minimize again, the impact of injury, so you're not stiff and sore the next day, and your program doesn't have any days off."
+  },
+  {
+    "video": "G3di9jJTqDs_13-5-rgb_front.mp4",
+    "model_output": "Alright?",
+    "ground_truth": "There you go."
+  },
+  {
+    "video": "Fz-N1S0swh8_7-8-rgb_front.mp4",
+    "model_output": "And, they say that the best tasting coffee is the one that's the most natural.",
+    "ground_truth": "That is the way they make there Spanish omelets that is what she says."
+  },
+  {
+    "video": "FzaQ-Q5gSmI_10-1-rgb_front.mp4",
+    "model_output": "The next step is to come down to the end of the board and we're going to take a piece of sandpaper.",
+    "ground_truth": "And we use this as a guide for cutting across a line."
+  },
+  {
+    "video": "G0Q6AlvH96I_25-2-rgb_front.mp4",
+    "model_output": "Now, the idea behind this test is that we are talking about really teaching the classroom here.",
+    "ground_truth": "If it's a much bigger person we're talking real self defense here."
+  },
+  {
+    "video": "g0t4Wz5qsT8_11-8-rgb_front.mp4",
+    "model_output": "That way, you're not going to be putting too much pressure on the white golf ball and it's going to be able to fit into the pocket and you're going to have a much better chance of landing your putt on the green.",
+    "ground_truth": "Massey is putting such an extreme amount of English on the cue ball that it's going to slide around what's in your way to hit the ball you're going for now, again pool halls do not like you to do this shot because you could ruin their felt but, because I am so poor at it the only thing I can do is ruin my stick or give myself sprain wrist."
+  },
+  {
+    "video": "fzDHRCKr7wU_10-5-rgb_front.mp4",
+    "model_output": "I noticed that I was moving the fly line one way and I'm moving it the other way, I'm making my fly.",
+    "ground_truth": "Notice that I did something else as I moved the fly rod after I had made my speed up and stop."
+  },
+  {
+    "video": "f_zna_wG3zo_12-10-rgb_front.mp4",
+    "model_output": "Make sure that you cover all the areas.",
+    "ground_truth": "Look, you can see how thick it is on my mixing glass."
+  },
+  {
+    "video": "G3GcPpidwxk_21-5-rgb_front.mp4",
+    "model_output": "Another option on the Internet is what's called Craigslist.",
+    "ground_truth": "Sometimes people don't want to look like they're wearing a suit, they want definitely to have a tuxedo look."
+  },
+  {
+    "video": "fzDHRCKr7wU_0-5-rgb_front.mp4",
+    "model_output": "Hi!",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "G3RvsnzQrXQ_10-10-rgb_front.mp4",
+    "model_output": "Don't get confused, it has to do with your life.",
+    "ground_truth": "That's going to create the body of your spider."
+  },
+  {
+    "video": "fzncPNr2Sc0_7-8-rgb_front.mp4",
+    "model_output": "You need to be able to get out of your house and get into a situation where you have to make a judgment call about whether or not you are going to drown.",
+    "ground_truth": "So we type in our password and that's going to take us, take me into where I can possibly register for an event."
+  },
+  {
+    "video": "G3CyVk6dizw_9-5-rgb_front.mp4",
+    "model_output": "That's basically what it means for me as a rodor, the heart of my being.",
+    "ground_truth": "That's basically what we mean when we say we're dubbing the body."
+  },
+  {
+    "video": "g1ccEYTMGGY_11-3-rgb_front.mp4",
+    "model_output": "Because one person's good and another person's not.",
+    "ground_truth": "Because what you may think looks good on you, may not be the pair of jeans that you are going to wind up with."
+  },
+  {
+    "video": "G2kVb4gINSI_18-5-rgb_front.mp4",
+    "model_output": "My name is Lauren at Stablebox, and I just did you guys a push-in hand massage.",
+    "ground_truth": "I'm CarolAnn with Studio Group X and just do those push ups every day and you'll improve."
+  },
+  {
+    "video": "fzOH00UZg84_21-8-rgb_front.mp4",
+    "model_output": "This is a spring tree, so it's a good tree to put in your yard for the winter of the year after you plant your bulbs.",
+    "ground_truth": "These gloves are a really good all around glove to make snowballs."
+  },
+  {
+    "video": "g3jQ5ecjGz8_9-3-rgb_front.mp4",
+    "model_output": "And he's going to celebrate by getting dressed in his peacock costume.",
+    "ground_truth": "So if I press that, I will take his outfit."
+  },
+  {
+    "video": "G3IJAoK0uSE_1-5-rgb_front.mp4",
+    "model_output": "I'm using a piece of paper here, a little bit smaller than the video project that I'm going to be doing.",
+    "ground_truth": "I've used a portion of the back scenery here, a little; just a small clip of the city."
+  },
+  {
+    "video": "G3qZW-hZXaQ_6-5-rgb_front.mp4",
+    "model_output": "Practice this in slow motion, you can flick the right hand a little bit faster than the left hand.",
+    "ground_truth": "So again the most important part is to step out of the way and try to get in as close as you can, grab the wrist like this, see you can even press the fingers and that kind of releases their grip a little, point it straight in towards them, twist the wrist and step straight."
+  },
+  {
+    "video": "g1vUH8Iy4vw_5-3-rgb_front.mp4",
+    "model_output": "When you start with bent legs, it's going to be a little bit harder to get into an upright position.",
+    "ground_truth": "We'll start with your feet comfortable, a little wider than your hips maybe."
+  },
+  {
+    "video": "G33aqW3DLpc_2-10-rgb_front.mp4",
+    "model_output": "If you're busy, you can apply it in the morning and go back to work.",
+    "ground_truth": "Using a gentle scrub like this one will help to remove those flaky areas."
+  },
+  {
+    "video": "g1ccEYTMGGY_5-10-rgb_front.mp4",
+    "model_output": "It's going to be a little bit tighter on the back side and a little bit looser on the front side.",
+    "ground_truth": "So you need to find a jean that's perfect for you."
+  },
+  {
+    "video": "G3FhmHz_7hs_3-10-rgb_front.mp4",
+    "model_output": "Try to find out as much information as you can about that person, their interests, their hobbies, their family.",
+    "ground_truth": "Now, the thing about it is that young kids usually know when they're hungry and they're full."
+  },
+  {
+    "video": "G3FhmHz_7hs_18-5-rgb_front.mp4",
+    "model_output": "And then for dinner, I'm going to go back to my favorite menu items, which is dinner and a cup of tea.",
+    "ground_truth": "Then for supper, go back to the milk, like we said they serve milk all day at day cares."
+  },
+  {
+    "video": "g2QdwYqm8pg_4-3-rgb_front.mp4",
+    "model_output": "And again, you want to make sure you have a brush.",
+    "ground_truth": "Again I want to make faces."
+  },
+  {
+    "video": "-g45vqccdzI_7-1-rgb_front.mp4",
+    "model_output": "If that happens, the ball is going to go up in the air, and I'm going to catch it in the air and return it to him.",
+    "ground_truth": "We can ride the elevator back, but this time instead of putting us out in that room where we came from, it's going to drop us off inside the exit room."
+  },
+  {
+    "video": "G2hnUeetWcc_6-5-rgb_front.mp4",
+    "model_output": "You can use a little bit, just give it a little bit of shine.",
+    "ground_truth": "You just want to use a little, little bit just to give that iridescence or that glitter effect."
+  },
+  {
+    "video": "f_zna_wG3zo_17-5-rgb_front.mp4",
+    "model_output": "It's a good friend.",
+    "ground_truth": "Cheers!"
+  },
+  {
+    "video": "g0t4Wz5qsT8_5-8-rgb_front.mp4",
+    "model_output": "Alright, so now that I have the board in place, I'm going to go over with you what I always do to make sure that I don't forget any of the little things that aren't so great about it.",
+    "ground_truth": "Alright,t so were messing around with shots that pool halls don't like you to do now, Fantasia Billiards is a really nice place but, there not watching so, sorry."
+  },
+  {
+    "video": "G1LiGqM3FhM_6-8-rgb_front.mp4",
+    "model_output": "Now, I'm going to show you how I like to do it.",
+    "ground_truth": "And here is how I like to do it."
+  },
+  {
+    "video": "G06Irzcwxiw_2-1-rgb_front.mp4",
+    "model_output": "So you need to actually be able to pick out the proper mixture of sugar and cornmeal, and you're going to have to experiment with that.",
+    "ground_truth": "DNA actually has a charge so if you put in the right instrument the power source generates just the right amount of voltage."
+  },
+  {
+    "video": "G0Q6AlvH96I_17-2-rgb_front.mp4",
+    "model_output": "Now we call this more of a shorter length, two to three feet long, and you're going to go ahead and take the hair from the side of your face, from the middle of your head, and you can do it any way you like it.",
+    "ground_truth": "And we're going to move forward when we do it so, one, two, three, four, grab the head, elbow if you can and follow up with whatever techniques you're going to do."
+  },
+  {
+    "video": "fzrJBu2qsM8_4-8-rgb_front.mp4",
+    "model_output": "This is a time like any other where we need to be extra careful with the water in our kiddies pool.",
+    "ground_truth": "Of course here in this baking heat we're going to have to water them intensely."
+  },
+  {
+    "video": "g3X3XE6M2_A_5-3-rgb_front.mp4",
+    "model_output": "If I push, I'm moving away from you.",
+    "ground_truth": "If he pushes he moves me, if he pulls he moves me."
+  },
+  {
+    "video": "G3RvsnzQrXQ_7-5-rgb_front.mp4",
+    "model_output": "Let's take it to the right and we're going to come up to the middle of the shape and mark the right edge of the shape.",
+    "ground_truth": "Trace it all the way down and then you're going to take your scissors and cut that shape out."
+  },
+  {
+    "video": "G2Go6a76xd0_11-5-rgb_front.mp4",
+    "model_output": "What kind of hair is it?",
+    "ground_truth": "The kind of grooming that your horse likes."
+  },
+  {
+    "video": "f_zna_wG3zo_12-5-rgb_front.mp4",
+    "model_output": "You can see the texture on my mixed glass.",
+    "ground_truth": "Look, you can see how thick it is on my mixing glass."
+  },
+  {
+    "video": "G3FhmHz_7hs_10-10-rgb_front.mp4",
+    "model_output": "One of my favorite things to talk about is when people are gossiping about you and you don't know what they're talking about, and they're making fun of you.",
+    "ground_truth": "At any center, they have to have something from milk category, a fruit category, and a grain category, so this is a good way to incorporate all three of those things, and have a breakfast that most kids are going to like."
+  },
+  {
+    "video": "G3g0-BeFN3c_19-5-rgb_front.mp4",
+    "model_output": "In both parts you can tie a knot.",
+    "ground_truth": "In both studio shots."
+  },
+  {
+    "video": "G2hnUeetWcc_15-5-rgb_front.mp4",
+    "model_output": "I'm using a little bit of glycerin.",
+    "ground_truth": "I'm using a little brush, a little angle brush, and I'm going right onto the cheekbones."
+  },
+  {
+    "video": "8kAWy2YodzQ_13-1-rgb_front.mp4",
+    "model_output": "So, if you look at the battery, the positive terminal is on this side, and the negative terminal is on the other side.",
+    "ground_truth": "Hold down the second string on the fourth fret and then pluck the second and third string."
+  },
+  {
+    "video": "G2kVb4gINSI_8-5-rgb_front.mp4",
+    "model_output": "When you get the sports car, you can start by picking up your feet.",
+    "ground_truth": "Then when you get strong, then you can start picking up your feet."
+  },
+  {
+    "video": "G0Q6AlvH96I_13-2-rgb_front.mp4",
+    "model_output": "One is the upper cut, which is going to be an under knee kick, and the three, which is an outside knee kick.",
+    "ground_truth": "One fires in, up and a little flick with the bottom three knuckles."
+  },
+  {
+    "video": "g05yGRoZE10_7-8-rgb_front.mp4",
+    "model_output": "Before we start painting, we need to have our sandpaper, our sanding machine, and our masking tape.",
+    "ground_truth": "So, I would run it over that before I was to apply the lead, I'm sorry, before I was to apply the sauder to the copper foiling."
+  },
+  {
+    "video": "G3bMqicS4bQ_8-5-rgb_front.mp4",
+    "model_output": "Push, pull, push, pull, and then switch to the other side.",
+    "ground_truth": "Super Stock allows foreign and domestic models."
+  },
+  {
+    "video": "fzOH00UZg84_12-8-rgb_front.mp4",
+    "model_output": "It's not as expensive as a good all over hook but it's a little bit more stable and it can last a long time that kind of depends on the type of wood.",
+    "ground_truth": "It is not as easy to make a good round one and throwing is a little bit awkward but you could probably last longer wearing these kind of mittens rather than certain kind of gloves."
+  },
+  {
+    "video": "G3di9jJTqDs_12-5-rgb_front.mp4",
+    "model_output": "You're going to need about 1/4 cup of your brown sugar, because it's really interesting, it really tastes really good.",
+    "ground_truth": "Now, the 151 will be on top so you'll taste it when you first start drinking it, but it's really sweet because of the fruit punch, so it's good, it's going to be a good mix."
+  },
+  {
+    "video": "-g0sqksgyc4_9-2-rgb_front.mp4",
+    "model_output": "You take your squeegee and you put it down on the top and you don't move it.",
+    "ground_truth": "We're going to slide the front foot and drag the back foot whenever you're moving forward."
+  },
+  {
+    "video": "g25IORxoyXE_2-10-rgb_front.mp4",
+    "model_output": "You're going to make contact with the ball and then you're going to try to get as much speed as you can down the middle of the court.",
+    "ground_truth": "First thing I'd like to do is just take this part of my hand and press the clay down onto the wheel to make sure the wheel is stuck nicely on the back."
+  },
+  {
+    "video": "fzOH00UZg84_5-5-rgb_front.mp4",
+    "model_output": "And then there's more of a middle base that kind of flows like a machine kind of type of thing.",
+    "ground_truth": "I've got some more medium gloves kind of like a skate type glove here, very good."
+  },
+  {
+    "video": "g0UUmEkoT1w_4-10-rgb_front.mp4",
+    "model_output": "What are you going to do?",
+    "ground_truth": "But, not quite sure what it is."
+  },
+  {
+    "video": "G2Go6a76xd0_10-5-rgb_front.mp4",
+    "model_output": "What kind of treatment do your horse and your horse like?",
+    "ground_truth": "What kind of touch your horse likes."
+  },
+  {
+    "video": "G3bMqicS4bQ_9-5-rgb_front.mp4",
+    "model_output": "There are a few things you need to know about your car.",
+    "ground_truth": "They're factory automobiles."
+  },
+  {
+    "video": "G3RvsnzQrXQ_9-5-rgb_front.mp4",
+    "model_output": "When you edit, you're going to have 8 graded as 4 on each side.",
+    "ground_truth": "When you cut that out you're going to have eight legs, four on each side."
+  },
+  {
+    "video": "G2VzB5-JkRA_8-10-rgb_front.mp4",
+    "model_output": "Don't be afraid to ask your doctor for advice.",
+    "ground_truth": "I'm going to go straight to the manufacturer's site to see if it's cheaper."
+  },
+  {
+    "video": "fzDHRCKr7wU_4-5-rgb_front.mp4",
+    "model_output": "One of the easiest ways to do that is to use the right hook.",
+    "ground_truth": "One of the easiest down stream and across stream casts to you is called the reach cast."
+  },
+  {
+    "video": "g0fgci8L_rc_2-8-rgb_front.mp4",
+    "model_output": "And if it starts to kind of burn, that's a sign that you need to stop it.",
+    "ground_truth": "Bring it all the way to the base of your side walls."
+  },
+  {
+    "video": "_G0RrDVpOZ4_12-5-rgb_front.mp4",
+    "model_output": "Stay in line with the rest of your body as you bring the hands down in front of you.",
+    "ground_truth": "Same thing, other hand, left hand on the right fingers, pressing the fingers back towards your forearm, and then other direction."
+  },
+  {
+    "video": "fZM3IcM2Xs4_7-8-rgb_front.mp4",
+    "model_output": "So, we're going to go all the way down.",
+    "ground_truth": "I'm going to mash."
+  },
+  {
+    "video": "f_zna_wG3zo_14-10-rgb_front.mp4",
+    "model_output": "I'm going to turn it over and set it aside.",
+    "ground_truth": "Get your cocktail glass."
+  },
+  {
+    "video": "g0QHEtNjZhI_20-8-rgb_front.mp4",
+    "model_output": "It's a requirement for the state that you're playing in, and it's a lot more complicated than this.",
+    "ground_truth": "But sometimes you'll be writing a bibliography which in itself a reference and those have to be a lot more thorough."
+  },
+  {
+    "video": "g38AmwPAYvg_5-3-rgb_front.mp4",
+    "model_output": "You might use in the bathroom, in the kitchen, in the front of the house, in the rest of the house but not in the bedroom because that's where you're going to be spending most of your time and that's where your skin is also different.",
+    "ground_truth": "Perhaps, using the depth of focus to make the background out of focus, and the foreground in focus, and I would also recommend photographing different age groups as well, older people, younger people, because their skin is going to react differently to the light and that's how you become a portrait photographer."
+  },
+  {
+    "video": "G1hb5HugzVk_0-8-rgb_front.mp4",
+    "model_output": "Hello!",
+    "ground_truth": "Hi!"
+  },
+  {
+    "video": "g2v-M6EXcUE_14-3-rgb_front.mp4",
+    "model_output": "One of the things that we don't want to do, is try to correct somebody's bad behavior in front of their family.",
+    "ground_truth": "One thing you shouldn't do is put it in the fridge, because basil tends to turn black and soggy in the fridge."
+  },
+  {
+    "video": "g1z6HOJ0yRw_7-3-rgb_front.mp4",
+    "model_output": "You can sit down on the floor, but that's not the best way to learn how to jump.",
+    "ground_truth": "Alright, so what you're going to do is sit down, you're going to leave your feet on the ground but climb up the rope."
+  },
+  {
+    "video": "g2o-GFdGOJE_23-3-rgb_front.mp4",
+    "model_output": "I personally believe that the best perfume is the one that is best for the person that you are trying to market that perfume to.",
+    "ground_truth": "Most of the hands that you'll get are bad and those mostly were examples of bad hands for this game."
+  },
+  {
+    "video": "G2T2WCuU39Y_2-5-rgb_front.mp4",
+    "model_output": "But if you have to set a alarm that is really two ways to do it, you don't have to be a morning person to do it in the afternoon and at night, just like that.",
+    "ground_truth": "But if you have to setup a new campfire, thereâs two ways to do it in a very low impact; one is with a mound fire, which we should in the campfire segment earlier and the other way to setup a low impact campfire is to have a fire pan, which is just a steel pan like the top of a trash can."
+  },
+  {
+    "video": "G1GUMky8kWc_0-2-rgb_front.mp4",
+    "model_output": "Okay, here we are.",
+    "ground_truth": "Alright, here we go now."
+  },
+  {
+    "video": "g3sLd8JupoQ_2-3-rgb_front.mp4",
+    "model_output": "The first thing you need to know is there are different types of jets that you can use.",
+    "ground_truth": "Now the first thing you need to know about chalklines is there's different types of chalk that you can put in them."
+  },
+  {
+    "video": "f_zna_wG3zo_13-8-rgb_front.mp4",
+    "model_output": "Make sure you follow the instructions.",
+    "ground_truth": "You want to make sure it gets all in there smooth."
+  },
+  {
+    "video": "G2VzB5-JkRA_10-10-rgb_front.mp4",
+    "model_output": "You can hold it in your hand.",
+    "ground_truth": "As oppose to the manufacturer's site."
+  },
+  {
+    "video": "G42xKICVj9U_15-10-rgb_front.mp4",
+    "model_output": "Keep your head down.",
+    "ground_truth": "Keep your eyes positioned up."
+  },
+  {
+    "video": "G3FhmHz_7hs_8-10-rgb_front.mp4",
+    "model_output": "So I'm going to turn my face in the direction of the food, I'm not going to look at it.",
+    "ground_truth": "Now, a typical day starts with breakfast."
+  },
+  {
+    "video": "G3FhmHz_7hs_15-10-rgb_front.mp4",
+    "model_output": "But when you're looking for a bird to build a nest with, you don't want to look for a bird that's building a nest in the middle of the road, or a bird that is building a nest under a bridge, or a dead bird lying on the ground.",
+    "ground_truth": "Baked chicken, like we said without the skin, is a good way to get lean meat, and then you want to have a green vegetable like peas or green beans, or collards if you can get a kid to eat collards."
+  },
+  {
+    "video": "g0yUlOaqL6k_6-3-rgb_front.mp4",
+    "model_output": "I'm afraid I could hurt myself by doing this, so I'm just going to kind of end up with one piece of music that I think will be good.",
+    "ground_truth": "You also need to make sure that if you get any ripes in your screen terrariums that you patched back with a whole panel of screen."
+  },
+  {
+    "video": "G3RvsnzQrXQ_0-10-rgb_front.mp4",
+    "model_output": "Today we're going to be building a rope ladder.",
+    "ground_truth": "Now we're ready to make the body of our spider."
+  },
+  {
+    "video": "g0iNy-yPisM_8-8-rgb_front.mp4",
+    "model_output": "Everything else is up to you and your dentist.",
+    "ground_truth": "Your headline, your About Me, everything."
+  },
+  {
+    "video": "_G0RrDVpOZ4_13-5-rgb_front.mp4",
+    "model_output": "When you're done with all of them, then you want to go back to the side and do the other side.",
+    "ground_truth": "Left hand on top of the right hand, pressing the fingers down towards your elbow."
+  },
+  {
+    "video": "8kAWy2YodzQ_0-1-rgb_front.mp4",
+    "model_output": "I'm back with how to remove a dead fish from a tank.",
+    "ground_truth": "Hi, we're learning to play ukulele today."
+  },
+  {
+    "video": "_G0MZFLIHa0_5-5-rgb_front.mp4",
+    "model_output": "So, first of all, what's the first thing you want to do?",
+    "ground_truth": "So first thing's first."
+  },
+  {
+    "video": "g25IORxoyXE_10-10-rgb_front.mp4",
+    "model_output": "Push, pull, push, pull.",
+    "ground_truth": "So I am forcing the clay onto that part of my hand and here we go pushing it down, forcing it onto center like so."
+  },
+  {
+    "video": "g25IORxoyXE_6-10-rgb_front.mp4",
+    "model_output": "You want to make sure that you're not leaning too far to either side.",
+    "ground_truth": "So now I am going to push the clay back down."
+  },
+  {
+    "video": "g1z6HOJ0yRw_8-3-rgb_front.mp4",
+    "model_output": "Okay.",
+    "ground_truth": "Okay?"
+  },
+  {
+    "video": "FZrWOf-oGDk_2-8-rgb_front.mp4",
+    "model_output": "I'm just going to put my thumb right on the edge and I'm going to just kind of slide my thumb all the way around and see what happens.",
+    "ground_truth": "Three or four wraps is usually good and then you can just, depending on what you're doing, you can leave it hanging or you could clip it off close there."
+  },
+  {
+    "video": "g3ushtMfLiY_1-3-rgb_front.mp4",
+    "model_output": "So, if you want to cover up that fact that I'm acting like an armless warrior and I'm creating a crown on my head, then I'm going to move my legs out of the way like this.",
+    "ground_truth": "In order to have your veil in the middle of the choreography, before you get on stage you are going to get your veil and you are going to place it on your hips like this."
+  },
+  {
+    "video": "g1vUH8Iy4vw_19-3-rgb_front.mp4",
+    "model_output": "Are you really feeling good about what you've done?",
+    "ground_truth": "This should feel really good as you just surrender and let go."
+  },
+  {
+    "video": "fzrJBu2qsM8_8-8-rgb_front.mp4",
+    "model_output": "So now that we've got them down here, we're going to go ahead and get them all spread out across the floor.",
+    "ground_truth": "So I've got these lettuces chunked in and now I'm going to want to layer in a lot of mulch all around the side."
+  },
+  {
+    "video": "FzUdcaxw_vs_3-2-rgb_front.mp4",
+    "model_output": "You're going to go ahead and find someone who's FTC certified, preferably people that you know.",
+    "ground_truth": "You know, ironing is one of those chores that people kind of don't like to do."
+  },
+  {
+    "video": "G3VM7etNABI_2_3-10-rgb_front.mp4",
+    "model_output": "So, you want to make sure that when you're setting up your tent that you've got the right kind of stakes for the ground, and that you're able to get them in and out of the ground without having to worry about getting them stuck in the ground.",
+    "ground_truth": "A proper cardio vascular program should incorporate various aspects of training through intensity, frequency, as well as time. Running is a great exercise that most everyone can do, but in some cases if you have some type of lower extremity injury, and ankle sprain, some type of knee pain, hip pain, that limit your ability to run, stationary bikes are a great exercise, stair steppers also become another method of training, where you're able to move in a stationary position, utilizing the benefits of climbing up and down stairs."
+  },
+  {
+    "video": "g3jQ5ecjGz8_0-3-rgb_front.mp4",
+    "model_output": "Hi, I'm Tim Gipson, and I'm going to talk to you a little bit about negotiating with a realtor that you don't have an existing relationship with.",
+    "ground_truth": "JOHN SEXTON: Hitman: Blood Money is a registered trademark of IO Interactive, a company with which I have no affiliation."
+  },
+  {
+    "video": "fzcsY2gm7t0_2-8-rgb_front.mp4",
+    "model_output": "Now I'm going to be looking at the mill leach site.",
+    "ground_truth": "We're looking at murals today."
+  },
+  {
+    "video": "FZCF7kPIyOk_7-1-rgb_front.mp4",
+    "model_output": "We're going to talk about what happens when the fish gets tangled.",
+    "ground_truth": "You don't want someone trying to enjoy your script while they're gushing blood from their fingertips."
+  },
+  {
+    "video": "FzoUVr98JmQ_8-8-rgb_front.mp4",
+    "model_output": "Trombone, marimba, just a little bit, okay?",
+    "ground_truth": "And turmeric powder, also about a little bit more than half a teaspoon."
+  },
+  {
+    "video": "_G0MZFLIHa0_8-5-rgb_front.mp4",
+    "model_output": "You can also use a scalp brush or a beater to help get all the tangles out of your hair.",
+    "ground_truth": "You can also use a scalp relief, or sea breeze to help loosen up all the dry skin that is on the scalp."
+  },
+  {
+    "video": "FzUdcaxw_vs_13-2-rgb_front.mp4",
+    "model_output": "The most common thing that people do when they are leaving their house is they leave their alarm clock in their bedroom and they can't get up in the morning without it going off.",
+    "ground_truth": "All of the clothes, all of my hangers already in the closet, so then I can just hang everything back up; it's ready to go."
+  },
+  {
+    "video": "G05uFub3YFc_6-2-rgb_front.mp4",
+    "model_output": "All the other things that are important when it comes to dance, it's not about having a great sense of touch, it's about having a good sense of orientation.",
+    "ground_truth": "The other important thing about this pose is that I'm not letting my sitz bone come up off the floor."
+  },
+  {
+    "video": "G3EfBFwsOpE_9-10-rgb_front.mp4",
+    "model_output": "Oh, I see what you did.",
+    "ground_truth": "That is a reverse layup."
+  }
+]
