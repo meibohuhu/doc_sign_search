@@ -1,0 +1,267 @@
+MASTER_PORT: 27225
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+[2025-11-29 00:39:07,860] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected VISIBLE_DEVICES=0,1 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2025-11-29 00:39:07,860] [INFO] [runner.py:630:main] cmd = /home/mh2803/miniconda3/envs/internvl/bin/python3.10 -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=27225 --enable_each_rank_log=None --log_level=info internvl_chat/internvl/train/train_internvl_mae.py --model_id OpenGVLab/InternVL2_5-2B --output_dir /home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100_mae --data_path /home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json --video_base_path /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/ --batch_size 1 --gradient_accumulation_steps 4 --num_epochs 30 --learning_rate 1.5e-4 --weight_decay 0.05 --max_grad_norm 1.0 --image_size 224 --min_num_frames 8 --max_num_frames 24 --sampling_method random_start_every2 --mask_ratio 0.75 --mask_strategy random --decoder_dim 384 --decoder_depth 6 --decoder_heads 12 --norm_pix_loss True --spacetime_mask True --save_strategy steps --save_total_limit 2 --save_interval 10000 --log_interval 2 --num_workers 2 --bf16 --gradient_checkpointing --deepspeed internvl_chat/zero_stage3_config.json --local_rank -1
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+[2025-11-29 00:39:11,659] [INFO] [launch.py:162:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2025-11-29 00:39:11,659] [INFO] [launch.py:168:main] nnodes=1, num_local_procs=2, node_rank=0
+[2025-11-29 00:39:11,659] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2025-11-29 00:39:11,659] [INFO] [launch.py:180:main] dist_world_size=2
+[2025-11-29 00:39:11,659] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0,1
+[2025-11-29 00:39:11,659] [INFO] [launch.py:272:main] process 3226977 spawned with command: ['/home/mh2803/miniconda3/envs/internvl/bin/python3.10', '-u', 'internvl_chat/internvl/train/train_internvl_mae.py', '--local_rank=0', '--model_id', 'OpenGVLab/InternVL2_5-2B', '--output_dir', '/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100_mae', '--data_path', '/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json', '--video_base_path', '/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/', '--batch_size', '1', '--gradient_accumulation_steps', '4', '--num_epochs', '30', '--learning_rate', '1.5e-4', '--weight_decay', '0.05', '--max_grad_norm', '1.0', '--image_size', '224', '--min_num_frames', '8', '--max_num_frames', '24', '--sampling_method', 'random_start_every2', '--mask_ratio', '0.75', '--mask_strategy', 'random', '--decoder_dim', '384', '--decoder_depth', '6', '--decoder_heads', '12', '--norm_pix_loss', 'True', '--spacetime_mask', 'True', '--save_strategy', 'steps', '--save_total_limit', '2', '--save_interval', '10000', '--log_interval', '2', '--num_workers', '2', '--bf16', '--gradient_checkpointing', '--deepspeed', 'internvl_chat/zero_stage3_config.json', '--local_rank', '-1']
+[2025-11-29 00:39:11,660] [INFO] [launch.py:272:main] process 3226978 spawned with command: ['/home/mh2803/miniconda3/envs/internvl/bin/python3.10', '-u', 'internvl_chat/internvl/train/train_internvl_mae.py', '--local_rank=1', '--model_id', 'OpenGVLab/InternVL2_5-2B', '--output_dir', '/home/mh2803/projects/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa100_mae', '--data_path', '/home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json', '--video_base_path', '/shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/', '--batch_size', '1', '--gradient_accumulation_steps', '4', '--num_epochs', '30', '--learning_rate', '1.5e-4', '--weight_decay', '0.05', '--max_grad_norm', '1.0', '--image_size', '224', '--min_num_frames', '8', '--max_num_frames', '24', '--sampling_method', 'random_start_every2', '--mask_ratio', '0.75', '--mask_strategy', 'random', '--decoder_dim', '384', '--decoder_depth', '6', '--decoder_heads', '12', '--norm_pix_loss', 'True', '--spacetime_mask', 'True', '--save_strategy', 'steps', '--save_total_limit', '2', '--save_interval', '10000', '--log_interval', '2', '--num_workers', '2', '--bf16', '--gradient_checkpointing', '--deepspeed', 'internvl_chat/zero_stage3_config.json', '--local_rank', '-1']
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+The system install of this program, gcc, has been hidden from view. 
+
+The currently blindfolded commands:
+ - g++
+ - gcc
+ - gfortran
+
+*** Recommended ***
+
+To access gcc:
+  spack load gcc
+
+-----------------------------------
+
+*** Not recommended ***
+
+To remove the blindfold and gain access to the system installs (OLD!!) of the above commands:
+  module unload blindfold
+
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+
+petrel_client is not installed. Using PIL to load images.
+petrel_client is not installed. Using PIL to load images.
+Creating MAE model...
+Creating MAE model...
+Loading InternVL vision model from OpenGVLab/InternVL2_5-2B...
+Loading InternVL vision model from OpenGVLab/InternVL2_5-2B...
+patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
+patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
+Vision encoder trainable (all layers)
+Loading dataset from /home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json...
+Using video base path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Vision encoder trainable (all layers)
+Loading dataset from /home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json...
+Using video base path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Loading data from config file /home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json
+  JSONL path: /home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl.jsonl
+  Using provided video_base_path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Loading data from config file /home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta.json
+  JSONL path: /home/mh2803/projects/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl.jsonl
+  Using provided video_base_path: /shared/rc/llm-gen-agent/mhu/videos/how2sign_train_segment_clips_stable_224x224/
+Loaded 30711 samples for MAE pre-training
+
+Global training steps: 460680 (15356 steps/epoch × 30 epochs, 30711 samples, 2 GPUs)
+
+Initializing decoder_pred with dummy forward...
+Loaded 30711 samples for MAE pre-training
+
+Global training steps: 460680 (15356 steps/epoch × 30 epochs, 30711 samples, 2 GPUs)
+
+Initializing decoder_pred with dummy forward...
+Detected patch_pixel_dim: 588 (creating decoder_pred layer with dtype torch.float32)
+
+======================================================================
+🎭 Masking Strategy: RANDOM
+======================================================================
+  Strategy: random
+  Mask Ratio: 0.75
+======================================================================
+
+Detected patch_pixel_dim: 588 (creating decoder_pred layer with dtype torch.float32)
+
+======================================================================
+🎭 Masking Strategy: RANDOM
+======================================================================
+  Strategy: random
+  Mask Ratio: 0.75
+======================================================================
+
+decoder_pred initialized successfullydecoder_pred initialized successfully
+
+Starting training for 30 epochs...
+Starting training for 30 epochs...
+Installed CUDA version 12.4 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+Installed CUDA version 12.4 does not match the version torch was compiled with 12.1 but since the APIs are compatible, accepting this combination
+Parameter Offload - Persistent parameters statistics: param_count = 2, numel = 768
+{'loss': 1.6852, 'learning_rate': 0.00014999739515498826, 'epoch': 0.0}
+{'loss': 1.1239, 'learning_rate': 0.00014999479030997653, 'epoch': 0.0}
+{'loss': 0.9363, 'learning_rate': 0.0001499921854649648, 'epoch': 0.0}
+{'loss': 0.8145, 'learning_rate': 0.0001499895806199531, 'epoch': 0.0}
+{'loss': 0.7712, 'learning_rate': 0.00014998697577494138, 'epoch': 0.0}
+{'loss': 0.7143, 'learning_rate': 0.00014998437092992965, 'epoch': 0.0}
+{'loss': 0.6992, 'learning_rate': 0.00014998176608491793, 'epoch': 0.0}
+{'loss': 0.6927, 'learning_rate': 0.0001499791612399062, 'epoch': 0.0}
+{'loss': 0.6685, 'learning_rate': 0.00014997655639489447, 'epoch': 0.0}
+{'loss': 0.6715, 'learning_rate': 0.00014997395154988277, 'epoch': 0.01}
+{'loss': 0.6802, 'learning_rate': 0.00014997134670487105, 'epoch': 0.01}
+{'loss': 0.6686, 'learning_rate': 0.00014996874185985932, 'epoch': 0.01}
+{'loss': 0.6948, 'learning_rate': 0.0001499661370148476, 'epoch': 0.01}
+{'loss': 0.6744, 'learning_rate': 0.00014996353216983587, 'epoch': 0.01}
+{'loss': 0.6568, 'learning_rate': 0.00014996092732482414, 'epoch': 0.01}
+{'loss': 0.6756, 'learning_rate': 0.00014995832247981244, 'epoch': 0.01}
+{'loss': 0.7178, 'learning_rate': 0.00014995571763480072, 'epoch': 0.01}
+{'loss': 0.6735, 'learning_rate': 0.000149953112789789, 'epoch': 0.01}
+{'loss': 0.7282, 'learning_rate': 0.00014995050794477726, 'epoch': 0.01}
+{'loss': 0.6902, 'learning_rate': 0.00014994790309976554, 'epoch': 0.01}
+{'loss': 0.6554, 'learning_rate': 0.00014994529825475384, 'epoch': 0.01}
+{'loss': 0.6448, 'learning_rate': 0.0001499426934097421, 'epoch': 0.01}
+{'loss': 0.6622, 'learning_rate': 0.00014994008856473038, 'epoch': 0.01}
+{'loss': 0.697, 'learning_rate': 0.00014993748371971868, 'epoch': 0.01}
+{'loss': 0.6563, 'learning_rate': 0.00014993487887470696, 'epoch': 0.01}
+{'loss': 0.683, 'learning_rate': 0.00014993227402969523, 'epoch': 0.01}
+{'loss': 0.6454, 'learning_rate': 0.0001499296691846835, 'epoch': 0.01}
+{'loss': 0.6847, 'learning_rate': 0.00014992706433967178, 'epoch': 0.01}
+{'loss': 0.6696, 'learning_rate': 0.00014992445949466005, 'epoch': 0.02}
+{'loss': 0.6599, 'learning_rate': 0.00014992185464964835, 'epoch': 0.02}
+{'loss': 0.6777, 'learning_rate': 0.00014991924980463662, 'epoch': 0.02}
+{'loss': 0.675, 'learning_rate': 0.0001499166449596249, 'epoch': 0.02}
+{'loss': 0.6851, 'learning_rate': 0.00014991404011461317, 'epoch': 0.02}
+{'loss': 0.6625, 'learning_rate': 0.00014991143526960144, 'epoch': 0.02}
+{'loss': 0.6557, 'learning_rate': 0.00014990883042458972, 'epoch': 0.02}
+{'loss': 0.7055, 'learning_rate': 0.000149906225579578, 'epoch': 0.02}
+{'loss': 0.6478, 'learning_rate': 0.0001499036207345663, 'epoch': 0.02}
+{'loss': 0.665, 'learning_rate': 0.00014990101588955456, 'epoch': 0.02}
+{'loss': 0.6812, 'learning_rate': 0.00014989841104454284, 'epoch': 0.02}
+{'loss': 0.6655, 'learning_rate': 0.0001498958061995311, 'epoch': 0.02}
+{'loss': 0.6592, 'learning_rate': 0.00014989320135451938, 'epoch': 0.02}
+{'loss': 0.6825, 'learning_rate': 0.00014989059650950766, 'epoch': 0.02}
+{'loss': 0.6778, 'learning_rate': 0.00014988799166449596, 'epoch': 0.02}
+{'loss': 0.709, 'learning_rate': 0.00014988538681948423, 'epoch': 0.02}
+{'loss': 0.6843, 'learning_rate': 0.0001498827819744725, 'epoch': 0.02}
+{'loss': 0.6542, 'learning_rate': 0.00014988017712946078, 'epoch': 0.02}
+{'loss': 0.6678, 'learning_rate': 0.00014987757228444905, 'epoch': 0.02}
