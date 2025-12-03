@@ -380,9 +380,9 @@ def main():
                        help="Folder containing test videos")
     parser.add_argument("--question-file", type=str, required=True,
                        help="JSON file with test questions")
-    parser.add_argument("--min-pixels", type=int, default=224*224,
+    parser.add_argument("--out-dir", type=str, required=True,
                        help="Output directory for results")
-    parser.add_argument("--max-pixels", type=int, default=224*224,
+    parser.add_argument("--max-samples", type=int, default=None,
                        help="Limit number of samples (for testing)")
     parser.add_argument("--max-new-tokens", type=int, default=128,
                        help="Max tokens to generate")
