@@ -1,7 +1,7 @@
 {
   "how2sign": {
     "root": "/mnt/localssd/doc_sign_search/train_crop_videos_224/",
-    "annotation": "/code/doc_sign_search/InternVL/data/how2sign/train_how2sign_internvl.jsonl",
+    "annotation": "/code/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined.jsonl",
     "data_augment": false,
     "repeat_time": 1,
     "length": 24880

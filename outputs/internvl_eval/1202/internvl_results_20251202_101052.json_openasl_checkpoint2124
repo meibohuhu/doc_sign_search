@@ -1,0 +1,102 @@
+[
+  {
+    "video": "Mci9oyb5V2E-00_00_05.333-00_00_11.166.mp4",
+    "model_output": "I'm the CEO of the NAD.",
+    "ground_truth": "I am Ed Bosson, and I am 67 years old and now retired."
+  },
+  {
+    "video": "uXdL5njDiBU-00_00_25.566-00_00_31.200.mp4",
+    "model_output": "That law is called the Americans with Disabilities Act (ADA).",
+    "ground_truth": "The suit was filed under Title II of the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973."
+  },
+  {
+    "video": "352fd8KUcD4-00_00_48.133-00_00_51.466.mp4",
+    "model_output": "I'm from Illinois and I'm very proud to be here.",
+    "ground_truth": "I just toured through the Ali museum and it is inspiring!"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_22.733-00_03_28.733.mp4",
+    "model_output": "I graduated from Gallaudet University, but I didn t want to stay there.",
+    "ground_truth": "The demands are not like a big city, they don't share the same issues."
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_32.033-00_03_37.233.mp4",
+    "model_output": "I grew up in a small town and didn t go to college.",
+    "ground_truth": "The community isn’t used to something different."
+  },
+  {
+    "video": "YwHni5MhlAc-00_01_21.400-00_01_28.733.mp4",
+    "model_output": "For example, a state law that requires all states to provide equal access to their legal rights to deaf and hard of hearing people.",
+    "ground_truth": "There may be state laws that apply to employers with less than 15 employees, watch out for that."
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_04.700-00_01_17.200.mp4",
+    "model_output": "It is very helpful to have a caregiver who can take care of you and help you with daily tasks.",
+    "ground_truth": "If you or your family cannot help, don’t worry, there may be caregivers in your area to provide support to the family member with needs."
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_50.333-00_01_59.500.mp4",
+    "model_output": "It s important to know that your loved one may not be able to take care of themselves.",
+    "ground_truth": "It is important to let the caregiver know what the patient truly needs, so the caregiver can adapt and do their job well."
+  },
+  {
+    "video": "QBlOz5OjdRE-00_00_36.666-00_00_39.366.mp4",
+    "model_output": "The NAD has been recognized as one of the top 100 organizations in the world.",
+    "ground_truth": "NAD finally approved 2018."
+  },
+  {
+    "video": "00ADU7t7IWI-00_00_08.666-00_00_13.733.mp4",
+    "model_output": "I've been thinking about it for a while now and I want to run for mayor.",
+    "ground_truth": "I've been staying home in self-quarantine and practicing social distancing."
+  },
+  {
+    "video": "Ln3MaRp0Dvc-00_00_59.266-00_01_01.366.mp4",
+    "model_output": "We also want to know if you are interested in joining us!",
+    "ground_truth": "So, yes, I want you to join us in Phoenix!"
+  },
+  {
+    "video": "ohbo2X3bQoc-00_01_52.666-00_01_58.566.mp4",
+    "model_output": "The State Association of the Deaf (SAD) will host the National Deaf Education Conference (NDEC) this fall.",
+    "ground_truth": "A lot of the State and National Associations are hosting conferences."
+  },
+  {
+    "video": "tUnOjApclYI-00_00_00.000-00_00_10.700.mp4",
+    "model_output": "I graduated from the Institute of Transportation Technology (ITT) and got a job at a local auto repair shop.",
+    "ground_truth": "One of my role models -- Mike Rowe, the “Dirty Jobs” TV show host, once said, “It’s okay to not go to college.” That stuck with me."
+  },
+  {
+    "video": "tUnOjApclYI-00_01_54.366-00_01_57.033.mp4",
+    "model_output": "I didn t have any experience, so I had to learn.",
+    "ground_truth": "Once I saw there was a job opening and applied."
+  },
+  {
+    "video": "cddgTAQLy_4-00_05_32.700-00_05_41.400.mp4",
+    "model_output": "The FCC has been working with the Federal Communications Commission (FCC) to improve the VRS system.",
+    "ground_truth": "In a per-user system, I was concerned that VRS companies may lose money, so I thought it best to make more calls and was quickly discouraged to do so."
+  },
+  {
+    "video": "cddgTAQLy_4-00_08_12.666-00_08_36.733.mp4",
+    "model_output": "The FCC said it would not have to change its rules, but the FCC said they would have to change their rules if there is a change in the FCC's rules.",
+    "ground_truth": "Submit your comments at www.fcc.gov/comments. Enter your information on the FCC form, then select 'Telecommunications Relay Services in the drop-down menu, and enter your comments, then submit your comments."
+  },
+  {
+    "video": "ubC82N6N1bQ-00_00_39.300-00_00_43.066.mp4",
+    "model_output": "I m from the state of Oregon, and I ve been a fisherman since I was 10 years old.",
+    "ground_truth": "I transferred to Ohio state school and stayed there for two years."
+  },
+  {
+    "video": "ubC82N6N1bQ-00_01_05.100-00_01_07.033.mp4",
+    "model_output": "I m very good at it, but I don t know what I m good at.",
+    "ground_truth": "Try my best and if I fail, I'll find something else to do!"
+  },
+  {
+    "video": "ubC82N6N1bQ-00_01_52.033-00_01_54.233.mp4",
+    "model_output": "I didn t know what to do, so I decided to go for a walk.",
+    "ground_truth": "If it's rainy with rough weather, I don’t go out."
+  },
+  {
+    "video": "GTlMzp0KVqk-00_00_08.133-00_00_09.266.mp4",
+    "model_output": "I'm going to show you some of my work.",
+    "ground_truth": "Stress."
+  }
+]
