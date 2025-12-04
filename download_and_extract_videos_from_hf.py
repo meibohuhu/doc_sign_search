@@ -187,9 +187,16 @@ def download_checkpoint(
             # Common checkpoint files
             "*chat_template*", "*zero_to_fp32*", "latest*"
         ]
+        # When downloading all checkpoints, also include log files
+        if download_all_checkpoints:
+            include_patterns.extend(["*.log", "*log*", "*.log.*"])
     
     if exclude_patterns is None:
-        exclude_patterns = ["*.log", "*.swp", "*.tmp", "__pycache__"]
+        # When downloading all checkpoints, don't exclude log files
+        if download_all_checkpoints:
+            exclude_patterns = ["*.swp", "*.tmp", "__pycache__"]
+        else:
+            exclude_patterns = ["*.log", "*.swp", "*.tmp", "__pycache__"]
     
     api = HfApi()
     repo_type = "model"
