@@ -2,11 +2,6 @@
 # NOTE the -l flag!
 #
 # InternVL2.5-2B How2Sign Fine-Tuning on 4×A100 GPUs
-# Single-node recipe using DeepSpeed ZeRO-2 by default, with optional ZeRO-3 + CPU offload
-# Memory guidance:
-#   - Default (ZeRO-2): 8k seq / 16k packed / 96 frames works on 4×A100 40 GB.
-#   - Enable ZeRO-3 by exporting USE_ZERO_STAGE3=1 to uplift defaults to 12k seq / 20k packed / 128 frames.
-#   - You can still override any MAX_* env if you need tighter or looser bounds.
 
 #SBATCH --job-name=internvl25_how2sign_4xa100
 #SBATCH --error=/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/err_%j.txt
