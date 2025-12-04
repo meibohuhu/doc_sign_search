@@ -47,7 +47,7 @@ NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-160}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
 
 # Video frame sampling method
-SAMPLING_METHOD='fps16.0'
+SAMPLING_METHOD='fps12.0'
 
 echo "🚀 Starting InternVL2.5-2B How2Sign Training on 4*A100"
 echo "======================================================"
