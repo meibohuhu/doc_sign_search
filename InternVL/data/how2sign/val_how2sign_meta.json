@@ -1,0 +1,9 @@
+{
+  "how2sign": {
+    "root": "/local1/mhu/sign_language_llm/how2sign/video/how2sign_val_segment_clips_stable_448x448",
+    "annotation": "/local1/mhu/sign_language_llm/InternVL/data/how2sign/val_how2sign_internvl.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 24880
+  }
+}

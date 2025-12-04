@@ -38,14 +38,25 @@ if HF_EVALUATE_AVAILABLE:
         rouge_metric = hf_evaluate.load("rouge")
         ROUGE_AVAILABLE = True
     except Exception as e:
-        print(f"Warning: Could not load ROUGE metric: {e}")
+        print(f"⚠️  Warning: Could not load ROUGE metric: {e}")
+        print(f"   To fix: pip install rouge-score")
         ROUGE_AVAILABLE = False
     
-    # BLEURT disabled due to TensorFlow compatibility issues
+    # Try to load BLEURT metric
+    bleurt_metric = None
     BLEURT_AVAILABLE = False
+    # Try loading BLEURT-20 via HuggingFace evaluate
+    # Based on ssvp_slt/translation/engine_translation.py line 349
+    # Must specify config_name="BLEURT-20" to use the correct model
+    print("Attempting to load BLEURT-20 metric...")
+    bleurt_metric = hf_evaluate.load("bleurt", module_type="metric", config_name="BLEURT-20")
+    BLEURT_AVAILABLE = True
+    print("✅ BLEURT-20 metric loaded successfully")
+
 else:
     ROUGE_AVAILABLE = False
     BLEURT_AVAILABLE = False
+    bleurt_metric = None
 
 def normalize_text(text: str) -> str:
     """Normalize text for evaluation by removing extra whitespace and converting to lowercase."""
@@ -180,10 +191,41 @@ def calculate_rouge_l_ssvp(predictions: List[str], ground_truths: List[str]) -> 
 def calculate_bleurt_score_ssvp(predictions: List[str], ground_truths: List[str]) -> float:
     """
     Calculate BLEURT score using the exact same approach as SSVP-SLT.
-    Currently disabled due to TensorFlow compatibility issues.
+    Uses HuggingFace evaluate bleurt metric.
     """
-    # BLEURT disabled - returns 0.0
-    return 0.0
+    if not BLEURT_AVAILABLE or bleurt_metric is None:
+        return 0.0
+    
+    if not predictions or not ground_truths:
+        return 0.0
+    
+    try:
+        # Use the same approach as in engine_translation.py line 354-358
+        # BLEURT expects predictions and references as lists
+        # The metric returns a dict with "scores" key containing a list of scores
+        bleurt_results = bleurt_metric.compute(
+            predictions=predictions,
+            references=ground_truths
+        )
+        
+        # BLEURT returns a dict with "scores" key (as per engine_translation.py line 357)
+        if isinstance(bleurt_results, dict) and 'scores' in bleurt_results:
+            scores = bleurt_results['scores']
+            # Calculate mean of scores (as per engine_translation.py line 354-358)
+            return float(np.mean(scores)) if scores else 0.0
+        elif isinstance(bleurt_results, list):
+            # Fallback: if it's a list directly, calculate mean
+            return float(np.mean(bleurt_results)) if bleurt_results else 0.0
+        else:
+            # If it's a single value, return it
+            return float(bleurt_results) if isinstance(bleurt_results, (int, float)) else 0.0
+        
+    except Exception as e:
+        print(f"Error calculating BLEURT score: {e}")
+        print(f"   Error type: {type(e).__name__}")
+        import traceback
+        traceback.print_exc()
+        return 0.0
 
 def comprehensive_evaluation_ssvp(references: List[str], predictions: List[str]) -> Dict[str, Any]:
     """
