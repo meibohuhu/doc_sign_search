@@ -2,7 +2,7 @@
 #
 # Helper script to run Qwen2VL evaluation with nohup
 # Usage: ./run_evaluation_nohup.sh [GPU_ID] [MAX_SAMPLES]
-# Example: ./run_evaluation_nohup.sh 1 110
+# Example: ./run_evaluation_nohup.sh 0
 #
 
 # Get arguments

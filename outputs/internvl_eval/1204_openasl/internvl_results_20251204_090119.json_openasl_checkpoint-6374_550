@@ -1,0 +1,2752 @@
+[
+  {
+    "video": "Mci9oyb5V2E-00_00_05.333-00_00_11.166.mp4",
+    "model_output": "Hi, I'm Melissa and I'm 17 years old.",
+    "ground_truth": "I am Ed Bosson, and I am 67 years old and now retired."
+  },
+  {
+    "video": "uXdL5njDiBU-00_00_25.566-00_00_31.200.mp4",
+    "model_output": "The law against bullying is Title III of the Americans with Disabilities Act (ADA).",
+    "ground_truth": "The suit was filed under Title II of the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973."
+  },
+  {
+    "video": "352fd8KUcD4-00_00_48.133-00_00_51.466.mp4",
+    "model_output": "Deaf Bing: You will be amazed at what you see here.",
+    "ground_truth": "I just toured through the Ali museum and it is inspiring!"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_22.733-00_03_28.733.mp4",
+    "model_output": "I m a Democrat and I m not affiliated with any party -- I m a member of the Democratic Party.",
+    "ground_truth": "The demands are not like a big city, they don't share the same issues."
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_32.033-00_03_37.233.mp4",
+    "model_output": "I don t want to use the same approach for every issue.",
+    "ground_truth": "The community isn’t used to something different."
+  },
+  {
+    "video": "YwHni5MhlAc-00_01_21.400-00_01_28.733.mp4",
+    "model_output": "However, some states have laws that require employers to follow the Equal Employment Opportunity Commission (EEOC) guidelines.",
+    "ground_truth": "There may be state laws that apply to employers with less than 15 employees, watch out for that."
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_04.700-00_01_17.200.mp4",
+    "model_output": "Sometimes, the caregiver can be overwhelmed and may not be able to provide the care that the patient needs.",
+    "ground_truth": "If you or your family cannot help, don’t worry, there may be caregivers in your area to provide support to the family member with needs."
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_50.333-00_01_59.500.mp4",
+    "model_output": "It is important to take care of the patient by understanding their needs and matching their needs with their work.",
+    "ground_truth": "It is important to let the caregiver know what the patient truly needs, so the caregiver can adapt and do their job well."
+  },
+  {
+    "video": "QBlOz5OjdRE-00_00_36.666-00_00_39.366.mp4",
+    "model_output": "The NAD has a page for you to check out.",
+    "ground_truth": "NAD finally approved 2018."
+  },
+  {
+    "video": "00ADU7t7IWI-00_00_08.666-00_00_13.733.mp4",
+    "model_output": "I've been homeschooled since I was 2 years old.",
+    "ground_truth": "I've been staying home in self-quarantine and practicing social distancing."
+  },
+  {
+    "video": "Ln3MaRp0Dvc-00_00_59.266-00_01_01.366.mp4",
+    "model_output": "So we invite you to join us in Phoenix, Arizona!",
+    "ground_truth": "So, yes, I want you to join us in Phoenix!"
+  },
+  {
+    "video": "ohbo2X3bQoc-00_01_52.666-00_01_58.566.mp4",
+    "model_output": "Many states, associations, and national organizations are hosting their own state and national conferences.",
+    "ground_truth": "A lot of the State and National Associations are hosting conferences."
+  },
+  {
+    "video": "tUnOjApclYI-00_00_00.000-00_00_10.700.mp4",
+    "model_output": "One day, I went to a job fair and was approached by a representative from Jethro Wood Center for the Deaf and Hard of Hearing.",
+    "ground_truth": "One of my role models -- Mike Rowe, the “Dirty Jobs” TV show host, once said, “It’s okay to not go to college.” That stuck with me."
+  },
+  {
+    "video": "tUnOjApclYI-00_01_54.366-00_01_57.033.mp4",
+    "model_output": "I ve been working there for a while now.",
+    "ground_truth": "Once I saw there was a job opening and applied."
+  },
+  {
+    "video": "cddgTAQLy_4-00_05_32.700-00_05_41.400.mp4",
+    "model_output": "The VRS provider is responsible for making sure that VRS calls are not being used for other purposes.",
+    "ground_truth": "In a per-user system, I was concerned that VRS companies may lose money, so I thought it best to make more calls and was quickly discouraged to do so."
+  },
+  {
+    "video": "cddgTAQLy_4-00_08_12.666-00_08_36.733.mp4",
+    "model_output": "You can go to www.census.gov and click on  Communication Services Relay Program (CSRP).",
+    "ground_truth": "Submit your comments at www.fcc.gov/comments. Enter your information on the FCC form, then select 'Telecommunications Relay Services in the drop-down menu, and enter your comments, then submit your comments."
+  },
+  {
+    "video": "ubC82N6N1bQ-00_00_39.300-00_00_43.066.mp4",
+    "model_output": "I grew up in Hawaii and went to the Hawaii School for the Deaf for two years.",
+    "ground_truth": "I transferred to Ohio state school and stayed there for two years."
+  },
+  {
+    "video": "ubC82N6N1bQ-00_01_05.100-00_01_07.033.mp4",
+    "model_output": "I ve been doing this since I was 5 years old.",
+    "ground_truth": "Try my best and if I fail, I'll find something else to do!"
+  },
+  {
+    "video": "ubC82N6N1bQ-00_01_52.033-00_01_54.233.mp4",
+    "model_output": "Why do I do this?",
+    "ground_truth": "If it's rainy with rough weather, I don’t go out."
+  },
+  {
+    "video": "GTlMzp0KVqk-00_00_08.133-00_00_09.266.mp4",
+    "model_output": "It s a special place.",
+    "ground_truth": "Stress."
+  },
+  {
+    "video": "CnBZlJ39ESQ-00_03_54.433-00_05_08.366.mp4",
+    "model_output": "You can use paper or a whiteboard to write down what you need for your phone or tablet.",
+    "ground_truth": "The emergency bag can include: Paper and pens; whiteboard and markers, plugs and chargers for your smartphone, laptop, or tablets, a cellular hotspot in case the hospital WiFi is not working, an extension cord or power strip in case your bed is far from an outlet, extra eyewear supplies you might need, such as reading glasses to read the speech to text on a phone app, extra batteries for your hearing aid, cochlear implant, or assistive listening device, if you have an advance medical directive, please put a copy of this in your bag."
+  },
+  {
+    "video": "EwTCXTgehpU-00_00_49.433-00_00_51.766.mp4",
+    "model_output": "The environment is good.",
+    "ground_truth": "Use good soil."
+  },
+  {
+    "video": "IsEzvnueFQk-00_00_33.000-00_00_39.366.mp4",
+    "model_output": "NLTC is a great opportunity to learn, network, and have fun.",
+    "ground_truth": "NLTC is incredible because without this opportunity, we can’t learn."
+  },
+  {
+    "video": "rgE2ZZ9bHKA-00_00_32.066-00_00_37.366.mp4",
+    "model_output": "The House of Representatives has a different number of representatives from each state, while the Senate has representatives from all 50 states.",
+    "ground_truth": "The House of Representatives has a different number of representatives per state, depending on the size of your state’s population."
+  },
+  {
+    "video": "rgE2ZZ9bHKA-00_01_46.600-00_01_51.200.mp4",
+    "model_output": "The NAD has been advocating for services to be available in sign language, ASL, and English.",
+    "ground_truth": "Receiving services, there is a lot of information that comes with strong opinions on speech and auditory therapy services."
+  },
+  {
+    "video": "rgE2ZZ9bHKA-00_04_40.300-00_04_43.766.mp4",
+    "model_output": "If you want to get involved, you can contact your Senators and Representatives.",
+    "ground_truth": "You can help - submit your letters!"
+  },
+  {
+    "video": "r7FVWOs--Nw-00_02_35.000-00_02_38.766.mp4",
+    "model_output": "I noticed that most of my clients were male.",
+    "ground_truth": "Usually my clients prefer me at night because most of them work during the day."
+  },
+  {
+    "video": "r7FVWOs--Nw-00_03_11.466-00_03_12.366.mp4",
+    "model_output": "It s hard to see.",
+    "ground_truth": "You may be surprised."
+  },
+  {
+    "video": "6rMNK9JX0nc-00_00_11.733-00_00_16.066.mp4",
+    "model_output": "However, if the door is locked and you can t get through the door, you can call 911.",
+    "ground_truth": "But what if the person you are calling refuses to accept your VRS call?"
+  },
+  {
+    "video": "UoHKrFL9g0g-00_00_03.733-00_00_06.300.mp4",
+    "model_output": "It was on March 6th, 2017, during the Deaf Youth Day.",
+    "ground_truth": "Recently, on March 6th, it was Deaf Youth Day!"
+  },
+  {
+    "video": "1-bCws7TnBs-00_00_29.000-00_00_33.533.mp4",
+    "model_output": "I encourage you to make a video or write a letter to make them feel the difference.",
+    "ground_truth": "They might think that lipreading or writing is effective when it isn’t."
+  },
+  {
+    "video": "2MnvFrB5ljQ-00_01_53.066-00_01_58.233.mp4",
+    "model_output": "Hi, I m Alice and I ve been working with the Outreach Committee.",
+    "ground_truth": "Hello, I’m Alicia and I’ve been working with the Outreach committee."
+  },
+  {
+    "video": "2MnvFrB5ljQ-00_02_10.666-00_02_16.766.mp4",
+    "model_output": "This survey will help us develop a proposal for the NAD s rights.",
+    "ground_truth": "The purpose of the data is to help develop recommendations for the NAD board and headquarters."
+  },
+  {
+    "video": "udAa5hSHH_s-00_03_50.766-00_03_58.666.mp4",
+    "model_output": "We encourage the delegates to ask the NAD Board members for their input on the proposed priorities.",
+    "ground_truth": "This means you need to encourage the delegates to pass your proposed priority that will become the work of the NAD."
+  },
+  {
+    "video": "udAa5hSHH_s-00_03_59.000-00_04_07.066.mp4",
+    "model_output": "We want you to take the time to ask for your input so that you can be a part of making sure your work is successful.",
+    "ground_truth": "You need to invest your time and passion to assist delegates to understand why this topic is important to ensure your proposed priority successfully ranks."
+  },
+  {
+    "video": "udAa5hSHH_s-00_04_33.233-00_04_38.066.mp4",
+    "model_output": "Your involvement during this time is very important to us.",
+    "ground_truth": "Your involvement in this process is important and we welcome your ideas and passion."
+  },
+  {
+    "video": "nyrUt0INMOA-00_01_24.600-00_01_28.166.mp4",
+    "model_output": "Make my journey worth your time.",
+    "ground_truth": "It's made my journey worth it."
+  },
+  {
+    "video": "nyrUt0INMOA-00_02_04.266-00_02_08.666.mp4",
+    "model_output": "Let's talk about what you want to focus on when it comes to youth sports.",
+    "ground_truth": "Discuss how to invest in youth."
+  },
+  {
+    "video": "nyrUt0INMOA-00_02_56.233-00_02_57.100.mp4",
+    "model_output": "Now, LoL 2020!",
+    "ground_truth": "It's 2020."
+  },
+  {
+    "video": "vmkpE6hQnQM-00_00_29.200-00_00_33.033.mp4",
+    "model_output": "It was a great event!",
+    "ground_truth": "This is a historic event for the people who come together here!"
+  },
+  {
+    "video": "vmkpE6hQnQM-00_02_54.000-00_03_03.333.mp4",
+    "model_output": "Also, it will be a big event at the NAD Conference in New Castle, Delaware.",
+    "ground_truth": "Another major event: NAD CEO Nancy Bloch will be leaving her position soon."
+  },
+  {
+    "video": "XS2c07HCdyo-00_00_53.500-00_01_18.266.mp4",
+    "model_output": "We are all the same, we are all human beings with the same rights.",
+    "ground_truth": "And as long as we have our films, we will be able to preserve our beautiful signs in their old purity."
+  },
+  {
+    "video": "oLBUT0xMVmY-00_01_01.333-00_01_06.633.mp4",
+    "model_output": "However, the NAD is very concerned about the safety of deaf and hard of hearing students at schools for the deaf.",
+    "ground_truth": "Should we focus our energy on supporting these deaf schools?"
+  },
+  {
+    "video": "oLBUT0xMVmY-00_02_47.700-00_02_54.333.mp4",
+    "model_output": "It seems like the NAD has to show that they can do it first before they can ask for it.",
+    "ground_truth": "Ask your school what you can do for them, not what they can do for you."
+  },
+  {
+    "video": "ITBFiwzJ-u8-00_00_06.233-00_00_07.100.mp4",
+    "model_output": "Hi!",
+    "ground_truth": "Hey there!"
+  },
+  {
+    "video": "ITBFiwzJ-u8-00_00_19.366-00_00_24.300.mp4",
+    "model_output": "I hope people will look forward to what I do as Miss Deaf America.",
+    "ground_truth": "I hope you all have been keeping track of my whereabouts and what I’ve been doing as Miss Deaf America."
+  },
+  {
+    "video": "ITBFiwzJ-u8-00_00_58.400-00_01_07.766.mp4",
+    "model_output": "I was lucky enough to be selected as a delegate to the Delegates Training Session (DTRTS) in Milwaukee, Wisconsin.",
+    "ground_truth": "I made an appearance at Delta Zeta Sorority’s Mr. Killarney Rose Pageant and crowned the winner."
+  },
+  {
+    "video": "ITBFiwzJ-u8-00_01_33.000-00_01_42.566.mp4",
+    "model_output": "Third, I went to the International Day of Sign Languages (IDSL) at the World Federation of the Deaf (WFD).",
+    "ground_truth": "I also traveled to Chicago, IL for the first time and made an appearance at a Signing Santa event at Woodfield Mall."
+  },
+  {
+    "video": "XJZjvVGfwxA-00_00_38.433-00_00_47.666.mp4",
+    "model_output": "ADAA is related to the Civil Rights Act of 1964 and the ADA, which is also known as the Americans with Disabilities Act (ADA).",
+    "ground_truth": "An ADA-related win usually means changing the system and also means the lawyers receive legal fees."
+  },
+  {
+    "video": "pLRXqP1N9W0-00_00_13.733-00_00_17.033.mp4",
+    "model_output": "Deaf and hard of hearing people can do anything.",
+    "ground_truth": "Admittedly, it is a little awkward."
+  },
+  {
+    "video": "0anurowGDtM-00_00_01.200-00_00_02.033.mp4",
+    "model_output": "I'm Melissa.",
+    "ground_truth": "I'm Melissa."
+  },
+  {
+    "video": "aERlsFoMnfg-00_01_54.500-00_01_56.166.mp4",
+    "model_output": "We encourage you to share your thoughts.",
+    "ground_truth": "To get information."
+  },
+  {
+    "video": "IolWzNB2TJ0-00_00_09.033-00_00_12.666.mp4",
+    "model_output": "You can ask your doctor to provide captioning.",
+    "ground_truth": "With VRI, you can ask for medically trained interpreters."
+  },
+  {
+    "video": "sfNL5tR2Now-00_06_05.400-00_06_09.066.mp4",
+    "model_output": "We're excited to see the progress that's been made in Hawaii.",
+    "ground_truth": "We're excited for them and appreciate their wonderful progress."
+  },
+  {
+    "video": "sfNL5tR2Now-00_06_21.066-00_06_24.366.mp4",
+    "model_output": "We are all in the same boat and we need to support each other.",
+    "ground_truth": "We continue our support through the ongoing videophone meetings."
+  },
+  {
+    "video": "sfNL5tR2Now-00_09_00.633-00_09_07.333.mp4",
+    "model_output": "We are excited about the upcoming NAD Conference in Phoenix, Arizona.",
+    "ground_truth": "We're having an exciting meeting here and I'd like to share my report covering a few things."
+  },
+  {
+    "video": "sfNL5tR2Now-00_09_39.200-00_09_41.000.mp4",
+    "model_output": "Contact us if you have any questions.",
+    "ground_truth": "Please reach out to me if you have any questions."
+  },
+  {
+    "video": "uUCDW3aFLMk-00_00_53.033-00_00_55.100.mp4",
+    "model_output": "I will share more information soon.",
+    "ground_truth": "More information to come!"
+  },
+  {
+    "video": "_gcdbWV03Xk-00_04_36.100-00_04_39.233.mp4",
+    "model_output": "Many states require RID certification for licensure.",
+    "ground_truth": "Many states require RID certifications for their licensures."
+  },
+  {
+    "video": "FYdKjJCcQcw-00_00_15.333-00_00_29.766.mp4",
+    "model_output": "The NAD Board has established a committee to work on this issue and we are working closely with the National Association of the Deaf (NAD) and the Federal Communications Commission (FCC).",
+    "ground_truth": "The committee realized that not all children have moms and dads -- some are raised by grandparents, aunts and uncles, LGBTQ parents, or foster parents."
+  },
+  {
+    "video": "wdmj6E_faOo-00_01_18.633-00_01_24.400.mp4",
+    "model_output": "So, we decided to write a book together.",
+    "ground_truth": "Whew, it was crazy, but I kept getting up to write, write, and write."
+  },
+  {
+    "video": "wdmj6E_faOo-00_01_34.566-00_01_38.233.mp4",
+    "model_output": "My wife was one of the first in the hard-hitting column.",
+    "ground_truth": "I was alone in the world and would write in the quiet."
+  },
+  {
+    "video": "wdmj6E_faOo-00_01_42.200-00_01_46.733.mp4",
+    "model_output": "ROSALYN: Yes, it's been a long time since we finished the book.",
+    "ground_truth": "Ah, many of those countries didn't have their own history."
+  },
+  {
+    "video": "wdmj6E_faOo-00_01_46.733-00_01_52.566.mp4",
+    "model_output": "ROSALYN: I feel like it's been a long time since I've done this.",
+    "ground_truth": "I felt that they should write their history themselves, not me."
+  },
+  {
+    "video": "wdmj6E_faOo-00_01_55.133-00_01_56.433.mp4",
+    "model_output": "ROSALYN: Yes, it's been a long time.",
+    "ground_truth": "I needed to write a book."
+  },
+  {
+    "video": "wdmj6E_faOo-00_02_24.366-00_02_26.233.mp4",
+    "model_output": "ROSALYN: Yes, that's right.",
+    "ground_truth": "I said yes, do you mind if I borrow it."
+  },
+  {
+    "video": "3bFbHvIHOZI-00_01_16.600-00_01_27.533.mp4",
+    "model_output": "My mom always told me to write down my thoughts and to visit her every once in a while.",
+    "ground_truth": "Best wishes for a joyous season and a very Happy New Year."
+  },
+  {
+    "video": "StJtXFsG804-00_00_49.133-00_00_55.000.mp4",
+    "model_output": "Two of those organizations are the National Association of the Deaf (NAD) and the Minnesota Association for the Deaf.",
+    "ground_truth": "Two local organizations will host: the New Mexico Commission for Deaf and Hard of Hearing and the New Mexico Association of the Deaf."
+  },
+  {
+    "video": "9-ff2wj6Kv8-00_02_04.133-00_02_05.233.mp4",
+    "model_output": "I'd like to share an update on the NAD's Youth Ambassador Program (YAP).",
+    "ground_truth": "Prizes will be given!"
+  },
+  {
+    "video": "mrTrAkEC1Sc-00_03_23.500-00_03_30.066.mp4",
+    "model_output": "The NAD has four priorities for 2018: 1) attend different conferences with parents; 2) work with parents; and 3) attend parent-teacher associations (PTAs).",
+    "ground_truth": "First, the group attended conferences that focused on parents, they were also involved with the conferences themselves."
+  },
+  {
+    "video": "qm4MrlW0U1c-00_01_54.000-00_02_08.233.mp4",
+    "model_output": "The NAD has encouraged VRS providers to improve the quality of VRS calls since March 2016.",
+    "ground_truth": "Unfortunately, one small provider, Star VRS, has closed as of March 2016, and we need to ensure other providers do not also go out of business."
+  },
+  {
+    "video": "qm4MrlW0U1c-00_03_03.033-00_03_03.766.mp4",
+    "model_output": "Thank you.",
+    "ground_truth": "Thank you."
+  },
+  {
+    "video": "NJQ7M-rFtFQ-00_00_04.633-00_00_08.366.mp4",
+    "model_output": "I ve always loved writing and I ve always wanted to be a writer.",
+    "ground_truth": "I’ve always loved reading and writing."
+  },
+  {
+    "video": "NJQ7M-rFtFQ-00_01_20.733-00_01_23.700.mp4",
+    "model_output": "I m a writer and I m a creative person.",
+    "ground_truth": "In college, I took a creative writing class."
+  },
+  {
+    "video": "h9Pdy9Mf6so-00_02_36.066-00_02_46.233.mp4",
+    "model_output": "Many people knew that she was deaf but they did not realize that she had a high level of intelligence.",
+    "ground_truth": "Many people knew and respected this person for their intellect and advocacy for deaf women's right to equality."
+  },
+  {
+    "video": "9VviAP3FNv4-00_00_21.366-00_00_28.700.mp4",
+    "model_output": "Now, I remember my fifth year of working at YLC as a Youth Leadership Camp (YLC) Director.",
+    "ground_truth": "This summer will be my fourth straight summer working at YLC - second as Camp Director."
+  },
+  {
+    "video": "9VviAP3FNv4-00_02_22.733-00_02_31.100.mp4",
+    "model_output": "I was a camp counselor for 2003-2007 and worked for YLC.",
+    "ground_truth": "I used to be a YLC camper in 2003, and I have worked for YLC in 2007, 2008, and 2009."
+  },
+  {
+    "video": "iMJ9CjBX7eo-00_00_25.333-00_00_28.466.mp4",
+    "model_output": "We need to focus on what we can do instead of what we can't do.",
+    "ground_truth": "Phoenix, Arizona."
+  },
+  {
+    "video": "iMJ9CjBX7eo-00_01_14.000-00_01_18.300.mp4",
+    "model_output": "Some of you may know me as a member of the Deaf community in Portland, Oregon.",
+    "ground_truth": "Join us at the Community Forum, where I will be hosting."
+  },
+  {
+    "video": "iMJ9CjBX7eo-00_01_34.366-00_01_39.733.mp4",
+    "model_output": "I've been thinking about this for a while now and I want to share something that's been important to me in the Deaf community for a long time.",
+    "ground_truth": "Our goal is to unify the community together, deaf and hearing people in one room for the evening."
+  },
+  {
+    "video": "iMJ9CjBX7eo-00_03_06.066-00_03_14.600.mp4",
+    "model_output": "The men and women of the LGBTQ community have been a part of the NAD for a long time and we are thrilled to have them here.",
+    "ground_truth": "It's an initiative that recognizes women, men, LGBT, and so on I'm thrilled to be involved."
+  },
+  {
+    "video": "iMJ9CjBX7eo-00_04_08.000-00_04_15.000.mp4",
+    "model_output": "We want to see you at the NAD Conference in Phoenix, Arizona this summer!",
+    "ground_truth": "We look forward to seeing you there with your cash, credit card, or check!"
+  },
+  {
+    "video": "mdRh7UiZjQM-00_00_09.366-00_00_15.033.mp4",
+    "model_output": "Police officers are required to follow ADA rules.",
+    "ground_truth": "Even though the police are required to follow the ADA, although the rules are a bit sticky."
+  },
+  {
+    "video": "mdRh7UiZjQM-00_00_24.000-00_00_27.533.mp4",
+    "model_output": "However, you must show that you are a deaf or hard of hearing person.",
+    "ground_truth": "It’s required for them to meet my needs as a deaf  individual."
+  },
+  {
+    "video": "7MVtn8T13Lc-00_01_32.300-00_01_35.466.mp4",
+    "model_output": "I feel like we need to move forward with the NAD.",
+    "ground_truth": "I feel there’s a great need for the young generation to become involved with NAD again."
+  },
+  {
+    "video": "6vrfEopSMeo-00_01_01.633-00_01_04.533.mp4",
+    "model_output": "This means we feel our boundaries are being respected.",
+    "ground_truth": "We have our own boundaries."
+  },
+  {
+    "video": "bxITvkIvXL0-00_02_10.266-00_02_14.566.mp4",
+    "model_output": "You can choose to go to the NAD Headquarters in Washington, D.C. or go to the American School for the Deaf (ASD) in Austin, Texas.",
+    "ground_truth": "Priority proposals can be in ASL or English."
+  },
+  {
+    "video": "bxITvkIvXL0-00_02_16.500-00_02_20.166.mp4",
+    "model_output": "So, what do you want to do on May 1st?",
+    "ground_truth": "Please send those in by May 15th!"
+  },
+  {
+    "video": "2LEpMiInAvQ-00_00_11.033-00_00_16.466.mp4",
+    "model_output": "For example, if a video is captioned, the interpreter should be able to use American Sign Language (ASL) to interpret the video.",
+    "ground_truth": "For example, if a movie is going to be watched, you can use the captions or an interpreter."
+  },
+  {
+    "video": "n8wMXAjy-xA-00_00_00.000-00_00_02.600.mp4",
+    "model_output": "I grew up in a hearing family, but I was curious about sign language.",
+    "ground_truth": "Growing up, I liked school."
+  },
+  {
+    "video": "n8wMXAjy-xA-00_00_36.533-00_00_41.633.mp4",
+    "model_output": "I m really passionate about science, technology, engineering, and math (STEM)!",
+    "ground_truth": "Eventually, I changed my course and technically, I’m still a scientist -- I’m a Language Scientist!"
+  },
+  {
+    "video": "6xIMOHq41ZE-00_00_21.633-00_00_29.133.mp4",
+    "model_output": "The NAD Education Strategy Team (EST) is also responsible for the bill.",
+    "ground_truth": "I also serve on the NAD Educational Strategy Team focusing on legislative bills related to Education."
+  },
+  {
+    "video": "6xIMOHq41ZE-00_00_50.266-00_00_56.100.mp4",
+    "model_output": "We are focused on making the bill more current by doing more research.",
+    "ground_truth": "We decided to make changes to what is currently used through additional research."
+  },
+  {
+    "video": "6xIMOHq41ZE-00_01_12.300-00_01_15.266.mp4",
+    "model_output": "Many states are interested in this bill.",
+    "ground_truth": "Many other states have expressed interest also."
+  },
+  {
+    "video": "6xIMOHq41ZE-00_03_13.366-00_03_21.266.mp4",
+    "model_output": "If you are a state representative or a community member who wants to propose a bill, please contact us at nad@nad.org.",
+    "ground_truth": "If any state or community is interested in proposing a bill, please contact me at NAD. Thanks."
+  },
+  {
+    "video": "cC7o3bhSpjc-00_00_19.000-00_00_22.766.mp4",
+    "model_output": "We have all the information you need to get started with the application process.",
+    "ground_truth": "We have all of the information ready for you on the website!"
+  },
+  {
+    "video": "OCljaCDxpb0-00_03_41.233-00_03_44.666.mp4",
+    "model_output": "I want to start with the NAD's 100th Biennial Conference.",
+    "ground_truth": "We will partner with NAD for 2012."
+  },
+  {
+    "video": "HBpGS56KwGk-00_00_15.100-00_00_16.633.mp4",
+    "model_output": "Healthcare.",
+    "ground_truth": "Health Care."
+  },
+  {
+    "video": "HBpGS56KwGk-00_01_16.200-00_01_20.066.mp4",
+    "model_output": "That is your right to be informed and to make an informed decision.",
+    "ground_truth": "You can show the paper for them to accommodate to."
+  },
+  {
+    "video": "HBpGS56KwGk-00_01_22.600-00_01_37.233.mp4",
+    "model_output": "For example, if you call the mail-in ballot drop-off location, you will be able to see who is ahead of you in line.",
+    "ground_truth": "For example, you can ask to use both mobile phones to communicate by typing messages in big text which you can show to each other.  "
+  },
+  {
+    "video": "HBpGS56KwGk-00_02_00.700-00_02_17.533.mp4",
+    "model_output": "The CDC has guidelines on how to vote, such as mail-in ballots, paper ballots, and early voting.",
+    "ground_truth": "The CDC has guidance on voting in-person that includes where to vote. It's important to bring your own black ink pens or touch-screen pens to use on the voting machine."
+  },
+  {
+    "video": "JKivR1oXxZU-00_00_27.300-00_00_33.500.mp4",
+    "model_output": "The NAD has a website at www.nad.org.",
+    "ground_truth": "www.nad.org/seniors."
+  },
+  {
+    "video": "UxlnxGyS3lc-00_04_22.300-00_04_32.633.mp4",
+    "model_output": "Students should be able to interact with their deaf or hard of hearing peers and participate in classroom activities with the same opportunities as their hearing peers.",
+    "ground_truth": "Likewise, to ensure accessibility is provided throughout, they can use support services through appropriate technology such as video conferencing platforms."
+  },
+  {
+    "video": "1jOUjpZ8ZzA-00_05_24.200-00_05_29.600.mp4",
+    "model_output": "Our preference is ASL because that's the language we use.",
+    "ground_truth": "Our preferences would be to use American Sign Language as it is our primary language."
+  },
+  {
+    "video": "6SPn9TENOdM-00_02_27.633-00_02_29.366.mp4",
+    "model_output": "I m here.",
+    "ground_truth": "I will take over this place."
+  },
+  {
+    "video": "DCy7yjXqaAM-00_00_36.633-00_00_40.066.mp4",
+    "model_output": "The first one is about the hospital refusing to hire a deaf nurse.",
+    "ground_truth": "The first had surgery on the neck."
+  },
+  {
+    "video": "DCy7yjXqaAM-00_01_25.500-00_01_27.633.mp4",
+    "model_output": "She preferred to use an interpreter.",
+    "ground_truth": "The interpreter was prefered but not provided."
+  },
+  {
+    "video": "UfLdljKWr2k-00_00_10.200-00_00_11.466.mp4",
+    "model_output": "Hello, my name is Wayne.",
+    "ground_truth": "Howdy!"
+  },
+  {
+    "video": "c2JEjHSoKT0-00_01_31.433-00_01_34.333.mp4",
+    "model_output": "Secondly, if you need accommodations, go ahead and ask!",
+    "ground_truth": "When you go, you may need accessibility accommodations."
+  },
+  {
+    "video": "osHy2dzQmgE-00_00_19.133-00_00_20.233.mp4",
+    "model_output": "You can choose from several options.",
+    "ground_truth": "The equipment must be paid for."
+  },
+  {
+    "video": "osHy2dzQmgE-00_04_36.500-00_04_45.200.mp4",
+    "model_output": "If you are not able to have a qualified interpreter with you during the video meeting, you can ask the meeting host to provide a captioning service.",
+    "ground_truth": "Before the meeting, you should share with your captioner what topics will be discussed, so the captioner will be better prepared for your meeting. "
+  },
+  {
+    "video": "osHy2dzQmgE-00_07_04.500-00_07_12.733.mp4",
+    "model_output": "Each platform has its own list of recommended tools, but it may not be the best fit for your needs.",
+    "ground_truth": "Online trainings or workshops may not be ideal due to struggles that participants experience. "
+  },
+  {
+    "video": "TPGwtrWWZic-00_01_17.033-00_01_26.133.mp4",
+    "model_output": "I m really lucky to have different job opportunities here at the National Museum of the Deaf and Hard of Hearing in Minneapolis, Minnesota.",
+    "ground_truth": "I rotated through several jobs, first with the Smithsonian National Postal Museum for about a year until they ran out of grant money and I was let go."
+  },
+  {
+    "video": "_fWpJJekhww-00_00_30.433-00_00_33.133.mp4",
+    "model_output": "You can bring in an interpreter to lead the meeting.",
+    "ground_truth": "They are responsible for providing interpreters."
+  },
+  {
+    "video": "S3X9V-9Gy4k-00_00_46.333-00_00_51.333.mp4",
+    "model_output": "The NAD encourages the community to host a march on March 8, 2018.",
+    "ground_truth": "They are planning their next big march on March 8, 2018."
+  },
+  {
+    "video": "U0-4g5iIyqQ-00_00_05.233-00_00_07.433.mp4",
+    "model_output": "Hello everyone!",
+    "ground_truth": "Hello Everyone!"
+  },
+  {
+    "video": "b7_yaar8zMc-00_00_17.400-00_00_20.066.mp4",
+    "model_output": "I'm glad you're here for the NAD Conference.",
+    "ground_truth": "I’m coordinating all the details for the Gala."
+  },
+  {
+    "video": "ao84QAxcU70-00_00_21.466-00_00_24.533.mp4",
+    "model_output": "My name is Howard and I'm here to introduce you to the NAD.",
+    "ground_truth": "Also, the combo is much cheaper than before."
+  },
+  {
+    "video": "tAB9G6QcXDU-00_00_30.766-00_00_38.200.mp4",
+    "model_output": "Now, I want to explain a little bit about what it means to be a nice person, to be a good listener, to be an effective communicator.",
+    "ground_truth": "It is very important that it is clean, professional, well organized, and clear."
+  },
+  {
+    "video": "tAB9G6QcXDU-00_01_03.333-00_01_06.166.mp4",
+    "model_output": "Before I started my second job, I was a kind of a freelancer.",
+    "ground_truth": "Prior to professional type of work. "
+  },
+  {
+    "video": "fNT8a6e1gx8-00_03_52.066-00_03_52.500.mp4",
+    "model_output": "Right.",
+    "ground_truth": "Good!"
+  },
+  {
+    "video": "fNT8a6e1gx8-00_04_20.100-00_04_21.233.mp4",
+    "model_output": "Hello, how are you doing?",
+    "ground_truth": "Hello, what’s your name?"
+  },
+  {
+    "video": "fNT8a6e1gx8-00_05_35.300-00_05_37.366.mp4",
+    "model_output": "If you make a mistake, don t worry.",
+    "ground_truth": "Learn from your mistakes."
+  },
+  {
+    "video": "fNT8a6e1gx8-00_06_22.233-00_06_22.633.mp4",
+    "model_output": "Yes!",
+    "ground_truth": "I am going to ask a few questions."
+  },
+  {
+    "video": "fNT8a6e1gx8-00_07_01.066-00_07_02.400.mp4",
+    "model_output": "I want to win the homecoming.",
+    "ground_truth": "It's close to my home."
+  },
+  {
+    "video": "fNT8a6e1gx8-00_07_55.733-00_07_58.500.mp4",
+    "model_output": "I think it s a good idea for students to get involved in that.",
+    "ground_truth": "If a student is oppressed, what would your advice be? "
+  },
+  {
+    "video": "fNT8a6e1gx8-00_08_26.766-00_08_28.166.mp4",
+    "model_output": "Marvin Lee.",
+    "ground_truth": "Marvin Miller."
+  },
+  {
+    "video": "fNT8a6e1gx8-00_08_54.566-00_08_58.166.mp4",
+    "model_output": "First of all, I want to thank the Deaf Education Foundation for providing this opportunity for us.",
+    "ground_truth": "After Deafhood, I realized we all need to unpack."
+  },
+  {
+    "video": "XNLX7QTAuP4-00_01_43.466-00_01_45.133.mp4",
+    "model_output": "Hi, I'm Melissa.",
+    "ground_truth": "I'm Melissa."
+  },
+  {
+    "video": "XNLX7QTAuP4-00_02_15.633-00_02_19.766.mp4",
+    "model_output": "After breakfast, we had a discussion about the NAD's priorities for the day.",
+    "ground_truth": "We had lunch and visited with the students."
+  },
+  {
+    "video": "ypsSYB5vDxY-00_00_02.466-00_00_09.166.mp4",
+    "model_output": "Hello, I'm Chris Wagner and this is my sign name.",
+    "ground_truth": "I'm Chris Wagner, and this is the first of many vlogs I will do as NAD President."
+  },
+  {
+    "video": "ypsSYB5vDxY-00_02_26.133-00_02_33.500.mp4",
+    "model_output": "I encourage you to open your mind and share your ideas with the NAD Board and the staff at the Biennial NAD Conference in Phoenix, Arizona.",
+    "ground_truth": "I want to close by sharing with you my conversation with Sheri Farinha."
+  },
+  {
+    "video": "KWiU6b05W7Y-00_00_53.500-00_01_04.100.mp4",
+    "model_output": "People over the age of 20 should get a nasal swab test every 3 to 4 years.",
+    "ground_truth": "People older than 20 years old should have an oral cancer exam every three years while those over 40 years old should have an annual exam."
+  },
+  {
+    "video": "YcdSExm1cXU-00_00_41.733-00_00_46.300.mp4",
+    "model_output": "Since 1994, I ve been a part of the NAD s Youth Ambassador Program (YAP).",
+    "ground_truth": "Nonetheless, since February I have made several appearances and I have done a lot of volunteering."
+  },
+  {
+    "video": "4xF7mSuRrBw-00_02_12.533-00_02_13.033.mp4",
+    "model_output": "HOLMES: Yes!",
+    "ground_truth": "Thank you!"
+  },
+  {
+    "video": "tDmD1ZeYeNQ-00_01_48.566-00_02_02.200.mp4",
+    "model_output": "We work with different organizations in the deaf and hard of hearing community to provide interpreters for their events.",
+    "ground_truth": "Due to a change of leadership within the FCC, with feedback from many consumers groups like NAD and others, the FCC realized that video clips shared online should be captioned as well."
+  },
+  {
+    "video": "TXyNxVRRPt8-00_00_55.233-00_01_01.466.mp4",
+    "model_output": "We met with representatives from the community of Rochester, New York.",
+    "ground_truth": "We met with the people there and did a community forum just like the one we did in South Carolina."
+  },
+  {
+    "video": "TXyNxVRRPt8-00_01_25.600-00_01_26.266.mp4",
+    "model_output": "Nice!",
+    "ground_truth": "Thank you."
+  },
+  {
+    "video": "TXyNxVRRPt8-00_02_40.700-00_02_45.166.mp4",
+    "model_output": "The purpose of this workshop is to give people a better understanding of the NAD s programs.",
+    "ground_truth": "Most people do not realize that is a NAD program."
+  },
+  {
+    "video": "TXyNxVRRPt8-00_02_54.733-00_03_00.766.mp4",
+    "model_output": "Now, we look forward to the next board meeting in 3 months.",
+    "ground_truth": "We are looking forward to Region III monthly meeting."
+  },
+  {
+    "video": "TXyNxVRRPt8-00_03_33.266-00_03_34.266.mp4",
+    "model_output": "Thank you.",
+    "ground_truth": "Thank you."
+  },
+  {
+    "video": "NGry3ZtyTyE-00_01_59.733-00_02_09.133.mp4",
+    "model_output": "If you re interviewing for a job, make sure you know what to expect during the interview process.",
+    "ground_truth": "Second, suppose you were not satisfied with a response to a question they asked during the interview – go ahead and expand on that response."
+  },
+  {
+    "video": "bRdGsTt7J7c-00_00_16.233-00_00_21.600.mp4",
+    "model_output": "I want to go to a different country to meet deaf people and support CRPD.",
+    "ground_truth": "I enjoy traveling around other countries and meeting other deaf people; I support CRPD."
+  },
+  {
+    "video": "bRdGsTt7J7c-00_00_29.366-00_00_38.200.mp4",
+    "model_output": "I love ASL, I love reading, and I love Jr. NAD.",
+    "ground_truth": "I love ASL; I support CRPD."
+  },
+  {
+    "video": "CnT3ke7yiIY-00_01_50.066-00_01_50.500.mp4",
+    "model_output": "Join us!",
+    "ground_truth": "Competitor."
+  },
+  {
+    "video": "CnT3ke7yiIY-00_02_10.133-00_02_16.366.mp4",
+    "model_output": "I know what it feels like to be rejected, to be rejected again and again for a dream job.",
+    "ground_truth": "I hope you feel inspired and convinced to join NAD YAP this summer."
+  },
+  {
+    "video": "hvSB-C04cc4-00_03_05.100-00_03_13.533.mp4",
+    "model_output": "If you don t have access, you can copy and paste the transcript into the captioning app.",
+    "ground_truth": "Then I will copy/paste individual lines from the transcript to the caption creator."
+  },
+  {
+    "video": "6vmtT8VJus8-00_00_57.400-00_01_01.700.mp4",
+    "model_output": "I went to Gallaudet University and majored in Chemistry.",
+    "ground_truth": "After I graduated, I went to Gallaudet University and double majored in Biology and Chemistry."
+  },
+  {
+    "video": "qrR_VwMIsnU-00_00_23.333-00_00_33.000.mp4",
+    "model_output": "If you are considering running for the Board of Trustees, please apply for a position.",
+    "ground_truth": "If you are passionate about NAD and have good leadership skills I encourage you to apply for available a position."
+  },
+  {
+    "video": "8j5uolV235U-00_00_31.033-00_00_45.566.mp4",
+    "model_output": "The NAD Board and the WFD Board have sent a letter to the Governing Council of the WFD.",
+    "ground_truth": "We were just be told, and are honored, that the WFD Board selected us for the WFD Award."
+  },
+  {
+    "video": "k7kOtz1kPk8-00_01_26.066-00_01_33.766.mp4",
+    "model_output": "The NAD YAP is a search for deaf and hard of hearing students who want to be involved in the NAD Youth Ambassador Program (NADYAP).",
+    "ground_truth": "Contact us via Facebook, NADYS, or email us at NADYST@nad.org."
+  },
+  {
+    "video": "KedR6RWF4Dc-00_00_38.166-00_00_44.166.mp4",
+    "model_output": "And in Kentucky, we visited the first State Association of the Deaf (SAD) in Louisville, Kentucky.",
+    "ground_truth": "And Kansas, they are the first state in the region to pass the LEAD-K!"
+  },
+  {
+    "video": "wO-FMbD4MW8-00_02_22.000-00_02_29.166.mp4",
+    "model_output": "The NAD is currently working on the Anti-Racism Action Plan (ARAP) which includes people of color, BIPOC, and other marginalized groups.",
+    "ground_truth": "We need to look with an anti-racism lens to ensure the policies include and are equitable to everyone, especially BIPOC."
+  },
+  {
+    "video": "VvpFqAynbOc-00_01_04.200-00_01_06.066.mp4",
+    "model_output": "You can start a ride-sharing business right from there.",
+    "ground_truth": "As soon as they get in, it’s go time."
+  },
+  {
+    "video": "Nw07MwFkT2k-00_01_18.666-00_01_24.700.mp4",
+    "model_output": "Not all of us have the same opportunities, but we can make a difference in the community for deaf people.",
+    "ground_truth": "Nevertheless, they need a place to go to in order to receive support from the Community just like bees."
+  },
+  {
+    "video": "sITlRZ-tnqw-00_00_34.233-00_00_39.300.mp4",
+    "model_output": "We want to know how you are doing with YAP.",
+    "ground_truth": "We are closer because of YAP."
+  },
+  {
+    "video": "Nmmi7qu_a2A-00_00_56.166-00_01_05.266.mp4",
+    "model_output": "If you have a hearing interpreter, they will be placed on the same page as the ASL interpreter.",
+    "ground_truth": "Hearing interpreters who have full access to English only use ASL up to a certain level."
+  },
+  {
+    "video": "Nmmi7qu_a2A-00_03_47.233-00_03_55.666.mp4",
+    "model_output": "I ve worked with different workshops, medical organizations, law offices, deaf clubs, and more.",
+    "ground_truth": "I’ve taken different workshops, including medical, legal, and DeafBlind training."
+  },
+  {
+    "video": "1woNMYcqmd4-00_00_35.666-00_00_47.366.mp4",
+    "model_output": "The White House released a statement that said the NAD and the deaf and hard of hearing community are not satisfied with the White House s decision.",
+    "ground_truth": "The white supremacists were sharing messages full of hate, oppression, racism, bigotry, elitism, and violence."
+  },
+  {
+    "video": "6ozfmRow9e0-00_00_04.300-00_00_09.133.mp4",
+    "model_output": "The ADA requires hospitals to provide relay services for telephone calls.",
+    "ground_truth": "The ADA requires that relay calls are treated the same as voice calls."
+  },
+  {
+    "video": "FrxDzpLQj0M-00_00_07.100-00_00_08.233.mp4",
+    "model_output": "Are you ready?",
+    "ground_truth": "It's coming!"
+  },
+  {
+    "video": "sFSKINpFQKU-00_00_21.066-00_00_33.666.mp4",
+    "model_output": "The NAD is excited about the upcoming 2012 NAD Conference, which will be hosted at any college or university affiliated with the NAD.",
+    "ground_truth": "NAD is pleased to announce that the 2012 College Bowl competition will expand to include any new colleges and universities with deaf participants."
+  },
+  {
+    "video": "sFSKINpFQKU-00_02_02.366-00_02_05.500.mp4",
+    "model_output": "Each school has its own team.",
+    "ground_truth": "Each college/university is eligible to send one team."
+  },
+  {
+    "video": "sFSKINpFQKU-00_02_34.766-00_02_37.400.mp4",
+    "model_output": "For more information, please contact the NAD.",
+    "ground_truth": "For further information, please contact the NAD."
+  },
+  {
+    "video": "2O6QUmPT0gM-00_01_15.200-00_01_31.600.mp4",
+    "model_output": "The FCC considers the telephone to be an essential part of our community because of its ability to facilitate communication.",
+    "ground_truth": "The U.S. Congress intended to make telephone communication services accessible to our community, using the very best technologies available."
+  },
+  {
+    "video": "2O6QUmPT0gM-00_03_11.066-00_03_39.066.mp4",
+    "model_output": "Telephone calls are still being made on the basis of the telephone being set up in the public switched telephone network (PSTN), which is not strong enough to support the high volume of telephone calls.",
+    "ground_truth": "The deaf and hard of hearing community continues to struggle to achieve this goal because our equipment is often stuck at one location or the connection is not strong enough to carry our call."
+  },
+  {
+    "video": "QY0paRttZZ0-00_00_30.100-00_00_33.533.mp4",
+    "model_output": "It is the first place where the US interpreters are hired.",
+    "ground_truth": "She made the first American flag."
+  },
+  {
+    "video": "fZ3tPElWpmQ-00_00_08.166-00_00_08.766.mp4",
+    "model_output": "Take a look!",
+    "ground_truth": "YES!"
+  },
+  {
+    "video": "WkXR6ZnWnoU-00_00_05.166-00_00_12.666.mp4",
+    "model_output": "This is important because it shows that deaf and hard of hearing people can do the same things as hearing people.",
+    "ground_truth": "It's important for deaf youth and others to meet deaf people who work in various careers, and remember 'if a deaf person can, I can!'"
+  },
+  {
+    "video": "ICBGc3FXFyQ-00_06_31.066-00_06_41.266.mp4",
+    "model_output": "The NAD sent a press release explaining that we can do a good job of advocating for better government funding for schools for the deaf.",
+    "ground_truth": "The video provided political, legal, and funding strategies to protect schools for the deaf and keep them open."
+  },
+  {
+    "video": "ICBGc3FXFyQ-00_09_10.333-00_09_21.733.mp4",
+    "model_output": "We can continue to do our work, but we need the support of the deaf and hard of hearing community.",
+    "ground_truth": "We cannot do it by ourselves."
+  },
+  {
+    "video": "cCa-TMqxTOg-00_00_17.566-00_00_23.300.mp4",
+    "model_output": "Remember to reach out to your neighbors and make them feel welcome.",
+    "ground_truth": "Reach out to them on FaceTime or write them a letter to keep them busy."
+  },
+  {
+    "video": "O2uBRm6D_KI-00_02_39.700-00_02_46.366.mp4",
+    "model_output": "The NAD Board recognizes the need for different types of interpreters to meet the diverse needs of deaf and hard of hearing people.",
+    "ground_truth": "The Board is taking this into serious consideration. We are looking into other interpreting issues as well."
+  },
+  {
+    "video": "lNt7xIP1mc4-00_00_14.066-00_00_22.566.mp4",
+    "model_output": "Where do deaf people get access to news information in ASL?",
+    "ground_truth": "Where else will the Deaf be able to access news and information in ASL?"
+  },
+  {
+    "video": "8y3qgSwNDEg-00_00_57.633-00_01_01.366.mp4",
+    "model_output": "The NAD has been a part of that process for a long time.",
+    "ground_truth": "Eventually, they reached out to NAD."
+  },
+  {
+    "video": "07BevXg9ISg-00_01_50.666-00_01_51.633.mp4",
+    "model_output": "See you soon!",
+    "ground_truth": "See you there!"
+  },
+  {
+    "video": "vCGQ34CO5bs-00_04_17.466-00_04_21.233.mp4",
+    "model_output": "We are so touched and inspired by these young children.",
+    "ground_truth": "We are thrilled to inspire young children."
+  },
+  {
+    "video": "aCBtEC6ckWU-00_00_03.433-00_00_05.233.mp4",
+    "model_output": "I look forward to it.",
+    "ground_truth": "#GivingTuesday! "
+  },
+  {
+    "video": "aCBtEC6ckWU-00_00_37.500-00_00_40.266.mp4",
+    "model_output": "Join the Youth Leadership Camp (YLC).",
+    "ground_truth": "Jr. NAD and Youth Ambassador Program."
+  },
+  {
+    "video": "hOj4HdPqnaI-00_00_14.400-00_00_18.066.mp4",
+    "model_output": "We want to know how to communicate with the hospital.",
+    "ground_truth": "To access information, it requires communication."
+  },
+  {
+    "video": "s94iueF9e0w-00_01_47.700-00_01_48.666.mp4",
+    "model_output": "Third.",
+    "ground_truth": "And third ..."
+  },
+  {
+    "video": "tDEWkD8lxlo-00_03_00.300-00_03_01.566.mp4",
+    "model_output": "The FCC has a long list of rules.",
+    "ground_truth": "We are not done yet."
+  },
+  {
+    "video": "rK2cB6Trk68-00_00_13.466-00_00_18.166.mp4",
+    "model_output": "I ve learned a lot about how to be a coach, how to be an educator, and how to be involved in the community.",
+    "ground_truth": "I don't know how to use Excel or manage email, it was tough."
+  },
+  {
+    "video": "rK2cB6Trk68-00_00_21.000-00_00_26.266.mp4",
+    "model_output": "That experience really helped me when I decided to start my own job and I m really thankful for that experience.",
+    "ground_truth": "Eventually, I started working there and I’m really grateful for that experience and that opportunity."
+  },
+  {
+    "video": "nsjNUhF_s94-00_00_14.166-00_00_20.200.mp4",
+    "model_output": "Alzheimer s disease is a type of dementia that leads to the loss of cognitive abilities.",
+    "ground_truth": "Alzheimer’s disease is the sixth leading cause of death in the America."
+  },
+  {
+    "video": "r2AKKaGvFi8-00_00_19.700-00_00_27.400.mp4",
+    "model_output": "Some of the students are deaf, some are hearing, and some are not sure if they re deaf or hearing.",
+    "ground_truth": "I met many deaf people who wouldn’t help me because I was a European immigrant."
+  },
+  {
+    "video": "cQ8Dl52X1u0-00_03_52.733-00_04_04.033.mp4",
+    "model_output": "I like to encourage people to be open-minded, to not be afraid to ask questions, and to be willing to learn from others.",
+    "ground_truth": "I was lucky enough to have a foundation on employment law and was already a good communicator with good people skills."
+  },
+  {
+    "video": "4yQ5fvm_5IU-00_00_06.166-00_00_06.600.mp4",
+    "model_output": "Hello!",
+    "ground_truth": "Hello!"
+  },
+  {
+    "video": "5O0H-uqiBVA-00_00_32.100-00_00_37.066.mp4",
+    "model_output": "The NAD will work with you for a month to find out what you would like to do with the NAD.",
+    "ground_truth": "While you work for a month, you will be experiencing major personal growth alongside them."
+  },
+  {
+    "video": "6nijXFM2g0k-00_01_12.466-00_01_18.300.mp4",
+    "model_output": "We were able to film a video explaining what the NAD has to offer and how to contact the NAD.",
+    "ground_truth": "If there is a video that you know is not captioned, you can reach out to DCMP to request captioning for the video."
+  },
+  {
+    "video": "H4pXPWVvfZ0-00_00_31.700-00_00_34.766.mp4",
+    "model_output": "The NAD is looking for a new Director of the Registry of Interpreting Services for the Deaf (RID).",
+    "ground_truth": "We made some changes to the rounds."
+  },
+  {
+    "video": "mgEXz0K9O6U-00_00_19.333-00_00_31.100.mp4",
+    "model_output": "We will discuss the top five priorities of the NAD: Advocacy for Rights, Education, Legal Funding, and Employment.",
+    "ground_truth": "We were able to get together and discuss the top five priorities which are: Preservation and Advocacy for Relay Services, Memory, Education, FEMA and Youth."
+  },
+  {
+    "video": "GfWZfUxFmhE-00_01_49.566-00_01_58.266.mp4",
+    "model_output": "The NAD Board is also using the app to attend different community events and local, state, and national NAD conferences.",
+    "ground_truth": "Each board member has been attending various conferences and events in our community, throughout the month, at all levels: local, state, or national."
+  },
+  {
+    "video": "N29DdjIj5rw-00_00_11.400-00_00_19.200.mp4",
+    "model_output": "It s kind of like being a superhero, I m always on the lookout for something to do and I don t want to miss out on anything.",
+    "ground_truth": "It keeps things fresh for me, I mean -- I get bored easily, that’s why I love conference planning because of the many things that come up."
+  },
+  {
+    "video": "t9lQq2SL7bo-00_00_13.533-00_00_14.466.mp4",
+    "model_output": "Hello!",
+    "ground_truth": "Hello."
+  },
+  {
+    "video": "t9lQq2SL7bo-00_01_05.133-00_01_11.166.mp4",
+    "model_output": "Parents of deaf children are not included in the family description.",
+    "ground_truth": "Deaf children cannot watch streamed content with their hearing family."
+  },
+  {
+    "video": "yG_ZGSd4bVg-00_00_33.200-00_00_42.600.mp4",
+    "model_output": "He graduated from the South Carolina School for the Deaf in Hartford.",
+    "ground_truth": "At eleven years old, it was informed that there was a deaf school in Hartford."
+  },
+  {
+    "video": "yG_ZGSd4bVg-00_01_22.133-00_01_31.000.mp4",
+    "model_output": "He did this by establishing a newspaper for the deaf.",
+    "ground_truth": "While they were teaching, along with a few others, founded a newspaper for deaf people."
+  },
+  {
+    "video": "tKxeCOzn5So-00_00_00.000-00_00_05.200.mp4",
+    "model_output": "You can think of different ways to apply for a job.",
+    "ground_truth": "The information on this page gives you different ideas on how to find a job."
+  },
+  {
+    "video": "XQzQ3F81ik8-00_00_47.133-00_00_55.466.mp4",
+    "model_output": "When I graduated from high school, I knew I wanted to be an accountant.",
+    "ground_truth": "I didn’t have a clear idea on what I wanted to do in the future, I just went along with everyone else in elementary, middle school, high school, and college."
+  },
+  {
+    "video": "XQzQ3F81ik8-00_02_56.100-00_03_02.566.mp4",
+    "model_output": "I work in the back office, it involves a lot of paperwork and data entry.",
+    "ground_truth": "Sometimes I communicate with my co-workers through an internal chat or e-mail, occasionally using Zoom."
+  },
+  {
+    "video": "mq2dPNCiRoI-00_01_51.733-00_01_54.433.mp4",
+    "model_output": "I m tired of this.",
+    "ground_truth": "I am pushed off to the side, not included in things."
+  },
+  {
+    "video": "mq2dPNCiRoI-00_01_55.766-00_01_57.166.mp4",
+    "model_output": "It s not the same as hearing people.",
+    "ground_truth": "It’s just not fair!"
+  },
+  {
+    "video": "qOLlQehpQvM-00_04_17.233-00_04_59.633.mp4",
+    "model_output": "I'm here at the National Association of the Deaf (NAD) Headquarters in Atlanta, Georgia.",
+    "ground_truth": "Inspiring Entertaining Deaf Ecosystem, Friendship, Collaborate, Team, Socialize, Motivation, Learn, Grow, Discover, Unity Jr. NAD That"
+  },
+  {
+    "video": "cNn_N22whAU-00_01_06.866-00_01_09.700.mp4",
+    "model_output": "Come and join us!",
+    "ground_truth": "Go and learn history!"
+  },
+  {
+    "video": "y0URUVcvrTg-00_01_42.000-00_01_47.733.mp4",
+    "model_output": "We have a lot of things to discuss and more exciting things to share before the next NAD Conference in Hartford, Connecticut.",
+    "ground_truth": "At that meeting, we’ll be discussing status updates, plans for the months leading up to the Conference!"
+  },
+  {
+    "video": "y0URUVcvrTg-00_01_58.633-00_02_01.500.mp4",
+    "model_output": "We look forward to seeing you there!",
+    "ground_truth": "There will be more information about the conference!"
+  },
+  {
+    "video": "Thh18yKaHWc-00_00_43.600-00_00_44.733.mp4",
+    "model_output": "We look forward to seeing you there!",
+    "ground_truth": "Take a look around."
+  },
+  {
+    "video": "eOjjLnOdgow-00_00_32.333-00_00_37.400.mp4",
+    "model_output": "Only those who vote NO means they support our rights and information.",
+    "ground_truth": "Thank those who voted \"nay\", meaning those who support our ADA rights."
+  },
+  {
+    "video": "eOjjLnOdgow-00_00_40.033-00_00_46.033.mp4",
+    "model_output": "The NAD has been advocating for the repeal of H.R.",
+    "ground_truth": "620 didn't happen quickly."
+  },
+  {
+    "video": "eOjjLnOdgow-00_03_24.566-00_03_28.233.mp4",
+    "model_output": "The Senate has a different process than the House of Representatives.",
+    "ground_truth": "The Senate should do what?"
+  },
+  {
+    "video": "sO31dRRabiE-00_00_04.333-00_00_13.233.mp4",
+    "model_output": "The Legal Aid Program provides free legal services for all deaf and hard of hearing people, their families, and members of the military.",
+    "ground_truth": "All NAD programs and services are available to all deaf and hard of hearing people and their families -- membership is not required."
+  },
+  {
+    "video": "dSkoNrtNxwo-00_03_25.100-00_03_32.533.mp4",
+    "model_output": "The NAD has a list of state associations that you can contact for more information.",
+    "ground_truth": "If your state association wants to have legislative training, please contact your regional representative."
+  },
+  {
+    "video": "dSkoNrtNxwo-00_06_31.500-00_06_37.633.mp4",
+    "model_output": "The NAD has been in touch with them and they have agreed to work with the NAD to make sure this happens.",
+    "ground_truth": "For those who have contacted us, we will get back to you to make sure the community is involved in the process to make strides for education!"
+  },
+  {
+    "video": "W5JdZRkos4Q-00_04_02.700-00_04_09.733.mp4",
+    "model_output": "I m really interested in being a part of the video or podcast industry because I m a beginner and I m always learning new things.",
+    "ground_truth": "I prefer to set up a call to have a warm up chat before we start the interview, that way I can figure out a good frame for their story."
+  },
+  {
+    "video": "W5JdZRkos4Q-00_04_18.700-00_04_21.133.mp4",
+    "model_output": "I ll be there to chat with them and meet new people.",
+    "ground_truth": "I find time to chat with them through meetings."
+  },
+  {
+    "video": "W5JdZRkos4Q-00_04_41.300-00_04_42.533.mp4",
+    "model_output": "I ve been doing this for a while now.",
+    "ground_truth": "I go ahead and do it!"
+  },
+  {
+    "video": "dLzmPt2segw-00_02_26.600-00_02_30.533.mp4",
+    "model_output": "I think it s important to make it clear what you re looking for and what you re asking for.",
+    "ground_truth": "The more transparent you are, the smoother your interview will be."
+  },
+  {
+    "video": "op3k0tUi40k-00_01_18.100-00_01_25.600.mp4",
+    "model_output": "I grew up in a mainstreamed school without special education services.",
+    "ground_truth": "I went to mainstream school with no special education services, it was very tough."
+  },
+  {
+    "video": "sld9TKHkOtg-00_02_15.666-00_02_19.466.mp4",
+    "model_output": "I will be working as a UN delegate for Kentucky.",
+    "ground_truth": "I love the traditional Kentucky Derby roots here."
+  },
+  {
+    "video": "sld9TKHkOtg-00_02_24.000-00_02_24.733.mp4",
+    "model_output": "I'm not a person.",
+    "ground_truth": "I love people."
+  },
+  {
+    "video": "HlYvjMBYyag-00_01_19.733-00_01_22.133.mp4",
+    "model_output": "I also work at the Health Center.",
+    "ground_truth": "I am working on a grant proposal."
+  },
+  {
+    "video": "HlYvjMBYyag-00_01_33.633-00_01_39.166.mp4",
+    "model_output": "I'm really excited about this program because it is connected to the NAD's goal of access and advocacy.",
+    "ground_truth": "I am thrilled to be working on this project because it fits with NAD's goals of advocating for accessibility."
+  },
+  {
+    "video": "HlYvjMBYyag-00_01_46.000-00_01_50.700.mp4",
+    "model_output": "I've had different interpreters, hearing interpreters, and Deaf interpreters.",
+    "ground_truth": "Two different communities: hearing and Deaf."
+  },
+  {
+    "video": "Bn5RrOa7AEI-00_01_44.000-00_01_50.000.mp4",
+    "model_output": "Second, we want to thank those who have expressed concerns about VRI.",
+    "ground_truth": "On to the second topic -- thank you for sharing your concerns about VRI."
+  },
+  {
+    "video": "qvN9q5kPC74-00_00_43.566-00_00_50.733.mp4",
+    "model_output": "You can share your communication preferences, such as if you prefer to use American Sign Language (ASL) or English (English).",
+    "ground_truth": "There are a diverse methods of communication such as American Sign Language, cued speech, and Signing Exact English."
+  },
+  {
+    "video": "6O6O2eXf22o-00_00_12.066-00_00_13.266.mp4",
+    "model_output": "I m a mechanic.",
+    "ground_truth": "When it's broke, you fix it. "
+  },
+  {
+    "video": "xEZo2zgDdfE-00_02_20.400-00_02_30.033.mp4",
+    "model_output": "The NAD is excited to share with you a special thank you to the many members of Congress and supporters of the NAD who participated in the National Deaf Education Day.",
+    "ground_truth": "The NAD wishes to express its many thanks to the many members and supporters who participated in the successful NAD Legislative Day."
+  },
+  {
+    "video": "zTt2umLBlnI-00_00_27.333-00_00_31.400.mp4",
+    "model_output": "Some of you went to different places for different things.",
+    "ground_truth": "Some were successful while others go back to the drawing board."
+  },
+  {
+    "video": "plH6Tq2rj6k-00_00_06.600-00_00_07.466.mp4",
+    "model_output": "Come and join us!",
+    "ground_truth": "Come on!"
+  },
+  {
+    "video": "P8USfnEaNig-00_02_39.133-00_02_40.100.mp4",
+    "model_output": "I m glad you re here!",
+    "ground_truth": "I enjoy the east."
+  },
+  {
+    "video": "PBSpEj64HAg-00_00_19.366-00_00_21.666.mp4",
+    "model_output": "We look forward to working with you.",
+    "ground_truth": "We look forward to working with you all."
+  },
+  {
+    "video": "zpKzb1SBN3Y-00_01_13.500-00_01_18.633.mp4",
+    "model_output": "I also went to the Virginia School for the Deaf and the Blind (VSDC).",
+    "ground_truth": "I visited 22 mainstream, deaf programs, and schools for the deaf."
+  },
+  {
+    "video": "zpKzb1SBN3Y-00_05_30.033-00_05_36.700.mp4",
+    "model_output": "We want to make sure that deaf children have the right to sign language from the very beginning.",
+    "ground_truth": "We want to ensure that they recognize deaf children’s need for sign language, starting from birth."
+  },
+  {
+    "video": "zpKzb1SBN3Y-00_07_36.100-00_07_39.533.mp4",
+    "model_output": "First, the American School for the Deaf (ASD) is one of the programs under the NAD.",
+    "ground_truth": "First, the ASL English Bilingual Schools and Programs."
+  },
+  {
+    "video": "3_D804hV73c-00_02_24.500-00_02_41.633.mp4",
+    "model_output": "When a deaf or hard of hearing child goes to a mainstreamed school for the deaf, it is important for the teacher to be fluent in ASL and to be able to communicate with the child through sign language.",
+    "ground_truth": "In fact, an article was recently published in the American Academy of Pediatrics’ journal outlining the clear benefits of learning sign language with speech over an oral-only approach for babies."
+  },
+  {
+    "video": "3_D804hV73c-00_02_43.000-00_02_51.466.mp4",
+    "model_output": "The use of ASL is an essential part of American culture and the deaf and hard of hearing community.",
+    "ground_truth": "ASL usage is increasing, as ASL courses are among the most popular classes in high schools and colleges across the country, as well as in community programs."
+  },
+  {
+    "video": "yjAuZBiVFII-00_00_33.033-00_00_41.233.mp4",
+    "model_output": "Once you meet with your state representative, they will provide you with a list of what s available to you.",
+    "ground_truth": "I met with the various state Governor’s offices about what their states have and don’t have… Gathering information."
+  },
+  {
+    "video": "_gAnLlibJso-00_03_59.666-00_04_02.366.mp4",
+    "model_output": "We will also share your contact information with your friends.",
+    "ground_truth": "Also, it is important to share this with your friends."
+  },
+  {
+    "video": "gJeM5T7uW_k-00_00_53.233-00_01_06.000.mp4",
+    "model_output": "The farmer would pick up the food and bring it to the train station where the mail would be delivered to the homes of deaf and hard of hearing people.",
+    "ground_truth": "Students lived in various parts of the state and used carriages, horseback riding, and the train to get to the Schools for the Deaf."
+  },
+  {
+    "video": "JFpUT5qmgUM-00_07_31.133-00_07_32.000.mp4",
+    "model_output": "4.",
+    "ground_truth": "Fourth"
+  },
+  {
+    "video": "ov4V4iCiM_s-00_01_07.100-00_01_11.433.mp4",
+    "model_output": "I really enjoyed it because I was able to meet new people and make new friends.",
+    "ground_truth": "We were also involved in a skit and found out that I can act!"
+  },
+  {
+    "video": "ov4V4iCiM_s-00_01_11.466-00_01_17.066.mp4",
+    "model_output": "I learned a lot about myself, my strengths, my weaknesses, and what I want to do in the future.",
+    "ground_truth": "At the time, I didn't know others and that helped us work together as a team."
+  },
+  {
+    "video": "sUg7i_wSn24-00_00_22.733-00_00_26.733.mp4",
+    "model_output": "I like to talk with families who are grieving.",
+    "ground_truth": "I appreciate being a part of the family’s grieving process."
+  },
+  {
+    "video": "qz7qQZgL5x8-00_02_14.100-00_02_18.566.mp4",
+    "model_output": "What do you really want to say to them?",
+    "ground_truth": "The bottom line - what I wanted to share - is that you are you."
+  },
+  {
+    "video": "1Fcli9bH_X8-00_03_31.000-00_03_37.266.mp4",
+    "model_output": "We will develop an action plan for the 2014 Biennial NAD Conference in Atlanta, Georgia.",
+    "ground_truth": "Develop an action plan that will be presented at the 2014 Conference in Atlanta."
+  },
+  {
+    "video": "G2tzMT1j0gI-00_00_10.633-00_00_19.633.mp4",
+    "model_output": "If you are not able to understand what is being said, ask your boss or the meeting host to repeat what was said.",
+    "ground_truth": "If you are not able to understand your remote work meetings, talk to your boss or the meeting host about what you need."
+  },
+  {
+    "video": "G2tzMT1j0gI-00_02_48.433-00_02_53.100.mp4",
+    "model_output": "We will share a list of resources to help you prepare for your next meeting.",
+    "ground_truth": "This may not provide a smooth meeting experience for you."
+  },
+  {
+    "video": "iD6DQiD2J7I-00_00_10.066-00_00_16.133.mp4",
+    "model_output": "NAD is thrilled to have this opportunity to host the College Bowl.",
+    "ground_truth": "The NAD is excited about this new generation of the College Bowl."
+  },
+  {
+    "video": "iD6DQiD2J7I-00_00_19.133-00_00_24.766.mp4",
+    "model_output": "We've worked with Linguabee, which is a college women's volleyball team, as well as the University of Nebraska and the University of Nevada.",
+    "ground_truth": "Over the years we've been used to the Legacy College Bowl trio: Gallaudet University, CSUN and NTID."
+  },
+  {
+    "video": "iD6DQiD2J7I-00_04_42.466-00_04_45.200.mp4",
+    "model_output": "I'm having a great time and I'm excited to be a part of this team.",
+    "ground_truth": "We have wonderful new experiences for our team."
+  },
+  {
+    "video": "NhcbG0pBqaY-00_01_46.366-00_01_54.500.mp4",
+    "model_output": "My favorite Christmas song is \"Jingle Bells.\"",
+    "ground_truth": "Happy Holidays, Merry Christmas and Happy New Year!"
+  },
+  {
+    "video": "wUEiLfHtMxY-00_01_50.266-00_02_02.666.mp4",
+    "model_output": "Every government leader, every public health official, must make sure that there is access to information about your health and well-being.",
+    "ground_truth": "Every government leader and health officers must provide sign language access during their press briefings about our health and threats."
+  },
+  {
+    "video": "wUEiLfHtMxY-00_02_18.600-00_02_19.433.mp4",
+    "model_output": "Thank you.",
+    "ground_truth": "Thank you!"
+  },
+  {
+    "video": "tTeiyqt1GCY-00_00_49.166-00_00_54.066.mp4",
+    "model_output": "We are very excited to have you join us for the next NAD Leadership Training Conference (NLTC).",
+    "ground_truth": "Not to worry, we’ll take good care of them and have fun!"
+  },
+  {
+    "video": "EDlQOtl4fW8-00_02_34.000-00_02_38.133.mp4",
+    "model_output": "You can submit a list of items that are important to you.",
+    "ground_truth": "A few things to keep in mind as you make your proposal."
+  },
+  {
+    "video": "EDlQOtl4fW8-00_04_19.433-00_04_26.766.mp4",
+    "model_output": "The second issue is to recognize the need for the NAD to address this issue.",
+    "ground_truth": "The second component is what issue or gaps do you want NAD to address."
+  },
+  {
+    "video": "EDlQOtl4fW8-00_07_34.466-00_07_37.133.mp4",
+    "model_output": "Maybe you will be given a gift card.",
+    "ground_truth": "There may be shipping costs involved."
+  },
+  {
+    "video": "H7nga4_DWtE-00_00_08.366-00_00_13.500.mp4",
+    "model_output": "The NAD has a rich history of sign language and sign language is an important part of our culture.",
+    "ground_truth": "There are over 200 sign languages used around the world."
+  },
+  {
+    "video": "H7nga4_DWtE-00_00_39.100-00_00_52.133.mp4",
+    "model_output": "This week is International Week of the Deaf, a week to celebrate deaf culture, sign language, and sign language deprivation.",
+    "ground_truth": "Now, we begin our celebration of International Week of the Deaf by reminding everyone that we must promote, protect, and preserve our sign languages to the same degree as spoken languages."
+  },
+  {
+    "video": "H7nga4_DWtE-00_01_09.166-00_01_14.600.mp4",
+    "model_output": "The NAD Board will be leading the next phase of the Deaf Grassroots Movement (DGM).",
+    "ground_truth": "At the same time, we deaf people experience discrimination and are often marginalized."
+  },
+  {
+    "video": "Pfr_DqcuqUY-00_02_06.200-00_02_09.066.mp4",
+    "model_output": "I always knew I wanted to be a school administrator.",
+    "ground_truth": "I’m the only deaf person here, ever!"
+  },
+  {
+    "video": "Pfr_DqcuqUY-00_03_47.100-00_03_59.700.mp4",
+    "model_output": "I talked with them and told them that I was not interested in being a supervisor, but I was interested in working with the students.",
+    "ground_truth": "I either send a text or head over to their building to check in with them in person to determine what needs to be done."
+  },
+  {
+    "video": "RzCLFyNbFTI-00_01_34.666-00_01_45.233.mp4",
+    "model_output": "The biggest concern is the S. 3304 bill, \"Enhanced Communications Act of 2001.\"",
+    "ground_truth": "For example, our biggest concerns are: S. 3304 does not define \"advanced communications\" as broadly as H. R. 3101."
+  },
+  {
+    "video": "RzCLFyNbFTI-00_02_31.566-00_02_42.233.mp4",
+    "model_output": "We are confident that the House of Representatives will pass the H.R.",
+    "ground_truth": "We believe our recent hearing was a big success and a step in the right direction - and it would not have been possible without you!"
+  },
+  {
+    "video": "RzCLFyNbFTI-00_03_19.466-00_03_20.333.mp4",
+    "model_output": "Thank you.",
+    "ground_truth": "Thank you!"
+  },
+  {
+    "video": "NbOzUYY98bI-00_02_36.533-00_02_38.300.mp4",
+    "model_output": "We are very proud of them.",
+    "ground_truth": "I use these four to inspire them."
+  },
+  {
+    "video": "NbOzUYY98bI-00_03_08.233-00_03_10.666.mp4",
+    "model_output": "We think it s the same here at the School for the Deaf at the University of Minnesota.",
+    "ground_truth": "These are like other Jr. NAD chapters at schools for the deaf."
+  },
+  {
+    "video": "uwlcMEwqOhE-00_00_50.366-00_00_55.166.mp4",
+    "model_output": "It is important to feel safe and to not push yourself too far out of your comfort zone.",
+    "ground_truth": "It's extremely important that if you feel sick or have a cold that you refrain from going outside at all."
+  },
+  {
+    "video": "_GGnds1j594-00_00_25.600-00_00_36.733.mp4",
+    "model_output": "I went to the High School for the Deaf (HSD) in August 2010 and I was nervous at first.",
+    "ground_truth": "I moved to Hawaii nine years ago on August 10th, 20010 but it took me one year to set my roots in Hawaii."
+  },
+  {
+    "video": "_GGnds1j594-00_04_02.566-00_04_06.100.mp4",
+    "model_output": "Now, I m on the job as a counselor.",
+    "ground_truth": "Now, I’m no longer shy and I overcame challenges growing up."
+  },
+  {
+    "video": "pQrRV9k6l_I-00_00_43.266-00_00_54.500.mp4",
+    "model_output": "This means that after the meeting, you should have a list of all the things that were discussed, what needs to be done, and what should be added to the bill.",
+    "ground_truth": "After a session is completed -- specific people will gather to study the bill and figure out certain things before a bill  is proposed."
+  },
+  {
+    "video": "NFGiPziWZi0-00_01_22.633-00_01_28.600.mp4",
+    "model_output": "I look forward to learning more about the NAD and its mission.",
+    "ground_truth": "I look forward to learning more at Jr. NAD and bringing all that back to my school."
+  },
+  {
+    "video": "RdDlFuOSvWQ-00_00_37.566-00_00_43.700.mp4",
+    "model_output": "The most prominent group is the Deaf Grassroots Movement (DGM).",
+    "ground_truth": "Most State Associations focus on LEAD-K, as well as other issues."
+  },
+  {
+    "video": "t386fjyHvkE-00_02_04.000-00_02_08.000.mp4",
+    "model_output": "The Deaf community should be at the forefront.",
+    "ground_truth": "The Deaf community should have a say at the table."
+  },
+  {
+    "video": "t386fjyHvkE-00_09_00.000-00_09_05.433.mp4",
+    "model_output": "If they don't do this, then they will be on the brink of legal action from the federal government.",
+    "ground_truth": "So, if a state provides only mainstream programs, then they are in violation of the Federal law."
+  },
+  {
+    "video": "sJ68yFATBXk-00_00_55.266-00_00_56.300.mp4",
+    "model_output": "RID: 1, 4, 3, 2.",
+    "ground_truth": "1493"
+  },
+  {
+    "video": "OtSXwPwHRx4-00_00_47.233-00_00_48.133.mp4",
+    "model_output": "We encourage you to do the same!",
+    "ground_truth": "Allow me to explain how."
+  },
+  {
+    "video": "OtSXwPwHRx4-00_01_43.000-00_01_51.666.mp4",
+    "model_output": "The NAD has a long list of ways to get involved with the NAD and the deaf and hard of hearing community.",
+    "ground_truth": "This movement will occur every now and then, not just October 20th, so we can remain visible and bring attention to the community including the politicians."
+  },
+  {
+    "video": "mZr-T0Ci2EY-00_01_52.300-00_01_55.733.mp4",
+    "model_output": "The ADA is not just for the deaf and hard of hearing, it is for everyone.",
+    "ground_truth": "TTYs can be burdensome, with technical issues and all."
+  },
+  {
+    "video": "vKTkxuH_O9k-00_01_05.600-00_01_13.700.mp4",
+    "model_output": "It s a lot of emotional and mental health issues with a lot of trauma.",
+    "ground_truth": "Navigating through the topic of mental health comes with a lot of taboo and myths."
+  },
+  {
+    "video": "QIasUvV5_OI-00_01_28.233-00_01_37.600.mp4",
+    "model_output": "All of the grants are focused on increasing awareness and understanding of deaf and hard of hearing people and their needs.",
+    "ground_truth": "Part of our priority is to increase awareness – especially for deaf seniors and deaf women aged 40s and up."
+  },
+  {
+    "video": "Vk6LNQu2RQE-00_00_26.266-00_00_31.766.mp4",
+    "model_output": "The guidelines are available on the NAD YAP website to help you prepare for the competition.",
+    "ground_truth": "We have a guideline with all of the information you will need to plan ahead for the competition next year!"
+  },
+  {
+    "video": "y7KIrON1uco-00_02_07.733-00_02_10.133.mp4",
+    "model_output": "He is expected to appear in court today Thursday.",
+    "ground_truth": "It's expected to be arraigned Thursday."
+  },
+  {
+    "video": "y7KIrON1uco-00_02_58.433-00_03_08.233.mp4",
+    "model_output": "Forecasters say some areas could see up to 2 inches of rain until Friday night.",
+    "ground_truth": "Meteorologist say some areas might not get relief from the rain and floods until Friday afternoon."
+  },
+  {
+    "video": "cfpYnacUBGY-00_02_25.366-00_02_29.766.mp4",
+    "model_output": "And it's expected to bring about 136 million passengers.",
+    "ground_truth": "About 31.6 million passengers are expected to travel by plane."
+  },
+  {
+    "video": "cfpYnacUBGY-00_03_36.433-00_03_44.300.mp4",
+    "model_output": "Authorities say she was first reported missing two days later.",
+    "ground_truth": "The sheriff's office said Williams stopped cooperating with police two days later."
+  },
+  {
+    "video": "TMsVV9Y4wRM-00_01_05.366-00_01_17.566.mp4",
+    "model_output": "Trump says he is looking forward to a day when North Korea will be held accountable for its actions.",
+    "ground_truth": "Sanctions against North Korea will remain in place for now but Trump says he looks forward to being able to one day lifting those sanctions."
+  },
+  {
+    "video": "TMsVV9Y4wRM-00_01_19.466-00_01_23.233.mp4",
+    "model_output": "The US stands by its position.",
+    "ground_truth": "And what did the US give up in return?"
+  },
+  {
+    "video": "TMsVV9Y4wRM-00_05_39.000-00_05_50.500.mp4",
+    "model_output": "We want to tell you a little bit about what's going on in the food industry for breakfast, lunch and dinner.",
+    "ground_truth": "It was meant to draw attention to the restaurant's non-breakfast related items in an effort to booze lunch and dinner sales."
+  },
+  {
+    "video": "TMsVV9Y4wRM-00_08_20.300-00_08_30.500.mp4",
+    "model_output": "The Dmainstara Mountain High School softball team is looking for a good spot in the Super Bowl.",
+    "ground_truth": "Check out this true act of sportsmanship at a high school baseball game in Minnesota."
+  },
+  {
+    "video": "J-0KHhPS_m4-00_03_25.000-00_03_38.666.mp4",
+    "model_output": "Some of the veterans are considering joining the \"Kickback Squad.\"",
+    "ground_truth": "In addition some other retired players participated in the scheme for kickbacks and bribes."
+  },
+  {
+    "video": "J-0KHhPS_m4-00_12_53.000-00_13_01.100.mp4",
+    "model_output": "Here's a quick recap of the top 20 healthiest 100 people in the US.",
+    "ground_truth": "And speaking of health, Google is out with the top ten health questions users in the US asked in 2019."
+  },
+  {
+    "video": "J-0KHhPS_m4-00_13_30.666-00_13_35.666.mp4",
+    "model_output": "How do you stop yourself from snacking?",
+    "ground_truth": "The third question is how to get rid of hiccups."
+  },
+  {
+    "video": "J-0KHhPS_m4-00_16_10.366-00_16_22.166.mp4",
+    "model_output": "If you're looking for a way to spice up your Halloween this year, here's a tip: try incorporating something different into your life.",
+    "ground_truth": "So instead of being scared of Friday the 13th, try incorporating some positive changes in your life and see what happens today."
+  },
+  {
+    "video": "J-0KHhPS_m4-00_16_29.200-00_16_31.100.mp4",
+    "model_output": "Thank you for watching Sign1News live.",
+    "ground_truth": "Thank you for watching Sign1News live."
+  },
+  {
+    "video": "kYfAQOobaxI-00_03_14.400-00_03_36.400.mp4",
+    "model_output": "The CDC is urging people to stay away from the sale of products made in the D.C. area.",
+    "ground_truth": "The CDC strongly encourages people to avoid consuming lettuce. If the location on the romaine lettuce is not listed, the CDC still warns consumers to avoid it, even if it's in a restaurant."
+  },
+  {
+    "video": "kYfAQOobaxI-00_08_47.566-00_09_04.733.mp4",
+    "model_output": "But how did this happen?",
+    "ground_truth": "This happened after someone noticed the nation from \"Black Panther\" comics and movie was listed as a free-trade agreement partner."
+  },
+  {
+    "video": "kYfAQOobaxI-00_11_26.733-00_11_27.233.mp4",
+    "model_output": "Sign1News.",
+    "ground_truth": "Your language."
+  },
+  {
+    "video": "PY8a3Q_GB1c-00_03_10.500-00_03_24.433.mp4",
+    "model_output": "The Food and Drug Administration (FDA) is issuing a warning about the sale of e-cigarette and vaping products.",
+    "ground_truth": "More than 1,000 businesses across the US are getting letters from the FDA warning to stop selling e-cigarettes to minors."
+  },
+  {
+    "video": "PY8a3Q_GB1c-00_06_51.766-00_07_01.233.mp4",
+    "model_output": "I used to work in a DC hospital as a lab technician.",
+    "ground_truth": "I was working in a DC hospital center lab on September 11."
+  },
+  {
+    "video": "PY8a3Q_GB1c-00_09_11.066-00_09_12.066.mp4",
+    "model_output": "It was different.",
+    "ground_truth": "I couldn't stand."
+  },
+  {
+    "video": "LgpJQ7jkX5E-00_02_45.100-00_02_58.200.mp4",
+    "model_output": "The result of the debate will be discussed in the next episode of \"The Walking Dead.\"",
+    "ground_truth": "As a result, the debate over the connection between video game violence and real-world violence has started again."
+  },
+  {
+    "video": "Glzf4l942RQ-00_03_58.400-00_04_06.166.mp4",
+    "model_output": "According to the WHO, one out of every seven people worldwide are infected with human papillomavirus (HPV).",
+    "ground_truth": "The WHO found on average 1 in every 25 people globally has at least one of these STDs."
+  },
+  {
+    "video": "NOKlX2CRNfk-00_08_17.033-00_08_17.666.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your language."
+  },
+  {
+    "video": "pJ8TyVN7HE0-00_00_36.666-00_00_50.333.mp4",
+    "model_output": "Authorities say the murder took place Thursday in San Antonio, where Stevens was a foster child.",
+    "ground_truth": "Authorities say the killings began Thursday when forensic psychiatrist Steven Pitt was found shot to death in Phoenix."
+  },
+  {
+    "video": "S4XbLn_o6OY-00_07_30.466-00_07_40.566.mp4",
+    "model_output": "In his tweet, he said \"The job is not done but we have a new chapter to write in the annals of history.\"",
+    "ground_truth": "The message was actually about newly canonized Saints."
+  },
+  {
+    "video": "smq7BzXmIkE-00_04_52.200-00_05_01.133.mp4",
+    "model_output": "He was arrested and charged with disorderly conduct.",
+    "ground_truth": "They were arrested after getting off the bus and charged with disorderly conduct."
+  },
+  {
+    "video": "i96QICT6BiU-00_03_38.733-00_03_47.233.mp4",
+    "model_output": "It's a way for people to come together and share their stories.",
+    "ground_truth": "Unfortunately that means criminals want to take advantage of people's kindness."
+  },
+  {
+    "video": "i96QICT6BiU-00_09_08.700-00_09_16.500.mp4",
+    "model_output": "On Friday (Yesterday) we asked you what you wanted to see on Sign1News.",
+    "ground_truth": "Well, little Manuel was hungry - really, really hungry - last Friday and wanted to order pizza."
+  },
+  {
+    "video": "7f96j98SBos-00_02_31.366-00_02_35.033.mp4",
+    "model_output": "The boy says he just wanted to say hi.",
+    "ground_truth": "The boy said, \"Look, I told you!\""
+  },
+  {
+    "video": "7f96j98SBos-00_02_35.200-00_02_36.033.mp4",
+    "model_output": "Take a look.",
+    "ground_truth": "Let's go!"
+  },
+  {
+    "video": "7f96j98SBos-00_02_41.400-00_02_44.066.mp4",
+    "model_output": "I'm happy to share his story with you.",
+    "ground_truth": "They were happy to tell their side of the story."
+  },
+  {
+    "video": "7IONUnzZCzk-00_02_52.666-00_03_02.133.mp4",
+    "model_output": "About a year ago, the Orange County Register identified her as one of California's most prominent candidates for the Democratic nomination.",
+    "ground_truth": "A year earlier a local magazine named him Orange County, California's most eligible bachelor."
+  },
+  {
+    "video": "7IONUnzZCzk-00_04_52.533-00_05_00.033.mp4",
+    "model_output": "Seven people who ate the contaminated meat have been sickened and one person has died.",
+    "ground_truth": "Eighteen people who ate the meat became sick and one person died."
+  },
+  {
+    "video": "x7ieo_bLOt8-00_04_58.733-00_05_02.500.mp4",
+    "model_output": "It's called an \"emergency box\" and it's full of surprises.",
+    "ground_truth": "Baby bottle and smiley emojis."
+  },
+  {
+    "video": "7Ed0xWifFhk-00_00_29.233-00_00_29.766.mp4",
+    "model_output": "Hello everyone.",
+    "ground_truth": "Hello everyone."
+  },
+  {
+    "video": "7Ed0xWifFhk-00_05_26.166-00_05_35.533.mp4",
+    "model_output": "Trump's political advisor is hoping he will use his endorsement to find his way back to the limelight and four more years in the White House.",
+    "ground_truth": "Trump's political advisors hope he'll spotlight his accomplishments and 4 more years of promises kept."
+  },
+  {
+    "video": "7Ed0xWifFhk-00_06_47.033-00_06_53.500.mp4",
+    "model_output": "Oregon has a ban on keeping wild animals as pets.",
+    "ground_truth": "In Oregon it is also illegal to lure wild animals by leaving behind food or garbage."
+  },
+  {
+    "video": "7Ed0xWifFhk-00_07_13.166-00_07_14.066.mp4",
+    "model_output": "I'm Crystal Cousineau.",
+    "ground_truth": "I'm Crystal Cousineau."
+  },
+  {
+    "video": "EyHFK4r23qE-00_01_36.700-00_01_44.233.mp4",
+    "model_output": "Jones announced Friday that 46 people were arrested and charged with grand larceny.",
+    "ground_truth": "Johnson also announced that 46 people were arrested this past weekend on gun charges."
+  },
+  {
+    "video": "EyHFK4r23qE-00_09_11.000-00_09_14.066.mp4",
+    "model_output": "He's been in the White House for 24 years.",
+    "ground_truth": "They have been with Pepsi for 24 years."
+  },
+  {
+    "video": "3h7veASAUaw-00_03_40.666-00_03_54.100.mp4",
+    "model_output": "The storm destroyed the home of Holly Williams, the director of the Rochester Institute of Technology's Department of Electrical and Computer Engineering.",
+    "ground_truth": "The storm knocked out the power and air-conditioning system at the Rehabilitation Center at Hollywood Hills nursing home."
+  },
+  {
+    "video": "3h7veASAUaw-00_07_29.766-00_07_38.433.mp4",
+    "model_output": "The first round of community testing for the virus began Tuesday.",
+    "ground_truth": "New technology rolled out Tuesday after being tested in select cities over the past year."
+  },
+  {
+    "video": "3h7veASAUaw-00_10_28.300-00_10_32.733.mp4",
+    "model_output": "The company says it plans to sell the chicken sandwiches in stores later this year.",
+    "ground_truth": "Popeyes say they plan to bring chicken sandwiches back again soon."
+  },
+  {
+    "video": "TmpQJ2sDUcE-00_09_45.666-00_09_51.300.mp4",
+    "model_output": "It's a 60-ounce bottle of soda with less than 100 calories.",
+    "ground_truth": "It's less than a hundred calories for a 16-ounce drink."
+  },
+  {
+    "video": "hVoU7P_QdUQ-00_03_52.000-00_03_59.666.mp4",
+    "model_output": "If you're one of those people, here's what you need to know.",
+    "ground_truth": "If the criteria is met, they will write it down to let them know, and they need to call to schedule an appointment."
+  },
+  {
+    "video": "hVoU7P_QdUQ-00_09_04.766-00_09_06.333.mp4",
+    "model_output": "And finally the third tip.",
+    "ground_truth": "Third, exercise."
+  },
+  {
+    "video": "lqvoj7arHjI-00_05_54.233-00_05_57.700.mp4",
+    "model_output": "Remember to like us on Facebook and follow us on Twitter.",
+    "ground_truth": "And remember to like us on Facebook and follow us on Twitter."
+  },
+  {
+    "video": "rzGo6eQvstY-00_00_46.300-00_00_53.766.mp4",
+    "model_output": "He is accused of sparring with Spider-Man and sending him 5,000 emails.",
+    "ground_truth": "They spear-phish by emailing 5,000 voters."
+  },
+  {
+    "video": "rzGo6eQvstY-00_01_14.000-00_01_27.000.mp4",
+    "model_output": "On Monday, Trump and Putin held off on a meeting that was supposed to take place in Singapore.",
+    "ground_truth": "Trump's Summit with Putin is Monday, but Democrats say the meeting should not happen."
+  },
+  {
+    "video": "rzGo6eQvstY-00_03_59.066-00_04_05.366.mp4",
+    "model_output": "Prosecutors say he altered his testimony in court.",
+    "ground_truth": "He testified against and changed his story."
+  },
+  {
+    "video": "rzGo6eQvstY-00_06_06.166-00_06_10.733.mp4",
+    "model_output": "Remember to like us on Facebook and follow us on Twitter.",
+    "ground_truth": "Remember to like this on Facebook and follow us on Twitter."
+  },
+  {
+    "video": "syDWIvL6-hk-00_00_07.066-00_00_08.366.mp4",
+    "model_output": "Hello everyone.",
+    "ground_truth": "Hello everyone."
+  },
+  {
+    "video": "syDWIvL6-hk-00_07_40.100-00_07_47.700.mp4",
+    "model_output": "If you're a Washington state resident and you're out and about this time of year, be on the lookout.",
+    "ground_truth": "Washington State agricultural officials are asking residents to report any sightings of the giant hornets."
+  },
+  {
+    "video": "syDWIvL6-hk-00_10_56.433-00_11_10.633.mp4",
+    "model_output": "Earlier this week British Prime Minister Boris Johnson and First Lady Marie Meadows were spotted posing with a baby boy.",
+    "ground_truth": "Earlier this week we shared the news that British Prime Minister Boris Johnson and his partner Carrie Symonds welcomed the arrival of their son."
+  },
+  {
+    "video": "rAyFScCBavE-00_00_53.466-00_01_00.133.mp4",
+    "model_output": "The driver of the car involved in the crash was a skateboarder who got into a fight with a group of bikers.",
+    "ground_truth": "The driver was performing a burnout."
+  },
+  {
+    "video": "jPvOkmxsKoA-00_04_56.633-00_04_57.300.mp4",
+    "model_output": "Ohio.",
+    "ground_truth": "The main stumbling block?"
+  },
+  {
+    "video": "jPvOkmxsKoA-00_07_20.566-00_07_27.133.mp4",
+    "model_output": "The male lead is played by Mena Massoud.",
+    "ground_truth": "Mena Massoud plays Aladdin."
+  },
+  {
+    "video": "zfumcO72yTs-00_01_50.000-00_01_52.266.mp4",
+    "model_output": "That's when things got out of hand.",
+    "ground_truth": "The entire incident lasted only five minutes."
+  },
+  {
+    "video": "zfumcO72yTs-00_03_25.733-00_03_31.300.mp4",
+    "model_output": "The man was using his last 20 dollars to buy gas.",
+    "ground_truth": "The man used his last $20 to buy gas to give to her."
+  },
+  {
+    "video": "zfumcO72yTs-00_04_00.300-00_04_08.133.mp4",
+    "model_output": "But before the hearing, the judge ordered the baby to be removed from the home.",
+    "ground_truth": "The couple has repeatedly denied any wrongdoing, but a court ordered a deadline for them to hand over the money."
+  },
+  {
+    "video": "zfumcO72yTs-00_05_09.200-00_05_17.033.mp4",
+    "model_output": "And during the interview, he fired a handgun into the crowd.",
+    "ground_truth": "During the interview they waved around a flamethrower."
+  },
+  {
+    "video": "bxei0aUphCw-00_03_31.133-00_03_40.133.mp4",
+    "model_output": "It's the first time the Space Force will be a sixth branch of the US military.",
+    "ground_truth": "They want the Space Force to be the sixth branch of the armed forces."
+  },
+  {
+    "video": "bxei0aUphCw-00_08_20.166-00_08_37.633.mp4",
+    "model_output": "The change is called \"Experian Boost\" and it could give you a higher credit score based on your online activity.",
+    "ground_truth": "The first change, \"Experian Boost,\" can potentially get you a higher credit score based on your internet, utility and cable bill payment history."
+  },
+  {
+    "video": "S1HvZQRRIaY-00_00_35.500-00_00_45.766.mp4",
+    "model_output": "Eighteen people were killed and dozens were injured in a series of bombings in Sri Lanka.",
+    "ground_truth": "200 people were killed and many more injured all across Sri Lanka as a result of eight explosions."
+  },
+  {
+    "video": "vJdxYw1i2QM-00_04_26.000-00_04_43.333.mp4",
+    "model_output": "The Academy of Motion Picture Arts and Sciences (AMPAS) says it's not too late to find a safe place to work but it's not going to happen anytime soon.",
+    "ground_truth": "A message on the AMS website says \"Do not let the virus prevent you from seeking refuge from a tornado.\""
+  },
+  {
+    "video": "KFnSbd2RKJ0-00_01_01.200-00_01_15.666.mp4",
+    "model_output": "She was arrested and charged with one count of aggravated robbery.",
+    "ground_truth": "Witnesses say a person entered a store around 6:30 Tuesday morning and opened fire, killing one person inside the store and killing another outside as he was fleeing."
+  },
+  {
+    "video": "9oAD9JRPPIQ-00_06_10.700-00_06_15.633.mp4",
+    "model_output": "But as he was running away, he was shot in the back.",
+    "ground_truth": "But they were also hit by a sixth bullet by a CPH officer."
+  },
+  {
+    "video": "e9o20Wskpvw-00_04_31.566-00_04_42.533.mp4",
+    "model_output": "The Lakers asked the team if they could have an autograph session with the players during the game.",
+    "ground_truth": "The league is asking them to consider what actions they would take in their arenas to play games without fans inside."
+  },
+  {
+    "video": "e9o20Wskpvw-00_08_25.300-00_08_38.533.mp4",
+    "model_output": "The winner will be announced at the end of the week and the contestants will be a mix of public kitties, private kitties and human kitties.",
+    "ground_truth": "Besides the dog, Lieutenant Dan, there is a mini horse, pig, llama, hamster, duck and two cats."
+  },
+  {
+    "video": "LT0-h4P_xBY-00_00_12.500-00_00_14.000.mp4",
+    "model_output": "I'm Jethro Wooddall.",
+    "ground_truth": "I'm Jethro Wooddall."
+  },
+  {
+    "video": "LT0-h4P_xBY-00_01_59.033-00_02_07.666.mp4",
+    "model_output": "The virus is less likely to spread and the demand for hospital beds is also on the decline.",
+    "ground_truth": "The virus attack rate has lowered as has the demand for supplies, such as hospital beds."
+  },
+  {
+    "video": "LT0-h4P_xBY-00_05_10.666-00_05_23.000.mp4",
+    "model_output": "But speaking of water, you may be able to save up to four months in your water bill.",
+    "ground_truth": "Although it may take several months for your lungs to clear out all the gunk from smoking, it is a change you'll be glad you made."
+  },
+  {
+    "video": "LT0-h4P_xBY-00_07_35.000-00_07_42.766.mp4",
+    "model_output": "The National Enquirer is accused of covering up the coronavirus pandemic as a cover-up.",
+    "ground_truth": "Of course the coronavirus pandemic is the reason of the spike in unemployment."
+  },
+  {
+    "video": "LT0-h4P_xBY-00_07_54.500-00_08_00.200.mp4",
+    "model_output": "That's the second highest number of workers filing a claim in the state.",
+    "ground_truth": "It was the second largest number of initial unemployment claims in history."
+  },
+  {
+    "video": "LT0-h4P_xBY-00_09_29.733-00_09_38.100.mp4",
+    "model_output": "Bars and nightclubs are among the businesses that have been forced to shut down.",
+    "ground_truth": "As business dried up, owner Jennifer Knox was sitting in her empty bar and looked around."
+  },
+  {
+    "video": "oqsiLgMkqIU-00_00_29.100-00_00_30.433.mp4",
+    "model_output": "Welcome to Sign1News.",
+    "ground_truth": "Welcome to Sign1News."
+  },
+  {
+    "video": "oqsiLgMkqIU-00_04_30.500-00_04_41.066.mp4",
+    "model_output": "The decision has sparked outrage in many parts of the country.",
+    "ground_truth": "Many Flint residents say they are outraged, horrified, blindsided and retraumatized by the decision."
+  },
+  {
+    "video": "_N5zuJa9vJI-00_00_15.133-00_00_21.700.mp4",
+    "model_output": "Today is a day to celebrate the beauty of the American flag.",
+    "ground_truth": "Americans across the country said \"Happy Birthday\" to the nation today."
+  },
+  {
+    "video": "_N5zuJa9vJI-00_01_47.000-00_01_52.700.mp4",
+    "model_output": "Security is still tight but people are still enjoying the festivities.",
+    "ground_truth": "Security was extremely tight but it didn't stop the fun from happening."
+  },
+  {
+    "video": "fgbp9mCQX_g-00_01_45.066-00_01_50.600.mp4",
+    "model_output": "Authorities have not released any information on the motive for the shooting.",
+    "ground_truth": "Authorities are not releasing further information about the killing including the motive."
+  },
+  {
+    "video": "fgbp9mCQX_g-00_04_47.400-00_05_01.033.mp4",
+    "model_output": "According to Johns Hopkins University, coronavirus continues to spread in the US with more than 1.5 million confirmed cases.",
+    "ground_truth": "According to Johns Hopkins University, the virus continues to spread with more than 1.5 million confirmed cases in the US."
+  },
+  {
+    "video": "YR7BS6l_95E-00_01_54.133-00_01_58.233.mp4",
+    "model_output": "I have been dancing since I was a little girl and I have been dancing ever since.",
+    "ground_truth": "A warm welcome to you all. So friendly and sociable."
+  },
+  {
+    "video": "YR7BS6l_95E-00_04_25.633-00_04_30.500.mp4",
+    "model_output": "I'm really excited because there are so many different kinds of Deaf people here.",
+    "ground_truth": "I met so many diverse people with so much talent."
+  },
+  {
+    "video": "YR7BS6l_95E-00_04_35.500-00_04_39.666.mp4",
+    "model_output": "We feel so grateful for the community.",
+    "ground_truth": "I feel so blessed and grateful for the Atlanta community."
+  },
+  {
+    "video": "YR7BS6l_95E-00_08_15.366-00_08_30.400.mp4",
+    "model_output": "Last week the children were seen in the attire worn by Princess Eugenie's royal bodyguards.",
+    "ground_truth": "Speculation that she might be pregnant started last week when royal watchers noticed she was wearing a loose fitting outfit at the wedding of Princess Eugenie."
+  },
+  {
+    "video": "YR7BS6l_95E-00_09_00.633-00_09_12.233.mp4",
+    "model_output": "The rescue operation was overseen by a Sherri team of rescuers.",
+    "ground_truth": "They got an aerial tour over the devastated areas, then landed and stopped by a shelter to help hand out supplies to people."
+  },
+  {
+    "video": "YR7BS6l_95E-00_09_31.733-00_09_45.066.mp4",
+    "model_output": "The company's new ads feature a man in a suit carrying a chocolate bar, a tablet and a coffee cup.",
+    "ground_truth": "The company's new ad campaign depicts burly men picking grapes, driving trucks and guzzling down grape juice."
+  },
+  {
+    "video": "oY4zNmRl79Q-00_06_19.700-00_06_27.766.mp4",
+    "model_output": "The girl was driving and suddenly slammed on the brakes, hitting a man and his dog.",
+    "ground_truth": "At one point the girl stepped on the accelerator and then struck a tree, a man,  and one of his dogs."
+  },
+  {
+    "video": "UoU3ZSuTef4-00_04_12.100-00_04_21.000.mp4",
+    "model_output": "The holiday weekend in western and central states is expected to be filled with wildfires.",
+    "ground_truth": "Crews spent this holiday weekend battling wildfires in several states in the West."
+  },
+  {
+    "video": "YAxFqaUqQDo-00_05_27.133-00_05_37.233.mp4",
+    "model_output": "Several states are imposing stay-at-home orders.",
+    "ground_truth": "As several states in the US have begun lifting stay-at-home restrictions, some countries are beginning to open up as well."
+  },
+  {
+    "video": "YAxFqaUqQDo-00_07_32.666-00_07_47.600.mp4",
+    "model_output": "In Delaware and Maryland, 2 million birds were euthanized because of the high demand for bird meat.",
+    "ground_truth": "Two million chickens in Delaware and Maryland are being euthanized because chicken processing plants are short-staffed."
+  },
+  {
+    "video": "hr4pJ4qW9ao-00_07_34.500-00_07_36.066.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your life."
+  },
+  {
+    "video": "luSqJNOOx6A-00_04_45.366-00_04_49.766.mp4",
+    "model_output": "Grocery store manager Raphael is 33 years old.",
+    "ground_truth": "The Grammy nominated rapper was 33 years old."
+  },
+  {
+    "video": "luSqJNOOx6A-00_05_19.433-00_05_27.133.mp4",
+    "model_output": "Every year, the US sees 500 deaths due to vaping.",
+    "ground_truth": "The disease once claimed up to 500 lives in the United States each year."
+  },
+  {
+    "video": "luSqJNOOx6A-00_10_32.266-00_10_33.666.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your life."
+  },
+  {
+    "video": "9Oj4WYiljqs-00_04_06.533-00_04_18.033.mp4",
+    "model_output": "But the US Treasury Department says Americans will not be out of a job for long.",
+    "ground_truth": "But Federal Reserve Chairman Jerome Powell says Americans will just have to ride it out."
+  },
+  {
+    "video": "9Oj4WYiljqs-00_08_51.433-00_09_03.433.mp4",
+    "model_output": "And of course all of us here at Sign1News will be keeping a close eye on the president's response to the crisis.",
+    "ground_truth": "So Candace gathered a diverse group of her friends to sign the same song, hoping it will uplift and inspire the Deaf community."
+  },
+  {
+    "video": "n8o0aUKmNyM-00_06_10.400-00_06_22.266.mp4",
+    "model_output": "The fast food chain is recalling some of its burgers and chicken sandwiches because of a possible E. coli contamination.",
+    "ground_truth": "The company is removing artificial ingredients from its burgers and even the Big Mac special sauce will get a makeover."
+  },
+  {
+    "video": "n8o0aUKmNyM-00_08_28.233-00_08_30.733.mp4",
+    "model_output": "Thank you for watching Sign1News.",
+    "ground_truth": "Thank you for watching Sign1News."
+  },
+  {
+    "video": "noSF4Y7sGEk-00_04_23.366-00_04_42.000.mp4",
+    "model_output": "The White House says it is still working on a solution but health experts are stressing the importance of wearing a mask to protect yourself and others.",
+    "ground_truth": "And while the White House says progress is being made on vaccines, health experts stress erring on the side of caution could be the difference between life and death."
+  },
+  {
+    "video": "noSF4Y7sGEk-00_06_09.300-00_06_23.400.mp4",
+    "model_output": "The plan is for Democrats to establish a national call-in system to allow citizens to report police officers wearing body cameras.",
+    "ground_truth": "Democrats want to set national standards such as banning chokeholds and requiring federal uniformed officers to wear body cameras."
+  },
+  {
+    "video": "k5Gxbifw8s8-00_00_37.533-00_00_38.500.mp4",
+    "model_output": "I'm Candace Jones.",
+    "ground_truth": "Me cl:L-flick-side-of-chin. "
+  },
+  {
+    "video": "k5Gxbifw8s8-00_01_33.166-00_01_52.500.mp4",
+    "model_output": "We want to empower students to make informed decisions about what information they want to collect and how they want to present it to the Deaf community.",
+    "ground_truth": "I let my students decide the topic they feel will be most beneficial for them, I narrow the list down to the top three and then I bring in leaders from the Deaf community in those fields to present to the class."
+  },
+  {
+    "video": "k5Gxbifw8s8-00_02_14.066-00_02_18.733.mp4",
+    "model_output": "The CDC is working with the Department of Health and Human Services to get the information out to the public.",
+    "ground_truth": "There are more and more opportunities for Deaf people to become CDIs."
+  },
+  {
+    "video": "k5Gxbifw8s8-00_07_04.500-00_07_20.400.mp4",
+    "model_output": "Trump talked about the House's impeachment inquiry as an example of why Congress hasn't voted to impeach him.",
+    "ground_truth": "The Trump Administration has claimed the House is not conducting a valid impeachment inquiry since there's been no formal vote to authorize it."
+  },
+  {
+    "video": "k5Gxbifw8s8-00_08_10.300-00_08_14.733.mp4",
+    "model_output": "And it's not just humans.",
+    "ground_truth": "Why the increase of young people vaping? Eesh."
+  },
+  {
+    "video": "k5Gxbifw8s8-00_09_33.433-00_09_38.433.mp4",
+    "model_output": "Snickers, what are you up to?",
+    "ground_truth": "Snickers is giving away candy anyway."
+  },
+  {
+    "video": "2_PWeBb41qM-00_00_50.500-00_01_08.533.mp4",
+    "model_output": "Sign1News will be reporting from the governor's press conference at the Capitol as well as the first interpreter team from the state's emergency management planning center.",
+    "ground_truth": "They are the first interpreting team in the country to be embedded in the state's emergency management operation center alongside other critical personnel."
+  },
+  {
+    "video": "2_PWeBb41qM-00_05_46.700-00_05_55.100.mp4",
+    "model_output": "As of Tuesday morning, the US has more than 3,000 coronavirus cases.",
+    "ground_truth": "As of Tuesday morning, more than 3-thousand people have died of coronavirus in the US."
+  },
+  {
+    "video": "2_PWeBb41qM-00_08_52.600-00_09_07.133.mp4",
+    "model_output": "On Monday Florida authorities arrested him for disorderly conduct at a church service for social distancing.",
+    "ground_truth": "On Monday a popular Florida pastor was arrested for holding large church services despite social distancing orders."
+  },
+  {
+    "video": "2_PWeBb41qM-00_11_22.733-00_11_27.733.mp4",
+    "model_output": "Monday was the first day of the protests.",
+    "ground_truth": "Amazon fired them Monday after he appeared at the protest."
+  },
+  {
+    "video": "2_PWeBb41qM-00_13_42.300-00_13_44.466.mp4",
+    "model_output": "Thank you for watching Sign1News live.",
+    "ground_truth": "Thank you for watching Sign1News live."
+  },
+  {
+    "video": "5epnKnBWP4Y-00_08_58.333-00_09_13.400.mp4",
+    "model_output": "The NBA player says he donated the money to a life insurance company called Equistrust.",
+    "ground_truth": "The basketball player will provides money to life insurance company, EquiTrust, of which he owns a majority."
+  },
+  {
+    "video": "na2y-3lh5x4-00_09_36.700-00_09_37.466.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your language."
+  },
+  {
+    "video": "c-5mKVNHetA-00_02_45.000-00_02_56.200.mp4",
+    "model_output": "If approved, it will be sent to the House of Representatives for a vote and if confirmed by the Senate, it will become law.",
+    "ground_truth": "If approved, they'll go to the House, where a majority is needed to formally impeach Trump."
+  },
+  {
+    "video": "CIl6r9nP-VA-00_04_22.366-00_04_31.266.mp4",
+    "model_output": "He said the US is still 30 percent taxed at the same rate as Mexico.",
+    "ground_truth": "They said the tariffs for them are equal in value to the US tariffs."
+  },
+  {
+    "video": "a91XPFdhKuU-00_05_22.400-00_05_29.000.mp4",
+    "model_output": "The National Weather Service has issued a flash flood watch from 1 PM to 5 PM, including parts of Florida.",
+    "ground_truth": "Meteorologists say freeze warnings remain in the South including Florida."
+  },
+  {
+    "video": "a91XPFdhKuU-00_07_09.200-00_07_16.133.mp4",
+    "model_output": "On Thursday police responded to a mother's call about a missing child.",
+    "ground_truth": "Last Thursday police reported the mother was no longer cooperating with police."
+  },
+  {
+    "video": "q2dp2b7YPog-00_02_51.000-00_03_01.666.mp4",
+    "model_output": "Officials are asking anyone with information about the girl's whereabouts to come forward.",
+    "ground_truth": "Authorities are asking anyone who may have seen this girl with her mother anytime in the last four months to call police."
+  },
+  {
+    "video": "q2dp2b7YPog-00_07_31.700-00_07_33.200.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your life."
+  },
+  {
+    "video": "A33z5b18iew-00_01_19.033-00_01_30.533.mp4",
+    "model_output": "Some states are still struggling to get their hands on the drug.",
+    "ground_truth": "Some states have been the most hardest-hit areas with Covid and still have not received their medicine."
+  },
+  {
+    "video": "fDAfyBbiA_c-00_08_07.266-00_08_09.700.mp4",
+    "model_output": "It's a favorite movie of mine.",
+    "ground_truth": "In fact their favorite movie is \"Moana.\""
+  },
+  {
+    "video": "xYMLDF2l080-00_04_12.100-00_04_17.233.mp4",
+    "model_output": "He said the drug will be available by the end of the month.",
+    "ground_truth": "They said the drug will run out the end of the month, June 30."
+  },
+  {
+    "video": "xYMLDF2l080-00_06_48.733-00_06_56.433.mp4",
+    "model_output": "That's a 10 percent drop since January 2019.",
+    "ground_truth": "That is Trump's worst approval rating since January 2019."
+  },
+  {
+    "video": "xYMLDF2l080-00_09_10.433-00_09_33.000.mp4",
+    "model_output": "The EWDR says it is concerned about the economic impact of the coronavirus pandemic on small business owners across the country.",
+    "ground_truth": "Edwards says many black-owned businesses may not make it through the pandemic and that we have a responsibility to make sure \"we all thrive.\""
+  },
+  {
+    "video": "aWYgWpsTAjo-00_00_53.400-00_01_12.533.mp4",
+    "model_output": "More evacuations are in the works as the Carr fire continues to burn and California's sixth-largest wildfire has grown to more than 200 miles wide.",
+    "ground_truth": "More evacuations are underway as firefighters continue to fight the massive CARR fire, which is now the 6th most destructive fire in the states history and has burned about 200 square miles."
+  },
+  {
+    "video": "aWYgWpsTAjo-00_06_25.333-00_06_37.433.mp4",
+    "model_output": "The FDA says the prescriptions are used to treat and prevent a rare condition called cyclopharyngeal dysphagia.",
+    "ground_truth": "According to the FDA, an unused package of Fresh Express salad mix tested positive for Cyclospra."
+  },
+  {
+    "video": "sP6B4dlSOoc-00_04_05.466-00_04_17.600.mp4",
+    "model_output": "The Convention on Migrants and Refugees (CMR) is an international treaty between the United Nations and the European Union.",
+    "ground_truth": "Conspiracy theories included everyone from mobsters to international terrorists and the highest levels of the Vatican being involved."
+  },
+  {
+    "video": "sP6B4dlSOoc-00_05_21.533-00_05_29.300.mp4",
+    "model_output": "But the activities can be harmful to your dog if you're not careful.",
+    "ground_truth": "Those activities can pose a threat to your dog if you're taking them along."
+  },
+  {
+    "video": "sP6B4dlSOoc-00_05_38.333-00_05_41.433.mp4",
+    "model_output": "But it's important to note the same applies to dogs.",
+    "ground_truth": "It's important to do the same for your dog space."
+  },
+  {
+    "video": "sP6B4dlSOoc-00_05_41.666-00_05_47.233.mp4",
+    "model_output": "But a simple walk in the snow can be dangerous.",
+    "ground_truth": "Something as simple as walking along the sidewalk can be potentially dangerous."
+  },
+  {
+    "video": "sP6B4dlSOoc-00_08_20.233-00_08_31.200.mp4",
+    "model_output": "Wednesday President Trump signed an executive order to regulate kidney care.",
+    "ground_truth": "On Wednesday President Trump signed an executive order aimed at transforming kidney care."
+  },
+  {
+    "video": "sTHgUNAxDts-00_04_24.633-00_04_32.600.mp4",
+    "model_output": "During the pandemic truck drivers are considered essential workers.",
+    "ground_truth": "Truck drivers are among the \"essential employees\" whose responsibilities haven't changed much, if at all, during the pandemic."
+  },
+  {
+    "video": "sTHgUNAxDts-00_07_17.266-00_07_29.566.mp4",
+    "model_output": "The two have been spending time with the children and teaching them how to make baskets.",
+    "ground_truth": "The couple spoke with children who showed them paintings they had made of their parents and Easter crafts they had created."
+  },
+  {
+    "video": "sTHgUNAxDts-00_08_19.566-00_08_20.366.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your language."
+  },
+  {
+    "video": "2HCnifZR1pw-00_02_02.433-00_02_12.066.mp4",
+    "model_output": "It's a great opportunity for teachers, students, parents and special education professionals to learn more about the process.",
+    "ground_truth": "It's a day to recognize teachers, students, parents and the progress that has been made in special education."
+  },
+  {
+    "video": "2HCnifZR1pw-00_08_19.133-00_08_24.466.mp4",
+    "model_output": "Chicago police have no suspects in the case.",
+    "ground_truth": "Chicago police do not have a suspect in custody and the investigation is ongoing."
+  },
+  {
+    "video": "2vItFX_gYQE-00_02_19.666-00_02_23.100.mp4",
+    "model_output": "If the committee approves it, it will go to the full House of Representatives for a vote.",
+    "ground_truth": "If the committee approves the charges, ..."
+  },
+  {
+    "video": "2vItFX_gYQE-00_03_22.466-00_03_30.566.mp4",
+    "model_output": "Police say the suspects were first spotted in a Jewish grocery store.",
+    "ground_truth": "Police believe the suspects targeted the Jewish supermarket, and that they apparently held a hatred for Jewish law enforcement."
+  },
+  {
+    "video": "LifhWQwUvMg-00_00_42.733-00_01_05.366.mp4",
+    "model_output": "On Sunday night, President Trump had a disturbing conversation with Mississippi Senator Kirsten Gillibrand about immigration policy and border security.",
+    "ground_truth": "Kirstjen Nielsen resigned Sunday evening after repeated clashes with the President over his immigration policy and after he expressed his frustration over the situation at the southern border with Mexico."
+  },
+  {
+    "video": "LifhWQwUvMg-00_03_25.166-00_03_40.300.mp4",
+    "model_output": "The Southeast states are on the brink of a major storm outbreak with Georgia, South Carolina, North Carolina, Virginia, Mississippi and Alabama.",
+    "ground_truth": "The Southeast states potentially affected by the storm are Georgia, North and South Carolina, Virginia, Mississippi and Alabama."
+  },
+  {
+    "video": "LifhWQwUvMg-00_05_24.200-00_05_39.166.mp4",
+    "model_output": "She says she didn't think much of it at the time but when Gillette came up to her, she was taken aback.",
+    "ground_truth": "She said she never considered fostering or adoption but when Gisele crossed her path in a stroller, the two locked eyes and that was it."
+  },
+  {
+    "video": "oUaGP-pj30A-00_01_08.133-00_01_12.366.mp4",
+    "model_output": "We have an update to a story we told you about today.",
+    "ground_truth": "Right now the entire state of Florida is under a state of emergency."
+  },
+  {
+    "video": "oUaGP-pj30A-00_13_30.000-00_13_31.566.mp4",
+    "model_output": "Thank you for watching Sign1News.",
+    "ground_truth": "Thank you for watching Sign1News."
+  },
+  {
+    "video": "vTs4UBTvly8-00_05_19.266-00_05_41.766.mp4",
+    "model_output": "The produce has been recalled from Whole Foods, Trader Joe's, Walmart, Wal-Mart, Target and other retailers due to possible salmonella contamination.",
+    "ground_truth": "Pre-cut melon sold at Whole Foods, Kroger, Target, Walmart, Trader Joe's and other stores has been voluntarily recalled due to the possibility of salmonella contamination."
+  },
+  {
+    "video": "bySOi__Kauk-00_06_18.100-00_06_24.266.mp4",
+    "model_output": "The group is made up of other law enforcement officers.",
+    "ground_truth": "The officers involved have been placed on desk duty."
+  },
+  {
+    "video": "bySOi__Kauk-00_09_11.100-00_09_20.166.mp4",
+    "model_output": "A 39-year-old Connecticut man was arrested Sunday after flying from the JFK International Airport in New York.",
+    "ground_truth": "The 39-year-old Connecticut man was arrested Sunday at JFK International Airport in New York."
+  },
+  {
+    "video": "btdPgAr_4ow-00_00_14.300-00_00_15.433.mp4",
+    "model_output": "I'm Candace Jones.",
+    "ground_truth": "I'm Candace Jones."
+  },
+  {
+    "video": "btdPgAr_4ow-00_00_42.033-00_01_02.500.mp4",
+    "model_output": "The University of Washington's Institute for Photonics and Imaging (IPHI) estimates that by the end of August, more than 600-thousand Americans will die from the virus.",
+    "ground_truth": "A scientific model by the University of Washington's Institute for Health Metrics and Evaluation predicted that by August over 60-thousand Americans would lose their lives."
+  },
+  {
+    "video": "btdPgAr_4ow-00_08_05.200-00_08_12.533.mp4",
+    "model_output": "The third option is to ask the property manager to return the money.",
+    "ground_truth": "Then ask about repayment options."
+  },
+  {
+    "video": "btdPgAr_4ow-00_10_45.100-00_10_46.566.mp4",
+    "model_output": "Sign1News.",
+    "ground_truth": "Sign1News."
+  },
+  {
+    "video": "CTOvj74LWD8-00_01_12.400-00_01_21.000.mp4",
+    "model_output": "Police say the pregnant woman, who was 23 years old, was shot and killed.",
+    "ground_truth": "Police say a pregnant 24-year-old woman was fatally shot by the father of her two other children."
+  },
+  {
+    "video": "CTOvj74LWD8-00_07_11.733-00_07_17.633.mp4",
+    "model_output": "Many Italian migrants are headed to Italy's largest city, Milan.",
+    "ground_truth": "Many Italians are moving to bigger cities for better opportunities."
+  },
+  {
+    "video": "CTOvj74LWD8-00_08_11.433-00_08_23.033.mp4",
+    "model_output": "Democrats want to know if the trial will be held remotely.",
+    "ground_truth": "Democrats are demanding to know the parameters of the trial before sending over their articles of impeachment."
+  },
+  {
+    "video": "PYbUwpYMx0A-00_00_28.600-00_00_31.466.mp4",
+    "model_output": "Here are your top stories for today.",
+    "ground_truth": "Here are your top stories for today."
+  },
+  {
+    "video": "PYbUwpYMx0A-00_00_35.533-00_00_45.266.mp4",
+    "model_output": "Thousands of people from around the world attended the ceremony to honor George H.W.",
+    "ground_truth": "Thousands of people gather at the US Capitol to pay their respects to George H.W. Bush."
+  },
+  {
+    "video": "PYbUwpYMx0A-00_02_23.633-00_02_28.033.mp4",
+    "model_output": "The girl was placed in a SUV.",
+    "ground_truth": "She was forced into an SUV."
+  },
+  {
+    "video": "PYbUwpYMx0A-00_07_12.000-00_07_17.033.mp4",
+    "model_output": "It's important to me to meet my friends.",
+    "ground_truth": "Most importantly my mentor and friend."
+  },
+  {
+    "video": "PYbUwpYMx0A-00_12_26.000-00_12_30.000.mp4",
+    "model_output": "Remember to like us on Facebook and follow us on Twitter.",
+    "ground_truth": "Remember to like us on Facebook and follow us on Twitter."
+  },
+  {
+    "video": "gxjb6BJX3w0-00_06_20.500-00_06_33.100.mp4",
+    "model_output": "Since the product has been on the market for a few weeks, most of the employees have no idea what it is or how it works.",
+    "ground_truth": "Since pharmacies have evening and weekend hours, and there's no need for an appointment, they are a great alternative for busy parents."
+  },
+  {
+    "video": "ZdEwfVNtSmw-00_00_19.533-00_00_31.100.mp4",
+    "model_output": "For nine days, a group of Thai fishermen were trapped in a cave.",
+    "ground_truth": "After nine frantic days of searching, the Thai soccer team trapped in a cave has been found."
+  },
+  {
+    "video": "RT2ZoSSsP1Y-00_01_38.300-00_01_51.000.mp4",
+    "model_output": "Police in Florida have arrested 25-year-old Travis Scott Winix.",
+    "ground_truth": "In Florida police body cam footage shows the arrest of Tristan Scott Wix outside of a Daytona Beach grocery store."
+  },
+  {
+    "video": "RT2ZoSSsP1Y-00_07_00.200-00_07_04.000.mp4",
+    "model_output": "But don't let that discourage you.",
+    "ground_truth": "If using one strap, this can cause pain while leaning awkwardly to maintain balance."
+  },
+  {
+    "video": "1U-rv8VSGpE-00_00_48.400-00_00_55.666.mp4",
+    "model_output": "Trump said he hopes North Korea will continue to act decisively to help its people.",
+    "ground_truth": "President Trump says he hopes the North Korean leader will do what's right for his people."
+  },
+  {
+    "video": "1U-rv8VSGpE-00_04_03.166-00_04_14.066.mp4",
+    "model_output": "In a statement, he said \"Anyone who knows me knows that I am committed to doing what it takes to make them feel safe.\"",
+    "ground_truth": "A statement saying \"Anyone who knows this person or has worked with them, knows that they wouldn't intentionally offend.\""
+  },
+  {
+    "video": "1U-rv8VSGpE-00_07_12.433-00_07_15.066.mp4",
+    "model_output": "He died in 1946.",
+    "ground_truth": "They eventually died in 1946."
+  },
+  {
+    "video": "znwRZXn3jc0-00_03_01.100-00_03_06.700.mp4",
+    "model_output": "Immigration and Customs Enforcement (ICE) is set to vote on the bill.",
+    "ground_truth": "A vote on immigration failed in the House of Representatives."
+  },
+  {
+    "video": "4ckqY82422o-00_02_21.333-00_02_33.166.mp4",
+    "model_output": "It's a rare condition called amoebic meningoencephalitis.",
+    "ground_truth": "That is a rare, brain destroying amoeba that enters through the nasal passage and it's usually fatal."
+  },
+  {
+    "video": "4ckqY82422o-00_04_55.500-00_05_04.500.mp4",
+    "model_output": "The flight was headed to the United Kingdom next week.",
+    "ground_truth": "A plane crashed in Utah near Box Elder Peak on Friday."
+  },
+  {
+    "video": "4ckqY82422o-00_13_31.200-00_13_41.500.mp4",
+    "model_output": "One of the most popular Deaf TV shows is \"EAU de Soleil.\"",
+    "ground_truth": "A fragrance called Eau de Space brings the scent of outer space down to earth."
+  },
+  {
+    "video": "4TtUxQPu5UM-00_06_40.466-00_06_44.733.mp4",
+    "model_output": "The Duchess of Sussex, Meghan Markle.",
+    "ground_truth": "Meghan the Duchess of Sussex will not be involved."
+  },
+  {
+    "video": "4TtUxQPu5UM-00_07_16.566-00_07_27.233.mp4",
+    "model_output": "But Higgins' decision to step down is partly due to his desire to fundraise for a life after retirement.",
+    "ground_truth": "However Harry and Meghan's decision to step down so they can lead financially independent lives is uncharted territory."
+  },
+  {
+    "video": "4TtUxQPu5UM-00_10_15.266-00_10_17.166.mp4",
+    "model_output": "He died peacefully in his sleep.",
+    "ground_truth": "The baby died."
+  },
+  {
+    "video": "35N28rtz66I-00_07_19.433-00_07_33.100.mp4",
+    "model_output": "But the company says last October it was approached by a customer who wanted to shop at the store.",
+    "ground_truth": "But the winner did say when they bought their ticket last October, they allowed another person to go ahead of them in line at the store."
+  },
+  {
+    "video": "35N28rtz66I-00_08_05.000-00_08_20.766.mp4",
+    "model_output": "It's a way for people to give back to the community by giving blood and receiving a chance to make a difference in the lives of others.",
+    "ground_truth": "The purpose of this blood donation therapy is to help both the younger donor and the older recipient to look and feel younger."
+  },
+  {
+    "video": "35N28rtz66I-00_09_53.100-00_09_58.666.mp4",
+    "model_output": "The singer is offering to bring the cat to the hospital for a checkup.",
+    "ground_truth": "Why did Ciara get this welcome?"
+  },
+  {
+    "video": "4AsiL4C8l_E-00_07_18.133-00_07_25.166.mp4",
+    "model_output": "The rescue took several hours but it was worth it.",
+    "ground_truth": "The rescue took several minutes but the efforts paid off when the deer ran free."
+  },
+  {
+    "video": "4AsiL4C8l_E-00_07_25.533-00_07_30.366.mp4",
+    "model_output": "And it's all about celebrating the joys of working with the land.",
+    "ground_truth": "After the escape, they celebrated with a loud \"Wooo!\""
+  },
+  {
+    "video": "Ads-4j06eJY-00_00_14.000-00_00_15.733.mp4",
+    "model_output": "Here are your top stories for today.",
+    "ground_truth": "Here you are your top stories for today."
+  },
+  {
+    "video": "Ads-4j06eJY-00_07_37.233-00_07_47.200.mp4",
+    "model_output": "The tweet was allegedly made by a donor to the Biden campaign.",
+    "ground_truth": "The tweets appeared to solicit donations as part of a Bitcoin scam."
+  },
+  {
+    "video": "RcvCCqIbwdU-00_05_30.466-00_05_33.333.mp4",
+    "model_output": "It's a heart rate monitor.",
+    "ground_truth": "Limit salty snacks."
+  },
+  {
+    "video": "RcvCCqIbwdU-00_08_20.233-00_08_34.000.mp4",
+    "model_output": "The Alabama Interscholastic Athletic Association (AIA) is donating the jerseys to the Ice Bucket Challenge to raise money for the ALS Association and to raise awareness of the disease.",
+    "ground_truth": "The ALS ice bucket challenge involved dumping ice water on your head, making a donation to an ALS organization and challenging others to participate."
+  },
+  {
+    "video": "RcvCCqIbwdU-00_08_49.533-00_08_53.366.mp4",
+    "model_output": "But Pete Frates is enjoying it.",
+    "ground_truth": "Rest in peace Pete Frates."
+  },
+  {
+    "video": "6QuKxaUXUnY-00_12_12.233-00_12_15.000.mp4",
+    "model_output": "And those are your top stories for today.",
+    "ground_truth": "And those are your top stories for today."
+  },
+  {
+    "video": "GmpPSx_UekY-00_00_24.333-00_00_25.233.mp4",
+    "model_output": "Hello everyone.",
+    "ground_truth": "Hello everyone."
+  },
+  {
+    "video": "GmpPSx_UekY-00_09_23.033-00_09_28.533.mp4",
+    "model_output": "The movie's director is James Cameron.",
+    "ground_truth": "The movie producer is again James Cameron."
+  },
+  {
+    "video": "sl5iY7000tk-00_00_25.700-00_00_27.366.mp4",
+    "model_output": "Welcome to Sign1News.",
+    "ground_truth": "Welcome to Sign1News."
+  },
+  {
+    "video": "sl5iY7000tk-00_02_39.066-00_02_46.700.mp4",
+    "model_output": "Here's a new aerial picture of the devastation in the Jura region.",
+    "ground_truth": "These new aerial images show the scale of devastation on Java's western coast."
+  },
+  {
+    "video": "jZP5thQ22S0-00_02_46.066-00_02_52.633.mp4",
+    "model_output": "The US now has 99 cases.",
+    "ground_truth": "The US the death has risen to nine, all in Washington state."
+  },
+  {
+    "video": "jZP5thQ22S0-00_04_48.466-00_04_56.500.mp4",
+    "model_output": "President Trump and Taiwanese leader Xi Jinping are now on a phone call.",
+    "ground_truth": "President Trump and the Taliban's chief negotiator spoke on the phone amid the reports."
+  },
+  {
+    "video": "jZP5thQ22S0-00_08_07.466-00_08_10.433.mp4",
+    "model_output": "Take a walk outside!",
+    "ground_truth": "A llama has to stay outside."
+  },
+  {
+    "video": "EoWGYt_g3Xo-00_04_15.466-00_04_41.366.mp4",
+    "model_output": "In 2016, 3 percent of voters said Bernie was the best choice to run for president in 2020 and in 2016 Republican candidate Bernie Sanders received 13 percent of the vote.",
+    "ground_truth": "When asked to choose their preference from among 16 candidates, 33 percent said Biden could win in 2020, compared to 13 percent who backed 2016 Democratic Bernie Sanders."
+  },
+  {
+    "video": "EoWGYt_g3Xo-00_05_22.500-00_05_30.066.mp4",
+    "model_output": "Police are now looking for a suspect in the shooting.",
+    "ground_truth": "Police are reviewing surveillance tape to see if they can identify a suspect."
+  },
+  {
+    "video": "cux9_CWO_t0-00_04_24.700-00_04_35.333.mp4",
+    "model_output": "Tuesday 80 new coronavirus cases were reported in the US, surpassing the death toll from the virus.",
+    "ground_truth": "On Tuesday 800 new coronavirus deaths were reported in the US, the most reported deaths in a single day."
+  },
+  {
+    "video": "zEt7aQgOsSM-00_10_24.233-00_10_32.066.mp4",
+    "model_output": "Number five: a man from South Carolina was arrested for taking a picture of a cute cat.",
+    "ground_truth": "The story of the 100-year-old woman arrested on her birthday apparently amused many viewers."
+  },
+  {
+    "video": "7BgQM7l2ZY0-00_00_12.600-00_00_15.033.mp4",
+    "model_output": "Here are your top stories for today.",
+    "ground_truth": "Here are your top stories for the day."
+  },
+  {
+    "video": "7BgQM7l2ZY0-00_03_14.766-00_03_24.633.mp4",
+    "model_output": "Sources say the case has been referred to the Department of Justice (DOJ).",
+    "ground_truth": "An informational agency said ISIS claimed responsibility for the attack through its media outlet, AMAQ."
+  },
+  {
+    "video": "IS0FR_xIPFM-00_11_08.466-00_11_12.500.mp4",
+    "model_output": "They will show you four different ways to do it.",
+    "ground_truth": "The line of dolls features four diverse figures."
+  },
+  {
+    "video": "autHVr6sKjE-00_07_09.000-00_07_10.666.mp4",
+    "model_output": "Thank you for watching Sign1News.",
+    "ground_truth": "Thank you for watching Sign1News."
+  },
+  {
+    "video": "CdakPZuyQmU-00_04_06.500-00_04_10.766.mp4",
+    "model_output": "DeJoy is a supporter of President Trump.",
+    "ground_truth": "DeJoy is a Trump supporter and friend of President Trump."
+  },
+  {
+    "video": "CdakPZuyQmU-00_07_54.200-00_07_57.666.mp4",
+    "model_output": "There is no information on the cause of death.",
+    "ground_truth": "No deaths have been reported."
+  },
+  {
+    "video": "y3rmBWJoJg4-00_01_11.400-00_01_19.600.mp4",
+    "model_output": "And that's a good reminder for Americans to practice social distancing when you're out in public.",
+    "ground_truth": "That's likely to fuel interest in urging Americans to wear masks outside their homes."
+  },
+  {
+    "video": "y3rmBWJoJg4-00_09_27.666-00_09_38.100.mp4",
+    "model_output": "It's recommended that babies be separated from their mothers as soon as possible because of the baby's immune system.",
+    "ground_truth": "It's suggested upon birth, to separate the baby and mother  to protect the infant's weak immune system."
+  },
+  {
+    "video": "Eu1VoQlUdIE-00_10_46.666-00_10_47.566.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your language."
+  },
+  {
+    "video": "qilEmtLS5Qk-00_00_15.666-00_00_17.133.mp4",
+    "model_output": "I'm Jethro Wooddall.",
+    "ground_truth": "I'm Jethro Wooddall."
+  },
+  {
+    "video": "qilEmtLS5Qk-00_02_09.200-00_02_15.166.mp4",
+    "model_output": "North Carolina and Kansas are also suspending their stay-at-home orders.",
+    "ground_truth": "Other states like North Carolina, Kansas and Arizona are pausing too."
+  },
+  {
+    "video": "qilEmtLS5Qk-00_02_16.666-00_02_26.500.mp4",
+    "model_output": "California is one of the states with the highest number of Covid-19 cases in the country.",
+    "ground_truth": "In California Los Angeles County has more confirmed cases in any other county in the nation."
+  },
+  {
+    "video": "qilEmtLS5Qk-00_03_33.566-00_03_50.266.mp4",
+    "model_output": "The top five causes of death in the US are listed below with the number of deaths and the cause of death.",
+    "ground_truth": "They say if measures for containment, surveillance, and contact tracing are not done, the US could be in for a very rough time."
+  },
+  {
+    "video": "54q7y2npxbM-00_04_25.633-00_04_36.133.mp4",
+    "model_output": "The first law is the Gun Violence Prevention Act of 1994, which was signed into law by President Bill Clinton in 1994.",
+    "ground_truth": "They created these giant pieces using reclaimed granite countertops."
+  },
+  {
+    "video": "54q7y2npxbM-00_04_51.066-00_04_57.533.mp4",
+    "model_output": "He said his wife and friends helped him get through the difficult time.",
+    "ground_truth": "Him, his wife and friends helped his vision come to life."
+  },
+  {
+    "video": "pVevQs0fZFc-00_04_35.600-00_04_42.000.mp4",
+    "model_output": "The surgery took 5 hours to complete.",
+    "ground_truth": "The surgery took five hours."
+  },
+  {
+    "video": "pVevQs0fZFc-00_05_39.033-00_05_42.533.mp4",
+    "model_output": "Remember to like us on Facebook and follow us on Twitter.",
+    "ground_truth": "Remember to like us on Facebook and follow us on Twitter."
+  },
+  {
+    "video": "lLPFTLjYFho-00_00_44.366-00_00_52.333.mp4",
+    "model_output": "According to the lawsuit, the complaint was filed with the Minnesota Department of Health.",
+    "ground_truth": "This is according to discrimination charges filed with the Minnesota Department of Human Rights."
+  },
+  {
+    "video": "lLPFTLjYFho-00_02_37.766-00_02_57.400.mp4",
+    "model_output": "The city's attorney says they are demanding the district attorney conduct a thorough investigation and make sure the Board of Trustees is compensated for the harm caused.",
+    "ground_truth": "The officers' lawyer said they are demanding steps be taken to ensure the discriminatory behavior never happens again and they are seeking compensation for emotional distress and lost earnings."
+  },
+  {
+    "video": "lLPFTLjYFho-00_03_27.333-00_03_49.100.mp4",
+    "model_output": "Researchers say more people are seeing doctors for flu symptoms than ever before.",
+    "ground_truth": "The researchers looked at the number of people who went to doctors or clinics with influenza-like illnesses that were never diagnosed with coronavirus. During the winter, illnesses like influenza or any other viruses usually circulate."
+  },
+  {
+    "video": "fSAY6QRd2Sk-00_07_34.266-00_07_35.766.mp4",
+    "model_output": "Sign1News.",
+    "ground_truth": "Sign1News."
+  },
+  {
+    "video": "r5AHxaq6bkE-00_02_48.033-00_02_57.000.mp4",
+    "model_output": "If the state does decide to lift restrictions, it could lead to more deaths.",
+    "ground_truth": "If states began lifting restrictions too early, we could see more deaths than predicted."
+  },
+  {
+    "video": "r5AHxaq6bkE-00_03_58.266-00_04_06.433.mp4",
+    "model_output": "That's because unemployment is the worst it's been since the Great Depression.",
+    "ground_truth": "That would be the highest unemployment rate since the Great Depression."
+  },
+  {
+    "video": "5iRIeHAK9b0-00_01_32.566-00_01_33.766.mp4",
+    "model_output": "But that's not all.",
+    "ground_truth": "It was really cool!"
+  },
+  {
+    "video": "5iRIeHAK9b0-00_04_05.366-00_04_15.733.mp4",
+    "model_output": "On Friday two parents in California were found guilty of child abuse.",
+    "ground_truth": "Two parents accused of horrific child abuse pleaded guilty in a California court, Friday."
+  },
+  {
+    "video": "5iRIeHAK9b0-00_04_38.333-00_04_43.033.mp4",
+    "model_output": "The children range in age from 2 to 29 years old.",
+    "ground_truth": "The children range in age from 2 to 29 years old."
+  },
+  {
+    "video": "5iRIeHAK9b0-00_04_43.300-00_04_48.133.mp4",
+    "model_output": "The reason for the march is to raise awareness about the plight of children with leukemia and lymphoma.",
+    "ground_truth": "The deal will keep the children from being called to testify."
+  },
+  {
+    "video": "5iRIeHAK9b0-00_06_30.533-00_06_31.666.mp4",
+    "model_output": "Sign1News.",
+    "ground_truth": "Sign1News."
+  },
+  {
+    "video": "Bd2YIcGbbJg-00_01_32.066-00_01_37.566.mp4",
+    "model_output": "The sheriff says the store had a sign that read \"Closed.\"",
+    "ground_truth": "The police say it's the same vehicle that had a broken back window."
+  },
+  {
+    "video": "Bd2YIcGbbJg-00_02_14.266-00_02_20.266.mp4",
+    "model_output": "He said \"I'm proud of you.\"",
+    "ground_truth": "The words on the jacket read \"I don't care. Do you?\""
+  },
+  {
+    "video": "Bd2YIcGbbJg-00_02_53.233-00_02_59.366.mp4",
+    "model_output": "President Trump is refusing to sign the immigration bill.",
+    "ground_truth": "President Trump possibly killed any chance of immigration bill passing any time soon."
+  },
+  {
+    "video": "Bd2YIcGbbJg-00_06_19.066-00_06_29.266.mp4",
+    "model_output": "In a statement, he said: \"Twitter is a strange place.",
+    "ground_truth": "An odd statement was released expressing regrets of reasons that caused them to be removed from the show."
+  },
+  {
+    "video": "4b-evcJm2JQ-00_08_06.300-00_08_18.000.mp4",
+    "model_output": "According to the latest data from the US Centers for Disease Control and Prevention, about 65,000 women have breast cancer and about 52,000 men have breast cancer.",
+    "ground_truth": "Every year about 245,000 new cases of breast cancer are diagnosed in women in the US and 2,200 cases in men."
+  },
+  {
+    "video": "G8PUtORtufE-00_02_18.066-00_02_33.566.mp4",
+    "model_output": "But the Iranian-backed Houthi militant group in Yemen has been backing the strike.",
+    "ground_truth": "However Iran-supported militant group Houthi in Yemen say they used ten drones to carry out strikes."
+  },
+  {
+    "video": "G8PUtORtufE-00_07_46.100-00_07_58.733.mp4",
+    "model_output": "The offer is estimated to be worth about $5 billion.",
+    "ground_truth": "They also offered nearly $5 billion and part of future revenue from its drug sales to settle claims."
+  },
+  {
+    "video": "G8PUtORtufE-00_09_09.533-00_09_20.433.mp4",
+    "model_output": "In 1978, 18-year-old Deidre Monroe was murdered just days before her wedding.",
+    "ground_truth": "Three days earlier popular 1970s and 80s singer Deddie Money died."
+  },
+  {
+    "video": "G8PUtORtufE-00_10_38.066-00_10_38.733.mp4",
+    "model_output": "Your life.",
+    "ground_truth": "Your life."
+  },
+  {
+    "video": "s40fbKY2O9Q-00_03_45.133-00_03_55.100.mp4",
+    "model_output": "It features a white face, black eyes and a black beard.",
+    "ground_truth": "The person is described as a Caucasian with tan skin and dark hair, and may have a beard or glasses."
+  },
+  {
+    "video": "s40fbKY2O9Q-00_05_20.600-00_05_24.600.mp4",
+    "model_output": "Take a look at this.",
+    "ground_truth": "This is a composite sketch of that man."
+  },
+  {
+    "video": "5_k1TypH_s8-00_02_35.733-00_02_37.600.mp4",
+    "model_output": "Trump took the lead.",
+    "ground_truth": "Trump accepted."
+  },
+  {
+    "video": "5_k1TypH_s8-00_03_42.600-00_03_55.666.mp4",
+    "model_output": "The Centers for Disease Control and Prevention says September has already been the deadliest flu season with 1,800 deaths.",
+    "ground_truth": "The Centers for Disease Control says that the influenza has already killed 1,800 people since late September."
+  },
+  {
+    "video": "5_k1TypH_s8-00_09_03.700-00_09_20.033.mp4",
+    "model_output": "The House of Representatives has accused the Trump administration of obstructing Congress and interfering with the power of the presidency.",
+    "ground_truth": "The House of Representatives passed two articles of impeachment: obstruction of Congress and abuse of power."
+  },
+  {
+    "video": "W-Ag3H16yN0-00_00_27.466-00_00_28.566.mp4",
+    "model_output": "Hello everyone.",
+    "ground_truth": "Hello everyone."
+  },
+  {
+    "video": "W-Ag3H16yN0-00_09_09.133-00_09_10.166.mp4",
+    "model_output": "I'm Crystal Cousineau.",
+    "ground_truth": "I'm Crystal Cousineau."
+  },
+  {
+    "video": "f75G_hZMSHs-00_03_37.100-00_03_45.100.mp4",
+    "model_output": "She says her wife has struggled with depression and anxiety for years.",
+    "ground_truth": "They also said their wife suffered from depression and anxiety for many years and was seeking help."
+  },
+  {
+    "video": "f75G_hZMSHs-00_05_58.666-00_06_06.400.mp4",
+    "model_output": "The officers were seen talking to each other in a similar manner as they were in the past when they lived in the city.",
+    "ground_truth": "They started talking and discovered one of them had worked as an officer in their hometown."
+  },
+  {
+    "video": "f75G_hZMSHs-00_06_21.100-00_06_28.033.mp4",
+    "model_output": "He was taken to the hospital and admitted to doctors that he suffered a minor stab wound to the abdomen.",
+    "ground_truth": "Patterson then shook hands and said \"My name is Michael Patterson, sir.\""
+  },
+  {
+    "video": "f75G_hZMSHs-00_08_52.000-00_08_54.366.mp4",
+    "model_output": "It will be the largest in the world.",
+    "ground_truth": "The wedding is this weekend."
+  },
+  {
+    "video": "f75G_hZMSHs-00_08_56.133-00_09_04.566.mp4",
+    "model_output": "ERROR: Failed to load video - Failed to load video locally (decord: Error reading /local1/mhu/sign_language_llm/openasl/cropped_videos_openasl_test/f75G_hZMSHs-00_08_56.133-00_09_04.566.mp4...; opencv: cv2.VideoCapture failed to open file)",
+    "ground_truth": "Today we're giving you a sneak peek at a couple of big movies set to hit theaters soon."
+  },
+  {
+    "video": "VOHbrquVRWU-00_07_24.600-00_07_28.566.mp4",
+    "model_output": "Thank you for all that you do.",
+    "ground_truth": "Rest peacefully our sweet baby boy."
+  },
+  {
+    "video": "VOHbrquVRWU-00_10_44.100-00_10_51.233.mp4",
+    "model_output": "It's not clear if the bear is a tourist attraction or if it's a wild animal.",
+    "ground_truth": "People don't often interact with koalas, in fact they usually keep their distance."
+  },
+  {
+    "video": "ovvuXVSsItE-00_01_30.033-00_01_36.700.mp4",
+    "model_output": "This will be the second time this month that a major storm will impact the region.",
+    "ground_truth": "This would be the second time in less than a month a storm of this magnitude has developed in the midwest."
+  },
+  {
+    "video": "ovvuXVSsItE-00_06_09.600-00_06_17.666.mp4",
+    "model_output": "The group also hopes some of the women will be sent to Mexico to be deported or join them in Mexico.",
+    "ground_truth": "They also worry that some women are simply discounted by police because of their race or involvement in prostitution."
+  },
+  {
+    "video": "ovvuXVSsItE-00_06_18.266-00_06_21.766.mp4",
+    "model_output": "The police officer involved in the shooting has not been identified.",
+    "ground_truth": "Tribal police have declined to comment."
+  },
+  {
+    "video": "EKX7-U56t84-00_02_59.533-00_03_12.466.mp4",
+    "model_output": "Alpharetta police chief says the incident is under investigation.",
+    "ground_truth": "The police chief, Alpharett, says officer was suspended immediately and the incident is under investigation."
+  },
+  {
+    "video": "UERj8a5S45k-00_03_23.200-00_03_29.433.mp4",
+    "model_output": "Many Chicago lawmakers have admitted they don't know how to stop the violence.",
+    "ground_truth": "Many conservative lawmakers admitted before the bill was passed they knew it would be blocked."
+  },
+  {
+    "video": "UERj8a5S45k-00_06_32.433-00_06_33.233.mp4",
+    "model_output": "I'm Crystal Cousineau.",
+    "ground_truth": "I'm Crystal Cousineau."
+  },
+  {
+    "video": "UERj8a5S45k-00_06_36.533-00_06_42.466.mp4",
+    "model_output": "Remember to follow us on all of our social media platforms and be sure to download our app too.",
+    "ground_truth": "Remember to follow us on all of our social media platforms."
+  },
+  {
+    "video": "0QgDWB3M47g-00_05_20.033-00_05_29.133.mp4",
+    "model_output": "He responded by saying \"I'm not the only one who is offended by the flag.\"",
+    "ground_truth": "They answered they will \"never agree with anybody disrespecting the flag.\""
+  },
+  {
+    "video": "oP2WdYlaflE-00_00_24.500-00_00_28.533.mp4",
+    "model_output": "Here are your top stories for today.",
+    "ground_truth": "Here are your top stories for today."
+  },
+  {
+    "video": "oP2WdYlaflE-00_01_02.666-00_01_11.766.mp4",
+    "model_output": "The model comes from the Institute for Health Metrics and Evaluation (IHME) at the University of Washington.",
+    "ground_truth": "The forecast is from the Institute of Health Metrics and Evaluation at the University of Washington."
+  },
+  {
+    "video": "oP2WdYlaflE-00_06_55.733-00_07_09.666.mp4",
+    "model_output": "The study also found more than half of those surveyed were the first responders for DHS and the Department of Health and Human Services.",
+    "ground_truth": "It also limits the number of witnesses that primary response agencies, like the Department of Health and Human Services, can provide."
+  },
+  {
+    "video": "oP2WdYlaflE-00_07_27.466-00_07_49.033.mp4",
+    "model_output": "He said the city's board of commissioners is considering a $1.3 trillion stimulus package to help the city cope with the pandemic.",
+    "ground_truth": "They said members of Congress who are deciding what to do with trillions of dollars in coronavirus response money are entitled to know more about the situation so they can make the best decisions."
+  },
+  {
+    "video": "oP2WdYlaflE-00_14_27.466-00_14_29.700.mp4",
+    "model_output": "I'm Candace Jones.",
+    "ground_truth": "Thank you for watching Sign1News live."
+  },
+  {
+    "video": "AKtthktaYps-00_03_21.500-00_03_35.666.mp4",
+    "model_output": "Steven Himmelman says his family stopped giving gifts to charity a few years ago but he still donates to them.",
+    "ground_truth": "Steven Hymphrey says his family stopped giving gifts years ago but they do buy gifts for the children under 18 years old."
+  },
+  {
+    "video": "AKtthktaYps-00_08_51.400-00_08_57.066.mp4",
+    "model_output": "The shooter was arrested and released on bail.",
+    "ground_truth": "The gunman is behind bars being held without bail."
+  },
+  {
+    "video": "K1bsZiByzTs-00_03_03.400-00_03_13.166.mp4",
+    "model_output": "Last year he was found guilty in the fatal shooting of Ahmaud Arbery in Baton Rouge, Louisiana.",
+    "ground_truth": "A year ago, they walked into Botham Jean's apartment, later saying they mistook it for their own, and killed Jean."
+  },
+  {
+    "video": "DxIpPTZM-tw-00_00_40.000-00_00_59.400.mp4",
+    "model_output": "Prosecutors say 15-year-old Jordyn Davis shot and killed 17-year-old Blackshirts police officer Baldwin Harris on August 17.",
+    "ground_truth": "Prosecutors say a specific person, who worked for the Balch Springs Police Department, fired at a car driving past them in April 2017, killing 15-year-old Jordan Edwards."
+  },
+  {
+    "video": "DxIpPTZM-tw-00_03_05.733-00_03_14.333.mp4",
+    "model_output": "Adults will have to wait until the decision is made before they can vote.",
+    "ground_truth": "The five adult suspects were not giving a preliminary hearing within the 10 day time frame required by law."
+  },
+  {
+    "video": "GvkCfTMdL7E-00_01_57.500-00_02_10.266.mp4",
+    "model_output": "Chicago officials are asking for more officers to be sent to the front lines.",
+    "ground_truth": "Chicago officials were shocked and upset by the level of violence so they pledged to deploy more officers in neighborhoods that have seen a surge in shootings."
+  },
+  {
+    "video": "GvkCfTMdL7E-00_06_02.533-00_06_16.033.mp4",
+    "model_output": "After the arrest, authorities returned to the scene and found a young boy with a body in his arms.",
+    "ground_truth": "But after going back for another search of the compound, deputies made another horrible discovery: the body of a young boy."
+  },
+  {
+    "video": "pOeF3ReSqoM-00_00_08.466-00_00_10.466.mp4",
+    "model_output": "Welcome to Sign1News.",
+    "ground_truth": "Welcome to Sign1News."
+  },
+  {
+    "video": "pOeF3ReSqoM-00_00_18.700-00_00_23.200.mp4",
+    "model_output": "The storm was so powerful, it knocked out power to hundreds of thousands of customers.",
+    "ground_truth": "A powerful storm and a tornado moved through the Tampa area."
+  }
+]
