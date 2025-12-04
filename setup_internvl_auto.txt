@@ -130,7 +130,7 @@ huggingface-cli login --token "$HUGGINGFACE_TOKEN"
 # download and extract videos ###############################################################################
 echo "正在下载和解压视频..."
 DOWNLOAD_SCRIPT="/code/doc_sign_search/download_and_extract_videos_from_hf.py"
-VIDEO_DATASET_NAME="${VIDEO_DATASET_NAME:-PhoenixHu/sign_mllm_how_224}"
+VIDEO_DATASET_NAME="${VIDEO_DATASET_NAME:-PhoenixHu/sign_mllm_how_224_train_val}"
 VIDEO_OUTPUT_DIR="${VIDEO_OUTPUT_DIR:-/mnt/localssd/doc_sign_search/train_crop_videos_224}"
 FORCE_DOWNLOAD_VIDEOS="${FORCE_DOWNLOAD_VIDEOS:-0}"
 

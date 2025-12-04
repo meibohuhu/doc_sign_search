@@ -1,0 +1,248 @@
+✅ Conda environment activated: internvl
+🎬 InternVL2.5-2B How2Sign Evaluation on 2×A6000
+==================================================
+Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_20fps_1130/checkpoint-2124
+Model Base: OpenGVLab/InternVL2_5-2B
+Video Folder: /local1/mhu/sign_language_llm/openasl/cropped_videos_openasl_test
+Question File: /local1/mhu/sign_language_llm/InternVL/data/openasl/test_openasl_internvl.jsonl
+Output Dir: /local1/mhu/sign_language_llm/outputs/internvl_eval/
+GPU IDs: 1 (CUDA_VISIBLE_DEVICES: 1)
+Number of GPUs: 1
+Min Num Frames: 32
+Max Num Frames: 130
+Sampling Method: fps20.0
+Image Size: 224
+Max New Tokens: 128
+Max Samples (limited): 20
+Export Frames: Disabled
+
+📁 Output directory: /local1/mhu/sign_language_llm/outputs/internvl_eval/
+
+📝 Log file: /local1/mhu/sign_language_llm/outputs/internvl_eval//evaluation_20251202_100929.log
+
+🚀 Starting evaluation...
+
+Using conda python: /home/ztao/anaconda3/envs/internvl/bin/python
+
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+✅ GPU: NVIDIA RTX A6000
+💾 Memory: 50.9GB
+
+🔒 Gradient computation disabled globally for memory optimization
+🚀 Loading InternVL model from checkpoint...
+   Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_20fps_1130/checkpoint-2124
+
+1️⃣ Loading base model config...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+   ✅ Config loaded
+
+2️⃣ Loading model from checkpoint...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
+trainable params: 15,728,640 || all params: 1,904,875,520 || trainable%: 0.8257043483870274
+   ✅ Model loaded from checkpoint
+
+3️⃣ Loading tokenizer...
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+   ✅ Tokenizer loaded (model_max_length: 12288)
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+
+🔒 All model parameters set to requires_grad=False
+📂 Loading test data from: /local1/mhu/sign_language_llm/InternVL/data/openasl/test_openasl_internvl.jsonl
+   Limited to 20 samples
+   Total samples: 20
+
+🎬 Starting evaluation...
+======================================================================
+
+Evaluating:   0%|          | 0/20 [00:00<?, ?it/s]
+📹 [1/20] Loading video: Mci9oyb5V2E-00_00_05.333-00_00_11.166.mp4
+   📊 Sampled 130 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 67, 68, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 84, 86, 88, 89, 91, 92, 93, 94, 96, 97, 98, 99, 101, 102, 103, 106, 107, 108, 109, 111, 112, 113, 114, 116, 117, 118, 119, 121, 123, 124, 126, 127, 128, 129, 131, 132, 133, 134, 136, 137, 138, 141, 142, 143, 144, 146, 147, 148, 149, 151, 152, 153, 154, 156, 158, 159, 161, 162, 163, 164, 166, 167, 168, 169, 171, 172, 174] (video total: 175, fps: 25.00)
+   ✅ Loaded 130 frames
+
+──────────────────────────────────────────────────────────────────────
+[1/20] Mci9oyb5V2E-00_00_05.333-00_00_11.166.mp4
+Ground truth: I am Ed Bosson, and I am 67 years old and now retired.
+Prediction:   I'm the CEO of the NAD.
+✅ Partial match (has some words)
+Evaluating:   5%|▌         | 1/20 [00:04<01:33,  4.93s/it]
+📹 [2/20] Loading video: uXdL5njDiBU-00_00_25.566-00_00_31.200.mp4
+   📊 Sampled 130 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 84, 86, 87, 88, 89, 91, 92, 93, 94, 96, 97, 98, 99, 102, 103, 104, 106, 107, 108, 109, 111, 112, 113, 114, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 131, 132, 133, 136, 137, 138, 139, 141, 142, 143, 144, 146, 147, 148, 149, 151, 152, 153, 154, 156, 157, 158, 159, 161, 162, 163, 164, 166, 168] (video total: 169, fps: 25.00)
+   ✅ Loaded 130 frames
+
+──────────────────────────────────────────────────────────────────────
+[2/20] uXdL5njDiBU-00_00_25.566-00_00_31.200.mp4
+Ground truth: The suit was filed under Title II of the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973.
+Prediction:   That law is called the Americans with Disabilities Act (ADA).
+✅ Partial match (has some words)
+Evaluating:  10%|█         | 2/20 [00:09<01:26,  4.79s/it]
+📹 [3/20] Loading video: 352fd8KUcD4-00_00_48.133-00_00_51.466.mp4
+   📊 Sampled 80 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 84, 86, 87, 88, 89, 91, 92, 93, 94, 96, 97, 98, 99] (video total: 100, fps: 25.00)
+   ✅ Loaded 80 frames
+
+──────────────────────────────────────────────────────────────────────
+[3/20] 352fd8KUcD4-00_00_48.133-00_00_51.466.mp4
+Ground truth: I just toured through the Ali museum and it is inspiring!
+Prediction:   I'm from Illinois and I'm very proud to be here.
+✅ Partial match (has some words)
+Evaluating:  15%|█▌        | 3/20 [00:12<01:05,  3.84s/it]
+📹 [4/20] Loading video: 5dttR4Yq-2k-00_03_22.733-00_03_28.733.mp4
+   📊 Sampled 130 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 14, 16, 17, 18, 19, 21, 22, 23, 24, 27, 28, 29, 31, 32, 33, 34, 36, 37, 39, 41, 42, 43, 44, 46, 47, 48, 49, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 66, 67, 68, 69, 71, 72, 73, 74, 76, 78, 79, 81, 82, 83, 84, 86, 87, 88, 91, 92, 93, 94, 96, 97, 98, 99, 101, 103, 104, 106, 107, 108, 109, 111, 112, 113, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 129, 131, 132, 133, 134, 136, 137, 138, 139, 142, 143, 144, 146, 147, 148, 149, 151, 152, 154, 156, 157, 158, 159, 161, 162, 163, 164, 167, 168, 169, 171, 172, 173, 174, 176, 177, 179] (video total: 180, fps: 25.00)
+   ✅ Loaded 130 frames
+
+──────────────────────────────────────────────────────────────────────
+[4/20] 5dttR4Yq-2k-00_03_22.733-00_03_28.733.mp4
+Ground truth: The demands are not like a big city, they don't share the same issues.
+Prediction:   I graduated from Gallaudet University, but I didn t want to stay there.
+✅ Partial match (has some words)
+Evaluating:  20%|██        | 4/20 [00:17<01:09,  4.35s/it]
+📹 [5/20] Loading video: 5dttR4Yq-2k-00_03_32.033-00_03_37.233.mp4
+   📊 Sampled 124 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 84, 86, 87, 88, 89, 91, 92, 93, 94, 96, 97, 98, 99, 101, 102, 103, 104, 106, 107, 108, 109, 111, 112, 113, 114, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 131, 132, 133, 134, 136, 137, 138, 139, 141, 142, 143, 144, 146, 147, 148, 149, 151, 152, 153, 154] (video total: 156, fps: 25.00)
+   ✅ Loaded 124 frames
+
+──────────────────────────────────────────────────────────────────────
+[5/20] 5dttR4Yq-2k-00_03_32.033-00_03_37.233.mp4
+Ground truth: The community isn’t used to something different.
+Prediction:   I grew up in a small town and didn t go to college.
+✅ Partial match (has some words)
+Evaluating:  25%|██▌       | 5/20 [00:21<01:04,  4.29s/it]
+📹 [6/20] Loading video: YwHni5MhlAc-00_01_21.400-00_01_28.733.mp4
+   📊 Sampled 130 frames: [1, 2, 3, 6, 7, 8, 11, 12, 13, 16, 17, 18, 21, 22, 23, 26, 27, 29, 31, 32, 34, 36, 37, 39, 41, 42, 44, 46, 47, 49, 51, 53, 54, 56, 58, 59, 61, 63, 64, 66, 68, 69, 71, 73, 74, 77, 78, 79, 82, 83, 84, 87, 88, 89, 92, 93, 94, 97, 98, 101, 102, 103, 106, 107, 108, 111, 112, 113, 116, 117, 118, 121, 122, 124, 126, 127, 129, 131, 132, 134, 136, 137, 139, 141, 142, 144, 146, 148, 149, 151, 153, 154, 156, 158, 159, 161, 163, 164, 166, 168, 169, 172, 173, 174, 177, 178, 179, 182, 183, 184, 187, 188, 189, 192, 193, 196, 197, 198, 201, 202, 203, 206, 207, 208, 211, 212, 213, 216, 217, 219] (video total: 220, fps: 25.00)
+   ✅ Loaded 130 frames
+
+──────────────────────────────────────────────────────────────────────
+[6/20] YwHni5MhlAc-00_01_21.400-00_01_28.733.mp4
+Ground truth: There may be state laws that apply to employers with less than 15 employees, watch out for that.
+Prediction:   For example, a state law that requires all states to provide equal access to their legal rights to deaf and hard of hearing people.
+✅ Partial match (has some words)
+Evaluating:  30%|███       | 6/20 [00:26<01:03,  4.57s/it]
+📹 [7/20] Loading video: FaELOA6h-ec-00_01_04.700-00_01_17.200.mp4
+   📊 Sampled 130 frames: [1, 3, 6, 8, 12, 14, 17, 21, 23, 26, 29, 32, 34, 38, 41, 43, 47, 49, 52, 56, 58, 61, 63, 67, 69, 72, 76, 78, 81, 84, 87, 89, 93, 96, 98, 102, 104, 107, 111, 113, 116, 119, 122, 124, 127, 131, 133, 136, 139, 142, 144, 148, 151, 153, 157, 159, 162, 166, 168, 171, 174, 177, 179, 183, 186, 188, 191, 194, 197, 199, 203, 206, 208, 212, 214, 217, 221, 223, 226, 229, 232, 234, 238, 241, 243, 247, 249, 252, 254, 258, 261, 263, 267, 269, 272, 276, 278, 281, 284, 287, 289, 293, 296, 298, 302, 304, 307, 311, 313, 316, 318, 322, 324, 327, 331, 333, 336, 339, 342, 344, 348, 351, 353, 357, 359, 362, 366, 368, 371, 374] (video total: 375, fps: 25.00)
+   ✅ Loaded 130 frames
+
+──────────────────────────────────────────────────────────────────────
+[7/20] FaELOA6h-ec-00_01_04.700-00_01_17.200.mp4
+Ground truth: If you or your family cannot help, don’t worry, there may be caregivers in your area to provide support to the family member with needs.
+Prediction:   It is very helpful to have a caregiver who can take care of you and help you with daily tasks.
+✅ Partial match (has some words)
+Evaluating:  35%|███▌      | 7/20 [00:31<01:00,  4.67s/it]
+📹 [8/20] Loading video: FaELOA6h-ec-00_01_50.333-00_01_59.500.mp4
+   📊 Sampled 130 frames: [1, 2, 4, 7, 8, 11, 13, 14, 17, 19, 21, 23, 26, 28, 29, 32, 34, 36, 38, 41, 42, 44, 47, 49, 51, 53, 56, 57, 59, 62, 63, 66, 68, 71, 72, 74, 77, 78, 81, 83, 84, 87, 89, 92, 93, 96, 98, 99, 102, 104, 106, 108, 111, 112, 114, 117, 119, 121, 123, 126, 127, 129, 132, 133, 136, 138, 141, 142, 144, 147, 148, 151, 153, 154, 157, 159, 162, 163, 166, 168, 169, 172, 174, 176, 178, 181, 183, 184, 187, 189, 191, 193, 196, 197, 199, 202, 203, 206, 208, 211, 212, 214, 217, 218, 221, 223, 224, 227, 229, 232, 233, 236, 238, 239, 242, 244, 246, 248, 251, 253, 254, 257, 259, 261, 263, 266, 267, 269, 272, 274] (video total: 275, fps: 25.00)
+   ✅ Loaded 130 frames
+
+──────────────────────────────────────────────────────────────────────
+[8/20] FaELOA6h-ec-00_01_50.333-00_01_59.500.mp4
+Ground truth: It is important to let the caregiver know what the patient truly needs, so the caregiver can adapt and do their job well.
+Prediction:   It s important to know that your loved one may not be able to take care of themselves.
+✅ Partial match (has some words)
+Evaluating:  40%|████      | 8/20 [00:36<00:57,  4.80s/it]
+📹 [9/20] Loading video: QBlOz5OjdRE-00_00_36.666-00_00_39.366.mp4
+   📊 Sampled 64 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79] (video total: 81, fps: 25.00)
+   ✅ Loaded 64 frames
+
+──────────────────────────────────────────────────────────────────────
+[9/20] QBlOz5OjdRE-00_00_36.666-00_00_39.366.mp4
+Ground truth: NAD finally approved 2018.
+Prediction:   The NAD has been recognized as one of the top 100 organizations in the world.
+✅ Partial match (has some words)
+Evaluating:  45%|████▌     | 9/20 [00:39<00:44,  4.07s/it]
+📹 [10/20] Loading video: 00ADU7t7IWI-00_00_08.666-00_00_13.733.mp4
+   📊 Sampled 121 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 84, 86, 87, 88, 89, 91, 92, 93, 94, 96, 97, 98, 99, 101, 102, 103, 104, 106, 107, 108, 109, 111, 112, 113, 114, 116, 117, 118, 119, 121, 122, 123, 124, 126, 127, 128, 129, 131, 132, 133, 134, 136, 137, 138, 139, 141, 142, 143, 144, 146, 147, 148, 149, 151] (video total: 152, fps: 25.00)
+   ✅ Loaded 121 frames
+
+──────────────────────────────────────────────────────────────────────
+[10/20] 00ADU7t7IWI-00_00_08.666-00_00_13.733.mp4
+Ground truth: I've been staying home in self-quarantine and practicing social distancing.
+Prediction:   I've been thinking about it for a while now and I want to run for mayor.
+✅ Partial match (has some words)
+Evaluating:  50%|█████     | 10/20 [00:43<00:41,  4.16s/it]
+📹 [11/20] Loading video: Ln3MaRp0Dvc-00_00_59.266-00_01_01.366.mp4
+   📊 Sampled 50 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62] (video total: 63, fps: 25.00)
+   ✅ Loaded 50 frames
+Evaluating:  55%|█████▌    | 11/20 [00:45<00:31,  3.46s/it]
+📹 [12/20] Loading video: ohbo2X3bQoc-00_01_52.666-00_01_58.566.mp4
+   📊 Sampled 130 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 81, 82, 83, 84, 86, 87, 88, 89, 91, 92, 93, 94, 97, 98, 99, 101, 102, 103, 104, 106, 107, 108, 109, 111, 113, 114, 116, 117, 118, 119, 121, 122, 123, 124, 126, 128, 129, 131, 132, 133, 134, 136, 137, 138, 139, 141, 142, 144, 146, 147, 148, 149, 151, 152, 153, 154, 156, 157, 158, 161, 162, 163, 164, 166, 167, 168, 169, 171, 172, 173, 176] (video total: 177, fps: 25.00)
+   ✅ Loaded 130 frames
+Evaluating:  60%|██████    | 12/20 [00:50<00:31,  3.97s/it]
+📹 [13/20] Loading video: tUnOjApclYI-00_00_00.000-00_00_10.700.mp4
+   📊 Sampled 130 frames: [1, 2, 4, 7, 9, 12, 14, 17, 19, 22, 24, 27, 29, 32, 34, 37, 39, 42, 44, 47, 49, 52, 54, 57, 59, 62, 64, 67, 69, 72, 74, 77, 79, 82, 84, 87, 89, 92, 94, 97, 99, 102, 104, 107, 108, 111, 113, 116, 118, 121, 123, 126, 128, 131, 133, 136, 138, 141, 143, 146, 148, 151, 153, 156, 158, 161, 163, 166, 168, 171, 173, 176, 178, 181, 183, 186, 188, 191, 193, 196, 198, 201, 203, 206, 208, 211, 213, 214, 217, 219, 222, 224, 227, 229, 232, 234, 237, 239, 242, 244, 247, 249, 252, 254, 257, 259, 262, 264, 267, 269, 272, 274, 277, 279, 282, 284, 287, 289, 292, 294, 297, 299, 302, 304, 307, 309, 312, 314, 317, 319] (video total: 321, fps: 25.00)
+   ✅ Loaded 130 frames
+Evaluating:  65%|██████▌   | 13/20 [00:55<00:30,  4.29s/it]
+📹 [14/20] Loading video: tUnOjApclYI-00_01_54.366-00_01_57.033.mp4
+   📊 Sampled 64 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79] (video total: 80, fps: 25.00)
+   ✅ Loaded 64 frames
+Evaluating:  70%|███████   | 14/20 [00:57<00:22,  3.72s/it]
+📹 [15/20] Loading video: cddgTAQLy_4-00_05_32.700-00_05_41.400.mp4
+   📊 Sampled 130 frames: [1, 2, 4, 6, 8, 11, 12, 14, 16, 18, 21, 22, 24, 26, 28, 31, 32, 34, 36, 38, 41, 42, 44, 46, 48, 51, 52, 54, 56, 58, 61, 62, 64, 66, 68, 71, 72, 74, 76, 78, 81, 82, 84, 87, 88, 91, 92, 94, 97, 98, 101, 102, 104, 107, 108, 111, 112, 114, 117, 118, 121, 122, 124, 127, 128, 131, 132, 134, 137, 138, 141, 142, 144, 147, 148, 151, 152, 154, 157, 158, 161, 162, 164, 167, 168, 171, 173, 174, 177, 178, 181, 183, 184, 187, 188, 191, 193, 194, 197, 198, 201, 203, 204, 207, 208, 211, 213, 214, 217, 218, 221, 223, 224, 227, 228, 231, 233, 234, 237, 238, 241, 243, 244, 247, 248, 251, 253, 254, 257, 259] (video total: 261, fps: 25.00)
+   ✅ Loaded 130 frames
+Evaluating:  75%|███████▌  | 15/20 [01:03<00:20,  4.14s/it]
+📹 [16/20] Loading video: cddgTAQLy_4-00_08_12.666-00_08_36.733.mp4
+   📊 Sampled 130 frames: [1, 6, 11, 17, 22, 28, 33, 39, 44, 51, 56, 62, 67, 73, 78, 83, 89, 94, 101, 106, 112, 117, 123, 128, 134, 139, 146, 151, 157, 162, 167, 173, 178, 184, 189, 196, 201, 207, 212, 218, 223, 229, 234, 241, 246, 251, 257, 262, 268, 273, 279, 284, 291, 296, 302, 307, 313, 318, 323, 329, 334, 341, 346, 352, 357, 363, 368, 374, 379, 386, 391, 397, 402, 407, 413, 418, 424, 429, 436, 441, 447, 452, 458, 463, 469, 474, 481, 486, 491, 497, 502, 508, 513, 519, 524, 531, 536, 542, 547, 553, 558, 563, 569, 574, 581, 586, 592, 597, 603, 608, 614, 619, 626, 631, 637, 642, 647, 653, 658, 664, 669, 676, 681, 687, 692, 698, 703, 709, 714, 721] (video total: 722, fps: 25.00)
+   ✅ Loaded 130 frames
+Evaluating:  80%|████████  | 16/20 [01:08<00:18,  4.61s/it]
+📹 [17/20] Loading video: ubC82N6N1bQ-00_00_39.300-00_00_43.066.mp4
+   📊 Sampled 90 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, 81, 82, 83, 84, 86, 87, 88, 89, 91, 92, 93, 94, 96, 97, 98, 99, 101, 102, 103, 104, 106, 107, 108, 109, 111, 112] (video total: 113, fps: 25.00)
+   ✅ Loaded 90 frames
+Evaluating:  85%|████████▌ | 17/20 [01:12<00:12,  4.28s/it]
+📹 [18/20] Loading video: ubC82N6N1bQ-00_01_05.100-00_01_07.033.mp4
+   📊 Sampled 46 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57] (video total: 58, fps: 25.00)
+   ✅ Loaded 46 frames
+Evaluating:  90%|█████████ | 18/20 [01:14<00:07,  3.58s/it]
+📹 [19/20] Loading video: ubC82N6N1bQ-00_01_52.033-00_01_54.233.mp4
+   📊 Sampled 52 frames: [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 21, 22, 23, 24, 26, 27, 28, 29, 31, 32, 33, 34, 36, 37, 38, 39, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 63, 64] (video total: 66, fps: 25.00)
+   ✅ Loaded 52 frames
+Evaluating:  95%|█████████▌| 19/20 [01:16<00:03,  3.12s/it]
+📹 [20/20] Loading video: GTlMzp0KVqk-00_00_08.133-00_00_09.266.mp4
+   📊 Sampled 32 frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33] (video total: 34, fps: 25.00)
+   ✅ Loaded 32 frames
+Evaluating: 100%|██████████| 20/20 [01:17<00:00,  2.58s/it]Evaluating: 100%|██████████| 20/20 [01:17<00:00,  3.88s/it]
+
+======================================================================
+✅ Results saved: /local1/mhu/sign_language_llm/outputs/internvl_eval/internvl_results_20251202_101052.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+Using the latest cached version of the module from /home/ztao/.cache/huggingface/modules/evaluate_modules/metrics/evaluate-metric--rouge/6e5315f72865c2eaa764c8361360bb938740b9c120a2cf3a7ad218aa0ce452ed (last modified on Tue Nov 25 18:30:50 2025) since it couldn't be found locally at evaluate-metric--rouge, or remotely on the Hugging Face Hub.
+Warning: Could not load ROUGE metric: No module named 'nltk'
+
+============================================================
+EVALUATION RESULTS - InternVL (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1531
+  Precision:        0.1531
+  Recall:           0.1659
+  ROUGE-L F1:       0.0000
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2046
+  BLEU2: 0.0750
+  BLEU3: 0.0380
+  BLEU4: 0.0249
+
+📋 Summary:
+  Total Samples:    20
+============================================================
+
+📊 Metrics saved: /local1/mhu/sign_language_llm/outputs/internvl_eval/metrics_20251202_101052.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 20
+   Successful: 20
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+
+
+✅ Evaluation completed successfully!
+📁 Results saved to: /local1/mhu/sign_language_llm/outputs/internvl_eval/
+📝 Log file: /local1/mhu/sign_language_llm/outputs/internvl_eval//evaluation_20251202_100929.log
