@@ -20,7 +20,7 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"0,1,2,3"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"4,5,6,7"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -83,7 +83,7 @@ export LAUNCHER=pytorch
 # Generate MASTER_PORT
 # MASTER_PORT=${MASTER_PORT:-$(shuf -i 20000-29999 -n 1)}
 # export MASTER_PORT
-export MASTER_PORT=29500
+export MASTER_PORT=29508
 echo "MASTER_PORT: $MASTER_PORT"
 echo "LAUNCHER: $LAUNCHER (for local training, not SLURM)"
 echo ""
@@ -113,7 +113,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --learning_rate 6e-5 \
     --vision_select_layer -1 \
     --force_image_size 224 \
-    --max_dynamic_patch 3 \
+    --max_dynamic_patch 6 \
     --dynamic_image_size True \
     --down_sample_ratio 0.5 \
     --drop_path_rate 0.0 \
