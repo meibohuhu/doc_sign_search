@@ -20,7 +20,7 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"4,5,6,7"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"0,1,2,3"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -41,18 +41,13 @@ GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * 
 # Memory envelopes (defaults can be overridden via env vars)
 DEEPSPEED_CONFIG="internvl_chat/zero_stage1_config.json"
 
-# DEFAULT_MAX_SEQ_LENGTH=12288
-# DEFAULT_MAX_BUFFER_SIZE=20
-# DEFAULT_NUM_IMAGES_EXPECTED=128
-# DEFAULT_MAX_NUM_FRAME=128
-
 MAX_SEQ_LENGTH=${MAX_SEQ_LENGTH:-16584}
 MAX_BUFFER_SIZE=${MAX_BUFFER_SIZE:-20}
 NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-160}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
 
 # Video frame sampling method
-SAMPLING_METHOD='fps12.0'
+SAMPLING_METHOD='fps16.0'
 
 echo "🚀 Starting InternVL2.5-2B How2Sign Training on 4*A100"
 echo "======================================================"
@@ -88,7 +83,7 @@ export LAUNCHER=pytorch
 # Generate MASTER_PORT
 # MASTER_PORT=${MASTER_PORT:-$(shuf -i 20000-29999 -n 1)}
 # export MASTER_PORT
-export MASTER_PORT=29508
+export MASTER_PORT=29500
 echo "MASTER_PORT: $MASTER_PORT"
 echo "LAUNCHER: $LAUNCHER (for local training, not SLURM)"
 echo ""
