@@ -1,0 +1,3156 @@
+{
+  "statistics": {
+    "total_videos": 395,
+    "single_language_videos": 349,
+    "multilanguage_videos_excluded": 46,
+    "videos_with_sentences": 349,
+    "videos_without_sentences": 0,
+    "total_sentences": 13457,
+    "average_sentences_per_video": 38.55873925501432,
+    "min_sentences": 2,
+    "max_sentences": 167,
+    "median_sentences": 47
+  },
+  "video_details": {
+    "9Xm4ieF32qQ": {
+      "title": "Sign1News 11.13.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "P7crM7PwnTk": {
+      "title": "Multiple fatalities in Miami bridge collapse (ASL - 3.15.18)",
+      "sentence_count": 16,
+      "sample_sentences": [
+        "Just after the lunch hour today a pedestrian bridge collapsed in Miami",
+        "The bridge was at Florida International University over SW 8th St",
+        "connecting the campus to the student housing area"
+      ]
+    },
+    "dcI96iQtgJg": {
+      "title": "Candace Jones shines at FSDB Homecoming (ASL - 10.25.18)",
+      "sentence_count": 31,
+      "sample_sentences": [
+        "This past weekend Sign1News anchor Candace Jones headed back to her alma mater, Florida School for the Deaf and the Blind (FSDB)",
+        "She was invited to be the grand marshal of the homecoming parade",
+        "But while she was there, she shared her life story and life lessons for hundreds of students and they hung on her every word"
+      ]
+    },
+    "uY583WM9yJw": {
+      "title": "Sign1News 11.24.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall and here are your top  stories for today"
+      ]
+    },
+    "kMz7cPfI3NM": {
+      "title": "Sign1News fan video of the day (ASL - 2.7.18)",
+      "sentence_count": 44,
+      "sample_sentences": [
+        "Sign1News fan Nikole Kolenda sent us an adorable video of her son Damon practicing ASL with her",
+        "Damon is hearing but his father Dillon is a CODA",
+        "Dillon's parents and several other members of the family are deaf so Damon is learning ASL so he can communicate with the extended family"
+      ]
+    },
+    "DUPvK46M_rs": {
+      "title": "Sign1News 12.11.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 66,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "8Z9yl0lQdCo": {
+      "title": "Sign1News 11.21.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 76,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "e2rNsEjzerw": {
+      "title": "Sign1News 2.25.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 42,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "guZ3CJdANAA": {
+      "title": "Sign1News 12.4.19 - News for the Deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 46,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News Live",
+        "I'm Candace Jones"
+      ]
+    },
+    "AIiXQEiY_kM": {
+      "title": "Sign1News 3.19.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 71,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "tSCEj6AeUjM": {
+      "title": "Sign1News 2.14.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 38,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I’m Candace Jones"
+      ]
+    },
+    "aaOux6d7Ny4": {
+      "title": "Sign1News 4.11.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 79,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "uiXnsEXuMVY": {
+      "title": "Sign1News 3.1.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "XkecBlYcxp4": {
+      "title": "California zoos welcome baby giraffe and meerkat mob (ASL - 3.16.18)",
+      "sentence_count": 10,
+      "sample_sentences": [
+        "The Santa Barbara zoo welcomed the birth of a new giraffe calf -- and she came early",
+        "She wasn't expected until next month",
+        "But zoo staff say mom and baby are bonding and doing well"
+      ]
+    },
+    "SZcnservpiE": {
+      "title": "Torture house kids only allowed to look at food (ASL - 1.19.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "We're learning more disturbing details about the physical and emotional abuse 13 children suffered at the hands of their parents",
+        "Officials in California say the children, ages 2 to 29, were not allowed to shower more than once a year, they were chained and padlocked to their beds and there were unopened toys in the house the children were not allowed to play with",
+        "The parents would buy food like apple or pumpkin pie and leave them on the counter for the children to look at but not eat"
+      ]
+    },
+    "2AWyzSyzrtk": {
+      "title": "Sign1News 2.23.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 51,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "9QZI0vEt4GQ": {
+      "title": "Sign1News 10.26.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 45,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "CHLpAQvilH0": {
+      "title": "Sign1News 12.8.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 48,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "6aLr21Iza1U": {
+      "title": "It’s National Soft Ice Cream Day! (ASL - 8.19.19)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "It's a great day to beat the heat with a delicious treat",
+        "Today is National Softserve Ice Cream day",
+        "Here's a fun fact: the secret ingredient behind softserve ice cream is air"
+      ]
+    },
+    "tpazvXGyir0": {
+      "title": "Sign1News 4.24.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 47,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "Sc8SEW_iaNE": {
+      "title": "What is net neutrality? Sign1News Anchor Jethro Wooddall explains in ASL. (American Sign Language)",
+      "sentence_count": 16,
+      "sample_sentences": [
+        "Today the Federal Communications Commission voted to repeal the net neutrality rule prohibiting internet security providers from prioritizing online content",
+        "So what in the world is net neutrality and why are people so passionate about it",
+        "Here's the explanation: The \"net\" refers to the Internet"
+      ]
+    },
+    "Rn1xa9cPbSo": {
+      "title": "5.1.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 67,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "2WvGsW3j3tI": {
+      "title": "Tiger cub found in express mail container (ASL - 2.7.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "Mexican authorities say they rescued a two-month-old Bengal tiger cub from a package intended for shipping",
+        "Officials reportedly heard noises and called in sniffing dogs, who confirmed something was alive inside the box",
+        "Authorities say the cub was completely sedated and had no food or water"
+      ]
+    },
+    "9d_BaaU3GUo": {
+      "title": "What's in your Starbucks coffee mug?",
+      "sentence_count": 15,
+      "sample_sentences": [
+        "As you know earlier this week our Sign1News crew was allowed a sneak peek into the new Starbucks signing store in Washington, DC",
+        "Thanks to you that video has gone viral, with over 640,000 views and 13,000 shares",
+        "We also noticed from your comments that many of you are interested in getting your hands on the Starbucks signing store coffee mug"
+      ]
+    },
+    "9-UyXaEh7UI": {
+      "title": "Severe storms across Midwest, South (ASL - 2.25.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "According to the National Weather Service, several people in Kentucky were killed due to severe storms",
+        "The storm brought relentless rain, fierce winds and lots of damage",
+        "Most of the damage happened late Saturday"
+      ]
+    },
+    "bnKRNLYxhA8": {
+      "title": "Sign1News 2.2.18: News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I’m Candace Jones"
+      ]
+    },
+    "5CQ9N0ls0Hc": {
+      "title": "Tillerson aide fired (ASL - 3.13.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "Hours after Tillerson was let go, the White House also got rid of Tillerson's aide Steve Goldstein",
+        "He was fired after he publicly contradicted the White House's account of Tillerson's firing",
+        "Goldstein sent out a tweet that said Tillerson never spoke to the president and found out he was fired on Twitter"
+      ]
+    },
+    "fldFnr1xG2g": {
+      "title": "1st case of super-resistant gonorrhea reported (ASL - 3.29.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "The first case of super-resistant gonorrhea has been reported in the United Kingdom",
+        "Health officials say a man is infected with a form of gonorrhea that is completely resistant to treatment",
+        "The man caught the sexually transmitted disease in southeast Asia one month before his symptoms began"
+      ]
+    },
+    "EnUyoD85HKU": {
+      "title": "Lonely Bolivian water frog seeks mate on Match.com (ASL - 2.13.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "A frog named Romeo is looking for a mate on Match.com",
+        "The 11-year-old Bolivian water frog is trying to save his species",
+        "Researchers say Romeo has been looking for mate for the past decade with no luck"
+      ]
+    },
+    "EB78MNLokOo": {
+      "title": "LADY GAGA REVEALS LAS VEGAS RESIDENCY",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Lady Gaga now has a residency engagement at the MGM Park theater in Las Vegas",
+        "The deal was signed over the weekend and the pop star will begin performing next year",
+        "She will perform 74 days with the possibility of adding more"
+      ]
+    },
+    "olpXrUauOTs": {
+      "title": "Dr. G answers your question: Can you get coronavirus and the flu at the same time?",
+      "sentence_count": 21,
+      "sample_sentences": [
+        "Sign1News anchor Candace Jones heard that you can get coronavirus of the flu at the same time",
+        "Is that possible",
+        "Yes but it doesn't happen often"
+      ]
+    },
+    "dtxwmtPjHKM": {
+      "title": "Most Americans can’t cover $1,000 emergency (ASL - 1.19.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "If you were hit with a $1,000 emergency, would you be able to cover it",
+        "The majority of Americans can't",
+        "A new report from BankRate.com found that only 39% would be able to pay a bill that size out of savings"
+      ]
+    },
+    "bj32_z1O-RI": {
+      "title": "Sign1News 11.25.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "As0Dy9BpNAk": {
+      "title": "Sign1News 3.22.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "RrRK1s6vlBU": {
+      "title": "Sign1News 3.5.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 51,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "3mfHu_ianaQ": {
+      "title": "4.29.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "wPqsN_awKQ0": {
+      "title": "Sign1News 10.30.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "hpgrcRBoz4M": {
+      "title": "Sign1News 12.26.18",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "FZ10xSnJCEI": {
+      "title": "Update: Deadly Miami bridge collapse (ASL - 3.16.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "The Miami pedestrian bridge rescue operation is now a recovery operation",
+        "Of the six people killed, five bodies are still under the bridge wreckage",
+        "Officials say their priority now is getting to those remains so they can be taken to a proper place of rest"
+      ]
+    },
+    "_Q4ShGf3FzY": {
+      "title": "Sign1News 4.26.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 35,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "1SVT3uqXEAE": {
+      "title": "Sign1News 2.7.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 83,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "-bM2DBJE7zE": {
+      "title": "Get some rest! “It’s World Sleep Day” (ASL - 3.16.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "If your boss catches you napping on the job or your teacher scolds you for falling asleep in class, just tell them you have a really good excuse",
+        "Today is \"World Sleep Day!\" World Sleep Day was started in 2008 by the World Sleep Society and is designed to draw attention to the importance of and benefits associated with good, healthy sleep",
+        "According to several studies, sleep deprivation is a global epidemic that can lead to weight gain, mood swings, memory loss, depression and increase your risk of heart disease and stroke"
+      ]
+    },
+    "L9iHYHc-VFw": {
+      "title": "Virginia and New York wooing Delta (ASL - 2.27.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "Last week, Delta Airlines joined several other companies by announcing it would no longer offer NRA members discounts following the school shooting in Florida",
+        "As a result, Georgia Republicans are threatening to kill part of a new bill that would eliminate a state tax for jet fuel",
+        "Georgia's Lt"
+      ]
+    },
+    "5MUTjks5Dac": {
+      "title": "4.30.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 57,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "FwZtKAt4uiY": {
+      "title": "Dr. G answers your questions: I'm older with health issues. Am I high risk for coronavirus?",
+      "sentence_count": 13,
+      "sample_sentences": [
+        "Many people worry because of age and the risk for getting this illness",
+        "I have a lot of different questions about that",
+        "Laura is concerned because she is almost 60 and her doctor says she has pneumonia and asthma"
+      ]
+    },
+    "aRaWoeDRc7s": {
+      "title": "Sign1News 3.11.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 45,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "SYKqVhZdWk4": {
+      "title": "Space-X PAZ mission launch (ASL - 2.22.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "A Space-X Falcon 9 rocket launched Thursday morning from California's Vandenberg Air Force Base",
+        "The primary mission is to deliver Spain's Paz satellite into low orbit",
+        "But the rocket also gets founder Elon Musk closer to his goal of providing high-speed internet to the world using thousands of tiny satellites"
+      ]
+    },
+    "grkqUYcf68w": {
+      "title": "Sign1News 3.8.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "-7AQlPgDPN0": {
+      "title": "Sign1News 12.20.18 - News for the deaf community powered by CNN in American Sign Language (ASL)",
+      "sentence_count": 62,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "txkb931Vq4M": {
+      "title": "“Bomb Cyclone” hammering the East Coast (ASL - 1.4.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "Every East Coast state from Maine to Florida is under some type of winter storm watch or warning",
+        "And meteorologists expect it to stay that way for the rest of the week",
+        "This weather pattern is called a \"bomb cyclone\" and forecasters say it isn't letting up anytime soon"
+      ]
+    },
+    "-_oUXqM2Zjc": {
+      "title": "Sign1News 9.29.19 - News for the Deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 78,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "hlyhPDsnnP4": {
+      "title": "Sign1News 1.25.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "WeY6Uge23ao": {
+      "title": "Trump returns to D.C. with big “TO-DO” list (ASL - 1.2.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "President Trump is back in Washington after 10 days of vacation",
+        "He starts a new year with a number of challenges on his plate",
+        "The first: a January 19th deadline to pass a spending bill and avert a government shutdown that could cost billions"
+      ]
+    },
+    "eivBB7B6hVA": {
+      "title": "Sign1News 3.10.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "Qt_mjM3HFBA": {
+      "title": "Your comments: 10-year old runs to school as punishment (ASL - 3.8.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Yesterday we told you about the 10-year-old boy whose father forced him to run 1 mile to school for three days as punishment for bullying his classmates on the school bus",
+        "We wanted to know if you thought the punishment was appropriate or too harsh",
+        "Here's what you had to say: Reynoldo Llarena said: \"I think this punishment is reasonable"
+      ]
+    },
+    "ZRu5_9uLGpM": {
+      "title": "5.22.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 73,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "1O97jR0Pwd0": {
+      "title": "Sign1News 2.24.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 51,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "l1_ttFLvHWk": {
+      "title": "Sign1News 3.24.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 167,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "6Pdev_juHdM": {
+      "title": "Sign1News 12.19.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 53,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "l_Pr8kKQInU": {
+      "title": "Sign1News 4.25.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 35,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "-cyCLrQnXZo": {
+      "title": "Sign1News 5.31.19 - News for the Deaf community powered by CNN in American Sign Language (ASL)",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "MC3PN3Sl218": {
+      "title": "Snow fall in the desert! (ASL 1.30.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "Take a look at this",
+        "That is snow in the desert",
+        "For the past two days several regions of Morocco have experienced snowfall"
+      ]
+    },
+    "7YL5SVVXHCo": {
+      "title": "Trump unloads on Bannon, says he lost his mind (ASL - 1.3.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "A new book entitled \"Fire and Fury\" was just released",
+        "A copy of the book was obtained by the newspaper \"The Guardian.\" In the book former White House chief strategist Steve Bannon reportedly said the 2016 meeting between Trump campaign officials and a Russian lawyer was \"treasonous.\" Bannon told the book's author that they should have immediately called the FBI",
+        "Jared Kushner, Donald Trump, Jr and then-campaign chairman Paul Manafort were present"
+      ]
+    },
+    "z5_VAr9YOTU": {
+      "title": "Sign1News 12.18.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "h7nmZ1UqNoA": {
+      "title": "Sign1News 3.4.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 53,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "5gFYtIKARVg": {
+      "title": "DPN 30 year anniversary (ASL - 3.6.18)",
+      "sentence_count": 13,
+      "sample_sentences": [
+        "Today marks a groundbreaking day in Deaf history and American history",
+        "Thirty years ago students at Gallaudet University kicked off a massive protest, demanding the school appoint a Deaf president",
+        "When the board hired a hearing person instead, the students became livid"
+      ]
+    },
+    "Y86eXzDlorE": {
+      "title": "Sign1News 2.12.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "FZ-o3FNEVnA": {
+      "title": "Sign1News 6.1.18 - News for the deaf community powered by CNN in American Sign Language (ASL)",
+      "sentence_count": 61,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "iZq3yQQ07s0": {
+      "title": "Sign1News 10.12.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "-K-HfBcGPXU": {
+      "title": "Sign1News 6.3.20",
+      "sentence_count": 69,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "DBA7r0XgKUY": {
+      "title": "Sign1News fan comment: disability emojis (ASL - 3.26.18)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "A few days ago we told you about Apple's push to add emojis that represent people with disabilities",
+        "The emojis would include an ear with a hearing aid, a person in a wheelchair, a prosthetic arm, a service dog and a person with a cane",
+        "I think it's a wonderful idea because it involves so much diversity"
+      ]
+    },
+    "dTftIVNjE8E": {
+      "title": "Sign1News Live 3.1.20",
+      "sentence_count": 70,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "bt6EbW45g78": {
+      "title": "Sign1News 11.1.17- News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones and here are your top stories for today"
+      ]
+    },
+    "CePMsA2CxM4": {
+      "title": "Sign1News 10.23.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 62,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "ZJtQuntEBMU": {
+      "title": "Sign1News Live 3.6.20",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News Live",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "RKZl8E2Dykk": {
+      "title": "Sign1News 2.9.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "0nhLqtKRRsk": {
+      "title": "Sign1News 2.5.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "BaMqQQIlBbM": {
+      "title": "Police investigate massive brawl on cruise ship (ASL - 2.18.18)",
+      "sentence_count": 12,
+      "sample_sentences": [
+        "We have the video of a massive brawl that broke out on a cruise ship",
+        "The 10-day Carnival cruise was headed to the South Pacific",
+        "Vicious brawls broke out over several days"
+      ]
+    },
+    "r98gHFIKtNE": {
+      "title": "Sign1News 4.2.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 69,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I’m Crystal Cousineau"
+      ]
+    },
+    "VSG2Q4h7WrQ": {
+      "title": "Sign1News 1.3.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "lFUWngaOlIc": {
+      "title": "Sign1News 4.8.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 74,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I’m Jethro Wooddall"
+      ]
+    },
+    "xHT55ZYj4cI": {
+      "title": "Sign1News 1.1.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "n7u6UW8CuPo": {
+      "title": "Powerball and Mega-Millions Jackpots over $300M (ASL 12.28.17)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "If you're feeling lucky, you may want to buy a lottery ticket this weekend",
+        "The Megamillions jackpot is now at $306 million and growing",
+        "The next drawing is 11 PM Eastern time on Friday night"
+      ]
+    },
+    "G5mm813Au1A": {
+      "title": "Protests over Trump visit to Davos (ASL - 1.24.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "President Trump is taking his \"America First\" message to the world economic forum in Davos, Switzerland this week",
+        "However thousands of people marched through Zurich and other major Swiss cities to demonstrate against Trump's visit",
+        "Leaders from France, Germany and Italy will address the forum Wednesday"
+      ]
+    },
+    "RRd2DlRgibg": {
+      "title": "Sign1News 4.20.20",
+      "sentence_count": 47,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Candace Jones"
+      ]
+    },
+    "wldGPG8Me_M": {
+      "title": "Cruise control designs could solve traffic jams (ASL - Sign1News - 12.16.17)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "MIT researchers believe they have found a new way to stop frustrating \"stop-and-go\" traffic",
+        "Researchers published a paper this week offering cruise control as a solution to help alleviate traffic jams",
+        "The report proposes redesigning the cruise control feature on cars to factor in the space in front and behind the vehicle"
+      ]
+    },
+    "fblxrnHHYL4": {
+      "title": "Sign1News 2.22.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "-hPALuvcMsM": {
+      "title": "October 3, 2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 64,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "so9BbSfdQGM": {
+      "title": "50th anniversary of MLK, Jr. assassination (ASL - 4.4.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Today marks the 50th anniversary of the assassination of civil rights leader Dr",
+        "Martin Luther King, Jr",
+        "He was shot to death on the balcony of the Lorraine Motel in Memphis, Tennessee in 1968"
+      ]
+    },
+    "Ai0_0EEvMXo": {
+      "title": "Sign1News 12.2.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "k7RAvMHIHf0": {
+      "title": "Sheriff heard on recording saying “take him out!” (ASL - 2.11.18)",
+      "sentence_count": 13,
+      "sample_sentences": [
+        "Last April, officers attempted to pull over a 33-year-old white male named Michael Dial",
+        "This is video of the chase",
+        "They suspected him of driving with a suspended license"
+      ]
+    },
+    "XLmvwuD9QEo": {
+      "title": "Dr. G answers your questions: How do Deaf people avoid touching our faces?",
+      "sentence_count": 17,
+      "sample_sentences": [
+        "Hello again",
+        "I am Dr",
+        "G, a hearing family physician"
+      ]
+    },
+    "UMTmgiJcGXs": {
+      "title": "Sign1News 11.18.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "1shDjV2kuYI": {
+      "title": "Sign1News 4.3.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "78PYzJd_6-I": {
+      "title": "Weight Watchers offers teens free membership (ASL - 2.7.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "Weight Watchers just announced one of its goals this year: to help 10 million people adopt healthy habits",
+        "Part of that plan is to offer free memberships over the summer to teenagers 13 to 17 years old",
+        "The company also says it plans to remove all artificial ingredients from products that carry the Weight Watchers brand"
+      ]
+    },
+    "1iTycyw2jcE": {
+      "title": "Sign1News 10.10.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 78,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "c1KAO1PjIrI": {
+      "title": "Sign1News 4.7.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 46,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I’m Crystal Cousineau"
+      ]
+    },
+    "-zsVFWyuQ1g": {
+      "title": "Sign1News 10.8.19 - News for the Deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 57,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "y_sYQK0SE6A": {
+      "title": "October 2, 2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 61,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau and here are your top stories for today"
+      ]
+    },
+    "SBSHrSnP7G8": {
+      "title": "Sign1News 7.11.20",
+      "sentence_count": 74,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "U0RhuUss9YA": {
+      "title": "Google sued for alleged white men bias (ASL - 1.9.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Two former Google software engineers are suing the company, alleging it discriminates against white people, conservatives and men",
+        "One of those suing Google is James Damore",
+        "He's the senior software engineer fired by Google last summer after a controversial essay he wrote about the company's diversity policies went viral"
+      ]
+    },
+    "EJZK1h7uh8g": {
+      "title": "Sign1News 1.7.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome the Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "pkfr-y5GRWo": {
+      "title": "Sign1News 1.9.18",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "rErFQSndqkE": {
+      "title": "Sign1News 4.9.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 64,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "v7Gio5YC4YY": {
+      "title": "Sign1News 10.11.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 51,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "HCkAYRQSKTc": {
+      "title": "Sign1News 11.3.17- News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 66,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "f48ZSCY-2MA": {
+      "title": "Sign1News 1.16.18",
+      "sentence_count": 64,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "zgB-OFgH0m8": {
+      "title": "Deaf Hip Hop artist Sean Forbes performs in Atlanta (3.24.18)",
+      "sentence_count": 131,
+      "sample_sentences": [
+        "Award-winning deaf rapper Sean Forbes performed in Atlanta earlier this week at Atlanta Area School for the Deaf",
+        "The place was packed",
+        "Forbes has a huge fan base"
+      ]
+    },
+    "jj-nKpL4mWQ": {
+      "title": "Prince Harry, Meghan Markle new wedding details (ASL - 2.12.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "Kensington Palace has announced new details about the wedding of Prince Harry and Meghan Markle",
+        "The couple will marry at noon local time on May 19th",
+        "That's 7 AM Eastern in the US"
+      ]
+    },
+    "OLkLPPWE4Ks": {
+      "title": "Sign1News 10.19.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 50,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "DesJoWoUrDU": {
+      "title": "Sign1News 3.18.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 69,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "MXdPJj8gNOQ": {
+      "title": "Sign1News 3.16.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "UzbloJOxuaA": {
+      "title": "Sign1News 11.16.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 68,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "Lwq1VFMR0Ig": {
+      "title": "Sign1News celebrates deaf culture with local school (ASL - 3.31.18)",
+      "sentence_count": 12,
+      "sample_sentences": [
+        "We want to thank Cleveland Road elementary school for inviting us to participate in their Deaf Culture Celebration on Friday",
+        "Sign1News anchor Jethro Wooddall shared with the students his life story and what it's like to be a news anchor and a deaf interpreter",
+        "The kids was thoroughly engaged and asked lots of great questions"
+      ]
+    },
+    "Ov97MJDKWPo": {
+      "title": "Don't fall for these April Fool's Day jokes (ASL - 4.1.18)",
+      "sentence_count": 13,
+      "sample_sentences": [
+        "It is not only Easter, is also April Fools' Day",
+        "And this year a few corporations got in on the April Fools' Day pranking",
+        "So be careful and don't fall for these fake commercials"
+      ]
+    },
+    "Q3uGuYnV4Mc": {
+      "title": "Sign1News 1.30.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 61,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "xRATfMBbnoY": {
+      "title": "Fans to decide which M&M flavor will stay (ASL - 3.8.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "On Wednesday the candy company M&amp;Ms announced that it was introducing three new flavors",
+        "But only one flavor will stay on the shelves",
+        "Crunchy Espresso, Crunchy Raspberry and Crunchy Mint will be a part of a flavor vote campaign"
+      ]
+    },
+    "UihV32x1iQk": {
+      "title": "October 5, 2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "9F3Q_LctJFw": {
+      "title": "Curious penguins find camera, take selfie video (ASL - 3.9.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "Two emperor penguins in Antarctica stumbled across a camera left in the ice by an expeditioner",
+        "The curious birds flipped it over to face skyward and then took a selfie video",
+        "The Australian Antarctic division posted this 38 second clip on its Twitter page"
+      ]
+    },
+    "xADNh5Mu_7g": {
+      "title": "Sign1News 10.18.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "j7SziwCkoG4": {
+      "title": "Sign1News 1.27.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 44,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "oZDMo_ZKkcA": {
+      "title": "Will you get paid more? (ASL - 2.8.18)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "Your paycheck may go up this month, thanks to the new tax law",
+        "The Congressional Budget Office estimates employees will likely withhold between 10 to 15 billion dollars less from workers every month",
+        "That means more money for you"
+      ]
+    },
+    "cJyKY1fsm4Q": {
+      "title": "Sign1News 2.15.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 43,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "bA3PhnWe0gM": {
+      "title": "Sign1News 11.14.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "oHbQ-L2nwk8": {
+      "title": "Sign1News 10.20.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "iMYQVqkvJ_s": {
+      "title": "Sign1News 2.1.18: News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "wneZ68oct1U": {
+      "title": "Dr. G answers your questions: Can babies and children die from coronavirus?",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "This question is from Jetsy Hoppenrath Sosa",
+        "She says I noticed lots of elders dying but I’m curious if any children, babies or adult die from it as well",
+        "Yes"
+      ]
+    },
+    "U9n99OeLKG8": {
+      "title": "Deaf literacy bill passes in Georgia (ASL - 3.15.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "Big news for Georgia's deaf community",
+        "Today lawmakers passed House Bill 844 by a unanimous vote, 49-0",
+        "HB 844 is called \"Georgia Pathway.\" The bill monitors the state's Deaf and hard of hearing children, their language acquisition, development and literacy"
+      ]
+    },
+    "MET7iOk_UCE": {
+      "title": "Super blue blood moon visible on January 31st (ASL - 1.20.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "You've heard of super moons, blue moons and blood moons",
+        "A \"supermoon\" occurs when the full moon is close to earth and brighter than normal",
+        "A \"blood moon\" occurs when it takes on a reddish tint as it passes through Earth's shadow in a lunar eclipse"
+      ]
+    },
+    "g8T1bH8AOpg": {
+      "title": "Maryland school shooter dead, 2 injured (ASL - 3.20.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Just before 8 AM Tuesday morning, police say 17-year-old Austin Rollins shot a male and female student in the hallway at Great Mills high school in Maryland",
+        "Witnesses say the school's resource officer responded to the scene in less than one minute and he and Rollins simultaneously exchanged gunfire",
+        "Rollins was killed, the officer was unharmed"
+      ]
+    },
+    "1gcINL-bie0": {
+      "title": "Sign1News 1.17.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 57,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "G6bZDfnv0Hc": {
+      "title": "Sign1News 11.27.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 62,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "obI6De8I_0M": {
+      "title": "Sign1News 12.7.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "0VQ9H3AxdGc": {
+      "title": "Sign1News 8 7 20",
+      "sentence_count": 75,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Candace Jones"
+      ]
+    },
+    "woBf_0sHPOU": {
+      "title": "Overturned truck sparks unbelievable fireball (ASL - 2.12.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "A truck loaded with liquefied natural gas overturned in China and sparked any enormous explosion",
+        "The fireball spread incredibly fast and engulfed, not only the vehicle, but trees lining the roadway",
+        "You have to see the video to believe it"
+      ]
+    },
+    "b7FlASvY17I": {
+      "title": "Sign1News 4.10.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "gHITisrphJw": {
+      "title": "GVRA proposed policy change infuriates deaf community (ASL - 3.7.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "If you live in Georgia, we have some important information to share with you regarding the Georgia Vocational Rehabilitation Agency (GVRA)",
+        "The agency is proposing a change to remove Gallaudet University and National Technical Institute for the Deaf from its list of approved schools for college funding",
+        "Instead the agency wants to expand in-state college options and use interpreters"
+      ]
+    },
+    "IjUZClqdbpk": {
+      "title": "Sign1News 3.13.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "qmyNG6BxU4k": {
+      "title": "“S***hole” projected onto Trump Hotel (ASL - 1.15.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "We want to warn you that some of the language in the story is vulgar and unsuitable for children",
+        "So please use discretion when viewing it",
+        "On Saturday night, the Trump International Hotel in Washington DC had the word \"shithole\" projected on the front of the building along with several grinning poop emojis"
+      ]
+    },
+    "FiT5DnAmGAY": {
+      "title": "Trump goes on twitter tirade (ASL - 2.22.18)",
+      "sentence_count": 14,
+      "sample_sentences": [
+        "President Trump spent the past 24 hours tweeting furiously in response to comments and criticisms involving the Parkland, Florida shooting, gun sale background checks and the NRA",
+        "The first tweet is in response to comments he made during his listening session yesterday with survivors of gun violence in which he suggested arming teachers with guns",
+        "He tweeted: \"I never said 'give teacher's guns' like was stated on fake news @CNN and @NBC"
+      ]
+    },
+    "jAJPCu0bJT8": {
+      "title": "Sign1News 8.4.18 - News for the deaf community powered by CNN in American Sign Language (ASL)",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "bBqc-znpE-I": {
+      "title": "Sign1News 11.5.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "1yZiY7j0AoM": {
+      "title": "Sign1News 1.15.18 - News in American Sign Language (ASL)",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "K9IL3PsNd6k": {
+      "title": "Sign1News 11.28.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "py5xnRUlYkQ": {
+      "title": "Sign1News 12.1.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 48,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "-46vrmBr6BU": {
+      "title": "Sign1News 10.24.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "QeMd2LWFjRQ": {
+      "title": "Dr. G answers your questions: What's the difference between coronavirus and Covid-19",
+      "sentence_count": 15,
+      "sample_sentences": [
+        "There are a few things I've noticed that has confused everyone",
+        "First, yes there is a difference between coronavirus and Covid-19",
+        "The coronavirus is a small germ you can catch and not know it"
+      ]
+    },
+    "xKZMWuGk994": {
+      "title": "Sign1News 3.26.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "Lx0tEpJhsyU": {
+      "title": "Sign1News 1.14.18 - News in American Sign Language (ASL)",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "PRqdTNUduvE": {
+      "title": "Sign1News 4.21.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 42,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "y57lszB5Ptk": {
+      "title": "Sign1News 4.22.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "Zqu4yvHmSmI": {
+      "title": "Sign1News 12.30.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 87,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "V0VAETm1R4E": {
+      "title": "Sign1News anchor Candace Jones signs National Anthem (ASL - 3.18.18)",
+      "sentence_count": 15,
+      "sample_sentences": [
+        "We want to congratulate Sign1News anchor Candace Jones",
+        "She stood in front of 60,000 soccer fans and signed the US and Canadian national anthem at the Atlanta United-Vancouver Whitecaps game Saturday night at Mercedes-Benz Stadium",
+        "Some team officials say her rendition was one of the best interpretations they've ever seen"
+      ]
+    },
+    "HOfd4HntEt4": {
+      "title": "Sign1News 11.7.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 57,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall and here are your top stories for today"
+      ]
+    },
+    "kakTOqKnOzU": {
+      "title": "Sign1News 10.22.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "ek0Yr1ju7zc": {
+      "title": "Sign1News 4.15.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 42,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "2zj0EooJVG4": {
+      "title": "Photos of damage from Atlanta Airport fire (12.18.17)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Here's a look at some of the damage from the fire that knocked out power to Atlanta's Hartsfield-Jackson International airport",
+        "Atlanta's mayor said the outage started with a fire in a Georgia Power underground electrical facility",
+        "He said the electrical fire's intensity damaged two substations serving the airport, including the airport's \"redundant system\" that should have provided backup power"
+      ]
+    },
+    "ks-ZeVsQwbw": {
+      "title": "Bridge collapse memorials grow (ASL - 3.16.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "Overnight people started coming to the intersection where the bridge collapsed to light candles for those killed and for the ones still trapped under the rubble",
+        "As you can see many people just sat in silence, some prayed, some cried",
+        "And this picture was taken from up above"
+      ]
+    },
+    "JTEkB9AEaU0": {
+      "title": "Trump approves release of controversial memo (ASL - 2.2.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Today President Trump authorized the release of a controversial Republican memo",
+        "It’s a report from the House Intelligence Committee compiled by Republican Congressman Devin Nunes",
+        "The report accuses the FBI for abusing surveillance powers and accuses the Democrats of being behind the Russia investigation"
+      ]
+    },
+    "26P-Ma96pEs": {
+      "title": "Sign1News 1.10.18 - News in American Sign Language (ASL)",
+      "sentence_count": 70,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "egM34eDINwg": {
+      "title": "“Bomb cyclone” kills six, 900K without power (ASL - 3.4.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "The \"bomb cyclone\" that hammered the Northeast this weekend has now moved out to sea but it left a lot of devastation behind",
+        "The storm killed at least six people and more than 600,000 people from Virginia to Massachusetts are without power",
+        "At one point, homes and buildings in the Boston area were completely underwater"
+      ]
+    },
+    "-jar_eJa87Y": {
+      "title": "Equifax hackers stole more than previously reported (ASL - 3.1.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "Last year Equifax announced that hackers stole the personal information of 145.5 million people",
+        "That included Social Security numbers, driver's license numbers and addresses",
+        "Now Equifax says it has discovered another 2.4 million Americans who had their names and driver's license numbers exposed"
+      ]
+    },
+    "TO2FhCTc-UM": {
+      "title": "Sign1News 12.4.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 62,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "lurseCKY1dg": {
+      "title": "Sign1News 2.4.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 47,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I’m Crystal Cousineau"
+      ]
+    },
+    "i8KzxRhzQks": {
+      "title": "Health benefits of chocolate (ASL - 2.13.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "Tomorrow is Valentine's Day and if you don't know what to get your significant other, try chocolate",
+        "It's not only a romantic gift but it also has several health benefits",
+        "Researchers say a quarter of an ounce of dark chocolate everyday lowers your risk of a heart attack or stroke, it helps reduce inflammation in the body and it definitely improves a person's mood"
+      ]
+    },
+    "R0QXjeGVQEc": {
+      "title": "Father of FL shooting victim paints powerful mural (ASL - 3.12.18)",
+      "sentence_count": 3,
+      "sample_sentences": [
+        "Manuel Oliver painted this mural to honor his late son",
+        "Joaquin Oliver was among the 17 students and teachers killed in the February 14 shooting",
+        "The mural reads \"We Demand A Change.\" The artwork is part of the \"Parkland 17\" exhibit, an art exhibit organized by Miami Heat player Dwayne Wade and created by Miami-area artists Evan Pestain."
+      ]
+    },
+    "eDM9jW83VRo": {
+      "title": "Sign1News 12.21.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "URLsI7KVA70": {
+      "title": "Deputy get into scuffle with suspect on highway (ASL - 3.19.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "A man is facing charges after he got into a scuffle with a Georgia deputy",
+        "The video we're about to show you shows the deputy trying to arrest a man during a traffic stop but he resists",
+        "The suspect and deputy began to struggle on the side of the road"
+      ]
+    },
+    "3kaUiON2fS8": {
+      "title": "Here’s what you missed at 258 Deaf Street (ASL - 10.15.18)",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "As you know the 258 Street Deaf festival was in Atlanta this weekend",
+        "It was a big success and lots of fun",
+        "Thousands of people showed up at the Georgia International Convention Center"
+      ]
+    },
+    "5zfPLAz4l-Q": {
+      "title": "Sign1News 12.17.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 44,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "RzWDyJd5A4Y": {
+      "title": "Barking dog saves family’s life (ASL - 1.12.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "A Missouri family is lucky to be alive and it's all thanks to their dog",
+        "Matt Beaudreau says he woke up around 2 AM to the sound of his dog, River, barking",
+        "He got up, took River out to do her business and went back to sleep"
+      ]
+    },
+    "uMYeyplfXw8": {
+      "title": "Sign1News 11.22.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 66,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "pYHNX1K_nLQ": {
+      "title": "What happened to the Tesla shot into space? (ASL 2.10.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "On Tuesday Space-X launched a red sports car into orbit with a mannequin named \"Starman\" behind the wheel",
+        "But where exactly is the car going",
+        "NASA's jet propulsion laboratory expects \"Starman\" to take this path as he orbits the sun"
+      ]
+    },
+    "41FOWmQsKPI": {
+      "title": "Dr. G. answers your questions: What is the cause of death for Covid-19?",
+      "sentence_count": 10,
+      "sample_sentences": [
+        "The next question is from Lonnie Overstreet",
+        "He wants to know when people die from Covid-19, what exactly is the cause of death",
+        "First you have to remember Covid-19 is the disease"
+      ]
+    },
+    "p9jDq5hO7k8": {
+      "title": "Sign1News 1.26.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 72,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "70ddmjZLtJw": {
+      "title": "Sign1News 3.29.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 53,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "_xBb_SJ4J_8": {
+      "title": "Sign1News 11.30.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "jdqmM_HiTC4": {
+      "title": "Sign1News 12.16.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 45,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "gKWW_jO_CO8": {
+      "title": "October 7, 2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "N5hHUGVN1G4": {
+      "title": "NFL player pulls Jeep to strength train (ASL - 3.11.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "New Orleans Saints running back Alvin Kamara has one insane workout",
+        "Take a look",
+        "Instead of doing squats to strengthen his legs, he pulls a Jeep"
+      ]
+    },
+    "-NWZsLFjA7A": {
+      "title": "Sign1News 2.20.19 - News for the Deaf community powered by CNN in American Sign Language (ASL)",
+      "sentence_count": 40,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "-tAf0xFNJDI": {
+      "title": "Sign1News 5.23.19 - News for the Deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "-QHnZBBE8Ho": {
+      "title": "Sign1News 3.7.19 - News for the Deaf community powered by CNN in American Sign Language (ASL)",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "jKhTTxkHScY": {
+      "title": "State of the Union preview (ASL - 1.29.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "President Trump will deliver his first State of the Union address to the nation and Congress Tuesday",
+        "At the forefront of his speech: immigration",
+        "The president tweeted late Saturday about his DACA plan"
+      ]
+    },
+    "l6FTtwVHFbE": {
+      "title": "Sign1News 1.21.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 47,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "p4eINVM_gbg": {
+      "title": "Sign1News 12.28.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "668bu_vGg7M": {
+      "title": "Atlanta Area School for the Deaf Annual Fall Festival (ASL - 11.4.18)",
+      "sentence_count": 35,
+      "sample_sentences": [
+        "Yesterday was a big day at Atlanta Area school for the Deaf",
+        "The school held its 26th annual fall festival",
+        "This is the school's biggest fundraiser and it brings out dozens of Deaf-friendly businesses, vendors and news organizations"
+      ]
+    },
+    "7iwfFafwIyo": {
+      "title": "Sign1News 12.27.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "BlzpvIPLg1w": {
+      "title": "Sign1News 4.14.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 167,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "mIbhXbrdfEw": {
+      "title": "Sign1News 12.26.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 75,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "I_LAYEn9--A": {
+      "title": "Sign1News 2.16.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "1wFZjYCc-8U": {
+      "title": "Home Depot giving workers $1K bonuses (ASL - 1.25.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Home Depot is paying $1,000 bonuses to its hourly employees",
+        "Home Depot says they are able to do this because of the recent tax reform",
+        "The bonus amounts will be based on how long the employee has worked for the company"
+      ]
+    },
+    "8Z2qKJWlAgY": {
+      "title": "5.27.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "3Uhjd1gWESY": {
+      "title": "\"March for our lives\" rallies around the world (ASL - 3.24.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "Millions of protesters around the country and the world came together for the massive \"March For Our Lives\" demonstrations Saturday",
+        "This is a map of the 800+ rallies taking place across America",
+        "The event was organized by survivors of the school shooting that left 17 people dead in Parkland, Florida last month"
+      ]
+    },
+    "8A3jpDQmkPA": {
+      "title": "5.16.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "_Abo4EGDlfo": {
+      "title": "China accuses Trump of spreading “fake news” (ASL - 4.4.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "The world's two largest economies, China and United States, are locked in a tariff tit-for-tat",
+        "China and the United States have announced tariffs on more than $100 billion worth of combined goods",
+        "The latest clash came Wednesday when the Chinese government proposed new tariffs on dozens of US products including airplanes, cars and soybeans"
+      ]
+    },
+    "MTY9lPOvwzc": {
+      "title": "Dr. G answers your questions: How many people have recovered from coronavirus?",
+      "sentence_count": 33,
+      "sample_sentences": [
+        "Hello everyone",
+        "My name is Dr",
+        "Deborah Gilboa or Dr"
+      ]
+    },
+    "Id3E3Myp_uQ": {
+      "title": "Zuckerberg breaks silence, addresses data scandal (ASL - 3.21.18)",
+      "sentence_count": 10,
+      "sample_sentences": [
+        "For the first time, we are hearing from Facebook CEO Mark Zuckerberg about a data scandal engulfing the social media giant",
+        "He posted a comment on Facebook saying the company has a responsibility to protect user data",
+        "He says Facebook will take a series of steps to fix what he called a \"breach of trust\" between Facebook and its users"
+      ]
+    },
+    "rmFwPc96YUY": {
+      "title": "Super Bowl anti-terrorism documents left on plane (ASL - 2.5.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "The Department of Homeland Security documents were found in the seat back pocket of a commercial airplane",
+        "Most of the documents were marked \"For Official Use Only.\" The documents detailed anti-terrorism preparations for Sunday night's Super Bowl -- 78 pages containing details of preparations in the event of a biological attack",
+        "The document also spelled out specific instructions on how to safeguard the document"
+      ]
+    },
+    "XV5n_GN606Q": {
+      "title": "Sign1News 3.12.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 40,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "Pwv3j_jgoSU": {
+      "title": "Deadly storms strike Western Europe (ASL - 1.19.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "A massive windstorm in Western Europe has killed eight people -- two in the Netherlands and six in Germany",
+        "The wind is so strong it is flipping trucks off the road, ripping roofs off buildings and pulling trees up from the roots",
+        "Here's video showing the destructive force of the wind"
+      ]
+    },
+    "OsujvC5NZwM": {
+      "title": "Sign1News 3.6.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "g2UTplDl6Qc": {
+      "title": "Sign1News 11.17.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones and here are your top stories for today"
+      ]
+    },
+    "oUUWMIk-GUw": {
+      "title": "Sign1News 4.5.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 41,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I’m Crystal Cousineau"
+      ]
+    },
+    "MrQeObIhUXU": {
+      "title": "Sign1News 4.20.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "GMAOpKhvlPo": {
+      "title": "Police ask for calm in Stephon Clark protests (ASL - 3.27.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "The police chief in Sacramento is asking protesters to exercise calm to prevent any more tragedies, injuries or property damage",
+        "The marchers are protesting the shooting death of Stephon Clark",
+        "Last week police fired 20 rounds at him while he was standing in his grandmother's backyard"
+      ]
+    },
+    "VN9X1WQKjWI": {
+      "title": "Sign1News 3.20.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 53,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "MiENdjCKv1s": {
+      "title": "Sign1News 1.31.18: News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 75,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "O7361D4IHWA": {
+      "title": "FCC recommends 3-digit number for suicide hotline (ASL - 8.17.19)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "The Federal Communications Commission is recommending that Congress designate a three-digit number for the National Suicide Prevention Hotline",
+        "The FCC recommends the use of the digits 988 because it's a shorter number and easier to remember",
+        "Currently calls to the 11-digit suicide hotline number are routed to the closest certified crisis center"
+      ]
+    },
+    "gRt8imZfprY": {
+      "title": "Obamas tweet Valentine's Day love messages to each other (ASL - 2.14.18)",
+      "sentence_count": 3,
+      "sample_sentences": [
+        "Former First Lady Michelle Obama tweeted: “Happy #Valentine’s Day to my one and only, @Barack Obama",
+        "To celebrate the occasion, I’m dedicating a little Valentine’s Day playlist to you!” The playlist includes songs such as “Fallin’ by Alicia Keys, “Halo” by Beyoncé and “Just The Way You Are” by Billy Joel",
+        "Former President Barack Obama also honored his wife on Valentine’s Day tweeting: “She makes every day and every place better.”"
+      ]
+    },
+    "ZsboUVmjCp0": {
+      "title": "Screw in boy's skull, millimeter away from death (ASL 1.27.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Thirteen-year-old Darius Foreman is recovery after a brush with death last weekend",
+        "Last Saturday, the Maryland boy was building a tree house when he fell from a branch and knocked over a wooden board that had a 6-inch screw in it",
+        "The board slammed down on his head and thrust the screw into his skull"
+      ]
+    },
+    "rg0aNrsRMVc": {
+      "title": "Sign1News 3.17.20",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Candace Jones"
+      ]
+    },
+    "2bXnkd7DGc8": {
+      "title": "Sign1News 12.12.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "-o9Tj5gJGI4": {
+      "title": "Sign1News 4.18.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 36,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "nJnr_thzg0c": {
+      "title": "Sign1News 4.27.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 41,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "o0vCRLF-0Uk": {
+      "title": "Sign1News 12.15.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 45,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "rCxgHVKgntg": {
+      "title": "Sign1News 1.24.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "6eRl2gkin9w": {
+      "title": "Sign1News 12.31.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 51,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "T3HP-1xZdG8": {
+      "title": "Sign1News 2.13.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 50,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "48lMs6U5n0w": {
+      "title": "Sign1News 10.25.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 72,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "IhgMwb1qmGg": {
+      "title": "Sign1News 1.6.18",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "EFhz2KRPa68": {
+      "title": "Sign1News 12.24.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 82,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "Vpb13X1sxdo": {
+      "title": "Sign1News 11.20.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "-TI-YrX4Zho": {
+      "title": "Sign1News 6.13.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "Ebrdhld-8wM": {
+      "title": "Dad recreates fireworks show in daughter's bedroom (ASL - 3.22.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "Nevada dad Lyle Coram has re-created Disneyland's iconic fireworks show in his daughter Shelby's bedroom",
+        "Coram works as a stagehand on live shows in Las Vegas",
+        "His technical expertise came in handy on the bedroom project"
+      ]
+    },
+    "82edaN7PsVQ": {
+      "title": "Sign1News 12.9.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "4NMULDVMXXA": {
+      "title": "Sign1News 10.27.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "zLrTP3whdb0": {
+      "title": "Sign1News 1.8.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 62,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "SI19V4-BXIs": {
+      "title": "Sign1News 10.28.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 61,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am at Crystal Cousineau"
+      ]
+    },
+    "w1CAyTB3wFA": {
+      "title": "Sign1News 1.11.18 - News in American Sign Language (ASL)",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "wHk7-DjrqxY": {
+      "title": "W. Virginia lawmakers agree to teacher pay raise (ASL - 3.6.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "Thousands of teachers cheered after lawmakers reached a deal agreeing to give a 5% pay raise to all state employees, including teachers and school staff",
+        "Schools all over the state have been shut down for nine days because of the teachers' strike",
+        "Both the House and Senate unanimously approved the pay raise and the bill is expected to be signed by Governor Jim Justice today"
+      ]
+    },
+    "PNTbO_VrcSI": {
+      "title": "Mega Millions jackpot at $363M (ASL - 1.2.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "If you're a lottery player and feeling lucky, make sure you buy your Mega Millions ticket tonight",
+        "The jackpot for tonight's drawing is up to $363 million",
+        "But did you know Mega Millions officials made a change back in October, giving you more numbers to choose therefore making it harder to hit the jackpot"
+      ]
+    },
+    "-Zl-cALyuy8": {
+      "title": "Sign1News 8.14.19 - News for the Deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 69,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "sqJcHZ4bYPw": {
+      "title": "Sign1News 4.1.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 67,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "dF-8sngLwcU": {
+      "title": "Russia expels U.S. diplomats in retaliation (ASL - 3.29.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Earlier this week Washington expelled 60 Russian diplomats",
+        "It was part of a global response to the poisoning of a former Russian double agent and his daughter in England",
+        "UK authorities openly blamed Russia for using a military-grade nerve agent for the poisoning on March 4"
+      ]
+    },
+    "DFwQQL6_YZ8": {
+      "title": "Update: White House shooter dies (ASL - 3.4.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "The man who shot himself just outside the White House Saturday morning has died from his injuries",
+        "According to the Secret Service, the incident happened just outside the north fence of the building",
+        "Officials say a man pulled out a gun and fired several rounds"
+      ]
+    },
+    "03ky2gf59Hw": {
+      "title": "Stoplight shootout caught on camera (ASL - 1.24.18)",
+      "sentence_count": 10,
+      "sample_sentences": [
+        "Police in Pensacola, Florida are searching for a man involved in a shoot out at a stoplight",
+        "It happened around noon on Monday at the intersection of Fairfield Drive and W Street",
+        "Police say the driver of a silver Lexus pulled up at a stoplight and exchanged gunfire with someone in a gold Toyota"
+      ]
+    },
+    "i-F6l3YmS1I": {
+      "title": "Legalizing pot could help opioid crisis (ASL - 4.3.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "The Centers for Disease Control and Prevention says on average, 115 Americans die every day from an opioid overdose",
+        "But according to two new studies, marijuana could help curb America's opioid epidemic",
+        "Researchers compared opioid prescription patterns in states with and without medical cannabis laws and found that states with medical marijuana laws had 2.2 million fewer daily doses of opioids prescribed per year"
+      ]
+    },
+    "rGN0WjdtTTY": {
+      "title": "Sign1News 12.29.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 61,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "4rWrNpTI7HE": {
+      "title": "Sign1News 12.20.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 69,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "0xYA1GwMQcE": {
+      "title": "A healthier holiday (12.22.17)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "If you're looking to kickstart a healthier lifestyle, there's no better time than now",
+        "Here are some tips to help you celebrate a healthy holiday season",
+        "Go easy on the booze during the holidays"
+      ]
+    },
+    "_zA4_EFlFZ4": {
+      "title": "How does the new tax bill affect you? (ASL - Sign1News - 12.16.17)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Yesterday Republicans released the final version of their tax bill, which means they are one step closer to fulfilling the promise of passing tax breaks by Christmas",
+        "But how will the new tax bill affect you -- the taxpayer",
+        "You will see some benefits like a doubling of the standard deduction -- although that's scheduled to go away after eight years"
+      ]
+    },
+    "XF-FFbeyMJY": {
+      "title": "Sign1News 12.14.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "DKEIfOqQMx4": {
+      "title": "Sign1News 4.17.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 48,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "hC-WIfOlVZg": {
+      "title": "Sign1News 1.4.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "R0EFhH15P_4": {
+      "title": "Miami bridge collapse: six vehicles recovered (ASL - 3.18.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "In Florida recovery workers have pulled six vehicles from the rubble of the collapsed pedestrian bridge",
+        "Officials say two cars were pulled out today with one body in one car and two bodies in the other",
+        "At least two bodies and four cars remain buried in the rubble"
+      ]
+    },
+    "dL-3v-3u7ws": {
+      "title": "Trump furious over \"Do Not Congratulate\" leak (ASL - 3.21.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "Sources in Washington, DC say President Trump is furious about leaked information regarding advice he received before his Tuesday phone call with Russian President Vladimir Putin",
+        "The Washington Post was the first to report that Trump congratulated Putin on being reelected, which his advisers had warned him not to do",
+        "Sources say only a few people would've known about that warning and the leak reinforces Trump's idea that some staffers want to undermine him"
+      ]
+    },
+    "4xngx-JjvC8": {
+      "title": "Sign1News 1.20.18 - News in American Sign Language (ASL)",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "n3Wg2bArIkw": {
+      "title": "Sign1News 3.21.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 40,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "jafgm6k2NYA": {
+      "title": "Sign1News 12.6.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 69,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "TXP1RMKwABE": {
+      "title": "Sign1News 4.28.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 35,
+      "sample_sentences": [
+        "Hello everyone Welcome to Sign1News",
+        "I'm Candace Jones",
+        "Here are your top stories for today"
+      ]
+    },
+    "GaVM8qXM9t0": {
+      "title": "Waymo wants to prevent vomiting in self-driving cars (ASL - 2.24.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Waymo, the company behind a self-driving car project, says it has the technology that will prevent motion sickness in its vehicles",
+        "The technology would choose routes without stop-and-go traffic to spare motion-sensitive passengers",
+        "It would also reduce sudden acceleration and back-and-forth swaying of the vehicle"
+      ]
+    },
+    "wRp58NgrSo8": {
+      "title": "Sign1News 3.27.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "kaRAnvHYY9c": {
+      "title": "Biden: would \"beat the hell\" out of Trump if in high school  (ASL - 3.22.18)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "Former Vice President Joe Biden is getting some flak for a speech he made at the University of Miami in South Florida on Tuesday",
+        "He was talking to the college Democrats about the Access Hollywood video of Trump that surfaced in 2016, in which Trump made lewd comments about women",
+        "Biden said: \"A guy who ended up becoming our national leader said I can grab a woman anywhere and she likes it"
+      ]
+    },
+    "UDktJ0JF6Ko": {
+      "title": "Sign1News 2.19.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "55KLzfK4fqg": {
+      "title": "Supreme court declines request to take DACA case (ASL - 2.26.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "On Monday the Supreme Court said it will stay out of the dispute over the Deferred Action for Childhood Arrivals (DACA) program -- for now",
+        "The justices declined a request from the Trump administration to review a lower court decision that temporarily blocked the government's efforts to end the program",
+        "That means the case will continue in the lower courts"
+      ]
+    },
+    "_RlJLypK6ok": {
+      "title": "Sign1News 8.10.20",
+      "sentence_count": 72,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "7ztoTdD13xM": {
+      "title": "Nature lovers watch eaglets being hatched (ASL 12.28.17)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "A female bald eagle named \"Harriett\" has been nesting in North Fort Myers since 2006",
+        "Finally, the eaglets hatched from the two eggs she laid in November",
+        "Thousands of nature lovers watched via WebCam as the baby eagles hatched"
+      ]
+    },
+    "lcv4YNHjvsc": {
+      "title": "Sign1News 2.10.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 61,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "ETFBaCv19IQ": {
+      "title": "Third Nor'easter this month hits New England (ASL - 3.13.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "We're one week away from the first day of spring and the northeast just can't catch a break",
+        "A third coastal storm in less than two weeks will bring more snow, more flooding and howling winds to New England, impacting millions",
+        "Officials are warning people, again, about dangerous driving conditions"
+      ]
+    },
+    "gD1qIg05Rgs": {
+      "title": "Topless woman protests Italian elections (ASL - 3.4.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "Voting is underway in Italy's unpredictable national election",
+        "The campaign has been divisive with the issue of immigration front and center",
+        "Traditional parties on the right and the left are losing ground"
+      ]
+    },
+    "VYLUoMLnlSs": {
+      "title": "How does the government shutdown affect you? (ASL - 1.20.18)",
+      "sentence_count": 20,
+      "sample_sentences": [
+        "The US government is officially shut down",
+        "And it falls on the one-year anniversary of Trump's inauguration",
+        "If you're wondering how the shutdown affects you, here's a breakdown: Federal workers will be affected right away"
+      ]
+    },
+    "yyXX3naOlks": {
+      "title": "Sign1News 11.2.17- News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "obGTDNDP8nQ": {
+      "title": "Sign1News 1.23.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "xZIfn4aIJ6o": {
+      "title": "Sign1News 10.13.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "eFh6kDzJQ2M": {
+      "title": "Students walk out of school across the country (ASL - 2.21.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "Thousands of students across the country walked out of their schools to protest gun laws and demand school safety",
+        "These are images from Tallahassee, Florida",
+        "Students stormed the state Capitol rotunda, demanding to be heard"
+      ]
+    },
+    "jaXvjJyXW6g": {
+      "title": "Sign1News 3.2.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 66,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "Llgrxnk6LCE": {
+      "title": "Jennifer Lopez speaking out on being sexually harassed (ASL - 3.16.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "Jennifer Lopez is sharing her experience of being sexually harassed in Hollywood",
+        "In an interview with \"Harper's Bazaar\" the actress, singer and producer detailed an experience she had very early in her career",
+        "She said the director of one of her first movies told her to take off her shirt and show her breasts"
+      ]
+    },
+    "01DtCzgzaUU": {
+      "title": "Sign1News 2.27.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "shFwGHIBOiA": {
+      "title": "Trump shifts back to hard-line immigration stance (ASL - 4.3.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "In the last 48 hours President Trump has tweeted 10 times about illegal immigration",
+        "He continues to complain about US immigration policies, calling current laws \"weak\" and an \"Obama joke\" and urging Congress to act",
+        "This after sources say a number of the president's allies warned him this weekend that his support base thinks he's softening on immigration"
+      ]
+    },
+    "0mR7n0W1h9c": {
+      "title": "Texas serial bomber killed, more bombs may be in region (ASL - 3.21.18)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "Police in Texas say this man, 24-year-old Mark Anthony Conditt, is responsible for the package bombings that killed two people and injured five others this month",
+        "Police believe surveillance cameras caught Conditt dropping packages off at a FedEx facility on Sunday",
+        "When investigators analyzed the bombs they realize they all had something in common: they were being made from common household ingredients"
+      ]
+    },
+    "09_WhZGpLrE": {
+      "title": "Sign1News 2.17.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 47,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "KW7GMZvZSdY": {
+      "title": "Dining out may disrupt your hormones (ASL - 4.3.18)",
+      "sentence_count": 12,
+      "sample_sentences": [
+        "We all know home-cooked meals are probably healthier than restaurant food",
+        "But according to a new study published in the Journal Environment International, dining out increases your exposure to potentially harmful chemicals",
+        "Those chemicals are called phthalates and researchers say they can make your hormones go haywire"
+      ]
+    },
+    "YfZAuGEaDWg": {
+      "title": "Repair your credit, beware of scammers (ASL - 3.22.18)",
+      "sentence_count": 13,
+      "sample_sentences": [
+        "What's your credit score",
+        "If you want to make your score better, be careful",
+        "Scammers can not only steal your information but may also turn you into a crook"
+      ]
+    },
+    "0PSmYAx9Dr0": {
+      "title": "Sign1News 1.5.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "-bvpPL0vdz0": {
+      "title": "Sign1News 10.28.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 45,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "-GgW0Hrt6ow": {
+      "title": "Sign1News 6.24.19 - News for the Deaf community powered by CNN in American Sign Language (ASL)",
+      "sentence_count": 52,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "f0-Who5qMr4": {
+      "title": "Sign1News 3.15.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 62,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "-_ojvPJp0c0": {
+      "title": "Alcohol could help you live past 90 (ASL - 2.21.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Dr",
+        "Claudia Kawas, a researcher from the University of California, says reaching for a wine glass rather than a dumbbell may help you live longer",
+        "Kawas studied 1,700 people who lived until at least 90 and found that the people who drank two glasses of wine or beer a night reduced their chances of dying prematurely by 18 percent"
+      ]
+    },
+    "uYYYIN5bDeY": {
+      "title": "Sign1News 10.21.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 57,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "OClHG2EYscM": {
+      "title": "Sign1News 1.22.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 51,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "WRs8bBaxCZM": {
+      "title": "Sign1News 2.11.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "gjauzzsnOvI": {
+      "title": "Sign1News 11.26.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "9eEZwzUZejY": {
+      "title": "Sign1News 3.9.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 46,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "fjhuFhu3vI0": {
+      "title": "Univ. of Hawaii students panic after false missile alert (ASL - 1.14.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "Students at the University of Hawaii went into panic mode on Saturday after a false missile alert was issued",
+        "The alert went out on Saturday saying there was an inbound ballistic missile threat to the state",
+        "The message also told people to seek shelter right away and that it was not a drill"
+      ]
+    },
+    "KtbsAj4epCk": {
+      "title": "NRA sues Florida (ASL - 3.10.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "The National Rifle Association isn't happy with the new gun laws",
+        "A few hours after the Florida gun law passed, the NRA filed a federal lawsuit to block it",
+        "The lawsuit argues the law violates the constitutional rights of Florida adults who have not yet turned 21"
+      ]
+    },
+    "3SaL_1cqzAE": {
+      "title": "Woman stops car thief with kid inside (ASL - 3.9.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "A scary situation in Bremerton, Washington was caught on camera",
+        "A woman was getting ready to leave her home when she noticed a man running down the street, heading towards her truck",
+        "Her child was inside the truck"
+      ]
+    },
+    "Y7p6Y2ky-iI": {
+      "title": "Facebook overhauls privacy settings, tools (ASL - 3.28.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Facebook is changing its privacy settings",
+        "The changes are as a result of the data breach by Cambridge Analytica",
+        "Facebook says the new security settings will let users decide what personal information Facebook and third-party apps keep"
+      ]
+    },
+    "--6bmFM9wT4": {
+      "title": "5.25.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 53,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "JZmNueMInnk": {
+      "title": "Sign1News 3.14.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 53,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "Bawbmhprvqs": {
+      "title": "“Black Panther” rises and falls in one weekend (ASL - 3.25.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "The movie \"Black Panther\" is now the top grossing superhero film of all-time in North America",
+        "According to the Hollywood Reporter, \"Black Panther\" passed 2012's \"The Avengers\" Saturday to become number one all-time in the superhero genre",
+        "And Variety reports that the film should reach the $630 million mark at the US box office this weekend"
+      ]
+    },
+    "favoQ0F6Q0U": {
+      "title": "Update: GVRA cancels policy change on Gallaudet/NTID (ASL - 3.8.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Yesterday we told you about the Georgia Vocational Rehabilitation Agency's proposed policy change that would have removed Gallaudet University and the National Technical Institute for the Deaf from its list of approved schools for college funding",
+        "The policy change would have impacted thousands of Deaf and hard-of-hearing students across the state",
+        "The Deaf community was prepared to show up in masses to protest the policy change"
+      ]
+    },
+    "IW98HansqCk": {
+      "title": "Sign1News 10.29.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "nQlx2P5wxvk": {
+      "title": "Three deadly packages explode in Texas neighborhoods (ASL - 3.12.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "Law enforcement agencies in Austin, Texas have issued an emergency public safety alert",
+        "Three package bombs have exploded over the last 10 days and investigators believe they are somehow connected",
+        "In all three incidents, the victims picked up a strange package left on their doorstep, then it exploded"
+      ]
+    },
+    "5OyIQChN5DA": {
+      "title": "Sign1News 10.16.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 63,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "QNBWZrjumaA": {
+      "title": "Sign1News 2.6.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 49,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "5LX2paqf91Y": {
+      "title": "Sign1News 11.10.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 70,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Jethro Wooddall"
+      ]
+    },
+    "3-8fEGeDfK4": {
+      "title": "Nor’easter round 2 (ASL - 3.7.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "For the second time in a week a nor'easter is dumping snow across parts of the East Coast",
+        "More than 50 million people from Maryland to Maine are under winter storm warnings and watches",
+        "And more than 2,000 flights have been canceled"
+      ]
+    },
+    "AZ_YIyaMbV4": {
+      "title": "Sign1News 2.18.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "PtCk2JK59NA": {
+      "title": "Man tries to stop hit and run with sledge hammer (ASL - 3.13.18)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "It was a wild scene on the streets of Miami this weekend",
+        "Two cars got into an accident",
+        "One car tried to leave the scene"
+      ]
+    },
+    "0wTEsT9tG9A": {
+      "title": "Girl can’t stop staring at Michelle Obama’s portrait (ASL - 3.4.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "This photo went viral this week",
+        "It was taken at the National Portrait Gallery by a visitor from North Carolina who posted it on his Facebook page",
+        "It shows two-year-old Parker Curry staring in awe at a towering portrait of former First Lady Michelle Obama"
+      ]
+    },
+    "YeP-SqrjkyU": {
+      "title": "Musician plays flute during brain surgery (ASL - 3.31.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "Sixty-three-year-old Anna Henry had been suffering from intense tremors in her left hand and fingers",
+        "So surgeons at the Texas Medical Center in Houston implanted tiny electrodes in her brain",
+        "While she was still an the operating table the team handed Henry her flute to test if her hands were steady enough to play"
+      ]
+    },
+    "Jmryac-HSgI": {
+      "title": "Sign1News 4.23.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 54,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "TyzULpKvSys": {
+      "title": "Deadly Bronx fire (ASL 12.29.17)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "At least 12 people were killed in a fire Thursday night at an apartment building in the Bronx borough of New York City",
+        "Three of the 12 people killed were children",
+        "Fire officials say that the flame started in a first floor unit, where a three-year-old boy was playing with the burners on the stove"
+      ]
+    },
+    "5WSorhhDEsI": {
+      "title": "Sign1News 2.8.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "1gpNf32gGp8": {
+      "title": "Sign1News 12.13.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "wMUpVZEaoQY": {
+      "title": "Trump slams Oprah Winfrey’s “60 Minutes” segment (ASL - 2.19.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "Last fall Oprah Winfrey interviewed 14 Michigan voters, seven of whom voted for Donald Trump and seven who did not",
+        "Last night on \"60 Minutes,\" she sat down with the voters again to get their thoughts on Trump's first year",
+        "The discussion looked at whether pro-Trump supporters still backed Trump"
+      ]
+    },
+    "4jPSJl8BjT4": {
+      "title": "Millions of Americans can’t afford rent (ASL - 1.2.18)",
+      "sentence_count": 18,
+      "sample_sentences": [
+        "According to a new Harvard University study, millions of Americans cannot afford their rent",
+        "Almost 21 million people were considered burdened by the price of their rent in 2016",
+        "That means more than 30% of the money they earn goes to housing and utilities"
+      ]
+    },
+    "k_LHeo6sXek": {
+      "title": "Sign1News 1.29.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 46,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "u7es5azGhCs": {
+      "title": "Official NAD video announcement on White House lawsuit (8.4.20)",
+      "sentence_count": 16,
+      "sample_sentences": [
+        "The NAD filed a lawsuit to ask U.S",
+        "President Donald J",
+        "Trump and the White House to immediately begin providing American Sign Language (ASL) interpreters during television broadcasts of their COVID-19 press conferences and briefings to make them accessible to deaf and hard of hearing people"
+      ]
+    },
+    "WA3ZLFQrSf4": {
+      "title": "Sign1News 1.19.18 - News in American Sign Language (ASL)",
+      "sentence_count": 55,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "TGsw9tqUA4w": {
+      "title": "How to defend yourself against the flu (ASL - 1.26.18)",
+      "sentence_count": 10,
+      "sample_sentences": [
+        "The flu is hitting people really hard this year",
+        "Some places are even running short of the drug that helps minimize flu symptoms",
+        "So your best defense is you"
+      ]
+    },
+    "-tHAb1yPEVM": {
+      "title": "Mass shooting at Florida high school (ASL - 2.14.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Broward County police say a lone gunman opened fire at Marjory Stoneman Douglas High School today",
+        "Authorities say the shooting started just before 3 PM",
+        "Dozens of law-enforcement agencies -- police, fire, ambulances, ATF – responded"
+      ]
+    },
+    "UJTMSNJzjYE": {
+      "title": "Shelter pets enjoy donated furniture (ASL - 3.8.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Shelter dogs and cats are animals without a home",
+        "But the Knox County Humane Society in Illinois came up with the bright idea to make the animals feel right at home",
+        "They are asking people to donate old chairs so the animals will feel comfortable while they wait to meet potential owners"
+      ]
+    },
+    "fMCfJqqVZSI": {
+      "title": "Fleeing suspect gets run over by his own car (ASL - 3.8.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "A suspect in Virginia trying to flee from a police pursuit runs himself over with his own car",
+        "Thirty-year-old Isaac Bonsu took off in his car when police tried to pull him over",
+        "But when he drove down a dead-end street, he jumped out and tried to run"
+      ]
+    },
+    "rxgzdsivPs4": {
+      "title": "Sign1News 11.8.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 45,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau and here are your top stories for today"
+      ]
+    },
+    "2xqV9Ttjmmg": {
+      "title": "Package explodes at Fedex facility in Texas (ASL - 3.20.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "There have been four package explosions in Austin, Texas this month",
+        "Today a fifth package exploded, this time at a FedEx sorting facility near San Antonio",
+        "Investigators say the package was traveling along the automated conveyor belt when it exploded"
+      ]
+    },
+    "-qkSHWi0ANU": {
+      "title": "Sign1News Live 2.22.20",
+      "sentence_count": 58,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News live",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "09Qc0feFdxE": {
+      "title": "Sign1News 11.15.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 74,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "h-0xl-v2Bv4": {
+      "title": "New Year's Eve security at all-time high in LV and NY (ASL 12.28.17)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "New Year's Eve is three days away",
+        "And security preparations are underway in some of the country's most popular party spots right now",
+        "There will be more than 300 National Guard troops in Las Vegas this New Year's Eve, doubling the amount typically on hand"
+      ]
+    },
+    "sd_r54bUfQU": {
+      "title": "Sign1News 4.13.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 43,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Crystal Cousineau"
+      ]
+    },
+    "Tk2RStE3HwM": {
+      "title": "Florida passes historic gun law (ASL - 3.10.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "Three weeks after the Florida high school massacre, the state passed gun-control restrictions into law",
+        "Under the new law you must be 21 to buy a gun",
+        "Buying or possessing bump stocks is illegal"
+      ]
+    },
+    "34wDu7ZhsXs": {
+      "title": "Sign1News 11.11.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 67,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "1zk5fa3SqOY": {
+      "title": "Adorable puppies go to Disneyland! (ASL - 4.4.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "A group of service dogs took a field trip to the happiest place on earth -- Disneyland",
+        "And the images are going viral on social media",
+        "Meet Essie, Aryssa, Ortega and Chekov"
+      ]
+    },
+    "oocYh8NQAKQ": {
+      "title": "Sign1News 3.7.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 59,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "dbFMTM6uXMw": {
+      "title": "Dr. G answers your questions: Is there a cure for coronavirus? (4.27.20)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "Many people are wondering when will this be over, will there be a vaccine or cure and if someone can get it again",
+        "I want to tell you that what we know right now, and everything is changing rapidly, but right now we know there is no cure",
+        "Maybe we're hoping research will start discovering different medicines but right now we don't see one to help cure this"
+      ]
+    },
+    "BakdKfSMj1M": {
+      "title": "9-1-1 calls reveal Florida shooter’s troubled life (ASL - 2.24.18)",
+      "sentence_count": 13,
+      "sample_sentences": [
+        "In the days since the massacre at Marjory Stoneman Douglas high school, more information is coming out about the shooter Nikolas Cruz",
+        "Newly released 911 calls reveal a troubled young man who was often at odds with law enforcement",
+        "From 2008 to 2016, there were at least 39 calls for service at Cruz's home"
+      ]
+    },
+    "yxagowRBBvU": {
+      "title": "Sign1News 12.5.2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 69,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "12V41Um9QS4": {
+      "title": "Sign1News 2.21.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 60,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "Pn8OOeENZOw": {
+      "title": "First Lady spokesperson tweets on Stormy interview (ASL - 3.26.18)",
+      "sentence_count": 2,
+      "sample_sentences": [
+        "First Lady Melania Trump's communications director did respond via twitter but did not directly address the Stormy Daniels' interview",
+        "It said: \"While I know the media is enjoying speculation and salacious gossip, I'd like to remind people there is a minor child whose name should be kept out of news stories when at all possible.\""
+      ]
+    },
+    "Jw6U4Wkcjxg": {
+      "title": "Democrats push for release of second memo (ASL - 2.5.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "The second chapter of Washington DC's memo saga could be coming soon",
+        "There is a push among Democrats, and some Republicans, to release a memo that rebuts allegations of FBI surveillance abuses",
+        "Democrats on the House Intelligence Committee may call for a vote Monday to release their memo on the FBI"
+      ]
+    },
+    "KeFFF9SeFd0": {
+      "title": "October 9, 2017 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 64,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Candace Jones"
+      ]
+    },
+    "-5H_8K2k7-4": {
+      "title": "Rallies, protests break out all over the country (ASL - 2.26.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Rallies and protests have sprung up all over the country",
+        "Today in Florida, thousands of protesters marched on the Capitol steps in Tallahassee demanding gun law reform",
+        "Every public school in West Virginia has been shut down for three days because of a massive teacher walkout"
+      ]
+    },
+    "l0_D2ZgkE7o": {
+      "title": "Sign1News 1.12.18 - News in American Sign Language (ASL)",
+      "sentence_count": 66,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "M6miJXkHI4g": {
+      "title": "Over 1,600 LBS of cocaine hidden in pineapples (ASL - 1.19.18)",
+      "sentence_count": 4,
+      "sample_sentences": [
+        "On Wednesday The Spanish national police announced on Twitter they had seized 1,642 pounds of cocaine",
+        "The cocaine was hidden inside pineapples shipped from South America",
+        "Nine people were arrested in a joint operation the Portuguese police to seize the pineapples"
+      ]
+    },
+    "eG9ElwObQXk": {
+      "title": "NY helicopter crash moment of impact (ASL - 3.12.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "We have the video of the moment a chartered helicopter in New York City slowly loses altitude and crashes into the East River",
+        "The blades slice the water briefly and then the craft stinks into the frigid water",
+        "Emergency crews had trouble getting the passengers out because they were tightly harnessed and the harnesses had to be cut while the helicopter was upside down and underwater"
+      ]
+    },
+    "Q1Z1BjgiyY4": {
+      "title": "Retiring trooper makes emotional final radio call (ASL - 4.1.18)",
+      "sentence_count": 20,
+      "sample_sentences": [
+        "Arizona trooper Mark Gilberg began his law enforcement career with the Department of Public Safety on March 11, 1981",
+        "On Thursday the 37-year veteran signed off for the last time",
+        "And his emotional final radio call is making the rounds on social media"
+      ]
+    },
+    "lraA2o6flpc": {
+      "title": "18 states sue Trump Administration over census (ASL - 4.3.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "The Trump administration wants to demand citizenship information on the next census in 2020",
+        "But if 18 states have their way, that won't happen",
+        "A multi-state federal lawsuit has been filed to block the Trump administration from asking a question about citizenship"
+      ]
+    },
+    "AIJhIR1IfbM": {
+      "title": "Sign1News 4.4.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 65,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Jethro Wooddall"
+      ]
+    },
+    "j-d7B2pYpbk": {
+      "title": "Governor tells Trump Greenland is not for sale (ASL - 8.17.19)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "President Trump has reportedly, on multiple occasions, expressed interest in buying Greenland from the Danish government",
+        "The President's interest in buying Greenland was first reported by the Wall Street Journal",
+        "According to the Journal, he has raised the issue during meetings and dinners with varying degrees of seriousness, questioning aides about the possible advantages of purchasing the autonomous Danish territory"
+      ]
+    },
+    "s0p5sNW2vXQ": {
+      "title": "Reminder: clocks spring forward one hour (ASL - 3.10.18)",
+      "sentence_count": 9,
+      "sample_sentences": [
+        "Don't forget to set your clocks ahead one hour tonight",
+        "The good news: the sun will set later so people will enjoy more daylight hours",
+        "The bad news: we will lose one hour of sleep"
+      ]
+    },
+    "drxldErz6LM": {
+      "title": "What do recent school shootings in American have in common? (ASL - 2.15.18)",
+      "sentence_count": 5,
+      "sample_sentences": [
+        "Many of the worst mass shootings in recent years have something in common: The same weapon, the AR-15 rifle, was used in all of the shootings",
+        "The Sutherland Springs church, the Las Vegas country music concert, Pulse nightclub, the San Bernardino office shooting, Sandy Hook elementary and the Aurora movie theater",
+        "The National Rifle Association says the AR-15 is adaptable, reliable and accurate"
+      ]
+    },
+    "EiPM2y8c1RE": {
+      "title": "Sign1News 3.31.18 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 98,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I'm Candace Jones"
+      ]
+    },
+    "SBbvV7KZ2PQ": {
+      "title": "Dr. G answers your questions: Is there a cure?",
+      "sentence_count": 16,
+      "sample_sentences": [
+        "This question is from Lena Daron",
+        "She asked is there a cure yet",
+        "No not yet but scientiests from all over the world are researching and working hard day and night"
+      ]
+    },
+    "I-BuvRRzqVc": {
+      "title": "Sign1News 11.23.17 - News for the deaf community powered by CNN in American Sign Language (ASL).",
+      "sentence_count": 56,
+      "sample_sentences": [
+        "Hello everyone",
+        "Welcome to Sign1News",
+        "I am Crystal Cousineau"
+      ]
+    },
+    "JCdXI56o7JA": {
+      "title": "China’s space station will crash to Earth soon (ASL - 3.26.18)",
+      "sentence_count": 8,
+      "sample_sentences": [
+        "If you see a fireball crashing to earth on April 1, it might not be an April Fools' Day prank",
+        "A Chinese space station is expected to crash to earth soon",
+        "But exactly where it will land is unknown"
+      ]
+    },
+    "ZyxAd6N9MVo": {
+      "title": "Parkland shooter receives fan mail, donations (ASL - 3.29.18)",
+      "sentence_count": 6,
+      "sample_sentences": [
+        "Authorities say Parkland, Florida shooter Nikolas Cruz is actually receiving fan mail",
+        "Hundreds of letters are coming in from all over the US and Europe from young girls, women and even grown men",
+        "Some are typed, others handwritten on notebook paper"
+      ]
+    },
+    "MKaxL6t-_G8": {
+      "title": "More companies cutting ties with the NRA (ASL - 2.24.18)",
+      "sentence_count": 11,
+      "sample_sentences": [
+        "The number of companies are cutting ties with the National Rifle Association (NRA) continues to grow",
+        "The latest companies are Delta and United Airlines",
+        "Both companies announced they are no longer offering discounted rates to NRA members and Delta has requested that the NRA remove its information from their website"
+      ]
+    },
+    "atbU5JjI8QM": {
+      "title": "Trump calls for rules change to end shutdown (ASL 1.21.18)",
+      "sentence_count": 7,
+      "sample_sentences": [
+        "The House and Senate were back in session today attempting to break an impasse that caused federal agencies to shut down",
+        "And there is no indication lawmakers are any closer to reaching a deal",
+        "Chamber rules require 60 votes to break the budget impasse and Senate Republicans currently have 51 votes"
+      ]
+    }
+  }
+}
