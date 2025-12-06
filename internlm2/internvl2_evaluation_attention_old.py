@@ -4,8 +4,24 @@ InternVL2 Processing Script with Attention Visualization
 Uses hook to intercept projector output and feed to InternLM2Model.forward() for attention extraction.
 
 Usage:
-    python internlm2/internvl2_evaluation_attention.py \
-        --model-path OpenGVLab/InternVL2-2B \
+    # Using HuggingFace model:
+    python internlm2/internvl2_evaluation_attention_old.py \
+        --model-path OpenGVLab/InternVL2.5-2B \
+        --video-path /path/to/video.mp4 \
+        --out-dir ./output \
+        --save-attention
+    
+    # Using local checkpoint (full model):
+    python internlm2/internvl2_evaluation_attention_old.py \
+        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399 \
+        --video-path /path/to/video.mp4 \
+        --out-dir ./output \
+        --save-attention
+    
+    # Using local LoRA checkpoint:
+    python internlm2/internvl2_evaluation_attention_old.py \
+        --model-path /path/to/lora_checkpoint \
+        --base-model-name OpenGVLab/InternVL2.5-2B \
         --video-path /path/to/video.mp4 \
         --out-dir ./output \
         --save-attention
@@ -35,8 +51,8 @@ sys.path.insert(0, parent_dir)
 
 from transformers import AutoTokenizer, AutoModel
 from torchvision import transforms
-from internlm2.modeling_internlm2 import InternLM2Model
-from scripts.visualize_attention_simple_correct import (
+from internlm2.modeling_internlm2_old import InternLM2Model
+from scripts.visualize_attention_simple_correct_final import (
     visualize,
     minmax_01
 )
@@ -207,7 +223,7 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
     # Monkey patch InternLM2Model.forward to use local version (only for InternLM2Model)
     if 'InternLM2Model' in model_type_name or 'InternLM2' in model_type_name:
         import importlib.util
-        modeling_path = os.path.join(current_dir, 'modeling_internlm2.py')
+        modeling_path = os.path.join(current_dir, 'modeling_internlm2_old.py')
         spec = importlib.util.spec_from_file_location("internlm2.modeling_internlm2_local", modeling_path)
         local_modeling = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(local_modeling)
@@ -346,230 +362,67 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
     # For other models (Phi3), extract attention manually
     is_internlm2 = 'InternLM2Model' in model_type_name or 'InternLM2' in model_type_name
     
-    # Initialize aggregated_attention
+    # Extract attention from single forward pass
     aggregated_attention = None
-    
-    # If generation failed, manually implement generation loop to accumulate attention
-    if generated_text is None and is_internlm2:
-        print(f"   🔄 Attempting manual generation with attention accumulation...")
-        try:
-            # Get the language model wrapper (InternLM2ForCausalLM)
-            causal_lm = model.language_model if hasattr(model, 'language_model') else None
-            if causal_lm is None:
-                raise ValueError("Could not find causal_lm model")
+    with torch.no_grad():
+        if is_internlm2:
+            # InternLM2Model supports visual_token_index
+            outputs = language_model.forward(
+                inputs_embeds=inputs_embeds,
+                output_attentions=True,
+                visual_token_index=visual_token_index,
+                return_dict=True
+            )
+            # Get aggregated attention from model output
+            aggregated_attention = outputs.aggregated_viusal_token_attention
+        else:
+            # For other models (Phi3), extract attention manually
+            print(f"   🔍 Using manual attention extraction for {model_type_name}")
+            outputs = language_model.forward(
+                inputs_embeds=inputs_embeds,
+                output_attentions=True,
+                return_dict=True
+            )
             
-            # Manual generation loop
-            with torch.no_grad():
-                max_new_tokens = 128
-                eos_token_id = tokenizer.eos_token_id
-                pad_token_id = tokenizer.eos_token_id
+            # Extract attention from all layers and aggregate
+            if hasattr(outputs, 'attentions') and outputs.attentions is not None:
+                # attentions is a tuple of tensors, one per layer
+                # Shape: (num_layers, batch_size, num_heads, seq_len, seq_len)
+                all_attentions = outputs.attentions
+                print(f"   📊 Found {len(all_attentions)} attention layers")
                 
-                # Get im_end token ID
-                try:
-                    im_end_token_id = tokenizer.convert_tokens_to_ids(['<|im_end|>'])[0]
-                except:
-                    im_end_token_id = None
+                # Use last layer attention (most relevant)
+                last_layer_attn = all_attentions[-1]  # [batch_size, num_heads, seq_len, seq_len]
                 
-                # Initialize generation state
-                generated_ids = input_ids.clone()
-                past_key_values = None
-                aggregated_attention = None
+                # Average over heads: [batch_size, num_heads, seq_len, seq_len] -> [batch_size, seq_len, seq_len]
+                if len(last_layer_attn.shape) == 4:
+                    last_layer_attn = last_layer_attn.mean(dim=1)  # Average over heads
                 
-                # First forward pass (non-generation case): extract attention from text tokens
-                print(f"   📊 First forward pass (text tokens → visual tokens)...")
-                # Use language_model.forward() directly (it's monkey-patched to support visual_token_index)
-                first_outputs = language_model.forward(
-                    inputs_embeds=inputs_embeds,
-                    output_attentions=True,
-                    visual_token_index=visual_token_index,
-                    return_dict=True,
-                    use_cache=True,
-                )
+                # Extract attention from text tokens to visual tokens
+                # Get visual token indices
+                visual_start = visual_token_index[0].item()
+                visual_end = visual_token_index[1].item() + 1
+                seq_len = last_layer_attn.shape[-1]
                 
-                # Get logits from causal_lm's output layer
-                first_logits = causal_lm.output(first_outputs.last_hidden_state)
+                # Attention matrix: attention[i, j] = attention from token i to token j
+                # We want attention from all tokens (especially text tokens) to visual tokens
+                # Shape: [batch_size, seq_len, visual_token_count]
+                visual_attn = last_layer_attn[:, :, visual_start:visual_end]
                 
-                # Get attention from first forward pass
-                if hasattr(first_outputs, 'aggregated_viusal_token_attention'):
-                    aggregated_attention = first_outputs.aggregated_viusal_token_attention
-                    if aggregated_attention is not None:
-                        print(f"   ✅ First forward attention shape: {aggregated_attention.shape}")
+                # Aggregate: sum attention from all tokens to each visual token
+                # This gives us how much attention each visual token receives
+                # Shape: [batch_size, visual_token_count]
+                aggregated_attention = visual_attn.sum(dim=1).squeeze(0)  # Sum over source tokens, remove batch dim
                 
-                # Get logits and past_key_values for generation
-                next_token_logits = first_logits[:, -1, :]  # [batch, vocab_size]
-                past_key_values = first_outputs.past_key_values
+                # Normalize to get relative attention (optional, but helps with visualization)
+                if aggregated_attention.sum() > 0:
+                    aggregated_attention = aggregated_attention / aggregated_attention.sum() * visual_attn.shape[1]
                 
-                # Generation loop
-                print(f"   🔄 Starting generation loop (max {max_new_tokens} tokens)...")
-                print(f"   📊 EOS token ID: {eos_token_id}, Pad token ID: {pad_token_id}, im_end token ID: {im_end_token_id}")
-                for step in range(max_new_tokens):
-                    # Get next token
-                    next_token = torch.argmax(next_token_logits, dim=-1, keepdim=True)  # [batch, 1]
-                    next_token_id = next_token.item()
-                    
-                    # Debug: print first few tokens
-                    if step < 5:
-                        print(f"   📊 Step {step}: next_token_id={next_token_id}, token='{tokenizer.decode([next_token_id], skip_special_tokens=False)}'")
-                    
-                    # Append to generated sequence FIRST (before checking stop conditions)
-                    # This ensures we accumulate attention for the current token
-                    generated_ids = torch.cat([generated_ids, next_token], dim=-1)
-                    
-                    # Prepare inputs for next step (only the new token)
-                    # Get embeddings for the new token
-                    next_token_embeds = language_model.tok_embeddings(next_token)  # [batch, 1, hidden_dim]
-                    
-                    # Forward pass with past_key_values
-                    # Use language_model.forward() directly (it's monkey-patched)
-                    step_outputs = language_model.forward(
-                        inputs_embeds=next_token_embeds,
-                        output_attentions=True,
-                        visual_token_index=visual_token_index,
-                        past_key_values=past_key_values,
-                        return_dict=True,
-                        use_cache=True,
-                    )
-                    
-                    # Get logits from causal_lm's output layer
-                    step_logits = causal_lm.output(step_outputs.last_hidden_state)
-                    
-                    # Accumulate attention (THIS IS CRITICAL - accumulate before checking stop)
-                    if hasattr(step_outputs, 'aggregated_viusal_token_attention'):
-                        step_attention = step_outputs.aggregated_viusal_token_attention
-                        if step_attention is not None:
-                            if aggregated_attention is None:
-                                aggregated_attention = step_attention.clone()
-                            else:
-                                aggregated_attention = aggregated_attention + step_attention
-                            if step < 3:
-                                print(f"   ✅ Step {step} attention accumulated, shape: {step_attention.shape}")
-                    
-                    # Update for next iteration
-                    next_token_logits = step_logits[:, -1, :]
-                    past_key_values = step_outputs.past_key_values
-                    
-                    # NOW check for stop conditions (after accumulating attention)
-                    should_stop = False
-                    if next_token_id == eos_token_id:
-                        if step == 0:
-                            print(f"   ⚠️  EOS token reached at first step (step {step}), continuing anyway...")
-                            # Don't break on first EOS, might be a false positive
-                        else:
-                            print(f"   ✅ EOS token reached at step {step}")
-                            should_stop = True
-                    
-                    # Check for im_end token
-                    if im_end_token_id is not None and next_token_id == im_end_token_id:
-                        print(f"   ✅ <|im_end|> token reached at step {step}")
-                        should_stop = True
-                    
-                    if should_stop:
-                        break
-                    
-                    if (step + 1) % 10 == 0:
-                        print(f"   📊 Generated {step + 1} tokens, attention accumulated")
-                
-                # Decode generated text
-                generated_tokens = generated_ids[0, input_ids.shape[1]:]
-                print(f"   📊 Generated {len(generated_tokens)} tokens")
-                print(f"   📊 Generated token IDs: {generated_tokens.tolist()[:20]}")  # Show first 20 tokens
-                
-                # Check if EOS or im_end appeared early
-                eos_positions = (generated_tokens == eos_token_id).nonzero(as_tuple=True)[0]
-                im_end_positions = []
-                if im_end_token_id is not None:
-                    im_end_positions = (generated_tokens == im_end_token_id).nonzero(as_tuple=True)[0]
-                
-                # Find the first stopping token position
-                stop_positions = []
-                if len(eos_positions) > 0:
-                    stop_positions.append(eos_positions[0].item())
-                if len(im_end_positions) > 0:
-                    stop_positions.append(im_end_positions[0].item())
-                
-                if len(stop_positions) > 0:
-                    first_stop = min(stop_positions)
-                    print(f"   ⚠️  Stopping token found at position: {first_stop}")
-                    # Remove tokens after the first stopping token
-                    generated_tokens = generated_tokens[:first_stop]
-                
-                generated_text = tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
-                
-                if aggregated_attention is not None:
-                    print(f"   ✅ Manual generation successful!")
-                    print(f"   📊 Final aggregated attention shape: {aggregated_attention.shape}")
-                    print(f"   📝 Generated text ({len(generated_text)} chars): {generated_text[:100]}")
-                else:
-                    print(f"   ⚠️  Manual generation successful but no attention accumulated")
-                
-        except Exception as e:
-            print(f"   ⚠️  Manual generation with inputs_embeds failed: {str(e)[:200]}")
-            import traceback
-            traceback.print_exc()
-            # Fallback: extract attention from single forward pass
-            aggregated_attention = None
-    
-    # If we don't have attention yet (either generation succeeded or manual generation failed), extract from single forward
-    if aggregated_attention is None:
-        with torch.no_grad():
-            if is_internlm2:
-                # InternLM2Model supports visual_token_index
-                outputs = language_model.forward(
-                    inputs_embeds=inputs_embeds,
-                    output_attentions=True,
-                    visual_token_index=visual_token_index,
-                    return_dict=True
-                )
-                # Get aggregated attention from model output
-                aggregated_attention = outputs.aggregated_viusal_token_attention
+                print(f"   📊 Last layer attention shape: {last_layer_attn.shape}")
+                print(f"   📊 Visual token attention shape: {aggregated_attention.shape}")
             else:
-                # For other models (Phi3), extract attention manually
-                print(f"   🔍 Using manual attention extraction for {model_type_name}")
-                outputs = language_model.forward(
-                    inputs_embeds=inputs_embeds,
-                    output_attentions=True,
-                    return_dict=True
-                )
-                
-                # Extract attention from all layers and aggregate
-                if hasattr(outputs, 'attentions') and outputs.attentions is not None:
-                    # attentions is a tuple of tensors, one per layer
-                    # Shape: (num_layers, batch_size, num_heads, seq_len, seq_len)
-                    all_attentions = outputs.attentions
-                    print(f"   📊 Found {len(all_attentions)} attention layers")
-                    
-                    # Use last layer attention (most relevant)
-                    last_layer_attn = all_attentions[-1]  # [batch_size, num_heads, seq_len, seq_len]
-                    
-                    # Average over heads: [batch_size, num_heads, seq_len, seq_len] -> [batch_size, seq_len, seq_len]
-                    if len(last_layer_attn.shape) == 4:
-                        last_layer_attn = last_layer_attn.mean(dim=1)  # Average over heads
-                    
-                    # Extract attention from text tokens to visual tokens
-                    # Get visual token indices
-                    visual_start = visual_token_index[0].item()
-                    visual_end = visual_token_index[1].item() + 1
-                    seq_len = last_layer_attn.shape[-1]
-                    
-                    # Attention matrix: attention[i, j] = attention from token i to token j
-                    # We want attention from all tokens (especially text tokens) to visual tokens
-                    # Shape: [batch_size, seq_len, visual_token_count]
-                    visual_attn = last_layer_attn[:, :, visual_start:visual_end]
-                    
-                    # Aggregate: sum attention from all tokens to each visual token
-                    # This gives us how much attention each visual token receives
-                    # Shape: [batch_size, visual_token_count]
-                    aggregated_attention = visual_attn.sum(dim=1).squeeze(0)  # Sum over source tokens, remove batch dim
-                    
-                    # Normalize to get relative attention (optional, but helps with visualization)
-                    if aggregated_attention.sum() > 0:
-                        aggregated_attention = aggregated_attention / aggregated_attention.sum() * visual_attn.shape[1]
-                    
-                    print(f"   📊 Last layer attention shape: {last_layer_attn.shape}")
-                    print(f"   📊 Visual token attention shape: {aggregated_attention.shape}")
-                else:
-                    print(f"   ⚠️  No attentions found in outputs")
-                    aggregated_attention = None
+                print(f"   ⚠️  No attentions found in outputs")
+                aggregated_attention = None
     
     if aggregated_attention is not None:
         print(f"   📊 Final aggregated attention shape: {aggregated_attention.shape}")
@@ -691,15 +544,162 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
     return generated_text, aggregated_attention
 
 
+def load_model_from_checkpoint(checkpoint_path, base_model_name=None):
+    """
+    Load model from checkpoint, supporting both full model and LoRA checkpoints.
+    
+    Args:
+        checkpoint_path: Path to checkpoint directory
+        base_model_name: Base model name (required for LoRA checkpoints)
+    
+    Returns:
+        model, tokenizer
+    """
+    checkpoint_path = os.path.abspath(checkpoint_path)
+    
+    # Check if it's a LoRA checkpoint
+    adapter_config_path = os.path.join(checkpoint_path, 'adapter_config.json')
+    is_lora = os.path.exists(adapter_config_path)
+    
+    if is_lora:
+        print(f"   🔍 Detected LoRA checkpoint")
+        if base_model_name is None:
+            # Try to infer from checkpoint config
+            try:
+                import json
+                with open(adapter_config_path, 'r') as f:
+                    adapter_config = json.load(f)
+                    base_model_name = adapter_config.get('base_model_name_or_path', None)
+            except:
+                pass
+            
+            if base_model_name is None:
+                raise ValueError(
+                    "LoRA checkpoint detected but base_model_name not provided. "
+                    "Please specify --base-model-name or ensure adapter_config.json contains base_model_name_or_path"
+                )
+        
+        print(f"   📦 Loading base model: {base_model_name}")
+        # Load base model first
+        model = AutoModel.from_pretrained(
+            base_model_name,
+            dtype=torch.bfloat16,
+            low_cpu_mem_usage=True,
+            trust_remote_code=True
+        )
+        
+        # Load non-LoRA trainable weights if available
+        non_lora_path = os.path.join(checkpoint_path, 'non_lora_state_dict.bin')
+        if os.path.exists(non_lora_path):
+            print(f"   📦 Loading non-LoRA weights (vision tower + merger)...")
+            non_lora_trainables = torch.load(non_lora_path, map_location='cpu')
+            # Clean up state dict keys (handle different prefix patterns)
+            cleaned_state = {}
+            for key, value in non_lora_trainables.items():
+                # Remove common prefixes
+                cleaned_key = key
+                if cleaned_key.startswith('base_model.'):
+                    cleaned_key = cleaned_key[11:]
+                if cleaned_key.startswith('model.model.'):
+                    cleaned_key = cleaned_key[6:]
+                cleaned_state[cleaned_key] = value
+            model.load_state_dict(cleaned_state, strict=False)
+            print(f"   ✅ Loaded {len(cleaned_state)} non-LoRA weights")
+        
+        # Load LoRA weights
+        print(f"   📦 Loading LoRA weights from {checkpoint_path}...")
+        try:
+            from peft import PeftModel
+            model = PeftModel.from_pretrained(model, checkpoint_path)
+            # Merge LoRA weights for inference
+            print(f"   🔄 Merging LoRA weights...")
+            model = model.merge_and_unload()
+            print(f"   ✅ LoRA weights merged")
+        except ImportError:
+            raise ImportError("peft library is required for LoRA checkpoints. Install with: pip install peft")
+        except Exception as e:
+            print(f"   ⚠️  Warning: Failed to load LoRA weights: {e}")
+            print(f"   📦 Falling back to base model only")
+        
+        # Load tokenizer from checkpoint (prefer checkpoint, fallback to base)
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(checkpoint_path, trust_remote_code=True)
+        except:
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name, trust_remote_code=True)
+    else:
+        print(f"   🔍 Detected full model checkpoint")
+        # Load full model directly
+        model = AutoModel.from_pretrained(
+            checkpoint_path,
+            dtype=torch.bfloat16,
+            low_cpu_mem_usage=True,
+            trust_remote_code=True
+        )
+        tokenizer = AutoTokenizer.from_pretrained(checkpoint_path, trust_remote_code=True)
+    
+    return model, tokenizer
+
+
 def process_model(args):
     print(f"🤖 Loading model: {args.model_path}")
-    model = AutoModel.from_pretrained(
-        args.model_path,
-        torch_dtype=torch.bfloat16,
-        low_cpu_mem_usage=True,
-        trust_remote_code=True
-    ).eval().cuda()
-    tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+    
+    # Check if it's a local checkpoint path
+    if os.path.isdir(args.model_path) or (os.path.isfile(args.model_path) and args.model_path.endswith('.json')):
+        # Local checkpoint path
+        model, tokenizer = load_model_from_checkpoint(
+            args.model_path,
+            base_model_name=args.base_model_name
+        )
+    else:
+        # HuggingFace model name
+        model = AutoModel.from_pretrained(
+            args.model_path,
+            dtype=torch.bfloat16,
+            low_cpu_mem_usage=True,
+            trust_remote_code=True
+        )
+        tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
+    
+    model = model.eval().cuda()
+    
+    # Force eager attention to enable attention extraction
+    # Flash Attention doesn't support output_attentions=True
+    if hasattr(model, 'language_model') and hasattr(model.language_model, 'model'):
+        lang_model = model.language_model.model
+        if hasattr(lang_model, 'config'):
+            original_attn = lang_model.config.attn_implementation
+            lang_model.config.attn_implementation = 'eager'
+            print(f"   ✅ Changed attention from '{original_attn}' to 'eager' for attention extraction")
+            # Rebuild layers with eager attention
+            from internlm2.modeling_internlm2_old import INTERNLM2_ATTENTION_CLASSES
+            device = next(lang_model.layers[0].attention.parameters()).device
+            for idx, layer in enumerate(lang_model.layers):
+                old_attn = layer.attention
+                new_attn = INTERNLM2_ATTENTION_CLASSES['eager'](lang_model.config)
+                new_attn.to(device)
+                
+                # Copy weights from old attention to new attention
+                new_attn.wqkv.weight.data = old_attn.wqkv.weight.data.clone()
+                if hasattr(old_attn.wqkv, 'bias') and old_attn.wqkv.bias is not None:
+                    new_attn.wqkv.bias.data = old_attn.wqkv.bias.data.clone()
+                new_attn.wo.weight.data = old_attn.wo.weight.data.clone()
+                if hasattr(old_attn.wo, 'bias') and old_attn.wo.bias is not None:
+                    new_attn.wo.bias.data = old_attn.wo.bias.data.clone()
+                
+                # Copy rotary embedding (it's a module, so we need to copy its state)
+                if hasattr(old_attn, 'rotary_emb') and hasattr(new_attn, 'rotary_emb'):
+                    # Copy rotary embedding buffers
+                    if hasattr(old_attn.rotary_emb, 'inv_freq'):
+                        new_attn.rotary_emb.inv_freq = old_attn.rotary_emb.inv_freq
+                    if hasattr(old_attn.rotary_emb, 'cos_cached'):
+                        new_attn.rotary_emb.cos_cached = old_attn.rotary_emb.cos_cached
+                    if hasattr(old_attn.rotary_emb, 'sin_cached'):
+                        new_attn.rotary_emb.sin_cached = old_attn.rotary_emb.sin_cached
+                    if hasattr(old_attn.rotary_emb, 'max_seq_len_cached'):
+                        new_attn.rotary_emb.max_seq_len_cached = old_attn.rotary_emb.max_seq_len_cached
+                
+                layer.attention = new_attn
+            print(f"   ✅ Rebuilt {len(lang_model.layers)} layers with eager attention")
     
     # Resolve image size
     image_size = args.image_size
@@ -709,8 +709,8 @@ def process_model(args):
     
     # Fixed question
     # question = "Translate the American Sign Language in this video to English. Pay close attention to the person's facial expressions and hand movement."
-    # question = "Translate the American Sign Language in this video to English."
-    question = "How many people are in this video?"
+    question = "Translate the American Sign Language in this video to English."
+    # question = "How many people are in this video?"
 
     # Prepare video paths
     video_paths = []
@@ -773,7 +773,11 @@ def process_model(args):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, required=True)
+    parser.add_argument("--model-path", type=str, required=True,
+                        help="Path to model checkpoint (local directory or HuggingFace model name)")
+    parser.add_argument("--base-model-name", type=str, default=None,
+                        help="Base model name for LoRA checkpoints (e.g., 'OpenGVLab/InternVL2.5-2B'). "
+                             "If not provided, will try to infer from adapter_config.json")
     parser.add_argument("--video-path", type=str, required=True)
     parser.add_argument("--out-dir", type=str, required=True)
     parser.add_argument("--max-samples", type=int, default=None)
