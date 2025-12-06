@@ -1053,7 +1053,11 @@ class InternLM2Model(InternLM2PreTrainedModel):
             hidden_states=all_hidden_states,
             attentions=all_self_attns,
         )
-        out_dict.aggregated_viusal_token_attention = aggregated_viusal_token_attention
+        # Convert integer 0 to None if no attention was accumulated
+        if isinstance(aggregated_viusal_token_attention, int) and aggregated_viusal_token_attention == 0:
+            out_dict.aggregated_viusal_token_attention = None
+        else:
+            out_dict.aggregated_viusal_token_attention = aggregated_viusal_token_attention
 
         return out_dict
 

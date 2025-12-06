@@ -35,8 +35,8 @@ sys.path.insert(0, parent_dir)
 
 from transformers import AutoTokenizer, AutoModel
 from torchvision import transforms
-from internlm2.modeling_internlm2 import InternLM2Model
-from scripts.visualize_attention_simple_correct import (
+from internlm2.modeling_internlm2_old import InternLM2Model
+from scripts.visualize_attention_simple_correct_final import (
     visualize,
     minmax_01
 )
@@ -207,7 +207,7 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
     # Monkey patch InternLM2Model.forward to use local version (only for InternLM2Model)
     if 'InternLM2Model' in model_type_name or 'InternLM2' in model_type_name:
         import importlib.util
-        modeling_path = os.path.join(current_dir, 'modeling_internlm2.py')
+        modeling_path = os.path.join(current_dir, 'modeling_internlm2_old.py')
         spec = importlib.util.spec_from_file_location("internlm2.modeling_internlm2_local", modeling_path)
         local_modeling = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(local_modeling)
@@ -346,6 +346,8 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
     # For other models (Phi3), extract attention manually
     is_internlm2 = 'InternLM2Model' in model_type_name or 'InternLM2' in model_type_name
     
+    # Extract attention from single forward pass
+    aggregated_attention = None
     with torch.no_grad():
         if is_internlm2:
             # InternLM2Model supports visual_token_index
@@ -530,10 +532,50 @@ def process_model(args):
     print(f"🤖 Loading model: {args.model_path}")
     model = AutoModel.from_pretrained(
         args.model_path,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
         low_cpu_mem_usage=True,
         trust_remote_code=True
     ).eval().cuda()
+    
+    # Force eager attention to enable attention extraction
+    # Flash Attention doesn't support output_attentions=True
+    if hasattr(model, 'language_model') and hasattr(model.language_model, 'model'):
+        lang_model = model.language_model.model
+        if hasattr(lang_model, 'config'):
+            original_attn = lang_model.config.attn_implementation
+            lang_model.config.attn_implementation = 'eager'
+            print(f"   ✅ Changed attention from '{original_attn}' to 'eager' for attention extraction")
+            # Rebuild layers with eager attention
+            from internlm2.modeling_internlm2_old import INTERNLM2_ATTENTION_CLASSES
+            device = next(lang_model.layers[0].attention.parameters()).device
+            for idx, layer in enumerate(lang_model.layers):
+                old_attn = layer.attention
+                new_attn = INTERNLM2_ATTENTION_CLASSES['eager'](lang_model.config)
+                new_attn.to(device)
+                
+                # Copy weights from old attention to new attention
+                new_attn.wqkv.weight.data = old_attn.wqkv.weight.data.clone()
+                if hasattr(old_attn.wqkv, 'bias') and old_attn.wqkv.bias is not None:
+                    new_attn.wqkv.bias.data = old_attn.wqkv.bias.data.clone()
+                new_attn.wo.weight.data = old_attn.wo.weight.data.clone()
+                if hasattr(old_attn.wo, 'bias') and old_attn.wo.bias is not None:
+                    new_attn.wo.bias.data = old_attn.wo.bias.data.clone()
+                
+                # Copy rotary embedding (it's a module, so we need to copy its state)
+                if hasattr(old_attn, 'rotary_emb') and hasattr(new_attn, 'rotary_emb'):
+                    # Copy rotary embedding buffers
+                    if hasattr(old_attn.rotary_emb, 'inv_freq'):
+                        new_attn.rotary_emb.inv_freq = old_attn.rotary_emb.inv_freq
+                    if hasattr(old_attn.rotary_emb, 'cos_cached'):
+                        new_attn.rotary_emb.cos_cached = old_attn.rotary_emb.cos_cached
+                    if hasattr(old_attn.rotary_emb, 'sin_cached'):
+                        new_attn.rotary_emb.sin_cached = old_attn.rotary_emb.sin_cached
+                    if hasattr(old_attn.rotary_emb, 'max_seq_len_cached'):
+                        new_attn.rotary_emb.max_seq_len_cached = old_attn.rotary_emb.max_seq_len_cached
+                
+                layer.attention = new_attn
+            print(f"   ✅ Rebuilt {len(lang_model.layers)} layers with eager attention")
+    
     tokenizer = AutoTokenizer.from_pretrained(args.model_path, trust_remote_code=True)
     
     # Resolve image size
@@ -544,8 +586,8 @@ def process_model(args):
     
     # Fixed question
     # question = "Translate the American Sign Language in this video to English. Pay close attention to the person's facial expressions and hand movement."
-    # question = "Translate the American Sign Language in this video to English."
-    question = "How many people are in this video?"
+    question = "Translate the American Sign Language in this video to English."
+    # question = "How many people are in this video?"
 
     # Prepare video paths
     video_paths = []

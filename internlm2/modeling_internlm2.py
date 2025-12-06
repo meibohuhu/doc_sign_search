@@ -1038,29 +1038,59 @@ class InternLM2Model(InternLM2PreTrainedModel):
                 # layer_outputs[1] shape: [batch, num_heads, query_len, key_len]
                 # CRITICAL: Only extract attention if visual_token_index is provided
                 if visual_token_index is not None:
-                    if layer_outputs[1].shape[2] != 1:
-                        print(f"   📊 Adding attention from non-generation case: {layer_outputs[1].shape}")
-
-                        # Non-generation case: extract attention from tokens after visual tokens to visual tokens
-                        # Shape: [batch, num_heads, query_len, num_visual_tokens]
-                        visual_attn = layer_outputs[1][:, :, visual_token_index[1]:, visual_token_index[0]:visual_token_index[1]+1]
-                        # Sum over batch, heads, and query positions, keep visual token positions
-                        # Result shape: [num_visual_tokens]
-                        visual_attn_sum = visual_attn.sum(dim=(0, 1, 2))
+                    if layer_outputs[1] is not None:
+                        try:
+                            attn_shape = layer_outputs[1].shape
+                            visual_start = visual_token_index[0].item()
+                            visual_end = visual_token_index[1].item()
+                            seq_len = attn_shape[2]
+                            
+                            # Check bounds
+                            if visual_start >= seq_len or visual_end >= seq_len:
+                                # Skip if out of bounds
+                                if idx == 0:  # Only print once for first layer
+                                    print(f"   ⚠️  Visual token index out of bounds: [{visual_start}, {visual_end}] vs seq_len={seq_len}")
+                            else:
+                                if attn_shape[2] != 1:
+                                    # Non-generation case: extract attention from ALL query positions to visual tokens
+                                    # This includes text tokens (before visual) and any tokens after visual
+                                    # Shape: [batch, num_heads, seq_len, seq_len]
+                                    # We want: all query positions attending to visual tokens (key positions)
+                                    visual_end_plus_one = min(visual_end + 1, seq_len)
+                                    # Extract attention from all query positions to visual tokens
+                                    visual_attn = layer_outputs[1][:, :, :, visual_start:visual_end_plus_one]
+                                    # Sum over batch, heads, and query positions, keep visual token positions
+                                    # Result shape: [num_visual_tokens]
+                                    visual_attn_sum = visual_attn.sum(dim=(0, 1, 2))
+                                    if idx == 0:  # Only print once for first layer
+                                        print(f"   ✅ Layer {idx}: Extracted attention shape: {visual_attn_sum.shape}")
+                                else:
+                                    # Generation case: single query token attending to visual tokens
+                                    # Shape: [batch, num_heads, 1, num_visual_tokens]
+                                    visual_end_plus_one = min(visual_end + 1, seq_len)
+                                    visual_attn = layer_outputs[1][:, :, :, visual_start:visual_end_plus_one]
+                                    # Sum over batch and heads, keep visual token positions
+                                    # Result shape: [num_visual_tokens]
+                                    visual_attn_sum = visual_attn.sum(dim=(0, 1, 2))
+                                    if idx == 0:  # Only print once for first layer
+                                        print(f"   ✅ Layer {idx}: Extracted generation attention shape: {visual_attn_sum.shape}")
+                                
+                                # Initialize or accumulate per-token attention scores
+                                if aggregated_viusal_token_attention is None:
+                                    aggregated_viusal_token_attention = visual_attn_sum
+                                else:
+                                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + visual_attn_sum
+                        except Exception as e:
+                            # If indexing fails, skip this layer
+                            if idx == 0:  # Only print once for first layer
+                                print(f"   ⚠️  Attention extraction failed in layer {idx}: {e}")
+                            pass
                     else:
-                        # Generation case: single query token attending to visual tokens
-                        # Shape: [batch, num_heads, 1, num_visual_tokens]
-                        print(f"   📊 Adding attention from generation case: {layer_outputs[1].shape}")
-                        visual_attn = layer_outputs[1][:, :, :, visual_token_index[0]:visual_token_index[1]+1]
-                        # Sum over batch and heads, keep visual token positions
-                        # Result shape: [num_visual_tokens]
-                        visual_attn_sum = visual_attn.sum(dim=(0, 1, 2))
-                    
-                    # Initialize or accumulate per-token attention scores
-                    if aggregated_viusal_token_attention is None:
-                        aggregated_viusal_token_attention = visual_attn_sum
-                    else:
-                        aggregated_viusal_token_attention = aggregated_viusal_token_attention + visual_attn_sum
+                        if idx == 0:  # Only print once for first layer
+                            print(f"   ⚠️  Layer {idx}: layer_outputs[1] is None")
+                else:
+                    if idx == 0:  # Only print once for first layer
+                        print(f"   ⚠️  Layer {idx}: visual_token_index is None")
                 # If visual_token_index is None (generation step without visual tokens), skip attention extraction
 
         hidden_states = self.norm(hidden_states)

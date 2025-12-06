@@ -1,0 +1,9 @@
+{
+  "how2sign": {
+    "root": "/mnt/localssd/sign_mllm_openasl_videos",
+    "annotation": "/code/doc_sign_search/InternVL/data/openasl/train_openasl_internvl_merged_original.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 24880
+  }
+}
