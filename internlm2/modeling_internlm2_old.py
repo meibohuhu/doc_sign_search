@@ -1030,7 +1030,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
                 next_decoder_cache += (layer_outputs[2 if output_attentions else 1],)
 
             if output_attentions:
-                # all_self_attns += (layer_outputs[1],)
+                all_self_attns += (layer_outputs[1],)
                 if layer_outputs[1].shape[2] != 1:
                     aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_outputs[1][:, :, visual_token_index[1]:, visual_token_index[0]:visual_token_index[1]+1].sum(dim=(0, 1, 2))
                 else:

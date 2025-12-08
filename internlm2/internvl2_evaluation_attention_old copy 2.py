@@ -546,104 +546,36 @@ def load_model_from_checkpoint(checkpoint_path, base_model_name=None):
     checkpoint_path = os.path.abspath(checkpoint_path)
     
     # Check if it's a LoRA checkpoint
-    # Method 1: Check for adapter_config.json
     adapter_config_path = os.path.join(checkpoint_path, 'adapter_config.json')
     is_lora = os.path.exists(adapter_config_path)
-    
-    # Method 2: If no adapter_config.json, check model weights for LoRA keys
-    if not is_lora:
-        try:
-            # Check safetensors file
-            model_safetensors = os.path.join(checkpoint_path, 'model.safetensors')
-            if os.path.exists(model_safetensors):
-                from safetensors import safe_open
-                with safe_open(model_safetensors, framework='pt') as f:
-                    keys = list(f.keys())
-                    # Check if any key contains LoRA indicators
-                    lora_indicators = ['base_layer', 'lora_A', 'lora_B']
-                    has_lora_keys = any(any(indicator in k for indicator in lora_indicators) for k in keys)
-                    if has_lora_keys:
-                        is_lora = True
-                        print(f"   🔍 Detected LoRA format in model.safetensors (found LoRA keys)")
-            else:
-                # Check pytorch_model.bin
-                model_bin = os.path.join(checkpoint_path, 'pytorch_model.bin')
-                if os.path.exists(model_bin):
-                    state_dict = torch.load(model_bin, map_location='cpu')
-                    keys = list(state_dict.keys())
-                    lora_indicators = ['base_layer', 'lora_A', 'lora_B']
-                    has_lora_keys = any(any(indicator in k for indicator in lora_indicators) for k in keys)
-                    if has_lora_keys:
-                        is_lora = True
-                        print(f"   🔍 Detected LoRA format in pytorch_model.bin (found LoRA keys)")
-        except Exception as e:
-            print(f"   ⚠️  Warning: Could not check for LoRA keys: {e}")
     
     if is_lora:
         print(f"   🔍 Detected LoRA checkpoint")
         if base_model_name is None:
             # Try to infer from checkpoint config
-            if os.path.exists(adapter_config_path):
-                try:
-                    import json
-                    with open(adapter_config_path, 'r') as f:
-                        adapter_config = json.load(f)
-                        base_model_name = adapter_config.get('base_model_name_or_path', None)
-                except:
-                    pass
-            
-            # Try to infer from config.json
-            if base_model_name is None:
-                config_path = os.path.join(checkpoint_path, 'config.json')
-                if os.path.exists(config_path):
-                    try:
-                        import json
-                        with open(config_path, 'r') as f:
-                            config = json.load(f)
-                            # Check for base model name in various possible locations
-                            base_model_name = (config.get('_name_or_path') or 
-                                             config.get('base_model_name_or_path') or
-                                             config.get('model_type'))
-                    except:
-                        pass
+            try:
+                import json
+                with open(adapter_config_path, 'r') as f:
+                    adapter_config = json.load(f)
+                    base_model_name = adapter_config.get('base_model_name_or_path', None)
+            except:
+                pass
             
             if base_model_name is None:
                 raise ValueError(
                     "LoRA checkpoint detected but base_model_name not provided. "
-                    "Please specify --base-model-name (e.g., 'OpenGVLab/InternVL2.5-2B')"
+                    "Please specify --base-model-name or ensure adapter_config.json contains base_model_name_or_path"
                 )
         
         print(f"   📦 Loading base model: {base_model_name}")
-        
-        # Try to read checkpoint config to get image_size
-        checkpoint_config_path = os.path.join(checkpoint_path, 'config.json')
-        checkpoint_image_size = None
-        if os.path.exists(checkpoint_config_path):
-            try:
-                import json
-                with open(checkpoint_config_path, 'r') as f:
-                    checkpoint_config = json.load(f)
-                    checkpoint_image_size = checkpoint_config.get('vision_tower_image_size') or checkpoint_config.get('image_size')
-                    if checkpoint_image_size:
-                        print(f"   📐 Checkpoint image_size: {checkpoint_image_size}")
-            except:
-                pass
-        
         # Load base model first
         model = AutoModel.from_pretrained(
             base_model_name,
             dtype=torch.bfloat16,
             low_cpu_mem_usage=True,
             trust_remote_code=True,
-            attn_implementation='eager'
+            attn_implementation='eager'  # ← 添加这行
         )
-        
-        # If checkpoint has different image_size, we'll skip vision weights that don't match
-        if checkpoint_image_size and hasattr(model, 'config'):
-            model_image_size = getattr(model.config, 'vision_tower_image_size', None) or getattr(model.config, 'image_size', None)
-            if model_image_size != checkpoint_image_size:
-                print(f"   ⚠️  Image size mismatch: base model={model_image_size}, checkpoint={checkpoint_image_size}")
-                print(f"   📝 Will skip vision weights with shape mismatches")
         
         # Load non-LoRA trainable weights if available
         non_lora_path = os.path.join(checkpoint_path, 'non_lora_state_dict.bin')
@@ -667,136 +599,15 @@ def load_model_from_checkpoint(checkpoint_path, base_model_name=None):
         print(f"   📦 Loading LoRA weights from {checkpoint_path}...")
         try:
             from peft import PeftModel
-            # Try to load with PEFT if adapter_config.json exists
-            if os.path.exists(adapter_config_path):
-                model = PeftModel.from_pretrained(model, checkpoint_path)
-                # Merge LoRA weights for inference
-                print(f"   🔄 Merging LoRA weights...")
-                model = model.merge_and_unload()
-                print(f"   ✅ LoRA weights merged")
-            else:
-                # Manual LoRA loading: load from model.safetensors or pytorch_model.bin
-                print(f"   📦 Loading LoRA weights manually (no adapter_config.json)...")
-                model_safetensors = os.path.join(checkpoint_path, 'model.safetensors')
-                model_bin = os.path.join(checkpoint_path, 'pytorch_model.bin')
-                
-                if os.path.exists(model_safetensors):
-                    from safetensors import safe_open
-                    state_dict = {}
-                    with safe_open(model_safetensors, framework='pt') as f:
-                        for key in f.keys():
-                            state_dict[key] = f.get_tensor(key)
-                elif os.path.exists(model_bin):
-                    state_dict = torch.load(model_bin, map_location='cpu')
-                else:
-                    raise FileNotFoundError("Could not find model.safetensors or pytorch_model.bin")
-                
-                # Extract LoRA weights and merge manually
-                print(f"   🔄 Merging LoRA weights manually...")
-                merged_state_dict = {}
-                lora_keys = [k for k in state_dict.keys() if 'base_layer' in k or 'lora_A' in k or 'lora_B' in k]
-                normal_keys = [k for k in state_dict.keys() if k not in lora_keys]
-                
-                # First, load normal (non-LoRA) weights
-                for key in normal_keys:
-                    # Remove common prefixes
-                    cleaned_key = key
-                    if cleaned_key.startswith('base_model.'):
-                        cleaned_key = cleaned_key[11:]
-                    if cleaned_key.startswith('model.model.'):
-                        cleaned_key = cleaned_key[6:]
-                    merged_state_dict[cleaned_key] = state_dict[key]
-                
-                # Then, merge LoRA weights
-                # Group LoRA weights by base layer
-                lora_groups = {}
-                for key in lora_keys:
-                    # Extract base layer name (e.g., 'language_model.base_model.model.model.layers.0.attention.wqkv')
-                    if 'base_layer' in key:
-                        base_key = key.replace('.base_layer', '')
-                        if base_key not in lora_groups:
-                            lora_groups[base_key] = {}
-                        lora_groups[base_key]['base'] = state_dict[key]
-                    elif 'lora_A' in key:
-                        base_key = key.replace('.lora_A.default', '')
-                        if base_key not in lora_groups:
-                            lora_groups[base_key] = {}
-                        lora_groups[base_key]['lora_A'] = state_dict[key]
-                    elif 'lora_B' in key:
-                        base_key = key.replace('.lora_B.default', '')
-                        if base_key not in lora_groups:
-                            lora_groups[base_key] = {}
-                        lora_groups[base_key]['lora_B'] = state_dict[key]
-                
-                # Merge LoRA: W = W_base + alpha * (lora_B @ lora_A) / r
-                # Default alpha/r ratio is usually 1.0 (alpha=r), so W = W_base + lora_B @ lora_A
-                merged_count = 0
-                for base_key, lora_group in lora_groups.items():
-                    if 'base' in lora_group and 'lora_A' in lora_group and 'lora_B' in lora_group:
-                        base_weight = lora_group['base']
-                        lora_A = lora_group['lora_A']
-                        lora_B = lora_group['lora_B']
-                        
-                        # Ensure weights are on CPU and in float32 for merging
-                        base_weight = base_weight.float().cpu()
-                        lora_A = lora_A.float().cpu()
-                        lora_B = lora_B.float().cpu()
-                        
-                        # Merge: W = W_base + lora_B @ lora_A
-                        # lora_B shape: [out_features, r], lora_A shape: [r, in_features]
-                        try:
-                            merged_weight = base_weight + torch.matmul(lora_B, lora_A)
-                            
-                            # Remove common prefixes
-                            cleaned_key = base_key
-                            if cleaned_key.startswith('base_model.'):
-                                cleaned_key = cleaned_key[11:]
-                            if cleaned_key.startswith('model.model.'):
-                                cleaned_key = cleaned_key[6:]
-                            merged_state_dict[cleaned_key] = merged_weight
-                            merged_count += 1
-                        except Exception as e:
-                            print(f"   ⚠️  Warning: Failed to merge LoRA for {base_key}: {e}")
-                            print(f"      base_weight shape: {base_weight.shape}, lora_A shape: {lora_A.shape}, lora_B shape: {lora_B.shape}")
-                
-                print(f"   ✅ Successfully merged {merged_count}/{len(lora_groups)} LoRA layers")
-                
-                # Load merged weights with shape checking
-                # Filter out weights that have shape mismatches
-                model_state_dict = model.state_dict()
-                filtered_state_dict = {}
-                skipped_keys = []
-                
-                for key, value in merged_state_dict.items():
-                    if key in model_state_dict:
-                        model_shape = model_state_dict[key].shape
-                        checkpoint_shape = value.shape
-                        if model_shape == checkpoint_shape:
-                            filtered_state_dict[key] = value
-                        else:
-                            skipped_keys.append(f"{key}: {checkpoint_shape} -> {model_shape}")
-                    else:
-                        # Key not in model, skip it
-                        skipped_keys.append(f"{key}: (not in model)")
-                
-                if skipped_keys:
-                    print(f"   ⚠️  Skipped {len(skipped_keys)} weights due to shape mismatches or missing keys")
-                    if len(skipped_keys) <= 10:
-                        for skip_key in skipped_keys:
-                            print(f"      - {skip_key}")
-                    else:
-                        for skip_key in skipped_keys[:5]:
-                            print(f"      - {skip_key}")
-                        print(f"      ... and {len(skipped_keys) - 5} more")
-                
-                model.load_state_dict(filtered_state_dict, strict=False)
-                print(f"   ✅ Loaded {len(filtered_state_dict)} matching weights (merged {merged_count} LoRA layers)")
+            model = PeftModel.from_pretrained(model, checkpoint_path)
+            # Merge LoRA weights for inference
+            print(f"   🔄 Merging LoRA weights...")
+            model = model.merge_and_unload()
+            print(f"   ✅ LoRA weights merged")
         except ImportError:
             raise ImportError("peft library is required for LoRA checkpoints. Install with: pip install peft")
         except Exception as e:
             print(f"   ⚠️  Warning: Failed to load LoRA weights: {e}")
-            import traceback
-            traceback.print_exc()
             print(f"   📦 Falling back to base model only")
         
         # Load tokenizer from checkpoint (prefer checkpoint, fallback to base)
