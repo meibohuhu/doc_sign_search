@@ -26,7 +26,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Empty by default - will use base model
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_20fps_1130/checkpoint-2124}"
 
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_1205/checkpoint-3060}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_12fps_1203/checkpoint-3060}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399}"
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2874}"
@@ -50,7 +50,7 @@ OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/internvl_eval/}"
 MAX_SAMPLES=${MAX_SAMPLES:-550}
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}  # Minimum number of frames (set to 6 to ensure 6 frames)
 MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-130}  # Maximum number of frames (set to 6 to fix at 6 frames)
-SAMPLING_METHOD=${SAMPLING_METHOD:-fps16.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
+SAMPLING_METHOD=${SAMPLING_METHOD:-fps12.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
 IMAGE_SIZE=${IMAGE_SIZE:-224}
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
 EXPORT_FRAMES=${EXPORT_FRAMES:-false}  # Set to "true" to enable frame export
