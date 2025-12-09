@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# InternVL2.5-8B How2Sign Fine-Tuning on 4*A100
+# InternVL2.5-2B How2Sign Fine-Tuning on 4*A100
 # Set up conda environment - matches setup_internvl_auto.txt
 # Anaconda is installed at $HOME/anaconda3 by setup script
 # Environment name: internvl
@@ -20,22 +20,22 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"0,1,2,3"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"4,5,6,7"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
-MODEL_NAME="OpenGVLab/InternVL2_5-8B"
-OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_8b_16fps_1207"
-META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
-IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
+MODEL_NAME="OpenGVLab/InternVL2_5-2B"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_16fps_1209_448"
+META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta_448.json"
+IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_448"
 
 # Optimized training configuration
 # Note: NUM_DEVICES is automatically calculated from GPU_IDS above
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-32}
-BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
+BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
 # Memory envelopes (defaults can be overridden via env vars)
@@ -49,7 +49,7 @@ MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
 # Video frame sampling method
 SAMPLING_METHOD='fps16.0'
 
-echo "🚀 Starting InternVL2.5-8B How2Sign Training on 4*A100"
+echo "🚀 Starting InternVL2.5-2B How2Sign Training on 4*A100"
 echo "======================================================"
 echo "Model: $MODEL_NAME"
 echo "Output Dir: $OUTPUT_DIR"
@@ -69,7 +69,7 @@ echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
 
 # Check if model is already cached
-MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-8B"
+MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B"
 if [ -d "$MODEL_CACHE_DIR" ]; then
     echo "✅ Model found in cache: $MODEL_CACHE_DIR"
     echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" 2>/dev/null | cut -f1 || echo 'N/A')"
@@ -83,7 +83,7 @@ export LAUNCHER=pytorch
 # Generate MASTER_PORT
 # MASTER_PORT=${MASTER_PORT:-$(shuf -i 20000-29999 -n 1)}
 # export MASTER_PORT
-export MASTER_PORT=29500
+export MASTER_PORT=29508
 echo "MASTER_PORT: $MASTER_PORT"
 echo "LAUNCHER: $LAUNCHER (for local training, not SLURM)"
 echo ""
@@ -110,9 +110,9 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --num_train_epochs 6 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
-    --learning_rate 4e-5 \
+    --learning_rate 6e-5 \
     --vision_select_layer -1 \
-    --force_image_size 224 \
+    --force_image_size 448 \
     --max_dynamic_patch 6 \
     --dynamic_image_size True \
     --down_sample_ratio 0.5 \
