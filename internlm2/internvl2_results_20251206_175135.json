@@ -1,8 +1,0 @@
-[
-  {
-    "video": "_0-JkwZ9o4Q_6-5-rgb_front.mp4",
-    "video_path": "/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/_0-JkwZ9o4Q_6-5-rgb_front.mp4",
-    "model_output": "[Generation failed, but attention extracted successfully]",
-    "has_attention": true
-  }
-]

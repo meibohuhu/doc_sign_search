@@ -130,3 +130,5 @@ output_cluster/
 *.rar
 *.7z
 *.gz
+gated_attention/
+VLM-R1/

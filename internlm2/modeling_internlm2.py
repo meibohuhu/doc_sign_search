@@ -888,7 +888,6 @@ class InternLM2Model(InternLM2PreTrainedModel):
         large_model_prune_layer: Optional[float] = None,
         large_model_prune_ratio: Optional[float] = None,
         visual_token_importance: Optional[torch.Tensor] = None,
-        video_grid_thw: Optional[Tuple[int, int, int]] = None,
     ) -> Union[Tuple, BaseModelOutputWithPast]:
         output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
         output_hidden_states = (
@@ -962,9 +961,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
             token_prune = False
         
         
-        aggregated_viusal_token_attention = None
-        # Will be initialized as tensor when first attention is computed
-        # Shape will be [num_visual_tokens] after aggregation
+        aggregated_viusal_token_attention = 0 if output_attentions else None
         prunded_sequence_length = 0
         for idx, decoder_layer in enumerate(self.layers):
             if output_hidden_states:
@@ -991,7 +988,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
             else:
 
                 ##### 某一层 random pruning #########
-                if token_prune and visual_token_index is not None:
+                if token_prune:
                     if hidden_states.shape[1] != 1:
                         if idx == K:
                             device = hidden_states.device
@@ -1033,65 +1030,11 @@ class InternLM2Model(InternLM2PreTrainedModel):
                 next_decoder_cache += (layer_outputs[2 if output_attentions else 1],)
 
             if output_attentions:
-                # all_self_attns += (layer_outputs[1],)
-                # Extract attention to visual tokens, preserving per-token dimension
-                # layer_outputs[1] shape: [batch, num_heads, query_len, key_len]
-                # CRITICAL: Only extract attention if visual_token_index is provided
-                if visual_token_index is not None:
-                    if layer_outputs[1] is not None:
-                        try:
-                            attn_shape = layer_outputs[1].shape
-                            visual_start = visual_token_index[0].item()
-                            visual_end = visual_token_index[1].item()
-                            seq_len = attn_shape[2]
-                            
-                            # Check bounds
-                            if visual_start >= seq_len or visual_end >= seq_len:
-                                # Skip if out of bounds
-                                if idx == 0:  # Only print once for first layer
-                                    print(f"   ⚠️  Visual token index out of bounds: [{visual_start}, {visual_end}] vs seq_len={seq_len}")
-                            else:
-                                if attn_shape[2] != 1:
-                                    # Non-generation case: extract attention from ALL query positions to visual tokens
-                                    # This includes text tokens (before visual) and any tokens after visual
-                                    # Shape: [batch, num_heads, seq_len, seq_len]
-                                    # We want: all query positions attending to visual tokens (key positions)
-                                    visual_end_plus_one = min(visual_end + 1, seq_len)
-                                    # Extract attention from all query positions to visual tokens
-                                    visual_attn = layer_outputs[1][:, :, :, visual_start:visual_end_plus_one]
-                                    # Sum over batch, heads, and query positions, keep visual token positions
-                                    # Result shape: [num_visual_tokens]
-                                    visual_attn_sum = visual_attn.sum(dim=(0, 1, 2))
-                                    if idx == 0:  # Only print once for first layer
-                                        print(f"   ✅ Layer {idx}: Extracted attention shape: {visual_attn_sum.shape}")
-                                else:
-                                    # Generation case: single query token attending to visual tokens
-                                    # Shape: [batch, num_heads, 1, num_visual_tokens]
-                                    visual_end_plus_one = min(visual_end + 1, seq_len)
-                                    visual_attn = layer_outputs[1][:, :, :, visual_start:visual_end_plus_one]
-                                    # Sum over batch and heads, keep visual token positions
-                                    # Result shape: [num_visual_tokens]
-                                    visual_attn_sum = visual_attn.sum(dim=(0, 1, 2))
-                                    if idx == 0:  # Only print once for first layer
-                                        print(f"   ✅ Layer {idx}: Extracted generation attention shape: {visual_attn_sum.shape}")
-                                
-                                # Initialize or accumulate per-token attention scores
-                                if aggregated_viusal_token_attention is None:
-                                    aggregated_viusal_token_attention = visual_attn_sum
-                                else:
-                                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + visual_attn_sum
-                        except Exception as e:
-                            # If indexing fails, skip this layer
-                            if idx == 0:  # Only print once for first layer
-                                print(f"   ⚠️  Attention extraction failed in layer {idx}: {e}")
-                            pass
-                    else:
-                        if idx == 0:  # Only print once for first layer
-                            print(f"   ⚠️  Layer {idx}: layer_outputs[1] is None")
+                all_self_attns += (layer_outputs[1],)
+                if layer_outputs[1].shape[2] != 1:
+                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_outputs[1][:, :, visual_token_index[1]:, visual_token_index[0]:visual_token_index[1]+1].sum(dim=(0, 1, 2))
                 else:
-                    if idx == 0:  # Only print once for first layer
-                        print(f"   ⚠️  Layer {idx}: visual_token_index is None")
-                # If visual_token_index is None (generation step without visual tokens), skip attention extraction
+                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_outputs[1][:, :, :, visual_token_index[0]:visual_token_index[1]+1].sum(dim=(0, 1, 2))
 
         hidden_states = self.norm(hidden_states)
 
@@ -1110,24 +1053,11 @@ class InternLM2Model(InternLM2PreTrainedModel):
             hidden_states=all_hidden_states,
             attentions=all_self_attns,
         )
-        
-        # Store attention as 1D tensor (preserving token dimension)
-        out_dict.aggregated_viusal_token_attention = aggregated_viusal_token_attention
-        
-        # Optionally reshape to (T, H, W) if video_grid_thw is provided
-        if aggregated_viusal_token_attention is not None and video_grid_thw is not None:
-            T, H, W = video_grid_thw
-            num_visual_tokens = aggregated_viusal_token_attention.shape[0]
-            if T * H * W == num_visual_tokens:
-                # Reshape to (T, H, W) format
-                out_dict.aggregated_viusal_token_attention_3d = aggregated_viusal_token_attention.reshape(T, H, W)
-            else:
-                # Warn if dimensions don't match
-                import warnings
-                warnings.warn(
-                    f"video_grid_thw ({T}, {H}, {W}) = {T*H*W} tokens doesn't match "
-                    f"num_visual_tokens ({num_visual_tokens}). Skipping reshape."
-                )
+        # Convert integer 0 to None if no attention was accumulated
+        if isinstance(aggregated_viusal_token_attention, int) and aggregated_viusal_token_attention == 0:
+            out_dict.aggregated_viusal_token_attention = None
+        else:
+            out_dict.aggregated_viusal_token_attention = aggregated_viusal_token_attention
 
         return out_dict
 
@@ -1182,8 +1112,8 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
         visual_token_index: Optional[torch.Tensor] = None,
         large_model_prune_layer: Optional[float] = None,
         large_model_prune_ratio: Optional[float] = None,
-        visual_token_importance: Optional[torch.Tensor] = None,
-        video_grid_thw: Optional[Tuple[int, int, int]] = None,
+        visual_token_importance: Optional[torch.Tensor] = None
+
     ) -> Union[Tuple, CausalLMOutputWithPast]:
         r"""
         Args:
@@ -1231,8 +1161,7 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
             visual_token_index=visual_token_index,
             large_model_prune_layer=large_model_prune_layer,
             large_model_prune_ratio=large_model_prune_ratio,
-            visual_token_importance=visual_token_importance,
-            video_grid_thw=video_grid_thw,
+            visual_token_importance=visual_token_importance
         )
 
         hidden_states = outputs[0]
@@ -1265,9 +1194,6 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
             attentions=outputs.attentions,
         )
         output['aggregated_viusal_token_attention'] = outputs.aggregated_viusal_token_attention
-        # Also include 3D reshaped version if available
-        if hasattr(outputs, 'aggregated_viusal_token_attention_3d'):
-            output['aggregated_viusal_token_attention_3d'] = outputs.aggregated_viusal_token_attention_3d
         output['logits'] = output['logits'].to(device)
         return output
 
@@ -1319,8 +1245,7 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
         unfinished_sequences = torch.ones(batch_size, dtype=torch.long, device=input_ids.device)
         model_kwargs = self._get_initial_cache_position(input_ids, model_kwargs)
 
-        aggregated_viusal_token_attention = None
-        # Will be initialized as tensor from first forward pass during generation
+        aggregated_viusal_token_attention = 0 if output_attentions else None
         while self._has_unfinished_sequences(
             this_peer_finished, synced_gpus, device=input_ids.device, cur_len=cur_len, max_length=max_length
         ):
@@ -1334,11 +1259,7 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
             # forward pass to get next token
             outputs = self(**model_inputs, return_dict=True)
             if output_attentions:
-                # Accumulate per-token attention scores across generation steps
-                if aggregated_viusal_token_attention is None:
-                    aggregated_viusal_token_attention = outputs['aggregated_viusal_token_attention'].clone()
-                else:
-                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + outputs['aggregated_viusal_token_attention']
+                aggregated_viusal_token_attention = aggregated_viusal_token_attention + outputs['aggregated_viusal_token_attention']
 
             if synced_gpus and this_peer_finished:
                 continue  # don't waste resources running the code we don't need
@@ -1470,8 +1391,7 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
                 'visual_token_index': kwargs.get('visual_token_index'),
                 'large_model_prune_layer': kwargs.get('large_model_prune_layer'),
                 'large_model_prune_ratio': kwargs.get('large_model_prune_ratio'),
-                'visual_token_importance': kwargs.get('visual_token_importance'),
-                'video_grid_thw': kwargs.get('video_grid_thw'),
+                'visual_token_importance': kwargs.get('visual_token_importance')
             }
         )
         return model_inputs

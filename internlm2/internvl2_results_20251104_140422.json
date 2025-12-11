@@ -1,8 +1,0 @@
-[
-  {
-    "video": "17hrR6QZBdU_7-8-rgb_front_sam_masked.mp4",
-    "video_path": "/local1/mhu/sign_language_llm/how2sign/video/train_videos/17hrR6QZBdU_7-8-rgb_front_sam_masked.mp4",
-    "model_output": "op",
-    "has_attention": true
-  }
-]

@@ -1,0 +1,10 @@
+[
+  {
+    "video": "abzRFn8xngA_5-3-rgb_front.mp4",
+    "video_path": "/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/abzRFn8xngA_5-3-rgb_front.mp4",
+    "model_output": "[Generation failed, but attention extracted successfully]",
+    "has_attention": true,
+    "has_per_layer_attention": true,
+    "num_layers": 24
+  }
+]
