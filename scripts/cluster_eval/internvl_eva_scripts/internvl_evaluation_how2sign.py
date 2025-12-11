@@ -374,6 +374,19 @@ def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     for param in model.parameters():
         param.requires_grad = False
     
+    # CRITICAL FIX: Explicitly move model to GPU to ensure all components are on CUDA
+    # device_map="auto" may leave some components on CPU, causing "Input type (CUDABFloat16Type) and weight type (CPUBFloat16Type)" error
+    print(f"\n4️⃣ Moving model to GPU...")
+    if torch.cuda.is_available():
+        device = torch.device("cuda:0")
+        model = model.to(device)
+        # Explicitly move vision_model to GPU (this is often the problematic component)
+        if hasattr(model, 'vision_model'):
+            model.vision_model = model.vision_model.to(device)
+        print(f"   ✅ Model moved to {device}")
+    else:
+        print(f"   ⚠️  CUDA not available, model remains on CPU")
+    
     print(f"\n{'='*70}")
     print(f"✅ COMPLETE BASE MODEL LOADED SUCCESSFULLY!")
     print(f"{'='*70}\n")
@@ -457,6 +470,19 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
     # Disable gradients for all parameters to save memory
     for param in model.parameters():
         param.requires_grad = False
+    
+    # CRITICAL FIX: Explicitly move model to GPU to ensure all components are on CUDA
+    # device_map="auto" may leave some components on CPU, causing "Input type (CUDABFloat16Type) and weight type (CPUBFloat16Type)" error
+    print(f"\n4️⃣ Moving model to GPU...")
+    if torch.cuda.is_available():
+        device = torch.device("cuda:0")
+        model = model.to(device)
+        # Explicitly move vision_model to GPU (this is often the problematic component)
+        if hasattr(model, 'vision_model'):
+            model.vision_model = model.vision_model.to(device)
+        print(f"   ✅ Model moved to {device}")
+    else:
+        print(f"   ⚠️  CUDA not available, model remains on CPU")
     
     print(f"\n{'='*70}")
     print(f"✅ COMPLETE MODEL LOADED SUCCESSFULLY!")
