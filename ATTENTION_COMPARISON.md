@@ -231,3 +231,6 @@ if hasattr(outputs, 'attentions') and outputs.attentions is not None:
 **结论**: 这两种计算方式服务于不同的分析目标，结果不一样是**预期行为**，不是 bug。
 
 
+
+
+

@@ -264,3 +264,6 @@ visual_attn_2d = aggregated_attention.reshape(num_frames, num_patches_h, num_pat
 - 📈 评估模型的多模态理解能力
 
 
+
+
+

@@ -2,7 +2,7 @@
 #
 # Helper script to run InternVL evaluation with nohup
 # Usage: ./run_evaluation_nohup.sh [GPU_ID] [MAX_SAMPLES]
-# Example: ./run_evaluation_nohup.sh 0 2337
+# Example: ./run_evaluation_nohup.sh 1 2337
 
 # Get arguments
 GPU_ID=${1:-"1"}  # Default to GPU 0
