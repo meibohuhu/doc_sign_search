@@ -2,6 +2,26 @@
 """
 Download and extract video archives from Hugging Face dataset repository
 Also supports downloading model checkpoints from Hugging Face model repository
+
+# 下载并解压视频（完整流程）
+python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
+    --mode dataset \
+    --dataset_name PhoenixHu/how2sign_test_videos_224x224 \
+    --output_dir /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224_downloaded
+
+# 如果只想解压已下载的归档文件
+python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
+    --mode dataset \
+    --dataset_name PhoenixHu/how2sign_test_videos_224x224 \
+    --output_dir /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224_downloaded \
+    --extract_only
+
+# 解压后自动删除归档文件以节省空间
+python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
+    --mode dataset \
+    --dataset_name PhoenixHu/how2sign_test_videos_224x224 \
+    --output_dir /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224_downloaded \
+    --remove_archives
 """
 
 import os

@@ -95,6 +95,8 @@ class InternLM2Config(PretrainedConfig):
         rope_theta=10000,
         rope_scaling=None,
         attn_implementation='eager',
+        headwise_attn_output_gate=False,
+        elementwise_attn_output_gate=False,
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -120,6 +122,10 @@ class InternLM2Config(PretrainedConfig):
         self.attn_implementation = attn_implementation
         if self.attn_implementation is None:
             self.attn_implementation = 'eager'
+        
+        # Phase 1: Standard Gated Attention
+        self.headwise_attn_output_gate = headwise_attn_output_gate
+        self.elementwise_attn_output_gate = elementwise_attn_output_gate
         super().__init__(
             pad_token_id=pad_token_id,
             bos_token_id=bos_token_id,

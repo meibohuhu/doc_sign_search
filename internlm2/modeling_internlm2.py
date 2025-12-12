@@ -962,6 +962,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
         
         
         aggregated_viusal_token_attention = 0 if output_attentions else None
+        per_layer_text_to_visual_attention = [] if output_attentions else None   ##### mhu 20251211 每一层的 text-to-visual attention #####
         prunded_sequence_length = 0
         for idx, decoder_layer in enumerate(self.layers):
             if output_hidden_states:
@@ -1028,14 +1029,40 @@ class InternLM2Model(InternLM2PreTrainedModel):
 
             if use_cache:
                 next_decoder_cache += (layer_outputs[2 if output_attentions else 1],)
-
+############ 统计视觉token的注意力 mhu 20251211 #############
             if output_attentions:
                 all_self_attns += (layer_outputs[1],)
-                if layer_outputs[1].shape[2] != 1:
-                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_outputs[1][:, :, visual_token_index[1]:, visual_token_index[0]:visual_token_index[1]+1].sum(dim=(0, 1, 2))
+                layer_attn = layer_outputs[1]  # [batch, num_heads, seq_len, seq_len]
+                
+                # Check if visual_token_index is valid
+                if visual_token_index is None or len(visual_token_index) < 2:
+                    per_layer_text_to_visual_attention.append(None)
+                    if layer_attn.shape[2] != 1:
+                        aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_attn[:, :, :, :].sum(dim=(0, 1, 2))
+                    continue
+                
+                # Extract per-layer attention to visual tokens (EXACTLY same calculation as aggregated)
+                # This computes attention FROM tokens AFTER visual_end TO visual tokens
+                # Result: [visual_len] - total attention received by each visual token from generation tokens
+                if layer_attn.shape[2] != 1:
+                    # Full sequence: attention from tokens after visual_end to visual tokens
+                    # Use EXACTLY the same indexing as aggregated attention
+                    attn_slice = layer_attn[:, :, visual_token_index[1]+1:, visual_token_index[0]:visual_token_index[1]+1]
+                    per_layer_visual_attn = attn_slice.sum(dim=(0, 1, 2))  # Sum over batch, heads, and query tokens
                 else:
-                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_outputs[1][:, :, :, visual_token_index[0]:visual_token_index[1]+1].sum(dim=(0, 1, 2))
-
+                    # Single token (generation): extract attention to visual tokens
+                    attn_slice = layer_attn[:, :, :, visual_token_index[0]:visual_token_index[1]+1]
+                    per_layer_visual_attn = attn_slice.sum(dim=(0, 1, 2))
+                
+                # Store per-layer attention to visual tokens
+                per_layer_text_to_visual_attention.append(per_layer_visual_attn.detach().cpu())
+                
+                # Also compute aggregated attention (sum across all layers) - SAME calculation
+                if layer_attn.shape[2] != 1:
+                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_attn[:, :, visual_token_index[1]+1:, visual_token_index[0]:visual_token_index[1]+1].sum(dim=(0, 1, 2))
+                else:
+                    aggregated_viusal_token_attention = aggregated_viusal_token_attention + layer_attn[:, :, :, visual_token_index[0]:visual_token_index[1]+1].sum(dim=(0, 1, 2))
+####################################################
         hidden_states = self.norm(hidden_states)
 
         # add hidden states from the last decoder layer
@@ -1058,6 +1085,12 @@ class InternLM2Model(InternLM2PreTrainedModel):
             out_dict.aggregated_viusal_token_attention = None
         else:
             out_dict.aggregated_viusal_token_attention = aggregated_viusal_token_attention
+        ##### mhu 20251211 每一层的 text-to-visual attention #####
+        # Add per-layer text-to-visual attention
+        if per_layer_text_to_visual_attention is not None and len(per_layer_text_to_visual_attention) > 0:
+            out_dict.per_layer_text_to_visual_attention = per_layer_text_to_visual_attention
+        else:
+            out_dict.per_layer_text_to_visual_attention = None
 
         return out_dict
 
