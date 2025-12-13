@@ -28,10 +28,10 @@ if os.path.exists(internvl_chat_path):
 if os.path.exists(internvl_path):
     sys.path.insert(0, internvl_path)
 # Fallback to hardcoded paths if auto-detection fails
-if '/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat' not in sys.path:
-    sys.path.insert(0, '/home/mh2803/projects/sign_language_llm/InternVL/internvl_chat')
-if '/home/mh2803/projects/sign_language_llm/InternVL' not in sys.path:
-    sys.path.insert(0, '/home/mh2803/projects/sign_language_llm/InternVL')
+if '/code/doc_sign_search/InternVL/internvl_chat' not in sys.path:
+    sys.path.insert(0, '/code/doc_sign_search/InternVL/internvl_chat')
+if '/code/doc_sign_search/InternVL' not in sys.path:
+    sys.path.insert(0, '/code/doc_sign_search/InternVL')
 
 from internvl.model.internvl_chat import InternVLChatModel, InternVLChatConfig
 from internvl.model.internlm2.modeling_internlm2 import InternLM2ForCausalLM
@@ -900,7 +900,7 @@ def eval_model(args):
             if os.path.exists(eval_path):
                 sys.path.append(eval_path)
             else:
-                sys.path.append('/home/mh2803/projects/sign_language_llm/evaluation')
+                sys.path.append('/code/doc_sign_search/evaluation')
             from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results
             
             eval_results = comprehensive_evaluation(references, predictions)

@@ -322,10 +322,10 @@ class InternLM2Attention(nn.Module):
             # # LayerNorm to normalize hidden_states before computing gate_score
             # # This makes gate_score computation scale-invariant
             # self.gate_norm = nn.LayerNorm(self.hidden_size, eps=config.rms_norm_eps)
-            # # Scaling factor to control the magnitude of gate_score
-            # # Smaller values (e.g., 0.1) make gate_score less sensitive to hidden_states magnitude
+            # # # Scaling factor to control the magnitude of gate_score
+            # # # Smaller values (e.g., 0.1) make gate_score less sensitive to hidden_states magnitude
             # self.gate_scale = 0.1
-            # logger.info(
+            # print(
             #     f"[Gated Attention Init] Layer attention module initialized with "
             #     f"headwise={self.headwise_attn_output_gate}, "
             #     f"elementwise={self.elementwise_attn_output_gate}, "
@@ -406,32 +406,24 @@ class InternLM2Attention(nn.Module):
 
         bsz, q_len, _ = hidden_states.size()
 
-        # mh 1211 Fix 1: Normalize hidden_states before computing gate_score (if gating is enabled)
-        # Fix 2: Apply scaling factor to gate_score computation
-        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            # Normalize hidden_states for gate_score computation
-            # hidden_states_normalized = self.gate_norm(hidden_states)
-            # Compute gate_score from normalized hidden_states
-            gate_qkv_states = self.wqkv(hidden_states)
-            # Compute standard qkv from original hidden_states
-            qkv_states = self.wqkv(hidden_states)
-        else:
-            qkv_states = self.wqkv(hidden_states)
-            gate_qkv_states = None
+        # mh 1211: Compute wqkv output once (same as Qwen3's approach)
+        # Qwen3 computes q_proj once and separates query_states and gate_score from it
+        # InternLM2 computes wqkv once and separates qkv_base and gate_score_raw from it
+        qkv_states = self.wqkv(hidden_states)
 
         # Phase 1: Separate gate_score from standard qkv
         base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
-        
+       
         if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            # Separate standard qkv and gate_score
+            # Separate standard qkv and gate_score (same as Qwen3's approach)
             if self.headwise_attn_output_gate:
                 gate_dim = self.num_heads
             else:  # elementwise
                 gate_dim = self.num_heads * self.head_dim
-            
+           
             qkv_base = qkv_states[:, :, :base_qkv_dim]
-            # Extract gate_score from normalized hidden_states computation
-            gate_score_raw = gate_qkv_states[:, :, base_qkv_dim:]
+            # Extract gate_score from wqkv output (same as Qwen3 extracts from q_proj)
+            gate_score_raw = qkv_states[:, :, base_qkv_dim:]
             # Apply scaling factor to gate_score
             # gate_score_raw = gate_score_raw * self.gate_scale
             
@@ -452,7 +444,7 @@ class InternLM2Attention(nn.Module):
             # Log gate_score statistics - ALWAYS print, no restrictions
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
-            print(
+            logger.info(
                 f"[Gated Attention - Eager] Mode: {gate_type}, "
                 f"gate_score shape: {gate_score.shape}, "
                 f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
@@ -528,7 +520,7 @@ class InternLM2Attention(nn.Module):
             gate_sigmoid = torch.sigmoid(gate_score)
             attn_output_before_gating = attn_output.clone()
             attn_output = attn_output * gate_sigmoid
-            print
+
             # Log gating effect - ALWAYS print, no restrictions
             print(
                 f"[Gated Attention - Eager] Applied gating - "
@@ -597,19 +589,19 @@ class InternLM2FlashAttention2(InternLM2Attention):
         # Check hidden_states for NaN/Inf
         if torch.isnan(hidden_states).any() or torch.isinf(hidden_states).any():
             logger.error(f"[Gated Attention - Flash] ERROR: hidden_states contains NaN/Inf!")
-
-        # Fix 1: Normalize hidden_states before computing gate_score (if gating is enabled)
-        # Fix 2: Apply scaling factor to gate_score computation
-        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            # Normalize hidden_states for gate_score computation
-            hidden_states_normalized = self.gate_norm(hidden_states)
-            # Compute gate_score from normalized hidden_states
-            gate_qkv_states = self.wqkv(hidden_states_normalized)
-            # Compute standard qkv from original hidden_states
-            qkv_states = self.wqkv(hidden_states)
-        else:
-            qkv_states = self.wqkv(hidden_states)
-            gate_qkv_states = None
+        # # 现在不用了 Fix 1: Normalize hidden_states before computing gate_score (if gating is enabled)
+        # # Fix 2: Apply scaling factor to gate_score computation
+        # if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+        #     # Normalize hidden_states for gate_score computation
+        #     # hidden_states_normalized = self.gate_norm(hidden_states)
+        #     # Compute gate_score from normalized hidden_states
+        #     gate_qkv_states = self.wqkv(hidden_states)
+        #     # Compute standard qkv from original hidden_states
+        #     qkv_states = self.wqkv(hidden_states)
+        # else:
+        #     qkv_states = self.wqkv(hidden_states)
+        #     gate_qkv_states = None
+        qkv_states = self.wqkv(hidden_states)
         
         # Check wqkv output for NaN/Inf
         if torch.isnan(qkv_states).any() or torch.isinf(qkv_states).any():
@@ -647,17 +639,18 @@ class InternLM2FlashAttention2(InternLM2Attention):
         # )
         
         if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            # Separate standard qkv and gate_score
+            # Separate standard qkv and gate_score (same as Qwen3's approach)
             if self.headwise_attn_output_gate:
                 gate_dim = self.num_heads
             else:  # elementwise
                 gate_dim = self.num_heads * self.head_dim
-            
+                # print(f'gate_dim: {gate_dim}')
+           
             qkv_base = qkv_states[:, :, :base_qkv_dim]
-            # Extract gate_score from normalized hidden_states computation
-            gate_score_raw = gate_qkv_states[:, :, base_qkv_dim:]
+            # Extract gate_score from wqkv output (same as Qwen3 extracts from q_proj)
+            gate_score_raw = qkv_states[:, :, base_qkv_dim:]
             # Apply scaling factor to gate_score
-            gate_score_raw = gate_score_raw * self.gate_scale
+            # gate_score_raw = gate_score_raw * self.gate_scale
             
             # Check qkv_base for NaN/Inf
             if torch.isnan(qkv_base).any() or torch.isinf(qkv_base).any():

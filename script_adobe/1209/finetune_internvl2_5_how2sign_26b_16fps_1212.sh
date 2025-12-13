@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# InternVL2.5-8B How2Sign Fine-Tuning on 4*A100
+# InternVL2.5-26B How2Sign Fine-Tuning on 4*A100
 # Set up conda environment - matches setup_internvl_auto.txt
 # Anaconda is installed at $HOME/anaconda3 by setup script
 # Environment name: internvl
@@ -27,15 +27,15 @@ export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
-MODEL_NAME="OpenGVLab/InternVL2_5-8B"
-OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_8b_16fps_1209"
+MODEL_NAME="OpenGVLab/InternVL2_5-26B"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_26b_16fps_1212"
 META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
 IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
 # Optimized training configuration
 # Note: NUM_DEVICES is automatically calculated from GPU_IDS above
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
-BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-32}
+BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 
 # Memory envelopes (defaults can be overridden via env vars)
@@ -49,7 +49,7 @@ MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
 # Video frame sampling method
 SAMPLING_METHOD='fps16.0'
 
-echo "🚀 Starting InternVL2.5-8B How2Sign Training on 4*A100"
+echo "🚀 Starting InternVL2.5-26B How2Sign Training on 4*A100"
 echo "======================================================"
 echo "Model: $MODEL_NAME"
 echo "Output Dir: $OUTPUT_DIR"
@@ -69,7 +69,7 @@ echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
 
 # Check if model is already cached
-MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-8B"
+MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-26B"
 if [ -d "$MODEL_CACHE_DIR" ]; then
     echo "✅ Model found in cache: $MODEL_CACHE_DIR"
     echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" 2>/dev/null | cut -f1 || echo 'N/A')"
