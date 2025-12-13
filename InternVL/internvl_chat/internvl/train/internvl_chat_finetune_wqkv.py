@@ -1471,25 +1471,15 @@ def main():
                         config.downsample_ratio, data_args.down_sample_ratio)
             config.downsample_ratio = data_args.down_sample_ratio
         # mh1211 Load model with ignore_mismatched_sizes if gating is enabled
-        # Note: Even without gating, we use modeling_internlm2_gate.py which splits wqkv into q_proj/k_proj/v_proj
-        # So we need ignore_mismatched=True to skip wqkv loading, then manually split and load
         ignore_mismatched = (model_args.headwise_attn_output_gate or 
                             model_args.elementwise_attn_output_gate)
-        # mh: Always use ignore_mismatched for InternLM2 when using gate version (even without gate enabled)
-        # because gate version splits wqkv into q_proj/k_proj/v_proj, which doesn't match pretrained wqkv
-        if config.llm_config.model_type == 'internlm2':
-            ignore_mismatched = True
-            logger.info('Using ignore_mismatched_sizes=True for InternLM2 (gate version splits wqkv into q_proj/k_proj/v_proj)')
-        
         model = InternVLChatModel.from_pretrained(
             model_args.model_name_or_path, torch_dtype=torch.bfloat16, config=config,
             ignore_mismatched_sizes=ignore_mismatched)
         
-        # mh1211 Manually load base QKV weights from pretrained model
-        # This is necessary because:
-        # 1. If gating is enabled: ignore_mismatched_sizes skips loading the entire wqkv.weight
-        # 2. If gating is disabled but using gate version: wqkv doesn't match q_proj/k_proj/v_proj structure
-        # In both cases, we need to split wqkv and load into q_proj/k_proj/v_proj
+        # mh1211 If ignore_mismatched_sizes was used, manually load base QKV weights from pretrained model
+        # This is necessary because ignore_mismatched_sizes skips loading the entire wqkv.weight,
+        # which causes the base QKV part to be randomly initialized (potentially with NaN/Inf)
         if ignore_mismatched and config.llm_config.model_type == 'internlm2':
             logger.info('Manually loading base QKV weights from pretrained model (ignore_mismatched_sizes was used)...')
             try:
@@ -1566,183 +1556,86 @@ def main():
                     for i, layer in enumerate(model.language_model.model.layers):
                         attn = layer.attention
                         if isinstance(attn, (InternLM2Attention, InternLM2FlashAttention2)):
-                            # mh: Always load weights when using gate version (even without gate enabled)
-                            # because gate version splits wqkv into q_proj/k_proj/v_proj, which needs manual loading
                             # Use getattr to safely access attributes (may not exist if model wasn't initialized with gating)
                             headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
                             elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
-                            
-                            # Always load weights for gate version (with or without gate enabled)
-                            base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
-                            # Construct the key name for this layer's wqkv.weight
-                            key = f'language_model.model.layers.{i}.attention.wqkv.weight'
-                            if key in pretrained_state_dict:
-                                pretrained_wqkv = pretrained_state_dict[key].to(dtype=torch.bfloat16)
-                                # Check if pretrained weight has correct shape [4096, 2048]
-                                if pretrained_wqkv.shape == (base_qkv_dim, attn.hidden_size):
-                                    # Verify pretrained weight doesn't contain NaN/Inf
-                                    if torch.isnan(pretrained_wqkv).any() or torch.isinf(pretrained_wqkv).any():
-                                        logger.warning(
-                                            f'Layer {i}: Pretrained wqkv.weight contains NaN/Inf! Skipping...'
-                                        )
-                                    else:
-                                        # mh: Split wqkv into q_proj, k_proj, v_proj (query-dependent gate)
-                                        # Use GatheredParameters for DeepSpeed ZeRO compatibility
-                                        with gather_context([attn.q_proj.weight, attn.k_proj.weight, attn.v_proj.weight]):
-                                            with torch.no_grad():
-                                                # Split pretrained_wqkv into Q, K, V
-                                                # wqkv shape: [base_qkv_dim, hidden_size]
-                                                # InternLM2 wqkv organization (GQA):
-                                                # For each key_value_head: [Q_group1, Q_group2, ..., Q_groupN, K, V]
-                                                # where Q_group1..N will be repeated for all query heads
-                                                # So the weight matrix is organized as:
-                                                # [KV_head0: Q_groups, K, V, KV_head1: Q_groups, K, V, ...]
-                                                # 
-                                                # After rearrange 'b q (h gs d) -> b q h gs d':
-                                                # - h = num_key_value_heads
-                                                # - gs = 2 + num_key_value_groups
-                                                # - Each KV head has: [Q_group1, ..., Q_groupN, K, V]
-                                                #
-                                                # So in the weight matrix (flattened):
-                                                # - Q: num_key_value_heads * num_key_value_groups * head_dim = num_heads * head_dim
-                                                # - K: num_key_value_heads * head_dim
-                                                # - V: num_key_value_heads * head_dim
-                                                
-                                                q_dim = attn.num_heads * attn.head_dim
-                                                k_dim = attn.num_key_value_heads * attn.head_dim
-                                                v_dim = attn.num_key_value_heads * attn.head_dim
-                                                
-                                                # Split pretrained wqkv
-                                                # InternLM2 wqkv organization is NOT [all_Q, all_K, all_V]
-                                                # Instead, it's organized by key_value_head:
-                                                # 
-                                                # The rearrange 'b q (h gs d) -> b q h gs d' expects:
-                                                # - h = num_key_value_heads
-                                                # - gs = 2 + num_key_value_groups
-                                                # - d = head_dim
-                                                # 
-                                                # For each key_value_head, there are gs groups:
-                                                # - First num_key_value_groups groups: Q (one per query head group)
-                                                # - Second-to-last group: K
-                                                # - Last group: V
-                                                # 
-                                                # So the weight matrix is organized as:
-                                                # KV_head 0: [Q_group1, Q_group2, ..., Q_groupN, K, V] (gs groups, each head_dim rows)
-                                                # KV_head 1: [Q_group1, Q_group2, ..., Q_groupN, K, V]
-                                                # ...
-                                                # 
-                                                # This means Q, K, V are interleaved by key_value_head, not concatenated
-                                                
-                                                # Correct split: extract Q, K, V for each key_value_head, then concatenate
-                                                # Use the attribute from attn (same as in modeling_internlm2_gate.py)
-                                                num_key_value_groups = attn.num_key_value_groups
-                                                gs = 2 + num_key_value_groups
-                                                
-                                                q_weights = []
-                                                k_weights = []
-                                                v_weights = []
-                                                
-                                                for kv_head in range(attn.num_key_value_heads):
-                                                    # Each KV head's starting row
-                                                    kv_start = kv_head * gs * attn.head_dim
+                            if headwise_gate or elementwise_gate:
+                                base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                                # Construct the key name for this layer's wqkv.weight
+                                key = f'language_model.model.layers.{i}.attention.wqkv.weight'
+                                if key in pretrained_state_dict:
+                                    pretrained_wqkv = pretrained_state_dict[key].to(dtype=torch.bfloat16)
+                                    # Check if pretrained weight has correct shape [4096, 2048]
+                                    if pretrained_wqkv.shape == (base_qkv_dim, attn.hidden_size):
+                                        # Verify pretrained weight doesn't contain NaN/Inf
+                                        if torch.isnan(pretrained_wqkv).any() or torch.isinf(pretrained_wqkv).any():
+                                            logger.warning(
+                                                f'Layer {i}: Pretrained wqkv.weight contains NaN/Inf! Skipping...'
+                                            )
+                                        else:
+                                            # mh1212 Copy base QKV part (first base_qkv_dim rows) from pretrained
+                                            # Use GatheredParameters for DeepSpeed ZeRO compatibility
+                                            with gather_context([attn.wqkv.weight]):
+                                                with torch.no_grad():
+                                                    # Calculate gate_dim based on gating mode
+                                                    if headwise_gate:
+                                                        gate_dim = attn.num_heads
+                                                    elif elementwise_gate:
+                                                        gate_dim = attn.num_heads * attn.head_dim
+                                                        # print(f'num_heads: {attn.num_heads}')  16
+                                                        # print(f'head_dim: {attn.head_dim}') 128
+                                                        # print(f'gate_dim: {gate_dim}') 2048
+                                                    else:
+                                                        gate_dim = 0
                                                     
-                                                    # Extract Q_groups (first num_key_value_groups groups)
-                                                    for q_group in range(num_key_value_groups):
-                                                        q_start = kv_start + q_group * attn.head_dim
-                                                        q_end = q_start + attn.head_dim
-                                                        q_weights.append(pretrained_wqkv[q_start:q_end, :])
+                                                    # Copy base QKV part
+                                                    attn.wqkv.weight[:base_qkv_dim, :].copy_(pretrained_wqkv)
                                                     
-                                                    # Extract K (second-to-last group)
-                                                    k_start = kv_start + (gs - 2) * attn.head_dim
-                                                    k_end = k_start + attn.head_dim
-                                                    k_weights.append(pretrained_wqkv[k_start:k_end, :])
+                                                    # Verify and fix gate part if needed (should be properly initialized, but check for abnormalities)
+                                                    if gate_dim > 0:
+                                                        current_gate_part = attn.wqkv.weight[base_qkv_dim:, :]
+                                                        gate_mean = current_gate_part.mean().item()
+                                                        gate_std = current_gate_part.std().item()
+                                                        has_nan = torch.isnan(current_gate_part).any().item()
+                                                        has_inf = torch.isinf(current_gate_part).any().item()
+                                                        
+                                                        # If gate part looks wrong (all zeros, NaN/Inf, or abnormal values), reinitialize it
+                                                        if has_nan or has_inf:
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part contained NaN/Inf! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) < 1e-6 and gate_std < 1e-6:
+                                                            # All zeros - reinitialize
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part was all zeros! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                                            # Abnormal values (should be ~N(0, 0.02^2) for initializer_range=0.02)
+                                                            # Reinitialize to ensure proper distribution
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part had abnormal values (mean={gate_mean:.6f}, std={gate_std:.6f})! '
+                                                                f'Reinitialized with std={config.llm_config.initializer_range}.'
+                                                            )
                                                     
-                                                    # Extract V (last group)
-                                                    v_start = kv_start + (gs - 1) * attn.head_dim
-                                                    v_end = v_start + attn.head_dim
-                                                    v_weights.append(pretrained_wqkv[v_start:v_end, :])
-                                                
-                                                # Concatenate
-                                                pretrained_q = torch.cat(q_weights, dim=0)
-                                                pretrained_k = torch.cat(k_weights, dim=0)
-                                                pretrained_v = torch.cat(v_weights, dim=0)
-                                                
-                                                # Verify dimensions
-                                                assert pretrained_q.shape == (q_dim, attn.hidden_size), \
-                                                    f"Q shape mismatch: expected ({q_dim}, {attn.hidden_size}), got {pretrained_q.shape}"
-                                                assert pretrained_k.shape == (k_dim, attn.hidden_size), \
-                                                    f"K shape mismatch: expected ({k_dim}, {attn.hidden_size}), got {pretrained_k.shape}"
-                                                assert pretrained_v.shape == (v_dim, attn.hidden_size), \
-                                                    f"V shape mismatch: expected ({v_dim}, {attn.hidden_size}), got {pretrained_v.shape}"
-                                                
-                                                # Copy Q, K, V to separate projections
-                                                # Note: q_proj needs to handle gate_dim, so we only copy the query part
-                                                attn.q_proj.weight[:q_dim, :].copy_(pretrained_q)
-                                                attn.k_proj.weight.copy_(pretrained_k)
-                                                attn.v_proj.weight.copy_(pretrained_v)
-                                                
-                                                # Calculate gate_dim based on gating mode
-                                                if headwise_gate:
-                                                    gate_dim = attn.num_heads
-                                                elif elementwise_gate:
-                                                    gate_dim = attn.num_heads * attn.head_dim
+                                                # Verify copy was successful
+                                                if torch.isnan(attn.wqkv.weight[:base_qkv_dim, :]).any() or \
+                                                   torch.isinf(attn.wqkv.weight[:base_qkv_dim, :]).any():
+                                                    logger.error(
+                                                        f'Layer {i}: Base QKV contains NaN/Inf after copy! '
+                                                        f'This should not happen.'
+                                                    )
                                                 else:
-                                                    gate_dim = 0
-                                                
-                                                # Initialize gate part immediately after loading Q weights (only if gate is enabled)
-                                                # This ensures gate part is properly initialized even if model initialization didn't handle it
-                                                if gate_dim > 0:
-                                                    gate_part = attn.q_proj.weight[q_dim:, :]
-                                                    # Check if gate part needs initialization
-                                                    gate_mean = gate_part.mean().item()
-                                                    gate_std = gate_part.std().item()
-                                                    has_nan = torch.isnan(gate_part).any().item()
-                                                    has_inf = torch.isinf(gate_part).any().item()
-                                                    
-                                                    # Initialize gate part if it's uninitialized (zeros, NaN/Inf, or abnormal)
-                                                    # Use same initialization as Qwen3: N(0, std^2) for consistency
-                                                    if has_nan or has_inf or (abs(gate_mean) < 1e-6 and gate_std < 1e-6) or abs(gate_mean) > 0.1 or gate_std > 0.1:
-                                                        # Initialize with mean=0.0 (same as Qwen3) for consistency
-                                                        gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
-                                                        # Verify initialization
-                                                        gate_part_after = attn.q_proj.weight[q_dim:, :]
-                                                        gate_mean_after = gate_part_after.mean().item()
-                                                        gate_std_after = gate_part_after.std().item()
-                                                        logger.info(
-                                                            f'Layer {i}: Initialized gate part (gate_dim={gate_dim}, '
-                                                            f'prev_mean={gate_mean:.6f}, prev_std={gate_std:.6f}, '
-                                                            f'has_nan={has_nan}, has_inf={has_inf}, '
-                                                            f'new_mean=0.0 (same as Qwen3), '
-                                                            f'after_init_mean={gate_mean_after:.6f}, after_init_std={gate_std_after:.6f})'
-                                                        )
-                                                
-                                                # Log for debugging
-                                                logger.info(
-                                                    f'Layer {i}: Loaded QKV weights - '
-                                                    f'Q: {pretrained_q.shape}, K: {pretrained_k.shape}, V: {pretrained_v.shape}, '
-                                                    f'Q mean: {pretrained_q.mean().item():.6f}, K mean: {pretrained_k.mean().item():.6f}, V mean: {pretrained_v.mean().item():.6f}'
-                                                )
-                                                
-                                            # Verify copy was successful
-                                            if torch.isnan(attn.q_proj.weight[:q_dim, :]).any() or \
-                                               torch.isinf(attn.q_proj.weight[:q_dim, :]).any() or \
-                                               torch.isnan(attn.k_proj.weight).any() or \
-                                               torch.isinf(attn.k_proj.weight).any() or \
-                                               torch.isnan(attn.v_proj.weight).any() or \
-                                               torch.isinf(attn.v_proj.weight).any():
-                                                logger.error(
-                                                    f'Layer {i}: Q/K/V contains NaN/Inf after copy! '
-                                                    f'This should not happen.'
-                                                )
-                                            else:
-                                                loaded_count += 1
+                                                    loaded_count += 1
+                                    else:
+                                        logger.warning(
+                                            f'Layer {i}: Pretrained wqkv.weight shape {pretrained_wqkv.shape} '
+                                            f'does not match expected base shape ({base_qkv_dim}, {attn.hidden_size})'
+                                        )
                                 else:
-                                    logger.warning(
-                                        f'Layer {i}: Pretrained wqkv.weight shape {pretrained_wqkv.shape} '
-                                        f'does not match expected base shape ({base_qkv_dim}, {attn.hidden_size})'
-                                    )
-                            else:
-                                logger.warning(f'Layer {i}: Key {key} not found in pretrained state dict')
+                                    logger.warning(f'Layer {i}: Key {key} not found in pretrained state dict')
                     
                     if loaded_count > 0:
                         logger.info(f'✅ Manually loaded base QKV weights for {loaded_count} layers')
@@ -1769,19 +1662,12 @@ def main():
         # No manual initialization needed - post_init() will call _init_weights for all modules
         # This uses normal_(mean=0.0, std=initializer_range) for weights and zero_() for bias
         if ignore_mismatched and config.llm_config.model_type == 'internlm2':
-            # Check if gate is enabled
-            gate_enabled = (model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate)
-            if gate_enabled:
-                logger.info(
-                    f'✅ Gate parameters will be automatically initialized by _init_weights '
-                    f'(same as Qwen3: normal(mean=0.0, std={config.llm_config.initializer_range}))'
-                )
-                # Verify gate part initialization after manual base QKV loading
-                logger.info('Verifying gate part initialization...')
-            else:
-                logger.info(
-                    f'✅ QKV weights loaded successfully. Gate is not enabled, so no gate part to verify.'
-                )
+            logger.info(
+                f'✅ Gate parameters will be automatically initialized by _init_weights '
+                f'(same as Qwen3: normal(mean=0.0, std={config.llm_config.initializer_range}))'
+            )
+            # Verify gate part initialization after manual base QKV loading
+            logger.info('Verifying gate part initialization...')
             from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
             import contextlib
             try:
@@ -1797,11 +1683,9 @@ def main():
                     headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
                     elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
                     if headwise_gate or elementwise_gate:
-                        # mh: Gate part is now in q_proj (query-dependent)
-                        q_dim = attn.num_heads * attn.head_dim
-                        with gather_context([attn.q_proj.weight]):
-                            # Extract gate part from q_proj (after query part)
-                            gate_part = attn.q_proj.weight[q_dim:, :]
+                        base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                        with gather_context([attn.wqkv.weight]):
+                            gate_part = attn.wqkv.weight[base_qkv_dim:, :]
                             gate_mean = gate_part.mean().item()
                             gate_std = gate_part.std().item()
                             gate_min = gate_part.min().item()
@@ -1813,7 +1697,7 @@ def main():
                                 logger.warning(
                                     f'Layer {i}: Gate part contains NaN/Inf! Reinitializing...'
                                 )
-                                # Reinitialize gate part with mean=0.0 (same as Qwen3) for consistency
+                                # Reinitialize gate part
                                 with torch.no_grad():
                                     gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
                                 verified_count += 1
@@ -1824,19 +1708,20 @@ def main():
                                     f'range=[{gate_min:.6f}, {gate_max:.6f}]. '
                                     f'This indicates initialization failed. Reinitializing...'
                                 )
-                                # Reinitialize gate part with mean=0.0 (same as Qwen3) for consistency
+                                # Reinitialize gate part
                                 with torch.no_grad():
                                     gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
                                 verified_count += 1
                             elif abs(gate_mean) > 0.1 or gate_std > 0.1:
-                                # Abnormal values - reinitialize with mean=0.0 (same as Qwen3) for consistency
+                                # Abnormal values (should be ~N(0, 0.02^2) for initializer_range=0.02)
+                                # Values like mean=63963136 or mean=-9.38e+28 are clearly wrong
                                 logger.warning(
                                     f'Layer {i}: Gate part has abnormal values! '
                                     f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
                                     f'range=[{gate_min:.6f}, {gate_max:.6f}]. '
-                                    f'Reinitializing with mean=0.0, std={config.llm_config.initializer_range}...'
+                                    f'Reinitializing with std={config.llm_config.initializer_range}...'
                                 )
-                                # Reinitialize gate part with mean=0.0 (same as Qwen3) for consistency
+                                # Reinitialize gate part
                                 with torch.no_grad():
                                     gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
                                 verified_count += 1

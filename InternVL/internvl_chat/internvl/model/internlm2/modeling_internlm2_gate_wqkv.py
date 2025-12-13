@@ -337,7 +337,7 @@ class InternLM2Attention(nn.Module):
             self.gate_norm = None
             self.gate_scale = None
         
-        # mh1213: Changed to query-dependent gate (similar to Qwen3)
+        # mh: Changed to query-dependent gate (similar to Qwen3)
         # Split wqkv into separate q_proj, k_proj, v_proj
         # Gate score is extracted only from q_proj output
         if self.headwise_attn_output_gate:
@@ -676,6 +676,15 @@ class InternLM2FlashAttention2(InternLM2Attention):
                 gate_weight_min = gate_weight.detach().min().item()
                 gate_weight_max = gate_weight.detach().max().item()
                 
+                # Always log gate weight for first few iterations to verify initialization
+                # print(
+                #     f"[Gated Attention - Flash] Gate Weight Check - "
+                #     f"weight_mean={gate_weight_mean:.6f} (expected ~0.0, same as Qwen3), "
+                #     f"weight_std={gate_weight_std:.6f} (expected ~0.02), "
+                #     f"weight_range=[{gate_weight_min:.6f}, {gate_weight_max:.6f}], "
+                #     f"hidden_states_norm={hidden_states.norm(dim=-1).mean().item():.4f}"
+                # )
+                
                 # Log if gate weight is abnormal (expected mean=0.0, same as Qwen3)
                 if abs(gate_weight_mean) > 0.1 or gate_weight_std > 0.1:
                     logger.warning(
@@ -686,15 +695,15 @@ class InternLM2FlashAttention2(InternLM2Attention):
                     )
             
             # Print detailed gate_score information
-            # print(
-            #     f"[Gated Attention - Flash] Gate Score Statistics - "
-            #     f"Mode: {gate_type}, "
-            #     f"shape: {gate_score.shape}, "
-            #     f"raw: min={gate_score.min().item():.6f}, max={gate_score.max().item():.6f}, "
-            #     f"mean={gate_score.mean().item():.6f}, std={gate_score.std().item():.6f}, "
-            #     f"sigmoid: min={gate_sigmoid.min().item():.6f}, max={gate_sigmoid.max().item():.6f}, "
-            #     f"mean={gate_sigmoid.mean().item():.6f}, std={gate_sigmoid.std().item():.6f}"
-            # )
+            print(
+                f"[Gated Attention - Flash] Gate Score Statistics - "
+                f"Mode: {gate_type}, "
+                f"shape: {gate_score.shape}, "
+                f"raw: min={gate_score.min().item():.6f}, max={gate_score.max().item():.6f}, "
+                f"mean={gate_score.mean().item():.6f}, std={gate_score.std().item():.6f}, "
+                f"sigmoid: min={gate_sigmoid.min().item():.6f}, max={gate_sigmoid.max().item():.6f}, "
+                f"mean={gate_sigmoid.mean().item():.6f}, std={gate_sigmoid.std().item():.6f}"
+            )
             
             # For head-wise gating, print per-head statistics
             if self.headwise_attn_output_gate:
@@ -706,7 +715,24 @@ class InternLM2FlashAttention2(InternLM2Attention):
                 #     f"[Gated Attention - Flash] Per-Head Gate (sigmoid) Mean: "
                 #     f"{gate_mean_per_head.detach().cpu().float().numpy()}"
                 # )
-    
+        
+        # Check query/key/value states for NaN/Inf after reshape
+        if torch.isnan(query_states).any() or torch.isinf(query_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: query_states contains NaN/Inf after reshape! "
+                f"query_states shape: {query_states.shape}"
+            )
+        if torch.isnan(key_states).any() or torch.isinf(key_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: key_states contains NaN/Inf after reshape! "
+                f"key_states shape: {key_states.shape}"
+            )
+        if torch.isnan(value_states).any() or torch.isinf(value_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: value_states contains NaN/Inf after reshape! "
+                f"value_states shape: {value_states.shape}"
+            )
+
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
         value_states = value_states.transpose(1, 2)
