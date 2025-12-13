@@ -20,7 +20,7 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"4,5,6,7"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"0,1,2,3"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
@@ -83,7 +83,7 @@ export LAUNCHER=pytorch
 # Generate MASTER_PORT
 # MASTER_PORT=${MASTER_PORT:-$(shuf -i 20000-29999 -n 1)}
 # export MASTER_PORT
-export MASTER_PORT=29508
+export MASTER_PORT=29500
 echo "MASTER_PORT: $MASTER_PORT"
 echo "LAUNCHER: $LAUNCHER (for local training, not SLURM)"
 echo ""

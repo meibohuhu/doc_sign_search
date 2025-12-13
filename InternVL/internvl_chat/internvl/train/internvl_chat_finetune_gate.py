@@ -28,6 +28,15 @@ import torch.distributed as dist
 import transformers
 from internvl.dist_utils import init_dist
 from internvl.model.internlm2.modeling_internlm2_gate import InternLM2ForCausalLM
+
+# CRITICAL: Patch modeling_internvl_chat.py to use gate version before importing InternVLChatModel
+# This ensures InternVLChatModel uses the gated attention implementation
+import sys
+import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
+# Replace the import in modeling_internvl_chat module
+modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM
+print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate")
+
 from internvl.model.internvl_chat import (InternVisionConfig,
                                           InternVisionModel,
                                           InternVLChatConfig,
@@ -1313,6 +1322,13 @@ def main():
     import os  # Ensure os is available in this scope
     os.environ['ACCELERATE_GRADIENT_ACCUMULATION_STEPS'] = '1'
 
+    # Verify that modeling_internvl_chat is using the gate version
+    import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
+    if modeling_internvl_chat_module.InternLM2ForCausalLM.__module__ == 'internvl.model.internlm2.modeling_internlm2_gate':
+        logger.info("✅ Verified: modeling_internvl_chat is using InternLM2ForCausalLM from modeling_internlm2_gate")
+    else:
+        logger.warning(f"⚠️  WARNING: modeling_internvl_chat is using {modeling_internvl_chat_module.InternLM2ForCausalLM.__module__}, not the gate version!")
+
     # Apply necessary patches for the transformers library
     replace_llama_rmsnorm_with_fused_rmsnorm()
     replace_train_sampler()
@@ -1557,11 +1573,53 @@ def main():
                                                 f'Layer {i}: Pretrained wqkv.weight contains NaN/Inf! Skipping...'
                                             )
                                         else:
-                                            # Copy base QKV part (first base_qkv_dim rows) from pretrained
+                                            # mh1212 Copy base QKV part (first base_qkv_dim rows) from pretrained
                                             # Use GatheredParameters for DeepSpeed ZeRO compatibility
                                             with gather_context([attn.wqkv.weight]):
                                                 with torch.no_grad():
+                                                    # Calculate gate_dim based on gating mode
+                                                    if headwise_gate:
+                                                        gate_dim = attn.num_heads
+                                                    elif elementwise_gate:
+                                                        gate_dim = attn.num_heads * attn.head_dim
+                                                        # print(f'num_heads: {attn.num_heads}')  16
+                                                        # print(f'head_dim: {attn.head_dim}') 128
+                                                        # print(f'gate_dim: {gate_dim}') 2048
+                                                    else:
+                                                        gate_dim = 0
+                                                    
+                                                    # Copy base QKV part
                                                     attn.wqkv.weight[:base_qkv_dim, :].copy_(pretrained_wqkv)
+                                                    
+                                                    # Verify and fix gate part if needed (should be properly initialized, but check for abnormalities)
+                                                    if gate_dim > 0:
+                                                        current_gate_part = attn.wqkv.weight[base_qkv_dim:, :]
+                                                        gate_mean = current_gate_part.mean().item()
+                                                        gate_std = current_gate_part.std().item()
+                                                        has_nan = torch.isnan(current_gate_part).any().item()
+                                                        has_inf = torch.isinf(current_gate_part).any().item()
+                                                        
+                                                        # If gate part looks wrong (all zeros, NaN/Inf, or abnormal values), reinitialize it
+                                                        if has_nan or has_inf:
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part contained NaN/Inf! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) < 1e-6 and gate_std < 1e-6:
+                                                            # All zeros - reinitialize
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part was all zeros! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                                            # Abnormal values (should be ~N(0, 0.02^2) for initializer_range=0.02)
+                                                            # Reinitialize to ensure proper distribution
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part had abnormal values (mean={gate_mean:.6f}, std={gate_std:.6f})! '
+                                                                f'Reinitialized with std={config.llm_config.initializer_range}.'
+                                                            )
+                                                    
                                                 # Verify copy was successful
                                                 if torch.isnan(attn.wqkv.weight[:base_qkv_dim, :]).any() or \
                                                    torch.isinf(attn.wqkv.weight[:base_qkv_dim, :]).any():
@@ -1637,15 +1695,31 @@ def main():
                             
                             if has_nan or has_inf:
                                 logger.warning(
-                                    f'Layer {i}: Gate part contains NaN/Inf! '
-                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}'
+                                    f'Layer {i}: Gate part contains NaN/Inf! Reinitializing...'
                                 )
+                                # Reinitialize gate part
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
                             elif abs(gate_mean) < 1e-6 and gate_std < 1e-6:
                                 logger.warning(
                                     f'Layer {i}: Gate part appears to be all zeros! '
                                     f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
                                     f'range=[{gate_min:.6f}, {gate_max:.6f}]. '
                                     f'This indicates initialization failed. Reinitializing...'
+                                )
+                                # Reinitialize gate part
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
+                            elif abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                # Abnormal values (should be ~N(0, 0.02^2) for initializer_range=0.02)
+                                # Values like mean=63963136 or mean=-9.38e+28 are clearly wrong
+                                logger.warning(
+                                    f'Layer {i}: Gate part has abnormal values! '
+                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
+                                    f'range=[{gate_min:.6f}, {gate_max:.6f}]. '
+                                    f'Reinitializing with std={config.llm_config.initializer_range}...'
                                 )
                                 # Reinitialize gate part
                                 with torch.no_grad():

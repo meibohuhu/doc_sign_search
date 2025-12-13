@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# InternVL2.5-8B How2Sign Fine-Tuning on 4*A100
+# InternVL2.5-2B How2Sign Fine-Tuning on 4*A100
 # Set up conda environment - matches setup_internvl_auto.txt
 # Anaconda is installed at $HOME/anaconda3 by setup script
 # Environment name: internvl
@@ -20,15 +20,15 @@ cd /code/doc_sign_search/InternVL
 
 # GPU configuration
 # Specify which GPUs to use (comma-separated, e.g., "0,1,2,3" for GPU 0, 1, 2, and 3)
-GPU_IDS=${GPU_IDS:-"4,5,6,7"}  # Default: use GPU 0, 1, 2, 3
+GPU_IDS=${GPU_IDS:-"0,1,2,3"}  # Default: use GPU 0, 1, 2, 3
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
-MODEL_NAME="OpenGVLab/InternVL2_5-8B"
-OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_8b_16fps_1209"
+MODEL_NAME="OpenGVLab/InternVL2_5-2B"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_16fps_1212_elementgate"
 META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
 IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
 
@@ -49,7 +49,7 @@ MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
 # Video frame sampling method
 SAMPLING_METHOD='fps16.0'
 
-echo "🚀 Starting InternVL2.5-8B How2Sign Training on 4*A100"
+echo "🚀 Starting InternVL2.5-2B How2Sign Training on 4*A100"
 echo "======================================================"
 echo "Model: $MODEL_NAME"
 echo "Output Dir: $OUTPUT_DIR"
@@ -69,7 +69,7 @@ echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
 
 # Check if model is already cached
-MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-8B"
+MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B"
 if [ -d "$MODEL_CACHE_DIR" ]; then
     echo "✅ Model found in cache: $MODEL_CACHE_DIR"
     echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" 2>/dev/null | cut -f1 || echo 'N/A')"
@@ -83,7 +83,7 @@ export LAUNCHER=pytorch
 # Generate MASTER_PORT
 # MASTER_PORT=${MASTER_PORT:-$(shuf -i 20000-29999 -n 1)}
 # export MASTER_PORT
-export MASTER_PORT=29508
+export MASTER_PORT=29500
 echo "MASTER_PORT: $MASTER_PORT"
 echo "LAUNCHER: $LAUNCHER (for local training, not SLURM)"
 echo ""
@@ -99,7 +99,7 @@ echo ""
 # deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
 #     internvl_chat/internvl/train/internvl_chat_finetune_local.py \
 deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
-    internvl_chat/internvl/train/internvl_chat_finetune_local.py \
+    internvl_chat/internvl/train/internvl_chat_finetune_gate.py \
     --model_name_or_path "$MODEL_NAME" \
     --output_dir "$OUTPUT_DIR" \
     --overwrite_output_dir \
@@ -107,7 +107,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --conv_style internvl2_5 \
     --use_fast_tokenizer False \
     --do_train True \
-    --num_train_epochs 6 \
+    --num_train_epochs 7 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --learning_rate 5e-5 \
@@ -125,7 +125,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
     --save_strategy epoch \
-    --save_total_limit 3 \
+    --save_total_limit 4 \
     --logging_steps 10 \
     --logging_first_step True \
     --evaluation_strategy no \
@@ -145,6 +145,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --warmup_ratio 0.03 \
     --weight_decay 0.01 \
     --lr_scheduler_type cosine \
+    --elementwise_attn_output_gate True \
     2>&1 | tee "$LOG_FILE"
 
 TRAINING_EXIT_CODE=$?
