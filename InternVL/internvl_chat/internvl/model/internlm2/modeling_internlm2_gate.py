@@ -345,40 +345,40 @@ class InternLM2Attention(nn.Module):
             self.q_proj = nn.Linear(
                 self.hidden_size,
                 self.num_heads * self.head_dim + self.num_heads,
-                bias=config.bias,
+                bias=config.qkv_bias,
             )
         elif self.elementwise_attn_output_gate:
             # q_proj: query + gate (element-wise)
             self.q_proj = nn.Linear(
                 self.hidden_size,
                 self.num_heads * self.head_dim * 2,
-                bias=config.bias,
+                bias=config.qkv_bias,
             )
         else:
             # Standard q_proj
             self.q_proj = nn.Linear(
                 self.hidden_size,
                 self.num_heads * self.head_dim,
-                bias=config.bias,
+                bias=config.qkv_bias,
             )
         
         # k_proj and v_proj are standard (no gate)
         self.k_proj = nn.Linear(
             self.hidden_size,
             self.num_key_value_heads * self.head_dim,
-            bias=config.bias,
+            bias=config.qkv_bias,
         )
         self.v_proj = nn.Linear(
             self.hidden_size,
             self.num_key_value_heads * self.head_dim,
-            bias=config.bias,
+            bias=config.qkv_bias,
         )
         
         # mh: Gate part initialization is handled by _init_weights (same as Qwen3)
         # All Linear modules (including q_proj with gate) are initialized with N(0, std^2)
         
 ######################
-        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.bias)
+        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.qkv_bias)
         self._init_rope()
 
     def _init_rope(self):
@@ -606,9 +606,26 @@ class InternLM2FlashAttention2(InternLM2Attention):
             logger.error(f"[Gated Attention - Flash] ERROR: hidden_states contains NaN/Inf!")
         
         # mh: Query-dependent gate (extract gate_score from q_proj only)
+        # query_states = W @ hidden_states + bias
+        # where W includes both query weights and gate weights
         query_states = self.q_proj(hidden_states)
         key_states = self.k_proj(hidden_states)
         value_states = self.v_proj(hidden_states)
+        
+        # DEBUG: Check gate_bias value before extracting gate_score
+        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+            q_dim = self.num_heads * self.head_dim
+            if self.q_proj.bias is not None:
+                gate_bias_actual = self.q_proj.bias[q_dim:]
+                gate_bias_mean = gate_bias_actual.mean().item()
+                # Only print once per layer to avoid spam
+                if not hasattr(self, '_gate_bias_logged'):
+                    logger.info(
+                        f"[Gated Attention - Flash] Layer gate_bias check: "
+                        f"gate_bias_mean={gate_bias_mean:.6f} (expected ~2.0 if gate_bias_init_value=2.0), "
+                        f"gate_bias_shape={gate_bias_actual.shape}"
+                    )
+                    self._gate_bias_logged = True
         
         # Check q_proj output for NaN/Inf
         if torch.isnan(query_states).any() or torch.isinf(query_states).any():
@@ -632,6 +649,8 @@ class InternLM2FlashAttention2(InternLM2Attention):
             )
 
         # Extract gate_score from q_proj output (similar to Qwen3)
+        # NOTE: gate_score already includes bias term from q_proj(hidden_states)
+        # gate_score = W_gate @ hidden_states + bias_gate
         if self.headwise_attn_output_gate:
             query_states = query_states.view(bsz, q_len, self.num_key_value_heads, -1)
             query_states, gate_score = torch.split(
@@ -643,6 +662,27 @@ class InternLM2FlashAttention2(InternLM2Attention):
             query_states = query_states.reshape(bsz, q_len, self.num_heads, self.head_dim)
             # Reshape gate_score: [b, q, num_key_value_heads, num_key_value_groups] -> [b, q, num_heads, 1]
             gate_score = gate_score.reshape(bsz, q_len, self.num_heads, 1)
+            
+            # DEBUG: Verify gate_bias is included in gate_score (only log once per layer)
+            if self.q_proj.bias is not None and not hasattr(self, '_gate_score_debug_logged'):
+                q_dim = self.num_heads * self.head_dim
+                gate_bias_actual = self.q_proj.bias[q_dim:]
+                gate_bias_mean = gate_bias_actual.mean().item()
+                # Compute W_gate @ hidden_states (without bias) for comparison
+                gate_weight = self.q_proj.weight[q_dim:, :]  # [gate_dim, hidden_size]
+                gate_weighted = torch.matmul(hidden_states, gate_weight.t())  # [bsz, q_len, gate_dim]
+                gate_weighted_mean = gate_weighted.mean().item()
+                gate_score_mean = gate_score.mean().item()
+                expected_mean = gate_weighted_mean + gate_bias_mean
+                logger.info(
+                    f"[Gated Attention - Flash] Gate Score Debug - "
+                    f"gate_bias_mean={gate_bias_mean:.6f}, "
+                    f"W_gate@hidden_states_mean={gate_weighted_mean:.6f}, "
+                    f"gate_score_mean={gate_score_mean:.6f}, "
+                    f"expected_mean={expected_mean:.6f} "
+                    f"(should be close if bias is correctly applied)"
+                )
+                self._gate_score_debug_logged = True
         elif self.elementwise_attn_output_gate:
             query_states = query_states.view(bsz, q_len, self.num_key_value_heads, -1)
             query_states, gate_score = torch.split(
@@ -686,6 +726,19 @@ class InternLM2FlashAttention2(InternLM2Attention):
                     )
             
             # Print detailed gate_score information
+            # Check actual gate bias value for debugging
+            q_dim = self.num_heads * self.head_dim
+            gate_bias_actual = self.q_proj.bias[q_dim:] if self.q_proj.bias is not None else None
+            gate_bias_info = ""
+            if gate_bias_actual is not None:
+                gate_bias_mean = gate_bias_actual.mean().item()
+                gate_bias_std = gate_bias_actual.std().item()
+                gate_bias_min = gate_bias_actual.min().item()
+                gate_bias_max = gate_bias_actual.max().item()
+                gate_bias_info = f", gate_bias: mean={gate_bias_mean:.6f}, std={gate_bias_std:.6f}, range=[{gate_bias_min:.6f}, {gate_bias_max:.6f}]"
+                # Note: gate_bias can be 0.0 (default) or any value set via gate_bias_init_value
+                # No warning needed as both are valid initialization values
+            
             # print(
             #     f"[Gated Attention - Flash] Gate Score Statistics - "
             #     f"Mode: {gate_type}, "
@@ -694,6 +747,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
             #     f"mean={gate_score.mean().item():.6f}, std={gate_score.std().item():.6f}, "
             #     f"sigmoid: min={gate_sigmoid.min().item():.6f}, max={gate_sigmoid.max().item():.6f}, "
             #     f"mean={gate_sigmoid.mean().item():.6f}, std={gate_sigmoid.std().item():.6f}"
+            #     f"{gate_bias_info}"
             # )
             
             # For head-wise gating, print per-head statistics

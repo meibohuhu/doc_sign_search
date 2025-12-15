@@ -92,6 +92,7 @@ class InternLM2Config(PretrainedConfig):
         eos_token_id=2,
         tie_word_embeddings=False,
         bias=True,
+        qkv_bias=None,  # bool or None: Whether to use bias in Q/K/V/O projection layers. If None, defaults to bias value.
         rope_theta=10000,
         rope_scaling=None,
         attn_implementation='eager',
@@ -106,6 +107,14 @@ class InternLM2Config(PretrainedConfig):
         self.num_hidden_layers = num_hidden_layers
         self.num_attention_heads = num_attention_heads
         self.bias = bias
+        # qkv_bias: bool - Whether to use bias in Q/K/V/O projection layers (similar to Qwen3's attention_bias)
+        # If None, defaults to bias value for backward compatibility
+        if qkv_bias is None:
+            qkv_bias = bias
+        # Ensure qkv_bias is a boolean (not a number)
+        if not isinstance(qkv_bias, bool):
+            raise ValueError(f"qkv_bias must be a boolean (True/False), got {type(qkv_bias).__name__}: {qkv_bias}")
+        self.qkv_bias = qkv_bias
 
         if num_key_value_heads is None:
             num_key_value_heads = num_attention_heads

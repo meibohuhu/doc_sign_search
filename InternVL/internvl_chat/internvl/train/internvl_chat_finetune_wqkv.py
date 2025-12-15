@@ -27,7 +27,7 @@ import torch
 import torch.distributed as dist
 import transformers
 from internvl.dist_utils import init_dist
-from internvl.model.internlm2.modeling_internlm2_gate import InternLM2ForCausalLM
+from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2ForCausalLM
 
 # CRITICAL: Patch modeling_internvl_chat.py to use gate version before importing InternVLChatModel
 # This ensures InternVLChatModel uses the gated attention implementation
@@ -35,7 +35,7 @@ import sys
 import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
 # Replace the import in modeling_internvl_chat module
 modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM
-print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate")
+print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate_wqkv")
 
 from internvl.model.internvl_chat import (InternVisionConfig,
                                           InternVisionModel,
@@ -1324,8 +1324,8 @@ def main():
 
     # Verify that modeling_internvl_chat is using the gate version
     import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
-    if modeling_internvl_chat_module.InternLM2ForCausalLM.__module__ == 'internvl.model.internlm2.modeling_internlm2_gate':
-        logger.info("✅ Verified: modeling_internvl_chat is using InternLM2ForCausalLM from modeling_internlm2_gate")
+    if modeling_internvl_chat_module.InternLM2ForCausalLM.__module__ == 'internvl.model.internlm2.modeling_internlm2_gate_wqkv':
+        logger.info("✅ Verified: modeling_internvl_chat is using InternLM2ForCausalLM from modeling_internlm2_gate_wqkv")
     else:
         logger.warning(f"⚠️  WARNING: modeling_internvl_chat is using {modeling_internvl_chat_module.InternLM2ForCausalLM.__module__}, not the gate version!")
 
@@ -1544,7 +1544,7 @@ def main():
                     logger.info(f'Loading base QKV weights from {weight_file}...')
                     pretrained_state_dict = load_file(weight_file)
                     
-                    from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+                    from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2Attention, InternLM2FlashAttention2
                     import contextlib
                     try:
                         from deepspeed import zero
@@ -1565,6 +1565,8 @@ def main():
                                 key = f'language_model.model.layers.{i}.attention.wqkv.weight'
                                 if key in pretrained_state_dict:
                                     pretrained_wqkv = pretrained_state_dict[key].to(dtype=torch.bfloat16)
+                                    ### Base QKV 部分（前 4096 行）：来自预训练模型, 通过 copy_() 从预训练模型的 wqkv.weight 复制
+
                                     # Check if pretrained weight has correct shape [4096, 2048]
                                     if pretrained_wqkv.shape == (base_qkv_dim, attn.hidden_size):
                                         # Verify pretrained weight doesn't contain NaN/Inf
@@ -1589,8 +1591,8 @@ def main():
                                                         gate_dim = 0
                                                     
                                                     # Copy base QKV part
-                                                    attn.wqkv.weight[:base_qkv_dim, :].copy_(pretrained_wqkv)
-                                                    
+                                                    attn.wqkv.weight[:base_qkv_dim, :].copy_(pretrained_wqkv)  ### Base QKV 部分（前 4096 行）：来自预训练模型, 通过 copy_() 从预训练模型的 wqkv.weight 复制
+
                                                     # Verify and fix gate part if needed (should be properly initialized, but check for abnormalities)
                                                     if gate_dim > 0:
                                                         current_gate_part = attn.wqkv.weight[base_qkv_dim:, :]
@@ -1668,7 +1670,7 @@ def main():
             )
             # Verify gate part initialization after manual base QKV loading
             logger.info('Verifying gate part initialization...')
-            from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+            from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2Attention, InternLM2FlashAttention2
             import contextlib
             try:
                 from deepspeed import zero
