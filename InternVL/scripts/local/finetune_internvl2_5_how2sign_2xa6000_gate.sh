@@ -139,6 +139,7 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --weight_decay 0.01 \
     --lr_scheduler_type cosine \
     --headwise_attn_output_gate True \
+    --qkv_bias True \
     2>&1 | tee "$LOG_FILE"
 
 TRAINING_EXIT_CODE=${PIPESTATUS[0]}

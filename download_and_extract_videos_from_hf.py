@@ -22,6 +22,12 @@ python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
     --dataset_name PhoenixHu/how2sign_test_videos_224x224 \
     --output_dir /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224_downloaded \
     --remove_archives
+
+python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
+    --mode checkpoint \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_16fps_1212_elementgate \
+    --output_dir /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1212_elementgate \
+    --checkpoint_subdir checkpoint-2548
 """
 
 import os

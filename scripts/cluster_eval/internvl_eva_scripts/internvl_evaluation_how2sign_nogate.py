@@ -34,27 +34,7 @@ if '/code/doc_sign_search/InternVL' not in sys.path:
     sys.path.insert(0, '/code/doc_sign_search/InternVL')
 
 from internvl.model.internvl_chat import InternVLChatModel, InternVLChatConfig
-# CRITICAL: Import wqkv gate version for gated attention checkpoints (same as training script)
-try:
-    from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2ForCausalLM as InternLM2ForCausalLM_GateWQKV
-    # Patch modeling_internvl_chat to use wqkv gate version (same as training script)
-    import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
-    modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM_GateWQKV
-    print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate_wqkv")
-    USE_GATE_VERSION = True
-except ImportError:
-    try:
-        # Fallback to q_proj/k_proj/v_proj gate version
-        from internvl.model.internlm2.modeling_internlm2_gate import InternLM2ForCausalLM as InternLM2ForCausalLM_Gate
-        import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
-        modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM_Gate
-        print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate")
-        USE_GATE_VERSION = True
-    except ImportError:
-        from internvl.model.internlm2.modeling_internlm2 import InternLM2ForCausalLM
-        print("⚠️  Gate version not available, using standard InternLM2ForCausalLM")
-        USE_GATE_VERSION = False
-
+from internvl.model.internlm2.modeling_internlm2 import InternLM2ForCausalLM
 from transformers import AutoTokenizer, AutoConfig
 from internvl.train.dataset import build_transform
 from PIL import Image
@@ -413,283 +393,28 @@ def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     
     return model, tokenizer
 
-def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
-    """
-    Load LoRA weights from checkpoint and merge into wqkv/wo for wqkv-based gated attention.
-    
-    Args:
-        model: InternVLChatModel with wqkv gate version
-        checkpoint_weights: Dictionary of weights from model.safetensors
-        checkpoint_path: Path to checkpoint directory
-    """
-    # Try wqkv gate version first, then fallback to q_proj/k_proj/v_proj version
-    try:
-        from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2Attention, InternLM2FlashAttention2
-        USE_WQKV_VERSION = True
-    except ImportError:
-        try:
-            from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
-            USE_WQKV_VERSION = False
-        except ImportError:
-            print("   ⚠️  Gate version not available")
-            return
-    
-    import contextlib
-    try:
-        from deepspeed import zero
-        gather_context = zero.GatheredParameters
-    except ImportError:
-        gather_context = contextlib.nullcontext
-    
-    loaded_wqkv_count = 0
-    loaded_wo_count = 0
-    
-    # Get the model that contains layers
-    # Path options:
-    # 1. model.language_model (PeftModel) -> .model or .base_model (InternLM2ForCausalLM) -> .model (InternLM2Model) -> .layers
-    # 2. model.language_model (InternLM2ForCausalLM) -> .model (InternLM2Model) -> .layers
-    try:
-        # Step 1: Get InternLM2ForCausalLM from PeftModel (if wrapped)
-        if hasattr(model.language_model, 'model'):
-            causal_lm_model = getattr(model.language_model, 'model')
-        elif hasattr(model.language_model, 'base_model'):
-            # PeftModel also has base_model as alias for model
-            causal_lm_model = getattr(model.language_model, 'base_model')
-        else:
-            # Fallback: maybe language_model is already InternLM2ForCausalLM?
-            causal_lm_model = model.language_model
-        
-        # Step 2: Get InternLM2Model from InternLM2ForCausalLM
-        if hasattr(causal_lm_model, 'model'):
-            layers_model = getattr(causal_lm_model, 'model')
-            if hasattr(layers_model, 'layers'):
-                layers = layers_model.layers
-            else:
-                raise AttributeError(f"layers_model ({type(layers_model)}) does not have 'layers' attribute")
-        else:
-            # Fallback: maybe causal_lm_model is already InternLM2Model?
-            if hasattr(causal_lm_model, 'layers'):
-                layers = causal_lm_model.layers
-            else:
-                raise AttributeError(f"causal_lm_model ({type(causal_lm_model)}) does not have 'model' or 'layers' attribute")
-    except AttributeError as e:
-        print(f"   ❌ Error accessing layers: {e}")
-        print(f"   🔍 Debug: model.language_model type: {type(model.language_model)}")
-        print(f"   🔍 Debug: hasattr(model.language_model, 'model'): {hasattr(model.language_model, 'model')}")
-        print(f"   🔍 Debug: hasattr(model.language_model, 'base_model'): {hasattr(model.language_model, 'base_model')}")
-        if hasattr(model.language_model, 'model'):
-            causal_lm_model = getattr(model.language_model, 'model')
-            print(f"   🔍 Debug: causal_lm_model type: {type(causal_lm_model)}")
-            print(f"   🔍 Debug: hasattr(causal_lm_model, 'model'): {hasattr(causal_lm_model, 'model')}")
-            if hasattr(causal_lm_model, 'model'):
-                layers_model = getattr(causal_lm_model, 'model')
-                print(f"   🔍 Debug: layers_model type: {type(layers_model)}")
-                print(f"   🔍 Debug: hasattr(layers_model, 'layers'): {hasattr(layers_model, 'layers')}")
-        return
-    
-    # Process each layer
-    for i, layer in enumerate(layers):
-        attn = layer.attention
-        if not isinstance(attn, (InternLM2Attention, InternLM2FlashAttention2)):
-            continue
-        
-        # Process wqkv weights
-        if USE_WQKV_VERSION and hasattr(attn, 'wqkv'):
-            base_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.wqkv"
-            base_layer_key = f"{base_key_prefix}.base_layer.weight"
-            lora_a_key = f"{base_key_prefix}.lora_A.default.weight"
-            lora_b_key = f"{base_key_prefix}.lora_B.default.weight"
-            
-            if base_layer_key in checkpoint_weights:
-                try:
-                    # Load base layer weight
-                    base_wqkv = checkpoint_weights[base_layer_key].to(dtype=torch.bfloat16)
-                    
-                    # Load and merge LoRA weights if they exist
-                    if lora_a_key in checkpoint_weights and lora_b_key in checkpoint_weights:
-                        lora_a = checkpoint_weights[lora_a_key].to(dtype=torch.bfloat16)
-                        lora_b = checkpoint_weights[lora_b_key].to(dtype=torch.bfloat16)
-                        # LoRA merge: base + lora_B @ lora_A (scaled by alpha/rank)
-                        # Default LoRA scaling: alpha/rank = 1.0 (assuming alpha=rank, as in training script)
-                        lora_delta = torch.matmul(lora_b, lora_a)
-                        merged_wqkv = base_wqkv + lora_delta
-                    else:
-                        merged_wqkv = base_wqkv
-                    
-                    # Check for NaN/Inf
-                    if torch.isnan(merged_wqkv).any() or torch.isinf(merged_wqkv).any():
-                        print(f"   ⚠️  Layer {i}: Merged wqkv contains NaN/Inf! Skipping...")
-                    else:
-                        # Verify shape matches wqkv (base_qkv_dim + gate_dim)
-                        expected_shape = attn.wqkv.weight.shape
-                        if merged_wqkv.shape == expected_shape:
-                            # Load directly into wqkv
-                            with gather_context([attn.wqkv.weight]):
-                                with torch.no_grad():
-                                    attn.wqkv.weight.copy_(merged_wqkv)
-                                    
-                                    # Verify and fix gate part if needed (same as training script)
-                                    headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
-                                    elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
-                                    
-                                    if headwise_gate or elementwise_gate:
-                                        base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
-                                        gate_dim = attn.num_heads if headwise_gate else attn.num_heads * attn.head_dim
-                                        gate_part = attn.wqkv.weight[base_qkv_dim:, :]
-                                        
-                                        # Check if gate part needs initialization
-                                        gate_mean = gate_part.mean().item()
-                                        gate_std = gate_part.std().item()
-                                        has_nan = torch.isnan(gate_part).any().item()
-                                        has_inf = torch.isinf(gate_part).any().item()
-                                        
-                                        if has_nan or has_inf or (abs(gate_mean) < 1e-6 and gate_std < 1e-6) or abs(gate_mean) > 0.1 or gate_std > 0.1:
-                                            # Initialize gate part
-                                            initializer_range = model.config.llm_config.initializer_range
-                                            gate_part.normal_(mean=0.0, std=initializer_range)
-                                    
-                                    loaded_wqkv_count += 1
-                        else:
-                            print(f"   ⚠️  Layer {i}: wqkv shape mismatch: expected {expected_shape}, got {merged_wqkv.shape}")
-                except Exception as e:
-                    print(f"   ⚠️  Layer {i}: Failed to load wqkv LoRA weights: {e}")
-                    import traceback
-                    traceback.print_exc()
-        
-        # Process wo (output projection) weights
-        wo_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.wo"
-        wo_base_key = f"{wo_key_prefix}.base_layer.weight"
-        wo_lora_a_key = f"{wo_key_prefix}.lora_A.default.weight"
-        wo_lora_b_key = f"{wo_key_prefix}.lora_B.default.weight"
-        
-        if wo_base_key in checkpoint_weights and hasattr(attn, 'wo'):
-            try:
-                base_wo = checkpoint_weights[wo_base_key].to(dtype=torch.bfloat16)
-                
-                if wo_lora_a_key in checkpoint_weights and wo_lora_b_key in checkpoint_weights:
-                    wo_lora_a = checkpoint_weights[wo_lora_a_key].to(dtype=torch.bfloat16)
-                    wo_lora_b = checkpoint_weights[wo_lora_b_key].to(dtype=torch.bfloat16)
-                    wo_lora_delta = torch.matmul(wo_lora_b, wo_lora_a)
-                    merged_wo = base_wo + wo_lora_delta
-                else:
-                    merged_wo = base_wo
-                
-                if not (torch.isnan(merged_wo).any() or torch.isinf(merged_wo).any()):
-                    if merged_wo.shape == attn.wo.weight.shape:
-                        with gather_context([attn.wo.weight]):
-                            with torch.no_grad():
-                                attn.wo.weight.copy_(merged_wo)
-                                loaded_wo_count += 1
-            except Exception as e:
-                print(f"   ⚠️  Layer {i}: Failed to load wo LoRA weights: {e}")
-    
-    if loaded_wqkv_count > 0:
-        print(f"   ✅ Successfully loaded wqkv LoRA weights for {loaded_wqkv_count} layers")
-    if loaded_wo_count > 0:
-        print(f"   ✅ Successfully loaded wo LoRA weights for {loaded_wo_count} layers")
-    if loaded_wqkv_count == 0 and loaded_wo_count == 0:
-        print(f"   ⚠️  No LoRA weights were loaded")
-
-
 def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2B"):
     """
     Load InternVL trained model from checkpoint
-    Supports both standard and gated attention checkpoints
     """
     print("🚀 Loading InternVL model from checkpoint...")
     print(f"   Checkpoint: {checkpoint_path}")
     
-    # Check if checkpoint was trained with gated attention
-    # Method 1: Check checkpoint path name for gate indicators
-    checkpoint_name = os.path.basename(checkpoint_path)
-    parent_dir = os.path.basename(os.path.dirname(checkpoint_path))
-    full_path_lower = (checkpoint_path + " " + parent_dir).lower()
-    
-    has_gate_config = False
-    elementwise_gate = False
-    headwise_gate = False
-    
-    # Detect from path name
-    if 'elementgate' in full_path_lower or 'elementwise' in full_path_lower:
-        elementwise_gate = True
-        has_gate_config = True
-        print(f"   🔍 Detected elementwise gated attention from checkpoint path")
-    elif 'headgate' in full_path_lower or 'headwise' in full_path_lower:
-        headwise_gate = True
-        has_gate_config = True
-        print(f"   🔍 Detected headwise gated attention from checkpoint path")
-    
-    # Method 2: Check config.json file
-    checkpoint_config_path = os.path.join(checkpoint_path, "config.json")
-    if os.path.exists(checkpoint_config_path):
-        try:
-            import json
-            with open(checkpoint_config_path, 'r') as f:
-                checkpoint_config = json.load(f)
-            # Check if config indicates gated attention
-            if isinstance(checkpoint_config, dict):
-                llm_config = checkpoint_config.get('llm_config', {})
-                if isinstance(llm_config, dict):
-                    config_elementwise = llm_config.get('elementwise_attn_output_gate', False)
-                    config_headwise = llm_config.get('headwise_attn_output_gate', False)
-                    if config_elementwise or config_headwise:
-                        elementwise_gate = config_elementwise
-                        headwise_gate = config_headwise
-                        has_gate_config = True
-                        gate_type = "elementwise" if elementwise_gate else "headwise"
-                        print(f"   🔍 Detected {gate_type} gated attention in checkpoint config.json")
-        except Exception as e:
-            print(f"   ⚠️  Could not read checkpoint config: {e}")
-    
     # Step 1: Load base model config
     print("\n1️⃣ Loading base model config...")
     config = InternVLChatConfig.from_pretrained(base_model_name, trust_remote_code=True)
-    
-    # Apply gate config if detected
-    if has_gate_config and config.llm_config.model_type == 'internlm2':
-        config.llm_config.elementwise_attn_output_gate = elementwise_gate
-        config.llm_config.headwise_attn_output_gate = headwise_gate
-        gate_type = "elementwise" if elementwise_gate else "headwise"
-        print(f"   ✅ Config loaded with {gate_type} gated attention")
-    else:
-        print("   ✅ Config loaded")
+    print("   ✅ Config loaded")
     
     # Step 2: Load model
     print(f"\n2️⃣ Loading model from checkpoint...")
     try:
-        # For wqkv gate version, we don't need ignore_mismatched_sizes
-        # because wqkv structure matches (just has additional gate_dim)
-        # But we still need it if using q_proj/k_proj/v_proj version
-        ignore_mismatched = False  # wqkv version doesn't need this
-        
         model = InternVLChatModel.from_pretrained(
             checkpoint_path,
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
-            device_map="auto",
-            ignore_mismatched_sizes=ignore_mismatched
+            device_map="auto"
         )
         print("   ✅ Model loaded from checkpoint")
-        
-        # CRITICAL: If checkpoint uses LoRA format (wqkv.base_layer + lora_A/lora_B),
-        # we need to merge LoRA weights and load into wqkv.weight
-        if has_gate_config and USE_GATE_VERSION:
-            print(f"\n   🔧 Loading and merging LoRA wqkv weights...")
-            try:
-                from safetensors.torch import load_file
-                checkpoint_weights = load_file(os.path.join(checkpoint_path, "model.safetensors"))
-                
-                # Check if checkpoint uses LoRA format
-                sample_key = "language_model.base_model.model.model.layers.0.attention.wqkv.base_layer.weight"
-                if sample_key in checkpoint_weights:
-                    print(f"   📦 Detected LoRA format checkpoint, merging and loading weights...")
-                    _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path)
-                else:
-                    print(f"   ℹ️  Checkpoint doesn't use LoRA format, skipping conversion")
-            except Exception as e:
-                print(f"   ⚠️  Failed to load LoRA weights: {e}")
-                import traceback
-                traceback.print_exc()
         # Check if num_image_token matches training (should be 64 for 224x224 with ratio 0.5)
         expected_num_image_token = int((224 // 14) ** 2 * (0.5 ** 2))  # 64
         if model.num_image_token != expected_num_image_token:
@@ -703,19 +428,11 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
     except Exception as e:
         print(f"   ⚠️  Failed to load from checkpoint, trying base model: {e}")
         # Fallback to base model if checkpoint loading fails
-        # Apply gate config if detected
-        if has_gate_config and config.llm_config.model_type == 'internlm2':
-            print(f"   🔧 Applying gate config to base model...")
-            config.llm_config.elementwise_attn_output_gate = elementwise_gate
-            config.llm_config.headwise_attn_output_gate = headwise_gate
-        
         model = InternVLChatModel.from_pretrained(
             base_model_name,
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
-            device_map="auto",
-            config=config,
-            ignore_mismatched_sizes=has_gate_config and USE_GATE_VERSION
+            device_map="auto"
         )
         print("   ✅ Model loaded from base model")
         # Apply training config to base model

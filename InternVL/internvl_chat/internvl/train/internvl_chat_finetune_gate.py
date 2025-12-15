@@ -638,6 +638,10 @@ class ModelArguments:
         default=False,
         metadata={'help': 'Set to True to enable elementwise attention output gating. Default is False.'}
     )
+    qkv_bias: Optional[bool] = field(
+        default=None,
+        metadata={'help': 'Boolean (True/False): Whether to use bias in Q/K/V/O projection layers. If None, defaults to config.bias value. Similar to Qwen3\'s attention_bias. Must be a boolean, not a number.'}
+    )
 
 
 @dataclass
@@ -1443,6 +1447,10 @@ def main():
         if config.llm_config.model_type == 'internlm2':
             config.llm_config.attn_implementation = 'flash_attention_2'  # for InternLM
             logger.info('Using flash_attention_2 for InternLM')
+            # Set qkv_bias if provided (similar to Qwen3's attention_bias)
+            if model_args.qkv_bias is not None:
+                config.llm_config.qkv_bias = model_args.qkv_bias
+                logger.info(f'✅ Set qkv_bias = {model_args.qkv_bias} (similar to Qwen3\'s attention_bias)')
             # Phase 1: Standard Gated Attention
             if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
                 config.llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
@@ -1485,6 +1493,48 @@ def main():
             model_args.model_name_or_path, torch_dtype=torch.bfloat16, config=config,
             ignore_mismatched_sizes=ignore_mismatched)
         
+
+        # 1214 mh 添加检查代码
+        if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+            logger.info("=" * 80)
+            logger.info("Checking q_proj bias configuration...")
+            
+            # 检查 config.qkv_bias (这是实际控制 Q/K/V/O 投影层 bias 的参数)
+            logger.info(f"config.llm_config.qkv_bias = {model.language_model.config.qkv_bias}")
+            logger.info(f"config.llm_config.bias = {model.language_model.config.bias} (general bias setting)")
+            
+            # 检查实际的 q_proj (应该与 qkv_bias 配置一致)
+            first_layer_attn = model.language_model.model.layers[0].attention
+            has_bias = first_layer_attn.q_proj.bias is not None
+            expected_bias = model.language_model.config.qkv_bias
+            
+            if has_bias != expected_bias:
+                logger.warning(
+                    f"⚠️  Mismatch: qkv_bias={expected_bias} but q_proj.bias is {'present' if has_bias else 'None'}! "
+                    f"This indicates a configuration issue."
+                )
+            
+            if has_bias:
+                logger.info(f"✅ q_proj HAS bias")
+                logger.info(f"   q_proj.weight shape: {first_layer_attn.q_proj.weight.shape}")
+                logger.info(f"   q_proj.bias shape: {first_layer_attn.q_proj.bias.shape}")
+                
+                # 检查 gate 部分的 bias
+                q_dim = first_layer_attn.num_heads * first_layer_attn.head_dim
+                gate_bias = first_layer_attn.q_proj.bias[q_dim:]
+                logger.info(f"   gate_bias shape: {gate_bias.shape}")
+                logger.info(f"   gate_bias values: mean={gate_bias.mean().item():.6f}, "
+                        f"std={gate_bias.std().item():.6f}, "
+                        f"min={gate_bias.min().item():.6f}, "
+                        f"max={gate_bias.max().item():.6f}")
+            else:
+                logger.warning(f"❌ q_proj has NO bias!")
+                logger.info(f"   q_proj.weight shape: {first_layer_attn.q_proj.weight.shape}")
+                logger.info(f"   Need to set --qkv_bias True or modify config.qkv_bias")
+            
+            logger.info("=" * 80)
+
+
         # mh1211 Manually load base QKV weights from pretrained model
         # This is necessary because:
         # 1. If gating is enabled: ignore_mismatched_sizes skips loading the entire wqkv.weight
@@ -1723,6 +1773,41 @@ def main():
                                                     f'Q mean: {pretrained_q.mean().item():.6f}, K mean: {pretrained_k.mean().item():.6f}, V mean: {pretrained_v.mean().item():.6f}'
                                                 )
                                                 
+                                            # CRITICAL: Initialize bias parameters if qkv_bias=True
+                                            # Pre-trained models may not have bias, but new model does (when qkv_bias=True)
+                                            # Bias should be initialized to zero (same as _init_weights)
+                                            if config.llm_config.qkv_bias:
+                                                bias_params = [p for p in [attn.q_proj.bias, attn.k_proj.bias, attn.v_proj.bias, attn.wo.bias] if p is not None]
+                                                if bias_params:
+                                                    with gather_context(bias_params):
+                                                        with torch.no_grad():
+                                                            if attn.q_proj.bias is not None:
+                                                                # Check if bias needs initialization (NaN/Inf or uninitialized)
+                                                                needs_init = (torch.isnan(attn.q_proj.bias).any() or torch.isinf(attn.q_proj.bias).any() or \
+                                                                             (attn.q_proj.bias.abs().max().item() > 1e-3))
+                                                                
+                                                                # Initialize bias to zero if needed (same as _init_weights)
+                                                                if needs_init:
+                                                                    attn.q_proj.bias.zero_()
+                                                                    logger.info(f'Layer {i}: Initialized q_proj.bias to 0 (shape: {attn.q_proj.bias.shape})')
+                                                            if attn.k_proj.bias is not None:
+                                                                if torch.isnan(attn.k_proj.bias).any() or torch.isinf(attn.k_proj.bias).any() or \
+                                                                   (attn.k_proj.bias.abs().max().item() > 1e-3):
+                                                                    attn.k_proj.bias.zero_()
+                                                                    logger.info(f'Layer {i}: Initialized k_proj.bias (shape: {attn.k_proj.bias.shape})')
+                                                            if attn.v_proj.bias is not None:
+                                                                if torch.isnan(attn.v_proj.bias).any() or torch.isinf(attn.v_proj.bias).any() or \
+                                                                   (attn.v_proj.bias.abs().max().item() > 1e-3):
+                                                                    attn.v_proj.bias.zero_()
+                                                                    logger.info(f'Layer {i}: Initialized v_proj.bias (shape: {attn.v_proj.bias.shape})')
+                                                            if attn.wo.bias is not None:
+                                                                if torch.isnan(attn.wo.bias).any() or torch.isinf(attn.wo.bias).any() or \
+                                                                   (attn.wo.bias.abs().max().item() > 1e-3):
+                                                                    attn.wo.bias.zero_()
+                                                                    logger.info(f'Layer {i}: Initialized wo.bias (shape: {attn.wo.bias.shape})')
+                                                else:
+                                                    logger.warning(f'Layer {i}: qkv_bias=True but bias parameters are None! This should not happen.')
+                                            
                                             # Verify copy was successful
                                             if torch.isnan(attn.q_proj.weight[:q_dim, :]).any() or \
                                                torch.isinf(attn.q_proj.weight[:q_dim, :]).any() or \
@@ -1794,6 +1879,40 @@ def main():
             for i, layer in enumerate(model.language_model.model.layers):
                 attn = layer.attention
                 if isinstance(attn, (InternLM2Attention, InternLM2FlashAttention2)):
+                    # CRITICAL: Initialize all bias parameters if qkv_bias=True
+                    # This ensures bias is properly initialized even if pre-trained model didn't have it
+                    if config.llm_config.qkv_bias:
+                        bias_params = [p for p in [attn.q_proj.bias, attn.k_proj.bias, attn.v_proj.bias, attn.wo.bias] if p is not None]
+                        if bias_params:
+                            with gather_context(bias_params):
+                                with torch.no_grad():
+                                    if attn.q_proj.bias is not None:
+                                        # Check if bias needs initialization (NaN/Inf or uninitialized)
+                                        needs_init = (torch.isnan(attn.q_proj.bias).any() or torch.isinf(attn.q_proj.bias).any() or \
+                                                     (attn.q_proj.bias.abs().max().item() > 1e-3))
+                                        
+                                        # Initialize bias to zero if needed (same as _init_weights)
+                                        if needs_init:
+                                            attn.q_proj.bias.zero_()
+                                            logger.info(f'Layer {i}: Initialized q_proj.bias to 0 (shape: {attn.q_proj.bias.shape})')
+                                    if attn.k_proj.bias is not None:
+                                        if torch.isnan(attn.k_proj.bias).any() or torch.isinf(attn.k_proj.bias).any() or \
+                                           (attn.k_proj.bias.abs().max().item() > 1e-3):
+                                            attn.k_proj.bias.zero_()
+                                            logger.info(f'Layer {i}: Initialized k_proj.bias (shape: {attn.k_proj.bias.shape})')
+                                    if attn.v_proj.bias is not None:
+                                        if torch.isnan(attn.v_proj.bias).any() or torch.isinf(attn.v_proj.bias).any() or \
+                                           (attn.v_proj.bias.abs().max().item() > 1e-3):
+                                            attn.v_proj.bias.zero_()
+                                            logger.info(f'Layer {i}: Initialized v_proj.bias (shape: {attn.v_proj.bias.shape})')
+                                    if attn.wo.bias is not None:
+                                        if torch.isnan(attn.wo.bias).any() or torch.isinf(attn.wo.bias).any() or \
+                                           (attn.wo.bias.abs().max().item() > 1e-3):
+                                            attn.wo.bias.zero_()
+                                            logger.info(f'Layer {i}: Initialized wo.bias (shape: {attn.wo.bias.shape})')
+                        else:
+                            logger.warning(f'Layer {i}: qkv_bias=True but bias parameters are None! This should not happen.')
+                    
                     headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
                     elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
                     if headwise_gate or elementwise_gate:
@@ -1869,6 +1988,10 @@ def main():
             model_type = InternLM2ForCausalLM
             llm_config.attn_implementation = 'flash_attention_2'  # for InternLM
             logger.info('Using flash_attention_2 for InternLM')
+            # Set qkv_bias if provided (similar to Qwen3's attention_bias)
+            if model_args.qkv_bias is not None:
+                llm_config.qkv_bias = model_args.qkv_bias
+                logger.info(f'✅ Set qkv_bias = {model_args.qkv_bias} (similar to Qwen3\'s attention_bias)')
             # mh 1211 Phase 1: Standard Gated Attention
             if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
                 llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
@@ -1984,6 +2107,20 @@ def main():
     if model_args.freeze_llm:
         model.language_model = model.language_model.eval()
         _freeze_params(model.language_model)
+        # Unfreeze bias parameters if qkv_bias is enabled (bias should be trainable even when LLM is frozen)
+        if config.llm_config.qkv_bias:
+            for layer in model.language_model.model.layers:
+                if hasattr(layer, 'attention'):
+                    attn = layer.attention
+                    if attn.q_proj.bias is not None:
+                        attn.q_proj.bias.requires_grad = True
+                    if attn.k_proj.bias is not None:
+                        attn.k_proj.bias.requires_grad = True
+                    if attn.v_proj.bias is not None:
+                        attn.v_proj.bias.requires_grad = True
+                    if attn.wo.bias is not None:
+                        attn.wo.bias.requires_grad = True
+            logger.info('✅ Unfroze attention bias parameters (q_proj, k_proj, v_proj, wo) for training')
 
     if model_args.unfreeze_lm_head:
         model.language_model.lm_head.requires_grad = True
