@@ -1583,6 +1583,83 @@ def main():
             if bias_init_count > 0:
                 logger.info(f'✅ Initialized q_proj/k_proj/v_proj bias for {bias_init_count // 3} layers (Qwen2). Will load from pretrained model.')
         
+        # Helper function to load safetensors (handles both single file and sharded)
+        def load_safetensors_state_dict(model_path_or_dir):
+            """
+            Load safetensors state dict, handling both single file and sharded formats.
+            
+            Returns:
+                tuple: (state_dict, base_dir) or (None, None) if not found
+            """
+            from safetensors.torch import load_file
+            import json
+            
+            # Try to find the model directory
+            model_dir = None
+            if os.path.exists(model_path_or_dir) and os.path.isdir(model_path_or_dir):
+                model_dir = model_path_or_dir
+            else:
+                # Try HuggingFace cache
+                try:
+                    from huggingface_hub import snapshot_download
+                    model_dir = snapshot_download(
+                        repo_id=model_path_or_dir,
+                        local_files_only=True,
+                        cache_dir=None
+                    )
+                except Exception:
+                    try:
+                        from huggingface_hub.constants import HF_HUB_CACHE
+                        cache_model_name = model_path_or_dir.replace('/', '--')
+                        cache_base = os.path.join(HF_HUB_CACHE, f'models--{cache_model_name}')
+                        if os.path.exists(cache_base):
+                            snapshots_dir = os.path.join(cache_base, 'snapshots')
+                            if os.path.exists(snapshots_dir):
+                                snapshots = [d for d in os.listdir(snapshots_dir) if os.path.isdir(os.path.join(snapshots_dir, d))]
+                                if snapshots:
+                                    model_dir = os.path.join(snapshots_dir, snapshots[0])
+                    except Exception:
+                        pass
+            
+            if model_dir is None:
+                return None, None
+            
+            # Check for sharded safetensors (model.safetensors.index.json)
+            index_file = os.path.join(model_dir, 'model.safetensors.index.json')
+            if os.path.exists(index_file):
+                logger.info(f'Found sharded safetensors index: {index_file}')
+                with open(index_file, 'r') as f:
+                    index_data = json.load(f)
+                
+                # Load all shards
+                state_dict = {}
+                weight_map = index_data.get('weight_map', {})
+                shard_files = set(weight_map.values())
+                
+                logger.info(f'Loading {len(shard_files)} shard files...')
+                for shard_file in shard_files:
+                    shard_path = os.path.join(model_dir, shard_file)
+                    if os.path.exists(shard_path):
+                        logger.debug(f'Loading shard: {shard_file}')
+                        shard_dict = load_file(shard_path)
+                        state_dict.update(shard_dict)
+                    else:
+                        logger.warning(f'Shard file not found: {shard_path}')
+                        return None, None
+                
+                logger.info(f'✅ Loaded {len(state_dict)} keys from {len(shard_files)} shards')
+                return state_dict, model_dir
+            
+            # Try single file
+            single_file = os.path.join(model_dir, 'model.safetensors')
+            if os.path.exists(single_file):
+                logger.info(f'Found single safetensors file: {single_file}')
+                state_dict = load_file(single_file)
+                logger.info(f'✅ Loaded {len(state_dict)} keys from single file')
+                return state_dict, model_dir
+            
+            return None, None
+        
         # mh1211 If ignore_mismatched_sizes was used, manually load base QKV weights from pretrained model
         # This is necessary because ignore_mismatched_sizes skips loading the entire wqkv.weight,
         # which causes the base QKV part to be randomly initialized (potentially with NaN/Inf)
@@ -1590,66 +1667,10 @@ def main():
         if ignore_mismatched and config.llm_config.model_type == 'internlm2':
             logger.info('Manually loading base QKV weights from pretrained model (ignore_mismatched_sizes was used)...')
             try:
-                from safetensors.torch import load_file
-                
-                # Try to load pretrained weights directly
                 pretrained_model_path = model_args.model_name_or_path
-                weight_file = None
+                pretrained_state_dict, model_dir = load_safetensors_state_dict(pretrained_model_path)
                 
-                # Check if it's a local path
-                if os.path.exists(pretrained_model_path):
-                    weight_file = os.path.join(pretrained_model_path, 'model.safetensors')
-                    if not os.path.exists(weight_file):
-                        weight_file = None
-                
-                # If not found locally, try HuggingFace cache
-                if weight_file is None or not os.path.exists(weight_file):
-                    # First, try to find it in the cache directory using snapshot_download
-                    try:
-                        from huggingface_hub import snapshot_download
-                        cache_dir = snapshot_download(
-                            repo_id=pretrained_model_path,
-                            local_files_only=True,
-                            cache_dir=None  # Use default cache
-                        )
-                        weight_file = os.path.join(cache_dir, 'model.safetensors')
-                        if os.path.exists(weight_file):
-                            logger.info(f'Found weight file via snapshot_download: {weight_file}')
-                        else:
-                            logger.debug(f'Weight file not found at {weight_file}')
-                            weight_file = None
-                    except Exception as e1:
-                        logger.debug(f'snapshot_download failed: {e1}')
-                        weight_file = None
-                    
-                    # If snapshot_download fails, try to construct the cache path directly
-                    if weight_file is None or not os.path.exists(weight_file):
-                        try:
-                            from huggingface_hub.constants import HF_HUB_CACHE
-                            # Convert model name to cache format: OpenGVLab/InternVL2_5-2B -> models--OpenGVLab--InternVL2_5-2B
-                            cache_model_name = pretrained_model_path.replace('/', '--')
-                            cache_base = os.path.join(HF_HUB_CACHE, f'models--{cache_model_name}')
-                            if os.path.exists(cache_base):
-                                # Find the latest snapshot directory
-                                snapshots_dir = os.path.join(cache_base, 'snapshots')
-                                if os.path.exists(snapshots_dir):
-                                    snapshots = [d for d in os.listdir(snapshots_dir) if os.path.isdir(os.path.join(snapshots_dir, d))]
-                                    if snapshots:
-                                        # Use the first snapshot (usually there's only one)
-                                        latest_snapshot = snapshots[0]
-                                        weight_file = os.path.join(snapshots_dir, latest_snapshot, 'model.safetensors')
-                                        if os.path.exists(weight_file):
-                                            logger.info(f'Found weight file via direct cache path: {weight_file}')
-                                        else:
-                                            logger.debug(f'Weight file not found at {weight_file}')
-                                            weight_file = None
-                        except Exception as e2:
-                            logger.debug(f'Direct cache path lookup failed: {e2}')
-                            weight_file = None
-                
-                if weight_file and os.path.exists(weight_file):
-                    logger.info(f'Loading base QKV weights from {weight_file}...')
-                    pretrained_state_dict = load_file(weight_file)
+                if pretrained_state_dict is not None:
                     
                     from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
                     import contextlib
@@ -1753,7 +1774,7 @@ def main():
                 else:
                     logger.warning(
                         f'⚠️  Pretrained weight file not found. '
-                        f'Tried: {pretrained_model_path}/model.safetensors. '
+                        f'Tried: {pretrained_model_path} (checked for model.safetensors and model.safetensors.index.json). '
                         f'Will rely on random initialization.'
                     )
             except Exception as e:
@@ -1849,67 +1870,17 @@ def main():
         if ignore_mismatched and config.llm_config.model_type == 'qwen2':
             logger.info('Manually loading base q_proj weights from pretrained model for Qwen2 (ignore_mismatched_sizes was used)...')
             try:
-                from safetensors.torch import load_file
                 from internvl.model.qwen2.modeling_qwen2_gate import (
                     Qwen2Attention as Qwen2AttentionGate,
                     Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
                     Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
                 )
                 
-                # Try to load pretrained weights directly
                 pretrained_model_path = model_args.model_name_or_path
-                weight_file = None
+                pretrained_state_dict, model_dir = load_safetensors_state_dict(pretrained_model_path)
                 
-                # Check if it's a local path
-                if os.path.exists(pretrained_model_path):
-                    weight_file = os.path.join(pretrained_model_path, 'model.safetensors')
-                    if not os.path.exists(weight_file):
-                        weight_file = None
-                
-                # If not found locally, try HuggingFace cache
-                if weight_file is None or not os.path.exists(weight_file):
-                    try:
-                        from huggingface_hub import snapshot_download
-                        cache_dir = snapshot_download(
-                            repo_id=pretrained_model_path,
-                            local_files_only=True,
-                            cache_dir=None
-                        )
-                        weight_file = os.path.join(cache_dir, 'model.safetensors')
-                        if os.path.exists(weight_file):
-                            logger.info(f'Found weight file via snapshot_download: {weight_file}')
-                        else:
-                            logger.debug(f'Weight file not found at {weight_file}')
-                            weight_file = None
-                    except Exception as e1:
-                        logger.debug(f'snapshot_download failed: {e1}')
-                        weight_file = None
-                    
-                    # If snapshot_download fails, try to construct the cache path directly
-                    if weight_file is None or not os.path.exists(weight_file):
-                        try:
-                            from huggingface_hub.constants import HF_HUB_CACHE
-                            cache_model_name = pretrained_model_path.replace('/', '--')
-                            cache_base = os.path.join(HF_HUB_CACHE, f'models--{cache_model_name}')
-                            if os.path.exists(cache_base):
-                                snapshots_dir = os.path.join(cache_base, 'snapshots')
-                                if os.path.exists(snapshots_dir):
-                                    snapshots = [d for d in os.listdir(snapshots_dir) if os.path.isdir(os.path.join(snapshots_dir, d))]
-                                    if snapshots:
-                                        latest_snapshot = snapshots[0]
-                                        weight_file = os.path.join(snapshots_dir, latest_snapshot, 'model.safetensors')
-                                        if os.path.exists(weight_file):
-                                            logger.info(f'Found weight file via direct cache path: {weight_file}')
-                                        else:
-                                            logger.debug(f'Weight file not found at {weight_file}')
-                                            weight_file = None
-                        except Exception as e2:
-                            logger.debug(f'Direct cache path lookup failed: {e2}')
-                            weight_file = None
-                
-                if weight_file and os.path.exists(weight_file):
-                    logger.info(f'Loading base q_proj weights from {weight_file}...')
-                    pretrained_state_dict = load_file(weight_file)
+                if pretrained_state_dict is not None:
+                    logger.info(f'Loading base q_proj weights from pretrained model...')
                     
                     import contextlib
                     try:
@@ -2040,7 +2011,7 @@ def main():
                 else:
                     logger.warning(
                         f'⚠️  Pretrained weight file not found for Qwen2. '
-                        f'Tried: {pretrained_model_path}/model.safetensors. '
+                        f'Tried: {pretrained_model_path} (checked for model.safetensors and model.safetensors.index.json). '
                         f'Will rely on random initialization.'
                     )
             except Exception as e:
