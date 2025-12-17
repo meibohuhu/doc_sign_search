@@ -348,13 +348,14 @@ class InternLM2Attention(nn.Module):
         else:
             total_dim = base_qkv_dim
 
+        # Use config.bias to match original InternLM2 behavior (same as modeling_internlm2.py)
         self.wqkv = nn.Linear(
             self.hidden_size,
             total_dim,
-            bias=config.qkv_bias,
+            bias=config.bias,
         )
 ######################
-        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.qkv_bias)
+        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.bias)
         self._init_rope()
 
     def _init_rope(self):
@@ -440,7 +441,7 @@ class InternLM2Attention(nn.Module):
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
             else:  # elementwise
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
-            
+        
             # Log gate_score statistics - ALWAYS print, no restrictions
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
@@ -669,7 +670,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
             else:  # elementwise
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
-            
+        
             # Log gate_score statistics - ALWAYS print, no restrictions
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
@@ -677,7 +678,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
             negative_ratio = (gate_score < 0).float().mean().item()
             small_positive_ratio = ((gate_score >= 0) & (gate_score < 2.0)).float().mean().item()
             large_positive_ratio = (gate_score >= 2.0).float().mean().item()
-
+                
             #### gate_score 的统计信息 gate_score shape: [1, 7007, 16, 1] — [batch=1, seq_len=7007, num_heads=16, gate_dim=1]
             #### gate_score raw range: [-0.1816, 0.1621] — 原始值范围（归一化+缩放后）gate_score raw mean: -0.0087 — 平均值接近 0 gate_score raw std: 0.0439 — 标准差较小
             #### sigmoid(gate_score) range: [0.4551, 0.5391] — sigmoid 后的范围
@@ -713,7 +714,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
                 f"[Gated Attention - Flash] ERROR: qkv_states contains NaN/Inf after rearrange! "
                 f"qkv_states shape: {qkv_states.shape}"
             )
-
+    
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
         value_states = value_states.transpose(1, 2)

@@ -1,0 +1,268 @@
+✅ Conda environment activated: internvl
+🎬 InternVL2.5-2B How2Sign Evaluation on 2×A6000
+==================================================
+Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_querygate_elementwise_1215/checkpoint-4078
+Model Base: OpenGVLab/InternVL2_5-2B
+Video Folder: /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224
+Question File: /local1/mhu/sign_language_llm/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl
+Output Dir: /local1/mhu/sign_language_llm/outputs/internvl_eval/
+GPU IDs: 0 (CUDA_VISIBLE_DEVICES: 0)
+Number of GPUs: 1
+Min Num Frames: 32
+Max Num Frames: 120
+Sampling Method: fps16.0
+Image Size: 224
+Max New Tokens: 128
+Max Samples (limited): 15
+Export Frames: Disabled
+
+📁 Output directory: /local1/mhu/sign_language_llm/outputs/internvl_eval/
+
+📝 Log file: /local1/mhu/sign_language_llm/outputs/internvl_eval//evaluation_20251216_142319.log
+
+🚀 Starting evaluation...
+
+Using conda python: /home/ztao/anaconda3/envs/internvl/bin/python
+
+✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_querygate_withbias
+   🔍 Detected: modeling_internlm2_querygate_withbias uses q_proj/k_proj/v_proj format
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+✅ GPU: NVIDIA RTX A6000
+💾 Memory: 50.9GB
+
+🔒 Gradient computation disabled globally for memory optimization
+🚀 Loading InternVL model from checkpoint...
+   Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_querygate_elementwise_1215/checkpoint-4078
+   🔍 Detected elementwise gated attention from checkpoint path
+   🔍 Detected headwise gated attention in checkpoint config.json
+
+1️⃣ Loading base model config...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+   ✅ Config loaded with headwise gated attention
+   ✅ Set qkv_bias = False from checkpoint config
+
+2️⃣ Loading model from checkpoint...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
+trainable params: 13,369,344 || all params: 1,903,302,656 || trainable%: 0.7024286945565005
+   ✅ Model loaded from checkpoint
+
+   🔧 Loading weights from checkpoint...
+   📦 Detected direct weight format (q_proj/k_proj/v_proj), loading weights...
+   ✅ Successfully loaded q_proj weights for 24 layers
+   ✅ Successfully loaded k_proj weights for 24 layers
+   ✅ Successfully loaded v_proj weights for 24 layers
+
+3️⃣ Loading tokenizer...
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+   ✅ Tokenizer loaded (model_max_length: 12288)
+
+4️⃣ Moving model to GPU...
+   ✅ Model moved to cuda:0
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+
+🔒 All model parameters set to requires_grad=False
+📂 Loading test data from: /local1/mhu/sign_language_llm/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl
+   Limited to 15 samples
+   Total samples: 15
+
+🎬 Starting evaluation...
+======================================================================
+
+
+Evaluating:   0%|          | 0/15 [00:00<?, ?it/s]
+📹 [1/15] Loading video: g2SdWBPoXZ0_8-3-rgb_front.mp4
+   📊 Sampled 102 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152] (video total: 153, fps: 24.00)
+   ✅ Loaded 102 frames
+
+──────────────────────────────────────────────────────────────────────
+[1/15] g2SdWBPoXZ0_8-3-rgb_front.mp4
+Ground truth: Now of course there are a million different tricks you can do, and a million different ways you can link them all together.
+Prediction:   We are talking about doing some massages of massages and mass.
+✅ Partial match (has some words)
+
+Evaluating:   7%|▋         | 1/15 [00:05<01:19,  5.71s/it]
+📹 [2/15] Loading video: G3IJAoK0uSE_10-5-rgb_front.mp4
+   📊 Sampled 120 frames: [1, 5, 11, 17, 22, 28, 34, 38, 44, 50, 56, 61, 67, 73, 77, 83, 89, 95, 100, 106, 112, 116, 122, 128, 133, 139, 145, 151, 155, 161, 167, 172, 178, 184, 190, 194, 200, 206, 211, 217, 223, 227, 233, 239, 245, 250, 256, 262, 266, 272, 278, 284, 289, 295, 301, 305, 311, 317, 322, 328, 334, 340, 344, 350, 356, 361, 367, 373, 379, 383, 389, 395, 400, 406, 412, 416, 422, 428, 434, 439, 445, 451, 455, 461, 467, 473, 478, 484, 490, 494, 500, 506, 511, 517, 523, 529, 533, 539, 545, 550, 556, 562, 568, 572, 578, 584, 589, 595, 601, 605, 611, 617, 623, 628, 634, 640, 644, 650, 656, 662] (video total: 664, fps: 24.00)
+   ✅ Loaded 120 frames
+
+──────────────────────────────────────────────────────────────────────
+[2/15] G3IJAoK0uSE_10-5-rgb_front.mp4
+Ground truth: I've continued the design on my front panel using the same napkin for decoupage and more animal stickers.
+Prediction:   I'm going to be using a bathtype of bat for this one, one for the middle of the bat.
+✅ Partial match (has some words)
+
+Evaluating:  13%|█▎        | 2/15 [00:12<01:25,  6.56s/it]
+📹 [3/15] Loading video: G2kVb4gINSI_9-10-rgb_front.mp4
+   📊 Sampled 82 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122] (video total: 124, fps: 24.00)
+   ✅ Loaded 82 frames
+
+──────────────────────────────────────────────────────────────────────
+[3/15] G2kVb4gINSI_9-10-rgb_front.mp4
+Ground truth: Down and up.
+Prediction:   Okay, you're just taking it right up to the end of his mouth.
+⚠️  No obvious match
+
+Evaluating:  20%|██        | 3/15 [00:18<01:11,  5.94s/it]
+📹 [4/15] Loading video: G0Q6AlvH96I_26-2-rgb_front.mp4
+   📊 Sampled 101 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151] (video total: 152, fps: 24.00)
+   ✅ Loaded 101 frames
+
+──────────────────────────────────────────────────────────────────────
+[4/15] G0Q6AlvH96I_26-2-rgb_front.mp4
+Ground truth: If it's woman attacked by a three hundred pound guy got to aim to the throat.
+Prediction:   And that's the basic stroke, basic stroke.
+✅ Partial match (has some words)
+
+Evaluating:  27%|██▋       | 4/15 [00:22<00:59,  5.44s/it]
+📹 [5/15] Loading video: g2wUCRRni28_6-3-rgb_front.mp4
+   📊 Sampled 80 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119] (video total: 121, fps: 24.00)
+   ✅ Loaded 80 frames
+
+──────────────────────────────────────────────────────────────────────
+[5/15] g2wUCRRni28_6-3-rgb_front.mp4
+Ground truth: These are also great for parting and keeping your hair going that way.
+Prediction:   You can also look at environmental factors that are specific and healthy considerations.
+✅ Partial match (has some words)
+
+Evaluating:  33%|███▎      | 5/15 [00:26<00:49,  4.91s/it]
+📹 [6/15] Loading video: G3RvsnzQrXQ_0-5-rgb_front.mp4
+   📊 Sampled 75 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112] (video total: 113, fps: 24.00)
+   ✅ Loaded 75 frames
+
+──────────────────────────────────────────────────────────────────────
+[6/15] G3RvsnzQrXQ_0-5-rgb_front.mp4
+Ground truth: Now we're ready to make the body of our spider.
+Prediction:   And now we're going to get our "G" wings" part of the movement."
+✅ Partial match (has some words)
+
+Evaluating:  40%|████      | 6/15 [00:30<00:41,  4.64s/it]
+📹 [7/15] Loading video: fzueHkUDyhE_1-8-rgb_front.mp4
+   📊 Sampled 110 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164] (video total: 166, fps: 24.00)
+   ✅ Loaded 110 frames
+
+──────────────────────────────────────────────────────────────────────
+[7/15] fzueHkUDyhE_1-8-rgb_front.mp4
+Ground truth: We had a banked track the actually had to take from arena to arena set it up and tear it down.
+Prediction:   I'm here with a team and we're here to watch as well as the people on the other side.
+✅ Partial match (has some words)
+
+Evaluating:  47%|████▋     | 7/15 [00:36<00:40,  5.09s/it]
+📹 [8/15] Loading video: G19uBylwQww_13-2-rgb_front.mp4
+   📊 Sampled 120 frames: [1, 4, 7, 10, 13, 17, 20, 23, 26, 31, 34, 37, 40, 43, 47, 50, 53, 56, 61, 64, 67, 70, 73, 77, 80, 83, 86, 91, 94, 97, 100, 104, 107, 110, 113, 116, 121, 124, 127, 130, 134, 137, 140, 143, 146, 151, 154, 157, 160, 164, 167, 170, 173, 178, 181, 184, 187, 190, 194, 197, 200, 203, 208, 211, 214, 217, 220, 224, 227, 230, 233, 238, 241, 244, 247, 251, 254, 257, 260, 263, 268, 271, 274, 277, 281, 284, 287, 290, 293, 298, 301, 304, 307, 311, 314, 317, 320, 325, 328, 331, 334, 337, 341, 344, 347, 350, 355, 358, 361, 364, 367, 371, 374, 377, 380, 385, 388, 391, 394, 398] (video total: 400, fps: 24.00)
+   ✅ Loaded 120 frames
+
+──────────────────────────────────────────────────────────────────────
+[8/15] G19uBylwQww_13-2-rgb_front.mp4
+Ground truth: "Oops, let's get our tip right".
+Prediction:   But again, it's a little more advanced but you can still make it a little more challenging but you can get away from that.
+✅ Partial match (has some words)
+
+Evaluating:  53%|█████▎    | 8/15 [00:44<00:40,  5.76s/it]
+📹 [9/15] Loading video: g3jQ5ecjGz8_8-3-rgb_front.mp4
+   📊 Sampled 120 frames: [1, 4, 7, 11, 14, 17, 22, 25, 29, 32, 35, 40, 43, 46, 50, 53, 58, 61, 64, 68, 71, 74, 79, 82, 86, 89, 92, 97, 100, 103, 107, 110, 115, 118, 121, 125, 128, 131, 136, 139, 143, 146, 149, 154, 157, 161, 164, 167, 172, 175, 178, 182, 185, 190, 193, 196, 200, 203, 206, 211, 214, 218, 221, 224, 229, 232, 235, 239, 242, 247, 250, 253, 257, 260, 263, 268, 271, 275, 278, 281, 286, 289, 293, 296, 299, 304, 307, 310, 314, 317, 322, 325, 328, 332, 335, 338, 343, 346, 350, 353, 356, 361, 364, 367, 371, 374, 379, 382, 385, 389, 392, 395, 400, 403, 407, 410, 413, 418, 421, 425] (video total: 426, fps: 24.00)
+   ✅ Loaded 120 frames
+
+──────────────────────────────────────────────────────────────────────
+[9/15] g3jQ5ecjGz8_8-3-rgb_front.mp4
+Ground truth: So I've shot him, and now I'm supposed to take his keycard and his clothes, and the keycard's here on the ground, so I'll pick that up, and then, go over here to the chemist, and you can see that the B button says "Suit Chemist."
+Prediction:   So, when you go to a wedding dress, you want to make sure that you put it in the appropriate place first.
+✅ Partial match (has some words)
+
+Evaluating:  60%|██████    | 9/15 [00:51<00:36,  6.14s/it]
+📹 [10/15] Loading video: FzOQMA-CVPc_2-2-rgb_front.mp4
+   📊 Sampled 120 frames: [1, 2, 5, 8, 10, 13, 16, 17, 20, 23, 25, 28, 31, 32, 35, 38, 40, 43, 46, 47, 50, 53, 55, 58, 61, 64, 65, 68, 71, 73, 76, 79, 80, 83, 86, 88, 91, 94, 95, 98, 101, 103, 106, 109, 110, 113, 116, 118, 121, 124, 127, 128, 131, 134, 136, 139, 142, 143, 146, 149, 151, 154, 157, 158, 161, 164, 166, 169, 172, 173, 176, 179, 182, 184, 187, 190, 191, 194, 197, 199, 202, 205, 206, 209, 212, 214, 217, 220, 221, 224, 227, 229, 232, 235, 236, 239, 242, 245, 247, 250, 253, 254, 257, 260, 262, 265, 268, 269, 272, 275, 277, 280, 283, 284, 287, 290, 292, 295, 298, 301] (video total: 302, fps: 24.00)
+   ✅ Loaded 120 frames
+
+──────────────────────────────────────────────────────────────────────
+[10/15] FzOQMA-CVPc_2-2-rgb_front.mp4
+Ground truth: So just be relaxed and have, just do whatever you need to do to make your guest have a good time.
+Prediction:   So, as I mentioned before, I'm going to go ahead and have it set up on me, and I'll just set it up at the same time.
+✅ Partial match (has some words)
+
+Evaluating:  67%|██████▋   | 10/15 [00:58<00:33,  6.68s/it]
+📹 [11/15] Loading video: G2hnUeetWcc_20-5-rgb_front.mp4
+   📊 Sampled 119 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178] (video total: 179, fps: 24.00)
+   ✅ Loaded 119 frames
+
+Evaluating:  73%|███████▎  | 11/15 [01:05<00:27,  6.77s/it]
+📹 [12/15] Loading video: g0t4Wz5qsT8_13-8-rgb_front.mp4
+   📊 Sampled 120 frames: [1, 2, 5, 7, 10, 13, 14, 17, 19, 22, 25, 26, 29, 31, 34, 37, 38, 41, 44, 46, 49, 50, 53, 56, 58, 61, 62, 65, 68, 70, 73, 76, 77, 80, 82, 85, 88, 89, 92, 94, 97, 100, 101, 104, 106, 109, 112, 113, 116, 119, 121, 124, 125, 128, 131, 133, 136, 137, 140, 143, 145, 148, 151, 152, 155, 157, 160, 163, 164, 167, 169, 172, 175, 176, 179, 182, 184, 187, 188, 191, 194, 196, 199, 200, 203, 206, 208, 211, 212, 215, 218, 220, 223, 226, 227, 230, 232, 235, 238, 239, 242, 244, 247, 250, 251, 254, 257, 259, 262, 263, 266, 269, 271, 274, 275, 278, 281, 283, 286, 289] (video total: 290, fps: 24.00)
+   ✅ Loaded 120 frames
+
+Evaluating:  80%|████████  | 12/15 [01:14<00:21,  7.30s/it]
+📹 [13/15] Loading video: g1xdqxCZxTg_11-3-rgb_front.mp4
+   📊 Sampled 32 frames: [0, 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 45] (video total: 46, fps: 24.00)
+   ✅ Loaded 32 frames
+
+Evaluating:  87%|████████▋ | 13/15 [01:15<00:11,  5.52s/it]
+📹 [14/15] Loading video: FZd8Iv9ACVw_7-8-rgb_front.mp4
+   📊 Sampled 78 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116] (video total: 118, fps: 24.00)
+   ✅ Loaded 78 frames
+
+Evaluating:  93%|█████████▎| 14/15 [01:19<00:05,  5.06s/it]
+📹 [15/15] Loading video: g0fgci8L_rc_2-8-rgb_front.mp4
+   📊 Sampled 53 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79] (video total: 80, fps: 24.00)
+   ✅ Loaded 53 frames
+
+Evaluating: 100%|██████████| 15/15 [01:22<00:00,  4.31s/it]
+Evaluating: 100%|██████████| 15/15 [01:22<00:00,  5.49s/it]
+
+======================================================================
+✅ Results saved: /local1/mhu/sign_language_llm/outputs/internvl_eval/internvl_results_20251216_142447.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+2025-12-16 14:24:48.740737: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-12-16 14:24:48.781238: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-12-16 14:24:50.767874: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Attempting to load BLEURT-20 metric...
+
+Computing checksums: 100%|██████████| 1/1 [00:07<00:00,  7.81s/it]
+Computing checksums: 100%|██████████| 1/1 [00:07<00:00,  7.81s/it]
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1765923901.900479 2595739 gpu_device.cc:2020] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 41687 MB memory:  -> device: 0, name: NVIDIA RTX A6000, pci bus id: 0000:1a:00.0, compute capability: 8.6
+✅ BLEURT-20 metric loaded successfully
+
+============================================================
+EVALUATION RESULTS - InternVL (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.1831
+  Precision:        0.2076
+  Recall:           0.1821
+  ROUGE-L F1:       0.1477
+  BLEURT-20 Score:  0.3004
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.2044
+  BLEU2: 0.0366
+  BLEU3: 0.0133
+  BLEU4: 0.0068
+
+📋 Summary:
+  Total Samples:    15
+============================================================
+
+📊 Metrics saved: /local1/mhu/sign_language_llm/outputs/internvl_eval/metrics_20251216_142447.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 15
+   Successful: 15
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+
+
+✅ Evaluation completed successfully!
+📁 Results saved to: /local1/mhu/sign_language_llm/outputs/internvl_eval/
+📝 Log file: /local1/mhu/sign_language_llm/outputs/internvl_eval//evaluation_20251216_142319.log
