@@ -1470,8 +1470,9 @@ def main():
                 config.llm_config.elementwise_attn_output_gate = model_args.elementwise_attn_output_gate
                 gate_type = "headwise" if model_args.headwise_attn_output_gate else "elementwise"
                 logger.info(f'✅ Enabled {gate_type} attention output gating')
-            # InternLM2 uses config.bias (not qkv_bias) - no need to set qkv_bias
-            # config.bias is already set from the pretrained model config
+            # Set qkv_bias
+            config.llm_config.qkv_bias = model_args.qkv_bias
+            logger.info(f'✅ Set qkv_bias to {model_args.qkv_bias}')
         elif config.llm_config.model_type == 'qwen2':   ### for 1B or 4B model
             config.llm_config._attn_implementation = 'flash_attention_2'  # for Qwen2
             logger.info('Using flash_attention_2 for Qwen2')
@@ -1516,9 +1517,46 @@ def main():
             model_args.model_name_or_path, torch_dtype=torch.bfloat16, config=config,
             ignore_mismatched_sizes=ignore_mismatched)
         
-        # For InternLM2: wqkv.bias and wo.bias are controlled by config.bias (not qkv_bias)
-        # config.bias is already set from the pretrained model config, so no manual initialization needed
-        # For Qwen2: q_proj.bias, k_proj.bias, v_proj.bias, o_proj.bias (handled below)
+        # Initialize wqkv.bias and wo.bias if qkv_bias is enabled (before loading weights)
+        # For InternLM2: wqkv.bias and wo.bias
+        # For Qwen2: q_proj.bias, k_proj.bias, v_proj.bias, o_proj.bias
+        if config.llm_config.qkv_bias and config.llm_config.model_type == 'internlm2':
+            logger.info('Initializing wqkv.bias and wo.bias (before loading weights)...')
+            from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+            import contextlib
+            try:
+                from deepspeed import zero
+                gather_context = zero.GatheredParameters
+            except ImportError:
+                gather_context = contextlib.nullcontext
+            
+            bias_init_count = 0
+            for i, layer in enumerate(model.language_model.model.layers):
+                attn = layer.attention
+                if isinstance(attn, (InternLM2Attention, InternLM2FlashAttention2)):
+                    with gather_context([attn.wqkv.bias, attn.wo.bias]):
+                        with torch.no_grad():
+                            # Initialize wqkv.bias to 0
+                            if attn.wqkv.bias is not None:
+                                # Check for NaN/Inf and initialize
+                                if torch.isnan(attn.wqkv.bias).any() or torch.isinf(attn.wqkv.bias).any():
+                                    attn.wqkv.bias.zero_()
+                                    logger.warning(f'Layer {i}: wqkv.bias contained NaN/Inf! Initialized to 0.')
+                                else:
+                                    attn.wqkv.bias.zero_()
+                                bias_init_count += 1
+                            
+                            # Initialize wo.bias to 0
+                            if attn.wo.bias is not None:
+                                # Check for NaN/Inf and initialize
+                                if torch.isnan(attn.wo.bias).any() or torch.isinf(attn.wo.bias).any():
+                                    attn.wo.bias.zero_()
+                                    logger.warning(f'Layer {i}: wo.bias contained NaN/Inf! Initialized to 0.')
+                                else:
+                                    attn.wo.bias.zero_()
+            
+            if bias_init_count > 0:
+                logger.info(f'✅ Initialized wqkv.bias and wo.bias for {bias_init_count} layers')
         
         # Initialize q_proj/k_proj/v_proj/o_proj.bias for Qwen2
         # Note: q_proj/k_proj/v_proj always have bias=True (matching original Qwen2)
@@ -1999,7 +2037,7 @@ def main():
                                                     else:
                                                         loaded_count += 1
                                                     
-                                                    # Load q_proj.bias from pretrained model (if exists)  otherwise loss high, not sure why MHU 1216
+                                                    # Load q_proj.bias from pretrained model (if exists)
                                                     bias_key = f'language_model.model.layers.{i}.self_attn.q_proj.bias'
                                                     if bias_key in pretrained_state_dict and attn.q_proj.bias is not None:
                                                         pretrained_q_bias = pretrained_state_dict[bias_key].to(dtype=torch.bfloat16)
@@ -2198,8 +2236,44 @@ def main():
             config=llm_config, trust_remote_code=True,
             ignore_mismatched_sizes=ignore_mismatched)
         
-        # For InternLM2: wqkv.bias and wo.bias are controlled by config.bias (not qkv_bias)
-        # config.bias is already set from the pretrained model config, so no manual initialization needed
+        # Initialize wqkv.bias and wo.bias if qkv_bias is enabled
+        if llm_config.qkv_bias and llm_config.model_type == 'internlm2':
+            logger.info('Initializing wqkv.bias and wo.bias...')
+            from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+            import contextlib
+            try:
+                from deepspeed import zero
+                gather_context = zero.GatheredParameters
+            except ImportError:
+                gather_context = contextlib.nullcontext
+            
+            bias_init_count = 0
+            for i, layer in enumerate(llm.model.layers):
+                attn = layer.attention
+                if isinstance(attn, (InternLM2Attention, InternLM2FlashAttention2)):
+                    with gather_context([attn.wqkv.bias, attn.wo.bias]):
+                        with torch.no_grad():
+                            # Initialize wqkv.bias to 0
+                            if attn.wqkv.bias is not None:
+                                # Check for NaN/Inf and initialize
+                                if torch.isnan(attn.wqkv.bias).any() or torch.isinf(attn.wqkv.bias).any():
+                                    attn.wqkv.bias.zero_()
+                                    logger.warning(f'Layer {i}: wqkv.bias contained NaN/Inf! Initialized to 0.')
+                                else:
+                                    attn.wqkv.bias.zero_()
+                                bias_init_count += 1
+                            
+                            # Initialize wo.bias to 0
+                            if attn.wo.bias is not None:
+                                # Check for NaN/Inf and initialize
+                                if torch.isnan(attn.wo.bias).any() or torch.isinf(attn.wo.bias).any():
+                                    attn.wo.bias.zero_()
+                                    logger.warning(f'Layer {i}: wo.bias contained NaN/Inf! Initialized to 0.')
+                                else:
+                                    attn.wo.bias.zero_()
+            
+            if bias_init_count > 0:
+                logger.info(f'✅ Initialized wqkv.bias and wo.bias for {bias_init_count} layers')
         
         # Gate parameters are automatically initialized by _init_weights (same as Qwen3)
         # No manual initialization needed - post_init() will call _init_weights for all modules
@@ -2306,9 +2380,58 @@ def main():
         # Ensure bias parameters are trainable when using LoRA
         # Note: PEFT LoRA defaults to bias="none" (frozen), but since qkv_bias creates NEW bias
         # parameters (initialized to 0), we need to train them. If bias was part of pretrained
-        # For InternLM2: wqkv.bias and wo.bias are controlled by config.bias (not qkv_bias)
-        # If config.bias is True, bias parameters will be trainable automatically
-        # For Qwen2: q_proj.bias, k_proj.bias, v_proj.bias, o_proj.bias (handled below)
+        # weights, you might want to keep them frozen. Adjust this logic as needed.
+        # For InternLM2: wqkv.bias and wo.bias
+        # For Qwen2: q_proj.bias, k_proj.bias, v_proj.bias, o_proj.bias
+        if model_args.qkv_bias and model.config.llm_config.model_type == 'internlm2':
+            logger.info('Ensuring wqkv.bias and wo.bias are trainable with LoRA...')
+            logger.info('  (These are NEW bias parameters initialized to 0, so they need training)')
+            from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+            
+            # Handle PEFT-wrapped model: get the actual model from base_model
+            # When using LoRA, model.language_model is wrapped by PEFT, so we need to access base_model.model
+            try:
+                from peft import PeftModel
+                if isinstance(model.language_model, PeftModel):
+                    # PEFT wraps the model, access via base_model.model
+                    # base_model is InternLM2ForCausalLM, so we need base_model.model to get InternLM2Model
+                    base_model = model.language_model.base_model
+                    # InternLM2ForCausalLM has a 'model' attribute that contains InternLM2Model
+                    actual_model = base_model.model
+                else:
+                    # Not wrapped, use directly
+                    actual_model = model.language_model.model
+            except (ImportError, AttributeError) as e:
+                # Fallback: try direct access
+                logger.warning(f'Failed to access PEFT model structure: {e}, trying direct access')
+                actual_model = model.language_model.model
+            
+            # Ensure we have the model with layers attribute
+            # actual_model should be InternLM2Model which has 'layers' attribute
+            if not hasattr(actual_model, 'layers'):
+                # If actual_model is InternLM2ForCausalLM, try to get model from it
+                if hasattr(actual_model, 'model'):
+                    actual_model = actual_model.model
+                else:
+                    logger.error(f'actual_model type: {type(actual_model)}, attributes: {[a for a in dir(actual_model) if not a.startswith("_")][:10]}')
+                    raise AttributeError(f'actual_model ({type(actual_model)}) does not have "layers" attribute')
+            
+            bias_trainable_count = 0
+            for i, layer in enumerate(actual_model.layers):
+                attn = layer.attention
+                if isinstance(attn, (InternLM2Attention, InternLM2FlashAttention2)):
+                    # Ensure wqkv.bias is trainable
+                    if attn.wqkv.bias is not None:
+                        attn.wqkv.bias.requires_grad = True
+                        bias_trainable_count += 1
+                    # Ensure wo.bias is trainable
+                    if attn.wo.bias is not None:
+                        attn.wo.bias.requires_grad = True
+            
+            if bias_trainable_count > 0:
+                logger.info(f'✅ Set wqkv.bias and wo.bias to trainable for {bias_trainable_count} layers (LoRA mode)')
+            else:
+                logger.warning('⚠️  No bias parameters found to make trainable')
         
         # Ensure Qwen2 bias parameters are trainable when using LoRA
         if model_args.qkv_bias and model.config.llm_config.model_type == 'qwen2' and model_args.use_llm_lora:

@@ -16,7 +16,7 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /local1/mhu/sign_language_llm/InternVL
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"0,1"}  # Default: use GPU 0 and 1
+GPU_IDS=${GPU_IDS:-"1"}  # Default: use GPU 0 and 1
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
@@ -29,7 +29,7 @@ META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_m
 IMAGE_ROOT="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
 # Optimized training configuration
-GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-8}
+GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-4}
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
 

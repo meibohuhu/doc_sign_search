@@ -34,29 +34,62 @@ if '/code/doc_sign_search/InternVL' not in sys.path:
     sys.path.insert(0, '/code/doc_sign_search/InternVL')
 
 from internvl.model.internvl_chat import InternVLChatModel, InternVLChatConfig
-# CRITICAL: Import q_proj/k_proj/v_proj gate version for gated attention checkpoints (same as internvl_chat_finetune_gate.py)
+# CRITICAL: Import querygate_withbias version (uses q_proj/k_proj/v_proj format)
 try:
-    # Priority 1: q_proj/k_proj/v_proj gate version (used by internvl_chat_finetune_gate.py)
-    from internvl.model.internlm2.modeling_internlm2_gate import InternLM2ForCausalLM as InternLM2ForCausalLM_Gate
+    # Priority 1: Use modeling_internlm2_querygate_withbias.py (used by internvl_chat_finetune_querygate_withbias.py)
+    from internvl.model.internlm2.modeling_internlm2_querygate_withbias import InternLM2ForCausalLM as InternLM2ForCausalLM_QueryGateWithBias
     import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
-    modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM_Gate
-    print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate")
+    modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM_QueryGateWithBias
+    print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_querygate_withbias")
     USE_GATE_VERSION = True
-    USE_WQKV_VERSION = False
+    USE_WQKV_VERSION = False  # querygate_withbias uses q_proj/k_proj/v_proj format
+    print("   🔍 Detected: modeling_internlm2_querygate_withbias uses q_proj/k_proj/v_proj format")
 except ImportError:
     try:
-        # Fallback to wqkv gate version (used by internvl_chat_finetune_wqkv.py)
-        from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2ForCausalLM as InternLM2ForCausalLM_GateWQKV
+        # Fallback 1: Try modeling_internlm2_gate.py (may use wqkv or q_proj/k_proj/v_proj)
+        from internvl.model.internlm2.modeling_internlm2_gate import InternLM2ForCausalLM as InternLM2ForCausalLM_Gate
         import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
-        modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM_GateWQKV
-        print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate_wqkv")
+        modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM_Gate
+        print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate")
+        
+        # Detect whether the gate version uses wqkv or q_proj/k_proj/v_proj
+        from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+        from internvl.model.internlm2.configuration_internlm2 import InternLM2Config
+        dummy_config = InternLM2Config(
+            hidden_size=2048,
+            num_attention_heads=16,
+            num_key_value_heads=8,
+            head_dim=128,
+            headwise_attn_output_gate=True,
+        )
+        dummy_attn = InternLM2Attention(dummy_config)
+        
+        if hasattr(dummy_attn, 'wqkv') and not hasattr(dummy_attn, 'q_proj'):
+            USE_WQKV_VERSION = True
+            print("   🔍 Detected: modeling_internlm2_gate uses wqkv format")
+        elif hasattr(dummy_attn, 'q_proj') and hasattr(dummy_attn, 'k_proj') and hasattr(dummy_attn, 'v_proj'):
+            USE_WQKV_VERSION = False
+            print("   🔍 Detected: modeling_internlm2_gate uses q_proj/k_proj/v_proj format")
+        else:
+            USE_WQKV_VERSION = hasattr(dummy_attn, 'wqkv')
+            print(f"   🔍 Auto-detected: USE_WQKV_VERSION={USE_WQKV_VERSION}")
+        
         USE_GATE_VERSION = True
-        USE_WQKV_VERSION = True
+        del dummy_attn, dummy_config
     except ImportError:
-        from internvl.model.internlm2.modeling_internlm2 import InternLM2ForCausalLM
-        print("⚠️  Gate version not available, using standard InternLM2ForCausalLM")
-        USE_GATE_VERSION = False
-        USE_WQKV_VERSION = False
+        try:
+            # Fallback 2: Try wqkv gate version (used by internvl_chat_finetune_wqkv.py)
+            from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2ForCausalLM as InternLM2ForCausalLM_GateWQKV
+            import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
+            modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM_GateWQKV
+            print("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate_wqkv")
+            USE_GATE_VERSION = True
+            USE_WQKV_VERSION = True
+        except ImportError:
+            from internvl.model.internlm2.modeling_internlm2 import InternLM2ForCausalLM
+            print("⚠️  Gate version not available, using standard InternLM2ForCausalLM")
+            USE_GATE_VERSION = False
+            USE_WQKV_VERSION = False
 
 from transformers import AutoTokenizer, AutoConfig
 from internvl.train.dataset import build_transform
@@ -428,24 +461,30 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
     """
     # Detect which version based on global USE_WQKV_VERSION flag
     try:
-        from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
-        from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2Attention as InternLM2AttentionWQKV, InternLM2FlashAttention2 as InternLM2FlashAttention2WQKV
-        # Use global flag to determine which version
-        if USE_WQKV_VERSION:
-            InternLM2Attention_Class = InternLM2AttentionWQKV
-            InternLM2FlashAttention2_Class = InternLM2FlashAttention2WQKV
-        else:
-            InternLM2Attention_Class = InternLM2Attention
-            InternLM2FlashAttention2_Class = InternLM2FlashAttention2
+        # Priority 1: Try querygate_withbias version (uses q_proj/k_proj/v_proj)
+        from internvl.model.internlm2.modeling_internlm2_querygate_withbias import InternLM2Attention as InternLM2Attention_QueryGateWithBias, InternLM2FlashAttention2 as InternLM2FlashAttention2_QueryGateWithBias
+        InternLM2Attention_Class = InternLM2Attention_QueryGateWithBias
+        InternLM2FlashAttention2_Class = InternLM2FlashAttention2_QueryGateWithBias
     except ImportError:
         try:
+            # Fallback 1: Try gate version (may use wqkv or q_proj/k_proj/v_proj)
             from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
-            InternLM2Attention_Class = InternLM2Attention
-            InternLM2FlashAttention2_Class = InternLM2FlashAttention2
-            USE_WQKV_VERSION_LOCAL = False
+            from internvl.model.internlm2.modeling_internlm2_gate_wqkv import InternLM2Attention as InternLM2AttentionWQKV, InternLM2FlashAttention2 as InternLM2FlashAttention2WQKV
+            # Use global flag to determine which version
+            if USE_WQKV_VERSION:
+                InternLM2Attention_Class = InternLM2AttentionWQKV
+                InternLM2FlashAttention2_Class = InternLM2FlashAttention2WQKV
+            else:
+                InternLM2Attention_Class = InternLM2Attention
+                InternLM2FlashAttention2_Class = InternLM2FlashAttention2
         except ImportError:
-            print("   ⚠️  Gate version not available")
-            return
+            try:
+                from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+                InternLM2Attention_Class = InternLM2Attention
+                InternLM2FlashAttention2_Class = InternLM2FlashAttention2
+            except ImportError:
+                print("   ⚠️  Gate version not available")
+                return
     
     import contextlib
     try:
@@ -512,8 +551,174 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
         if not isinstance(attn, (InternLM2Attention_Class, InternLM2FlashAttention2_Class)):
             continue
         
+        # Process wqkv weights (for wqkv version checkpoints) - check this first
+        if USE_WQKV_VERSION and hasattr(attn, 'wqkv'):
+            base_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.wqkv"
+            base_layer_key = f"{base_key_prefix}.base_layer.weight"
+            lora_a_key = f"{base_key_prefix}.lora_A.default.weight"
+            lora_b_key = f"{base_key_prefix}.lora_B.default.weight"
+            
+            # Also check for q_proj/k_proj/v_proj format (in case checkpoint is q_proj/k_proj/v_proj format)
+            q_proj_base_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.base_layer.weight"
+            k_proj_base_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.base_layer.weight"
+            v_proj_base_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.base_layer.weight"
+            
+            if base_layer_key in checkpoint_weights:
+                try:
+                    # Load base layer weight
+                    base_wqkv = checkpoint_weights[base_layer_key].to(dtype=torch.bfloat16)
+                    
+                    # Load and merge LoRA weights if they exist
+                    if lora_a_key in checkpoint_weights and lora_b_key in checkpoint_weights:
+                        lora_a = checkpoint_weights[lora_a_key].to(dtype=torch.bfloat16)
+                        lora_b = checkpoint_weights[lora_b_key].to(dtype=torch.bfloat16)
+                        # LoRA merge: base + lora_B @ lora_A (scaled by alpha/rank)
+                        # Default LoRA scaling: alpha/rank = 1.0 (assuming alpha=rank, as in training script)
+                        lora_delta = torch.matmul(lora_b, lora_a)
+                        merged_wqkv = base_wqkv + lora_delta
+                    else:
+                        merged_wqkv = base_wqkv
+                    
+                    # Check for NaN/Inf
+                    if torch.isnan(merged_wqkv).any() or torch.isinf(merged_wqkv).any():
+                        print(f"   ⚠️  Layer {i}: Merged wqkv contains NaN/Inf! Skipping...")
+                    else:
+                        # Verify shape matches wqkv (base_qkv_dim + gate_dim)
+                        expected_shape = attn.wqkv.weight.shape
+                        if merged_wqkv.shape == expected_shape:
+                            # Load directly into wqkv
+                            with gather_context([attn.wqkv.weight]):
+                                with torch.no_grad():
+                                    attn.wqkv.weight.copy_(merged_wqkv)
+                                    
+                                    # Verify and fix gate part if needed (same as training script)
+                                    headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                                    elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                                    
+                                    if headwise_gate or elementwise_gate:
+                                        base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                                        gate_dim = attn.num_heads if headwise_gate else attn.num_heads * attn.head_dim
+                                        gate_part = attn.wqkv.weight[base_qkv_dim:, :]
+                                        
+                                        # Check if gate part needs initialization
+                                        gate_mean = gate_part.mean().item()
+                                        gate_std = gate_part.std().item()
+                                        has_nan = torch.isnan(gate_part).any().item()
+                                        has_inf = torch.isinf(gate_part).any().item()
+                                        
+                                        if has_nan or has_inf or (abs(gate_mean) < 1e-6 and gate_std < 1e-6) or abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                            # Initialize gate part
+                                            initializer_range = model.config.llm_config.initializer_range
+                                            gate_part.normal_(mean=0.0, std=initializer_range)
+                                    
+                                    loaded_wqkv_count += 1
+                        else:
+                            print(f"   ⚠️  Layer {i}: wqkv shape mismatch: expected {expected_shape}, got {merged_wqkv.shape}")
+                except Exception as e:
+                    print(f"   ⚠️  Layer {i}: Failed to load wqkv LoRA weights: {e}")
+                    import traceback
+                    traceback.print_exc()
+            # Fallback: Try to merge from q_proj/k_proj/v_proj if wqkv not found
+            elif q_proj_base_key in checkpoint_weights and k_proj_base_key in checkpoint_weights and v_proj_base_key in checkpoint_weights:
+                try:
+                    print(f"   🔄 Layer {i}: wqkv not found, merging from q_proj/k_proj/v_proj...")
+                    # Load q_proj/k_proj/v_proj weights
+                    base_q_proj = checkpoint_weights[q_proj_base_key].to(dtype=torch.bfloat16)
+                    base_k_proj = checkpoint_weights[k_proj_base_key].to(dtype=torch.bfloat16)
+                    base_v_proj = checkpoint_weights[v_proj_base_key].to(dtype=torch.bfloat16)
+                    
+                    # Load and merge LoRA if exists
+                    q_proj_lora_a_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.lora_A.default.weight"
+                    q_proj_lora_b_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.lora_B.default.weight"
+                    k_proj_lora_a_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.lora_A.default.weight"
+                    k_proj_lora_b_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.lora_B.default.weight"
+                    v_proj_lora_a_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.lora_A.default.weight"
+                    v_proj_lora_b_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.lora_B.default.weight"
+                    
+                    if q_proj_lora_a_key in checkpoint_weights and q_proj_lora_b_key in checkpoint_weights:
+                        q_lora_a = checkpoint_weights[q_proj_lora_a_key].to(dtype=torch.bfloat16)
+                        q_lora_b = checkpoint_weights[q_proj_lora_b_key].to(dtype=torch.bfloat16)
+                        base_q_proj = base_q_proj + torch.matmul(q_lora_b, q_lora_a)
+                    if k_proj_lora_a_key in checkpoint_weights and k_proj_lora_b_key in checkpoint_weights:
+                        k_lora_a = checkpoint_weights[k_proj_lora_a_key].to(dtype=torch.bfloat16)
+                        k_lora_b = checkpoint_weights[k_proj_lora_b_key].to(dtype=torch.bfloat16)
+                        base_k_proj = base_k_proj + torch.matmul(k_lora_b, k_lora_a)
+                    if v_proj_lora_a_key in checkpoint_weights and v_proj_lora_b_key in checkpoint_weights:
+                        v_lora_a = checkpoint_weights[v_proj_lora_a_key].to(dtype=torch.bfloat16)
+                        v_lora_b = checkpoint_weights[v_proj_lora_b_key].to(dtype=torch.bfloat16)
+                        base_v_proj = base_v_proj + torch.matmul(v_lora_b, v_lora_a)
+                    
+                    # Extract gate part from q_proj if gating is enabled
+                    headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                    elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                    base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                    
+                    if headwise_gate or elementwise_gate:
+                        # q_proj contains query + gate, need to separate
+                        q_dim = attn.num_heads * attn.head_dim
+                        gate_dim = attn.num_heads if headwise_gate else attn.num_heads * attn.head_dim
+                        merged_q_proj = base_q_proj[:q_dim, :]  # Only query part
+                        gate_part = base_q_proj[q_dim:, :]  # Gate part
+                    else:
+                        merged_q_proj = base_q_proj
+                        gate_part = None
+                    
+                    # Merge q_proj/k_proj/v_proj into wqkv format (InternLM2's interleaved organization)
+                    # InternLM2 wqkv organization: [KV_head0: Q_groups, K, V, KV_head1: Q_groups, K, V, ...]
+                    num_key_value_groups = attn.num_key_value_groups
+                    gs = 2 + num_key_value_groups
+                    
+                    q_weights_list = []
+                    k_weights_list = []
+                    v_weights_list = []
+                    
+                    # Split q_proj by key_value_head groups
+                    q_per_kv_head = attn.num_key_value_groups * attn.head_dim
+                    for kv_head in range(attn.num_key_value_heads):
+                        q_start = kv_head * q_per_kv_head
+                        q_end = q_start + q_per_kv_head
+                        q_weights_list.append(merged_q_proj[q_start:q_end, :])
+                        k_weights_list.append(base_k_proj[kv_head * attn.head_dim:(kv_head + 1) * attn.head_dim, :])
+                        v_weights_list.append(base_v_proj[kv_head * attn.head_dim:(kv_head + 1) * attn.head_dim, :])
+                    
+                    # Interleave Q, K, V for each key_value_head
+                    wqkv_parts = []
+                    for kv_head in range(attn.num_key_value_heads):
+                        # For each Q group
+                        for q_group in range(num_key_value_groups):
+                            wqkv_parts.append(q_weights_list[kv_head][q_group * attn.head_dim:(q_group + 1) * attn.head_dim, :])
+                        # Then K and V
+                        wqkv_parts.append(k_weights_list[kv_head])
+                        wqkv_parts.append(v_weights_list[kv_head])
+                    
+                    merged_wqkv_base = torch.cat(wqkv_parts, dim=0)
+                    
+                    # Add gate part if exists
+                    if gate_part is not None:
+                        merged_wqkv = torch.cat([merged_wqkv_base, gate_part], dim=0)
+                    else:
+                        merged_wqkv = merged_wqkv_base
+                    
+                    # Check for NaN/Inf
+                    if torch.isnan(merged_wqkv).any() or torch.isinf(merged_wqkv).any():
+                        print(f"   ⚠️  Layer {i}: Merged wqkv (from q/k/v) contains NaN/Inf! Skipping...")
+                    else:
+                        expected_shape = attn.wqkv.weight.shape
+                        if merged_wqkv.shape == expected_shape:
+                            with gather_context([attn.wqkv.weight]):
+                                with torch.no_grad():
+                                    attn.wqkv.weight.copy_(merged_wqkv)
+                                    loaded_wqkv_count += 1
+                                    print(f"   ✅ Layer {i}: Successfully merged q_proj/k_proj/v_proj into wqkv")
+                        else:
+                            print(f"   ⚠️  Layer {i}: Merged wqkv shape mismatch: expected {expected_shape}, got {merged_wqkv.shape}")
+                except Exception as e:
+                    print(f"   ⚠️  Layer {i}: Failed to merge q_proj/k_proj/v_proj into wqkv: {e}")
+                    import traceback
+                    traceback.print_exc()
+        
         # Process q_proj/k_proj/v_proj weights (for internvl_chat_finetune_gate.py checkpoints)
-        if not USE_WQKV_VERSION and hasattr(attn, 'q_proj') and hasattr(attn, 'k_proj') and hasattr(attn, 'v_proj'):
+        elif not USE_WQKV_VERSION and hasattr(attn, 'q_proj') and hasattr(attn, 'k_proj') and hasattr(attn, 'v_proj'):
             # Process q_proj
             q_proj_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.q_proj"
             q_proj_base_key = f"{q_proj_key_prefix}.base_layer.weight"
@@ -597,75 +802,12 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
                 except Exception as e:
                     print(f"   ⚠️  Layer {i}: Failed to load v_proj LoRA weights: {e}")
         
-        # Process wqkv weights (for internvl_chat_finetune_wqkv.py checkpoints)
-        elif USE_WQKV_VERSION and hasattr(attn, 'wqkv'):
-            base_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.wqkv"
-            base_layer_key = f"{base_key_prefix}.base_layer.weight"
-            lora_a_key = f"{base_key_prefix}.lora_A.default.weight"
-            lora_b_key = f"{base_key_prefix}.lora_B.default.weight"
-            
-            if base_layer_key in checkpoint_weights:
-                try:
-                    # Load base layer weight
-                    base_wqkv = checkpoint_weights[base_layer_key].to(dtype=torch.bfloat16)
-                    
-                    # Load and merge LoRA weights if they exist
-                    if lora_a_key in checkpoint_weights and lora_b_key in checkpoint_weights:
-                        lora_a = checkpoint_weights[lora_a_key].to(dtype=torch.bfloat16)
-                        lora_b = checkpoint_weights[lora_b_key].to(dtype=torch.bfloat16)
-                        # LoRA merge: base + lora_B @ lora_A (scaled by alpha/rank)
-                        # Default LoRA scaling: alpha/rank = 1.0 (assuming alpha=rank, as in training script)
-                        lora_delta = torch.matmul(lora_b, lora_a)
-                        merged_wqkv = base_wqkv + lora_delta
-                    else:
-                        merged_wqkv = base_wqkv
-                    
-                    # Check for NaN/Inf
-                    if torch.isnan(merged_wqkv).any() or torch.isinf(merged_wqkv).any():
-                        print(f"   ⚠️  Layer {i}: Merged wqkv contains NaN/Inf! Skipping...")
-                    else:
-                        # Verify shape matches wqkv (base_qkv_dim + gate_dim)
-                        expected_shape = attn.wqkv.weight.shape
-                        if merged_wqkv.shape == expected_shape:
-                            # Load directly into wqkv
-                            with gather_context([attn.wqkv.weight]):
-                                with torch.no_grad():
-                                    attn.wqkv.weight.copy_(merged_wqkv)
-                                    
-                                    # Verify and fix gate part if needed (same as training script)
-                                    headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
-                                    elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
-                                    
-                                    if headwise_gate or elementwise_gate:
-                                        base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
-                                        gate_dim = attn.num_heads if headwise_gate else attn.num_heads * attn.head_dim
-                                        gate_part = attn.wqkv.weight[base_qkv_dim:, :]
-                                        
-                                        # Check if gate part needs initialization
-                                        gate_mean = gate_part.mean().item()
-                                        gate_std = gate_part.std().item()
-                                        has_nan = torch.isnan(gate_part).any().item()
-                                        has_inf = torch.isinf(gate_part).any().item()
-                                        
-                                        if has_nan or has_inf or (abs(gate_mean) < 1e-6 and gate_std < 1e-6) or abs(gate_mean) > 0.1 or gate_std > 0.1:
-                                            # Initialize gate part
-                                            initializer_range = model.config.llm_config.initializer_range
-                                            gate_part.normal_(mean=0.0, std=initializer_range)
-                                    
-                                    loaded_wqkv_count += 1
-                        else:
-                            print(f"   ⚠️  Layer {i}: wqkv shape mismatch: expected {expected_shape}, got {merged_wqkv.shape}")
-                except Exception as e:
-                    print(f"   ⚠️  Layer {i}: Failed to load wqkv LoRA weights: {e}")
-                    import traceback
-                    traceback.print_exc()
-        
         # Process wo (output projection) weights
         wo_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.wo"
         wo_base_key = f"{wo_key_prefix}.base_layer.weight"
         wo_lora_a_key = f"{wo_key_prefix}.lora_A.default.weight"
         wo_lora_b_key = f"{wo_key_prefix}.lora_B.default.weight"
-        
+            
         if wo_base_key in checkpoint_weights and hasattr(attn, 'wo'):
             try:
                 base_wo = checkpoint_weights[wo_base_key].to(dtype=torch.bfloat16)
@@ -705,6 +847,425 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
     total_loaded = (loaded_wqkv_count if USE_WQKV_VERSION else (loaded_q_proj_count + loaded_k_proj_count + loaded_v_proj_count)) + loaded_wo_count
     if total_loaded == 0:
         print(f"   ⚠️  No LoRA weights were loaded")
+
+
+def _load_direct_weights(model, checkpoint_weights, checkpoint_path):
+    """
+    Load direct weights (non-LoRA) from checkpoint.
+    Supports both q_proj/k_proj/v_proj format and wqkv format.
+    If checkpoint is q_proj/k_proj/v_proj format but model is wqkv format, merge them.
+    
+    Args:
+        model: InternVLChatModel with gate version
+        checkpoint_weights: Dictionary of weights from model.safetensors
+        checkpoint_path: Path to checkpoint directory
+    """
+    try:
+        # Priority 1: Try querygate_withbias version (uses q_proj/k_proj/v_proj)
+        from internvl.model.internlm2.modeling_internlm2_querygate_withbias import InternLM2Attention as InternLM2Attention_QueryGateWithBias, InternLM2FlashAttention2 as InternLM2FlashAttention2_QueryGateWithBias
+        InternLM2Attention_Class = InternLM2Attention_QueryGateWithBias
+        InternLM2FlashAttention2_Class = InternLM2FlashAttention2_QueryGateWithBias
+    except ImportError:
+        try:
+            # Fallback: Try gate version
+            from internvl.model.internlm2.modeling_internlm2_gate import InternLM2Attention, InternLM2FlashAttention2
+            InternLM2Attention_Class = InternLM2Attention
+            InternLM2FlashAttention2_Class = InternLM2FlashAttention2
+        except ImportError:
+            print("   ⚠️  Gate version not available")
+            return
+    
+    import contextlib
+    try:
+        from deepspeed import zero
+        gather_context = zero.GatheredParameters
+    except ImportError:
+        gather_context = contextlib.nullcontext
+    
+    # Get layers
+    try:
+        if hasattr(model.language_model, 'model'):
+            causal_lm_model = getattr(model.language_model, 'model')
+        elif hasattr(model.language_model, 'base_model'):
+            causal_lm_model = getattr(model.language_model, 'base_model')
+        else:
+            causal_lm_model = model.language_model
+        
+        if hasattr(causal_lm_model, 'model'):
+            layers_model = getattr(causal_lm_model, 'model')
+            if hasattr(layers_model, 'layers'):
+                layers = layers_model.layers
+            else:
+                raise AttributeError(f"layers_model ({type(layers_model)}) does not have 'layers' attribute")
+        else:
+            if hasattr(causal_lm_model, 'layers'):
+                layers = causal_lm_model.layers
+            else:
+                raise AttributeError(f"causal_lm_model ({type(causal_lm_model)}) does not have 'model' or 'layers' attribute")
+    except AttributeError as e:
+        print(f"   ❌ Error accessing layers: {e}")
+        return
+    
+    loaded_wqkv_count = 0
+    loaded_q_proj_count = 0
+    loaded_k_proj_count = 0
+    loaded_v_proj_count = 0
+    loaded_wo_count = 0
+    
+    for i, layer in enumerate(layers):
+        attn = layer.attention
+        if not isinstance(attn, (InternLM2Attention_Class, InternLM2FlashAttention2_Class)):
+            continue
+        
+        # Check for direct weight format (non-LoRA)
+        q_proj_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.weight"
+        k_proj_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.weight"
+        v_proj_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.weight"
+        wqkv_key = f"language_model.base_model.model.model.layers.{i}.attention.wqkv.weight"
+        wo_key = f"language_model.base_model.model.model.layers.{i}.attention.wo.weight"
+        
+        # Also check for bias (if qkv_bias is enabled)
+        q_proj_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.bias"
+        k_proj_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.bias"
+        v_proj_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.bias"
+        wqkv_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.wqkv.bias"
+        
+        # Process wqkv weights (if checkpoint has wqkv and model uses wqkv)
+        if USE_WQKV_VERSION and hasattr(attn, 'wqkv') and wqkv_key in checkpoint_weights:
+            try:
+                wqkv_weight = checkpoint_weights[wqkv_key].to(dtype=torch.bfloat16)
+                if not (torch.isnan(wqkv_weight).any() or torch.isinf(wqkv_weight).any()):
+                    if wqkv_weight.shape == attn.wqkv.weight.shape:
+                        with gather_context([attn.wqkv.weight]):
+                            with torch.no_grad():
+                                attn.wqkv.weight.copy_(wqkv_weight)
+                                
+                                # Verify and fix gate part if needed
+                                headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                                elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                                
+                                if headwise_gate or elementwise_gate:
+                                    base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                                    gate_dim = attn.num_heads if headwise_gate else attn.num_heads * attn.head_dim
+                                    gate_part = attn.wqkv.weight[base_qkv_dim:, :]
+                                    
+                                    gate_mean = gate_part.mean().item()
+                                    gate_std = gate_part.std().item()
+                                    has_nan = torch.isnan(gate_part).any().item()
+                                    has_inf = torch.isinf(gate_part).any().item()
+                                    
+                                    if has_nan or has_inf or (abs(gate_mean) < 1e-6 and gate_std < 1e-6) or abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                        initializer_range = model.config.llm_config.initializer_range
+                                        gate_part.normal_(mean=0.0, std=initializer_range)
+                                
+                                loaded_wqkv_count += 1
+            except Exception as e:
+                print(f"   ⚠️  Layer {i}: Failed to load wqkv weight: {e}")
+        
+        # Process q_proj/k_proj/v_proj weights (if checkpoint has them)
+        elif q_proj_key in checkpoint_weights and k_proj_key in checkpoint_weights and v_proj_key in checkpoint_weights:
+            try:
+                q_proj_weight = checkpoint_weights[q_proj_key].to(dtype=torch.bfloat16)
+                k_proj_weight = checkpoint_weights[k_proj_key].to(dtype=torch.bfloat16)
+                v_proj_weight = checkpoint_weights[v_proj_key].to(dtype=torch.bfloat16)
+                
+                # Load bias if exists
+                q_proj_bias = checkpoint_weights.get(q_proj_bias_key, None)
+                k_proj_bias = checkpoint_weights.get(k_proj_bias_key, None)
+                v_proj_bias = checkpoint_weights.get(v_proj_bias_key, None)
+                if q_proj_bias is not None:
+                    q_proj_bias = q_proj_bias.to(dtype=torch.bfloat16)
+                if k_proj_bias is not None:
+                    k_proj_bias = k_proj_bias.to(dtype=torch.bfloat16)
+                if v_proj_bias is not None:
+                    v_proj_bias = v_proj_bias.to(dtype=torch.bfloat16)
+                
+                # If model uses wqkv, merge q_proj/k_proj/v_proj into wqkv
+                if USE_WQKV_VERSION and hasattr(attn, 'wqkv'):
+                    if i == 0:  # Only print for first layer to avoid spam
+                        print(f"   🔄 Layer {i}: Merging q_proj/k_proj/v_proj into wqkv...")
+                    # Extract gate part from q_proj if gating is enabled
+                    headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                    elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                    base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                    
+                    if headwise_gate or elementwise_gate:
+                        q_dim = attn.num_heads * attn.head_dim
+                        gate_dim = attn.num_heads if headwise_gate else attn.num_heads * attn.head_dim
+                        merged_q_proj = q_proj_weight[:q_dim, :]  # Only query part
+                        gate_part = q_proj_weight[q_dim:, :]  # Gate part
+                    else:
+                        merged_q_proj = q_proj_weight
+                        gate_part = None
+                    
+                    # Merge q_proj/k_proj/v_proj into wqkv format (InternLM2's interleaved organization)
+                    # This is the REVERSE of the split logic in training script
+                    # Training script splits wqkv into q_proj/k_proj/v_proj by:
+                    # 1. For each kv_head: extract Q_groups (num_key_value_groups groups), then K, then V
+                    # 2. Concatenate all Q weights, all K weights, all V weights
+                    # So q_proj is organized as: [KV_head0_Q_groups, KV_head1_Q_groups, ...]
+                    # To merge back, we need to:
+                    # 1. Split q_proj by kv_head (each kv_head has num_key_value_groups * head_dim rows)
+                    # 2. For each kv_head, interleave: [Q_group1, Q_group2, ..., Q_groupN, K, V]
+                    
+                    num_key_value_groups = attn.num_key_value_groups
+                    gs = 2 + num_key_value_groups
+                    
+                    # Verify dimensions
+                    q_dim_expected = attn.num_heads * attn.head_dim
+                    k_dim_expected = attn.num_key_value_heads * attn.head_dim
+                    v_dim_expected = attn.num_key_value_heads * attn.head_dim
+                    
+                    if merged_q_proj.shape[0] != q_dim_expected:
+                        print(f"   ⚠️  Layer {i}: q_proj dimension mismatch: expected {q_dim_expected}, got {merged_q_proj.shape[0]}")
+                        continue
+                    if k_proj_weight.shape[0] != k_dim_expected:
+                        print(f"   ⚠️  Layer {i}: k_proj dimension mismatch: expected {k_dim_expected}, got {k_proj_weight.shape[0]}")
+                        continue
+                    if v_proj_weight.shape[0] != v_dim_expected:
+                        print(f"   ⚠️  Layer {i}: v_proj dimension mismatch: expected {v_dim_expected}, got {v_proj_weight.shape[0]}")
+                        continue
+                    
+                    q_weights_list = []
+                    k_weights_list = []
+                    v_weights_list = []
+                    
+                    # Split q_proj by key_value_head groups
+                    # q_proj is organized as: [KV_head0_Q_groups, KV_head1_Q_groups, ...]
+                    # Each kv_head has num_key_value_groups * head_dim rows
+                    q_per_kv_head = attn.num_key_value_groups * attn.head_dim
+                    for kv_head in range(attn.num_key_value_heads):
+                        q_start = kv_head * q_per_kv_head
+                        q_end = q_start + q_per_kv_head
+                        q_weights_list.append(merged_q_proj[q_start:q_end, :])
+                        k_weights_list.append(k_proj_weight[kv_head * attn.head_dim:(kv_head + 1) * attn.head_dim, :])
+                        v_weights_list.append(v_proj_weight[kv_head * attn.head_dim:(kv_head + 1) * attn.head_dim, :])
+                    
+                    # Interleave Q, K, V for each key_value_head (REVERSE of training script's extraction)
+                    # Training script extracts: [Q_group1, Q_group2, ..., Q_groupN, K, V] for each kv_head
+                    # So we need to reconstruct: [Q_group1, Q_group2, ..., Q_groupN, K, V] for each kv_head
+                    wqkv_parts = []
+                    for kv_head in range(attn.num_key_value_heads):
+                        # For each Q group (in order)
+                        for q_group in range(num_key_value_groups):
+                            q_group_start = q_group * attn.head_dim
+                            q_group_end = q_group_start + attn.head_dim
+                            wqkv_parts.append(q_weights_list[kv_head][q_group_start:q_group_end, :])
+                        # Then K (second-to-last in wqkv, which is gs - 2)
+                        wqkv_parts.append(k_weights_list[kv_head])
+                        # Then V (last in wqkv, which is gs - 1)
+                        wqkv_parts.append(v_weights_list[kv_head])
+                    
+                    merged_wqkv_base = torch.cat(wqkv_parts, dim=0)
+                    
+                    # Add gate part if exists
+                    if gate_part is not None:
+                        merged_wqkv = torch.cat([merged_wqkv_base, gate_part], dim=0)
+                    else:
+                        merged_wqkv = merged_wqkv_base
+                    
+                    # Verify merged_wqkv_base shape
+                    expected_base_shape = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                    if merged_wqkv_base.shape[0] != expected_base_shape:
+                        print(f"   ⚠️  Layer {i}: Merged wqkv_base shape mismatch: expected {expected_base_shape} rows, got {merged_wqkv_base.shape[0]}")
+                        print(f"      num_heads={attn.num_heads}, num_key_value_heads={attn.num_key_value_heads}, head_dim={attn.head_dim}")
+                        print(f"      num_key_value_groups={num_key_value_groups}, gs={gs}")
+                        print(f"      merged_q_proj shape: {merged_q_proj.shape}")
+                        print(f"      k_proj_weight shape: {k_proj_weight.shape}")
+                        print(f"      v_proj_weight shape: {v_proj_weight.shape}")
+                        continue
+                    
+                    # Check for NaN/Inf
+                    if torch.isnan(merged_wqkv_base).any() or torch.isinf(merged_wqkv_base).any():
+                        print(f"   ⚠️  Layer {i}: Merged wqkv_base (from q/k/v) contains NaN/Inf! Skipping...")
+                        if i == 0:
+                            print(f"      merged_q_proj has NaN: {torch.isnan(merged_q_proj).any()}, has Inf: {torch.isinf(merged_q_proj).any()}")
+                            print(f"      k_proj_weight has NaN: {torch.isnan(k_proj_weight).any()}, has Inf: {torch.isinf(k_proj_weight).any()}")
+                            print(f"      v_proj_weight has NaN: {torch.isnan(v_proj_weight).any()}, has Inf: {torch.isinf(v_proj_weight).any()}")
+                        continue
+                    
+                    if gate_part is not None:
+                        if torch.isnan(gate_part).any() or torch.isinf(gate_part).any():
+                            print(f"   ⚠️  Layer {i}: Gate part contains NaN/Inf! Reinitializing...")
+                            initializer_range = model.config.llm_config.initializer_range
+                            gate_part.normal_(mean=0.0, std=initializer_range)
+                    
+                    expected_shape = attn.wqkv.weight.shape
+                    if merged_wqkv.shape == expected_shape:
+                        # Verify the merged weight before copying
+                        if torch.isnan(merged_wqkv).any() or torch.isinf(merged_wqkv).any():
+                            print(f"   ⚠️  Layer {i}: Merged wqkv (from q/k/v) contains NaN/Inf! Skipping...")
+                        else:
+                            with gather_context([attn.wqkv.weight]):
+                                with torch.no_grad():
+                                    attn.wqkv.weight.copy_(merged_wqkv)
+                                    
+                                    # Merge bias if exists (same interleaving as weights)
+                                    if (q_proj_bias is not None or k_proj_bias is not None or v_proj_bias is not None) and hasattr(attn.wqkv, 'bias') and attn.wqkv.bias is not None:
+                                        # Get device from one of the biases
+                                        bias_device = None
+                                        if q_proj_bias is not None:
+                                            bias_device = q_proj_bias.device
+                                        elif k_proj_bias is not None:
+                                            bias_device = k_proj_bias.device
+                                        elif v_proj_bias is not None:
+                                            bias_device = v_proj_bias.device
+                                        
+                                        if bias_device is not None:
+                                            # Extract gate bias from q_proj if gating is enabled
+                                            if headwise_gate or elementwise_gate:
+                                                q_dim = attn.num_heads * attn.head_dim
+                                                merged_q_bias = q_proj_bias[:q_dim] if q_proj_bias is not None else torch.zeros(q_dim, dtype=torch.bfloat16, device=bias_device)
+                                                gate_bias = q_proj_bias[q_dim:] if q_proj_bias is not None else None
+                                            else:
+                                                merged_q_bias = q_proj_bias if q_proj_bias is not None else torch.zeros(attn.num_heads * attn.head_dim, dtype=torch.bfloat16, device=bias_device)
+                                                gate_bias = None
+                                            
+                                            # Merge q/k/v bias into wqkv format (same interleaving as weights)
+                                            bias_parts = []
+                                            for kv_head in range(attn.num_key_value_heads):
+                                                # For each Q group
+                                                for q_group in range(num_key_value_groups):
+                                                    q_bias_start = kv_head * q_per_kv_head + q_group * attn.head_dim
+                                                    q_bias_end = q_bias_start + attn.head_dim
+                                                    bias_parts.append(merged_q_bias[q_bias_start:q_bias_end])
+                                                # Then K and V
+                                                if k_proj_bias is not None:
+                                                    bias_parts.append(k_proj_bias[kv_head * attn.head_dim:(kv_head + 1) * attn.head_dim])
+                                                else:
+                                                    bias_parts.append(torch.zeros(attn.head_dim, dtype=torch.bfloat16, device=bias_device))
+                                                if v_proj_bias is not None:
+                                                    bias_parts.append(v_proj_bias[kv_head * attn.head_dim:(kv_head + 1) * attn.head_dim])
+                                                else:
+                                                    bias_parts.append(torch.zeros(attn.head_dim, dtype=torch.bfloat16, device=bias_device))
+                                            
+                                            merged_wqkv_bias_base = torch.cat(bias_parts, dim=0)
+                                            
+                                            # Add gate bias if exists
+                                            if gate_bias is not None:
+                                                merged_wqkv_bias = torch.cat([merged_wqkv_bias_base, gate_bias], dim=0)
+                                            else:
+                                                merged_wqkv_bias = merged_wqkv_bias_base
+                                            
+                                            # Copy bias
+                                            if not (torch.isnan(merged_wqkv_bias).any() or torch.isinf(merged_wqkv_bias).any()):
+                                                if merged_wqkv_bias.shape == attn.wqkv.bias.shape:
+                                                    with gather_context([attn.wqkv.bias]):
+                                                        with torch.no_grad():
+                                                            attn.wqkv.bias.copy_(merged_wqkv_bias)
+                                                else:
+                                                    if i == 0:
+                                                        print(f"   ⚠️  Layer {i}: Merged wqkv bias shape mismatch: expected {attn.wqkv.bias.shape}, got {merged_wqkv_bias.shape}")
+                                            else:
+                                                if i == 0:
+                                                    print(f"   ⚠️  Layer {i}: Merged wqkv bias contains NaN/Inf!")
+                                    
+                                    # Verify after copying
+                                    if torch.isnan(attn.wqkv.weight).any() or torch.isinf(attn.wqkv.weight).any():
+                                        print(f"   ⚠️  Layer {i}: wqkv.weight contains NaN/Inf after copying! This is unexpected.")
+                                    else:
+                                        loaded_wqkv_count += 1
+                                        if i == 0:
+                                            print(f"   ✅ Successfully merged q_proj/k_proj/v_proj into wqkv")
+                                            print(f"      wqkv.weight shape: {attn.wqkv.weight.shape}")
+                                            print(f"      wqkv.weight stats: mean={attn.wqkv.weight.mean().item():.6f}, std={attn.wqkv.weight.std().item():.6f}")
+                                            print(f"      wqkv.weight range: [{attn.wqkv.weight.min().item():.6f}, {attn.wqkv.weight.max().item():.6f}]")
+                                            # Verify a sample of weights to ensure merge is correct (using torch operations to avoid BFloat16->numpy issue)
+                                            # Check first few rows of wqkv_base (should match first Q group of first kv_head)
+                                            sample_q_row = merged_q_proj[0, :5]  # First row, first 5 cols
+                                            sample_wqkv_row = merged_wqkv_base[0, :5]  # First row of merged
+                                            if not torch.allclose(sample_q_row, sample_wqkv_row, atol=1e-5):
+                                                print(f"   ⚠️  Layer {i}: Weight verification failed! First row mismatch.")
+                                                print(f"      q_proj[0, :5] = {sample_q_row.tolist()}")
+                                                print(f"      wqkv_base[0, :5] = {sample_wqkv_row.tolist()}")
+                                            else:
+                                                print(f"      ✅ Weight verification passed (first row matches)")
+                    else:
+                        print(f"   ⚠️  Layer {i}: Merged wqkv shape mismatch: expected {expected_shape}, got {merged_wqkv.shape}")
+                        if i == 0:
+                            print(f"      base_qkv_dim={base_qkv_dim}, gate_dim={gate_dim if gate_part is not None else 0}")
+                            print(f"      merged_wqkv_base shape: {merged_wqkv_base.shape}")
+                            print(f"      gate_part shape: {gate_part.shape if gate_part is not None else 'None'}")
+                
+                # If model uses q_proj/k_proj/v_proj, load directly
+                elif hasattr(attn, 'q_proj') and hasattr(attn, 'k_proj') and hasattr(attn, 'v_proj'):
+                    if not (torch.isnan(q_proj_weight).any() or torch.isinf(q_proj_weight).any()):
+                        if q_proj_weight.shape == attn.q_proj.weight.shape:
+                            with gather_context([attn.q_proj.weight]):
+                                with torch.no_grad():
+                                    attn.q_proj.weight.copy_(q_proj_weight)
+                                    loaded_q_proj_count += 1
+                    # Load q_proj bias if exists
+                    if q_proj_bias is not None and hasattr(attn.q_proj, 'bias') and attn.q_proj.bias is not None:
+                        if not (torch.isnan(q_proj_bias).any() or torch.isinf(q_proj_bias).any()):
+                            if q_proj_bias.shape == attn.q_proj.bias.shape:
+                                with gather_context([attn.q_proj.bias]):
+                                    with torch.no_grad():
+                                        attn.q_proj.bias.copy_(q_proj_bias)
+                    
+                    if not (torch.isnan(k_proj_weight).any() or torch.isinf(k_proj_weight).any()):
+                        if k_proj_weight.shape == attn.k_proj.weight.shape:
+                            with gather_context([attn.k_proj.weight]):
+                                with torch.no_grad():
+                                    attn.k_proj.weight.copy_(k_proj_weight)
+                                    loaded_k_proj_count += 1
+                    # Load k_proj bias if exists
+                    if k_proj_bias is not None and hasattr(attn.k_proj, 'bias') and attn.k_proj.bias is not None:
+                        if not (torch.isnan(k_proj_bias).any() or torch.isinf(k_proj_bias).any()):
+                            if k_proj_bias.shape == attn.k_proj.bias.shape:
+                                with gather_context([attn.k_proj.bias]):
+                                    with torch.no_grad():
+                                        attn.k_proj.bias.copy_(k_proj_bias)
+                    
+                    if not (torch.isnan(v_proj_weight).any() or torch.isinf(v_proj_weight).any()):
+                        if v_proj_weight.shape == attn.v_proj.weight.shape:
+                            with gather_context([attn.v_proj.weight]):
+                                with torch.no_grad():
+                                    attn.v_proj.weight.copy_(v_proj_weight)
+                                    loaded_v_proj_count += 1
+                    # Load v_proj bias if exists
+                    if v_proj_bias is not None and hasattr(attn.v_proj, 'bias') and attn.v_proj.bias is not None:
+                        if not (torch.isnan(v_proj_bias).any() or torch.isinf(v_proj_bias).any()):
+                            if v_proj_bias.shape == attn.v_proj.bias.shape:
+                                with gather_context([attn.v_proj.bias]):
+                                    with torch.no_grad():
+                                        attn.v_proj.bias.copy_(v_proj_bias)
+            except Exception as e:
+                print(f"   ⚠️  Layer {i}: Failed to load q_proj/k_proj/v_proj weights: {e}")
+                import traceback
+                traceback.print_exc()
+        
+        # Process wo weights
+        if wo_key in checkpoint_weights and hasattr(attn, 'wo'):
+            try:
+                wo_weight = checkpoint_weights[wo_key].to(dtype=torch.bfloat16)
+                if not (torch.isnan(wo_weight).any() or torch.isinf(wo_weight).any()):
+                    if wo_weight.shape == attn.wo.weight.shape:
+                        with gather_context([attn.wo.weight]):
+                            with torch.no_grad():
+                                attn.wo.weight.copy_(wo_weight)
+                                loaded_wo_count += 1
+            except Exception as e:
+                print(f"   ⚠️  Layer {i}: Failed to load wo weight: {e}")
+    
+    # Report loading results
+    if USE_WQKV_VERSION:
+        if loaded_wqkv_count > 0:
+            print(f"   ✅ Successfully loaded wqkv weights for {loaded_wqkv_count} layers")
+    else:
+        if loaded_q_proj_count > 0:
+            print(f"   ✅ Successfully loaded q_proj weights for {loaded_q_proj_count} layers")
+        if loaded_k_proj_count > 0:
+            print(f"   ✅ Successfully loaded k_proj weights for {loaded_k_proj_count} layers")
+        if loaded_v_proj_count > 0:
+            print(f"   ✅ Successfully loaded v_proj weights for {loaded_v_proj_count} layers")
+    
+    if loaded_wo_count > 0:
+        print(f"   ✅ Successfully loaded wo weights for {loaded_wo_count} layers")
+    
+    total_loaded = (loaded_wqkv_count if USE_WQKV_VERSION else (loaded_q_proj_count + loaded_k_proj_count + loaded_v_proj_count)) + loaded_wo_count
+    if total_loaded == 0:
+        print(f"   ⚠️  No weights were loaded from checkpoint!")
 
 
 def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2B"):
@@ -810,31 +1371,42 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
         )
         print("   ✅ Model loaded from checkpoint")
         
-        # CRITICAL: If checkpoint uses LoRA format, we need to merge LoRA weights
-        # Supports both q_proj/k_proj/v_proj format (internvl_chat_finetune_gate.py) 
-        # and wqkv format (internvl_chat_finetune_wqkv.py)
+        # CRITICAL: Load weights from checkpoint
+        # Supports both LoRA format and direct weight format
+        # Supports both q_proj/k_proj/v_proj format and wqkv format
         if has_gate_config and USE_GATE_VERSION:
-            print(f"\n   🔧 Loading and merging LoRA weights...")
+            print(f"\n   🔧 Loading weights from checkpoint...")
             try:
                 from safetensors.torch import load_file
                 checkpoint_weights = load_file(os.path.join(checkpoint_path, "model.safetensors"))
                 
                 # Check if checkpoint uses LoRA format
-                # Try q_proj format first (internvl_chat_finetune_gate.py)
-                sample_key_q = "language_model.base_model.model.model.layers.0.attention.q_proj.base_layer.weight"
-                # Try wqkv format (internvl_chat_finetune_wqkv.py)
-                sample_key_wqkv = "language_model.base_model.model.model.layers.0.attention.wqkv.base_layer.weight"
+                # Try q_proj LoRA format first (internvl_chat_finetune_gate.py with LoRA)
+                sample_key_q_lora = "language_model.base_model.model.model.layers.0.attention.q_proj.base_layer.weight"
+                # Try wqkv LoRA format (internvl_chat_finetune_wqkv.py with LoRA)
+                sample_key_wqkv_lora = "language_model.base_model.model.model.layers.0.attention.wqkv.base_layer.weight"
+                # Try q_proj direct weight format (internvl_chat_finetune_gate.py without LoRA)
+                sample_key_q_direct = "language_model.base_model.model.model.layers.0.attention.q_proj.weight"
+                # Try wqkv direct weight format (internvl_chat_finetune_wqkv.py without LoRA)
+                sample_key_wqkv_direct = "language_model.base_model.model.model.layers.0.attention.wqkv.weight"
                 
-                if sample_key_q in checkpoint_weights:
+                if sample_key_q_lora in checkpoint_weights:
                     print(f"   📦 Detected LoRA format (q_proj/k_proj/v_proj), merging and loading weights...")
                     _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path)
-                elif sample_key_wqkv in checkpoint_weights:
+                elif sample_key_wqkv_lora in checkpoint_weights:
                     print(f"   📦 Detected LoRA format (wqkv), merging and loading weights...")
                     _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path)
+                elif sample_key_q_direct in checkpoint_weights:
+                    print(f"   📦 Detected direct weight format (q_proj/k_proj/v_proj), loading weights...")
+                    _load_direct_weights(model, checkpoint_weights, checkpoint_path)
+                elif sample_key_wqkv_direct in checkpoint_weights:
+                    print(f"   📦 Detected direct weight format (wqkv), loading weights...")
+                    _load_direct_weights(model, checkpoint_weights, checkpoint_path)
                 else:
-                    print(f"   ℹ️  Checkpoint doesn't use LoRA format, skipping conversion")
+                    print(f"   ⚠️  Could not detect checkpoint weight format!")
+                    print(f"   🔍 Checked for: {sample_key_q_lora}, {sample_key_wqkv_lora}, {sample_key_q_direct}, {sample_key_wqkv_direct}")
             except Exception as e:
-                print(f"   ⚠️  Failed to load LoRA weights: {e}")
+                print(f"   ⚠️  Failed to load weights: {e}")
                 import traceback
                 traceback.print_exc()
         # Check if num_image_token matches training (should be 64 for 224x224 with ratio 0.5)
