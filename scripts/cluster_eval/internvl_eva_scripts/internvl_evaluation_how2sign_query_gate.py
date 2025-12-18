@@ -34,6 +34,27 @@ if '/code/doc_sign_search/InternVL' not in sys.path:
     sys.path.insert(0, '/code/doc_sign_search/InternVL')
 
 from internvl.model.internvl_chat import InternVLChatModel, InternVLChatConfig
+
+# CRITICAL: Patch Qwen2 attention classes for gate support (same as training script)
+# This must be done BEFORE loading the model, so the gate version is used
+try:
+    from internvl.model.qwen2.modeling_qwen2_gate import (
+        Qwen2Attention as Qwen2AttentionGate,
+        Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
+        Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
+    )
+    # Get QWEN2_ATTENTION_CLASSES from qwen2 modeling
+    from transformers.models.qwen2.modeling_qwen2 import QWEN2_ATTENTION_CLASSES
+    # Replace Qwen2 attention classes with gate versions
+    QWEN2_ATTENTION_CLASSES['eager'] = Qwen2AttentionGate
+    QWEN2_ATTENTION_CLASSES['flash_attention_2'] = Qwen2FlashAttention2Gate
+    QWEN2_ATTENTION_CLASSES['sdpa'] = Qwen2SdpaAttentionGate
+    print("✅ Patched Qwen2 attention classes with gate versions")
+    QWEN2_GATE_AVAILABLE = True
+except ImportError as e:
+    print(f"⚠️  Qwen2 gate version not available: {e}")
+    QWEN2_GATE_AVAILABLE = False
+
 # CRITICAL: Import querygate_withbias version (uses q_proj/k_proj/v_proj format)
 try:
     # Priority 1: Use modeling_internlm2_querygate_withbias.py (used by internvl_chat_finetune_querygate_withbias.py)
@@ -96,6 +117,42 @@ from internvl.train.dataset import build_transform
 from PIL import Image
 import cv2
 from decord import VideoReader, cpu
+
+def _move_model_to_device(model, device):
+    """
+    Move model to device, handling meta device tensors properly.
+    
+    Args:
+        model: The model to move
+        device: Target device (e.g., torch.device("cuda:0"))
+    
+    Returns:
+        Model moved to target device
+    """
+    def _is_meta_tensor(t):
+        return hasattr(t, 'device') and str(t.device) == 'meta'
+    
+    # Check if any parameters are on meta device
+    has_meta = any(_is_meta_tensor(p) for p in model.parameters())
+    
+    if has_meta:
+        print(f"   🔧 Detected meta device tensors, using to_empty() first...")
+        # Move model to empty device first, then to target device
+        model = model.to_empty(device=device)
+        print(f"   ✅ Model moved from meta to {device} using to_empty()")
+    else:
+        model = model.to(device)
+        print(f"   ✅ Model moved to {device}")
+    
+    # Explicitly move vision_model to GPU (this is often the problematic component)
+    if hasattr(model, 'vision_model'):
+        vision_has_meta = any(_is_meta_tensor(p) for p in model.vision_model.parameters())
+        if vision_has_meta:
+            model.vision_model = model.vision_model.to_empty(device=device)
+        else:
+            model.vision_model = model.vision_model.to(device)
+    
+    return model
 
 def _compute_frame_indices(
     sample: str,
@@ -379,11 +436,14 @@ def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     
     # Step 2: Load model
     print(f"\n2️⃣ Loading base model...")
+    # CRITICAL: Don't use device_map="auto" to avoid meta device issues
+    # Load to CPU first, then move to GPU manually
     model = InternVLChatModel.from_pretrained(
         base_model_name,
         torch_dtype=torch.bfloat16,
         trust_remote_code=True,
-        device_map="auto"
+        device_map=None,  # Load to CPU first to avoid meta device
+        low_cpu_mem_usage=False  # Disable low_cpu_mem_usage to avoid meta device
     )
     print("   ✅ Model loaded from base model")
     
@@ -432,14 +492,11 @@ def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     
     # CRITICAL FIX: Explicitly move model to GPU to ensure all components are on CUDA
     # device_map="auto" may leave some components on CPU, causing "Input type (CUDABFloat16Type) and weight type (CPUBFloat16Type)" error
+    # Also handle meta device: Cannot copy out of meta tensor; need to use to_empty() first
     print(f"\n4️⃣ Moving model to GPU...")
     if torch.cuda.is_available():
         device = torch.device("cuda:0")
-        model = model.to(device)
-        # Explicitly move vision_model to GPU (this is often the problematic component)
-        if hasattr(model, 'vision_model'):
-            model.vision_model = model.vision_model.to(device)
-        print(f"   ✅ Model moved to {device}")
+        model = _move_model_to_device(model, device)
     else:
         print(f"   ⚠️  CUDA not available, model remains on CPU")
     
@@ -448,6 +505,41 @@ def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     print(f"{'='*70}\n")
     
     return model, tokenizer
+
+def _find_key_in_checkpoint(checkpoint_weights, key_variants):
+    """
+    Try to find a key in checkpoint, supporting multiple key name formats.
+    
+    Args:
+        checkpoint_weights: Dictionary of checkpoint weights
+        key_variants: List of possible key name formats to try
+    
+    Returns:
+        The first matching key found, or None if none match
+    """
+    for key in key_variants:
+        if key in checkpoint_weights:
+            return key
+    return None
+
+def _get_key_prefix_variants(layer_idx, component, suffix=""):
+    """
+    Generate key prefix variants for different model structures.
+    
+    Args:
+        layer_idx: Layer index
+        component: Component name (e.g., "attention.wqkv", "attention.q_proj")
+        suffix: Optional suffix (e.g., ".base_layer.weight", ".weight")
+    
+    Returns:
+        List of possible key prefixes
+    """
+    variants = [
+        f"language_model.base_model.model.model.layers.{layer_idx}.{component}{suffix}",
+        f"language_model.model.model.layers.{layer_idx}.{component}{suffix}",
+        f"language_model.layers.{layer_idx}.{component}{suffix}",
+    ]
+    return variants
 
 def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
     """
@@ -553,23 +645,41 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
         
         # Process wqkv weights (for wqkv version checkpoints) - check this first
         if USE_WQKV_VERSION and hasattr(attn, 'wqkv'):
-            base_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.wqkv"
-            base_layer_key = f"{base_key_prefix}.base_layer.weight"
-            lora_a_key = f"{base_key_prefix}.lora_A.default.weight"
-            lora_b_key = f"{base_key_prefix}.lora_B.default.weight"
+            # Try to find wqkv base layer key with multiple format variants
+            base_layer_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.wqkv", ".base_layer.weight")
+            )
+            lora_a_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.wqkv", ".lora_A.default.weight")
+            )
+            lora_b_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.wqkv", ".lora_B.default.weight")
+            )
             
             # Also check for q_proj/k_proj/v_proj format (in case checkpoint is q_proj/k_proj/v_proj format)
-            q_proj_base_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.base_layer.weight"
-            k_proj_base_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.base_layer.weight"
-            v_proj_base_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.base_layer.weight"
+            q_proj_base_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.q_proj", ".base_layer.weight")
+            )
+            k_proj_base_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.k_proj", ".base_layer.weight")
+            )
+            v_proj_base_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.v_proj", ".base_layer.weight")
+            )
             
-            if base_layer_key in checkpoint_weights:
+            if base_layer_key is not None:
                 try:
                     # Load base layer weight
                     base_wqkv = checkpoint_weights[base_layer_key].to(dtype=torch.bfloat16)
                     
                     # Load and merge LoRA weights if they exist
-                    if lora_a_key in checkpoint_weights and lora_b_key in checkpoint_weights:
+                    if lora_a_key is not None and lora_b_key is not None:
                         lora_a = checkpoint_weights[lora_a_key].to(dtype=torch.bfloat16)
                         lora_b = checkpoint_weights[lora_b_key].to(dtype=torch.bfloat16)
                         # LoRA merge: base + lora_B @ lora_A (scaled by alpha/rank)
@@ -619,7 +729,7 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
                     import traceback
                     traceback.print_exc()
             # Fallback: Try to merge from q_proj/k_proj/v_proj if wqkv not found
-            elif q_proj_base_key in checkpoint_weights and k_proj_base_key in checkpoint_weights and v_proj_base_key in checkpoint_weights:
+            elif q_proj_base_key is not None and k_proj_base_key is not None and v_proj_base_key is not None:
                 try:
                     print(f"   🔄 Layer {i}: wqkv not found, merging from q_proj/k_proj/v_proj...")
                     # Load q_proj/k_proj/v_proj weights
@@ -628,22 +738,40 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
                     base_v_proj = checkpoint_weights[v_proj_base_key].to(dtype=torch.bfloat16)
                     
                     # Load and merge LoRA if exists
-                    q_proj_lora_a_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.lora_A.default.weight"
-                    q_proj_lora_b_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.lora_B.default.weight"
-                    k_proj_lora_a_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.lora_A.default.weight"
-                    k_proj_lora_b_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.lora_B.default.weight"
-                    v_proj_lora_a_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.lora_A.default.weight"
-                    v_proj_lora_b_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.lora_B.default.weight"
+                    q_proj_lora_a_key = _find_key_in_checkpoint(
+                        checkpoint_weights,
+                        _get_key_prefix_variants(i, "attention.q_proj", ".lora_A.default.weight")
+                    )
+                    q_proj_lora_b_key = _find_key_in_checkpoint(
+                        checkpoint_weights,
+                        _get_key_prefix_variants(i, "attention.q_proj", ".lora_B.default.weight")
+                    )
+                    k_proj_lora_a_key = _find_key_in_checkpoint(
+                        checkpoint_weights,
+                        _get_key_prefix_variants(i, "attention.k_proj", ".lora_A.default.weight")
+                    )
+                    k_proj_lora_b_key = _find_key_in_checkpoint(
+                        checkpoint_weights,
+                        _get_key_prefix_variants(i, "attention.k_proj", ".lora_B.default.weight")
+                    )
+                    v_proj_lora_a_key = _find_key_in_checkpoint(
+                        checkpoint_weights,
+                        _get_key_prefix_variants(i, "attention.v_proj", ".lora_A.default.weight")
+                    )
+                    v_proj_lora_b_key = _find_key_in_checkpoint(
+                        checkpoint_weights,
+                        _get_key_prefix_variants(i, "attention.v_proj", ".lora_B.default.weight")
+                    )
                     
-                    if q_proj_lora_a_key in checkpoint_weights and q_proj_lora_b_key in checkpoint_weights:
+                    if q_proj_lora_a_key is not None and q_proj_lora_b_key is not None:
                         q_lora_a = checkpoint_weights[q_proj_lora_a_key].to(dtype=torch.bfloat16)
                         q_lora_b = checkpoint_weights[q_proj_lora_b_key].to(dtype=torch.bfloat16)
                         base_q_proj = base_q_proj + torch.matmul(q_lora_b, q_lora_a)
-                    if k_proj_lora_a_key in checkpoint_weights and k_proj_lora_b_key in checkpoint_weights:
+                    if k_proj_lora_a_key is not None and k_proj_lora_b_key is not None:
                         k_lora_a = checkpoint_weights[k_proj_lora_a_key].to(dtype=torch.bfloat16)
                         k_lora_b = checkpoint_weights[k_proj_lora_b_key].to(dtype=torch.bfloat16)
                         base_k_proj = base_k_proj + torch.matmul(k_lora_b, k_lora_a)
-                    if v_proj_lora_a_key in checkpoint_weights and v_proj_lora_b_key in checkpoint_weights:
+                    if v_proj_lora_a_key is not None and v_proj_lora_b_key is not None:
                         v_lora_a = checkpoint_weights[v_proj_lora_a_key].to(dtype=torch.bfloat16)
                         v_lora_b = checkpoint_weights[v_proj_lora_b_key].to(dtype=torch.bfloat16)
                         base_v_proj = base_v_proj + torch.matmul(v_lora_b, v_lora_a)
@@ -720,16 +848,24 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
         # Process q_proj/k_proj/v_proj weights (for internvl_chat_finetune_gate.py checkpoints)
         elif not USE_WQKV_VERSION and hasattr(attn, 'q_proj') and hasattr(attn, 'k_proj') and hasattr(attn, 'v_proj'):
             # Process q_proj
-            q_proj_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.q_proj"
-            q_proj_base_key = f"{q_proj_key_prefix}.base_layer.weight"
-            q_proj_lora_a_key = f"{q_proj_key_prefix}.lora_A.default.weight"
-            q_proj_lora_b_key = f"{q_proj_key_prefix}.lora_B.default.weight"
+            q_proj_base_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.q_proj", ".base_layer.weight")
+            )
+            q_proj_lora_a_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.q_proj", ".lora_A.default.weight")
+            )
+            q_proj_lora_b_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.q_proj", ".lora_B.default.weight")
+            )
             
-            if q_proj_base_key in checkpoint_weights:
+            if q_proj_base_key is not None:
                 try:
                     base_q_proj = checkpoint_weights[q_proj_base_key].to(dtype=torch.bfloat16)
                     
-                    if q_proj_lora_a_key in checkpoint_weights and q_proj_lora_b_key in checkpoint_weights:
+                    if q_proj_lora_a_key is not None and q_proj_lora_b_key is not None:
                         q_proj_lora_a = checkpoint_weights[q_proj_lora_a_key].to(dtype=torch.bfloat16)
                         q_proj_lora_b = checkpoint_weights[q_proj_lora_b_key].to(dtype=torch.bfloat16)
                         q_proj_lora_delta = torch.matmul(q_proj_lora_b, q_proj_lora_a)
@@ -749,16 +885,24 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
                     traceback.print_exc()
             
             # Process k_proj
-            k_proj_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.k_proj"
-            k_proj_base_key = f"{k_proj_key_prefix}.base_layer.weight"
-            k_proj_lora_a_key = f"{k_proj_key_prefix}.lora_A.default.weight"
-            k_proj_lora_b_key = f"{k_proj_key_prefix}.lora_B.default.weight"
+            k_proj_base_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.k_proj", ".base_layer.weight")
+            )
+            k_proj_lora_a_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.k_proj", ".lora_A.default.weight")
+            )
+            k_proj_lora_b_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.k_proj", ".lora_B.default.weight")
+            )
             
-            if k_proj_base_key in checkpoint_weights:
+            if k_proj_base_key is not None:
                 try:
                     base_k_proj = checkpoint_weights[k_proj_base_key].to(dtype=torch.bfloat16)
                     
-                    if k_proj_lora_a_key in checkpoint_weights and k_proj_lora_b_key in checkpoint_weights:
+                    if k_proj_lora_a_key is not None and k_proj_lora_b_key is not None:
                         k_proj_lora_a = checkpoint_weights[k_proj_lora_a_key].to(dtype=torch.bfloat16)
                         k_proj_lora_b = checkpoint_weights[k_proj_lora_b_key].to(dtype=torch.bfloat16)
                         k_proj_lora_delta = torch.matmul(k_proj_lora_b, k_proj_lora_a)
@@ -776,16 +920,24 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
                     print(f"   ⚠️  Layer {i}: Failed to load k_proj LoRA weights: {e}")
             
             # Process v_proj
-            v_proj_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.v_proj"
-            v_proj_base_key = f"{v_proj_key_prefix}.base_layer.weight"
-            v_proj_lora_a_key = f"{v_proj_key_prefix}.lora_A.default.weight"
-            v_proj_lora_b_key = f"{v_proj_key_prefix}.lora_B.default.weight"
+            v_proj_base_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.v_proj", ".base_layer.weight")
+            )
+            v_proj_lora_a_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.v_proj", ".lora_A.default.weight")
+            )
+            v_proj_lora_b_key = _find_key_in_checkpoint(
+                checkpoint_weights,
+                _get_key_prefix_variants(i, "attention.v_proj", ".lora_B.default.weight")
+            )
             
-            if v_proj_base_key in checkpoint_weights:
+            if v_proj_base_key is not None:
                 try:
                     base_v_proj = checkpoint_weights[v_proj_base_key].to(dtype=torch.bfloat16)
                     
-                    if v_proj_lora_a_key in checkpoint_weights and v_proj_lora_b_key in checkpoint_weights:
+                    if v_proj_lora_a_key is not None and v_proj_lora_b_key is not None:
                         v_proj_lora_a = checkpoint_weights[v_proj_lora_a_key].to(dtype=torch.bfloat16)
                         v_proj_lora_b = checkpoint_weights[v_proj_lora_b_key].to(dtype=torch.bfloat16)
                         v_proj_lora_delta = torch.matmul(v_proj_lora_b, v_proj_lora_a)
@@ -803,16 +955,24 @@ def _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path):
                     print(f"   ⚠️  Layer {i}: Failed to load v_proj LoRA weights: {e}")
         
         # Process wo (output projection) weights
-        wo_key_prefix = f"language_model.base_model.model.model.layers.{i}.attention.wo"
-        wo_base_key = f"{wo_key_prefix}.base_layer.weight"
-        wo_lora_a_key = f"{wo_key_prefix}.lora_A.default.weight"
-        wo_lora_b_key = f"{wo_key_prefix}.lora_B.default.weight"
+        wo_base_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.wo", ".base_layer.weight")
+        )
+        wo_lora_a_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.wo", ".lora_A.default.weight")
+        )
+        wo_lora_b_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.wo", ".lora_B.default.weight")
+        )
             
-        if wo_base_key in checkpoint_weights and hasattr(attn, 'wo'):
+        if wo_base_key is not None and hasattr(attn, 'wo'):
             try:
                 base_wo = checkpoint_weights[wo_base_key].to(dtype=torch.bfloat16)
                 
-                if wo_lora_a_key in checkpoint_weights and wo_lora_b_key in checkpoint_weights:
+                if wo_lora_a_key is not None and wo_lora_b_key is not None:
                     wo_lora_a = checkpoint_weights[wo_lora_a_key].to(dtype=torch.bfloat16)
                     wo_lora_b = checkpoint_weights[wo_lora_b_key].to(dtype=torch.bfloat16)
                     wo_lora_delta = torch.matmul(wo_lora_b, wo_lora_a)
@@ -918,20 +1078,47 @@ def _load_direct_weights(model, checkpoint_weights, checkpoint_path):
             continue
         
         # Check for direct weight format (non-LoRA)
-        q_proj_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.weight"
-        k_proj_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.weight"
-        v_proj_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.weight"
-        wqkv_key = f"language_model.base_model.model.model.layers.{i}.attention.wqkv.weight"
-        wo_key = f"language_model.base_model.model.model.layers.{i}.attention.wo.weight"
+        q_proj_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.q_proj", ".weight")
+        )
+        k_proj_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.k_proj", ".weight")
+        )
+        v_proj_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.v_proj", ".weight")
+        )
+        wqkv_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.wqkv", ".weight")
+        )
+        wo_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.wo", ".weight")
+        )
         
         # Also check for bias (if qkv_bias is enabled)
-        q_proj_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.q_proj.bias"
-        k_proj_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.k_proj.bias"
-        v_proj_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.v_proj.bias"
-        wqkv_bias_key = f"language_model.base_model.model.model.layers.{i}.attention.wqkv.bias"
+        q_proj_bias_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.q_proj", ".bias")
+        )
+        k_proj_bias_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.k_proj", ".bias")
+        )
+        v_proj_bias_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.v_proj", ".bias")
+        )
+        wqkv_bias_key = _find_key_in_checkpoint(
+            checkpoint_weights,
+            _get_key_prefix_variants(i, "attention.wqkv", ".bias")
+        )
         
         # Process wqkv weights (if checkpoint has wqkv and model uses wqkv)
-        if USE_WQKV_VERSION and hasattr(attn, 'wqkv') and wqkv_key in checkpoint_weights:
+        if USE_WQKV_VERSION and hasattr(attn, 'wqkv') and wqkv_key is not None:
             try:
                 wqkv_weight = checkpoint_weights[wqkv_key].to(dtype=torch.bfloat16)
                 if not (torch.isnan(wqkv_weight).any() or torch.isinf(wqkv_weight).any()):
@@ -963,16 +1150,16 @@ def _load_direct_weights(model, checkpoint_weights, checkpoint_path):
                 print(f"   ⚠️  Layer {i}: Failed to load wqkv weight: {e}")
         
         # Process q_proj/k_proj/v_proj weights (if checkpoint has them)
-        elif q_proj_key in checkpoint_weights and k_proj_key in checkpoint_weights and v_proj_key in checkpoint_weights:
+        elif q_proj_key is not None and k_proj_key is not None and v_proj_key is not None:
             try:
                 q_proj_weight = checkpoint_weights[q_proj_key].to(dtype=torch.bfloat16)
                 k_proj_weight = checkpoint_weights[k_proj_key].to(dtype=torch.bfloat16)
                 v_proj_weight = checkpoint_weights[v_proj_key].to(dtype=torch.bfloat16)
                 
                 # Load bias if exists
-                q_proj_bias = checkpoint_weights.get(q_proj_bias_key, None)
-                k_proj_bias = checkpoint_weights.get(k_proj_bias_key, None)
-                v_proj_bias = checkpoint_weights.get(v_proj_bias_key, None)
+                q_proj_bias = checkpoint_weights.get(q_proj_bias_key, None) if q_proj_bias_key is not None else None
+                k_proj_bias = checkpoint_weights.get(k_proj_bias_key, None) if k_proj_bias_key is not None else None
+                v_proj_bias = checkpoint_weights.get(v_proj_bias_key, None) if v_proj_bias_key is not None else None
                 if q_proj_bias is not None:
                     q_proj_bias = q_proj_bias.to(dtype=torch.bfloat16)
                 if k_proj_bias is not None:
@@ -1236,7 +1423,7 @@ def _load_direct_weights(model, checkpoint_weights, checkpoint_path):
                 traceback.print_exc()
         
         # Process wo weights
-        if wo_key in checkpoint_weights and hasattr(attn, 'wo'):
+        if wo_key is not None and hasattr(attn, 'wo'):
             try:
                 wo_weight = checkpoint_weights[wo_key].to(dtype=torch.bfloat16)
                 if not (torch.isnan(wo_weight).any() or torch.isinf(wo_weight).any()):
@@ -1318,67 +1505,201 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
         except Exception as e:
             print(f"   ⚠️  Could not read checkpoint config: {e}")
     
-    # Step 1: Load base model config
-    print("\n1️⃣ Loading base model config...")
-    config = InternVLChatConfig.from_pretrained(base_model_name, trust_remote_code=True)
+    # Step 1: Load config from checkpoint if available, otherwise from base model
+    print("\n1️⃣ Loading model config...")
+    checkpoint_config_path = os.path.join(checkpoint_path, "config.json")
     
-    # Apply gate config if detected
-    if has_gate_config and config.llm_config.model_type == 'internlm2':
-        config.llm_config.elementwise_attn_output_gate = elementwise_gate
-        config.llm_config.headwise_attn_output_gate = headwise_gate
-        gate_type = "elementwise" if elementwise_gate else "headwise"
-        print(f"   ✅ Config loaded with {gate_type} gated attention")
-        
-        # Check for qkv_bias in checkpoint config (from internvl_chat_finetune_gate.py)
-        # If checkpoint has qkv_bias, use it; otherwise, qkv_bias will default to bias value
-        # (handled by configuration_internlm2.py: if qkv_bias is None, defaults to bias)
-        checkpoint_config_path = os.path.join(checkpoint_path, "config.json")
-        if os.path.exists(checkpoint_config_path):
-            try:
-                import json
-                with open(checkpoint_config_path, 'r') as f:
-                    checkpoint_config = json.load(f)
-                if isinstance(checkpoint_config, dict):
-                    llm_config = checkpoint_config.get('llm_config', {})
+    # CRITICAL: For gate checkpoints, we MUST load config from checkpoint to get correct gate dimensions
+    # Otherwise, model will have wrong dimensions and weights won't match
+    if os.path.exists(checkpoint_config_path):
+        try:
+            import json
+            with open(checkpoint_config_path, 'r') as f:
+                checkpoint_config_dict = json.load(f)
+            
+            # Load config from checkpoint (this preserves gate configuration)
+            config = InternVLChatConfig.from_dict(checkpoint_config_dict)
+            print(f"   ✅ Config loaded from checkpoint (preserves gate configuration)")
+            
+            # Verify gate config is set
+            if has_gate_config:
+                gate_type = "elementwise" if elementwise_gate else "headwise"
+                print(f"   ✅ Gate config verified: {gate_type} gated attention")
+                # Double-check from config
+                if hasattr(config, 'llm_config'):
+                    llm_config = config.llm_config
                     if isinstance(llm_config, dict):
-                        qkv_bias = llm_config.get('qkv_bias', None)
-                        if qkv_bias is not None:
-                            config.llm_config.qkv_bias = qkv_bias
-                            print(f"   ✅ Set qkv_bias = {qkv_bias} from checkpoint config")
+                        config_elementwise = llm_config.get('elementwise_attn_output_gate', False)
+                        config_headwise = llm_config.get('headwise_attn_output_gate', False)
+                        model_type = llm_config.get('model_type', 'unknown')
+                        print(f"   🔍 Model type: {model_type}")
+                        print(f"   🔍 Config elementwise_gate: {config_elementwise}, headwise_gate: {config_headwise}")
+                        if config_elementwise or config_headwise:
+                            print(f"   ✅ Config confirms gate is enabled in checkpoint")
+                            # Ensure gate config is set (in case it wasn't preserved)
+                            if model_type == 'qwen2' or model_type == 'qwen2_5':
+                                # For Qwen2, gate is handled by patched attention classes
+                                # But we should still set the config for consistency
+                                llm_config['elementwise_attn_output_gate'] = config_elementwise or elementwise_gate
+                                llm_config['headwise_attn_output_gate'] = config_headwise or headwise_gate
+                                print(f"   ✅ Applied gate config for Qwen2 model")
+                            elif model_type == 'internlm2':
+                                llm_config['elementwise_attn_output_gate'] = config_elementwise or elementwise_gate
+                                llm_config['headwise_attn_output_gate'] = config_headwise or headwise_gate
+                                print(f"   ✅ Applied gate config for InternLM2 model")
                         else:
-                            # If qkv_bias is not in checkpoint, it will default to bias value
-                            # (handled by configuration_internlm2.py)
-                            print(f"   ℹ️  qkv_bias not found in checkpoint config, will use default (bias={config.llm_config.bias})")
-            except Exception as e:
-                print(f"   ⚠️  Could not read qkv_bias from checkpoint config: {e}")
+                            print(f"   ⚠️  WARNING: Gate config not found in checkpoint config, but detected from path")
+                            # Apply gate config manually
+                            if model_type == 'qwen2' or model_type == 'qwen2_5':
+                                llm_config['elementwise_attn_output_gate'] = elementwise_gate
+                                llm_config['headwise_attn_output_gate'] = headwise_gate
+                                print(f"   🔧 Manually applied gate config for Qwen2 model")
+                            elif model_type == 'internlm2':
+                                llm_config['elementwise_attn_output_gate'] = elementwise_gate
+                                llm_config['headwise_attn_output_gate'] = headwise_gate
+                                print(f"   🔧 Manually applied gate config for InternLM2 model")
+        except Exception as e:
+            print(f"   ⚠️  Could not load config from checkpoint: {e}")
+            print(f"   🔄 Falling back to base model config...")
+            config = InternVLChatConfig.from_pretrained(base_model_name, trust_remote_code=True)
+            
+            # Apply gate config if detected (for InternLM2)
+            if has_gate_config and config.llm_config.model_type == 'internlm2':
+                config.llm_config.elementwise_attn_output_gate = elementwise_gate
+                config.llm_config.headwise_attn_output_gate = headwise_gate
+                gate_type = "elementwise" if elementwise_gate else "headwise"
+                print(f"   ✅ Config loaded with {gate_type} gated attention")
+            else:
+                print("   ✅ Config loaded")
     else:
-        print("   ✅ Config loaded")
+        # No checkpoint config, load from base model
+        config = InternVLChatConfig.from_pretrained(base_model_name, trust_remote_code=True)
+        
+        # Apply gate config if detected (for InternLM2)
+        if has_gate_config and config.llm_config.model_type == 'internlm2':
+            config.llm_config.elementwise_attn_output_gate = elementwise_gate
+            config.llm_config.headwise_attn_output_gate = headwise_gate
+            gate_type = "elementwise" if elementwise_gate else "headwise"
+            print(f"   ✅ Config loaded with {gate_type} gated attention")
+        else:
+            print("   ✅ Config loaded")
     
     # Step 2: Load model
     print(f"\n2️⃣ Loading model from checkpoint...")
+    
+    # CRITICAL: Verify Qwen2 gate patch is active before loading model
+    if has_gate_config and QWEN2_GATE_AVAILABLE:
+        try:
+            from transformers.models.qwen2.modeling_qwen2 import QWEN2_ATTENTION_CLASSES
+            from internvl.model.qwen2.modeling_qwen2_gate import (
+                Qwen2Attention as Qwen2AttentionGate,
+                Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
+                Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
+            )
+            # Check if patch is active
+            if QWEN2_ATTENTION_CLASSES.get('flash_attention_2') == Qwen2FlashAttention2Gate:
+                print(f"   ✅ Qwen2 gate patch is active (flash_attention_2)")
+            else:
+                print(f"   ⚠️  WARNING: Qwen2 gate patch may not be active!")
+                print(f"   🔧 Re-applying Qwen2 gate patch...")
+                QWEN2_ATTENTION_CLASSES['eager'] = Qwen2AttentionGate
+                QWEN2_ATTENTION_CLASSES['flash_attention_2'] = Qwen2FlashAttention2Gate
+                QWEN2_ATTENTION_CLASSES['sdpa'] = Qwen2SdpaAttentionGate
+                print(f"   ✅ Qwen2 gate patch re-applied")
+        except Exception as e:
+            print(f"   ⚠️  Could not verify Qwen2 gate patch: {e}")
+    
     try:
         # For q_proj/k_proj/v_proj gate version, we need ignore_mismatched_sizes=True
         # because gate version splits wqkv into q_proj/k_proj/v_proj, which doesn't match pretrained wqkv
         # For wqkv gate version, we don't need ignore_mismatched_sizes
         ignore_mismatched = (has_gate_config and not USE_WQKV_VERSION)  # q_proj/k_proj/v_proj version needs this
         
+        # Debug: Print config gate settings before loading
+        if has_gate_config and hasattr(config, 'llm_config'):
+            llm_config = config.llm_config
+            if isinstance(llm_config, dict):
+                model_type = llm_config.get('model_type', 'unknown')
+                elementwise = llm_config.get('elementwise_attn_output_gate', False)
+                headwise = llm_config.get('headwise_attn_output_gate', False)
+                print(f"   🔍 Config before loading: model_type={model_type}, elementwise_gate={elementwise}, headwise_gate={headwise}")
+        
+        # CRITICAL: Don't use device_map="auto" to avoid meta device issues
+        # Load to CPU first, then move to GPU manually
+        # CRITICAL: Pass config to ensure gate dimensions are correct
         model = InternVLChatModel.from_pretrained(
             checkpoint_path,
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
-            device_map="auto",
+            device_map=None,  # Load to CPU first to avoid meta device
+            low_cpu_mem_usage=False,  # Disable low_cpu_mem_usage to avoid meta device
+            config=config,  # Use the config we loaded (with gate settings)
             ignore_mismatched_sizes=ignore_mismatched
         )
         print("   ✅ Model loaded from checkpoint")
         
-        # CRITICAL: Load weights from checkpoint
+        # CRITICAL: Check if this is a PEFT/LoRA checkpoint first
+        # If it's PEFT, weights are already loaded by from_pretrained, skip manual loading
+        adapter_file = os.path.join(checkpoint_path, 'adapter_model.safetensors')
+        adapter_config_file = os.path.join(checkpoint_path, 'adapter_config.json')
+        adapter_index_file = os.path.join(checkpoint_path, 'adapter_model.safetensors.index.json')
+        is_peft_checkpoint = (os.path.exists(adapter_file) or 
+                             os.path.exists(adapter_config_file) or 
+                             os.path.exists(adapter_index_file))
+        
+        # Also check if model is actually a PEFT model
+        from peft import PeftModel
+        if hasattr(model, 'language_model') and isinstance(model.language_model, PeftModel):
+            is_peft_checkpoint = True
+            print(f"   🔍 Detected PEFT model - weights should be automatically loaded by from_pretrained()")
+        
+        # CRITICAL: Load weights from checkpoint only if NOT a PEFT checkpoint
         # Supports both LoRA format and direct weight format
         # Supports both q_proj/k_proj/v_proj format and wqkv format
-        if has_gate_config and USE_GATE_VERSION:
+        if has_gate_config and USE_GATE_VERSION and not is_peft_checkpoint:
             print(f"\n   🔧 Loading weights from checkpoint...")
             try:
                 from safetensors.torch import load_file
-                checkpoint_weights = load_file(os.path.join(checkpoint_path, "model.safetensors"))
+                import json
+                
+                # Helper function to load safetensors (supports both single and sharded)
+                def load_checkpoint_safetensors(checkpoint_path):
+                    """Load checkpoint safetensors, handling both single file and sharded formats."""
+                    # Check for sharded safetensors (model.safetensors.index.json)
+                    index_file = os.path.join(checkpoint_path, 'model.safetensors.index.json')
+                    if os.path.exists(index_file):
+                        print(f"   📦 Found sharded safetensors index: {index_file}")
+                        with open(index_file, 'r') as f:
+                            index_data = json.load(f)
+                        
+                        # Load all shards
+                        checkpoint_weights = {}
+                        weight_map = index_data.get('weight_map', {})
+                        shard_files = set(weight_map.values())
+                        
+                        print(f"   📦 Loading {len(shard_files)} shard files...")
+                        for shard_file in shard_files:
+                            shard_path = os.path.join(checkpoint_path, shard_file)
+                            if os.path.exists(shard_path):
+                                shard_dict = load_file(shard_path)
+                                checkpoint_weights.update(shard_dict)
+                            else:
+                                raise FileNotFoundError(f'Shard file not found: {shard_path}')
+                        
+                        print(f"   ✅ Loaded {len(checkpoint_weights)} keys from {len(shard_files)} shards")
+                        return checkpoint_weights
+                    
+                    # Try single file
+                    single_file = os.path.join(checkpoint_path, 'model.safetensors')
+                    if os.path.exists(single_file):
+                        print(f"   📦 Found single safetensors file: {single_file}")
+                        checkpoint_weights = load_file(single_file)
+                        print(f"   ✅ Loaded {len(checkpoint_weights)} keys from single file")
+                        return checkpoint_weights
+                    
+                    raise FileNotFoundError(f'No safetensors file found in {checkpoint_path}')
+                
+                checkpoint_weights = load_checkpoint_safetensors(checkpoint_path)
                 
                 # Check if checkpoint uses LoRA format
                 # Try q_proj LoRA format first (internvl_chat_finetune_gate.py with LoRA)
@@ -1390,25 +1711,145 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
                 # Try wqkv direct weight format (internvl_chat_finetune_wqkv.py without LoRA)
                 sample_key_wqkv_direct = "language_model.base_model.model.model.layers.0.attention.wqkv.weight"
                 
-                if sample_key_q_lora in checkpoint_weights:
+                # Also try alternative key formats (without extra base_model layer)
+                sample_key_q_lora_alt = "language_model.model.model.layers.0.attention.q_proj.base_layer.weight"
+                sample_key_wqkv_lora_alt = "language_model.model.model.layers.0.attention.wqkv.base_layer.weight"
+                sample_key_q_direct_alt = "language_model.model.model.layers.0.attention.q_proj.weight"
+                sample_key_wqkv_direct_alt = "language_model.model.model.layers.0.attention.wqkv.weight"
+                
+                # Try to find any matching key pattern
+                if sample_key_q_lora in checkpoint_weights or sample_key_q_lora_alt in checkpoint_weights:
                     print(f"   📦 Detected LoRA format (q_proj/k_proj/v_proj), merging and loading weights...")
                     _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path)
-                elif sample_key_wqkv_lora in checkpoint_weights:
+                elif sample_key_wqkv_lora in checkpoint_weights or sample_key_wqkv_lora_alt in checkpoint_weights:
                     print(f"   📦 Detected LoRA format (wqkv), merging and loading weights...")
                     _load_and_convert_lora_weights(model, checkpoint_weights, checkpoint_path)
-                elif sample_key_q_direct in checkpoint_weights:
+                elif sample_key_q_direct in checkpoint_weights or sample_key_q_direct_alt in checkpoint_weights:
                     print(f"   📦 Detected direct weight format (q_proj/k_proj/v_proj), loading weights...")
                     _load_direct_weights(model, checkpoint_weights, checkpoint_path)
-                elif sample_key_wqkv_direct in checkpoint_weights:
+                elif sample_key_wqkv_direct in checkpoint_weights or sample_key_wqkv_direct_alt in checkpoint_weights:
                     print(f"   📦 Detected direct weight format (wqkv), loading weights...")
                     _load_direct_weights(model, checkpoint_weights, checkpoint_path)
                 else:
-                    print(f"   ⚠️  Could not detect checkpoint weight format!")
-                    print(f"   🔍 Checked for: {sample_key_q_lora}, {sample_key_wqkv_lora}, {sample_key_q_direct}, {sample_key_wqkv_direct}")
+                    print(f"   ℹ️  Checkpoint doesn't use LoRA format or attention weights not found in model.safetensors")
+                    print(f"   ℹ️  If this is a PEFT checkpoint, weights should already be loaded by from_pretrained()")
             except Exception as e:
                 print(f"   ⚠️  Failed to load weights: {e}")
                 import traceback
                 traceback.print_exc()
+        # Always verify weights for PEFT checkpoints (even if we skip manual loading)
+        if is_peft_checkpoint:
+            print(f"\n   ℹ️  PEFT checkpoint detected - weights should be automatically loaded by from_pretrained()")
+            print(f"   ℹ️  Skipping manual weight loading for PEFT checkpoints")
+            
+            # CRITICAL: For PEFT models, we may need to merge LoRA weights explicitly
+            # Check if we need to merge and merge weights
+            try:
+                from peft import PeftModel
+                if hasattr(model, 'language_model') and isinstance(model.language_model, PeftModel):
+                    print(f"   🔧 Attempting to merge PEFT LoRA weights...")
+                    # Merge LoRA weights into base model
+                    model.language_model = model.language_model.merge_and_unload()
+                    print(f"   ✅ PEFT LoRA weights merged successfully")
+            except Exception as e:
+                print(f"   ⚠️  Could not merge PEFT weights (may already be merged): {e}")
+        
+        # CRITICAL: Always verify weights are correctly loaded (for both PEFT and non-PEFT)
+        if has_gate_config and USE_GATE_VERSION:
+            print(f"\n   🔍 Verifying model weights are correctly loaded...")
+            try:
+                from peft import PeftModel
+                lang_model = model.language_model
+                
+                # After merge_and_unload(), model is no longer PEFT
+                if isinstance(lang_model, PeftModel):
+                    print(f"   📌 Model is still PEFT (merge may have failed), checking base_model weights...")
+                    lang_model = lang_model.base_model
+                else:
+                    print(f"   📌 Model is not PEFT (merge successful), checking direct weights...")
+                
+                # Debug: Print model structure
+                print(f"   🔍 lang_model type: {type(lang_model)}")
+                print(f"   🔍 lang_model attributes: {[attr for attr in dir(lang_model) if not attr.startswith('_')][:10]}")
+                
+                # Get to the layers - try multiple paths
+                causal_lm_model = None
+                if hasattr(lang_model, 'model'):
+                    causal_lm_model = getattr(lang_model, 'model')
+                    print(f"   🔍 Found lang_model.model: {type(causal_lm_model)}")
+                elif hasattr(lang_model, 'base_model'):
+                    causal_lm_model = getattr(lang_model, 'base_model')
+                    print(f"   🔍 Found lang_model.base_model: {type(causal_lm_model)}")
+                else:
+                    causal_lm_model = lang_model
+                    print(f"   🔍 Using lang_model directly: {type(causal_lm_model)}")
+                
+                layers_model = None
+                if hasattr(causal_lm_model, 'model'):
+                    layers_model = getattr(causal_lm_model, 'model')
+                    print(f"   🔍 Found causal_lm_model.model: {type(layers_model)}")
+                elif hasattr(causal_lm_model, 'layers'):
+                    layers_model = causal_lm_model
+                    print(f"   🔍 causal_lm_model has layers directly: {type(layers_model)}")
+                else:
+                    print(f"   ⚠️  Could not find layers in causal_lm_model")
+                    print(f"   🔍 causal_lm_model attributes: {[attr for attr in dir(causal_lm_model) if not attr.startswith('_')][:15]}")
+                
+                if layers_model is not None and hasattr(layers_model, 'layers') and len(layers_model.layers) > 0:
+                    first_layer = layers_model.layers[0]
+                    # Qwen2 uses 'self_attn', InternLM2 uses 'attention'
+                    attn = None
+                    if hasattr(first_layer, 'self_attn'):
+                        attn = first_layer.self_attn
+                        print(f"   🔍 Found self_attn layer (Qwen2): {type(attn)}")
+                    elif hasattr(first_layer, 'attention'):
+                        attn = first_layer.attention
+                        print(f"   🔍 Found attention layer (InternLM2): {type(attn)}")
+                    else:
+                        print(f"   ⚠️  First layer does not have self_attn or attention attribute")
+                        print(f"   🔍 First layer attributes: {[attr for attr in dir(first_layer) if not attr.startswith('_')][:15]}")
+                    
+                    if attn is not None:
+                        # Check if weights are non-zero (not randomly initialized)
+                        if USE_WQKV_VERSION and hasattr(attn, 'wqkv'):
+                            weight_mean = attn.wqkv.weight.mean().item()
+                            weight_std = attn.wqkv.weight.std().item()
+                            has_nan = torch.isnan(attn.wqkv.weight).any().item()
+                            has_inf = torch.isinf(attn.wqkv.weight).any().item()
+                            print(f"   📊 First layer wqkv weight stats: mean={weight_mean:.6f}, std={weight_std:.6f}, has_nan={has_nan}, has_inf={has_inf}")
+                            if has_nan or has_inf:
+                                print(f"   ❌ ERROR: Weights contain NaN/Inf! This will cause generation errors.")
+                                print(f"   ⚠️  This suggests PEFT weights may not have been correctly loaded or merged.")
+                            elif abs(weight_mean) < 1e-6 and weight_std < 1e-6:
+                                print(f"   ⚠️  WARNING: Weights appear uninitialized (very small mean/std)")
+                                print(f"   ⚠️  This suggests weights may not have been loaded correctly.")
+                            else:
+                                print(f"   ✅ Weights appear to be loaded correctly (non-zero mean/std)")
+                        elif hasattr(attn, 'q_proj'):
+                            weight_mean = attn.q_proj.weight.mean().item()
+                            weight_std = attn.q_proj.weight.std().item()
+                            has_nan = torch.isnan(attn.q_proj.weight).any().item()
+                            has_inf = torch.isinf(attn.q_proj.weight).any().item()
+                            print(f"   📊 First layer q_proj weight stats: mean={weight_mean:.6f}, std={weight_std:.6f}, has_nan={has_nan}, has_inf={has_inf}")
+                            print(f"   📊 q_proj weight shape: {attn.q_proj.weight.shape}")
+                            if has_nan or has_inf:
+                                print(f"   ❌ ERROR: Weights contain NaN/Inf! This will cause generation errors.")
+                                print(f"   ⚠️  This suggests PEFT weights may not have been correctly loaded or merged.")
+                            elif abs(weight_mean) < 1e-6 and weight_std < 1e-6:
+                                print(f"   ⚠️  WARNING: Weights appear uninitialized (very small mean/std)")
+                                print(f"   ⚠️  This suggests weights may not have been loaded correctly.")
+                            else:
+                                print(f"   ✅ Weights appear to be loaded correctly (non-zero mean/std)")
+                        else:
+                            print(f"   ⚠️  Could not find wqkv or q_proj in attention layer")
+                            print(f"   🔍 attention attributes: {[attr for attr in dir(attn) if not attr.startswith('_')][:15]}")
+                else:
+                    print(f"   ⚠️  Could not access layers from model")
+            except Exception as e:
+                print(f"   ⚠️  Could not verify model weights: {e}")
+                import traceback
+                traceback.print_exc()
+        
         # Check if num_image_token matches training (should be 64 for 224x224 with ratio 0.5)
         expected_num_image_token = int((224 // 14) ** 2 * (0.5 ** 2))  # 64
         if model.num_image_token != expected_num_image_token:
@@ -1422,18 +1863,21 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
     except Exception as e:
         print(f"   ⚠️  Failed to load from checkpoint, trying base model: {e}")
         # Fallback to base model if checkpoint loading fails
-        # Apply gate config if detected
-        if has_gate_config and config.llm_config.model_type == 'internlm2':
+        # Apply gate config if detected (for InternLM2)
+        if has_gate_config and hasattr(config, 'llm_config') and config.llm_config.model_type == 'internlm2':
             print(f"   🔧 Applying gate config to base model...")
             config.llm_config.elementwise_attn_output_gate = elementwise_gate
             config.llm_config.headwise_attn_output_gate = headwise_gate
         
+        # CRITICAL: Don't use device_map="auto" to avoid meta device issues
+        # Load to CPU first, then move to GPU manually
         model = InternVLChatModel.from_pretrained(
             base_model_name,
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
-            device_map="auto",
-            config=config,
+            device_map=None,  # Load to CPU first to avoid meta device
+            low_cpu_mem_usage=False,  # Disable low_cpu_mem_usage to avoid meta device
+            config=config,  # Use the config we loaded (with gate settings if applicable)
             ignore_mismatched_sizes=has_gate_config and USE_GATE_VERSION
         )
         print("   ✅ Model loaded from base model")
@@ -1475,14 +1919,11 @@ def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2
     
     # CRITICAL FIX: Explicitly move model to GPU to ensure all components are on CUDA
     # device_map="auto" may leave some components on CPU, causing "Input type (CUDABFloat16Type) and weight type (CPUBFloat16Type)" error
+    # Also handle meta device: Cannot copy out of meta tensor; need to use to_empty() first
     print(f"\n4️⃣ Moving model to GPU...")
     if torch.cuda.is_available():
         device = torch.device("cuda:0")
-        model = model.to(device)
-        # Explicitly move vision_model to GPU (this is often the problematic component)
-        if hasattr(model, 'vision_model'):
-            model.vision_model = model.vision_model.to(device)
-        print(f"   ✅ Model moved to {device}")
+        model = _move_model_to_device(model, device)
     else:
         print(f"   ⚠️  CUDA not available, model remains on CPU")
     
@@ -1817,14 +2258,41 @@ def eval_model(args):
             with torch.no_grad():
                 # Ensure gradient is disabled (redundant but explicit for safety)
                 torch.set_grad_enabled(False)
-                output = model.chat(
-                    tokenizer=tokenizer,
-                    pixel_values=pixel_values,  # [num_frames, C, H, W]
-                    question=question,
-                    generation_config=generation_config,
-                    num_patches_list=num_patches_list,  # Each <image> represents 1 frame
-                    verbose=False
-                )
+                try:
+                    output = model.chat(
+                        tokenizer=tokenizer,
+                        pixel_values=pixel_values,  # [num_frames, C, H, W]
+                        question=question,
+                        generation_config=generation_config,
+                        num_patches_list=num_patches_list,  # Each <image> represents 1 frame
+                        verbose=False
+                    )
+                except RuntimeError as e:
+                    if "probability tensor" in str(e) or "inf" in str(e).lower() or "nan" in str(e).lower():
+                        print(f"   ⚠️  Generation failed due to NaN/Inf in logits. This suggests model weights may have issues.")
+                        print(f"   🔧 Trying with more conservative generation settings...")
+                        # Try with even more conservative settings
+                        generation_config_safe = dict(
+                            num_beams=1,
+                            do_sample=False,
+                            temperature=1.0,
+                            max_new_tokens=min(args.max_new_tokens, 64),  # Reduce max tokens
+                            repetition_penalty=1.0,  # Disable repetition penalty
+                        )
+                        try:
+                            output = model.chat(
+                                tokenizer=tokenizer,
+                                pixel_values=pixel_values,
+                                question=question,
+                                generation_config=generation_config_safe,
+                                num_patches_list=num_patches_list,
+                                verbose=False
+                            )
+                        except Exception as e2:
+                            print(f"   ❌ Generation still failed: {e2}")
+                            raise
+                    else:
+                        raise
             
             # Explicitly delete pixel_values and clear cache
             del pixel_values

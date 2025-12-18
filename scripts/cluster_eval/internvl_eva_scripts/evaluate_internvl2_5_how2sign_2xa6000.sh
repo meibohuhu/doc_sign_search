@@ -27,7 +27,8 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_16fps_1130/checkpoint-8499}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1212_elementgate/checkpoint-2039}"
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_querygate_elementwise_1215/checkpoint-4078}"
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_elementgate_1216/checkpoint-3058}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1212_elementgate/checkpoint-2548}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399}"
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2874}"
@@ -35,7 +36,7 @@ CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/check
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps_freeze/checkpoint-2874}"
 
 
-MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-2B}"
+MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-1B}"
 # MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-1B}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224}"
 # VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/openasl/cropped_videos_openasl_test}"
@@ -48,7 +49,7 @@ OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/internvl_eval/}"
 
 # Evaluation parameters
 # MAX_SAMPLES=${MAX_SAMPLES:-20}  # Set to a number to limit samples, empty for full evaluation
-MAX_SAMPLES=${MAX_SAMPLES:-15}
+MAX_SAMPLES=${MAX_SAMPLES:-55}
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}  # Minimum number of frames (set to 6 to ensure 6 frames)
 MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-120}  # Maximum number of frames (set to 6 to fix at 6 frames)
 SAMPLING_METHOD=${SAMPLING_METHOD:-fps16.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
@@ -160,7 +161,7 @@ else
 fi
 echo ""
 
-$CONDA_PYTHON scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_query_gate.py \
+$CONDA_PYTHON scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign.py \
     "${EVAL_ARGS[@]}" \
     2>&1 | tee "$LOG_FILE"
 
