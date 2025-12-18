@@ -1583,7 +1583,7 @@ def main():
             if bias_init_count > 0:
                 logger.info(f'✅ Initialized q_proj/k_proj/v_proj bias for {bias_init_count // 3} layers (Qwen2). Will load from pretrained model.')
         
-        # Helper function to load safetensors (handles both single file and sharded)
+        # Helper function to load safetensors (handles both single file and sharded(4B/8B))
         def load_safetensors_state_dict(model_path_or_dir):
             """
             Load safetensors state dict, handling both single file and sharded formats.
@@ -1770,21 +1770,25 @@ def main():
                     if loaded_count > 0:
                         logger.info(f'✅ Manually loaded base QKV weights for {loaded_count} layers')
                     else:
-                        logger.warning('⚠️  No base QKV weights were loaded. Will rely on random initialization.')
+                        raise RuntimeError( ##### remove fallback, 直接抛出异常
+                            f'❌ CRITICAL: No base QKV weights were loaded for InternLM2. '
+                            f'This will cause training to fail with high initial loss. '
+                            f'Please check that pretrained weights are available at: {pretrained_model_path}'
+                        )
                 else:
-                    logger.warning(
-                        f'⚠️  Pretrained weight file not found. '
+                    raise FileNotFoundError(   ##### remove fallback, 直接抛出异常
+                        f'❌ CRITICAL: Pretrained weight file not found for InternLM2. '
                         f'Tried: {pretrained_model_path} (checked for model.safetensors and model.safetensors.index.json). '
-                        f'Will rely on random initialization.'
+                        f'Cannot proceed without pretrained weights. Please ensure the model weights are available.'
                     )
+            except (FileNotFoundError, RuntimeError):
+                # Re-raise these errors
+                raise
             except Exception as e:
-                logger.warning(
-                    f'⚠️  Failed to manually load base QKV weights: {e}. '
-                    f'Will rely on random initialization. '
-                    f'This may cause NaN/Inf issues.'
-                )
-                import traceback
-                logger.debug(traceback.format_exc())
+                raise RuntimeError(   ##### remove fallback, 直接抛出异常
+                    f'❌ CRITICAL: Failed to manually load base QKV weights for InternLM2: {e}. '
+                    f'This will cause training to fail. Please check the error above and ensure pretrained weights are available.'
+                ) from e
         
         # Gate parameters are automatically initialized by _init_weights (same as Qwen3)
         ## 初始化：只在模型加载时进行一次（24 层）
@@ -2007,21 +2011,25 @@ def main():
                     if loaded_count > 0:
                         logger.info(f'✅ Manually loaded base q_proj weights for {loaded_count} layers (Qwen2)')
                     else:
-                        logger.warning('⚠️  No base q_proj weights were loaded for Qwen2. Will rely on random initialization.')
+                        raise RuntimeError(   ##### remove fallback, 直接抛出异常
+                            f'❌ CRITICAL: No base q_proj weights were loaded for Qwen2. '
+                            f'This will cause training to fail with high initial loss. '
+                            f'Please check that pretrained weights are available at: {pretrained_model_path}'
+                        )
                 else:
-                    logger.warning(
-                        f'⚠️  Pretrained weight file not found for Qwen2. '
+                    raise FileNotFoundError(   ##### remove fallback, 直接抛出异常
+                        f'❌ CRITICAL: Pretrained weight file not found for Qwen2. '
                         f'Tried: {pretrained_model_path} (checked for model.safetensors and model.safetensors.index.json). '
-                        f'Will rely on random initialization.'
+                        f'Cannot proceed without pretrained weights. Please ensure the model weights are available.'
                     )
+            except (FileNotFoundError, RuntimeError):
+                # Re-raise these errors
+                raise
             except Exception as e:
-                logger.warning(
-                    f'⚠️  Failed to manually load base q_proj weights for Qwen2: {e}. '
-                    f'Will rely on random initialization. '
-                    f'This may cause NaN/Inf issues.'
-                )
-                import traceback
-                logger.debug(traceback.format_exc())
+                raise RuntimeError(   ##### remove fallback, 直接抛出异常
+                    f'❌ CRITICAL: Failed to manually load base q_proj weights for Qwen2: {e}. '
+                    f'This will cause training to fail. Please check the error above and ensure pretrained weights are available.'
+                ) from e
             
             # Verify and fix gate part initialization for Qwen2
             logger.info('Verifying gate part initialization for Qwen2...')
