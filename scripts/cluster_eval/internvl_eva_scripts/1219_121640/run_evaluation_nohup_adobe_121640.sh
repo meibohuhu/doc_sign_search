@@ -2,7 +2,7 @@
 #
 # Helper script to run InternVL evaluation with nohup
 # Usage: ./run_evaluation_nohup.sh [GPU_ID] [MAX_SAMPLES]
-# Example: ./run_evaluation_nohup_adobe.sh 1 2337
+# Example: ./run_evaluation_nohup_adobe.sh 6 2337
 
 # Get arguments
 GPU_ID=${1:-"1"}  # Default to GPU 0
@@ -11,7 +11,7 @@ MAX_SAMPLES=${2:-""}  # Default to empty (use script default or full evaluation)
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="/code/doc_sign_search"
-EVAL_SCRIPT="$SCRIPT_DIR/evaluate_internvl2_5_how2sign_2xa6000_0.sh"
+EVAL_SCRIPT="$SCRIPT_DIR/evaluate_internvl2_5_how2sign_2xa6000_0_121640.sh"
 
 # Generate nohup output filename with timestamp
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
