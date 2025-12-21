@@ -71,7 +71,9 @@ class InternVLChatModel(PreTrainedModel):
             self.vision_model = InternVisionModel(config.vision_config)
         if language_model is not None:
             self.language_model = language_model
+            print(f'[PATH 1] language_model isssssss: {self.language_model}')   #### mhu 1220: 这个是gate_wqkv的model
         else:
+            print(f'[PATH 2] language_model is None, creating new one with architecture: {config.llm_config.architectures[0]}')
             if config.llm_config.architectures[0] == 'LlamaForCausalLM':
                 self.language_model = LlamaForCausalLM(config.llm_config)
             elif config.llm_config.architectures[0] == 'InternLM2ForCausalLM':
@@ -211,17 +213,54 @@ class InternVLChatModel(PreTrainedModel):
             ignore_flag = True
 
         input_embeds = input_embeds.reshape(B, N, C)
+        
+        # 计算 visual_summary z: 从 vit_embeds 聚合得到 [B, C]   mhu 1220: 这个是gate_wqkv的visual_summary
+        visual_summary = None
+        if hasattr(self.language_model.config, 'visual_summary_head_gate') and self.language_model.config.visual_summary_head_gate:
+            if len(vit_embeds) > 0:
+                # vit_embeds: [num_frames, num_patches, C] 或 [num_visual_tokens, C]
+                # 先 flatten 到 2 维，然后对所有 visual tokens 做平均池化
+                if vit_embeds.dim() == 3:
+                    # [num_frames, num_patches, C] -> [num_frames * num_patches, C]
+                    vit_embeds_flat = vit_embeds.reshape(-1, vit_embeds.shape[-1])
+                else:
+                    vit_embeds_flat = vit_embeds
+                # 对所有 visual tokens 做聚合得到 [1, C]
+                aggregation_mode = getattr(self.language_model.config, 'visual_summary_aggregation', 'mean')
+                # print(f'aggregation_mode: {aggregation_mode}')
+                if aggregation_mode == 'mean':
+                    visual_summary_flat = vit_embeds_flat.mean(dim=0, keepdim=True)  # [1, C]
+                elif aggregation_mode == 'max':
+                    visual_summary_flat = vit_embeds_flat.max(dim=0, keepdim=True)[0]  # [1, C]
+                elif aggregation_mode == 'sum':
+                    visual_summary_flat = vit_embeds_flat.sum(dim=0, keepdim=True)  # [1, C]
+                elif aggregation_mode == 'first':
+                    visual_summary_flat = vit_embeds_flat[0:1]  # [1, C] - 取第一个 token
+                else:
+                    # fallback to mean
+                    visual_summary_flat = vit_embeds_flat.mean(dim=0, keepdim=True)  # [1, C]
+                visual_summary = visual_summary_flat.expand(B, -1)  # [B, C]
+                # print('visual_summary from modeling_internvl_chat: ', visual_summary.shape)   ## visual_summary:  torch.Size([1, 2048]) 1 batch size, 2048 hidden size
+            else:
+                logger.warning(f"[Visual Summary] visual_summary_head_gate=True but vit_embeds is empty (len={len(vit_embeds)})")
+        
         # 步骤 5: 融合后的 embeddings 进入 LLM 模型     
-        outputs = self.language_model(
-            inputs_embeds=input_embeds,
-            attention_mask=attention_mask,
-            position_ids=position_ids,
-            past_key_values=past_key_values,
-            use_cache=use_cache,
-            output_attentions=output_attentions,
-            output_hidden_states=output_hidden_states,
-            return_dict=return_dict,
-        )
+        # Only pass visual_summary if it's not None (i.e., when using gate version that supports it)
+        forward_kwargs = {
+            'inputs_embeds': input_embeds,
+            'attention_mask': attention_mask,
+            'position_ids': position_ids,
+            'past_key_values': past_key_values,
+            'use_cache': use_cache,
+            'output_attentions': output_attentions,
+            'output_hidden_states': output_hidden_states,
+            'return_dict': return_dict,
+        }
+        # Only add visual_summary if it's provided (gate version supports it)
+        if visual_summary is not None:
+            forward_kwargs['visual_summary'] = visual_summary
+            # print(f'visual_summary.shape: {visual_summary.shape}')
+        outputs = self.language_model(**forward_kwargs)
         logits = outputs.logits
 
         loss = None

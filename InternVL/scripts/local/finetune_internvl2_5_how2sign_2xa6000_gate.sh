@@ -21,7 +21,7 @@ export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
-MODEL_NAME="OpenGVLab/InternVL2_5-1B"
+MODEL_NAME="OpenGVLab/InternVL2_5-2B"
 OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints"
 # Use local data paths
 # META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
@@ -65,7 +65,7 @@ echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
 
 # Check if model is already cached
-MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-1B"
+MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B"
 if [ -d "$MODEL_CACHE_DIR" ]; then
     echo "✅ Model found in cache: $MODEL_CACHE_DIR"
     echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" 2>/dev/null | cut -f1 || echo 'N/A')"
@@ -138,7 +138,8 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --warmup_ratio 0.03 \
     --weight_decay 0.01 \
     --lr_scheduler_type cosine \
-    --headwise_attn_output_gate True \
+    --headwise_attn_output_gate  True \
+
     2>&1 | tee "$LOG_FILE"
 
 TRAINING_EXIT_CODE=${PIPESTATUS[0]}

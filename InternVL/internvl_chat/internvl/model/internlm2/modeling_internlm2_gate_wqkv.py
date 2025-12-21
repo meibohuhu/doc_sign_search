@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ PyTorch InternLM2 model."""
+from audioop import bias
 import math
 import queue
 import threading
@@ -316,26 +317,17 @@ class InternLM2Attention(nn.Module):
         self.headwise_attn_output_gate = config.headwise_attn_output_gate
         self.elementwise_attn_output_gate = config.elementwise_attn_output_gate
         
-        # Fix 1: Add LayerNorm for normalizing hidden_states before computing gate_score
-        # Fix 2: Add scaling factor for gate_score computation
-        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            # # LayerNorm to normalize hidden_states before computing gate_score
-            # # This makes gate_score computation scale-invariant
-            # self.gate_norm = nn.LayerNorm(self.hidden_size, eps=config.rms_norm_eps)
-            # # # Scaling factor to control the magnitude of gate_score
-            # # # Smaller values (e.g., 0.1) make gate_score less sensitive to hidden_states magnitude
-            # self.gate_scale = 0.1
-            # print(
-            #     f"[Gated Attention Init] Layer attention module initialized with "
-            #     f"headwise={self.headwise_attn_output_gate}, "
-            #     f"elementwise={self.elementwise_attn_output_gate}, "
-            #     f"gate_scale={self.gate_scale}"
-            # )
-            self.gate_norm = None
-            self.gate_scale = None
-        else:
-            self.gate_norm = None
-            self.gate_scale = None
+        # Note: Currently disabled - can be enabled by uncommenting below
+        self.gate_norm = None
+        self.gate_scale = None
+        
+        # Visual-conditioned gated attention  mh 1220: 视觉信息条件化门控注意力
+        self.visual_summary_head_gate = getattr(config, 'visual_summary_head_gate', False)
+        self.visual_gate_mode = getattr(config, 'visual_gate_mode', 'add_logits')
+        if self.visual_summary_head_gate:
+            self.visual_gate_proj = nn.Linear(self.hidden_size, self.num_heads, bias=True)  ### 有 bias：g_vis = W * visual_summary + b
+            nn.init.zeros_(self.visual_gate_proj.weight)
+            nn.init.zeros_(self.visual_gate_proj.bias)
         
         # Adjust wqkv output dimension based on gating mode
         base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
@@ -348,13 +340,14 @@ class InternLM2Attention(nn.Module):
         else:
             total_dim = base_qkv_dim
 
+        # Use config.bias to match original InternLM2 behavior (same as modeling_internlm2.py)
         self.wqkv = nn.Linear(
             self.hidden_size,
             total_dim,
-            bias=config.qkv_bias,
+            bias=config.bias,
         )
 ######################
-        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.qkv_bias)
+        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.bias)
         self._init_rope()
 
     def _init_rope(self):
@@ -396,6 +389,7 @@ class InternLM2Attention(nn.Module):
         past_key_value: Optional[Tuple[torch.Tensor]] = None,
         output_attentions: bool = False,
         use_cache: bool = False,
+        visual_summary: Optional[torch.Tensor] = None,
         **kwargs,
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
         if 'padding_mask' in kwargs:
@@ -405,6 +399,12 @@ class InternLM2Attention(nn.Module):
             )
 
         bsz, q_len, _ = hidden_states.size()
+        
+        # Compute visual gate g_vis if visual_summary is provided
+        g_vis = None
+        if self.visual_summary_head_gate and visual_summary is not None:
+            g_vis_raw = self.visual_gate_proj(visual_summary)  # [B, num_heads]   #### 将 visual summary 映射为每个 head 一个标量
+            g_vis = g_vis_raw.unsqueeze(1).unsqueeze(-1)  # [B, 1, num_heads, 1]
 
         # mh 1211: Compute wqkv output once (same as Qwen3's approach)
         # Qwen3 computes q_proj once and separates query_states and gate_score from it
@@ -440,7 +440,7 @@ class InternLM2Attention(nn.Module):
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
             else:  # elementwise
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
-            
+        
             # Log gate_score statistics - ALWAYS print, no restrictions
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
@@ -517,7 +517,43 @@ class InternLM2Attention(nn.Module):
         # mh 1211 Phase 1: Apply gating
         if gate_score is not None:
             gate_score = gate_score.transpose(1, 2)  # [bsz, num_heads, q_len, 1] or [bsz, num_heads, q_len, head_dim]
-            gate_sigmoid = torch.sigmoid(gate_score)
+            ### gate_sigmoid = torch.sigmoid(gate_score)
+            gate_tok_raw = gate_score  # [bsz, num_heads, q_len, 1] or [bsz, num_heads, q_len, head_dim]
+            
+            # Combine with visual gate if available
+            if g_vis is not None:
+                if self.visual_gate_mode == 'add_logits':
+                    # add_logits: sigmoid(raw_tok + raw_vis)
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)  # [B, q_len, num_heads, 1]
+                    g_vis_expanded = g_vis_expanded.transpose(1, 2)  # [B, num_heads, q_len, 1]
+                    if gate_tok_raw.shape[-1] == 1:
+                        gate_combined_raw = gate_tok_raw + g_vis_expanded
+                    else:
+                        # elementwise: expand g_vis to match head_dim
+                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                        gate_combined_raw = gate_tok_raw + g_vis_expanded
+                    gate_sigmoid = torch.sigmoid(gate_combined_raw)
+                elif self.visual_gate_mode == 'mul':
+                    # mul: g = g_tok * g_vis
+                    g_tok_sigmoid = torch.sigmoid(gate_tok_raw)
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1).transpose(1, 2)
+                    if gate_tok_raw.shape[-1] == 1:
+                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
+                    else:
+                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
+                    gate_sigmoid = g_tok_sigmoid * g_vis_sigmoid
+                elif self.visual_gate_mode == 'replace':
+                    # replace: 只用 g_vis
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1).transpose(1, 2)
+                    if gate_tok_raw.shape[-1] > 1:
+                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                    gate_sigmoid = torch.sigmoid(g_vis_expanded)
+                else:
+                    gate_sigmoid = torch.sigmoid(gate_tok_raw)
+            else:
+                gate_sigmoid = torch.sigmoid(gate_tok_raw)
+            
             attn_output_before_gating = attn_output.clone()
             attn_output = attn_output * gate_sigmoid
 
@@ -560,6 +596,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
         past_key_value: Optional[Tuple[torch.Tensor]] = None,
         output_attentions: bool = False,
         use_cache: bool = False,
+        visual_summary: Optional[torch.Tensor] = None,
         **kwargs,
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
         # InternLM2FlashAttention2 attention does not support output_attentions
@@ -575,6 +612,14 @@ class InternLM2FlashAttention2(InternLM2Attention):
         output_attentions = False
 
         bsz, q_len, _ = hidden_states.size()
+        
+        # Compute visual gate g_vis if visual_summary is provided
+        g_vis = None
+        if self.visual_summary_head_gate and visual_summary is not None:
+            # print("visual_summary is not None")
+            # print('visual_summary: ', visual_summary.shape)   ## visual_summary:  torch.Size([1, 2048])
+            g_vis_raw = self.visual_gate_proj(visual_summary)  # [B, num_heads]
+            g_vis = g_vis_raw.unsqueeze(1).unsqueeze(-1)  # [B, 1, num_heads, 1]
         
     ######### mhu 1211 add gate_qkv_states #########
         # qkv_states = self.wqkv(hidden_states)
@@ -669,7 +714,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
             else:  # elementwise
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
-            
+        
             # Log gate_score statistics - ALWAYS print, no restrictions
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
@@ -677,7 +722,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
             negative_ratio = (gate_score < 0).float().mean().item()
             small_positive_ratio = ((gate_score >= 0) & (gate_score < 2.0)).float().mean().item()
             large_positive_ratio = (gate_score >= 2.0).float().mean().item()
-
+                
             #### gate_score 的统计信息 gate_score shape: [1, 7007, 16, 1] — [batch=1, seq_len=7007, num_heads=16, gate_dim=1]
             #### gate_score raw range: [-0.1816, 0.1621] — 原始值范围（归一化+缩放后）gate_score raw mean: -0.0087 — 平均值接近 0 gate_score raw std: 0.0439 — 标准差较小
             #### sigmoid(gate_score) range: [0.4551, 0.5391] — sigmoid 后的范围
@@ -713,7 +758,7 @@ class InternLM2FlashAttention2(InternLM2Attention):
                 f"[Gated Attention - Flash] ERROR: qkv_states contains NaN/Inf after rearrange! "
                 f"qkv_states shape: {qkv_states.shape}"
             )
-
+    
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
         value_states = value_states.transpose(1, 2)
@@ -766,23 +811,55 @@ class InternLM2FlashAttention2(InternLM2Attention):
         
         # mh1211 Phase 1: Apply gating (before reshape)
         if gate_score is not None:
-     
-            # Flash Attention returns [bsz, q_len, num_heads, head_dim]
-            # gate_score: [bsz, q_len, num_heads, 1] or [bsz, q_len, num_heads, head_dim]
-            # Ensure shapes match
-            if attn_output.shape != gate_score.shape:
-                # If gate_score is [bsz, q_len, num_heads, 1] and attn_output is [bsz, q_len, num_heads, head_dim]
-                # we need to expand gate_score
-                if gate_score.shape[-1] == 1 and attn_output.shape[-1] > 1:
-                    gate_score = gate_score.expand_as(attn_output)
-                else:
-                    # Log shape mismatch for debugging
-                    logger.warning(
-                        f"[Gated Attention - Flash] Shape mismatch: "
-                        f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}"
-                    )
+            gate_tok_raw = gate_score  # [bsz, q_len, num_heads, 1] or [bsz, q_len, num_heads, head_dim]
             
-            gate_sigmoid = torch.sigmoid(gate_score)
+            # Combine with visual gate if available
+            if g_vis is not None:
+                # Flash Attention returns [bsz, q_len, num_heads, head_dim]
+                # g_vis: [B, 1, num_heads, 1]
+                if self.visual_gate_mode == 'add_logits':
+                    
+                    # add_logits: sigmoid(raw_tok + raw_vis)
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)  # [B, q_len, num_heads, 1]
+                    if gate_tok_raw.shape[-1] == 1:
+                        gate_combined_raw = gate_tok_raw + g_vis_expanded
+                    else:
+                        # elementwise: expand g_vis to match head_dim
+                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                        gate_combined_raw = gate_tok_raw + g_vis_expanded
+                    gate_sigmoid = torch.sigmoid(gate_combined_raw)
+                    ########## # 每个 token，每个 head 一个 gate 值， 6992个token， 16个head， 每个head 128个维度
+                    # print('gate_combined_raw: ', gate_combined_raw.shape)   ## gate_combined_raw:  torch.Size([1, 6992, 16, 128])， gate_combined_raw:  torch.Size([1, 7001, 16, 1])
+                elif self.visual_gate_mode == 'mul':
+                    # mul: g = g_tok * g_vis
+                    g_tok_sigmoid = torch.sigmoid(gate_tok_raw)
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)
+                    if gate_tok_raw.shape[-1] == 1:
+                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
+                    else:
+                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
+                    gate_sigmoid = g_tok_sigmoid * g_vis_sigmoid
+                    # print('gate_combined_raw: ', gate_combined_raw.shape)   ## gate_combined_raw:  torch.Size([1, 7008, 16, 1])
+
+                elif self.visual_gate_mode == 'replace':
+                    # replace: 只用 g_vis
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)
+                    if gate_tok_raw.shape[-1] > 1:
+                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                    gate_sigmoid = torch.sigmoid(g_vis_expanded)
+                    # print('g_vis_expanded: ', g_vis_expanded.shape)   ## gate_combined_raw:  torch.Size([1, 7008, 16, 1])
+
+                else:
+                    gate_sigmoid = torch.sigmoid(gate_tok_raw)
+            else:
+                gate_sigmoid = torch.sigmoid(gate_tok_raw)
+            
+            # Ensure shapes match
+            if attn_output.shape != gate_sigmoid.shape:
+                if gate_sigmoid.shape[-1] == 1 and attn_output.shape[-1] > 1:
+                    gate_sigmoid = gate_sigmoid.expand_as(attn_output)
+            
             attn_output_before_gating = attn_output.clone()
             
             # Check for NaN or Inf before gating
@@ -795,21 +872,14 @@ class InternLM2FlashAttention2(InternLM2Attention):
             if torch.isnan(attn_output).any() or torch.isinf(attn_output).any():
                 logger.error(f"[Gated Attention - Flash] ERROR: attn_output contains NaN/Inf after gating!")
             
-            # Log gating effect - ALWAYS print, no restrictions 应用 gating 后的效果
-            ## attn_output before: mean=0.0017, std=0.1367 — 应用 gating 前的均值和标准差
-            ## attn_output after: mean=0.0008, std=0.0679 — 应用 gating 后的均值和标准差
-            ## gating ratio (after/before mean): 0.4931 — 约 0.5，表示 gating 接近中性（不抑制也不增强）
-            # print(
-            #     f"[Gated Attention - Flash] Applied gating - "
-            #     f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}, "
-            #     f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
-            #     f"std={attn_output_before_gating.std().item():.4f}, "
-            #     f"attn_output after: mean={attn_output.mean().item():.4f}, "
-            #     f"std={attn_output.std().item():.4f}, "
-            #     f"gating ratio (after/before mean): {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
-            #     f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}, min: {gate_sigmoid.min().item():.4f}, max: {gate_sigmoid.max().item():.4f}, "
-            #     f"attn_output zero ratio: {(attn_output == 0).float().mean().item():.4f}"
-            # )
+            # # Log gating effect
+            # print(f"[Gated Attention - Flash] Applied gating - "
+            #       f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
+            #       f"std={attn_output_before_gating.std().item():.4f}, "
+            #       f"attn_output after: mean={attn_output.mean().item():.4f}, "
+            #       f"std={attn_output.std().item():.4f}, "
+            #       f"gating ratio: {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
+            #       f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}")
         
         attn_output = attn_output.reshape(bsz, q_len, self.hidden_size).contiguous()
         
@@ -956,6 +1026,7 @@ class InternLM2DecoderLayer(nn.Module):
         past_key_value: Optional[Tuple[torch.Tensor]] = None,
         output_attentions: Optional[bool] = False,
         use_cache: Optional[bool] = False,
+        visual_summary: Optional[torch.Tensor] = None,
         **kwargs,
     ) -> Tuple[torch.FloatTensor, Optional[Tuple[torch.FloatTensor, torch.FloatTensor]]]:
         """
@@ -990,6 +1061,7 @@ class InternLM2DecoderLayer(nn.Module):
             past_key_value=past_key_value,
             output_attentions=output_attentions,
             use_cache=use_cache,
+            visual_summary=visual_summary,
             **kwargs,
         )
         hidden_states = residual + hidden_states
@@ -1192,6 +1264,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
         output_attentions: Optional[bool] = None,
         output_hidden_states: Optional[bool] = None,
         return_dict: Optional[bool] = None,
+        visual_summary: Optional[torch.Tensor] = None,
     ) -> Union[Tuple, BaseModelOutputWithPast]:
         output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
         output_hidden_states = (
@@ -1266,9 +1339,10 @@ class InternLM2Model(InternLM2PreTrainedModel):
             if self.gradient_checkpointing and self.training:
 
                 def create_custom_forward(module):
-                    def custom_forward(*inputs):
-                        # None for past_key_value
-                        return module(*inputs, output_attentions, None)
+                    def custom_forward(hidden_states, attention_mask, position_ids, past_key_value, visual_summary):
+                        return module(hidden_states, attention_mask=attention_mask, position_ids=position_ids,
+                                    past_key_value=past_key_value, output_attentions=output_attentions,
+                                    use_cache=use_cache, visual_summary=visual_summary)
 
                     return custom_forward
 
@@ -1278,6 +1352,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
                     attention_mask,
                     position_ids,
                     None,
+                    visual_summary,
                 )
             else:
                 layer_outputs = decoder_layer(
@@ -1287,6 +1362,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
                     past_key_value=past_key_value,
                     output_attentions=output_attentions,
                     use_cache=use_cache,
+                    visual_summary=visual_summary,
                 )
 
             hidden_states = layer_outputs[0]
@@ -1361,6 +1437,7 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
         output_attentions: Optional[bool] = None,
         output_hidden_states: Optional[bool] = None,
         return_dict: Optional[bool] = None,
+        visual_summary: Optional[torch.Tensor] = None,
     ) -> Union[Tuple, CausalLMOutputWithPast]:
         r"""
         Args:
@@ -1405,6 +1482,7 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
             return_dict=return_dict,
+            visual_summary=visual_summary,
         )
 
         hidden_states = outputs[0]
