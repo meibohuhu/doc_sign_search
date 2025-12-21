@@ -316,26 +316,9 @@ class InternLM2Attention(nn.Module):
         self.headwise_attn_output_gate = config.headwise_attn_output_gate
         self.elementwise_attn_output_gate = config.elementwise_attn_output_gate
         
-        # Fix 1: Add LayerNorm for normalizing hidden_states before computing gate_score
-        # Fix 2: Add scaling factor for gate_score computation
-        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            # # LayerNorm to normalize hidden_states before computing gate_score
-            # # This makes gate_score computation scale-invariant
-            # self.gate_norm = nn.LayerNorm(self.hidden_size, eps=config.rms_norm_eps)
-            # # # Scaling factor to control the magnitude of gate_score
-            # # # Smaller values (e.g., 0.1) make gate_score less sensitive to hidden_states magnitude
-            # self.gate_scale = 0.1
-            # print(
-            #     f"[Gated Attention Init] Layer attention module initialized with "
-            #     f"headwise={self.headwise_attn_output_gate}, "
-            #     f"elementwise={self.elementwise_attn_output_gate}, "
-            #     f"gate_scale={self.gate_scale}"
-            # )
-            self.gate_norm = None
-            self.gate_scale = None
-        else:
-            self.gate_norm = None
-            self.gate_scale = None
+        # Note: Currently disabled - can be enabled by uncommenting below
+        self.gate_norm = None
+        self.gate_scale = None
         
         # Adjust wqkv output dimension based on gating mode
         base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim

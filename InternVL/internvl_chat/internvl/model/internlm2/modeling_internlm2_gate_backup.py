@@ -337,48 +337,25 @@ class InternLM2Attention(nn.Module):
             self.gate_norm = None
             self.gate_scale = None
         
-        # mh1213: Changed to query-dependent gate (similar to Qwen3)
-        # Split wqkv into separate q_proj, k_proj, v_proj
-        # Gate score is extracted only from q_proj output
+        # Adjust wqkv output dimension based on gating mode
+        base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
         if self.headwise_attn_output_gate:
-            # q_proj: query + gate (head-wise)
-            self.q_proj = nn.Linear(
-                self.hidden_size,
-                self.num_heads * self.head_dim + self.num_heads,
-                bias=config.qkv_bias,
-            )
+            gate_dim = self.num_heads
+            total_dim = base_qkv_dim + gate_dim
         elif self.elementwise_attn_output_gate:
-            # q_proj: query + gate (element-wise)
-            self.q_proj = nn.Linear(
-                self.hidden_size,
-                self.num_heads * self.head_dim * 2,
-                bias=config.qkv_bias,
-            )
+            gate_dim = self.num_heads * self.head_dim
+            total_dim = base_qkv_dim + gate_dim
         else:
-            # Standard q_proj
-            self.q_proj = nn.Linear(
-                self.hidden_size,
-                self.num_heads * self.head_dim,
-                bias=config.qkv_bias,
-            )
-        
-        # k_proj and v_proj are standard (no gate)
-        self.k_proj = nn.Linear(
+            total_dim = base_qkv_dim
+
+        # Use config.bias to match original InternLM2 behavior (same as modeling_internlm2.py)
+        self.wqkv = nn.Linear(
             self.hidden_size,
-            self.num_key_value_heads * self.head_dim,
-            bias=config.qkv_bias,
+            total_dim,
+            bias=config.bias,
         )
-        self.v_proj = nn.Linear(
-            self.hidden_size,
-            self.num_key_value_heads * self.head_dim,
-            bias=config.qkv_bias,
-        )
-        
-        # mh: Gate part initialization is handled by _init_weights (same as Qwen3)
-        # All Linear modules (including q_proj with gate) are initialized with N(0, std^2)
-        
 ######################
-        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.qkv_bias)
+        self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.bias)
         self._init_rope()
 
     def _init_rope(self):
@@ -430,78 +407,68 @@ class InternLM2Attention(nn.Module):
 
         bsz, q_len, _ = hidden_states.size()
 
-        # mh: Query-dependent gate (extract gate_score from q_proj only)
-        query_states = self.q_proj(hidden_states)
-        key_states = self.k_proj(hidden_states)
-        value_states = self.v_proj(hidden_states)
+        # mh 1211: Compute wqkv output once (same as Qwen3's approach)
+        # Qwen3 computes q_proj once and separates query_states and gate_score from it
+        # InternLM2 computes wqkv once and separates qkv_base and gate_score_raw from it
+        qkv_states = self.wqkv(hidden_states)
 
-        # Extract gate_score from q_proj output (similar to Qwen3)
-        if self.headwise_attn_output_gate:
-            query_states = query_states.view(bsz, q_len, self.num_key_value_heads, -1)
-            query_states, gate_score = torch.split(
-                query_states,
-                [self.head_dim * self.num_key_value_groups, self.num_key_value_groups],
-                dim=-1
+        # Phase 1: Separate gate_score from standard qkv
+        base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
+       
+        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+            # Separate standard qkv and gate_score (same as Qwen3's approach)
+            if self.headwise_attn_output_gate:
+                gate_dim = self.num_heads
+            else:  # elementwise
+                gate_dim = self.num_heads * self.head_dim
+           
+            qkv_base = qkv_states[:, :, :base_qkv_dim]
+            # Extract gate_score from wqkv output (same as Qwen3 extracts from q_proj)
+            gate_score_raw = qkv_states[:, :, base_qkv_dim:]
+            # Apply scaling factor to gate_score
+            # gate_score_raw = gate_score_raw * self.gate_scale
+            
+            # Process qkv_base (standard flow)
+            qkv_states = rearrange(
+                qkv_base,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
             )
-            # Reshape to expand all query heads: [b, q, num_key_value_heads, num_key_value_groups * head_dim] -> [b, q, num_heads, head_dim]
-            query_states = query_states.reshape(bsz, q_len, self.num_heads, self.head_dim)
-            # Reshape gate_score: [b, q, num_key_value_heads, num_key_value_groups] -> [b, q, num_heads, 1]
-            gate_score = gate_score.reshape(bsz, q_len, self.num_heads, 1)
-        elif self.elementwise_attn_output_gate:
-            query_states = query_states.view(bsz, q_len, self.num_key_value_heads, -1)
-            query_states, gate_score = torch.split(
-                query_states,
-                [self.head_dim * self.num_key_value_groups, self.head_dim * self.num_key_value_groups],
-                dim=-1
-            )
-            # Reshape to expand all query heads: [b, q, num_key_value_heads, num_key_value_groups * head_dim] -> [b, q, num_heads, head_dim]
-            query_states = query_states.reshape(bsz, q_len, self.num_heads, self.head_dim)
-            # Reshape gate_score: [b, q, num_key_value_heads, num_key_value_groups * head_dim] -> [b, q, num_heads, head_dim]
-            gate_score = gate_score.reshape(bsz, q_len, self.num_heads, self.head_dim)
-        else:
-            query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim)
-            gate_score = None
+            
+            # Process gate_score
+            if self.headwise_attn_output_gate:
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
+            else:  # elementwise
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
         
-        # Reshape key and value states
-        key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim)
-        value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim)
-        
-        # Log gate_score statistics (if gating is enabled)
-        if gate_score is not None:
+            # Log gate_score statistics - ALWAYS print, no restrictions
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
-            
-            # Print detailed gate_score information
-            print(
-                f"[Gated Attention - Eager] Gate Score Statistics - "
-                f"Mode: {gate_type}, "
-                f"shape: {gate_score.shape}, "
-                f"raw: min={gate_score.min().item():.6f}, max={gate_score.max().item():.6f}, "
-                f"mean={gate_score.mean().item():.6f}, std={gate_score.std().item():.6f}, "
-                f"sigmoid: min={gate_sigmoid.min().item():.6f}, max={gate_sigmoid.max().item():.6f}, "
-                f"mean={gate_sigmoid.mean().item():.6f}, std={gate_sigmoid.std().item():.6f}"
+            logger.info(
+                f"[Gated Attention - Eager] Mode: {gate_type}, "
+                f"gate_score shape: {gate_score.shape}, "
+                f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
+                f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
+                f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
+                f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
+                f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
             )
-            
-            # For head-wise gating, print per-head statistics
-            if self.headwise_attn_output_gate:
-                # gate_score: [bsz, q_len, num_heads, 1]
-                gate_sigmoid_per_head = gate_sigmoid.squeeze(-1)  # [bsz, q_len, num_heads]
-                gate_mean_per_head = gate_sigmoid_per_head.mean(dim=[0, 1])  # [num_heads]
-                # Detach and convert to float32 before numpy (required for tensors with grad)
-                # print(
-                #     f"[Gated Attention - Eager] Per-Head Gate (sigmoid) Mean: "
-                #     f"{gate_mean_per_head.detach().cpu().float().numpy()}"
-                # )
-            
-            # logger.info(
-            #     f"[Gated Attention - Eager] Mode: {gate_type}, "
-            #     f"gate_score shape: {gate_score.shape}, "
-            #     f"gate_score raw range: [{gate_score.min().item():.4f}, {gate_score.max().item():.4f}], "
-            #     f"gate_score raw mean: {gate_score.mean().item():.4f}, "
-            #     f"gate_score raw std: {gate_score.std().item():.4f}, "
-            #     f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
-            #     f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
-            # )
+        else:
+            # Standard mode (no gating)
+            qkv_states = rearrange(
+                qkv_states,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
+            )
+            gate_score = None
+######################
+
+        query_states = qkv_states[..., : self.num_key_value_groups, :]
+        query_states = rearrange(query_states, 'b q h gs d -> b q (h gs) d')
+        key_states = qkv_states[..., -2, :]
+        value_states = qkv_states[..., -1, :]
 
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
@@ -548,17 +515,26 @@ class InternLM2Attention(nn.Module):
                 f' {attn_output.size()}'
             )
 
-        # mh: Apply gating (same order as Qwen3: transpose attn_output first, then apply gate_score)
-        # Qwen3: attn_output.transpose(1, 2) then attn_output * torch.sigmoid(gate_score)
-        attn_output = attn_output.transpose(1, 2).contiguous()  # [bsz, q_len, num_heads, head_dim]
-        
+        # mh 1211 Phase 1: Apply gating
         if gate_score is not None:
-            # gate_score: [bsz, q_len, num_heads, 1] or [bsz, q_len, num_heads, head_dim]
-            # attn_output: [bsz, q_len, num_heads, head_dim]
-            # Shapes match, apply gating directly (same as Qwen3)
+            gate_score = gate_score.transpose(1, 2)  # [bsz, num_heads, q_len, 1] or [bsz, num_heads, q_len, head_dim]
             gate_sigmoid = torch.sigmoid(gate_score)
+            attn_output_before_gating = attn_output.clone()
             attn_output = attn_output * gate_sigmoid
+
+            # Log gating effect - ALWAYS print, no restrictions
+            print(
+                f"[Gated Attention - Eager] Applied gating - "
+                f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}, "
+                f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
+                f"std={attn_output_before_gating.std().item():.4f}, "
+                f"attn_output after: mean={attn_output.mean().item():.4f}, "
+                f"std={attn_output.std().item():.4f}, "
+                f"gating ratio (after/before mean): {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
+                f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}, min: {gate_sigmoid.min().item():.4f}, max: {gate_sigmoid.max().item():.4f}"
+            )
 ###############
+        attn_output = attn_output.transpose(1, 2).contiguous()
         attn_output = attn_output.reshape(bsz, q_len, self.hidden_size)
 
         attn_output = self.wo(attn_output)
@@ -601,165 +577,143 @@ class InternLM2FlashAttention2(InternLM2Attention):
 
         bsz, q_len, _ = hidden_states.size()
         
+    ######### mhu 1211 add gate_qkv_states #########
+        # qkv_states = self.wqkv(hidden_states)
+
+        # qkv_states = rearrange(
+        #     qkv_states,
+        #     'b q (h gs d) -> b q h gs d',
+        #     gs=2 + self.num_key_value_groups,
+        #     d=self.head_dim,
+        # )
+        
         # Check hidden_states for NaN/Inf
         if torch.isnan(hidden_states).any() or torch.isinf(hidden_states).any():
             logger.error(f"[Gated Attention - Flash] ERROR: hidden_states contains NaN/Inf!")
+        # # 现在不用了 Fix 1: Normalize hidden_states before computing gate_score (if gating is enabled)
+        # # Fix 2: Apply scaling factor to gate_score computation
+        # if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+        #     # Normalize hidden_states for gate_score computation
+        #     # hidden_states_normalized = self.gate_norm(hidden_states)
+        #     # Compute gate_score from normalized hidden_states
+        #     gate_qkv_states = self.wqkv(hidden_states)
+        #     # Compute standard qkv from original hidden_states
+        #     qkv_states = self.wqkv(hidden_states)
+        # else:
+        #     qkv_states = self.wqkv(hidden_states)
+        #     gate_qkv_states = None
+        qkv_states = self.wqkv(hidden_states)
         
-        # mh: Query-dependent gate (extract gate_score from q_proj only)
-        # query_states = W @ hidden_states + bias
-        # where W includes both query weights and gate weights
-        query_states = self.q_proj(hidden_states)
-        key_states = self.k_proj(hidden_states)
-        value_states = self.v_proj(hidden_states)
-        
-        # DEBUG: Check gate_bias value before extracting gate_score
-        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            q_dim = self.num_heads * self.head_dim
-            if self.q_proj.bias is not None:
-                gate_bias_actual = self.q_proj.bias[q_dim:]
-                gate_bias_mean = gate_bias_actual.mean().item()
-                # Only print once per layer to avoid spam
-                if not hasattr(self, '_gate_bias_logged'):
-                    logger.info(
-                        f"[Gated Attention - Flash] Layer gate_bias check: "
-                        f"gate_bias_mean={gate_bias_mean:.6f} (expected ~2.0 if gate_bias_init_value=2.0), "
-                        f"gate_bias_shape={gate_bias_actual.shape}"
-                    )
-                    self._gate_bias_logged = True
-        
-        # Check q_proj output for NaN/Inf
-        if torch.isnan(query_states).any() or torch.isinf(query_states).any():
-            q_proj_bias_info = ""
-            if self.q_proj.bias is not None:
-                q_proj_bias_info = (
-                    f"q_proj.bias has NaN: {torch.isnan(self.q_proj.bias).any().item()}, "
-                    f"q_proj.bias has Inf: {torch.isinf(self.q_proj.bias).any().item()}, "
-                    f"q_proj.bias shape: {self.q_proj.bias.shape}, "
+        # Check wqkv output for NaN/Inf
+        if torch.isnan(qkv_states).any() or torch.isinf(qkv_states).any():
+            wqkv_bias_info = ""
+            if self.wqkv.bias is not None:
+                wqkv_bias_info = (
+                    f"wqkv.bias has NaN: {torch.isnan(self.wqkv.bias).any().item()}, "
+                    f"wqkv.bias has Inf: {torch.isinf(self.wqkv.bias).any().item()}, "
+                    f"wqkv.bias shape: {self.wqkv.bias.shape}, "
                 )
             logger.error(
-                f"[Gated Attention - Flash] ERROR: q_proj output contains NaN/Inf! "
-                f"q_proj.weight has NaN: {torch.isnan(self.q_proj.weight).any().item()}, "
-                f"q_proj.weight has Inf: {torch.isinf(self.q_proj.weight).any().item()}, "
-                f"q_proj.weight shape: {self.q_proj.weight.shape}, "
-                f"{q_proj_bias_info}"
+                f"[Gated Attention - Flash] ERROR: wqkv output contains NaN/Inf! "
+                f"wqkv.weight has NaN: {torch.isnan(self.wqkv.weight).any().item()}, "
+                f"wqkv.weight has Inf: {torch.isinf(self.wqkv.weight).any().item()}, "
+                f"wqkv.weight shape: {self.wqkv.weight.shape}, "
+                f"{wqkv_bias_info}"
                 f"hidden_states has NaN: {torch.isnan(hidden_states).any().item()}, "
                 f"hidden_states has Inf: {torch.isinf(hidden_states).any().item()}, "
                 f"hidden_states shape: {hidden_states.shape}, "
-                f"query_states shape: {query_states.shape}"
+                f"hidden_states range: [{hidden_states.min().item():.4f}, {hidden_states.max().item():.4f}], "
+                f"qkv_states shape: {qkv_states.shape}"
             )
 
-        # Extract gate_score from q_proj output (similar to Qwen3)
-        # NOTE: gate_score already includes bias term from q_proj(hidden_states)
-        # gate_score = W_gate @ hidden_states + bias_gate
-        if self.headwise_attn_output_gate:
-            query_states = query_states.view(bsz, q_len, self.num_key_value_heads, -1)
-            query_states, gate_score = torch.split(
-                query_states,
-                [self.head_dim * self.num_key_value_groups, self.num_key_value_groups],
-                dim=-1
-            )
-            # Reshape to expand all query heads: [b, q, num_key_value_heads, num_key_value_groups * head_dim] -> [b, q, num_heads, head_dim]
-            query_states = query_states.reshape(bsz, q_len, self.num_heads, self.head_dim)
-            # Reshape gate_score: [b, q, num_key_value_heads, num_key_value_groups] -> [b, q, num_heads, 1]
-            gate_score = gate_score.reshape(bsz, q_len, self.num_heads, 1)
+        # Phase 1: Separate gate_score from standard qkv
+        base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
+        
+        # DEBUG: Force log to confirm code path and gating flags (Flash Attention) - ALWAYS print
+        # print(
+        #     f"[Gated Attention - Flash] 🟢 GATING CHECK - "
+        #     f"headwise_attn_output_gate={getattr(self, 'headwise_attn_output_gate', None)}, "
+        #     f"elementwise_attn_output_gate={getattr(self, 'elementwise_attn_output_gate', None)}, "
+        #     f"will_enter_gating={self.headwise_attn_output_gate or self.elementwise_attn_output_gate}, "
+        #     f"hidden_states shape={hidden_states.shape}, "
+        #     f"qkv_states shape={qkv_states.shape}"
+        # )
+        
+        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+            # Separate standard qkv and gate_score (same as Qwen3's approach)
+            if self.headwise_attn_output_gate:
+                gate_dim = self.num_heads
+            else:  # elementwise
+                gate_dim = self.num_heads * self.head_dim
+                # print(f'gate_dim: {gate_dim}')
+           
+            qkv_base = qkv_states[:, :, :base_qkv_dim]
+            # Extract gate_score from wqkv output (same as Qwen3 extracts from q_proj)
+            gate_score_raw = qkv_states[:, :, base_qkv_dim:]
+            # Apply scaling factor to gate_score
+            # gate_score_raw = gate_score_raw * self.gate_scale
             
-            # DEBUG: Verify gate_bias is included in gate_score (only log once per layer)
-            if self.q_proj.bias is not None and not hasattr(self, '_gate_score_debug_logged'):
-                q_dim = self.num_heads * self.head_dim
-                gate_bias_actual = self.q_proj.bias[q_dim:]
-                gate_bias_mean = gate_bias_actual.mean().item()
-                # Compute W_gate @ hidden_states (without bias) for comparison
-                gate_weight = self.q_proj.weight[q_dim:, :]  # [gate_dim, hidden_size]
-                gate_weighted = torch.matmul(hidden_states, gate_weight.t())  # [bsz, q_len, gate_dim]
-                gate_weighted_mean = gate_weighted.mean().item()
-                gate_score_mean = gate_score.mean().item()
-                expected_mean = gate_weighted_mean + gate_bias_mean
-                logger.info(
-                    f"[Gated Attention - Flash] Gate Score Debug - "
-                    f"gate_bias_mean={gate_bias_mean:.6f}, "
-                    f"W_gate@hidden_states_mean={gate_weighted_mean:.6f}, "
-                    f"gate_score_mean={gate_score_mean:.6f}, "
-                    f"expected_mean={expected_mean:.6f} "
-                    f"(should be close if bias is correctly applied)"
-                )
-                self._gate_score_debug_logged = True
-        elif self.elementwise_attn_output_gate:
-            query_states = query_states.view(bsz, q_len, self.num_key_value_heads, -1)
-            query_states, gate_score = torch.split(
-                query_states,
-                [self.head_dim * self.num_key_value_groups, self.head_dim * self.num_key_value_groups],
-                dim=-1
+            # Check qkv_base for NaN/Inf
+            if torch.isnan(qkv_base).any() or torch.isinf(qkv_base).any():
+                logger.error(f"[Gated Attention - Flash] ERROR: qkv_base contains NaN/Inf!")
+            
+            # Process qkv_base (standard flow)
+            qkv_states = rearrange(
+                qkv_base,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
             )
-            # Reshape to expand all query heads: [b, q, num_key_value_heads, num_key_value_groups * head_dim] -> [b, q, num_heads, head_dim]
-            query_states = query_states.reshape(bsz, q_len, self.num_heads, self.head_dim)
-            # Reshape gate_score: [b, q, num_key_value_heads, num_key_value_groups * head_dim] -> [b, q, num_heads, head_dim]
-            gate_score = gate_score.reshape(bsz, q_len, self.num_heads, self.head_dim)
-        else:
-            query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim)
-            gate_score = None
+            
+            # Process gate_score
+            if self.headwise_attn_output_gate:
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
+            else:  # elementwise
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
         
-        # Reshape key and value states
-        key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim)
-        value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim)
-        
-        # Log gate_score statistics (if gating is enabled) - Flash mode
-        if gate_score is not None:
+            # Log gate_score statistics - ALWAYS print, no restrictions
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
-            
-            # Check gate weight values (for debugging)
-            if self.headwise_attn_output_gate:
-                q_dim = self.num_heads * self.head_dim
-                gate_weight = self.q_proj.weight[q_dim:, :]
-                gate_weight_mean = gate_weight.detach().mean().item()
-                gate_weight_std = gate_weight.detach().std().item()
-                gate_weight_min = gate_weight.detach().min().item()
-                gate_weight_max = gate_weight.detach().max().item()
+            # Check gate_score distribution
+            negative_ratio = (gate_score < 0).float().mean().item()
+            small_positive_ratio = ((gate_score >= 0) & (gate_score < 2.0)).float().mean().item()
+            large_positive_ratio = (gate_score >= 2.0).float().mean().item()
                 
-                # Log if gate weight is abnormal (expected mean=0.0, same as Qwen3)
-                if abs(gate_weight_mean) > 0.1 or gate_weight_std > 0.1:
-                    logger.warning(
-                        f"[Gated Attention - Flash] WARNING: Gate weight is abnormal! "
-                        f"weight_mean={gate_weight_mean:.6f} (expected ~0.0, same as Qwen3), "
-                        f"weight_std={gate_weight_std:.6f} (expected ~0.02), "
-                        f"weight_range=[{gate_weight_min:.6f}, {gate_weight_max:.6f}]"
-                    )
-            
-            # Print detailed gate_score information
-            # Check actual gate bias value for debugging
-            q_dim = self.num_heads * self.head_dim
-            gate_bias_actual = self.q_proj.bias[q_dim:] if self.q_proj.bias is not None else None
-            gate_bias_info = ""
-            if gate_bias_actual is not None:
-                gate_bias_mean = gate_bias_actual.mean().item()
-                gate_bias_std = gate_bias_actual.std().item()
-                gate_bias_min = gate_bias_actual.min().item()
-                gate_bias_max = gate_bias_actual.max().item()
-                gate_bias_info = f", gate_bias: mean={gate_bias_mean:.6f}, std={gate_bias_std:.6f}, range=[{gate_bias_min:.6f}, {gate_bias_max:.6f}]"
-                # Note: gate_bias can be 0.0 (default) or any value set via gate_bias_init_value
-                # No warning needed as both are valid initialization values
-            
+            #### gate_score 的统计信息 gate_score shape: [1, 7007, 16, 1] — [batch=1, seq_len=7007, num_heads=16, gate_dim=1]
+            #### gate_score raw range: [-0.1816, 0.1621] — 原始值范围（归一化+缩放后）gate_score raw mean: -0.0087 — 平均值接近 0 gate_score raw std: 0.0439 — 标准差较小
+            #### sigmoid(gate_score) range: [0.4551, 0.5391] — sigmoid 后的范围
+            #### sigmoid(gate_score) mean: 0.4980 — sigmoid 后均值约 0.5（接近中性）
             # print(
-            #     f"[Gated Attention - Flash] Gate Score Statistics - "
-            #     f"Mode: {gate_type}, "
-            #     f"shape: {gate_score.shape}, "
-            #     f"raw: min={gate_score.min().item():.6f}, max={gate_score.max().item():.6f}, "
-            #     f"mean={gate_score.mean().item():.6f}, std={gate_score.std().item():.6f}, "
-            #     f"sigmoid: min={gate_sigmoid.min().item():.6f}, max={gate_sigmoid.max().item():.6f}, "
-            #     f"mean={gate_sigmoid.mean().item():.6f}, std={gate_sigmoid.std().item():.6f}"
-            #     f"{gate_bias_info}"
+            #     f"[Gated Attention - Flash] Mode: {gate_type}, "
+            #     f"gate_score shape: {gate_score.shape}, "
+            #     f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
+            #     f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
+            #     f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
+            #     f"gate_score distribution: negative={negative_ratio:.2%}, [0,2)={small_positive_ratio:.2%}, >=2={large_positive_ratio:.2%}, "
+            #     f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
+            #     f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
             # )
-            
-            # For head-wise gating, print per-head statistics
-            if self.headwise_attn_output_gate:
-                # gate_score: [bsz, q_len, num_heads, 1]
-                gate_sigmoid_per_head = gate_sigmoid.squeeze(-1)  # [bsz, q_len, num_heads]
-                gate_mean_per_head = gate_sigmoid_per_head.mean(dim=[0, 1])  # [num_heads]
-                # Detach and convert to float32 before numpy (required for tensors with grad)
-                # print(
-                #     f"[Gated Attention - Flash] Per-Head Gate (sigmoid) Mean: "
-                #     f"{gate_mean_per_head.detach().cpu().float().numpy()}"
-                # )
+        else:
+            # Standard mode (no gating)
+            qkv_states = rearrange(
+                qkv_states,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
+            )
+            gate_score = None
+###################################
+        query_states = qkv_states[..., : self.num_key_value_groups, :]
+        query_states = rearrange(query_states, 'b q h gs d -> b q (h gs) d')
+        key_states = qkv_states[..., -2, :]
+        value_states = qkv_states[..., -1, :]
+        
+        # Check qkv_states for NaN/Inf after rearrange
+        if torch.isnan(qkv_states).any() or torch.isinf(qkv_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: qkv_states contains NaN/Inf after rearrange! "
+                f"qkv_states shape: {qkv_states.shape}"
+            )
     
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
@@ -846,6 +800,18 @@ class InternLM2FlashAttention2(InternLM2Attention):
             ## attn_output before: mean=0.0017, std=0.1367 — 应用 gating 前的均值和标准差
             ## attn_output after: mean=0.0008, std=0.0679 — 应用 gating 后的均值和标准差
             ## gating ratio (after/before mean): 0.4931 — 约 0.5，表示 gating 接近中性（不抑制也不增强）
+            # print(
+            #     f"[Gated Attention - Flash] Applied gating - "
+            #     f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}, "
+            #     f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
+            #     f"std={attn_output_before_gating.std().item():.4f}, "
+            #     f"attn_output after: mean={attn_output.mean().item():.4f}, "
+            #     f"std={attn_output.std().item():.4f}, "
+            #     f"gating ratio (after/before mean): {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
+            #     f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}, min: {gate_sigmoid.min().item():.4f}, max: {gate_sigmoid.max().item():.4f}, "
+            #     f"attn_output zero ratio: {(attn_output == 0).float().mean().item():.4f}"
+            # )
+        
         attn_output = attn_output.reshape(bsz, q_len, self.hidden_size).contiguous()
         
         # Check attn_output before wo

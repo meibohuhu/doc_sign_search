@@ -98,6 +98,9 @@ class InternLM2Config(PretrainedConfig):
         attn_implementation='eager',
         headwise_attn_output_gate=False,
         elementwise_attn_output_gate=False,
+        visual_summary_head_gate=False,   ######### mhu 2025-12-20: add visual_summary_head_gate
+        visual_gate_mode='add_logits',   ######### mhu 2025-12-20: add visual_gate_mode
+        visual_summary_aggregation='mean',   ######### mhu 2025-12-20: add visual_summary_aggregation (mean/max/sum/first)
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -135,6 +138,10 @@ class InternLM2Config(PretrainedConfig):
         # Phase 1: Standard Gated Attention
         self.headwise_attn_output_gate = headwise_attn_output_gate
         self.elementwise_attn_output_gate = elementwise_attn_output_gate
+        # Visual-conditioned gated attention ######### mhu 2025-12-20: add visual_summary_head_gate and visual_gate_mode
+        self.visual_summary_head_gate = visual_summary_head_gate
+        self.visual_gate_mode = visual_gate_mode
+        self.visual_summary_aggregation = visual_summary_aggregation
         super().__init__(
             pad_token_id=pad_token_id,
             bos_token_id=bos_token_id,
