@@ -321,11 +321,33 @@ class InternLM2Attention(nn.Module):
         self.gate_norm = None
         self.gate_scale = None
         
+        # Gate logging control  mh 2025-12-21: 控制gate日志输出 
+        # 模型有 24 层：从配置可见 num_hidden_layers: 24，每层一个 InternLM2Attention 实例。log 24层
+        # 直接从代码控制，不依赖config
+        self.gate_logging_enabled = True   # 是否启用gate日志
+        self.gate_logging_frequency = 1000   # 每N次forward打印一次 (设置为0禁用)
+        self._gate_logging_counter = 0     # Counter for logging frequency control
+        
+        # Debug: print logging config on first layer only (to avoid spam)
+        if not hasattr(InternLM2Attention, '_logging_config_printed'):
+            InternLM2Attention._logging_config_printed = True
+            logger.info(
+                f"[Gate Logging Config] enabled={self.gate_logging_enabled}, "
+                f"frequency={self.gate_logging_frequency}"
+            )
+        
         # Visual-conditioned gated attention  mh 1220: 视觉信息条件化门控注意力
         self.visual_summary_head_gate = getattr(config, 'visual_summary_head_gate', False)
         self.visual_gate_mode = getattr(config, 'visual_gate_mode', 'add_logits')
         if self.visual_summary_head_gate:
-            self.visual_gate_proj = nn.Linear(self.hidden_size, self.num_heads, bias=True)  ### 有 bias：g_vis = W * visual_summary + b
+            # Determine output dimension based on gating mode
+            # Headwise: one scalar per head -> num_heads
+            # Elementwise: one scalar per head per dimension -> num_heads * head_dim
+            if self.elementwise_attn_output_gate:
+                visual_gate_out_dim = self.num_heads * self.head_dim
+            else:
+                visual_gate_out_dim = self.num_heads
+            self.visual_gate_proj = nn.Linear(self.hidden_size, visual_gate_out_dim, bias=True)  ### 有 bias：g_vis = W * visual_summary + b
             nn.init.zeros_(self.visual_gate_proj.weight)
             nn.init.zeros_(self.visual_gate_proj.bias)
         
@@ -378,6 +400,20 @@ class InternLM2Attention(nn.Module):
                 raise ValueError("Currently we only support rotary embedding's type being 'dynamic' or 'linear'.")
         return self.rotary_emb
 
+    def _should_log_gate(self):
+        """Check if gate statistics should be logged based on configuration."""
+        if not self.gate_logging_enabled:
+            return False
+        if self.gate_logging_frequency <= 0:
+            return False
+        self._gate_logging_counter += 1
+        should_log = (self._gate_logging_counter % self.gate_logging_frequency) == 0
+        # Debug: print on first log to confirm it's working
+        if should_log and not hasattr(self, '_first_log_printed'):
+            self._first_log_printed = True
+            logger.info(f"[Gate Logging] ✅ First log triggered! Counter={self._gate_logging_counter}, Frequency={self.gate_logging_frequency}, Enabled={self.gate_logging_enabled}")
+        return should_log
+
     def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
         return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
 
@@ -403,8 +439,14 @@ class InternLM2Attention(nn.Module):
         # Compute visual gate g_vis if visual_summary is provided
         g_vis = None
         if self.visual_summary_head_gate and visual_summary is not None:
-            g_vis_raw = self.visual_gate_proj(visual_summary)  # [B, num_heads]   #### 将 visual summary 映射为每个 head 一个标量
-            g_vis = g_vis_raw.unsqueeze(1).unsqueeze(-1)  # [B, 1, num_heads, 1]
+            g_vis_raw = self.visual_gate_proj(visual_summary)  # [B, num_heads] or [B, num_heads * head_dim]
+            
+            if self.elementwise_attn_output_gate:
+                # Elementwise: [B, num_heads * head_dim] -> [B, 1, num_heads, head_dim]  例如 [1, 16, 1000, 128]
+                g_vis = g_vis_raw.view(bsz, 1, self.num_heads, self.head_dim)  ### Elementwise: 每个 head 的每个维度都有独立的值
+            else:
+                # Headwise: [B, num_heads] -> [B, 1, num_heads, 1]
+                g_vis = g_vis_raw.unsqueeze(1).unsqueeze(-1)  # [B, 1, num_heads, 1]
 
         # mh 1211: Compute wqkv output once (same as Qwen3's approach)
         # Qwen3 computes q_proj once and separates query_states and gate_score from it
@@ -441,18 +483,19 @@ class InternLM2Attention(nn.Module):
             else:  # elementwise
                 gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
         
-            # Log gate_score statistics - ALWAYS print, no restrictions
-            gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
-            gate_sigmoid = torch.sigmoid(gate_score)
-            logger.info(
-                f"[Gated Attention - Eager] Mode: {gate_type}, "
-                f"gate_score shape: {gate_score.shape}, "
-                f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
-                f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
-                f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
-                f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
-                f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
-            )
+            # Log gate_score statistics (controlled by config)
+            if self._should_log_gate():
+                gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
+                gate_sigmoid = torch.sigmoid(gate_score)
+                logger.info(
+                    f"[Gated Attention - Eager] Mode: {gate_type}, "
+                    f"gate_score shape: {gate_score.shape}, "
+                    f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
+                    f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
+                    f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
+                    f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
+                    f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
+                )
         else:
             # Standard mode (no gating)
             qkv_states = rearrange(
@@ -524,30 +567,20 @@ class InternLM2Attention(nn.Module):
             if g_vis is not None:
                 if self.visual_gate_mode == 'add_logits':
                     # add_logits: sigmoid(raw_tok + raw_vis)
-                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)  # [B, q_len, num_heads, 1]
-                    g_vis_expanded = g_vis_expanded.transpose(1, 2)  # [B, num_heads, q_len, 1]
-                    if gate_tok_raw.shape[-1] == 1:
-                        gate_combined_raw = gate_tok_raw + g_vis_expanded
-                    else:
-                        # elementwise: expand g_vis to match head_dim
-                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
-                        gate_combined_raw = gate_tok_raw + g_vis_expanded
-                    gate_sigmoid = torch.sigmoid(gate_combined_raw)
-                elif self.visual_gate_mode == 'mul':
-                    # mul: g = g_tok * g_vis
-                    g_tok_sigmoid = torch.sigmoid(gate_tok_raw)
-                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1).transpose(1, 2)
-                    if gate_tok_raw.shape[-1] == 1:
-                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
-                    else:
-                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
-                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
-                    gate_sigmoid = g_tok_sigmoid * g_vis_sigmoid
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)  # [B, q_len, num_heads, 1] or [B, q_len, num_heads, head_dim]
+                    g_vis_expanded = g_vis_expanded.transpose(1, 2)  # [B, num_heads, q_len, 1] or [B, num_heads, q_len, head_dim]
+                    # g_vis already has the correct shape for both headwise and elementwise
+                    gate_combined_raw = gate_tok_raw + g_vis_expanded  ###[B, q_len, num_heads, 1]
+                    gate_sigmoid = torch.sigmoid(gate_combined_raw) 
+                # elif self.visual_gate_mode == 'mul':
+                #     # mul: g = g_tok * g_vis
+                #     g_tok_sigmoid = torch.sigmoid(gate_tok_raw)
+                #     g_vis_expanded = g_vis.expand(-1, q_len, -1, -1).transpose(1, 2)  # Already has correct shape
+                #     g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
+                #     gate_sigmoid = g_tok_sigmoid * g_vis_sigmoid
                 elif self.visual_gate_mode == 'replace':
                     # replace: 只用 g_vis
-                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1).transpose(1, 2)
-                    if gate_tok_raw.shape[-1] > 1:
-                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1).transpose(1, 2)  # Already has correct shape
                     gate_sigmoid = torch.sigmoid(g_vis_expanded)
                 else:
                     gate_sigmoid = torch.sigmoid(gate_tok_raw)
@@ -557,17 +590,18 @@ class InternLM2Attention(nn.Module):
             attn_output_before_gating = attn_output.clone()
             attn_output = attn_output * gate_sigmoid
 
-            # Log gating effect - ALWAYS print, no restrictions
-            print(
-                f"[Gated Attention - Eager] Applied gating - "
-                f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}, "
-                f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
-                f"std={attn_output_before_gating.std().item():.4f}, "
-                f"attn_output after: mean={attn_output.mean().item():.4f}, "
-                f"std={attn_output.std().item():.4f}, "
-                f"gating ratio (after/before mean): {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
-                f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}, min: {gate_sigmoid.min().item():.4f}, max: {gate_sigmoid.max().item():.4f}"
-            )
+            # Log gating effect (controlled by config)
+            if self._should_log_gate():
+                print(
+                        f"[Gated Attention - Eager] Applied gating - "
+                        f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}, "
+                        f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
+                        f"std={attn_output_before_gating.std().item():.4f}, "
+                        f"attn_output after: mean={attn_output.mean().item():.4f}, "
+                        f"std={attn_output.std().item():.4f}, "
+                        f"gating ratio (after/before mean): {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
+                        f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}, min: {gate_sigmoid.min().item():.4f}, max: {gate_sigmoid.max().item():.4f}"
+                    )
 ###############
         attn_output = attn_output.transpose(1, 2).contiguous()
         attn_output = attn_output.reshape(bsz, q_len, self.hidden_size)
@@ -618,8 +652,14 @@ class InternLM2FlashAttention2(InternLM2Attention):
         if self.visual_summary_head_gate and visual_summary is not None:
             # print("visual_summary is not None")
             # print('visual_summary: ', visual_summary.shape)   ## visual_summary:  torch.Size([1, 2048])
-            g_vis_raw = self.visual_gate_proj(visual_summary)  # [B, num_heads]
-            g_vis = g_vis_raw.unsqueeze(1).unsqueeze(-1)  # [B, 1, num_heads, 1]
+            g_vis_raw = self.visual_gate_proj(visual_summary)  # [B, num_heads] or [B, num_heads * head_dim]
+            
+            if self.elementwise_attn_output_gate:
+                # Elementwise: [B, num_heads * head_dim] -> [B, 1, num_heads, head_dim]
+                g_vis = g_vis_raw.view(bsz, 1, self.num_heads, self.head_dim)
+            else:
+                # Headwise: [B, num_heads] -> [B, 1, num_heads, 1]
+                g_vis = g_vis_raw.unsqueeze(1).unsqueeze(-1)  # [B, 1, num_heads, 1]
         
     ######### mhu 1211 add gate_qkv_states #########
         # qkv_states = self.wqkv(hidden_states)
@@ -719,24 +759,26 @@ class InternLM2FlashAttention2(InternLM2Attention):
             gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
             gate_sigmoid = torch.sigmoid(gate_score)
             # Check gate_score distribution
-            negative_ratio = (gate_score < 0).float().mean().item()
-            small_positive_ratio = ((gate_score >= 0) & (gate_score < 2.0)).float().mean().item()
-            large_positive_ratio = (gate_score >= 2.0).float().mean().item()
+            # negative_ratio = (gate_score < 0).float().mean().item()
+            # small_positive_ratio = ((gate_score >= 0) & (gate_score < 2.0)).float().mean().item()
+            # large_positive_ratio = (gate_score >= 2.0).float().mean().item()
                 
             #### gate_score 的统计信息 gate_score shape: [1, 7007, 16, 1] — [batch=1, seq_len=7007, num_heads=16, gate_dim=1]
             #### gate_score raw range: [-0.1816, 0.1621] — 原始值范围（归一化+缩放后）gate_score raw mean: -0.0087 — 平均值接近 0 gate_score raw std: 0.0439 — 标准差较小
             #### sigmoid(gate_score) range: [0.4551, 0.5391] — sigmoid 后的范围
             #### sigmoid(gate_score) mean: 0.4980 — sigmoid 后均值约 0.5（接近中性）
-            # print(
-            #     f"[Gated Attention - Flash] Mode: {gate_type}, "
-            #     f"gate_score shape: {gate_score.shape}, "
-            #     f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
-            #     f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
-            #     f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
-            #     f"gate_score distribution: negative={negative_ratio:.2%}, [0,2)={small_positive_ratio:.2%}, >=2={large_positive_ratio:.2%}, "
-            #     f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
-            #     f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
-            # )
+            # Log gate_score statistics (controlled by config)
+            if self._should_log_gate():
+                print(
+                    f"[Gated Attention - Flash] Mode: {gate_type}, "
+                    f"gate_score shape: {gate_score.shape}, "
+                    f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
+                    f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
+                    f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
+                    # f"gate_score distribution: negative={negative_ratio:.2%}, [0,2)={small_positive_ratio:.2%}, >=2={large_positive_ratio:.2%}, "
+                    f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
+                    f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
+                )
         else:
             # Standard mode (no gating)
             qkv_states = rearrange(
@@ -830,23 +872,17 @@ class InternLM2FlashAttention2(InternLM2Attention):
                     gate_sigmoid = torch.sigmoid(gate_combined_raw)
                     ########## # 每个 token，每个 head 一个 gate 值， 6992个token， 16个head， 每个head 128个维度
                     # print('gate_combined_raw: ', gate_combined_raw.shape)   ## gate_combined_raw:  torch.Size([1, 6992, 16, 128])， gate_combined_raw:  torch.Size([1, 7001, 16, 1])
-                elif self.visual_gate_mode == 'mul':
-                    # mul: g = g_tok * g_vis
-                    g_tok_sigmoid = torch.sigmoid(gate_tok_raw)
-                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)
-                    if gate_tok_raw.shape[-1] == 1:
-                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
-                    else:
-                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
-                        g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
-                    gate_sigmoid = g_tok_sigmoid * g_vis_sigmoid
-                    # print('gate_combined_raw: ', gate_combined_raw.shape)   ## gate_combined_raw:  torch.Size([1, 7008, 16, 1])
+                # elif self.visual_gate_mode == 'mul':
+                #     # mul: g = g_tok * g_vis
+                #     g_tok_sigmoid = torch.sigmoid(gate_tok_raw)
+                #     g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)  # Already has correct shape
+                #     g_vis_sigmoid = torch.sigmoid(g_vis_expanded)
+                #     gate_sigmoid = g_tok_sigmoid * g_vis_sigmoid
+                #     # print('gate_combined_raw: ', gate_combined_raw.shape)   ## gate_combined_raw:  torch.Size([1, 7008, 16, 1])
 
                 elif self.visual_gate_mode == 'replace':
                     # replace: 只用 g_vis
-                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)
-                    if gate_tok_raw.shape[-1] > 1:
-                        g_vis_expanded = g_vis_expanded.expand(-1, -1, -1, self.head_dim)
+                    g_vis_expanded = g_vis.expand(-1, q_len, -1, -1)  # Already has correct shape
                     gate_sigmoid = torch.sigmoid(g_vis_expanded)
                     # print('g_vis_expanded: ', g_vis_expanded.shape)   ## gate_combined_raw:  torch.Size([1, 7008, 16, 1])
 
