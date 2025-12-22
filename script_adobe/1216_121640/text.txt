@@ -12,8 +12,8 @@ bash finetune_internvl2_5_how2sign_1b_headgate_1216.sh
 
 export HF_TOKEN=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
 python3 upload_videos_to_hf.py --mode checkpoint \
-    --checkpoint_dir /code/doc_sign_search/script_adobe/1216_40/finetune_internvl2_5_how2sign_1b_headgate_1216 \
-    --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_headgate_1216 \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_1218_121640 \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_16fps_1218_121640 \
     --upload_subdirs
 
 
@@ -21,3 +21,14 @@ python3 download_and_extract_videos_from_hf.py \
     --mode dataset \
     --dataset_name PhoenixHu/how2sign_test_videos_224x224 \
     --output_dir /mnt/localssd/doc_sign_search/how2sign_test_videos_224x224
+
+
+            python3 upload_videos_to_hf.py --mode checkpoint \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_1220 \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_16fps_1220_121640 \
+    --upload_subdirs
+
+        python3 upload_videos_to_hf.py --mode checkpoint \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_1b_headgate_1220 \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_headgate_1220_121640 \
+    --upload_subdirs
