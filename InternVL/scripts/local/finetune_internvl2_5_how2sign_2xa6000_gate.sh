@@ -22,7 +22,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints"
+OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/"
 # Use local data paths
 # META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
 META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
@@ -37,11 +37,11 @@ GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * 
 DEEPSPEED_CONFIG="internvl_chat/zero_stage1_config.json"
 MAX_SEQ_LENGTH=${MAX_SEQ_LENGTH:-8192}
 MAX_BUFFER_SIZE=${MAX_BUFFER_SIZE:-20}
-NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-128}
+NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-96}
 MAX_NUM_FRAME=${MAX_NUM_FRAME:-96}
 
 # Video frame sampling method
-SAMPLING_METHOD='fps12.0'
+SAMPLING_METHOD='fps10.0'
 # SAMPLING_METHOD='rand'
 
 echo "🚀 Starting InternVL2.5-2B How2Sign Training on 2×A6000"
@@ -92,7 +92,7 @@ echo ""
 # with ZeRO Stage 2/3. DeepSpeed launcher handles gradient accumulation correctly.
 # Note: CUDA_VISIBLE_DEVICES is already set above, so deepspeed will use the specified GPUs
 deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
-    internvl_chat/internvl/train/internvl_chat_finetune_gate.py \
+    internvl_chat/internvl/train/internvl_chat_finetune_gate_wqkv.py \
     --model_name_or_path "$MODEL_NAME" \
     --output_dir "$OUTPUT_DIR" \
     --overwrite_output_dir \
@@ -138,8 +138,10 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --warmup_ratio 0.03 \
     --weight_decay 0.01 \
     --lr_scheduler_type cosine \
-    --headwise_attn_output_gate  True \
-
+    --elementwise_attn_output_gate  True \
+    --visual_summary_head_gate True \
+    --visual_gate_mode add_logits \
+    --visual_summary_aggregation sum \
     2>&1 | tee "$LOG_FILE"
 
 TRAINING_EXIT_CODE=${PIPESTATUS[0]}
