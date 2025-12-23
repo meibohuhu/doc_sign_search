@@ -10,13 +10,23 @@ python3 download_and_extract_videos_from_hf.py \
 
 export HF_TOKEN=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
 python3 upload_videos_to_hf.py --mode checkpoint \
-    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_16fps_1218/checkpoint-2039 \
-    --model_name PhoenixHu/finetune_internvl2_5_how2sign_16fps_1218_121630 \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_8b_1219_121610 \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_8b_elementgate_1219_121610 \
     --upload_subdirs
+
+python3 upload_videos_to_hf.py --mode checkpoint \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_8b_1219 \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_8b_1219_121610 \
+    --upload_subdirs
+
 
 
 python3 /code/doc_sign_search/download_and_extract_videos_from_hf.py \
 --mode checkpoint \
---model_name PhoenixHu/finetune_internvl2_5_how2sign_16fps_1218_121630 \
---output_dir /code/doc_sign_search/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1218_121630 \
---checkpoint_subdir checkpoint-2039
+--model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1220_replace_mean_121610 \
+--output_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1220_replace_mean_121610 \
+--checkpoint_subdir checkpoint-2548
+
+
+git config --global user.name "meibohuhu"
+git config --global user.email "meibohu96@gmail.com"
