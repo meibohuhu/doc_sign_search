@@ -20,6 +20,7 @@ Usage:
         --base-model-name OpenGVLab/InternVL2_5-2B \
         --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/g0fgci8L_rc_18-8-rgb_front.mp4 \
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
+        --save-mosaic-mask \
         --save-attention \
         --image-size 224 \
         --num-segments 2
@@ -995,8 +996,8 @@ def process_model(args):
     
     # Fixed question
     # question = "Translate the American Sign Language in this video to English. Pay close attention to the person's hand movement and facial expressions."
-    question = "Translate the American Sign Language in this video to English."
-    # question = "How many people are in this video?"
+    # question = "Translate the American Sign Language in this video to English."
+    question = "What's the color of the background?"
 
     # Prepare video paths
     video_paths = []

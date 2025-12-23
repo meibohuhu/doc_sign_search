@@ -25,9 +25,9 @@ python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
 
 python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
     --mode checkpoint \
-    --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_16fps_elementgate_1216 \
-    --output_dir /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_elementgate_1216 \
-    --checkpoint_subdir checkpoint-3058
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2B_elementgate_1218_121620 \
+    --output_dir /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_2B_elementgate_1218_121620 \
+    --checkpoint_subdir checkpoint-2548
 """
 
 import os

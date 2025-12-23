@@ -961,7 +961,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
             token_prune = False
         
         
-        aggregated_viusal_token_attention = 0 if output_attentions else None
+        aggregated_viusal_token_attention = 0 if output_attentions else None  ### 所有层累加后的 text-to-visual attention
         per_layer_text_to_visual_attention = [] if output_attentions else None   ##### mhu 20251211 每一层的 text-to-visual attention #####
         prunded_sequence_length = 0
         for idx, decoder_layer in enumerate(self.layers):
