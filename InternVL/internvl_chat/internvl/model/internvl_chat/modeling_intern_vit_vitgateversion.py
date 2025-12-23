@@ -1,0 +1,582 @@
+# --------------------------------------------------------
+# InternVL
+# Copyright (c) 2024 OpenGVLab
+# Licensed under The MIT License [see LICENSE for details]
+# --------------------------------------------------------
+
+from typing import Optional, Tuple, Union
+
+import torch
+import torch.nn.functional as F
+import torch.utils.checkpoint
+from einops import rearrange
+from timm.models.layers import DropPath
+from torch import nn
+from transformers.activations import ACT2FN
+from transformers.modeling_outputs import (BaseModelOutput,
+                                           BaseModelOutputWithPooling)
+from transformers.modeling_utils import PreTrainedModel
+from transformers.utils import logging
+
+from .configuration_intern_vit import InternVisionConfig
+
+try:
+    from flash_attn.bert_padding import pad_input, unpad_input
+    from flash_attn.flash_attn_interface import \
+        flash_attn_varlen_qkvpacked_func
+    has_flash_attn = True
+except:
+    print('FlashAttention2 is not installed.')
+    has_flash_attn = False
+
+logger = logging.get_logger(__name__)
+
+
+class FlashAttention(nn.Module):
+    """Implement the scaled dot product attention with softmax.
+    Arguments
+    ---------
+        softmax_scale: The temperature to use for the softmax attention.
+                      (default: 1/sqrt(d_keys) where d_keys is computed at
+                      runtime)
+        attention_dropout: The dropout rate to apply to the attention
+                           (default: 0.0)
+    """
+
+    def __init__(self, softmax_scale=None, attention_dropout=0.0, device=None, dtype=None):
+        super().__init__()
+        self.softmax_scale = softmax_scale
+        self.dropout_p = attention_dropout
+
+    def forward(self, qkv, key_padding_mask=None, causal=False, cu_seqlens=None,
+                max_s=None, need_weights=False):
+        """Implements the multihead softmax attention.
+        Arguments
+        ---------
+            qkv: The tensor containing the query, key, and value. (B, S, 3, H, D) if key_padding_mask is None
+                if unpadded: (nnz, 3, h, d)
+            key_padding_mask: a bool tensor of shape (B, S)
+        """
+        assert not need_weights
+        assert qkv.dtype in [torch.float16, torch.bfloat16]
+        assert qkv.is_cuda
+
+        if cu_seqlens is None:
+            batch_size = qkv.shape[0]
+            seqlen = qkv.shape[1]
+            if key_padding_mask is None:
+                qkv = rearrange(qkv, 'b s ... -> (b s) ...')
+                max_s = seqlen
+                cu_seqlens = torch.arange(0, (batch_size + 1) * seqlen, step=seqlen, dtype=torch.int32,
+                                          device=qkv.device)
+                output = flash_attn_varlen_qkvpacked_func(
+                    qkv, cu_seqlens, max_s, self.dropout_p if self.training else 0.0,
+                    softmax_scale=self.softmax_scale, causal=causal
+                )
+                output = rearrange(output, '(b s) ... -> b s ...', b=batch_size)
+            else:
+                nheads = qkv.shape[-2]
+                x = rearrange(qkv, 'b s three h d -> b s (three h d)')
+                x_unpad, indices, cu_seqlens, max_s = unpad_input(x, key_padding_mask)
+                x_unpad = rearrange(x_unpad, 'nnz (three h d) -> nnz three h d', three=3, h=nheads)
+                output_unpad = flash_attn_varlen_qkvpacked_func(
+                    x_unpad, cu_seqlens, max_s, self.dropout_p if self.training else 0.0,
+                    softmax_scale=self.softmax_scale, causal=causal
+                )
+                output = rearrange(pad_input(rearrange(output_unpad, 'nnz h d -> nnz (h d)'),
+                                             indices, batch_size, seqlen),
+                                   'b s (h d) -> b s h d', h=nheads)
+        else:
+            assert max_s is not None
+            output = flash_attn_varlen_qkvpacked_func(
+                qkv, cu_seqlens, max_s, self.dropout_p if self.training else 0.0,
+                softmax_scale=self.softmax_scale, causal=causal
+            )
+
+        return output, None
+
+
+class InternRMSNorm(nn.Module):
+    def __init__(self, hidden_size, eps=1e-6):
+        super().__init__()
+        self.weight = nn.Parameter(torch.ones(hidden_size))
+        self.variance_epsilon = eps
+
+    def forward(self, hidden_states):
+        input_dtype = hidden_states.dtype
+        hidden_states = hidden_states.to(torch.float32)
+        variance = hidden_states.pow(2).mean(-1, keepdim=True)
+        hidden_states = hidden_states * torch.rsqrt(variance + self.variance_epsilon)
+        return self.weight * hidden_states.to(input_dtype)
+
+
+try:
+    from apex.normalization import FusedRMSNorm
+
+    InternRMSNorm = FusedRMSNorm  # noqa
+
+    logger.info('Discovered apex.normalization.FusedRMSNorm - will use it instead of InternRMSNorm')
+except ImportError:
+    # using the normal InternRMSNorm
+    pass
+except Exception:
+    logger.warning('discovered apex but it failed to load, falling back to InternRMSNorm')
+    pass
+
+
+NORM2FN = {
+    'rms_norm': InternRMSNorm,
+    'layer_norm': nn.LayerNorm,
+}
+
+
+class InternVisionEmbeddings(nn.Module):
+    def __init__(self, config: InternVisionConfig):
+        super().__init__()
+        self.config = config
+        self.embed_dim = config.hidden_size
+        self.image_size = config.image_size
+        self.patch_size = config.patch_size
+
+        self.class_embedding = nn.Parameter(
+            torch.randn(1, 1, self.embed_dim),
+        )
+
+        self.patch_embedding = nn.Conv2d(
+            in_channels=3, out_channels=self.embed_dim, kernel_size=self.patch_size, stride=self.patch_size
+        )
+        print(f'patch_embedding.weight.shape: {self.patch_embedding.weight.shape}')
+        self.num_patches = (self.image_size // self.patch_size) ** 2
+        self.num_positions = self.num_patches + 1
+
+        self.position_embedding = nn.Parameter(torch.randn(1, self.num_positions, self.embed_dim))
+
+    def _get_pos_embed(self, pos_embed, H, W):
+        target_dtype = pos_embed.dtype
+        pos_embed = pos_embed.float().reshape(
+            1, self.image_size // self.patch_size, self.image_size // self.patch_size, -1).permute(0, 3, 1, 2)
+        pos_embed = F.interpolate(pos_embed, size=(H, W), mode='bicubic', align_corners=False). \
+            reshape(1, -1, H * W).permute(0, 2, 1).to(target_dtype)
+        return pos_embed
+
+    def forward(self, pixel_values: torch.FloatTensor) -> torch.Tensor:
+        target_dtype = self.patch_embedding.weight.dtype
+        patch_embeds = self.patch_embedding(pixel_values)  # shape = [*, channel, width, height]
+        batch_size, _, height, width = patch_embeds.shape
+        patch_embeds = patch_embeds.flatten(2).transpose(1, 2)
+        class_embeds = self.class_embedding.expand(batch_size, 1, -1).to(target_dtype)
+        embeddings = torch.cat([class_embeds, patch_embeds], dim=1)
+        position_embedding = torch.cat([
+            self.position_embedding[:, :1, :],
+            self._get_pos_embed(self.position_embedding[:, 1:, :], height, width)
+        ], dim=1)
+        embeddings = embeddings + position_embedding.to(target_dtype)
+        return embeddings
+
+
+class InternAttention(nn.Module):
+    """Multi-headed attention from 'Attention Is All You Need' paper"""
+
+    def __init__(self, config: InternVisionConfig):
+        super().__init__()
+        self.config = config
+        self.embed_dim = config.hidden_size
+        self.num_heads = config.num_attention_heads
+        self.use_flash_attn = config.use_flash_attn and has_flash_attn
+        if config.use_flash_attn and not has_flash_attn:
+            print('Warning: Flash Attention is not available, use_flash_attn is set to False.')
+        self.head_dim = self.embed_dim // self.num_heads
+        if self.head_dim * self.num_heads != self.embed_dim:
+            raise ValueError(
+                f'embed_dim must be divisible by num_heads (got `embed_dim`: {self.embed_dim} and `num_heads`:'
+                f' {self.num_heads}).'
+            )
+
+        self.scale = self.head_dim ** -0.5
+        self.qkv = nn.Linear(self.embed_dim, 3 * self.embed_dim, bias=config.qkv_bias)
+        self.attn_drop = nn.Dropout(config.attention_dropout)
+        self.proj_drop = nn.Dropout(config.dropout)
+
+        self.qk_normalization = config.qk_normalization
+
+        if self.qk_normalization:
+            self.q_norm = InternRMSNorm(self.embed_dim, eps=config.layer_norm_eps)
+            self.k_norm = InternRMSNorm(self.embed_dim, eps=config.layer_norm_eps)
+
+        if self.use_flash_attn:
+            self.inner_attn = FlashAttention(attention_dropout=config.attention_dropout)
+        self.proj = nn.Linear(self.embed_dim, self.embed_dim)
+        
+        # mhu 2025-12-22: Add gated attention mechanism
+        self.use_vit_gate = getattr(config, 'use_vit_gate', True)
+        self.vit_gate_type = getattr(config, 'vit_gate_type', 'elementwise')
+        if self.use_vit_gate:
+            # Create gate_proj based on gate type
+            if self.vit_gate_type == 'elementwise':
+                # Elementwise gate: [B, N, C] where C = embed_dim
+                gate_out_dim = self.embed_dim
+            elif self.vit_gate_type == 'headwise':
+                # Headwise gate: [B, N, num_heads, 1]
+                gate_out_dim = self.num_heads
+            elif self.vit_gate_type == 'elementwise_fine':
+                # Fine-grained elementwise gate: [B, N, num_heads, head_dim]
+                gate_out_dim = self.num_heads * self.head_dim
+            else:
+                raise ValueError(f"Unknown vit_gate_type: {self.vit_gate_type}. "
+                               f"Must be one of: 'elementwise', 'headwise', 'elementwise_fine'")
+            
+            self.gate_proj = nn.Linear(self.embed_dim, gate_out_dim, bias=False)
+            # Initialize gate projection with small values to avoid numerical instability
+            # Small std ensures gate logits are near 0, so sigmoid outputs are near 0.5
+            # nn.init.constant_(self.gate_proj.bias, 0) # 让初始 Gate 约等于 sigmoid(-2) ≈ 0.12
+            std = config.initializer_range # Use 10% of initializer_range for gate
+            self.gate_proj.weight.data.normal_(mean=0.0, std=std)
+            
+            # Gate logging control
+            self._gate_logging_counter = 0
+            self._gate_logging_frequency = 50  # Log every 50 forward passes
+
+######### mhu 2025-12-22: Naive Attention with gated attention #########
+    def _naive_attn(self, x, gate=None):
+        B, N, C = x.shape
+        qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
+        q, k, v = qkv.unbind(0)  # make torchscript happy (cannot use tensor as tuple)
+
+        if self.qk_normalization:
+            B_, H_, N_, D_ = q.shape
+            q = self.q_norm(q.transpose(1, 2).flatten(-2, -1)).view(B_, N_, H_, D_).transpose(1, 2)
+            k = self.k_norm(k.transpose(1, 2).flatten(-2, -1)).view(B_, N_, H_, D_).transpose(1, 2)
+
+        attn = ((q * self.scale) @ k.transpose(-2, -1))
+        attn = attn.softmax(dim=-1)
+        attn = self.attn_drop(attn)
+
+        attn_output = (attn @ v)  # [B, num_heads, N, head_dim]
+        
+        # mhu 2025-12-22: Apply gate based on gate type
+        if gate is not None:
+            if self.vit_gate_type == 'headwise':
+                # Headwise: gate shape [B, N, num_heads, 1], need to transpose to [B, num_heads, N, 1]
+                gate = gate.transpose(1, 2)  # [B, num_heads, N, 1]
+                attn_output = attn_output * gate  # [B, num_heads, N, head_dim]
+            elif self.vit_gate_type == 'elementwise_fine':
+                # Elementwise fine: gate shape [B, N, num_heads, head_dim], need to transpose to [B, num_heads, N, head_dim]
+                gate = gate.transpose(1, 2)  # [B, num_heads, N, head_dim]
+                attn_output = attn_output * gate  # [B, num_heads, N, head_dim]
+            # For 'elementwise', gate will be applied after reshape
+        
+        x = attn_output.transpose(1, 2).reshape(B, N, C)  # [B, N, C]
+        
+        # Apply elementwise gate after reshape (if gate_type is 'elementwise')
+        if gate is not None and self.vit_gate_type == 'elementwise':
+            x = x * gate  # [B, N, C]
+        
+        x = self.proj(x)
+        x = self.proj_drop(x)
+        return x
+
+######### mhu 2025-12-22: Flash Attention with gated attention #########
+    def _flash_attn(self, x, key_padding_mask=None, need_weights=False, gate=None):
+        qkv = self.qkv(x)
+        qkv = rearrange(qkv, 'b s (three h d) -> b s three h d', three=3, h=self.num_heads)
+
+        if self.qk_normalization:
+            q, k, v = qkv.unbind(2)
+            q = self.q_norm(q.flatten(-2, -1)).view(q.shape)
+            k = self.k_norm(k.flatten(-2, -1)).view(k.shape)
+            qkv = torch.stack([q, k, v], dim=2)
+            
+        # 2. SDPA 核心计算（在 Flash Attention 内部）
+        context, _ = self.inner_attn(       
+            qkv, key_padding_mask=key_padding_mask, need_weights=need_weights, causal=False
+        )
+        # context shape: [B, N, num_heads, head_dim]
+        
+        # mhu 2025-12-22: Apply gate based on gate type
+        if gate is not None:
+            if self.vit_gate_type == 'headwise':
+                # Headwise: gate shape [B, N, num_heads, 1]
+                context = context * gate  # [B, N, num_heads, head_dim]
+            elif self.vit_gate_type == 'elementwise_fine':
+                # Elementwise fine: gate shape [B, N, num_heads, head_dim]
+                context = context * gate  # [B, N, num_heads, head_dim]
+            # For 'elementwise', gate will be applied after reshape
+        
+        outs = rearrange(context, 'b s h d -> b s (h d)')  # [B, N, C]
+        
+        # Apply elementwise gate after reshape (if gate_type is 'elementwise')
+        if gate is not None and self.vit_gate_type == 'elementwise':
+            outs = outs * gate  # [B, N, C]
+
+        outs = self.proj(outs)   # 5. 输出投影
+        outs = self.proj_drop(outs)
+        return outs
+
+    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
+        # mhu 2025-12-22: Compute gate based on input hidden_states if gating is enabled
+        gate = None
+        if self.use_vit_gate:
+            B, N, C = hidden_states.shape
+            # Compute gate logits
+            gate_logits = self.gate_proj(hidden_states)  # Output shape depends on gate_type
+            
+            # Reshape gate based on gate type
+            if self.vit_gate_type == 'elementwise':
+                # Elementwise: [B, N, C] where C = embed_dim
+                gate = torch.sigmoid(gate_logits)  # [B, N, C]
+            elif self.vit_gate_type == 'headwise':
+                # Headwise: [B, N, num_heads] -> [B, N, num_heads, 1]
+                gate = torch.sigmoid(gate_logits)  # [B, N, num_heads]
+                gate = gate.unsqueeze(-1)  # [B, N, num_heads, 1]
+            elif self.vit_gate_type == 'elementwise_fine':
+                # Elementwise fine: [B, N, num_heads * head_dim] -> [B, N, num_heads, head_dim]
+                gate = torch.sigmoid(gate_logits)  # [B, N, num_heads * head_dim]
+                gate = gate.view(B, N, self.num_heads, self.head_dim)  # [B, N, num_heads, head_dim]
+        
+        # Log gate statistics (with frequency control) - log before applying to attention
+        # Use print instead of logger.info because log_level may be set to 'passive' in training
+        # which filters out INFO level logs. print always outputs to stdout.
+        if gate is not None:
+            self._gate_logging_counter += 1
+            if self._gate_logging_counter % self._gate_logging_frequency == 0:
+                # Calculate distribution statistics (0-1 range)
+                gate_flat = gate.flatten()
+                gate_sorted = torch.sort(gate_flat)[0]
+                n = gate_sorted.numel()
+                # Calculate quantiles using sorted values (more compatible than torch.quantile)
+                q25 = gate_sorted[int(n * 0.25)].item()
+                q50 = gate_sorted[int(n * 0.50)].item()
+                q75 = gate_sorted[int(n * 0.75)].item()
+                # Count values in different ranges
+                low = (gate_flat < 0.3).sum().item() / n * 100  # < 0.3
+                mid = ((gate_flat >= 0.3) & (gate_flat < 0.7)).sum().item() / n * 100  # 0.3-0.7
+                high = (gate_flat >= 0.7).sum().item() / n * 100  # >= 0.7
+                print(
+                    f"[ViT Gate] type={self.vit_gate_type}, shape={gate.shape}, "
+                    f"mean={gate.mean().item():.4f}, min={gate.min().item():.4f}, "
+                    f"max={gate.max().item():.4f}, "
+                    f"dist: <0.3={low:.1f}%, 0.3-0.7={mid:.1f}%, >=0.7={high:.1f}%"
+                )
+        
+        # Apply gate to attention output (gate is applied before proj in both methods)
+        if not self.use_flash_attn:
+            x = self._naive_attn(hidden_states, gate=gate)
+        else:
+            x = self._flash_attn(hidden_states, gate=gate)
+        return x
+
+
+class InternMLP(nn.Module):
+    def __init__(self, config: InternVisionConfig):
+        super().__init__()
+        self.config = config
+        self.act = ACT2FN[config.hidden_act]
+        self.fc1 = nn.Linear(config.hidden_size, config.intermediate_size)
+        self.fc2 = nn.Linear(config.intermediate_size, config.hidden_size)
+
+    def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
+        hidden_states = self.fc1(hidden_states)
+        hidden_states = self.act(hidden_states)
+        hidden_states = self.fc2(hidden_states)
+        return hidden_states
+
+
+class InternVisionEncoderLayer(nn.Module):
+    def __init__(self, config: InternVisionConfig, drop_path_rate: float):
+        super().__init__()
+        self.embed_dim = config.hidden_size
+        self.intermediate_size = config.intermediate_size
+        self.norm_type = config.norm_type
+
+        self.attn = InternAttention(config)
+        self.mlp = InternMLP(config)
+        self.norm1 = NORM2FN[self.norm_type](self.embed_dim, eps=config.layer_norm_eps)
+        self.norm2 = NORM2FN[self.norm_type](self.embed_dim, eps=config.layer_norm_eps)
+
+        self.ls1 = nn.Parameter(config.initializer_factor * torch.ones(self.embed_dim))
+        self.ls2 = nn.Parameter(config.initializer_factor * torch.ones(self.embed_dim))
+        self.drop_path1 = DropPath(drop_path_rate) if drop_path_rate > 0. else nn.Identity()
+        self.drop_path2 = DropPath(drop_path_rate) if drop_path_rate > 0. else nn.Identity()
+
+    def forward(
+            self,
+            hidden_states: torch.Tensor,
+    ) -> Tuple[torch.FloatTensor, Optional[torch.FloatTensor], Optional[Tuple[torch.FloatTensor]]]:
+        """
+        Args:
+            hidden_states (`Tuple[torch.FloatTensor, Optional[torch.FloatTensor]]`): input to the layer of shape `(batch, seq_len, embed_dim)`
+        """
+        hidden_states = hidden_states + self.drop_path1(self.attn(self.norm1(hidden_states).to(hidden_states.dtype)) * self.ls1)
+
+        hidden_states = hidden_states + self.drop_path2(self.mlp(self.norm2(hidden_states).to(hidden_states.dtype)) * self.ls2)
+
+        return hidden_states
+
+
+class InternVisionEncoder(nn.Module):
+    """
+    Transformer encoder consisting of `config.num_hidden_layers` self attention layers. Each layer is a
+    [`InternEncoderLayer`].
+
+    Args:
+        config (`InternConfig`):
+            The corresponding vision configuration for the `InternEncoder`.
+    """
+
+    def __init__(self, config: InternVisionConfig):
+        super().__init__()
+        self.config = config
+        # stochastic depth decay rule
+        dpr = [x.item() for x in torch.linspace(0, config.drop_path_rate, config.num_hidden_layers)]
+        self.layers = nn.ModuleList([
+            InternVisionEncoderLayer(config, dpr[idx]) for idx in range(config.num_hidden_layers)])
+        self.gradient_checkpointing = True
+
+    def forward(
+            self,
+            inputs_embeds,
+            output_hidden_states: Optional[bool] = None,
+            return_dict: Optional[bool] = None,
+    ) -> Union[Tuple, BaseModelOutput]:
+        r"""
+        Args:
+            inputs_embeds (`torch.FloatTensor` of shape `(batch_size, sequence_length, hidden_size)`):
+                Embedded representation of the inputs. Should be float, not int tokens.
+            output_hidden_states (`bool`, *optional*):
+                Whether or not to return the hidden states of all layers. See `hidden_states` under returned tensors
+                for more detail.
+            return_dict (`bool`, *optional*):
+                Whether or not to return a [`~utils.ModelOutput`] instead of a plain tuple.
+        """
+        output_hidden_states = (
+            output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
+        )
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        encoder_states = () if output_hidden_states else None
+        hidden_states = inputs_embeds
+# 经过多层 Transformer encoder layers后，hidden_states.shape: [B, N, C] 
+        for idx, encoder_layer in enumerate(self.layers):
+            if output_hidden_states:
+                encoder_states = encoder_states + (hidden_states,)
+            if self.gradient_checkpointing and self.training:
+                layer_outputs = torch.utils.checkpoint.checkpoint(
+                    encoder_layer,
+                    hidden_states)
+            else:
+                layer_outputs = encoder_layer(
+                    hidden_states,
+                )
+            hidden_states = layer_outputs
+
+        if output_hidden_states:
+            encoder_states = encoder_states + (hidden_states,)
+
+        if not return_dict:
+            return tuple(v for v in [hidden_states, encoder_states] if v is not None)
+        return BaseModelOutput(
+            last_hidden_state=hidden_states, hidden_states=encoder_states
+        )
+
+
+class InternVisionModel(PreTrainedModel):
+    main_input_name = 'pixel_values'
+    _supports_flash_attn_2 = True
+    supports_gradient_checkpointing = True
+    config_class = InternVisionConfig
+    _no_split_modules = ['InternVisionEncoderLayer']
+
+    def __init__(self, config: InternVisionConfig):
+        super().__init__(config)
+        self.config = config
+    # Patch Embeddings 阶段
+        self.embeddings = InternVisionEmbeddings(config)
+        self.encoder = InternVisionEncoder(config)
+
+    def resize_pos_embeddings(self, old_size, new_size, patch_size):
+        pos_emb = self.embeddings.position_embedding
+        ### mhu 11/10 added
+        if pos_emb.numel() == 0:
+            embed_dim = self.config.hidden_size
+            num_positions = (old_size // patch_size) ** 2 + 1
+            device = self.embeddings.class_embedding.device
+            dtype = self.embeddings.class_embedding.dtype
+            logger.warning('Position embedding is empty under ZeRO partitioning; reinitializing before resize.')
+            pos_emb = torch.empty(1, num_positions, embed_dim, device=device, dtype=dtype)
+            nn.init.trunc_normal_(pos_emb[:, 1:, :], std=0.02)
+            cls_emb = self.embeddings.class_embedding.to(device=device, dtype=dtype)
+            if cls_emb.numel() == pos_emb[:, :1, :].numel():
+                pos_emb[:, :1, :] = cls_emb
+            else:
+                nn.init.trunc_normal_(pos_emb[:, :1, :], std=0.02)
+        elif pos_emb.dim() == 1:
+            embed_dim = self.config.hidden_size
+            num_positions = (old_size // patch_size) ** 2 + 1
+            pos_emb = pos_emb.view(1, num_positions, embed_dim)
+        elif pos_emb.dim() == 2:
+            embed_dim = pos_emb.shape[-1]
+            pos_emb = pos_emb.view(1, pos_emb.shape[0], embed_dim)
+            num_positions = pos_emb.shape[1]
+        else:
+            _, num_positions, embed_dim = pos_emb.shape
+
+
+        ########
+        pos_emb = pos_emb.to(self.embeddings.position_embedding.device)
+        self.embeddings.position_embedding = nn.Parameter(pos_emb)
+        _, num_positions, embed_dim = pos_emb.shape
+        cls_emb = pos_emb[:, :1, :]
+        pos_emb = pos_emb[:, 1:, :].reshape(1, old_size // patch_size, old_size // patch_size, -1).permute(0, 3, 1, 2)
+        pos_emb = F.interpolate(pos_emb.float(), size=new_size // patch_size, mode='bicubic', align_corners=False)
+        pos_emb = pos_emb.to(cls_emb.dtype).reshape(1, embed_dim, -1).permute(0, 2, 1)
+        pos_emb = torch.cat([cls_emb, pos_emb], dim=1)
+        self.embeddings.position_embedding = nn.Parameter(pos_emb)
+        self.embeddings.image_size = new_size
+        logger.info('Resized position embeddings from {} to {}'.format(old_size, new_size))
+
+    def get_input_embeddings(self):
+        return self.embeddings
+
+    def forward(
+            self,
+            pixel_values: Optional[torch.FloatTensor] = None,
+            output_hidden_states: Optional[bool] = None,
+            return_dict: Optional[bool] = None,
+            pixel_embeds: Optional[torch.FloatTensor] = None,
+    ) -> Union[Tuple, BaseModelOutputWithPooling]:
+        output_hidden_states = (
+            output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
+        )
+        return_dict = return_dict if return_dict is not None else self.config.use_return_dict
+
+        if pixel_values is None and pixel_embeds is None:
+            raise ValueError('You have to specify pixel_values or pixel_embeds')
+
+        if pixel_embeds is not None:
+            hidden_states = pixel_embeds
+        else:
+        # 1. Embeddings 阶段
+            if len(pixel_values.shape) == 4:
+                hidden_states = self.embeddings(pixel_values)
+            else:
+                raise ValueError(f'wrong pixel_values size: {pixel_values.shape}')
+        # 2. Encoder 阶段
+        encoder_outputs = self.encoder(
+            inputs_embeds=hidden_states,
+            output_hidden_states=output_hidden_states,
+            return_dict=return_dict,
+        )
+        # print(f'encoder_outputs.last_hidden_state.shape: {encoder_outputs.last_hidden_state.shape}')
+        last_hidden_state = encoder_outputs.last_hidden_state
+         # 3. Pooled output (class token) 得到最终的特征
+        pooled_output = last_hidden_state[:, 0, :] 
+
+        if not return_dict:
+            return (last_hidden_state, pooled_output) + encoder_outputs[1:]
+
+        return BaseModelOutputWithPooling(
+            last_hidden_state=last_hidden_state,
+            pooler_output=pooled_output,
+            hidden_states=encoder_outputs.hidden_states,
+            attentions=encoder_outputs.attentions,
+        )

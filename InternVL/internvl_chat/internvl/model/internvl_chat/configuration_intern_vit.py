@@ -57,6 +57,13 @@ class InternVisionConfig(PretrainedConfig):
             The standard deviation of the truncated_normal_initializer for initializing all weight matrices.
         initializer_factor (`float`, *optional*, defaults to 0.1):
             A factor for layer scale.
+        use_vit_gate (`bool`, *optional*, defaults to `False`):
+            Whether to use gated attention mechanism in ViT attention layers.
+        vit_gate_type (`str`, *optional*, defaults to `'elementwise_fine'`):
+            Type of gate mechanism. Options:
+            - 'elementwise': Elementwise gate applied after reshape [B, N, C]
+            - 'headwise': Headwise gate [B, N, num_heads, 1] applied before reshape
+            - 'elementwise_fine': Fine-grained elementwise gate [B, N, num_heads, head_dim] applied before reshape (default)
     """
 
     model_type = 'intern_vit_6b'
@@ -81,6 +88,8 @@ class InternVisionConfig(PretrainedConfig):
             attention_dropout=0.0,
             initializer_range=0.02,
             initializer_factor=0.1,
+            use_vit_gate=False,
+            vit_gate_type='elementwise_fine',
             **kwargs,
     ):
         super().__init__(**kwargs)
@@ -103,6 +112,8 @@ class InternVisionConfig(PretrainedConfig):
         self.qkv_bias = qkv_bias
         self.qk_normalization = qk_normalization
         self.use_flash_attn = use_flash_attn
+        self.use_vit_gate = use_vit_gate
+        self.vit_gate_type = vit_gate_type
 
     @classmethod
     def from_pretrained(cls, pretrained_model_name_or_path: Union[str, os.PathLike], **kwargs) -> 'PretrainedConfig':

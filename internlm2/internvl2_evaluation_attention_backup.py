@@ -7,11 +7,19 @@ Usage:
     # Using HuggingFace model:
     python internlm2/internvl2_evaluation_attention.py \
         --model-path OpenGVLab/InternVL2_5-2B \
-        --video-path /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/abzRFn8xngA_5-3-rgb_front.mp4 \
+        --video-path /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/g0fgci8L_rc_18-8-rgb_front.mp4 \
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
         --save-attention \
         --image-size 224 \
-        --num-segments 16
+        --num-segments 2
+
+    python internlm2/internvl2_evaluation_attention.py \
+        --model-path OpenGVLab/InternVL2_5-2B \
+        --video-path /local1/mhu/sign_language_llm/internlm2/3999622-uhd_3840_2160_24fps.mp4 \
+        --out-dir /local1/mhu/sign_language_llm/internlm2 \
+        --save-attention \
+        --image-size 224 \
+        --num-segments 2
 
     # Using local LoRA checkpoint:
     python internlm2/internvl2_evaluation_attention.py \
@@ -21,7 +29,16 @@ Usage:
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
         --save-attention \
         --image-size 224 \
-        --num-segments 25
+        --num-segments 4
+
+    python internlm2/internvl2_evaluation_attention.py \
+        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399 \
+        --base-model-name OpenGVLab/InternVL2_5-2B \
+        --video-path /local1/mhu/sign_language_llm/internlm2/3999622-uhd_3840_2160_24fps.mp4 \
+        --out-dir /local1/mhu/sign_language_llm/internlm2 \
+        --save-attention \
+        --image-size 224 \
+        --num-segments 12
 """
 
 import os
@@ -61,6 +78,272 @@ def build_transform(input_size=448):
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
+
+
+def visualize_text_to_visual_heatmap(layer_attn, layer_idx, output_path, text_tokens=None, visual_tokens_per_frame=None):
+    """
+    Visualize text-to-visual attention heatmap for a single layer.
+    
+    Args:
+        layer_attn: [text_len, visual_len] attention matrix
+        layer_idx: Layer index
+        output_path: Path to save the heatmap
+        text_tokens: Optional list of text token strings for y-axis labels
+        visual_tokens_per_frame: Optional number of visual tokens per frame for x-axis grouping
+    """
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as mpatches
+    
+    # Convert to numpy if tensor
+    if isinstance(layer_attn, torch.Tensor):
+        layer_attn = layer_attn.float().cpu().numpy()
+    
+    # Debug: print attention statistics
+    print(f"      Layer {layer_idx} attention stats:")
+    print(f"         Shape: {layer_attn.shape}")
+    print(f"         Min: {layer_attn.min():.6f}, Max: {layer_attn.max():.6f}")
+    print(f"         Mean: {layer_attn.mean():.6f}, Std: {layer_attn.std():.6f}")
+    print(f"         Non-zero ratio: {(layer_attn > 1e-6).sum() / layer_attn.size:.4f}")
+    
+    # Check if attention values are too uniform
+    if layer_attn.std() < 1e-6:
+        print(f"      ⚠️  Warning: Attention values are too uniform (std={layer_attn.std():.6f})")
+    
+    # Normalize to [0, 1] with better handling of edge cases
+    attn_min = layer_attn.min()
+    attn_max = layer_attn.max()
+    
+    if attn_max - attn_min < 1e-6:
+        # All values are the same, set to 0.5
+        attn_norm = np.full_like(layer_attn, 0.5)
+        print(f"      ⚠️  Warning: All attention values are the same, setting to 0.5")
+    else:
+        attn_norm = (layer_attn - attn_min) / (attn_max - attn_min)
+    
+    # Apply percentile-based normalization for better contrast (optional)
+    # Use 1st and 99th percentile to reduce impact of outliers
+    p1, p99 = np.percentile(layer_attn, [1, 99])
+    if p99 - p1 > 1e-6:
+        attn_norm_robust = np.clip((layer_attn - p1) / (p99 - p1), 0, 1)
+        # Use robust normalization if it provides better contrast
+        if attn_norm_robust.std() > attn_norm.std():
+            attn_norm = attn_norm_robust
+            print(f"      Using robust normalization (percentile 1-99)")
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(max(12, layer_attn.shape[1] // 10), max(8, layer_attn.shape[0] // 5)))
+    
+    # Plot heatmap
+    im = ax.imshow(attn_norm, cmap='hot', aspect='auto', interpolation='nearest')
+    
+    # Add colorbar
+    cbar = plt.colorbar(im, ax=ax)
+    cbar.set_label('Attention Weight', rotation=270, labelpad=20)
+    
+    # Set labels
+    ax.set_xlabel('Visual Tokens', fontsize=12)
+    ax.set_ylabel('Text Tokens', fontsize=12)
+    ax.set_title(f'Text-to-Visual Attention Heatmap - Layer {layer_idx}', fontsize=14, fontweight='bold')
+    
+    # Add frame boundaries if visual_tokens_per_frame is provided
+    if visual_tokens_per_frame is not None:
+        num_frames = layer_attn.shape[1] // visual_tokens_per_frame
+        for frame_idx in range(1, num_frames):
+            x_pos = frame_idx * visual_tokens_per_frame
+            ax.axvline(x=x_pos - 0.5, color='cyan', linestyle='--', linewidth=1, alpha=0.5)
+            ax.text(x_pos + visual_tokens_per_frame // 2, -layer_attn.shape[0] * 0.05, 
+                   f'Frame {frame_idx}', ha='center', va='top', fontsize=8, color='cyan')
+    
+    # Add grid for better readability
+    ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+    
+    # Save figure
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    print(f"   ✅ Saved layer {layer_idx} text-to-visual heatmap: {output_path}")
+
+
+def visualize_per_layer_visual_attention(layer_attn_1d, layer_idx, output_path, num_frames=None, num_patches_h=None, num_patches_w=None):
+    """
+    Visualize per-layer attention to visual tokens (1D vector, same format as aggregated attention).
+    
+    Args:
+        layer_attn_1d: [visual_len] 1D attention vector
+        layer_idx: Layer index
+        output_path: Path to save the heatmap
+        num_frames: Number of frames
+        num_patches_h: Number of patches in height dimension
+        num_patches_w: Number of patches in width dimension
+    """
+    import matplotlib.pyplot as plt
+    
+    # Convert to numpy if tensor
+    if isinstance(layer_attn_1d, torch.Tensor):
+        layer_attn_1d = layer_attn_1d.float().cpu().numpy()
+    
+    # Ensure it's 1D
+    if len(layer_attn_1d.shape) > 1:
+        layer_attn_1d = layer_attn_1d.flatten()
+    
+    visual_len = len(layer_attn_1d)
+    
+    # Debug: print attention statistics
+    print(f"      Layer {layer_idx} attention stats:")
+    print(f"         Shape: {layer_attn_1d.shape}")
+    print(f"         Min: {layer_attn_1d.min():.6f}, Max: {layer_attn_1d.max():.6f}")
+    print(f"         Mean: {layer_attn_1d.mean():.6f}, Std: {layer_attn_1d.std():.6f}")
+    print(f"         Non-zero ratio: {(layer_attn_1d > 1e-6).sum() / layer_attn_1d.size:.4f}")
+    
+    # Calculate patches per frame if not provided
+    if num_frames is None or num_patches_h is None or num_patches_w is None:
+        # Try to infer from visual_len
+        # Assume square patches: visual_len = num_frames * num_patches_h * num_patches_w
+        # Try common configurations
+        if visual_len == 64:
+            # 1 frame, 8x8 patches
+            num_frames = 1
+            num_patches_h = num_patches_w = 8
+        else:
+            # Try to find a reasonable factorization
+            num_frames = 1
+            patches_per_frame = visual_len
+            num_patches_h = num_patches_w = int(np.sqrt(patches_per_frame))
+            if num_patches_h * num_patches_w != patches_per_frame:
+                # Not a perfect square, use approximate
+                num_patches_h = int(np.sqrt(patches_per_frame))
+                num_patches_w = patches_per_frame // num_patches_h
+    
+    print(f"   📐 num_frames: {num_frames}, num_patches_h: {num_patches_h}, num_patches_w: {num_patches_w}")
+    # Create mosaic mask (same as aggregated attention visualization)
+    mosaic_mask = create_mosaic_mask(layer_attn_1d, num_frames, num_patches_h, num_patches_w)
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(12, 8))
+    
+    # Plot heatmap
+    im = ax.imshow(mosaic_mask, cmap='hot', aspect='auto', interpolation='nearest')
+    
+    # Add colorbar
+    cbar = plt.colorbar(im, ax=ax)
+    cbar.set_label('Attention Weight', rotation=270, labelpad=20)
+    
+    # Set labels
+    ax.set_xlabel('Patches (Width)', fontsize=12)
+    ax.set_ylabel('Patches (Height)', fontsize=12)
+    ax.set_title(f'Per-Layer Visual Attention - Layer {layer_idx}', fontsize=14, fontweight='bold')
+    
+    # Add grid for better readability
+    ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+    
+    # Save figure
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    print(f"   ✅ Saved layer {layer_idx} visual attention: {output_path}")
+
+
+def visualize_frame_across_layers(per_layer_attention, frame_idx, frame_idx_in_segments, 
+                                  patches_per_frame, num_patches_h, num_patches_w,
+                                  video_file, output_dir):
+    """
+    Visualize a single frame across all layers (mosaic for each layer).
+    
+    Args:
+        per_layer_attention: List of per-layer attention vectors [visual_len] for each layer
+        frame_idx: Original frame index in video
+        frame_idx_in_segments: Frame index in the sampled segments
+        patches_per_frame: Number of patches per frame
+        num_patches_h: Number of patches in height dimension
+        num_patches_w: Number of patches in width dimension
+        video_file: Video filename (without extension)
+        output_dir: Output directory
+    """
+    import matplotlib.pyplot as plt
+    
+    # Extract frame attention from each layer
+    frame_attentions = []
+    valid_layers = []
+    
+    for layer_idx, layer_attn in enumerate(per_layer_attention):
+        if layer_attn is None:
+            continue
+        
+        # Convert to numpy if tensor
+        if isinstance(layer_attn, torch.Tensor):
+            layer_attn_np = layer_attn.float().cpu().numpy()
+        else:
+            layer_attn_np = layer_attn
+        
+        if layer_attn_np.size == 0:
+            continue
+        
+        # Ensure it's 1D
+        if len(layer_attn_np.shape) > 1:
+            layer_attn_np = layer_attn_np.flatten()
+        
+        # Extract attention for this specific frame
+        start_patch = frame_idx_in_segments * patches_per_frame
+        end_patch = start_patch + patches_per_frame
+        
+        if end_patch > len(layer_attn_np):
+            print(f"      ⚠️  Layer {layer_idx}: frame patches {start_patch}:{end_patch} exceed total {len(layer_attn_np)}")
+            continue
+        
+        frame_attn = layer_attn_np[start_patch:end_patch]
+        frame_attentions.append(frame_attn)
+        valid_layers.append(layer_idx)
+    
+    if len(frame_attentions) == 0:
+        print(f"   ⚠️  No valid layer attention found for frame {frame_idx}")
+        return
+    
+    # Create figure with subplots for all layers
+    num_layers = len(frame_attentions)
+    cols = min(4, num_layers)
+    rows = (num_layers + cols - 1) // cols
+    
+    fig, axes = plt.subplots(rows, cols, figsize=(cols * 3, rows * 3))
+    if num_layers == 1:
+        axes = [axes]
+    else:
+        axes = axes.flatten()
+    
+    for plot_idx, (layer_idx, frame_attn) in enumerate(zip(valid_layers, frame_attentions)):
+        # Normalize attention for this frame
+        frame_attn_norm = minmax_01(frame_attn)
+        
+        # Reshape to 2D grid for single frame: [num_patches_h, num_patches_w]
+        frame_attn_2d = frame_attn_norm.reshape(num_patches_h, num_patches_w)
+        
+        # Plot
+        ax = axes[plot_idx]
+        im = ax.imshow(frame_attn_2d, cmap='hot', aspect='auto', interpolation='nearest')
+        ax.set_title(f'Layer {layer_idx}', fontsize=10, fontweight='bold')
+        ax.set_xlabel('Patches (Width)', fontsize=8)
+        ax.set_ylabel('Patches (Height)', fontsize=8)
+        
+        # Add colorbar
+        plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+    
+    # Hide unused subplots
+    for idx in range(num_layers, len(axes)):
+        axes[idx].axis('off')
+    
+    plt.suptitle(f'Frame {frame_idx:04d} Attention Across All Layers\n{video_file}', 
+                 fontsize=14, fontweight='bold', y=0.995)
+    plt.tight_layout()
+    
+    # Save figure
+    frame_output_dir = os.path.join(output_dir, 'per_frame_layers')
+    os.makedirs(frame_output_dir, exist_ok=True)
+    output_path = os.path.join(frame_output_dir, f"{video_file}_frame_{frame_idx:04d}_all_layers.png")
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    print(f"   ✅ Saved frame {frame_idx} across all layers: {output_path}")
 
 
 def create_mosaic_mask(attn_1d, num_frames, num_patches_h, num_patches_w):
@@ -206,9 +489,12 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
     else:
         visual_token_start = input_ids.shape[1]
     
-    total_visual_patches = sum(num_patches_list)
+    # Note: num_patches_list might not reflect actual visual tokens after projection
+    # We'll update visual_token_index after we get the actual visual_embeds shape
+    total_visual_patches = sum(num_patches_list)  # This is just an initial estimate
     visual_token_end = visual_token_start + total_visual_patches - 1
     visual_token_index = torch.tensor([visual_token_start, visual_token_end], dtype=torch.long, device=model.device)
+    print(f"   📐 Initial visual_token_index (before correction): {visual_token_index.tolist()}")
     
     # Find language model
     language_model = model.language_model.model if hasattr(model.language_model, 'model') else model.language_model
@@ -305,10 +591,13 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
                 return_history=False
             )
             generated_text = response.strip()
-        except RuntimeError as e:
+        except (RuntimeError, AttributeError, Exception) as e:
             # Chat failed, but hooks should have captured embeddings
-            print(f"   ⚠️  Chat method failed (expected): {str(e)[:100]}")
+            # This is expected when we manually construct inputs_embeds
+            error_msg = str(e)[:200] if len(str(e)) > 200 else str(e)
+            print(f"   ⚠️  Chat method failed (expected): {error_msg}")
             # Continue - we'll generate text manually if needed
+            # The hooks should have already captured the embeddings we need
     
     # Remove hooks
     for handle in handles:
@@ -324,9 +613,11 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
     print(f"   📐 Visual embeds shape: {visual_embeds.shape}")
     print(f"   📐 Text embeds shape: {text_embeds.shape}")
     
-    # Reshape visual_embeds if needed
+    # Reshape visual_embeds if needed and ALWAYS update visual_token_index based on actual shape
     batch_size = text_embeds.shape[0]
+    visual_token_start = visual_token_index[0].item()  # Get the start position
     
+    # Determine total_visual_tokens from actual visual_embeds shape
     if len(visual_embeds.shape) == 3:
         # visual_embeds shape: [num_frames, patches_per_frame, hidden_dim] or [batch, seq_len, hidden_dim]
         if visual_embeds.shape[0] != batch_size:
@@ -334,16 +625,26 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
             num_frames, patches_per_frame, hidden_dim = visual_embeds.shape
             total_visual_tokens = num_frames * patches_per_frame
             visual_embeds = visual_embeds.view(1, total_visual_tokens, hidden_dim)
-            # Update visual_token_index based on actual visual tokens
-            visual_token_start = visual_token_index[0].item()
-            visual_token_end = visual_token_start + total_visual_tokens - 1
-            visual_token_index = torch.tensor([visual_token_start, visual_token_end], dtype=torch.long, device=model.device)
-            print(f"   📐 Reshaped visual_embeds: {visual_embeds.shape}")
-            print(f"   📐 Updated visual_token_index: {visual_token_index.tolist()}")
+            print(f"   📐 Reshaped visual_embeds from 3D: {visual_embeds.shape}")
+        else:
+            # Already in [batch, seq_len, hidden_dim] format
+            total_visual_tokens = visual_embeds.shape[1]
+            print(f"   📐 Visual embeds already in [batch, seq_len, hidden_dim] format: {visual_embeds.shape}")
     elif len(visual_embeds.shape) == 2:
         # Flattened: [batch*seq_len, hidden_dim] -> [batch, seq_len, hidden_dim]
-        visual_seq_len = visual_embeds.shape[0] // batch_size
+        visual_seq_len = visual_embeds.shape[0] // batch_size if visual_embeds.shape[0] > batch_size else visual_embeds.shape[0]
         visual_embeds = visual_embeds.view(batch_size, visual_seq_len, -1)
+        total_visual_tokens = visual_seq_len
+        print(f"   📐 Reshaped visual_embeds from 2D: {visual_embeds.shape}")
+    else:
+        # Should not happen, but handle it
+        total_visual_tokens = visual_embeds.shape[-2] if len(visual_embeds.shape) >= 2 else 1
+        print(f"   ⚠️  Unexpected visual_embeds shape: {visual_embeds.shape}, using {total_visual_tokens} tokens")
+    
+    # ALWAYS update visual_token_index based on actual visual_embeds shape
+    visual_token_end = visual_token_start + total_visual_tokens - 1
+    visual_token_index = torch.tensor([visual_token_start, visual_token_end], dtype=torch.long, device=model.device)
+    print(f"   ✅ Corrected visual_token_index: {visual_token_index.tolist()} (total visual tokens: {total_visual_tokens})")
     
     # Insert visual tokens into text embeddings at visual_token_index positions
     inputs_embeds = _insert_visual_tokens(text_embeds, visual_embeds, visual_token_index)
@@ -398,6 +699,14 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
                     print(f"   🔍 DEBUG - aggregated_attention has NaN: {torch.isnan(aggregated_attention).any().item()}")
                 else:
                     print(f"   🔍 DEBUG - aggregated_attention value: {aggregated_attention}")
+            
+            # 获取每一层的 text-to-visual attention
+            per_layer_text_to_visual_attention = getattr(outputs, 'per_layer_text_to_visual_attention', None)
+            if per_layer_text_to_visual_attention is not None:
+                print(f"   📊 Per-layer text-to-visual attention: {len(per_layer_text_to_visual_attention)} layers")
+                for layer_idx, layer_attn in enumerate(per_layer_text_to_visual_attention):
+                    if isinstance(layer_attn, torch.Tensor):
+                        print(f"      Layer {layer_idx}: shape {layer_attn.shape}")
     
     if aggregated_attention is not None:
         print(f"   📊 Final aggregated attention shape: {aggregated_attention.shape}")
@@ -417,7 +726,10 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
     if generated_text is None:
         generated_text = "[Generation failed, but attention extracted successfully]"
     
-    return aggregated_attention, visual_token_index, generated_text
+    # Return both aggregated and per-layer attention
+    per_layer_attention = getattr(outputs, 'per_layer_text_to_visual_attention', None) if is_internlm2 else None
+    
+    return aggregated_attention, visual_token_index, generated_text, per_layer_attention
 
 
 def process_video(model, tokenizer, video_path, question, args, output_dir, video_file):
@@ -433,7 +745,7 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
     print(f"   ✅ Loaded {len(num_patches_list)} frames")
     
     # Extract attention
-    aggregated_attention, visual_token_idx, generated_text = extract_attention_with_hook(
+    aggregated_attention, visual_token_idx, generated_text, per_layer_attention = extract_attention_with_hook(
         model, tokenizer, pixel_values, num_patches_list, question
     )
     
@@ -477,6 +789,10 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
         frames_to_visualize = args.frame_indices if args.frame_indices else frame_indices.tolist()
         
         if frames_to_visualize:
+            # Create directory for frame attention visualizations
+            frame_attention_dir = os.path.join(output_dir, 'frame_attention')
+            os.makedirs(frame_attention_dir, exist_ok=True)
+            
             cap = cv2.VideoCapture(video_path)
             total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
             
@@ -514,7 +830,8 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
                 end_patch = start_patch + patches_per_frame
                 frame_attn = attn_1d[start_patch:end_patch]
                 
-                output_path = os.path.join(output_dir, f"{video_file}_frame_{frame_idx:04d}_attention.png")
+                # Save both attention.png and attention_only.png in the same folder
+                output_path = os.path.join(frame_attention_dir, f"{video_file}_frame_{frame_idx:04d}_attention.png")
                 visualize(
                     frame_rgb, frame_attn, output_path,
                     use_overlay=args.use_overlay,
@@ -523,10 +840,168 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
                     num_patches_w=num_patches_w
                 )
                 print(f"   ✅ Saved frame {frame_idx} attention: {output_path}")
+                
+                # Save original frame
+                original_frame_path = os.path.join(frame_attention_dir, f"{video_file}_frame_{frame_idx:04d}_original.png")
+                Image.fromarray(frame_rgb).save(original_frame_path)
+                print(f"   ✅ Saved frame {frame_idx} original: {original_frame_path}")
             
             cap.release()
     
-    return generated_text, aggregated_attention
+    # Visualize per-layer text-to-visual attention heatmaps
+    if per_layer_attention is not None and args.save_attention:
+        print(f"   🎨 Generating per-layer text-to-visual attention heatmaps...")
+        print(f"   📊 Total layers: {len(per_layer_attention)}")
+        
+        # Calculate visual tokens per frame
+        total_visual_tokens = visual_token_idx[1].item() - visual_token_idx[0].item() + 1
+        num_frames = len(num_patches_list)
+        visual_tokens_per_frame = total_visual_tokens // num_frames if num_frames > 0 else total_visual_tokens
+        
+        print(f"   📐 Visual tokens: {total_visual_tokens}, Frames: {num_frames}, Tokens per frame: {visual_tokens_per_frame}")
+        print(f"   📝 Note: Each layer's heatmap shows text tokens (rows) attending to visual tokens (columns)")
+        print(f"   📝 Visual tokens include all frames, with frame boundaries marked by cyan lines")
+        
+        # Create directory for per-layer heatmaps
+        per_layer_dir = os.path.join(output_dir, 'per_layer_heatmaps')
+        os.makedirs(per_layer_dir, exist_ok=True)
+        
+        for layer_idx, layer_attn in enumerate(per_layer_attention):
+            if layer_attn is None:
+                continue
+            
+            # Convert to numpy if tensor
+            if isinstance(layer_attn, torch.Tensor):
+                layer_attn_np = layer_attn.float().cpu().numpy()
+            else:
+                layer_attn_np = layer_attn
+            
+            # Skip if empty
+            if layer_attn_np.size == 0:
+                continue
+            
+            # Save individual layer heatmap
+            layer_heatmap_path = os.path.join(per_layer_dir, f"{video_file}_layer_{layer_idx:02d}_visual_attention.png")
+            # Calculate patches per frame (same as aggregated attention)
+            patches_per_frame = visual_tokens_per_frame
+            num_patches_h = num_patches_w = int(np.sqrt(patches_per_frame)) if patches_per_frame > 0 else 8
+            
+            visualize_per_layer_visual_attention(
+                layer_attn_np, 
+                layer_idx, 
+                layer_heatmap_path,
+                num_frames=num_frames,
+                num_patches_h=num_patches_h,
+                num_patches_w=num_patches_w
+            )
+        
+        # Create a combined figure with all layers (subplot grid)
+        if len(per_layer_attention) > 0:
+            print(f"   🎨 Creating combined heatmap for all layers...")
+            
+            # Calculate grid size
+            num_layers = len([attn for attn in per_layer_attention if attn is not None])
+            cols = min(4, num_layers)
+            rows = (num_layers + cols - 1) // cols
+            
+            fig, axes = plt.subplots(rows, cols, figsize=(cols * 4, rows * 3))
+            if num_layers == 1:
+                axes = [axes]
+            else:
+                axes = axes.flatten()
+            
+            # Calculate patches per frame for mosaic creation
+            patches_per_frame = visual_tokens_per_frame
+            num_patches_h = num_patches_w = int(np.sqrt(patches_per_frame)) if patches_per_frame > 0 else 8
+            
+            layer_idx = 0
+            for idx, layer_attn in enumerate(per_layer_attention):
+                if layer_attn is None:
+                    continue
+                
+                if isinstance(layer_attn, torch.Tensor):
+                    layer_attn_np = layer_attn.float().cpu().numpy()
+                else:
+                    layer_attn_np = layer_attn
+                
+                if layer_attn_np.size == 0:
+                    continue
+                
+                # Ensure it's 1D
+                if len(layer_attn_np.shape) > 1:
+                    layer_attn_np = layer_attn_np.flatten()
+                
+                # Convert 1D attention to 2D mosaic (same as individual layer visualization)
+                mosaic_mask = create_mosaic_mask(layer_attn_np, num_frames, num_patches_h, num_patches_w)
+                
+                # Plot
+                ax = axes[layer_idx]
+                im = ax.imshow(mosaic_mask, cmap='hot', aspect='auto', interpolation='nearest')
+                ax.set_title(f'Layer {idx}', fontsize=10, fontweight='bold')
+                ax.set_xlabel('Patches (Width)', fontsize=8)
+                ax.set_ylabel('Patches (Height)', fontsize=8)
+                
+                # Add colorbar
+                plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+                
+                layer_idx += 1
+            
+            # Hide unused subplots
+            for idx in range(layer_idx, len(axes)):
+                axes[idx].axis('off')
+            
+            plt.suptitle(f'Text-to-Visual Attention Heatmaps - All Layers\n{video_file}', 
+                         fontsize=14, fontweight='bold', y=0.995)
+            plt.tight_layout()
+            
+            combined_path = os.path.join(output_dir, f"{video_file}_all_layers_text_to_visual.png")
+            plt.savefig(combined_path, dpi=150, bbox_inches='tight')
+            plt.close()
+            
+            print(f"   ✅ Saved combined heatmap: {combined_path}")
+        
+        # Generate per-frame across all layers visualizations
+        if per_layer_attention is not None and len(per_layer_attention) > 0:
+            print(f"   🎨 Generating per-frame across all layers visualizations...")
+            
+            # Use frame_indices from load_video
+            frames_to_visualize = args.frame_indices if args.frame_indices else frame_indices.tolist()
+            
+            if frames_to_visualize:
+                patches_per_frame = visual_tokens_per_frame
+                num_patches_h = num_patches_w = int(np.sqrt(patches_per_frame)) if patches_per_frame > 0 else 8
+                
+                for frame_idx in frames_to_visualize:
+                    # Find corresponding frame index in segments
+                    frame_idx_in_segments = None
+                    if args.frame_indices:
+                        # User specified frames: need to find closest match
+                        for i, orig_idx in enumerate(frame_indices):
+                            if abs(orig_idx - frame_idx) < 5:
+                                frame_idx_in_segments = i
+                                break
+                    else:
+                        # Using sampled frames: direct mapping
+                        for i, orig_idx in enumerate(frame_indices):
+                            if orig_idx == frame_idx:
+                                frame_idx_in_segments = i
+                                break
+                    
+                    if frame_idx_in_segments is None:
+                        continue
+                    
+                    visualize_frame_across_layers(
+                        per_layer_attention,
+                        frame_idx,
+                        frame_idx_in_segments,
+                        patches_per_frame,
+                        num_patches_h,
+                        num_patches_w,
+                        video_file,
+                        output_dir
+                    )
+    
+    return generated_text, aggregated_attention, per_layer_attention
 
 
 def load_model_from_checkpoint(checkpoint_path, base_model_name=None):
@@ -917,8 +1392,8 @@ def process_model(args):
     
     # Fixed question
     # question = "Translate the American Sign Language in this video to English. Pay close attention to the person's hand movement and facial expressions."
-    question = "Translate the American Sign Language in this video to English."
-    # question = "How many people are in this video?"
+    # question = "Translate the American Sign Language in this video to English."
+    question = "What's the main object in the video?"
 
     # Prepare video paths
     video_paths = []
@@ -949,7 +1424,7 @@ def process_model(args):
     
     for idx, video_path in enumerate(tqdm(video_paths, desc="Processing"), 1):
         video_name = os.path.basename(video_path)
-        generated_text, aggregated_attention = process_video(
+        generated_text, aggregated_attention, per_layer_attention = process_video(
                 model, tokenizer, video_path, question, args,
             attention_dir, video_name
             )
@@ -958,7 +1433,9 @@ def process_model(args):
         "video": video_name,
         "video_path": video_path,
             "model_output": generated_text,
-            "has_attention": aggregated_attention is not None
+            "has_attention": aggregated_attention is not None,
+            "has_per_layer_attention": per_layer_attention is not None and len(per_layer_attention) > 0,
+            "num_layers": len(per_layer_attention) if per_layer_attention is not None else 0
         })
         
         print(f"\n{'─'*70}")

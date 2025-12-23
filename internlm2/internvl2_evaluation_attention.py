@@ -7,7 +7,15 @@ Usage:
     # Using HuggingFace model:
     python internlm2/internvl2_evaluation_attention.py \
         --model-path OpenGVLab/InternVL2_5-2B \
-        --video-path /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/g0fgci8L_rc_18-8-rgb_front.mp4 \
+        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/_fZbAxSSbX4_24-5-rgb_front.mp4 \
+        --out-dir /local1/mhu/sign_language_llm/internlm2 \
+        --save-attention \
+        --image-size 224 \
+        --num-segments 6
+
+    python internlm2/internvl2_evaluation_attention.py \
+        --model-path OpenGVLab/InternVL2_5-2B \
+        --video-path /local1/mhu/sign_language_llm/internlm2/3999622-uhd_3840_2160_24fps.mp4 \
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
         --save-attention \
         --image-size 224 \
@@ -15,13 +23,42 @@ Usage:
 
     # Using local LoRA checkpoint:
     python internlm2/internvl2_evaluation_attention.py \
-        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399 \
+        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1203/checkpoint-2550 \
         --base-model-name OpenGVLab/InternVL2_5-2B \
-        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/g0fgci8L_rc_18-8-rgb_front.mp4 \
+        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/_fZbAxSSbX4_24-5-rgb_front.mp4\
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
         --save-attention \
         --image-size 224 \
-        --num-segments 4
+        --num-segments 6
+
+    python internlm2/internvl2_evaluation_attention.py \
+        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1203/checkpoint-2550 \
+        --base-model-name OpenGVLab/InternVL2_5-2B \
+        --video-path /local1/mhu/sign_language_llm/internlm2/4177955-hd_1920_1080_30fps.mp4\
+        --out-dir /local1/mhu/sign_language_llm/internlm2 \
+        --save-attention \
+        --image-size 224 \
+        --num-segments 6
+
+        # Using local LoRA checkpoint:
+    python internlm2/internvl2_evaluation_attention.py \
+        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1203/checkpoint-2550 \
+        --base-model-name OpenGVLab/InternVL2_5-2B \
+        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/_fZbAxSSbX4_24-5-rgb_front.mp4\
+        --out-dir /local1/mhu/sign_language_llm/internlm2 \
+        --save-attention \
+        --image-size 224 \
+        --num-segments 6
+
+        
+    python internlm2/internvl2_evaluation_attention.py \
+        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_2B_elementgate_1218_121620/checkpoint-2548 \
+        --base-model-name OpenGVLab/InternVL2_5-2B \
+        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/_fZbAxSSbX4_24-5-rgb_front.mp4\
+        --out-dir /local1/mhu/sign_language_llm/internlm2 \
+        --save-attention \
+        --image-size 224 \
+        --num-segments 6
 """
 
 import os
@@ -823,6 +860,11 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
                     num_patches_w=num_patches_w
                 )
                 print(f"   ✅ Saved frame {frame_idx} attention: {output_path}")
+                
+                # Save original frame
+                original_frame_path = os.path.join(frame_attention_dir, f"{video_file}_frame_{frame_idx:04d}_original.png")
+                Image.fromarray(frame_rgb).save(original_frame_path)
+                print(f"   ✅ Saved frame {frame_idx} original: {original_frame_path}")
             
             cap.release()
     
@@ -1371,7 +1413,7 @@ def process_model(args):
     # Fixed question
     # question = "Translate the American Sign Language in this video to English. Pay close attention to the person's hand movement and facial expressions."
     question = "Translate the American Sign Language in this video to English."
-    # question = "How many people are in this video?"
+    # question = "What's the main object in the video?"
 
     # Prepare video paths
     video_paths = []
