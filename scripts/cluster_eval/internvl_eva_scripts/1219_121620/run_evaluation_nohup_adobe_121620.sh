@@ -5,7 +5,7 @@
 # Example: ./run_evaluation_nohup_adobe.sh 4 2337
 
 # Get arguments
-GPU_ID=${1:-"4"}  # Default to GPU 0
+GPU_ID=${1:-"7"}  # Default to GPU 0
 MAX_SAMPLES=${2:-""}  # Default to empty (use script default or full evaluation)
 
 # Get script directory

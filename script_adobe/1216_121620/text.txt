@@ -21,9 +21,9 @@ python3 download_and_extract_videos_from_hf.py \
     --upload_subdirs
 
 
-        python3 upload_videos_to_hf.py --mode checkpoint \
-    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1218 \
-    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1218_121620 \
+python3 upload_videos_to_hf.py --mode checkpoint \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_headgate_1221 \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_headgate_1221 \
     --upload_subdirs
 
         python3 upload_videos_to_hf.py --mode checkpoint \
