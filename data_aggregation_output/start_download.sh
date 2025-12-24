@@ -8,8 +8,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 # Parse command line arguments
-INPUT_FILE="${1:-$SCRIPT_DIR/youtube_video_ids_stage2.txt}"
-OUTPUT_DIR="${2:-/shared/rc/llm-gen-agent/mhu/videos/youtube_asl/youtube_video_ids_stage2/}"
+# INPUT_FILE="${1:-$SCRIPT_DIR/youtube_video_ids_stage2.txt}"
+INPUT_FILE="${1:-$SCRIPT_DIR/youtube_video_ids_diff.txt}"
+OUTPUT_DIR="${2:-/shared/rc/llm-gen-agent/mhu/videos/youtube_asl/youtube_video_ids_stage2_diff/}"
 
 # Convert input file to absolute path
 if [ -f "$INPUT_FILE" ]; then
