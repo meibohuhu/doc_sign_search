@@ -106,18 +106,30 @@ def rule_based_filter(video_data):
     if not text or not text.strip():
         return False, "Empty text"
     
+    # Get metadata once
+    metadata = video_data.get('metadata', {})
+    title = video_data.get('title', '').lower()
+    channel = metadata.get('channel', '').lower()
+    duration = metadata.get('duration', 0)
+    
     # 1. Length checks
     caption_words = len(caption.split()) if caption else 0
     if caption_words < 20:  # Too short
         return False, f"Too short (caption: {caption_words} words)"
     
-    # Get metadata once
-    metadata = video_data.get('metadata', {})
-    title = video_data.get('title', '').lower()
-    channel = metadata.get('channel', '').lower()
+    # 1.5. Check caption density relative to video duration
+    # Normal videos should have at least 5-10 words per minute of video
+    # If duration is available and > 60 seconds, check caption density
+    if duration > 60:  # Only check for videos longer than 1 minute
+        duration_minutes = duration / 60.0
+        words_per_minute = caption_words / duration_minutes if duration_minutes > 0 else 0
+        
+        # Filter out videos with very low caption density (< 5 words per minute)
+        # This catches cases where caption is too short for the video length
+        if words_per_minute < 5:
+            return False, f"Low caption density ({words_per_minute:.1f} words/min, {caption_words} words for {duration_minutes:.1f} min)"
     
     # Check video duration (30 minutes = 1800 seconds)
-    duration = metadata.get('duration', 0)
     if duration > 1800:  # More than 30 minutes
         duration_min = duration / 60
         return False, f"Too long (duration: {duration_min:.1f} min)"
@@ -138,6 +150,69 @@ def rule_based_filter(video_data):
         caption_lower = caption.lower()
         if 'start position:' in caption_lower or 'align:start' in caption_lower or 'position:0%' in caption_lower:
             return False, "Problematic caption (contains format markers)"
+        
+        # Check for excessive special markers like [demonstrates name sign], [shows], etc.
+        # Count brackets with descriptive text inside (e.g., [demonstrates name sign], [shows something])
+        bracket_markers = len(re.findall(r'\[[^\]]+\]', caption))
+        # If caption has bracket markers, check if they're excessive
+        if caption_words > 10 and bracket_markers >= 2:
+            bracket_ratio = bracket_markers / caption_words
+            if bracket_ratio > 0.05:  # More than 5% of content is markers
+                return False, f"Too many special markers ({bracket_markers} markers in {caption_words} words, ratio: {bracket_ratio:.2f})"
+        
+        # Check for missing punctuation in long captions
+        # If caption is long (>50 words) but has very few sentence-ending punctuation marks
+        if caption_words > 50:
+            # Count sentence-ending punctuation
+            sentence_endings = len(re.findall(r'[.!?]', caption))
+            # Normal text should have roughly 1 sentence ending per 15-20 words
+            expected_sentences = caption_words / 20
+            # Require at least 20% of expected punctuation, or at least 1 if caption is short
+            min_required = max(1, int(expected_sentences * 0.2))
+            if sentence_endings < min_required:
+                return False, f"Missing punctuation (only {sentence_endings} sentence endings in {caption_words} words, expected at least {min_required})"
+        
+        # Check for escaped quotes (e.g., \"Oh oh!\") - these are JSON formatting artifacts
+        # Normal captions should use regular quotes, not escaped quotes
+        if '\\"' in caption or '\\\'' in caption:
+            # Count escaped quotes
+            escaped_quotes = caption.count('\\"') + caption.count('\\\'')
+            # If there are many escaped quotes, it's likely a formatting issue
+            if escaped_quotes > 2:
+                return False, f"Contains escaped quotes (JSON formatting artifacts: {escaped_quotes} escaped quotes)"
+        
+        # Check for excessive URLs (more than 2 "www" occurrences)
+        # Captions with many URLs are likely not pure content but include metadata/links
+        www_count = caption.lower().count('www.')
+        if www_count > 2:
+            return False, f"Too many URLs ({www_count} 'www' occurrences)"
+        
+        # Check for excessive conversation/quotes (too many quotation marks)
+        # Captions with many quotes are often transcripts of conversations rather than instructional content
+        quote_chars = caption.count('"') + caption.count("'") + caption.count('"') + caption.count('"')
+        if caption_words > 30 and quote_chars > 8:  # More than 8 quote characters in longer captions
+            quote_ratio = quote_chars / caption_words
+            if quote_ratio > 0.15:  # More than 15% quote characters
+                return False, f"Too many quotes/conversation ({quote_chars} quote chars in {caption_words} words, ratio: {quote_ratio:.2f})"
+        
+        # Check for mostly uppercase words (like vocabulary lists or sign glosses)
+        # Count words that are mostly uppercase (excluding single characters and numbers)
+        words = caption.split()
+        if len(words) > 10:  # Only check for longer captions
+            uppercase_words = 0
+            for w in words:
+                # Remove punctuation and check if the alphabetic part is uppercase
+                # This catches words like "TODAY,", "SIGNS:", "SHOW-you", etc.
+                w_clean = re.sub(r'[^\w]', '', w)  # Remove non-word characters
+                if len(w_clean) > 1:  # At least 2 characters
+                    # Check if it's all uppercase letters (may contain numbers/hyphens)
+                    if w_clean.isupper() and any(c.isalpha() for c in w_clean):
+                        uppercase_words += 1
+            
+            uppercase_ratio = uppercase_words / len(words) if len(words) > 0 else 0
+            # If more than 50% of words are uppercase, it's likely a vocabulary list or sign gloss
+            if uppercase_ratio > 0.5:
+                return False, f"Mostly uppercase words ({uppercase_words}/{len(words)} words are uppercase, ratio: {uppercase_ratio:.2f})"
     
     # 5. Keyword blacklist (music, news, etc.)
     

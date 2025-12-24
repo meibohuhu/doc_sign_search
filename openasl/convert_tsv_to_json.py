@@ -1,143 +1,144 @@
 #!/usr/bin/env python3
 """
-Convert dailymoth and openasl TSV files to JSON format and merge them.
+Convert openasl-nad-only.tsv to merged_train.json format.
 """
 
 import json
 import csv
-import os
+import random
 from pathlib import Path
 
-def convert_dailymoth_tsv_to_json(tsv_path, output_json_path, video_base_path):
-    """Convert dailymoth train.tsv to JSON format."""
-    data = []
+
+def convert_time_format(time_str, for_id=False):
+    """
+    Convert time format from TSV to JSON format.
     
-    with open(tsv_path, 'r', encoding='utf-8') as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            
-            parts = line.split('\t')
-            if len(parts) < 3:
-                continue
-            
-            video_filename = parts[0]
-            duration = parts[1]
-            text = parts[2]
-            
-            # Remove .mp4 extension for id
-            video_id = video_filename.replace('.mp4', '')
-            
-            entry = {
-                "id": video_id,
-                "video": video_filename,
-                "conversations": [
-                    {
-                        "from": "human",
-                        "value": "<video>\nTranslate the American Sign Language in this video to English."
-                    },
-                    {
-                        "from": "gpt",
-                        "value": text
-                    }
-                ]
-            }
-            data.append(entry)
+    TSV format: 00:00:06.000
+    JSON id format: 00_00_06_000 (underscores, milliseconds with underscore)
+    JSON video format: 00_00_06.000 (underscores, milliseconds with dot)
     
-    with open(output_json_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+    Args:
+        time_str: Time string in format "00:00:06.000"
+        for_id: If True, use format for id (with underscore before milliseconds)
+                If False, use format for video (with dot before milliseconds)
     
-    print(f"✅ Converted {len(data)} dailymoth entries to {output_json_path}")
-    return data
+    Returns:
+        Converted time string
+    """
+    # Split by colon and dot
+    parts = time_str.replace(':', '_').split('.')
+    if len(parts) == 2:
+        time_part = parts[0]  # 00_00_06
+        millis = parts[1]     # 000
+        if for_id:
+            return f"{time_part}_{millis}"  # 00_00_06_000
+        else:
+            return f"{time_part}.{millis}"  # 00_00_06.000
+    else:
+        # Fallback if format is unexpected
+        return time_str.replace(':', '_')
 
 
-def convert_openasl_tsv_to_json(tsv_path, output_json_path, video_base_path):
-    """Convert openasl openasl-v1.0.tsv to JSON format (only train split, using raw-text)."""
-    data = []
+def convert_tsv_to_json(tsv_file, output_file, sample_size=None, random_seed=42):
+    """
+    Convert TSV file to JSON format matching merged_train.json.
     
-    with open(tsv_path, 'r', encoding='utf-8') as f:
+    Args:
+        tsv_file: Path to input TSV file
+        output_file: Path to output JSON file
+        sample_size: If specified, randomly sample this many entries. If None, use all entries.
+        random_seed: Random seed for reproducibility
+    """
+    print(f"Reading TSV file: {tsv_file}")
+    
+    # First, read all rows
+    all_rows = []
+    with open(tsv_file, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f, delimiter='\t')
         for row in reader:
-            # Only process train split
-            if row.get('split', '').strip() != 'train':
-                continue
-            
-            vid = row.get('vid', '').strip()
-            raw_text = row.get('raw-text', '').strip()
-            
-            if not vid or not raw_text:
-                continue
-            
-            # Extract video filename from vid (format: Mci9oyb5V2E-00:00:06.000-00:00:06.589)
-            # We need to construct the video filename
-            # The vid format suggests the video file might be named differently
-            # Let's use the vid as the video identifier
-            video_filename = f"{vid}.mp4"
-            video_id = vid.replace(':', '_').replace('.', '_')
-            
-            entry = {
-                "id": video_id,
-                "video": video_filename,
-                "conversations": [
-                    {
-                        "from": "human",
-                        "value": "<video>\nTranslate the American Sign Language in this video to English."
-                    },
-                    {
-                        "from": "gpt",
-                        "value": raw_text
-                    }
-                ]
-            }
-            data.append(entry)
+            all_rows.append(row)
     
-    with open(output_json_path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+    print(f"Total entries in TSV: {len(all_rows)}")
     
-    print(f"✅ Converted {len(data)} openasl entries to {output_json_path}")
-    return data
+    # Sample if requested
+    if sample_size is not None:
+        if sample_size > len(all_rows):
+            print(f"⚠️  Warning: Requested sample size ({sample_size}) is larger than total entries ({len(all_rows)}). Using all entries.")
+            selected_rows = all_rows
+        else:
+            random.seed(random_seed)
+            selected_rows = random.sample(all_rows, sample_size)
+            print(f"Randomly sampled {len(selected_rows)} entries (seed={random_seed})")
+    else:
+        selected_rows = all_rows
+    
+    results = []
+    
+    for row_idx, row in enumerate(selected_rows):
+        yid = row['yid']
+        start_time = row['start']
+        end_time = row['end']
+        raw_text = row['raw-text']
+        
+        # Convert time formats
+        start_id_format = convert_time_format(start_time, for_id=True)
+        end_id_format = convert_time_format(end_time, for_id=True)
+        start_video_format = convert_time_format(start_time, for_id=False)
+        end_video_format = convert_time_format(end_time, for_id=False)
+        
+        # Create id: yid-start_time-end_time (with underscores)
+        entry_id = f"{yid}-{start_id_format}-{end_id_format}"
+        
+        # Create video: yid-start_time-end_time.mp4 (with dots for milliseconds)
+        video_name = f"{yid}-{start_video_format}-{end_video_format}.mp4"
+        
+        # Create conversations structure
+        entry = {
+            "id": entry_id,
+            "video": video_name,
+            "conversations": [
+                {
+                    "from": "human",
+                    "value": "<video>\nTranslate the American Sign Language in this video to English."
+                },
+                {
+                    "from": "gpt",
+                    "value": raw_text
+                }
+            ]
+        }
+        
+        results.append(entry)
+        
+        if (row_idx + 1) % 1000 == 0:
+            print(f"  Processed {row_idx + 1} entries...")
+    
+    print(f"\nTotal entries to write: {len(results)}")
+    print(f"Writing to JSON file: {output_file}")
+    
+    # Write to JSON file
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    
+    print(f"✅ Conversion complete! Output written to {output_file}")
+    
+    # Print a sample entry for verification
+    if results:
+        print(f"\nSample entry:")
+        print(json.dumps(results[0], indent=2, ensure_ascii=False))
 
 
-def merge_json_files(json_paths, output_json_path):
-    """Merge multiple JSON files into one."""
-    merged_data = []
+def main():
+    tsv_file = Path("/home/mh2803/projects/sign_language_llm/openasl/openasl-no-part2.tsv")
+    output_file = Path("/home/mh2803/projects/sign_language_llm/openasl/openasl-no-part2-sampled.json")
+    sample_size = 17000  # Randomly sample 17000 entries
     
-    for json_path in json_paths:
-        with open(json_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            merged_data.extend(data)
+    if not tsv_file.exists():
+        print(f"❌ Error: {tsv_file} not found")
+        return
     
-    with open(output_json_path, 'w', encoding='utf-8') as f:
-        json.dump(merged_data, f, indent=2, ensure_ascii=False)
-    
-    print(f"✅ Merged {len(merged_data)} entries to {output_json_path}")
-    return merged_data
+    convert_tsv_to_json(tsv_file, output_file, sample_size=sample_size)
 
 
-if __name__ == "__main__":
-    # File paths
-    dailymoth_tsv = "/home/mh2803/projects/sign_language_llm/dailymoth-70h/dailymoth-70h/unblurred_clips/manifests/train.tsv"
-    openasl_tsv = "/home/mh2803/projects/sign_language_llm/scripts/cluster_eval/openasl/openasl-v1.0.tsv"
-    
-    output_dir = "/home/mh2803/projects/sign_language_llm/scripts/cluster_eval"
-    dailymoth_json = os.path.join(output_dir, "dailymoth_train.json")
-    openasl_json = os.path.join(output_dir, "openasl_train.json")
-    merged_json = os.path.join(output_dir, "dailymoth_openasl_merged.json")
-    
-    # Convert dailymoth
-    print("Converting dailymoth TSV to JSON...")
-    dailymoth_data = convert_dailymoth_tsv_to_json(dailymoth_tsv, dailymoth_json, None)
-    
-    # Convert openasl
-    print("\nConverting openasl TSV to JSON (train split only)...")
-    openasl_data = convert_openasl_tsv_to_json(openasl_tsv, openasl_json, None)
-    
-    # Merge
-    print("\nMerging JSON files...")
-    merged_data = merge_json_files([dailymoth_json, openasl_json], merged_json)
-    
-    print(f"\n✅ Complete! Total entries: {len(merged_data)}")
-    print(f"   - Dailymoth: {len(dailymoth_data)} entries")
-    print(f"   - OpenASL: {len(openasl_data)} entries")
-
+if __name__ == '__main__':
+    main()

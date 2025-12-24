@@ -1,0 +1,12 @@
+{
+  "total": 6923,
+  "passed": 1630,
+  "filtered": 5293,
+  "reasons": {
+    "Not valid instructional English for training": 5293
+  },
+  "english_invalid": 5293,
+  "domain_mismatch": 0,
+  "filter_rate": 76.45529394771053,
+  "keep_rate": 23.54470605228947
+}
