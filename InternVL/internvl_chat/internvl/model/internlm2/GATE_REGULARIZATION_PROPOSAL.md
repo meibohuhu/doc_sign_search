@@ -267,6 +267,26 @@ reg_loss = neg_log_likelihood.mean()
 
 
 
+# 使用 entropy（当前）
+--gate_reg_type entropy \
+--gate_reg_lambda 0.1
 
+# 使用 beta_loglikelihood（推荐，更灵活）
+--gate_reg_type beta_loglikelihood \
+--gate_reg_lambda 0.1 \
+--gate_reg_beta_alpha 3.0 \
+--gate_reg_beta_beta 1.0
+
+# 使用 beta_loglikelihood 鼓励稀疏（U型分布）
+--gate_reg_type beta_loglikelihood \
+--gate_reg_lambda 0.1 \
+--gate_reg_beta_alpha 0.5 \
+--gate_reg_beta_beta 0.5
+
+# 使用 beta_kl_estimated（更精确但更慢）
+--gate_reg_type beta_kl_estimated \
+--gate_reg_lambda 0.1 \
+--gate_reg_beta_alpha 3.0 \
+--gate_reg_beta_beta 1.0
 
 

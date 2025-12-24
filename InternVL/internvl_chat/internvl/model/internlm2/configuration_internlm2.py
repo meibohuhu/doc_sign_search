@@ -101,6 +101,11 @@ class InternLM2Config(PretrainedConfig):
         visual_summary_head_gate=False,   ######### mhu 2025-12-20: add visual_summary_head_gate
         visual_gate_mode='add_logits',   ######### mhu 2025-12-20: add visual_gate_mode
         visual_summary_aggregation='mean',   ######### mhu 2025-12-20: add visual_summary_aggregation (mean/max/sum/first)
+        # mh1214 Gate regularization parameters
+        gate_reg_type=None,  # 'entropy' / 'beta_loglikelihood' / None
+        gate_reg_lambda=0.01,  # Regularization weight
+        gate_reg_beta_alpha=3.0,  # Beta distribution alpha parameter
+        gate_reg_beta_beta=1.0,  # Beta distribution beta parameter
         **kwargs,
     ):
         self.vocab_size = vocab_size
@@ -142,6 +147,11 @@ class InternLM2Config(PretrainedConfig):
         self.visual_summary_head_gate = visual_summary_head_gate
         self.visual_gate_mode = visual_gate_mode
         self.visual_summary_aggregation = visual_summary_aggregation
+        # Gate regularization mh1214
+        self.gate_reg_type = gate_reg_type
+        self.gate_reg_lambda = gate_reg_lambda
+        self.gate_reg_beta_alpha = gate_reg_beta_alpha
+        self.gate_reg_beta_beta = gate_reg_beta_beta
         super().__init__(
             pad_token_id=pad_token_id,
             bos_token_id=bos_token_id,

@@ -35,7 +35,7 @@ from transformers.utils import (add_start_docstrings,
                                 add_start_docstrings_to_model_forward, logging,
                                 replace_return_docstrings)
 
-### seperate gate projection layer version
+##### standard gate with wqkv version
 try:
     from transformers.generation.streamers import BaseStreamer
 except:  # noqa # pylint: disable=bare-except
@@ -313,49 +313,32 @@ class InternLM2Attention(nn.Module):
                 f' and `num_heads`: {self.num_heads}).'
             )
 
-        # mh 1222: Gated Attention with Independent Projection Layer
-        self.headwise_attn_output_gate = getattr(config, 'headwise_attn_output_gate', False)
-        self.elementwise_attn_output_gate = getattr(config, 'elementwise_attn_output_gate', False)
+        # mh 1211 Phase 1: Standard Gated Attention
+        self.headwise_attn_output_gate = config.headwise_attn_output_gate
+        self.elementwise_attn_output_gate = config.elementwise_attn_output_gate
+        
+        # Note: Currently disabled - can be enabled by uncommenting below
+        self.gate_norm = None
+        self.gate_scale = None
+        
+        # Adjust wqkv output dimension based on gating mode
+        base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
+        if self.headwise_attn_output_gate:
+            gate_dim = self.num_heads
+            total_dim = base_qkv_dim + gate_dim
+        elif self.elementwise_attn_output_gate:
+            gate_dim = self.num_heads * self.head_dim
+            total_dim = base_qkv_dim + gate_dim
+        else:
+            total_dim = base_qkv_dim
 
-        # Debug: Log gate configuration
-        if not hasattr(InternLM2Attention, '_gate_config_logged'):
-            InternLM2Attention._gate_config_logged = True
-            logger.info(
-                f"[LLM Gate Config] headwise={self.headwise_attn_output_gate}, "
-                f"elementwise={self.elementwise_attn_output_gate}"
-            )
-
-        # wqkv 保持原始维度（不包含 gate）
+        # Use config.bias to match original InternLM2 behavior (same as modeling_internlm2.py)
         self.wqkv = nn.Linear(
             self.hidden_size,
-            (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim,
+            total_dim,
             bias=config.bias,
         )
-
-        # 独立的 gate_proj layer（仅在启用 gating 时）
-        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
-            if self.headwise_attn_output_gate:
-                # Headwise gate: [B, q_len, num_heads, 1]
-                gate_out_dim = self.num_heads
-            else:  # elementwise
-                # Elementwise gate: [B, q_len, num_heads, head_dim]
-                gate_out_dim = self.num_heads * self.head_dim
-
-            self.gate_proj = nn.Linear(self.hidden_size, gate_out_dim, bias=True)
-            
-            # Initialize gate_proj with small std to prevent sigmoid saturation
-            # Small std ensures gate logits are near 0, so sigmoid outputs are near 0.5
-            std = config.initializer_range
-            self.gate_proj.weight.data.normal_(mean=0.0, std=std)
-            logger.info(f"[LLM Gate] gate_proj initialized: out_dim={gate_out_dim}")
-        else:
-            self.gate_proj = None
-            logger.info("[LLM Gate] gate_proj is None (gating disabled)")
-
-        # mh 1222: Gate logging control
-        self._gate_logging_counter = 0
-        self._gate_logging_frequency = 1000  # Log every 50 forward passes
-
+######################
         self.wo = nn.Linear(self.num_heads * self.head_dim, self.hidden_size, bias=config.bias)
         self._init_rope()
 
@@ -408,37 +391,63 @@ class InternLM2Attention(nn.Module):
 
         bsz, q_len, _ = hidden_states.size()
 
-        # mh 1222: Compute gate using independent gate_proj (if enabled)
-        gate_score = None
-        if self.gate_proj is not None:
-            gate_logits = self.gate_proj(hidden_states)  # [B, q_len, gate_out_dim]
-            # Debug: Log when gate is computed (first time only)
-            if not hasattr(self, '_gate_computed_logged_eager'):
-                self._gate_computed_logged_eager = True
-                logger.info(f"[LLM Gate - Eager] gate_proj computed: logits_shape={gate_logits.shape}")
-            
-            # Reshape gate based on gate type
-            if self.headwise_attn_output_gate:
-                # [B, q_len, num_heads] -> [B, q_len, num_heads, 1]
-                gate_score = gate_logits.view(bsz, q_len, self.num_heads, 1)
-            else:  # elementwise
-                # [B, q_len, num_heads * head_dim] -> [B, q_len, num_heads, head_dim]
-                gate_score = gate_logits.view(bsz, q_len, self.num_heads, self.head_dim)
-        else:
-            # Debug: Log when gate_proj is None (first time only)
-            if not hasattr(self, '_gate_none_logged_eager'):
-                self._gate_none_logged_eager = True
-                logger.info("[LLM Gate - Eager] gate_proj is None, skipping gating")
-
-        # Standard QKV computation (no gate included)
+        # mh 1211: Compute wqkv output once (same as Qwen3's approach)
+        # Qwen3 computes q_proj once and separates query_states and gate_score from it
+        # InternLM2 computes wqkv once and separates qkv_base and gate_score_raw from it
         qkv_states = self.wqkv(hidden_states)
 
-        qkv_states = rearrange(
-            qkv_states,
-            'b q (h gs d) -> b q h gs d',
-            gs=2 + self.num_key_value_groups,
-            d=self.head_dim,
-        )
+        # Phase 1: Separate gate_score from standard qkv
+        base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
+       
+        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+            # Separate standard qkv and gate_score (same as Qwen3's approach)
+            if self.headwise_attn_output_gate:
+                gate_dim = self.num_heads
+            else:  # elementwise
+                gate_dim = self.num_heads * self.head_dim
+           
+            qkv_base = qkv_states[:, :, :base_qkv_dim]
+            # Extract gate_score from wqkv output (same as Qwen3 extracts from q_proj)
+            gate_score_raw = qkv_states[:, :, base_qkv_dim:]
+            # Apply scaling factor to gate_score
+            # gate_score_raw = gate_score_raw * self.gate_scale
+            
+            # Process qkv_base (standard flow)
+            qkv_states = rearrange(
+                qkv_base,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
+            )
+            
+            # Process gate_score
+            if self.headwise_attn_output_gate:
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
+            else:  # elementwise
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
+        
+            # Log gate_score statistics - ALWAYS print, no restrictions
+            gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
+            gate_sigmoid = torch.sigmoid(gate_score)
+            logger.info(
+                f"[Gated Attention - Eager] Mode: {gate_type}, "
+                f"gate_score shape: {gate_score.shape}, "
+                f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
+                f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
+                f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
+                f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
+                f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
+            )
+        else:
+            # Standard mode (no gating)
+            qkv_states = rearrange(
+                qkv_states,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
+            )
+            gate_score = None
+######################
 
         query_states = qkv_states[..., : self.num_key_value_groups, :]
         query_states = rearrange(query_states, 'b q h gs d -> b q (h gs) d')
@@ -490,36 +499,29 @@ class InternLM2Attention(nn.Module):
                 f' {attn_output.size()}'
             )
 
-        # mh 1222: Apply gating (before transpose and reshape)
+        # mh 1211 Phase 1: Apply gating
+        gate_sigmoid_for_reg = None
         if gate_score is not None:
-            gate_score = gate_score.transpose(1, 2)  # [B, num_heads, q_len, ...]
+            gate_score = gate_score.transpose(1, 2)  # [bsz, num_heads, q_len, 1] or [bsz, num_heads, q_len, head_dim]
             gate_sigmoid = torch.sigmoid(gate_score)
+            attn_output_before_gating = attn_output.clone()
             attn_output = attn_output * gate_sigmoid
             
-            # Log gate statistics (with frequency control)
-            # Use print instead of logger.info because log_level may be set to 'passive' in training
-            self._gate_logging_counter += 1
-            if self._gate_logging_counter % self._gate_logging_frequency == 0:
-                gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
-                # Calculate distribution statistics (0-1 range)
-                gate_flat = gate_sigmoid.flatten()
-                gate_sorted = torch.sort(gate_flat)[0]
-                n = gate_sorted.numel()
-                # Calculate quantiles using sorted values (more compatible than torch.quantile)
-                q25 = gate_sorted[int(n * 0.25)].item()
-                q50 = gate_sorted[int(n * 0.50)].item()
-                q75 = gate_sorted[int(n * 0.75)].item()
-                # Count values in different ranges
-                low = (gate_flat < 0.3).sum().item() / n * 100  # < 0.3
-                mid = ((gate_flat >= 0.3) & (gate_flat < 0.7)).sum().item() / n * 100  # 0.3-0.7
-                high = (gate_flat >= 0.7).sum().item() / n * 100  # >= 0.7
-                print(
-                    f"[LLM Gate - Eager] type={gate_type}, shape={gate_sigmoid.shape}, "
-                    f"mean={gate_sigmoid.mean().item():.4f}, min={gate_sigmoid.min().item():.4f}, "
-                    f"max={gate_sigmoid.max().item():.4f}, "
-                    f"dist: <0.3={low:.1f}%, 0.3-0.7={mid:.1f}%, >=0.7={high:.1f}%"
-                )
-            
+            # Store gate_sigmoid for regularization (detach to avoid double backprop, but keep for loss computation)
+            gate_sigmoid_for_reg = gate_sigmoid
+
+            # Log gating effect - ALWAYS print, no restrictions
+            print(
+                f"[Gated Attention - Eager] Applied gating - "
+                f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}, "
+                f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
+                f"std={attn_output_before_gating.std().item():.4f}, "
+                f"attn_output after: mean={attn_output.mean().item():.4f}, "
+                f"std={attn_output.std().item():.4f}, "
+                f"gating ratio (after/before mean): {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
+                f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}, min: {gate_sigmoid.min().item():.4f}, max: {gate_sigmoid.max().item():.4f}"
+            )
+###############
         attn_output = attn_output.transpose(1, 2).contiguous()
         attn_output = attn_output.reshape(bsz, q_len, self.hidden_size)
 
@@ -528,7 +530,7 @@ class InternLM2Attention(nn.Module):
         if not output_attentions:
             attn_weights = None
 
-        return attn_output, attn_weights, past_key_value
+        return attn_output, attn_weights, past_key_value, gate_sigmoid_for_reg
 
 
 # Modified from transformers.model.llama.modeling_llama.InternLM2FlashAttention2
@@ -562,44 +564,145 @@ class InternLM2FlashAttention2(InternLM2Attention):
         output_attentions = False
 
         bsz, q_len, _ = hidden_states.size()
+        
+    ######### mhu 1211 add gate_qkv_states #########
+        # qkv_states = self.wqkv(hidden_states)
 
-        # mh 1222: Compute gate using independent gate_proj (if enabled)
-        gate_score = None
-        if self.gate_proj is not None:
-            gate_logits = self.gate_proj(hidden_states)  # [B, q_len, gate_out_dim]
-            # Debug: Log when gate is computed (first time only)
-            if not hasattr(self, '_gate_computed_logged_flash'):
-                self._gate_computed_logged_flash = True
-                logger.info(f"[LLM Gate - Flash] gate_proj computed: logits_shape={gate_logits.shape}")
-            
-            # Reshape gate based on gate type
-            if self.headwise_attn_output_gate:
-                # [B, q_len, num_heads] -> [B, q_len, num_heads, 1]
-                gate_score = gate_logits.view(bsz, q_len, self.num_heads, 1)
-            else:  # elementwise
-                # [B, q_len, num_heads * head_dim] -> [B, q_len, num_heads, head_dim]
-                gate_score = gate_logits.view(bsz, q_len, self.num_heads, self.head_dim)
-        else:
-            # Debug: Log when gate_proj is None (first time only)
-            if not hasattr(self, '_gate_none_logged_flash'):
-                self._gate_none_logged_flash = True
-                logger.info("[LLM Gate - Flash] gate_proj is None, skipping gating")
-
-        # Standard QKV computation (no gate included)
+        # qkv_states = rearrange(
+        #     qkv_states,
+        #     'b q (h gs d) -> b q h gs d',
+        #     gs=2 + self.num_key_value_groups,
+        #     d=self.head_dim,
+        # )
+        
+        # Check hidden_states for NaN/Inf
+        if torch.isnan(hidden_states).any() or torch.isinf(hidden_states).any():
+            logger.error(f"[Gated Attention - Flash] ERROR: hidden_states contains NaN/Inf!")
+        # # 现在不用了 Fix 1: Normalize hidden_states before computing gate_score (if gating is enabled)
+        # # Fix 2: Apply scaling factor to gate_score computation
+        # if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+        #     # Normalize hidden_states for gate_score computation
+        #     # hidden_states_normalized = self.gate_norm(hidden_states)
+        #     # Compute gate_score from normalized hidden_states
+        #     gate_qkv_states = self.wqkv(hidden_states)
+        #     # Compute standard qkv from original hidden_states
+        #     qkv_states = self.wqkv(hidden_states)
+        # else:
+        #     qkv_states = self.wqkv(hidden_states)
+        #     gate_qkv_states = None
         qkv_states = self.wqkv(hidden_states)
+        
+        # Check wqkv output for NaN/Inf
+        if torch.isnan(qkv_states).any() or torch.isinf(qkv_states).any():
+            wqkv_bias_info = ""
+            if self.wqkv.bias is not None:
+                wqkv_bias_info = (
+                    f"wqkv.bias has NaN: {torch.isnan(self.wqkv.bias).any().item()}, "
+                    f"wqkv.bias has Inf: {torch.isinf(self.wqkv.bias).any().item()}, "
+                    f"wqkv.bias shape: {self.wqkv.bias.shape}, "
+                )
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: wqkv output contains NaN/Inf! "
+                f"wqkv.weight has NaN: {torch.isnan(self.wqkv.weight).any().item()}, "
+                f"wqkv.weight has Inf: {torch.isinf(self.wqkv.weight).any().item()}, "
+                f"wqkv.weight shape: {self.wqkv.weight.shape}, "
+                f"{wqkv_bias_info}"
+                f"hidden_states has NaN: {torch.isnan(hidden_states).any().item()}, "
+                f"hidden_states has Inf: {torch.isinf(hidden_states).any().item()}, "
+                f"hidden_states shape: {hidden_states.shape}, "
+                f"hidden_states range: [{hidden_states.min().item():.4f}, {hidden_states.max().item():.4f}], "
+                f"qkv_states shape: {qkv_states.shape}"
+            )
 
-        qkv_states = rearrange(
-            qkv_states,
-            'b q (h gs d) -> b q h gs d',
-            gs=2 + self.num_key_value_groups,
-            d=self.head_dim,
-        )
-
+        # Phase 1: Separate gate_score from standard qkv
+        base_qkv_dim = (self.num_heads + 2 * self.num_key_value_heads) * self.head_dim
+        
+        # DEBUG: Force log to confirm code path and gating flags (Flash Attention) - ALWAYS print
+        # print(
+        #     f"[Gated Attention - Flash] 🟢 GATING CHECK - "
+        #     f"headwise_attn_output_gate={getattr(self, 'headwise_attn_output_gate', None)}, "
+        #     f"elementwise_attn_output_gate={getattr(self, 'elementwise_attn_output_gate', None)}, "
+        #     f"will_enter_gating={self.headwise_attn_output_gate or self.elementwise_attn_output_gate}, "
+        #     f"hidden_states shape={hidden_states.shape}, "
+        #     f"qkv_states shape={qkv_states.shape}"
+        # )
+        
+        if self.headwise_attn_output_gate or self.elementwise_attn_output_gate:
+            # Separate standard qkv and gate_score (same as Qwen3's approach)
+            if self.headwise_attn_output_gate:
+                gate_dim = self.num_heads
+            else:  # elementwise
+                gate_dim = self.num_heads * self.head_dim
+                # print(f'gate_dim: {gate_dim}')
+           
+            qkv_base = qkv_states[:, :, :base_qkv_dim]
+            # Extract gate_score from wqkv output (same as Qwen3 extracts from q_proj)
+            gate_score_raw = qkv_states[:, :, base_qkv_dim:]
+            # Apply scaling factor to gate_score
+            # gate_score_raw = gate_score_raw * self.gate_scale
+            
+            # Check qkv_base for NaN/Inf
+            if torch.isnan(qkv_base).any() or torch.isinf(qkv_base).any():
+                logger.error(f"[Gated Attention - Flash] ERROR: qkv_base contains NaN/Inf!")
+            
+            # Process qkv_base (standard flow)
+            qkv_states = rearrange(
+                qkv_base,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
+            )
+            
+            # Process gate_score
+            if self.headwise_attn_output_gate:
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, 1)
+            else:  # elementwise
+                gate_score = gate_score_raw.view(bsz, q_len, self.num_heads, self.head_dim)
+        
+            # Log gate_score statistics - ALWAYS print, no restrictions
+            gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
+            gate_sigmoid = torch.sigmoid(gate_score)
+            # Check gate_score distribution
+            negative_ratio = (gate_score < 0).float().mean().item()
+            small_positive_ratio = ((gate_score >= 0) & (gate_score < 2.0)).float().mean().item()
+            large_positive_ratio = (gate_score >= 2.0).float().mean().item()
+                
+            #### gate_score 的统计信息 gate_score shape: [1, 7007, 16, 1] — [batch=1, seq_len=7007, num_heads=16, gate_dim=1]
+            #### gate_score raw range: [-0.1816, 0.1621] — 原始值范围（归一化+缩放后）gate_score raw mean: -0.0087 — 平均值接近 0 gate_score raw std: 0.0439 — 标准差较小
+            #### sigmoid(gate_score) range: [0.4551, 0.5391] — sigmoid 后的范围
+            #### sigmoid(gate_score) mean: 0.4980 — sigmoid 后均值约 0.5（接近中性）
+            # print(
+            #     f"[Gated Attention - Flash] Mode: {gate_type}, "
+            #     f"gate_score shape: {gate_score.shape}, "
+            #     f"gate_score raw range: [{gate_score_raw.min().item():.4f}, {gate_score_raw.max().item():.4f}], "
+            #     f"gate_score raw mean: {gate_score_raw.mean().item():.4f}, "
+            #     f"gate_score raw std: {gate_score_raw.std().item():.4f}, "
+            #     f"gate_score distribution: negative={negative_ratio:.2%}, [0,2)={small_positive_ratio:.2%}, >=2={large_positive_ratio:.2%}, "
+            #     f"sigmoid(gate_score) range: [{gate_sigmoid.min().item():.4f}, {gate_sigmoid.max().item():.4f}], "
+            #     f"sigmoid(gate_score) mean: {gate_sigmoid.mean().item():.4f}"
+            # )
+        else:
+            # Standard mode (no gating)
+            qkv_states = rearrange(
+                qkv_states,
+                'b q (h gs d) -> b q h gs d',
+                gs=2 + self.num_key_value_groups,
+                d=self.head_dim,
+            )
+            gate_score = None
+###################################
         query_states = qkv_states[..., : self.num_key_value_groups, :]
         query_states = rearrange(query_states, 'b q h gs d -> b q (h gs) d')
         key_states = qkv_states[..., -2, :]
         value_states = qkv_states[..., -1, :]
-
+        
+        # Check qkv_states for NaN/Inf after rearrange
+        if torch.isnan(qkv_states).any() or torch.isinf(qkv_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: qkv_states contains NaN/Inf after rearrange! "
+                f"qkv_states shape: {qkv_states.shape}"
+            )
+    
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
         value_states = value_states.transpose(1, 2)
@@ -611,6 +714,12 @@ class InternLM2FlashAttention2(InternLM2Attention):
         cos, sin = self.rotary_emb(value_states, seq_len=kv_seq_len)
 
         query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin, position_ids)
+        
+        # mh 1211 Check after rotary embedding for NaN/Inf
+        if torch.isnan(query_states).any() or torch.isinf(query_states).any():
+            logger.error(f"[Gated Attention - Flash] ERROR: query_states contains NaN/Inf after rotary embedding!")
+        if torch.isnan(key_states).any() or torch.isinf(key_states).any():
+            logger.error(f"[Gated Attention - Flash] ERROR: key_states contains NaN/Inf after rotary embedding!")
 
         if past_key_value is not None:
             # reuse k, v, self_attention
@@ -622,48 +731,103 @@ class InternLM2FlashAttention2(InternLM2Attention):
         query_states = query_states.transpose(1, 2)
         key_states = key_states.transpose(1, 2)
         value_states = value_states.transpose(1, 2)
-
+        
+        # mh1211 Check query/key/value states for NaN/Inf before Flash Attention
+        if torch.isnan(query_states).any() or torch.isinf(query_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: query_states contains NaN/Inf before Flash Attention! "
+                f"query_states shape: {query_states.shape}"
+            )
+        if torch.isnan(key_states).any() or torch.isinf(key_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: key_states contains NaN/Inf before Flash Attention! "
+                f"key_states shape: {key_states.shape}"
+            )
+        if torch.isnan(value_states).any() or torch.isinf(value_states).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: value_states contains NaN/Inf before Flash Attention! "
+                f"value_states shape: {value_states.shape}"
+            )
+#############################
         attn_output = self._flash_attention_forward(
             query_states, key_states, value_states, attention_mask, q_len
         )
         
-        # mh 1222: Apply gating (Flash Attention returns [B, q_len, num_heads, head_dim])
+        # mh1211 Phase 1: Apply gating (before reshape)
+        gate_sigmoid_for_reg = None
         if gate_score is not None:
+     
+            # Flash Attention returns [bsz, q_len, num_heads, head_dim]
+            # gate_score: [bsz, q_len, num_heads, 1] or [bsz, q_len, num_heads, head_dim]
+            # Ensure shapes match
+            if attn_output.shape != gate_score.shape:
+                # If gate_score is [bsz, q_len, num_heads, 1] and attn_output is [bsz, q_len, num_heads, head_dim]
+                # we need to expand gate_score
+                if gate_score.shape[-1] == 1 and attn_output.shape[-1] > 1:
+                    gate_score = gate_score.expand_as(attn_output)
+                else:
+                    # Log shape mismatch for debugging
+                    logger.warning(
+                        f"[Gated Attention - Flash] Shape mismatch: "
+                        f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}"
+                    )
+            
             gate_sigmoid = torch.sigmoid(gate_score)
+            attn_output_before_gating = attn_output.clone()
+            
+            # Check for NaN or Inf before gating
+            if torch.isnan(attn_output_before_gating).any() or torch.isinf(attn_output_before_gating).any():
+                logger.error(f"[Gated Attention - Flash] ERROR: attn_output contains NaN/Inf before gating!")
+            
             attn_output = attn_output * gate_sigmoid
             
-            # Log gate statistics (with frequency control)
-            # Use print instead of logger.info because log_level may be set to 'passive' in training
-            # which filters out INFO level logs. print always outputs to stdout.
-            self._gate_logging_counter += 1
-            if self._gate_logging_counter % self._gate_logging_frequency == 0:
-                gate_type = "headwise" if self.headwise_attn_output_gate else "elementwise"
-                # Calculate distribution statistics (0-1 range)
-                gate_flat = gate_sigmoid.flatten()
-                gate_sorted = torch.sort(gate_flat)[0]
-                n = gate_sorted.numel()
-                # Calculate quantiles using sorted values (more compatible than torch.quantile)
-                q25 = gate_sorted[int(n * 0.25)].item()
-                q50 = gate_sorted[int(n * 0.50)].item()
-                q75 = gate_sorted[int(n * 0.75)].item()
-                # Count values in different ranges
-                low = (gate_flat < 0.3).sum().item() / n * 100  # < 0.3
-                mid = ((gate_flat >= 0.3) & (gate_flat < 0.7)).sum().item() / n * 100  # 0.3-0.7
-                high = (gate_flat >= 0.7).sum().item() / n * 100  # >= 0.7
-                print(
-                    f"[LLM Gate - Flash] type={gate_type}, shape={gate_sigmoid.shape}, "
-                    f"mean={gate_sigmoid.mean().item():.4f}, min={gate_sigmoid.min().item():.4f}, "
-                    f"max={gate_sigmoid.max().item():.4f}, "
-                    f"dist: <0.3={low:.1f}%, 0.3-0.7={mid:.1f}%, >=0.7={high:.1f}%"
-                )
+            # mh1224 Store gate_sigmoid for regularization (detach to avoid double backprop, but keep for loss computation)
+            gate_sigmoid_for_reg = gate_sigmoid
+            
+            # Check for NaN or Inf after gating
+            if torch.isnan(attn_output).any() or torch.isinf(attn_output).any():
+                logger.error(f"[Gated Attention - Flash] ERROR: attn_output contains NaN/Inf after gating!")
+            
+            # Log gating effect - ALWAYS print, no restrictions 应用 gating 后的效果
+            ## attn_output before: mean=0.0017, std=0.1367 — 应用 gating 前的均值和标准差
+            ## attn_output after: mean=0.0008, std=0.0679 — 应用 gating 后的均值和标准差
+            ## gating ratio (after/before mean): 0.4931 — 约 0.5，表示 gating 接近中性（不抑制也不增强）
+            # print(
+            #     f"[Gated Attention - Flash] Applied gating - "
+            #     f"attn_output shape: {attn_output.shape}, gate_score shape: {gate_score.shape}, "
+            #     f"attn_output before: mean={attn_output_before_gating.mean().item():.4f}, "
+            #     f"std={attn_output_before_gating.std().item():.4f}, "
+            #     f"attn_output after: mean={attn_output.mean().item():.4f}, "
+            #     f"std={attn_output.std().item():.4f}, "
+            #     f"gating ratio (after/before mean): {attn_output.mean().item() / (attn_output_before_gating.mean().item() + 1e-8):.4f}, "
+            #     f"gate_sigmoid mean: {gate_sigmoid.mean().item():.4f}, min: {gate_sigmoid.min().item():.4f}, max: {gate_sigmoid.max().item():.4f}, "
+            #     f"attn_output zero ratio: {(attn_output == 0).float().mean().item():.4f}"
+            # )
         
         attn_output = attn_output.reshape(bsz, q_len, self.hidden_size).contiguous()
+        
+        # Check attn_output before wo
+        if torch.isnan(attn_output).any() or torch.isinf(attn_output).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: attn_output contains NaN/Inf before wo! "
+                f"attn_output shape: {attn_output.shape}"
+            )
+        
         attn_output = self.wo(attn_output)
+        
+        # Check attn_output after wo
+        if torch.isnan(attn_output).any() or torch.isinf(attn_output).any():
+            logger.error(
+                f"[Gated Attention - Flash] ERROR: attn_output contains NaN/Inf after wo! "
+                f"attn_output shape: {attn_output.shape}, "
+                f"wo.weight has NaN: {torch.isnan(self.wo.weight).any().item()}, "
+                f"wo.weight has Inf: {torch.isinf(self.wo.weight).any().item()}"
+            )
 
         if not output_attentions:
             attn_weights = None
 
-        return attn_output, attn_weights, past_key_value
+        return attn_output, attn_weights, past_key_value, gate_sigmoid_for_reg    ### mh1224
 
     def _flash_attention_forward(
         self, query_states, key_states, value_states, attention_mask, query_length, dropout=0.0, softmax_scale=None
@@ -812,7 +976,7 @@ class InternLM2DecoderLayer(nn.Module):
         hidden_states = self.attention_norm(hidden_states)
 
         # Self Attention
-        hidden_states, self_attn_weights, present_key_value = self.attention(
+        attention_outputs = self.attention(   ## mh1224
             hidden_states=hidden_states,
             attention_mask=attention_mask,
             position_ids=position_ids,
@@ -821,6 +985,12 @@ class InternLM2DecoderLayer(nn.Module):
             use_cache=use_cache,
             **kwargs,
         )
+        ### mh1224
+        hidden_states = attention_outputs[0]
+        self_attn_weights = attention_outputs[1] if len(attention_outputs) > 1 else None
+        present_key_value = attention_outputs[2] if len(attention_outputs) > 2 else None
+        gate_sigmoid = attention_outputs[3] if len(attention_outputs) > 3 else None
+        
         hidden_states = residual + hidden_states
 
         # Fully Connected
@@ -836,6 +1006,10 @@ class InternLM2DecoderLayer(nn.Module):
 
         if use_cache:
             outputs += (present_key_value,)
+        
+        # Add gate_sigmoid for regularization mh1224
+        if gate_sigmoid is not None:
+            outputs += (gate_sigmoid,)
 
         return outputs
 
@@ -1085,6 +1259,7 @@ class InternLM2Model(InternLM2PreTrainedModel):
         all_hidden_states = () if output_hidden_states else None
         all_self_attns = () if output_attentions else None
         next_decoder_cache = () if use_cache else None
+        all_gate_values = []  # Collect gate values from all layers for regularization  mh1224
 
         for idx, decoder_layer in enumerate(self.layers):
             if output_hidden_states:
@@ -1120,6 +1295,26 @@ class InternLM2Model(InternLM2PreTrainedModel):
 
             hidden_states = layer_outputs[0]
 
+            # Extract gate values if present (last element of layer_outputs if gating is enabled)
+            # Structure of layer_outputs from InternLM2DecoderLayer.forward:
+            # - Basic: (hidden_states,) = length 1
+            # - With output_attentions: (hidden_states, self_attn_weights) = length 2
+            # - With use_cache: (hidden_states, [self_attn_weights], present_key_value) = length 2 or 3
+            # - With gate_sigmoid: one more element at the end (when gating is enabled)
+            # So gate_sigmoid is present if length > expected base length
+            # Note: when gradient_checkpointing is enabled, use_cache is forced to False (see line 1251-1255)
+            base_length = 1 + (1 if output_attentions else 0) + (1 if use_cache else 0)
+            if len(layer_outputs) > base_length:  # has gate_sigmoid (one extra element)
+                gate_sigmoid = layer_outputs[-1]
+                if gate_sigmoid is not None:
+                    all_gate_values.append(gate_sigmoid)
+                # Debug: log when gate_sigmoid is None (shouldn't happen if gating is enabled)
+                elif idx == 0:  # Only log for first layer to avoid spam
+                    logger.debug(f"Layer {idx}: gate_sigmoid is None despite len(layer_outputs)={len(layer_outputs)} > base_length={base_length}")
+            # Debug: log when gate_sigmoid is not found
+            elif idx == 0:  # Only log for first layer to avoid spam
+                logger.debug(f"Layer {idx}: No gate_sigmoid found. len(layer_outputs)={len(layer_outputs)}, base_length={base_length}, output_attentions={output_attentions}, use_cache={use_cache}")
+
             if use_cache:
                 next_decoder_cache += (layer_outputs[2 if output_attentions else 1],)
 
@@ -1133,14 +1328,24 @@ class InternLM2Model(InternLM2PreTrainedModel):
             all_hidden_states += (hidden_states,)
 
         next_cache = next_decoder_cache if use_cache else None
+        
+        # mh1224 Store gate values in a custom attribute for access in ForCausalLM 
         if not return_dict:
-            return tuple(v for v in [hidden_states, next_cache, all_hidden_states, all_self_attns] if v is not None)
-        return BaseModelOutputWithPast(
+            result = tuple(v for v in [hidden_states, next_cache, all_hidden_states, all_self_attns] if v is not None)
+            # Add gate values as an attribute (hack for non-dict return)
+            if all_gate_values:
+                result = result + (all_gate_values,)
+            return result
+        output = BaseModelOutputWithPast(
             last_hidden_state=hidden_states,
             past_key_values=next_cache,
             hidden_states=all_hidden_states,
             attentions=all_self_attns,
         )
+        # mh1224Add gate values as an attribute for access in ForCausalLM
+        if all_gate_values:
+            output.gate_values = all_gate_values
+        return output
 
 
 # Modified from transformers.model.llama.modeling_llama.LlamaForCausalLM
@@ -1253,8 +1458,13 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
             shift_labels = shift_labels.to(shift_logits.device)
             loss = loss_fct(shift_logits, shift_labels)
 
+        # mh1224 Extract gate values from model outputs for regularization
+        gate_values = getattr(outputs, 'gate_values', None)
+
         if not return_dict:
             output = (logits,) + outputs[1:]
+            if gate_values is not None:
+                output = output + (gate_values,)
             return (loss,) + output if loss is not None else output
 
         device = input_ids.device if input_ids is not None else inputs_embeds.device
@@ -1266,6 +1476,9 @@ class InternLM2ForCausalLM(InternLM2PreTrainedModel):
             attentions=outputs.attentions,
         )
         output['logits'] = output['logits'].to(device)
+        # mh1224 Add gate values for regularization
+        if gate_values is not None:
+            output.gate_values = gate_values
         return output
 
     def prepare_inputs_for_generation(
