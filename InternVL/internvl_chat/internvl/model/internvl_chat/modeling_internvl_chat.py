@@ -88,7 +88,7 @@ class InternVLChatModel(PreTrainedModel):
         vit_hidden_size = config.vision_config.hidden_size
         llm_hidden_size = config.llm_config.hidden_size
 
-        self.mlp1 = nn.Sequential(
+        self.mlp1 = nn.Sequential(   ##### Projector layer
             nn.LayerNorm(vit_hidden_size * int(1 / self.downsample_ratio) ** 2),
             nn.Linear(vit_hidden_size * int(1 / self.downsample_ratio) ** 2, llm_hidden_size),
             nn.GELU(),
@@ -307,17 +307,26 @@ class InternVLChatModel(PreTrainedModel):
             if ignore_flag:
                 loss = loss * 0.0
 
+        # Extract gate_values from language_model outputs for regularization
+        gate_values = getattr(outputs, 'gate_values', None)
+        
         if not return_dict:
             output = (logits,) + outputs[1:]
+            if gate_values is not None:
+                output = output + (gate_values,)
             return (loss,) + output if loss is not None else output
 
-        return CausalLMOutputWithPast(
+        output = CausalLMOutputWithPast(
             loss=loss,
             logits=logits,
             past_key_values=outputs.past_key_values,
             hidden_states=outputs.hidden_states,
             attentions=outputs.attentions,
         )
+        # Add gate_values for regularization if available
+        if gate_values is not None:
+            output.gate_values = gate_values
+        return output
 
     def pixel_shuffle(self, x, scale_factor=0.5):
         n, w, h, c = x.size()

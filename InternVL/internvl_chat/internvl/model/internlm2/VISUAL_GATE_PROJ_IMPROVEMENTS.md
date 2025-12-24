@@ -193,3 +193,5 @@ if self.visual_summary_head_gate and visual_summary is not None:
 
 
 
+
+

@@ -35,6 +35,7 @@ from transformers.utils import (add_start_docstrings,
                                 add_start_docstrings_to_model_forward, logging,
                                 replace_return_docstrings)
 
+##### standard gate with wqkv version
 try:
     from transformers.generation.streamers import BaseStreamer
 except:  # noqa # pylint: disable=bare-except
