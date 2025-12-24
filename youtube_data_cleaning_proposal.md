@@ -128,45 +128,6 @@ topic_keywords = {
 
 **Output**: Dictionary mapping `video_id → [topic_list]` (multi-label allowed)
 
----
-
-## PART 3: Topic Centroid Calculation
-
-### 3.1 Group Videos by Topic
-
-```python
-# Group How2Sign videos by topic
-topic_videos = {topic: [] for topic in topics}
-for video_id, text in how2sign_full_texts.items():
-    video_topics = classify_video_topics(text)  # From Part 2
-    for topic in video_topics:
-        topic_videos[topic].append(text)
-```
-
-### 3.2 Compute Embedding Centroids
-
-```python
-# Load embedding model (e.g., BGE-large-en-v1.5 or Instructor-large)
-from sentence_transformers import SentenceTransformer
-embed_model = SentenceTransformer('BAAI/bge-large-en-v1.5')
-
-# Compute centroid for each topic
-topic_centroids = {}
-for topic, texts in topic_videos.items():
-    if len(texts) < 5:  # Skip topics with too few videos
-        continue
-    
-    # Encode all videos in this topic
-    embeddings = embed_model.encode(texts, batch_size=32)
-    
-    # Compute mean embedding (centroid)
-    centroid = np.mean(embeddings, axis=0)
-    topic_centroids[topic] = centroid
-    
-    print(f"Topic: {topic}, Videos: {len(texts)}, Centroid shape: {centroid.shape}")
-```
-
-**Output**: Dictionary mapping `topic → centroid_embedding` (10 centroids)
 
 ---
 
@@ -216,9 +177,9 @@ def rule_based_filter(video_data):
 
 ---
 
-### Stage 2: LLM Semantic Classification (Filter 20-30%)
+### Stage 2: LLM Semantic Classification (Filter 30-50%)
 
-**Purpose**: Use LLM to filter invalid English and irrelevant content.
+**Purpose**: Use LLM to filter invalid English and irrelevant content, directly matching How2Sign domain.
 
 #### Task 1: Valid English Check
 ```python
@@ -237,92 +198,155 @@ def llm_valid_english_check(texts_batch):
     return [r.strip().lower() == "yes" for r in results.split('\n')]
 ```
 
-#### Task 2: Relevance-to-How2Sign Classification
+#### Task 2: How2Sign Domain Matching (Enhanced with Few-Shot Examples)
 ```python
-def llm_relevance_classification(texts_batch):
-    prompt = f"""
-    Classify each caption based on relevance to instructional/educational content 
-    similar to How2Sign (tutorials, how-to guides, instructional videos).
-    
-    Categories:
-    1 = Highly relevant (instructional, tutorial, how-to)
-    2 = Possibly relevant (educational, informative)
-    3 = Irrelevant (entertainment, music, news, personal vlog)
-    
-    Captions:
-    {chr(10).join([f"{i+1}. {text[:200]}..." for i, text in enumerate(texts_batch)])}
-    
-    Output format: Category number for each (one per line)
+def llm_how2sign_domain_match(texts_batch, how2sign_examples=None):
     """
+    Classify YouTube videos based on similarity to How2Sign instructional videos.
+    Uses few-shot examples from How2Sign dataset for better accuracy.
+    """
+    # Load How2Sign examples if not provided
+    if how2sign_examples is None:
+        with open('how2sign_video_texts.json', 'r') as f:
+            how2sign_data = json.load(f)
+        # Sample diverse examples (one per topic category)
+        how2sign_examples = [
+            list(how2sign_data.values())[i][:300]  # First 300 chars
+            for i in [0, 100, 500, 1000, 1500]  # Diverse samples
+        ]
+    
+    # Build few-shot examples section
+    examples_section = "\n".join([
+        f"Example {i+1} (How2Sign): {ex}..."
+        for i, ex in enumerate(how2sign_examples)
+    ])
+    
+    prompt = f"""
+You are classifying YouTube ASL video captions to determine if they match the How2Sign instructional video domain.
+
+How2Sign videos are instructional/educational content that fall into these 10 specific topic categories:
+
+1. Cars and Other Vehicle - Tutorials about vehicles, driving, maintenance, repairs
+2. Games - Game rules, strategies, how to play games
+3. Arts and Entertainment - Art techniques, creative tutorials, entertainment skills
+4. Personal Care and Style - Beauty, grooming, fashion, personal hygiene tutorials
+5. Food and Drinks - Cooking recipes, food preparation, drink making
+6. Education and Communication - Learning skills, communication techniques, educational content
+7. Home and Garden - Home improvement, gardening, DIY projects, interior design
+8. Pets and Animals - Pet care, animal training, veterinary advice
+9. Hobbies and Crafts - Craft tutorials, hobby instructions, creative projects
+10. Sports and Fitness - Sports techniques, fitness exercises, athletic training
+
+How2Sign videos are characterized by:
+- Tutorials and how-to guides with step-by-step instructions
+- Educational content teaching skills, techniques, or procedures
+- Professional demonstrations and instructional content
+- Clear instructional structure (not just entertainment or personal vlogs)
+
+Examples of How2Sign content:
+{examples_section}
+
+For each YouTube video caption below, determine if it matches ANY of the 10 How2Sign topic categories above AND is instructional/educational in nature.
+
+Classification:
+- "KEEP" = The video matches one or more How2Sign categories AND is instructional/tutorial content
+- "FILTER" = The video does NOT match any How2Sign category OR is not instructional (e.g., entertainment, music, news, personal vlogs, stories without instruction)
+
+YouTube Video Captions:
+{chr(10).join([f"{i+1}. {text[:400]}..." for i, text in enumerate(texts_batch)])}
+
+Output format: KEEP or FILTER for each video (one per line, only the word)
+"""
     
     results = llm.generate(prompt)
-    categories = [int(r.strip()) for r in results.split('\n') if r.strip().isdigit()]
+    decisions = []
+    for line in results.split('\n'):
+        line = line.strip().upper()
+        if 'KEEP' in line:
+            decisions.append(True)
+        elif 'FILTER' in line:
+            decisions.append(False)
+        else:
+            # Default to filter if unclear
+            decisions.append(False)
     
-    # Keep only category 1 and some category 2
-    return [cat in [1, 2] for cat in categories]
+    return decisions
+```
+
+**Alternative: Simpler Prompt (Faster, Less Accurate)**
+```python
+def llm_how2sign_simple_match(texts_batch):
+    """
+    Simpler version without few-shot examples for faster processing.
+    """
+    prompt = f"""
+Classify each YouTube video caption as matching or not matching How2Sign instructional video domain.
+
+How2Sign videos are instructional/educational content in these 10 categories:
+1. Cars and Other Vehicle
+2. Games
+3. Arts and Entertainment
+4. Personal Care and Style
+5. Food and Drinks
+6. Education and Communication
+7. Home and Garden
+8. Pets and Animals
+9. Hobbies and Crafts
+10. Sports and Fitness
+
+The video must be instructional/tutorial content (how-to guides, step-by-step instructions, educational demonstrations).
+
+For each caption, output:
+- "KEEP" if it matches one or more How2Sign categories AND is instructional/tutorial
+- "FILTER" if it doesn't match any category OR is not instructional (entertainment, music, news, vlogs)
+
+Captions:
+{chr(10).join([f"{i+1}. {text[:300]}..." for i, text in enumerate(texts_batch)])}
+
+Output: KEEP or FILTER (one per line)
+"""
+    results = llm.generate(prompt)
+    return [line.strip().upper().startswith('KEEP') for line in results.split('\n') if line.strip()]
 ```
 
 **Processing**: Batch process (20-50 videos per batch) to reduce API calls
 
-**Expected**: Filter out additional 20-30% of videos
+**Expected**: Filter out additional 30-50% of videos (more aggressive than original Stage 2+3 combined)
 
 ---
 
-### Stage 3: Topic Similarity Filtering (Filter 10-20%)
+### Stage 3: Topic Similarity Filtering (OPTIONAL - Skip for Fast Processing)
 
-**Purpose**: Match YouTube videos to How2Sign topics using embedding similarity.
+**Note**: This stage is skipped for fast processing. Stage 2's enhanced LLM classification replaces this.
 
+**Alternative**: If you want topic-level filtering without embeddings, you can add a topic classification step in Stage 2:
 ```python
-def topic_similarity_filter(youtube_video_text, topic_centroids, threshold=0.35):
+def llm_topic_classification(texts_batch):
     """
-    Compute similarity between YouTube video and How2Sign topic centroids.
-    
-    Args:
-        youtube_video_text: Full text of YouTube video
-        topic_centroids: Dict of topic → centroid embeddings
-        threshold: Minimum similarity to keep (can be topic-specific)
-    
-    Returns:
-        (keep: bool, best_topic: str, max_similarity: float)
+    Optional: Classify videos into How2Sign topics for better organization.
     """
-    # Encode YouTube video
-    youtube_embedding = embed_model.encode([youtube_video_text])[0]
-    
-    # Compute similarity with all topic centroids
-    similarities = {}
-    for topic, centroid in topic_centroids.items():
-        similarity = cosine_similarity(
-            youtube_embedding.reshape(1, -1),
-            centroid.reshape(1, -1)
-        )[0][0]
-        similarities[topic] = similarity
-    
-    # Find best matching topic
-    best_topic = max(similarities, key=similarities.get)
-    max_similarity = similarities[best_topic]
-    
-    # Topic-specific thresholds (Suggestion 3)
-    topic_thresholds = {
-        "Food and Drinks": 0.35,      # Common topic
-        "Home and Garden": 0.35,
-        "Personal Care and Style": 0.35,
-        "Education and Communication": 0.35,
-        "Sports and Fitness": 0.35,
-        "Arts and Entertainment": 0.30,  # Broader topic
-        "Games": 0.30,
-        "Cars and Other Vehicle": 0.30,
-        "Pets and Animals": 0.30,      # Less common
-        "Hobbies and Crafts": 0.30,
-    }
-    
-    threshold = topic_thresholds.get(best_topic, 0.35)
-    
-    keep = max_similarity >= threshold
-    
-    return keep, best_topic, max_similarity, similarities
-```
+    prompt = f"""
+Classify each video into one or more How2Sign topics:
+1. Cars and Other Vehicle
+2. Games
+3. Arts and Entertainment
+4. Personal Care and Style
+5. Food and Drinks
+6. Education and Communication
+7. Home and Garden
+8. Pets and Animals
+9. Hobbies and Crafts
+10. Sports and Fitness
 
-**Expected**: Filter out additional 10-20% of videos
+For each caption, output topic numbers (e.g., "5,7" for Food and Home).
+
+Captions:
+{chr(10).join([f"{i+1}. {text[:300]}..." for i, text in enumerate(texts_batch)])}
+
+Output: Topic numbers for each (one per line)
+"""
+    # Implementation similar to above
+```
 
 ---
 
@@ -353,7 +377,7 @@ def final_quality_check(filtered_videos):
 
 ## PART 5: Implementation Pipeline
 
-### 5.1 Complete Pipeline Flow
+### 5.1 Complete Pipeline Flow (Fast Version - No Embeddings)
 
 ```
 YouTube Videos (43K)
@@ -361,39 +385,15 @@ YouTube Videos (43K)
 [Stage 1] Rule-Based Filtering
     → Keep: ~26-30K videos (30-40% filtered)
     ↓
-[Stage 2] LLM Semantic Classification
-    → Keep: ~18-21K videos (20-30% filtered)
+[Stage 2] LLM How2Sign Domain Matching (Enhanced)
+    → Keep: ~13-18K videos (30-50% filtered)
     ↓
-[Stage 3] Topic Similarity Filtering
-    → Keep: ~14-18K videos (10-20% filtered)
-    ↓
-[Stage 4] Final Quality Check
+[Stage 3] Final Quality Check
     → Final: ~12-16K videos (50-70% total filtered)
     ↓
 Output: Filtered video list with metadata
 ```
 
-### 5.2 Output Format
-
-```json
-{
-    "video_id": "abc123",
-    "title": "...",
-    "matched_topic": "Food and Drinks",
-    "similarity_score": 0.42,
-    "all_topic_similarities": {
-        "Food and Drinks": 0.42,
-        "Home and Garden": 0.38,
-        ...
-    },
-    "filtering_stages": {
-        "rule_based": "passed",
-        "llm_english": "passed",
-        "llm_relevance": "category_1",
-        "topic_similarity": "passed"
-    }
-}
-```
 
 ---
 
@@ -408,10 +408,6 @@ import numpy as np
 import json
 from collections import defaultdict
 
-# Embeddings
-from sentence_transformers import SentenceTransformer
-from sklearn.metrics.pairwise import cosine_similarity
-
 # LLM (choose one)
 # Option 1: OpenAI API
 import openai
@@ -419,12 +415,19 @@ import openai
 # Option 2: Local LLM (e.g., Qwen, InternVL)
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
+# Option 3: Anthropic Claude API
+import anthropic
+
 # Language detection
 from langdetect import detect
 
 # Utilities
 import re
 from tqdm import tqdm
+
+# NOTE: Embedding libraries NOT needed for fast version
+# from sentence_transformers import SentenceTransformer  # Skip this
+# from sklearn.metrics.pairwise import cosine_similarity  # Skip this
 ```
 
 ### 6.2 Configuration
@@ -453,12 +456,20 @@ CONFIG = {
 
 ### 6.3 Performance Estimates
 
+**Fast Version (No Embeddings)**:
 - **Stage 1 (Rule-based)**: ~1-2 hours for 43K videos
-- **Stage 2 (LLM)**: ~5-10 hours (depends on API rate limits)
+- **Stage 2 (LLM Enhanced)**: ~6-12 hours (depends on API rate limits, batch size)
+- **Stage 3 (Final check)**: ~30 minutes
+
+**Total**: ~7-14 hours (similar to original, but simpler implementation)
+
+**Original Version (With Embeddings)**:
+- **Stage 1 (Rule-based)**: ~1-2 hours
+- **Stage 2 (LLM)**: ~5-10 hours
 - **Stage 3 (Embedding)**: ~2-3 hours
 - **Stage 4 (Final check)**: ~30 minutes
 
-**Total**: ~8-15 hours for full pipeline
+**Total**: ~8-15 hours
 
 ---
 
@@ -492,10 +503,76 @@ CONFIG = {
 
 This proposal combines:
 1. ✅ **Video-level aggregation** (How2Sign + YouTube)
-2. ✅ **Multi-stage filtering** (Rule → LLM → Embedding)
-3. ✅ **Topic-based similarity** (10 topic centroids)
+2. ✅ **Multi-stage filtering** (Rule → LLM → Final Check)
+3. ✅ **LLM-based domain matching** (replaces embedding similarity for speed)
 4. ✅ **Rich text combination** (title + description + captions)
 5. ✅ **Quality checks** at each stage
 
 **Expected Result**: Filter 50-70% of noisy YouTube videos while maintaining domain consistency with How2Sign.
+
+---
+
+## PART 8: Quick Start Guide (Fast Version)
+
+### 8.1 Prerequisites
+
+```bash
+# Install required packages
+pip install openai anthropic langdetect tqdm pandas
+
+# Set API keys
+export OPENAI_API_KEY="your-key-here"
+# OR
+export ANTHROPIC_API_KEY="your-key-here"
+```
+
+### 8.2 Run Pipeline
+
+```bash
+cd /home/mh2803/projects/sign_language_llm/data_aggregation_output
+
+# Step 1: Data aggregation (if not done)
+python part1_data_aggregation.py
+
+# Step 2: Stage 1 - Rule-based filtering
+python stage1_rule_based_filter.py
+
+# Step 3: Stage 2 - LLM How2Sign domain matching
+# Using OpenAI (default)
+export LLM_PROVIDER=openai
+export LLM_MODEL=gpt-4o-mini
+export BATCH_SIZE=20
+python stage2_llm_how2sign_filter.py
+
+# OR using Anthropic Claude
+export LLM_PROVIDER=anthropic
+export LLM_MODEL=claude-3-haiku-20240307
+python stage2_llm_how2sign_filter.py
+```
+
+### 8.3 Output Files
+
+After running Stage 2, you'll get:
+- `youtube_video_texts_filtered_stage2.json` - Videos that passed (KEEP)
+- `youtube_video_texts_filtered_out_stage2.json` - Videos filtered out with reasons
+- `stage2_filtering_stats.json` - Statistics and breakdown
+
+### 8.4 Cost Estimation
+
+For ~30K videos (after Stage 1) with batch size 20:
+- **OpenAI GPT-4o-mini**: ~$5-15 (depends on text length)
+- **Anthropic Claude Haiku**: ~$3-10 (depends on text length)
+
+**Tip**: Start with a small sample (100-500 videos) to test and estimate costs.
+
+### 8.5 Troubleshooting
+
+**Issue**: API rate limits
+- **Solution**: Reduce `BATCH_SIZE` (e.g., 10) or add longer delays between batches
+
+**Issue**: High costs
+- **Solution**: Use simpler model (gpt-4o-mini or claude-haiku), increase batch size, or filter more aggressively in Stage 1
+
+**Issue**: Inconsistent results
+- **Solution**: Check API responses, adjust temperature (currently 0.1), or use few-shot examples from How2Sign
 

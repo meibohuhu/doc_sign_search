@@ -14,3 +14,8 @@ YouTube 数据集：
 原始视频数：395
 删除的视频：45（caption_languages 为多语言且 caption_timestamps 有问题）
 total_sentences: 13457
+
+cd /home/mh2803/projects/sign_language_llm/data_aggregation_output
+MAX_VIDEOS=6923
+USE_STRICT=true BATCH_SIZE=20 python stage2_llm_how2sign_filter.py
+www的句子不裁，（）的不裁。**的不裁
