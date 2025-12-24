@@ -72,6 +72,7 @@ from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils.logging import (enable_default_handler,
                                         enable_explicit_format, set_verbosity)
 
+##### visual_summary_head_gate version
 # Try to import petrel_client for image loading, fallback to PIL if unavailable
 try:
     from petrel_client.client import Client
