@@ -22,7 +22,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/"
+OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/"
 # Use local data paths
 # META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
 META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
@@ -92,7 +92,7 @@ echo ""
 # with ZeRO Stage 2/3. DeepSpeed launcher handles gradient accumulation correctly.
 # Note: CUDA_VISIBLE_DEVICES is already set above, so deepspeed will use the specified GPUs
 deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
-    internvl_chat/internvl/train/internvl_chat_finetune_gate_wqkv.py \
+    internvl_chat/internvl/train/internvl_chat_finetune_gate_regularization.py \
     --model_name_or_path "$MODEL_NAME" \
     --output_dir "$OUTPUT_DIR" \
     --overwrite_output_dir \
@@ -139,9 +139,10 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --weight_decay 0.01 \
     --lr_scheduler_type cosine \
     --elementwise_attn_output_gate  True \
-    --visual_summary_head_gate True \
-    --visual_gate_mode add_logits \
-    --visual_summary_aggregation sum \
+    --gate_reg_type beta_loglikelihood \
+    --gate_reg_lambda 0.1 \
+    --gate_reg_beta_alpha 0.5 \
+    --gate_reg_beta_beta 0.5 \
     2>&1 | tee "$LOG_FILE"
 
 TRAINING_EXIT_CODE=${PIPESTATUS[0]}

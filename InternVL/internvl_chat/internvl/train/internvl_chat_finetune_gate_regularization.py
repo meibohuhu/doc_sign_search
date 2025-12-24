@@ -27,17 +27,15 @@ import torch
 import torch.distributed as dist
 import transformers
 from internvl.dist_utils import init_dist
-from internvl.model.internlm2.modeling_internlm2_gate_seperate import InternLM2ForCausalLM
+from internvl.model.internlm2.modeling_internlm2_gate_regularization import InternLM2ForCausalLM
 
-#### LLM gate seperate projection layer version
-# CRITICAL: Patch modeling_internvl_chat.py to use gate_seperate version before importing InternVLChatModel
-# This ensures InternVLChatModel uses the gated attention implementation with independent gate_proj
+# CRITICAL: Patch modeling_internvl_chat.py to use gate version before importing InternVLChatModel
+# This ensures InternVLChatModel uses the gated attention implementation
 import sys
 import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
 # Replace the import in modeling_internvl_chat module
 modeling_internvl_chat_module.InternLM2ForCausalLM = InternLM2ForCausalLM
-logger = logging.getLogger(__name__)
-logger.info("✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate_seperate")
+print("✅ Patched modeling_internlm2_gate_regularization to use InternLM2ForCausalLM from modeling_internlm2_gate_regularization")
 
 from internvl.model.internvl_chat import (InternVisionConfig,
                                           InternVisionModel,
@@ -91,11 +89,261 @@ MaximumDecompressedSize = 1024
 MegaByte = 2 ** 20
 PngImagePlugin.MAX_TEXT_CHUNK = MaximumDecompressedSize * MegaByte
 
-##### mhu added code 1108 #####
+##### mhu added code mh1224 #####
+def compute_gate_regularization_loss(gate_values_list, reg_type='entropy', lambda_reg=0.01, 
+                                     beta_alpha=3.0, beta_beta=1.0):
+    """
+    Compute gate regularization loss for gated attention.
+    
+    Args:
+        gate_values_list: List of gate_sigmoid tensors from all layers
+            Each tensor shape: [B, num_heads, q_len, 1] (headwise) or [B, num_heads, q_len, head_dim] (elementwise)
+        reg_type: 'entropy' / 'beta_kl_estimated' / 'beta_loglikelihood'
+        lambda_reg: Regularization weight
+        beta_alpha, beta_beta: Beta distribution parameters (for beta_kl_estimated/beta_loglikelihood)
+    
+    Returns:
+        reg_loss: Scalar regularization loss (already multiplied by lambda_reg)
+    """
+    if not gate_values_list:
+        # Return a zero tensor on the appropriate device
+        # We'll determine device from the first gate value if available
+        if torch.cuda.is_available():
+            return torch.tensor(0.0, device='cuda', dtype=torch.float32)
+        else:
+            return torch.tensor(0.0, device='cpu', dtype=torch.float32)
+    
+    # Get device and dtype from first gate value
+    device = gate_values_list[0].device
+    dtype = gate_values_list[0].dtype
+    
+    total_reg_loss = torch.tensor(0.0, device=device, dtype=dtype)
+    eps = 1e-8
+    
+    # Get logger for this module
+    logger = logging.getLogger(__name__)
+    
+    # Log gate values statistics for debugging (only first time)
+    if not hasattr(compute_gate_regularization_loss, '_debug_logged'):
+        if gate_values_list and gate_values_list[0] is not None:
+            sample_gate = gate_values_list[0]
+            logger.info(f"DEBUG: Gate values shape: {sample_gate.shape}, "
+                       f"mean: {sample_gate.mean().item():.6f}, "
+                       f"std: {sample_gate.std().item():.6f}, "
+                       f"min: {sample_gate.min().item():.6f}, "
+                       f"max: {sample_gate.max().item():.6f}")
+            # Check if gate values require gradients
+            logger.info(f"DEBUG: Gate values require_grad: {sample_gate.requires_grad}")
+        compute_gate_regularization_loss._debug_logged = True
+    
+    for layer_idx, gate_sigmoid in enumerate(gate_values_list):
+        if gate_sigmoid is None:
+            continue
+            
+        if reg_type == 'entropy':
+            # Entropy regularization: encourage gates to be 0 or 1 (sparse)
+            # -p*log(p) - (1-p)*log(1-p) for each gate value
+            gate_clamped = torch.clamp(gate_sigmoid, eps, 1 - eps)
+            entropy = -(gate_clamped * torch.log(gate_clamped) + 
+                       (1 - gate_clamped) * torch.log(1 - gate_clamped))
+            reg_loss = entropy.mean()
+            
+        elif reg_type == 'beta_kl_estimated':
+            # Beta KL divergence: KL(q || Beta(α, β))
+            # Method: Estimate gate score's Beta distribution parameters, then compute KL divergence
+            # This uses moment estimation to approximate the distribution
+            gate_clamped = torch.clamp(gate_sigmoid, eps, 1 - eps)
+            
+            # Estimate gate score's Beta distribution parameters (moment estimation)
+            gate_mean = gate_clamped.mean()
+            gate_var = gate_clamped.var()
+            
+            # Moment estimation formula:
+            # mean = α/(α+β), var = αβ/((α+β)²(α+β+1))
+            # Solving: α = mean * (mean*(1-mean)/var - 1), β = (1-mean) * (mean*(1-mean)/var - 1)
+            if gate_var > eps:
+                gate_sum = gate_mean * (1 - gate_mean) / gate_var - 1
+                alpha_q = gate_mean * gate_sum
+                beta_q = (1 - gate_mean) * gate_sum
+                alpha_q = torch.clamp(alpha_q, eps, 100)
+                beta_q = torch.clamp(beta_q, eps, 100)
+            else:
+                # If variance is too small, use default values (uniform distribution)
+                alpha_q = torch.tensor(1.0, device=gate_clamped.device, dtype=gate_clamped.dtype)
+                beta_q = torch.tensor(1.0, device=gate_clamped.device, dtype=gate_clamped.dtype)
+            
+            # KL divergence: KL(Beta(α_q, β_q) || Beta(α_target, β_target))
+            # KL = log(B(α_target,β_target)/B(α_q,β_q)) + 
+            #      (α_q-α_target)*ψ(α_q) + (β_q-β_target)*ψ(β_q) + 
+            #      (α_target-α_q+β_target-β_q)*ψ(α_q+β_q)
+            # where ψ is the digamma function
+            # For numerical stability, we use an approximation:
+            # log(B(α,β)) ≈ (α-0.5)*log(α) + (β-0.5)*log(β) - (α+β-1)*log(α+β) - log(2π)/2
+            alpha_target = torch.tensor(beta_alpha, device=gate_clamped.device, dtype=gate_clamped.dtype)
+            beta_target = torch.tensor(beta_beta, device=gate_clamped.device, dtype=gate_clamped.dtype)
+            
+            # Approximate log Beta function
+            def log_beta_approx(alpha, beta):
+                return (alpha - 0.5) * torch.log(alpha + eps) + (beta - 0.5) * torch.log(beta + eps) - \
+                       (alpha + beta - 1) * torch.log(alpha + beta + eps)
+            
+            log_beta_q = log_beta_approx(alpha_q, beta_q)
+            log_beta_target = log_beta_approx(alpha_target, beta_target)
+            
+            # Approximate digamma function: ψ(x) ≈ log(x) - 1/(2x) - 1/(12x²) for large x
+            def digamma_approx(x):
+                return torch.log(x + eps) - 1 / (2 * x + eps) - 1 / (12 * (x + eps) ** 2)
+            
+            psi_alpha_q = digamma_approx(alpha_q)
+            psi_beta_q = digamma_approx(beta_q)
+            psi_sum_q = digamma_approx(alpha_q + beta_q)
+            
+            # KL divergence (approximate)
+            kl_div = (log_beta_target - log_beta_q) + \
+                     (alpha_q - alpha_target) * psi_alpha_q + \
+                     (beta_q - beta_target) * psi_beta_q + \
+                     (alpha_target - alpha_q + beta_target - beta_q) * psi_sum_q
+            
+            reg_loss = kl_div
+            
+        elif reg_type == 'beta_loglikelihood':
+            # Beta distribution log-likelihood regularization (recommended method)
+            # Directly use negative log-likelihood, encouraging gate score to follow Beta(α, β) distribution
+            # Beta(α, β) log-likelihood: (α-1)*log(x) + (β-1)*log(1-x) - log(B(α,β))
+            # As regularization, use negative log-likelihood (ignoring constant term)
+            gate_clamped = torch.clamp(gate_sigmoid, eps, 1 - eps)
+            
+            # Negative log-likelihood (ignoring normalization constant log(B(α,β)))
+            neg_log_likelihood = -((beta_alpha - 1) * torch.log(gate_clamped) + 
+                                  (beta_beta - 1) * torch.log(1 - gate_clamped))
+            reg_loss = neg_log_likelihood.mean()
+            
+        else:
+            raise ValueError(f"Unknown regularization type: {reg_type}. "
+                           f"Supported types: 'entropy', 'beta_kl_estimated', 'beta_loglikelihood'")
+        
+        # Log per-layer regularization loss (only for first few layers to avoid spam)
+
+        # print(f"Gate regularization layer {layer_idx}: reg_loss={reg_loss.item():.6f}, reg_type={reg_type}")
+        
+        total_reg_loss = total_reg_loss + reg_loss
+        
+    # Average over layers and multiply by lambda
+    num_layers = sum(1 for gv in gate_values_list if gv is not None)
+    if num_layers > 0:
+        final_reg_loss = lambda_reg * total_reg_loss / num_layers
+        
+        # Track call count and log every 50 calls
+        if not hasattr(compute_gate_regularization_loss, '_call_count'):
+            compute_gate_regularization_loss._call_count = 0
+        compute_gate_regularization_loss._call_count += 1
+        
+        if compute_gate_regularization_loss._call_count % 50 == 0:
+            logger.info(f"Gate regularization total: {total_reg_loss.item():.6f} (before lambda), "
+                       f"final={final_reg_loss.item():.6f} (lambda={lambda_reg}), "
+                       f"num_layers={num_layers} (call_count={compute_gate_regularization_loss._call_count})")
+        
+        return final_reg_loss
+    else:
+        logger.warning("Gate regularization: no valid gate values found, returning zero loss")
+        return torch.tensor(0.0, device=device, dtype=dtype)
+
+
 class InternVLTrainer(Trainer):
+    # mh1224
+    def __init__(self, *args, gate_reg_type=None, gate_reg_lambda=0.01, 
+                 gate_reg_beta_alpha=3.0, gate_reg_beta_beta=1.0, **kwargs):
+        # Extract gate regularization parameters before calling super().__init__
+        self.gate_reg_type = gate_reg_type
+        self.gate_reg_lambda = gate_reg_lambda
+        self.gate_reg_beta_alpha = gate_reg_beta_alpha
+        self.gate_reg_beta_beta = gate_reg_beta_beta
+        super().__init__(*args, **kwargs)
+        # Patch accelerator after initialization if DeepSpeed is enabled
+        if hasattr(self, 'accelerator') and self.is_deepspeed_enabled:
+            self._patch_no_sync_for_zero()
+    
     def create_optimizer(self):
         # Use standard Trainer optimizer creation
         return super().create_optimizer()
+    
+    # mh1224
+    def compute_loss(self, model, inputs, return_outputs=False):
+        """
+        Compute loss with optional gate regularization.
+        
+        If gate_reg_type is set and model outputs contain gate_values,
+        adds gate regularization loss to the main loss.
+        """
+        # Use label_smoother if available
+        if self.label_smoother is not None and "labels" in inputs:
+            labels = inputs.pop("labels")
+        else:
+            labels = None
+        
+        outputs = model(**inputs)
+        
+        # Extract main loss
+        if isinstance(outputs, dict):
+            loss = outputs.get("loss", None)
+        else:
+            loss = outputs.loss if hasattr(outputs, "loss") else None
+        
+        # Apply label smoothing if available
+        if self.label_smoother is not None and labels is not None:
+            if loss is None:
+                raise ValueError("Cannot apply label smoothing when loss is None")
+            logits = outputs.get("logits") if isinstance(outputs, dict) else outputs.logits
+            loss = self.label_smoother({"logits": logits}, labels)
+            loss = loss.mean() if loss.numel() > 1 else loss
+        
+        # Extract gate values for regularization
+        gate_values = getattr(outputs, 'gate_values', None)
+        
+        # Compute gate regularization loss if enabled
+        if self.gate_reg_type is not None and gate_values is not None and len(gate_values) > 0:
+            # Log that we're computing regularization (only occasionally to avoid spam)
+            if hasattr(self, '_gate_reg_step_count'):
+                self._gate_reg_step_count += 1
+            else:
+                self._gate_reg_step_count = 0
+            
+            if self._gate_reg_step_count % 100 == 0:  # Log every 100 steps
+                logger.info(f"Computing gate regularization (step {self._gate_reg_step_count}): "
+                           f"gate_values count={len(gate_values)}, reg_type={self.gate_reg_type}")
+            
+            gate_reg_loss = compute_gate_regularization_loss(
+                gate_values,
+                reg_type=self.gate_reg_type,
+                lambda_reg=self.gate_reg_lambda,
+                beta_alpha=self.gate_reg_beta_alpha,
+                beta_beta=self.gate_reg_beta_beta
+            )
+            
+            # Log regularization loss (only occasionally)
+            if self._gate_reg_step_count % 100 == 0:
+                logger.info(f"Gate regularization loss: {gate_reg_loss.item():.6f} (step {self._gate_reg_step_count})")
+            
+            # Add gate regularization loss to main loss
+            if loss is not None:
+                # Ensure gate_reg_loss is on the same device as loss
+                gate_reg_loss = gate_reg_loss.to(loss.device)
+                loss = loss + gate_reg_loss
+                
+                # Log total loss with regularization (only occasionally)
+                if self._gate_reg_step_count % 100 == 0:
+                    logger.info(f"Total loss (main + reg): {loss.item():.6f} = "
+                               f"{loss.item() - gate_reg_loss.item():.6f} (main) + "
+                               f"{gate_reg_loss.item():.6f} (gate_reg)")
+            else:
+                loss = gate_reg_loss
+        elif self.gate_reg_type is not None:
+            # Log warning if gate regularization is enabled but no gate values found
+            if not hasattr(self, '_gate_reg_warned'):
+                logger.warning(f"Gate regularization enabled (type={self.gate_reg_type}) but no gate_values found in model outputs")
+                self._gate_reg_warned = True
+        
+        return (loss, outputs) if return_outputs else loss
 
 ### mh1122 ##### ERROR: [rank0]: AssertionError: no_sync context manager is incompatible with gradient partitioning logic of ZeRO stage 2
 ### incompatibility between no_sync and gradient partitioning logic of ZeRO stage 2
@@ -148,12 +396,6 @@ class InternVLTrainer(Trainer):
                 logger.info("✅ Patched accelerator.no_sync for DeepSpeed ZeRO Stage 2/3 compatibility")
         except:
             pass
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Patch accelerator after initialization if DeepSpeed is enabled
-        if hasattr(self, 'accelerator') and self.is_deepspeed_enabled:
-            self._patch_no_sync_for_zero()
 
     def train(self, resume_from_checkpoint=None, trial=None, ignore_keys_for_eval=None, **kwargs):
         """Override train method to ensure patch is applied before training starts."""
@@ -354,7 +596,6 @@ def _compute_frame_indices(
     
     # Remove duplicates and sort
     frame_indices = sorted(list(set(frame_indices)))
-    # print(f'frame_indices: {frame_indices}')
     return frame_indices
 
 
@@ -413,15 +654,6 @@ def _load_video_locally(
                 seen.add(idx)
                 unique_indices.append(idx)
         frame_indices = unique_indices
-
-        # # # Debug info: show video stats and sampling info
-        # if not dist.is_initialized() or dist.get_rank() == 0:
-        #     worker_info = get_worker_info()
-        #     if worker_info is None or worker_info.id == 0:
-        #         print(f'[Video Sampling] path={os.path.basename(video_path)}, '
-        #               f'total_frames={total_frames}, vlen={vlen}, '
-        #               f'min={min_num_frames}, max={max_num_frames}, '
-        #               f'sample={sample}, selected={frame_indices} frames')
         
         frames = vr.get_batch(frame_indices).asnumpy()  # (T, H, W, C), np.uint8
         images = [Image.fromarray(frames[i]) for i in range(frames.shape[0])]
@@ -644,11 +876,31 @@ class ModelArguments:
     )
     headwise_attn_output_gate: bool = field(
         default=False,
-        metadata={'help': 'Set to True to enable headwise gated attention in LLM. Default is False.'}
+        metadata={'help': 'Set to True to enable headwise attention output gating. Default is False.'}
     )
     elementwise_attn_output_gate: bool = field(
         default=False,
-        metadata={'help': 'Set to True to enable elementwise gated attention in LLM. Default is False.'}
+        metadata={'help': 'Set to True to enable elementwise attention output gating. Default is False.'}
+    )
+    qkv_bias: bool = field(
+        default=False,
+        metadata={'help': 'Set to True to enable bias in Q/K/V/O projection layers. Default is False.'}
+    )
+    gate_reg_type: Optional[str] = field(
+        default=None,
+        metadata={'help': 'Gate regularization type: entropy / beta_kl_estimated / beta_loglikelihood. Default is None (no regularization).'}
+    )
+    gate_reg_lambda: float = field(
+        default=0.01,
+        metadata={'help': 'Gate regularization weight (lambda). Default is 0.01.'}
+    )
+    gate_reg_beta_alpha: float = field(
+        default=3.0,
+        metadata={'help': 'Beta distribution alpha parameter (for beta_kl_estimated/beta_loglikelihood). Default is 3.0.'}
+    )
+    gate_reg_beta_beta: float = field(
+        default=1.0,
+        metadata={'help': 'Beta distribution beta parameter (for beta_kl_estimated/beta_loglikelihood). Default is 1.0.'}
     )
 
 
@@ -1331,7 +1583,15 @@ def len2weight(x, loss_reduction):
 
 def main():
     #### mh1122: set ACCELERATE_GRADIENT_ACCUMULATION_STEPS to 1 to avoid memory leak
+    import os  # Ensure os is available in this scope
     os.environ['ACCELERATE_GRADIENT_ACCUMULATION_STEPS'] = '1'
+
+    # Verify that modeling_internvl_chat is using the gate version
+    import internvl.model.internvl_chat.modeling_internvl_chat as modeling_internvl_chat_module
+    if modeling_internvl_chat_module.InternLM2ForCausalLM.__module__ == 'internvl.model.internlm2.modeling_internlm2_gate':
+        logger.info("✅ Verified: modeling_internvl_chat is using InternLM2ForCausalLM from modeling_internlm2_gate")
+    else:
+        logger.warning(f"⚠️  WARNING: modeling_internvl_chat is using {modeling_internvl_chat_module.InternLM2ForCausalLM.__module__}, not the gate version!")
 
     # Apply necessary patches for the transformers library
     replace_llama_rmsnorm_with_fused_rmsnorm()
@@ -1426,6 +1686,23 @@ def main():
     else:
         logger.info('petrel_client not installed. Will use local file loading.')
 
+    # Patch Qwen2 attention classes for gate support (before packed training patch)
+    if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+        try:
+            from transformers.models.qwen2.modeling_qwen2 import QWEN2_ATTENTION_CLASSES
+            from internvl.model.qwen2.modeling_qwen2_gate import (
+                Qwen2Attention as Qwen2AttentionGate,
+                Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
+                Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
+            )
+            # Replace Qwen2 attention classes with gate versions
+            QWEN2_ATTENTION_CLASSES['eager'] = Qwen2AttentionGate
+            QWEN2_ATTENTION_CLASSES['flash_attention_2'] = Qwen2FlashAttention2Gate
+            QWEN2_ATTENTION_CLASSES['sdpa'] = Qwen2SdpaAttentionGate
+            logger.info('✅ Patched Qwen2 attention classes with gate versions')
+        except ImportError as e:
+            logger.warning(f'⚠️  Failed to patch Qwen2 attention classes: {e}')
+
     if data_args.use_packed_ds:
         replace_internlm2_attention_class()
         replace_qwen2_attention_class()
@@ -1447,17 +1724,45 @@ def main():
         if config.llm_config.model_type == 'internlm2':
             config.llm_config.attn_implementation = 'flash_attention_2'  # for InternLM
             logger.info('Using flash_attention_2 for InternLM')
+            # Phase 1: Standard Gated Attention
+            if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+                config.llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
+                config.llm_config.elementwise_attn_output_gate = model_args.elementwise_attn_output_gate
+                gate_type = "headwise" if model_args.headwise_attn_output_gate else "elementwise"
+                logger.info(f'✅ Enabled {gate_type} attention output gating')
+            # Set gate regularization parameters mh1224
+            if model_args.gate_reg_type is not None:
+                config.llm_config.gate_reg_type = model_args.gate_reg_type
+                config.llm_config.gate_reg_lambda = model_args.gate_reg_lambda
+                config.llm_config.gate_reg_beta_alpha = model_args.gate_reg_beta_alpha
+                config.llm_config.gate_reg_beta_beta = model_args.gate_reg_beta_beta
+                logger.info(f'✅ Enabled gate regularization: type={model_args.gate_reg_type}, '
+                           f'lambda={model_args.gate_reg_lambda}, '
+                           f'beta_alpha={model_args.gate_reg_beta_alpha}, beta_beta={model_args.gate_reg_beta_beta}')
+            # InternLM2 uses config.bias (not qkv_bias) - no need to set qkv_bias
+            # config.bias is already set from the pretrained model config
+        elif config.llm_config.model_type == 'qwen2':   ### for 1B or 4B model
+            config.llm_config._attn_implementation = 'flash_attention_2'  # for Qwen2
+            logger.info('Using flash_attention_2 for Qwen2')
+            # Phase 1: Standard Gated Attention for Qwen2
+            if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+                config.llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
+                config.llm_config.elementwise_attn_output_gate = model_args.elementwise_attn_output_gate
+                gate_type = "headwise" if model_args.headwise_attn_output_gate else "elementwise"
+                logger.info(f'✅ Enabled {gate_type} attention output gating for Qwen2')
+            # Set qkv_bias
+            config.llm_config.qkv_bias = model_args.qkv_bias
+            logger.info(f'✅ Set qkv_bias to {model_args.qkv_bias} for Qwen2')
         else:
             config.llm_config._attn_implementation = 'flash_attention_2'  # for LLaMA
             logger.info('Using flash_attention_2 for LLaMA')
-        # mh 1211: Set LLM gating parameters
-        config.llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
-        config.llm_config.elementwise_attn_output_gate = model_args.elementwise_attn_output_gate
-        logger.info(
-            f"[Gate Config] Set LLM gate params: headwise={config.llm_config.headwise_attn_output_gate}, "
-            f"elementwise={config.llm_config.elementwise_attn_output_gate}"
-        )
-
+            # Warn if gating is enabled for non-InternLM2/Qwen2 models
+            if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+                logger.warning(
+                    f'⚠️  Gated attention is only supported for InternLM2 and Qwen2 models. '
+                    f'Current model type: {config.llm_config.model_type}. '
+                    f'Gating parameters will be ignored.'
+                )
         config.template = data_args.conv_style
         config.select_layer = model_args.vision_select_layer
         config.dynamic_image_size = data_args.dynamic_image_size
@@ -1469,8 +1774,658 @@ def main():
             logger.info('Overriding config.downsample_ratio (%s) with data_args.down_sample_ratio (%s)',
                         config.downsample_ratio, data_args.down_sample_ratio)
             config.downsample_ratio = data_args.down_sample_ratio
+        # mh1211 Load model with ignore_mismatched_sizes if gating is enabled
+        # Both InternLM2 and Qwen2 need ignore_mismatched when gating is enabled
+        # InternLM2: wqkv.weight shape changes (adds gate_dim rows)
+        # Qwen2: q_proj.weight shape changes (adds gate_dim rows)
+        ignore_mismatched = (model_args.headwise_attn_output_gate or 
+                            model_args.elementwise_attn_output_gate) and \
+                            config.llm_config.model_type in ['internlm2', 'qwen2']
         model = InternVLChatModel.from_pretrained(
-            model_args.model_name_or_path, torch_dtype=torch.bfloat16, config=config)
+            model_args.model_name_or_path, torch_dtype=torch.bfloat16, config=config,
+            ignore_mismatched_sizes=ignore_mismatched)
+        
+        # For InternLM2: wqkv.bias and wo.bias are controlled by config.bias (not qkv_bias)
+        # config.bias is already set from the pretrained model config, so no manual initialization needed
+        # For Qwen2: q_proj.bias, k_proj.bias, v_proj.bias, o_proj.bias (handled below)
+        
+        # Initialize q_proj/k_proj/v_proj/o_proj.bias for Qwen2
+        # Note: q_proj/k_proj/v_proj always have bias=True (matching original Qwen2)
+        # o_proj has bias only if qkv_bias=True
+        # Bias values will be loaded from pretrained model in the manual loading section below
+        if config.llm_config.model_type == 'qwen2':
+            logger.info('Initializing q_proj/k_proj/v_proj/o_proj.bias for Qwen2 (will load from pretrained model)...')
+            from internvl.model.qwen2.modeling_qwen2_gate import (
+                Qwen2Attention as Qwen2AttentionGate,
+                Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
+                Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
+            )
+            import contextlib
+            try:
+                from deepspeed import zero
+                gather_context = zero.GatheredParameters
+            except ImportError:
+                gather_context = contextlib.nullcontext
+            
+            # Access model layers (handle PEFT wrapping if needed)
+            try:
+                from peft import PeftModel
+                if isinstance(model.language_model, PeftModel):
+                    actual_model = model.language_model.base_model.model
+                else:
+                    actual_model = model.language_model.model
+            except (ImportError, AttributeError):
+                actual_model = model.language_model.model
+            
+            bias_init_count = 0
+            for i, layer in enumerate(actual_model.layers):
+                attn = layer.self_attn
+                if isinstance(attn, (Qwen2AttentionGate, Qwen2FlashAttention2Gate, Qwen2SdpaAttentionGate)):
+                    with gather_context([attn.q_proj.bias, attn.k_proj.bias, attn.v_proj.bias]):
+                        with torch.no_grad():
+                            # Initialize q_proj/k_proj/v_proj bias to 0 (will be loaded from pretrained model)
+                            # Note: These biases exist in pretrained model and will be loaded later
+                            for bias_name, bias_param in [
+                                ('q_proj.bias', attn.q_proj.bias),
+                                ('k_proj.bias', attn.k_proj.bias),
+                                ('v_proj.bias', attn.v_proj.bias),
+                            ]:
+                                if bias_param is not None:
+                                    if torch.isnan(bias_param).any() or torch.isinf(bias_param).any():
+                                        bias_param.zero_()
+                                        logger.warning(f'Layer {i}: {bias_name} contained NaN/Inf! Initialized to 0.')
+                                    else:
+                                        bias_param.zero_()
+                                    bias_init_count += 1
+                    
+                    # Initialize o_proj.bias only if qkv_bias is enabled
+                    if config.llm_config.qkv_bias and attn.o_proj.bias is not None:
+                        with gather_context([attn.o_proj.bias]):
+                            with torch.no_grad():
+                                if torch.isnan(attn.o_proj.bias).any() or torch.isinf(attn.o_proj.bias).any():
+                                    attn.o_proj.bias.zero_()
+                                    logger.warning(f'Layer {i}: o_proj.bias contained NaN/Inf! Initialized to 0.')
+                                else:
+                                    attn.o_proj.bias.zero_()
+                                bias_init_count += 1
+            
+            if bias_init_count > 0:
+                logger.info(f'✅ Initialized q_proj/k_proj/v_proj bias for {bias_init_count // 3} layers (Qwen2). Will load from pretrained model.')
+        
+        # Helper function to load safetensors (handles both single file and sharded(4B/8B))
+        def load_safetensors_state_dict(model_path_or_dir):
+            """
+            Load safetensors state dict, handling both single file and sharded formats.
+            
+            Returns:
+                tuple: (state_dict, base_dir) or (None, None) if not found
+            """
+            from safetensors.torch import load_file
+            import json
+            
+            # Try to find the model directory
+            model_dir = None
+            if os.path.exists(model_path_or_dir) and os.path.isdir(model_path_or_dir):
+                model_dir = model_path_or_dir
+            else:
+                # Try HuggingFace cache
+                try:
+                    from huggingface_hub import snapshot_download
+                    model_dir = snapshot_download(
+                        repo_id=model_path_or_dir,
+                        local_files_only=True,
+                        cache_dir=None
+                    )
+                except Exception:
+                    try:
+                        from huggingface_hub.constants import HF_HUB_CACHE
+                        cache_model_name = model_path_or_dir.replace('/', '--')
+                        cache_base = os.path.join(HF_HUB_CACHE, f'models--{cache_model_name}')
+                        if os.path.exists(cache_base):
+                            snapshots_dir = os.path.join(cache_base, 'snapshots')
+                            if os.path.exists(snapshots_dir):
+                                snapshots = [d for d in os.listdir(snapshots_dir) if os.path.isdir(os.path.join(snapshots_dir, d))]
+                                if snapshots:
+                                    model_dir = os.path.join(snapshots_dir, snapshots[0])
+                    except Exception:
+                        pass
+            
+            if model_dir is None:
+                return None, None
+            
+            # Check for sharded safetensors (model.safetensors.index.json)
+            index_file = os.path.join(model_dir, 'model.safetensors.index.json')
+            if os.path.exists(index_file):
+                logger.info(f'Found sharded safetensors index: {index_file}')
+                with open(index_file, 'r') as f:
+                    index_data = json.load(f)
+                
+                # Load all shards
+                state_dict = {}
+                weight_map = index_data.get('weight_map', {})
+                shard_files = set(weight_map.values())
+                
+                logger.info(f'Loading {len(shard_files)} shard files...')
+                for shard_file in shard_files:
+                    shard_path = os.path.join(model_dir, shard_file)
+                    if os.path.exists(shard_path):
+                        logger.debug(f'Loading shard: {shard_file}')
+                        shard_dict = load_file(shard_path)
+                        state_dict.update(shard_dict)
+                    else:
+                        logger.warning(f'Shard file not found: {shard_path}')
+                        return None, None
+                
+                logger.info(f'✅ Loaded {len(state_dict)} keys from {len(shard_files)} shards')
+                return state_dict, model_dir
+            
+            # Try single file
+            single_file = os.path.join(model_dir, 'model.safetensors')
+            if os.path.exists(single_file):
+                logger.info(f'Found single safetensors file: {single_file}')
+                state_dict = load_file(single_file)
+                logger.info(f'✅ Loaded {len(state_dict)} keys from single file')
+                return state_dict, model_dir
+            
+            return None, None
+        
+        # mh1211 If ignore_mismatched_sizes was used, manually load base QKV weights from pretrained model
+        # This is necessary because ignore_mismatched_sizes skips loading the entire wqkv.weight,
+        # which causes the base QKV part to be randomly initialized (potentially with NaN/Inf)
+        # For Qwen2, we need to manually load base q_proj weights (gate part is added to q_proj)
+        if ignore_mismatched and config.llm_config.model_type == 'internlm2':
+            logger.info('Manually loading base QKV weights from pretrained model (ignore_mismatched_sizes was used)...')
+            try:
+                pretrained_model_path = model_args.model_name_or_path
+                pretrained_state_dict, model_dir = load_safetensors_state_dict(pretrained_model_path)
+                
+                if pretrained_state_dict is not None:
+                    
+                    # Note: We check for gating attributes instead of isinstance to handle different module paths
+                    # from internvl.model.internlm2.modeling_internlm2_gate_regularization import InternLM2Attention, InternLM2FlashAttention2
+                    import contextlib
+                    try:
+                        from deepspeed import zero
+                        gather_context = zero.GatheredParameters
+                    except ImportError:
+                        gather_context = contextlib.nullcontext
+                    
+                    # Debug: Print some keys to see the actual structure
+                    sample_keys = [k for k in list(pretrained_state_dict.keys()) if 'wqkv' in k or 'attention' in k][:5]
+                    logger.info(f'Sample keys from pretrained state dict (containing wqkv/attention): {sample_keys}')
+                    
+                    loaded_count = 0
+                    for i, layer in enumerate(model.language_model.model.layers):
+                        attn = layer.attention
+                        # Check if attention has wqkv attribute (InternLM2) and gating attributes
+                        # Use hasattr to check for gating attributes instead of isinstance to handle different modules
+                        has_wqkv = hasattr(attn, 'wqkv')
+                        headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                        elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                        
+                        if i == 0:  # Debug first layer
+                            logger.info(f'[DEBUG] Layer {i}: attn type={type(attn).__name__}, has_wqkv={has_wqkv}, headwise_gate={headwise_gate}, elementwise_gate={elementwise_gate}')
+                        
+                        if has_wqkv and (headwise_gate or elementwise_gate):
+                                base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                                # Try different possible key formats
+                                possible_keys = [
+                                    f'language_model.model.layers.{i}.attention.wqkv.weight',
+                                    f'language_model.layers.{i}.attention.wqkv.weight',
+                                    f'model.layers.{i}.attention.wqkv.weight',
+                                ]
+                                key = None
+                                for possible_key in possible_keys:
+                                    if possible_key in pretrained_state_dict:
+                                        key = possible_key
+                                        break
+                                
+                                if key is not None:
+                                    pretrained_wqkv = pretrained_state_dict[key].to(dtype=torch.bfloat16)
+                                    ### Base QKV 部分（前 4096 行）：来自预训练模型, 通过 copy_() 从预训练模型的 wqkv.weight 复制
+
+                                    # Check if pretrained weight has correct shape [4096, 2048]
+                                    if pretrained_wqkv.shape == (base_qkv_dim, attn.hidden_size):
+                                        # Verify pretrained weight doesn't contain NaN/Inf
+                                        if torch.isnan(pretrained_wqkv).any() or torch.isinf(pretrained_wqkv).any():
+                                            logger.warning(
+                                                f'Layer {i}: Pretrained wqkv.weight contains NaN/Inf! Skipping...'
+                                            )
+                                        else:
+                                            # mh1212 Copy base QKV part (first base_qkv_dim rows) from pretrained
+                                            # Use GatheredParameters for DeepSpeed ZeRO compatibility
+                                            with gather_context([attn.wqkv.weight]):
+                                                with torch.no_grad():
+                                                    # Calculate gate_dim based on gating mode
+                                                    if headwise_gate:
+                                                        gate_dim = attn.num_heads
+                                                    elif elementwise_gate:
+                                                        gate_dim = attn.num_heads * attn.head_dim
+                                                        # print(f'num_heads: {attn.num_heads}')  16
+                                                        # print(f'head_dim: {attn.head_dim}') 128
+                                                        # print(f'gate_dim: {gate_dim}') 2048
+                                                    else:
+                                                        gate_dim = 0
+                                                    
+                                                    # Copy base QKV part
+                                                    attn.wqkv.weight[:base_qkv_dim, :].copy_(pretrained_wqkv)  ### Base QKV 部分（前 4096 行）：来自预训练模型, 通过 copy_() 从预训练模型的 wqkv.weight 复制
+
+                                                    # Verify and fix gate part if needed (should be properly initialized, but check for abnormalities)
+                                                    if gate_dim > 0:
+                                                        current_gate_part = attn.wqkv.weight[base_qkv_dim:, :]
+                                                        gate_mean = current_gate_part.mean().item()
+                                                        gate_std = current_gate_part.std().item()
+                                                        has_nan = torch.isnan(current_gate_part).any().item()
+                                                        has_inf = torch.isinf(current_gate_part).any().item()
+                                                        
+                                                        # If gate part looks wrong (all zeros, NaN/Inf, or abnormal values), reinitialize it
+                                                        if has_nan or has_inf:
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part contained NaN/Inf! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) < 1e-6 and gate_std < 1e-6:
+                                                            # All zeros - reinitialize
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part was all zeros! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                                            # Abnormal values (should be ~N(0, 0.02^2) for initializer_range=0.02)
+                                                            # Reinitialize to ensure proper distribution
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part had abnormal values (mean={gate_mean:.6f}, std={gate_std:.6f})! '
+                                                                f'Reinitialized with std={config.llm_config.initializer_range}.'
+                                                            )
+                                                    
+                                                # Verify copy was successful
+                                                if torch.isnan(attn.wqkv.weight[:base_qkv_dim, :]).any() or \
+                                                   torch.isinf(attn.wqkv.weight[:base_qkv_dim, :]).any():
+                                                    logger.error(
+                                                        f'Layer {i}: Base QKV contains NaN/Inf after copy! '
+                                                        f'This should not happen.'
+                                                    )
+                                                else:
+                                                    loaded_count += 1
+                                    else:
+                                        logger.warning(
+                                            f'Layer {i}: Pretrained wqkv.weight shape {pretrained_wqkv.shape} '
+                                            f'does not match expected base shape ({base_qkv_dim}, {attn.hidden_size})'
+                                        )
+                                else:
+                                    logger.warning(f'Layer {i}: None of the possible keys found in pretrained state dict. Tried: {possible_keys}')
+                                    # Debug: print actual keys that contain wqkv for this layer  
+                                    actual_keys = [k for k in pretrained_state_dict.keys() if f'layers.{i}' in k and 'wqkv' in k]
+                                    if actual_keys:
+                                        logger.warning(f'Layer {i}: Found keys containing wqkv: {actual_keys}')
+                                    else:
+                                        logger.warning(f'Layer {i}: No keys found containing layers.{i} and wqkv')
+                    
+                    if loaded_count > 0:
+                        logger.info(f'✅ Manually loaded base QKV weights for {loaded_count} layers')
+                    else:
+                        raise RuntimeError( ##### remove fallback, 直接抛出异常
+                            f'❌ CRITICAL: No base QKV weights were loaded for InternLM2. '
+                            f'This will cause training to fail with high initial loss. '
+                            f'Please check that pretrained weights are available at: {pretrained_model_path}'
+                        )
+                else:
+                    raise FileNotFoundError(   ##### remove fallback, 直接抛出异常
+                        f'❌ CRITICAL: Pretrained weight file not found for InternLM2. '
+                        f'Tried: {pretrained_model_path} (checked for model.safetensors and model.safetensors.index.json). '
+                        f'Cannot proceed without pretrained weights. Please ensure the model weights are available.'
+                    )
+            except (FileNotFoundError, RuntimeError):
+                # Re-raise these errors
+                raise
+            except Exception as e:
+                raise RuntimeError(   ##### remove fallback, 直接抛出异常
+                    f'❌ CRITICAL: Failed to manually load base QKV weights for InternLM2: {e}. '
+                    f'This will cause training to fail. Please check the error above and ensure pretrained weights are available.'
+                ) from e
+        
+        # Gate parameters are automatically initialized by _init_weights (same as Qwen3)
+        ## 初始化：只在模型加载时进行一次（24 层）
+        ## 训练：基于初始值通过梯度下降更新，不再重新初始化
+        # No manual initialization needed - post_init() will call _init_weights for all modules
+        # This uses normal_(mean=0.0, std=initializer_range) for weights and zero_() for bias
+        if ignore_mismatched and config.llm_config.model_type == 'internlm2':
+            logger.info(
+                f'✅ Gate parameters will be automatically initialized by _init_weights '
+                f'(same as Qwen3: normal(mean=0.0, std={config.llm_config.initializer_range}))'
+            )
+            # Verify gate part initialization after manual base QKV loading
+            logger.info('Verifying gate part initialization...')
+            # Note: We check for gating attributes instead of isinstance to handle different module paths
+            # from internvl.model.internlm2.modeling_internlm2_gate_regularization import InternLM2Attention, InternLM2FlashAttention2
+            import contextlib
+            try:
+                from deepspeed import zero
+                gather_context = zero.GatheredParameters
+            except ImportError:
+                gather_context = contextlib.nullcontext
+            
+            verified_count = 0
+            for i, layer in enumerate(model.language_model.model.layers):
+                attn = layer.attention
+                # Check if attention has wqkv attribute and gating attributes
+                has_wqkv = hasattr(attn, 'wqkv')
+                headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                if has_wqkv and (headwise_gate or elementwise_gate):
+                        base_qkv_dim = (attn.num_heads + 2 * attn.num_key_value_heads) * attn.head_dim
+                        with gather_context([attn.wqkv.weight]):
+                            gate_part = attn.wqkv.weight[base_qkv_dim:, :]
+                            gate_mean = gate_part.mean().item()
+                            gate_std = gate_part.std().item()
+                            gate_min = gate_part.min().item()
+                            gate_max = gate_part.max().item()
+                            has_nan = torch.isnan(gate_part).any().item()
+                            has_inf = torch.isinf(gate_part).any().item()
+                            
+                            if has_nan or has_inf:
+                                logger.warning(
+                                    f'Layer {i}: Gate part contains NaN/Inf! Reinitializing...'
+                                )
+                                # Reinitialize gate part
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
+                            elif abs(gate_mean) < 1e-6 and gate_std < 1e-6:
+                                logger.warning(
+                                    f'Layer {i}: Gate part appears to be all zeros! '
+                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
+                                    f'range=[{gate_min:.6f}, {gate_max:.6f}]. '
+                                    f'This indicates initialization failed. Reinitializing...'
+                                )
+                                # Reinitialize gate part
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
+                            elif abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                # Abnormal values (should be ~N(0, 0.02^2) for initializer_range=0.02)
+                                # Values like mean=63963136 or mean=-9.38e+28 are clearly wrong
+                                logger.warning(
+                                    f'Layer {i}: Gate part has abnormal values! '
+                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
+                                    f'range=[{gate_min:.6f}, {gate_max:.6f}]. '
+                                    f'Reinitializing with std={config.llm_config.initializer_range}...'
+                                )
+                                # Reinitialize gate part
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
+                            else:
+                                logger.info(
+                                    f'Layer {i}: Gate part initialized correctly. '
+                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
+                                    f'range=[{gate_min:.6f}, {gate_max:.6f}]'
+                                )
+                                verified_count += 1
+            
+            if verified_count > 0:
+                logger.info(f'✅ Verified and fixed gate part initialization for {verified_count} layers')
+        
+        # mh1216: Qwen2 gate initialization - manually load base q_proj weights and initialize gate part
+        if ignore_mismatched and config.llm_config.model_type == 'qwen2':
+            logger.info('Manually loading base q_proj weights from pretrained model for Qwen2 (ignore_mismatched_sizes was used)...')
+            try:
+                from internvl.model.qwen2.modeling_qwen2_gate import (
+                    Qwen2Attention as Qwen2AttentionGate,
+                    Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
+                    Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
+                )
+                
+                pretrained_model_path = model_args.model_name_or_path
+                pretrained_state_dict, model_dir = load_safetensors_state_dict(pretrained_model_path)
+                
+                if pretrained_state_dict is not None:
+                    logger.info(f'Loading base q_proj weights from pretrained model...')
+                    
+                    import contextlib
+                    try:
+                        from deepspeed import zero
+                        gather_context = zero.GatheredParameters
+                    except ImportError:
+                        gather_context = contextlib.nullcontext
+                    
+                    loaded_count = 0
+                    # Access model layers (handle PEFT wrapping if needed)
+                    try:
+                        from peft import PeftModel
+                        if isinstance(model.language_model, PeftModel):
+                            actual_model = model.language_model.base_model.model
+                        else:
+                            actual_model = model.language_model.model
+                    except (ImportError, AttributeError):
+                        actual_model = model.language_model.model
+                    
+                    for i, layer in enumerate(actual_model.layers):
+                        attn = layer.self_attn
+                        if isinstance(attn, (Qwen2AttentionGate, Qwen2FlashAttention2Gate, Qwen2SdpaAttentionGate)):
+                            headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                            elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                            if headwise_gate or elementwise_gate:
+                                # Calculate dimensions
+                                base_q_dim = attn.num_heads * attn.head_dim  # Base query dimension
+                                if headwise_gate:
+                                    gate_dim = attn.num_heads
+                                elif elementwise_gate:
+                                    gate_dim = attn.num_heads * attn.head_dim
+                                else:
+                                    gate_dim = 0
+                                
+                                # Construct the key name for this layer's q_proj.weight
+                                key = f'language_model.model.layers.{i}.self_attn.q_proj.weight'
+                                if key in pretrained_state_dict:
+                                    pretrained_q_proj = pretrained_state_dict[key].to(dtype=torch.bfloat16)
+                                    
+                                    # Check if pretrained weight has correct shape [base_q_dim, hidden_size]
+                                    if pretrained_q_proj.shape == (base_q_dim, attn.hidden_size):
+                                        # Verify pretrained weight doesn't contain NaN/Inf
+                                        if torch.isnan(pretrained_q_proj).any() or torch.isinf(pretrained_q_proj).any():
+                                            logger.warning(
+                                                f'Layer {i}: Pretrained q_proj.weight contains NaN/Inf! Skipping...'
+                                            )
+                                        else:
+                                            # Copy base q_proj part (first base_q_dim rows) from pretrained
+                                            with gather_context([attn.q_proj.weight]):
+                                                with torch.no_grad():
+                                                    # Copy base q_proj part
+                                                    attn.q_proj.weight[:base_q_dim, :].copy_(pretrained_q_proj)
+                                                    
+                                                    # Verify and fix gate part if needed
+                                                    if gate_dim > 0:
+                                                        current_gate_part = attn.q_proj.weight[base_q_dim:, :]
+                                                        gate_mean = current_gate_part.mean().item()
+                                                        gate_std = current_gate_part.std().item()
+                                                        has_nan = torch.isnan(current_gate_part).any().item()
+                                                        has_inf = torch.isinf(current_gate_part).any().item()
+                                                        
+                                                        # If gate part looks wrong, reinitialize it
+                                                        if has_nan or has_inf:
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part contained NaN/Inf! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) < 1e-6 and gate_std < 1e-6:
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part was all zeros! Reinitialized.'
+                                                            )
+                                                        elif abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                                            current_gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                                            logger.warning(
+                                                                f'Layer {i}: Gate part had abnormal values (mean={gate_mean:.6f}, std={gate_std:.6f})! '
+                                                                f'Reinitialized with std={config.llm_config.initializer_range}.'
+                                                            )
+                                                    
+                                                    # Verify copy was successful
+                                                    if torch.isnan(attn.q_proj.weight[:base_q_dim, :]).any() or \
+                                                       torch.isinf(attn.q_proj.weight[:base_q_dim, :]).any():
+                                                        logger.error(
+                                                            f'Layer {i}: Base q_proj contains NaN/Inf after copy! '
+                                                            f'This should not happen.'
+                                                        )
+                                                    else:
+                                                        loaded_count += 1
+                                                    
+                                                    # Load q_proj.bias from pretrained model (if exists)  otherwise loss high, not sure why MHU 1216
+                                                    bias_key = f'language_model.model.layers.{i}.self_attn.q_proj.bias'
+                                                    if bias_key in pretrained_state_dict and attn.q_proj.bias is not None:
+                                                        pretrained_q_bias = pretrained_state_dict[bias_key].to(dtype=torch.bfloat16)
+                                                        if pretrained_q_bias.shape == (base_q_dim,):
+                                                            if not (torch.isnan(pretrained_q_bias).any() or torch.isinf(pretrained_q_bias).any()):
+                                                                with gather_context([attn.q_proj.bias]):
+                                                                    with torch.no_grad():
+                                                                        # Copy base q_proj.bias (first base_q_dim elements)
+                                                                        attn.q_proj.bias[:base_q_dim].copy_(pretrained_q_bias)
+                                                                        # Initialize gate part of bias to 0 (if exists)
+                                                                        if gate_dim > 0:
+                                                                            attn.q_proj.bias[base_q_dim:].zero_()
+                                                    
+                                                    # Load k_proj.bias and v_proj.bias from pretrained model (if exists)
+                                                    for proj_name, proj_layer in [('k_proj', attn.k_proj), ('v_proj', attn.v_proj)]:
+                                                        if proj_layer.bias is not None:
+                                                            proj_bias_key = f'language_model.model.layers.{i}.self_attn.{proj_name}.bias'
+                                                            if proj_bias_key in pretrained_state_dict:
+                                                                pretrained_proj_bias = pretrained_state_dict[proj_bias_key].to(dtype=torch.bfloat16)
+                                                                expected_bias_dim = attn.num_key_value_heads * attn.head_dim
+                                                                if pretrained_proj_bias.shape == (expected_bias_dim,):
+                                                                    if not (torch.isnan(pretrained_proj_bias).any() or torch.isinf(pretrained_proj_bias).any()):
+                                                                        with gather_context([proj_layer.bias]):
+                                                                            with torch.no_grad():
+                                                                                proj_layer.bias.copy_(pretrained_proj_bias)
+                                    else:
+                                        logger.warning(
+                                            f'Layer {i}: Pretrained q_proj.weight shape {pretrained_q_proj.shape} '
+                                            f'does not match expected base shape ({base_q_dim}, {attn.hidden_size})'
+                                        )
+                                else:
+                                    logger.warning(f'Layer {i}: None of the possible keys found in pretrained state dict. Tried: {possible_keys}')
+                                    # Debug: print actual keys that contain wqkv for this layer  
+                                    actual_keys = [k for k in pretrained_state_dict.keys() if f'layers.{i}' in k and 'wqkv' in k]
+                                    if actual_keys:
+                                        logger.warning(f'Layer {i}: Found keys containing wqkv: {actual_keys}')
+                                    else:
+                                        logger.warning(f'Layer {i}: No keys found containing layers.{i} and wqkv')
+                    
+                    if loaded_count > 0:
+                        logger.info(f'✅ Manually loaded base q_proj weights for {loaded_count} layers (Qwen2)')
+                    else:
+                        raise RuntimeError(   ##### remove fallback, 直接抛出异常
+                            f'❌ CRITICAL: No base q_proj weights were loaded for Qwen2. '
+                            f'This will cause training to fail with high initial loss. '
+                            f'Please check that pretrained weights are available at: {pretrained_model_path}'
+                        )
+                else:
+                    raise FileNotFoundError(   ##### remove fallback, 直接抛出异常
+                        f'❌ CRITICAL: Pretrained weight file not found for Qwen2. '
+                        f'Tried: {pretrained_model_path} (checked for model.safetensors and model.safetensors.index.json). '
+                        f'Cannot proceed without pretrained weights. Please ensure the model weights are available.'
+                    )
+            except (FileNotFoundError, RuntimeError):
+                # Re-raise these errors
+                raise
+            except Exception as e:
+                raise RuntimeError(   ##### remove fallback, 直接抛出异常
+                    f'❌ CRITICAL: Failed to manually load base q_proj weights for Qwen2: {e}. '
+                    f'This will cause training to fail. Please check the error above and ensure pretrained weights are available.'
+                ) from e
+            
+            # Verify and fix gate part initialization for Qwen2
+            logger.info('Verifying gate part initialization for Qwen2...')
+            from internvl.model.qwen2.modeling_qwen2_gate import (
+                Qwen2Attention as Qwen2AttentionGate,
+                Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
+                Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
+            )
+            import contextlib
+            try:
+                from deepspeed import zero
+                gather_context = zero.GatheredParameters
+            except ImportError:
+                gather_context = contextlib.nullcontext
+            
+            # Access model layers (handle PEFT wrapping if needed)
+            try:
+                from peft import PeftModel
+                if isinstance(model.language_model, PeftModel):
+                    actual_model = model.language_model.base_model.model
+                else:
+                    actual_model = model.language_model.model
+            except (ImportError, AttributeError):
+                actual_model = model.language_model.model
+            
+            verified_count = 0
+            for i, layer in enumerate(actual_model.layers):
+                attn = layer.self_attn
+                if isinstance(attn, (Qwen2AttentionGate, Qwen2FlashAttention2Gate, Qwen2SdpaAttentionGate)):
+                    headwise_gate = getattr(attn, 'headwise_attn_output_gate', False)
+                    elementwise_gate = getattr(attn, 'elementwise_attn_output_gate', False)
+                    if headwise_gate or elementwise_gate:
+                        base_q_dim = attn.num_heads * attn.head_dim
+                        if headwise_gate:
+                            gate_dim = attn.num_heads
+                        elif elementwise_gate:
+                            gate_dim = attn.num_heads * attn.head_dim
+                        else:
+                            gate_dim = 0
+                        
+                        with gather_context([attn.q_proj.weight]):
+                            gate_part = attn.q_proj.weight[base_q_dim:, :]
+                            gate_mean = gate_part.mean().item()
+                            gate_std = gate_part.std().item()
+                            gate_min = gate_part.min().item()
+                            gate_max = gate_part.max().item()
+                            has_nan = torch.isnan(gate_part).any().item()
+                            has_inf = torch.isinf(gate_part).any().item()
+                            
+                            if has_nan or has_inf:
+                                logger.warning(
+                                    f'Layer {i}: Gate part contains NaN/Inf! Reinitializing...'
+                                )
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
+                            elif abs(gate_mean) < 1e-6 and gate_std < 1e-6:
+                                logger.warning(
+                                    f'Layer {i}: Gate part appears to be all zeros! '
+                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
+                                    f'range=[{gate_min:.6f}, {gate_max:.6f}]. Reinitializing...'
+                                )
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
+                            elif abs(gate_mean) > 0.1 or gate_std > 0.1:
+                                logger.warning(
+                                    f'Layer {i}: Gate part has abnormal values! '
+                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
+                                    f'range=[{gate_min:.6f}, {gate_max:.6f}]. '
+                                    f'Reinitializing with std={config.llm_config.initializer_range}...'
+                                )
+                                with torch.no_grad():
+                                    gate_part.normal_(mean=0.0, std=config.llm_config.initializer_range)
+                                verified_count += 1
+                            else:
+                                logger.info(
+                                    f'Layer {i}: Gate part initialized correctly. '
+                                    f'mean={gate_mean:.6f}, std={gate_std:.6f}, '
+                                    f'range=[{gate_min:.6f}, {gate_max:.6f}]'
+                                )
+                                verified_count += 1
+            
+            if verified_count > 0:
+                logger.info(f'✅ Verified and fixed gate part initialization for {verified_count} layers (Qwen2)')
+        
+        elif ignore_mismatched and config.llm_config.model_type not in ['internlm2', 'qwen2']:
+            logger.warning(
+                f'⚠️  Gated attention is only supported for InternLM2 and Qwen2 models. '
+                f'Current model type: {config.llm_config.model_type}. '
+                f'Gating will not be applied.'
+            )
+        ############################
     else:
         logger.info('Loading ViT-6B...')
         vision_config = InternVisionConfig.from_pretrained(model_args.vision_path)
@@ -1483,16 +2438,67 @@ def main():
             model_type = InternLM2ForCausalLM
             llm_config.attn_implementation = 'flash_attention_2'  # for InternLM
             logger.info('Using flash_attention_2 for InternLM')
+            # mh 1211 Phase 1: Standard Gated Attention
+            if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+                llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
+                llm_config.elementwise_attn_output_gate = model_args.elementwise_attn_output_gate
+                gate_type = "headwise" if model_args.headwise_attn_output_gate else "elementwise"
+                logger.info(f'✅ Enabled {gate_type} attention output gating')
+            # Set qkv_bias
+            llm_config.qkv_bias = model_args.qkv_bias
+            logger.info(f'✅ Set qkv_bias to {model_args.qkv_bias}')
+        elif llm_config.model_type == 'qwen2':
+            model_type = AutoModelForCausalLM
+            llm_config._attn_implementation = 'flash_attention_2'  # for Qwen2
+            logger.info('Using flash_attention_2 for Qwen2')
+            # Phase 1: Standard Gated Attention for Qwen2
+            if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+                llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
+                llm_config.elementwise_attn_output_gate = model_args.elementwise_attn_output_gate
+                gate_type = "headwise" if model_args.headwise_attn_output_gate else "elementwise"
+                logger.info(f'✅ Enabled {gate_type} attention output gating for Qwen2')
+            # Set qkv_bias
+            llm_config.qkv_bias = model_args.qkv_bias
+            logger.info(f'✅ Set qkv_bias to {model_args.qkv_bias} for Qwen2')
         else:
             model_type = AutoModelForCausalLM
             llm_config._attn_implementation = 'flash_attention_2'  # for LLaMA
             logger.info('Using flash_attention_2 for LLaMA')
-        # mh 1211: Set LLM gating parameters
-        llm_config.headwise_attn_output_gate = model_args.headwise_attn_output_gate
-        llm_config.elementwise_attn_output_gate = model_args.elementwise_attn_output_gate
+            # Warn if gating is enabled for non-InternLM2/Qwen2 models
+            if model_args.headwise_attn_output_gate or model_args.elementwise_attn_output_gate:
+                logger.warning(
+                    f'⚠️  Gated attention is only supported for InternLM2 and Qwen2 models. '
+                    f'Current model type: {llm_config.model_type}. '
+                    f'Gating parameters will be ignored.'
+                )
+        # Load LLM with ignore_mismatched_sizes if gating is enabled
+        # Only use ignore_mismatched for InternLM2 (Qwen2 uses separate q_proj/k_proj/v_proj, so no mismatch)
+        ignore_mismatched = (model_args.headwise_attn_output_gate or 
+                            model_args.elementwise_attn_output_gate) and llm_config.model_type == 'internlm2'
         llm = model_type.from_pretrained(
             model_args.llm_path, torch_dtype=torch.bfloat16,
-            config=llm_config, trust_remote_code=True)
+            config=llm_config, trust_remote_code=True,
+            ignore_mismatched_sizes=ignore_mismatched)
+        
+        # For InternLM2: wqkv.bias and wo.bias are controlled by config.bias (not qkv_bias)
+        # config.bias is already set from the pretrained model config, so no manual initialization needed
+        
+        # Gate parameters are automatically initialized by _init_weights (same as Qwen3)
+        # No manual initialization needed - post_init() will call _init_weights for all modules
+        # This uses normal_(mean=0.0, std=initializer_range) for weights and zero_() for bias
+        if ignore_mismatched and llm_config.model_type == 'internlm2':
+            logger.info(
+                f'✅ Gate parameters will be automatically initialized by _init_weights '
+                f'(same as Qwen3: normal(mean=0.0, std={llm_config.initializer_range}))'
+            )
+        elif ignore_mismatched and llm_config.model_type != 'internlm2':
+            logger.warning(
+                f'⚠️  Gated attention is only supported for InternLM2 models. '
+                f'Current model type: {llm_config.model_type}. '
+                f'Gating will not be applied.'
+            )
+
+                #######################
         logger.info('Building InternVLChatConfig...')
         internvl_chat_config = InternVLChatConfig(
             vision_config.to_dict(), llm_config.to_dict(), downsample_ratio=data_args.down_sample_ratio,
@@ -1578,6 +2584,63 @@ def main():
     if model_args.use_llm_lora:
         model.wrap_llm_lora(r=model_args.use_llm_lora, lora_alpha=2 * model_args.use_llm_lora)
         model.config.use_llm_lora = model_args.use_llm_lora
+        
+        # Ensure bias parameters are trainable when using LoRA
+        # Note: PEFT LoRA defaults to bias="none" (frozen), but since qkv_bias creates NEW bias
+        # parameters (initialized to 0), we need to train them. If bias was part of pretrained
+        # For InternLM2: wqkv.bias and wo.bias are controlled by config.bias (not qkv_bias)
+        # If config.bias is True, bias parameters will be trainable automatically
+        # For Qwen2: q_proj.bias, k_proj.bias, v_proj.bias, o_proj.bias (handled below)
+        
+        # Ensure Qwen2 bias parameters are trainable when using LoRA
+        if model_args.qkv_bias and model.config.llm_config.model_type == 'qwen2' and model_args.use_llm_lora:
+            logger.info('Ensuring q_proj/k_proj/v_proj/o_proj.bias are trainable with LoRA for Qwen2...')
+            logger.info('  (These are NEW bias parameters initialized to 0, so they need training)')
+            from internvl.model.qwen2.modeling_qwen2_gate import (
+                Qwen2Attention as Qwen2AttentionGate,
+                Qwen2FlashAttention2 as Qwen2FlashAttention2Gate,
+                Qwen2SdpaAttention as Qwen2SdpaAttentionGate,
+            )
+            
+            # Handle PEFT-wrapped model: get the actual model from base_model
+            try:
+                from peft import PeftModel
+                if isinstance(model.language_model, PeftModel):
+                    base_model = model.language_model.base_model
+                    actual_model = base_model.model
+                else:
+                    actual_model = model.language_model.model
+            except (ImportError, AttributeError) as e:
+                logger.warning(f'Failed to access PEFT model structure: {e}, trying direct access')
+                actual_model = model.language_model.model
+            
+            # Ensure we have the model with layers attribute
+            if not hasattr(actual_model, 'layers'):
+                if hasattr(actual_model, 'model'):
+                    actual_model = actual_model.model
+                else:
+                    logger.error(f'actual_model type: {type(actual_model)}, attributes: {[a for a in dir(actual_model) if not a.startswith("_")][:10]}')
+                    raise AttributeError(f'actual_model ({type(actual_model)}) does not have "layers" attribute')
+            
+            bias_trainable_count = 0
+            for i, layer in enumerate(actual_model.layers):
+                attn = layer.self_attn
+                if isinstance(attn, (Qwen2AttentionGate, Qwen2FlashAttention2Gate, Qwen2SdpaAttentionGate)):
+                    # Ensure all bias parameters are trainable
+                    for bias_name, bias_param in [
+                        ('q_proj.bias', attn.q_proj.bias),
+                        ('k_proj.bias', attn.k_proj.bias),
+                        ('v_proj.bias', attn.v_proj.bias),
+                        ('o_proj.bias', attn.o_proj.bias),
+                    ]:
+                        if bias_param is not None:
+                            bias_param.requires_grad = True
+                            bias_trainable_count += 1
+            
+            if bias_trainable_count > 0:
+                logger.info(f'✅ Set q_proj/k_proj/v_proj/o_proj.bias to trainable for {bias_trainable_count // 4} layers (LoRA mode, Qwen2)')
+            else:
+                logger.warning('⚠️  No bias parameters found to make trainable for Qwen2')
 
     if model_args.freeze_mlp:
         _freeze_params(model.mlp1)
@@ -1621,6 +2684,10 @@ def main():
         eval_dataset=None,
         tokenizer=tokenizer,
         data_collator=collator,
+        gate_reg_type=model_args.gate_reg_type,
+        gate_reg_lambda=model_args.gate_reg_lambda,
+        gate_reg_beta_alpha=model_args.gate_reg_beta_alpha,
+        gate_reg_beta_beta=model_args.gate_reg_beta_beta,
     )
 
     # mh1122: CRITICAL: Force patch accelerator.no_sync after trainer initialization

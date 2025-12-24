@@ -215,3 +215,5 @@ gate_logits = self.gate_proj(hidden_states)  # [B, q_len, gate_dim]
 5. ✅ 可以独立控制 gate 的初始化和处理
 
 
+
+
