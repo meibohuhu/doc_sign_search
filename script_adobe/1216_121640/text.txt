@@ -32,3 +32,7 @@ python3 download_and_extract_videos_from_hf.py \
     --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_1b_headgate_1220 \
     --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_headgate_1220_121640 \
     --upload_subdirs
+
+
+
+    find ./train_crop_videos_224/ -maxdepth 1 -name "*.mp4" -type f | wc -l
