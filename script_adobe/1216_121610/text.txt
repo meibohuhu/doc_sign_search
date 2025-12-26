@@ -35,3 +35,4 @@ python3 download_and_extract_videos_from_hf.py \
 git config --global user.name "meibohuhu"
 git config --global user.email "meibohu96@gmail.com"
 
+export OPENAI_API_KEY='daea989a01ab4df49de94ea81292b559'

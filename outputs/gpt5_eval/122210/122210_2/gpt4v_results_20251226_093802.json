@@ -1,0 +1,102 @@
+[
+  {
+    "video": "-b4_y6LOSx0_1-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 1-handshapes (index fingers extended, other fingers closed), palms facing each other at mid-chest, and the right hand moves on a short downward path to bring its index fingertip into contact with the tip of the stationary left index finger.\nStatement 2: The left hand holds a flat 5-handshape at lower chest with palm up while the right hand forms an O-handshape with palm down and makes small downward tapping motions onto the center of the left palm.\nStatement 3: touch",
+    "ground_truth": "Some of the pros of being a high school teacher are your emotional commitment to your students and the incredible rewards that you get when they succeed.",
+    "statements": {
+      "statement1": "Both hands form 1-handshapes (index fingers extended, other fingers closed), palms facing each other at mid-chest, and the right hand moves on a short downward path to bring its index fingertip into contact with the tip of the stationary left index finger.",
+      "statement2": "The left hand holds a flat 5-handshape at lower chest with palm up while the right hand forms an O-handshape with palm down and makes small downward tapping motions onto the center of the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_10-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms an S-hand (fingers curled into a fist) with palm facing down at midline above the left hand, while the left hand holds a flat B-hand (fingers extended and together) with palm up at mid-torso, and the right fist moves in a short downward path to make contact with the left palm and then lifts back up.\nStatement 2: Both hands form 5-handshapes with fingers spread, palms facing each other at upper chest level, and they move slightly toward each other and then apart along a short horizontal path with small alternating motions.\nStatement 3: touch",
+    "ground_truth": "You do have summer vacations and your day technically ends at 3:00 but what they don't tell you is you will be most likely bringing work back.",
+    "statements": {
+      "statement1": "The right hand forms an S-hand (fingers curled into a fist) with palm facing down at midline above the left hand, while the left hand holds a flat B-hand (fingers extended and together) with palm up at mid-torso, and the right fist moves in a short downward path to make contact with the left palm and then lifts back up.",
+      "statement2": "Both hands form 5-handshapes with fingers spread, palms facing each other at upper chest level, and they move slightly toward each other and then apart along a short horizontal path with small alternating motions.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_11-8-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand with index and middle fingers extended together (ring and pinky folded, thumb relaxed), palm-in, starts with the fingertips contacting the right temple and then moves outward and slightly downward along a short arc to neutral space near the right cheek/shoulder while maintaining the finger configuration.\nStatement 2: Left hand lifts from the lap into a relaxed flat hand (fingers together, thumb alongside), palm-up at mid-chest, while the right hand forms a small pinch (thumb to index, other fingers loosely curved), palm diagonal-in/down, moves to contact the left palm, then both hands open into semi-curved claw-like shapes with palms facing each other and separate slightly at chest level.\nStatement 3: touch",
+    "ground_truth": "Grading either in your classroom or at home.",
+    "statements": {
+      "statement1": "Right hand with index and middle fingers extended together (ring and pinky folded, thumb relaxed), palm-in, starts with the fingertips contacting the right temple and then moves outward and slightly downward along a short arc to neutral space near the right cheek/shoulder while maintaining the finger configuration.",
+      "statement2": "Left hand lifts from the lap into a relaxed flat hand (fingers together, thumb alongside), palm-up at mid-chest, while the right hand forms a small pinch (thumb to index, other fingers loosely curved), palm diagonal-in/down, moves to contact the left palm, then both hands open into semi-curved claw-like shapes with palms facing each other and separate slightly at chest level.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_12-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands use a 1-handshape (index fingers extended, other fingers curled, thumbs relaxed), palms facing each other at mid-chest centerline, moving toward each other so the index fingertips touch and make small repeated taps with minimal in–out motion.\nStatement 2: The right hand uses a B-handshape (fingers together, thumb tucked), palm oriented inward toward the head, traveling from in front of the right shoulder upward-diagonally to contact the right temple, while the left hand rests on the lap palm down.\nStatement 3: touch",
+    "ground_truth": "And you will be working on the weekends.",
+    "statements": {
+      "statement1": "Both hands use a 1-handshape (index fingers extended, other fingers curled, thumbs relaxed), palms facing each other at mid-chest centerline, moving toward each other so the index fingertips touch and make small repeated taps with minimal in–out motion.",
+      "statement2": "The right hand uses a B-handshape (fingers together, thumb tucked), palm oriented inward toward the head, traveling from in front of the right shoulder upward-diagonally to contact the right temple, while the left hand rests on the lap palm down.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_13-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form spread-5 handshapes, palms facing inward toward each other at upper chest to shoulder height, and move upward and slightly outward in small arcs while the fingers remain extended and loosely splayed with brief finger wiggles.\nStatement 2: The right hand forms a 1-hand (index extended, other fingers curled, thumb resting at the side), palm angled down, and makes short taps across the back of the left wrist (left hand held flat, palm down) followed by a brief upward slide along the left open palm (left hand held flat, palm up), all at lower to mid chest level.\nStatement 3: touch",
+    "ground_truth": "But it will be, hopefully, a labor of love.",
+    "statements": {
+      "statement1": "Both hands form spread-5 handshapes, palms facing inward toward each other at upper chest to shoulder height, and move upward and slightly outward in small arcs while the fingers remain extended and loosely splayed with brief finger wiggles.",
+      "statement2": "The right hand forms a 1-hand (index extended, other fingers curled, thumb resting at the side), palm angled down, and makes short taps across the back of the left wrist (left hand held flat, palm down) followed by a brief upward slide along the left open palm (left hand held flat, palm up), all at lower to mid chest level.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_14-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand has the index finger extended and slightly curved with the other fingers curled (palm oriented inward toward the torso) and is positioned above the dorsal side of the left wrist; it makes short downward tapping motions onto the left wrist while the left forearm rests across the torso with the left hand palm down and fingers relaxed.\nStatement 2: Both hands move toward each other at mid-chest with fingers extended and slightly curved in relaxed 5-handshapes and palms facing inward; the fingers interlace as the hands close together along a short inward path and then hold at the center.\nStatement 3: touch",
+    "ground_truth": "And the last con would be the administrative red tape and dealing with principals and maybe co-teachers that don't share the same vision you do and just being true to yourself and to your students.",
+    "statements": {
+      "statement1": "The right hand has the index finger extended and slightly curved with the other fingers curled (palm oriented inward toward the torso) and is positioned above the dorsal side of the left wrist; it makes short downward tapping motions onto the left wrist while the left forearm rests across the torso with the left hand palm down and fingers relaxed.",
+      "statement2": "Both hands move toward each other at mid-chest with fingers extended and slightly curved in relaxed 5-handshapes and palms facing inward; the fingers interlace as the hands close together along a short inward path and then hold at the center.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_15-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand at shoulder level in front of the right shoulder holds an index-extended handshape (index up, other fingers curled, thumb resting), palm generally facing forward, then transitions to an X handshape (index bent) and briefly to crossed index-and-middle, with a small in-place up-and-down movement path.\nStatement 2: Later, both hands are raised near shoulder level: the left hand holds an index-extended handshape with palm facing toward the signer’s right and stays relatively still, while the right hand holds a pinch/G handshape (thumb and index together, other fingers curled), palm facing forward, and moves in a short outward-to-the-right sweep before retracting toward the center at chest height.\nStatement 3: not touch",
+    "ground_truth": "My name is Deanna Gutierrez and I'm a high school teacher in San Jose.",
+    "statements": {
+      "statement1": "The right hand at shoulder level in front of the right shoulder holds an index-extended handshape (index up, other fingers curled, thumb resting), palm generally facing forward, then transitions to an X handshape (index bent) and briefly to crossed index-and-middle, with a small in-place up-and-down movement path.",
+      "statement2": "Later, both hands are raised near shoulder level: the left hand holds an index-extended handshape with palm facing toward the signer’s right and stays relatively still, while the right hand holds a pinch/G handshape (thumb and index together, other fingers curled), palm facing forward, and moves in a short outward-to-the-right sweep before retracting toward the center at chest height.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_2-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form spread 5-handshapes (fingers extended and separated, thumbs extended), palms facing each other at mid-chest level, moving repeatedly in small inward-outward arcs toward and away from the torso.\nStatement 2: The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting against the curled fingers), palm oriented inward, moving diagonally upward from mid-chest to the right temple and briefly touching the temple while the left hand holds an S-handshape near center chest.\nStatement 3: not touch",
+    "ground_truth": "Also summer vacation.",
+    "statements": {
+      "statement1": "Both hands form spread 5-handshapes (fingers extended and separated, thumbs extended), palms facing each other at mid-chest level, moving repeatedly in small inward-outward arcs toward and away from the torso.",
+      "statement2": "The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting against the curled fingers), palm oriented inward, moving diagonally upward from mid-chest to the right temple and briefly touching the temple while the left hand holds an S-handshape near center chest.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_3-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands start near mid-chest in relaxed curved-5 handshapes with palms facing each other, then open to spread 5 handshapes and move laterally outward to about shoulder width along straight paths while the palms rotate to face forward; fingers extend and spread with thumbs relaxed on both hands.\nStatement 2: The right hand forms a 1-handshape (index extended, other fingers curled, thumb tucked against the curled fingers) with palm inward at the right cheek area, then moves forward and slightly downward in a short arc to chest level while the left hand remains near the torso in a relaxed curved-5.\nStatement 3: not touch",
+    "ground_truth": "Everybody knows teachers love this and also the opportunity to be your own boss.",
+    "statements": {
+      "statement1": "Both hands start near mid-chest in relaxed curved-5 handshapes with palms facing each other, then open to spread 5 handshapes and move laterally outward to about shoulder width along straight paths while the palms rotate to face forward; fingers extend and spread with thumbs relaxed on both hands.",
+      "statement2": "The right hand forms a 1-handshape (index extended, other fingers curled, thumb tucked against the curled fingers) with palm inward at the right cheek area, then moves forward and slightly downward in a short arc to chest level while the left hand remains near the torso in a relaxed curved-5.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "-b4_y6LOSx0_4-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands move at chest level from 5-handshapes (fingers spread and extended, palms forward) to B-handshapes (fingers straight and together, palms down) as they travel downward in a short, straight path to a position in front of the torso, ending slightly closer together.\nStatement 2: At lap level near the lower torso, the right hand in a relaxed 5-handshape (fingers slightly curved, palm down) makes small downward taps and brief inward-outward wrist arcs onto the left hand, which is in a B-handshape with palm up resting on the lap.\nStatement 3: touch",
+    "ground_truth": "In your classroom you rule and that is a great plus.",
+    "statements": {
+      "statement1": "Both hands move at chest level from 5-handshapes (fingers spread and extended, palms forward) to B-handshapes (fingers straight and together, palms down) as they travel downward in a short, straight path to a position in front of the torso, ending slightly closer together.",
+      "statement2": "At lap level near the lower torso, the right hand in a relaxed 5-handshape (fingers slightly curved, palm down) makes small downward taps and brief inward-outward wrist arcs onto the left hand, which is in a B-handshape with palm up resting on the lap.",
+      "statement3": "touch"
+    }
+  }
+]

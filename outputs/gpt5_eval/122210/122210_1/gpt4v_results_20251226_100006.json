@@ -1,0 +1,102 @@
+[
+  {
+    "video": "--7E2sU6zP4_10-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 5-handshapes with fingers spread, palms facing forward, held at shoulder level, and each hand makes small repeated vertical bouncing motions with light finger flutter.\nStatement 2: The left hand holds a flat B-handshape, palm up at mid-torso, while the right hand forms a 1-handshape with the index extended and palm angled downward, moving in short lateral strokes across the left palm and contacting it.\nStatement 3: touch",
+    "ground_truth": "And I call them decorative elements because basically all they're meant to do is to enrich and color the page.",
+    "statements": {
+      "statement1": "Both hands form 5-handshapes with fingers spread, palms facing forward, held at shoulder level, and each hand makes small repeated vertical bouncing motions with light finger flutter.",
+      "statement2": "The left hand holds a flat B-handshape, palm up at mid-torso, while the right hand forms a 1-handshape with the index extended and palm angled downward, moving in short lateral strokes across the left palm and contacting it.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_11-5-rgb_front.mp4",
+    "model_output": "Statement 1: The left hand holds a “1” handshape with the index extended and other fingers curled, upright at mid-chest with palm angled right, while the right hand forms a “1” handshape with palm angled left and moves in small repeated taps from the right toward center to contact the tip of the left index finger.\nStatement 2: Both hands start as open “5” handshapes at mid-chest with palms facing inward toward the torso, then move upward and outward in parallel arcs with fingers spread, ending with palms facing forward.\nStatement 3: touch",
+    "ground_truth": "So they don't really have much of a symbolic meaning other than maybe life is richer, life is beautiful, but they've become so beautifully stylized and so you find them in different illuminative being rendered in very different ways.",
+    "statements": {
+      "statement1": "The left hand holds a “1” handshape with the index extended and other fingers curled, upright at mid-chest with palm angled right, while the right hand forms a “1” handshape with palm angled left and moves in small repeated taps from the right toward center to contact the tip of the left index finger.",
+      "statement2": "Both hands start as open “5” handshapes at mid-chest with palms facing inward toward the torso, then move upward and outward in parallel arcs with fingers spread, ending with palms facing forward.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_12-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat-B handshape with fingers together and palm facing down at mid-torso, and it sweeps diagonally from right to left across the top of the left forearm from wrist toward elbow while the left arm is held across the torso with the left hand in an S-hand (fist) and palm down. \nStatement 2: The left hand forms a flat-B handshape with fingers together and palm facing up at mid-torso, and the right hand forms a flat-B with palm facing down and slides in a short straight forward-and-back path along the left palm. \nStatement 3: touch",
+    "ground_truth": "Now this is very, this is actually an insert of a kind of an envelope for stationary, and this is a very Italian design.",
+    "statements": {
+      "statement1": "The right hand forms a flat-B handshape with fingers together and palm facing down at mid-torso, and it sweeps diagonally from right to left across the top of the left forearm from wrist toward elbow while the left arm is held across the torso with the left hand in an S-hand (fist) and palm down.",
+      "statement2": "The left hand forms a flat-B handshape with fingers together and palm facing up at mid-torso, and the right hand forms a flat-B with palm facing down and slides in a short straight forward-and-back path along the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_13-5-rgb_front.mp4",
+    "model_output": "Statement 1: The left hand holds a flat-B handshape with fingers together, palm up at mid-torso, while the right hand forms a 5-handshape with fingers extended and slightly curved, palm down, brushing from the body outward across the left palm and then lifting to wiggle the fingers above the left palm.\nStatement 2: The right hand makes a 1-handshape (index extended, other fingers closed, thumb resting), palm in, moving to touch the right cheek with the index fingertip and making small in-place taps, while the left hand stays at mid-torso in a flat-B handshape, palm up.\nStatement 3: touch",
+    "ground_truth": "This is all the you know, take off on the idea of the acanthus leaf.",
+    "statements": {
+      "statement1": "The left hand holds a flat-B handshape with fingers together, palm up at mid-torso, while the right hand forms a 5-handshape with fingers extended and slightly curved, palm down, brushing from the body outward across the left palm and then lifting to wiggle the fingers above the left palm.",
+      "statement2": "The right hand makes a 1-handshape (index extended, other fingers closed, thumb resting), palm in, moving to touch the right cheek with the index fingertip and making small in-place taps, while the left hand stays at mid-torso in a flat-B handshape, palm up.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_5-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in 1-handshape (index extended, other fingers curled), palm facing left/down at mid-chest, moves in short forward taps to contact the center of the left hand held in a flat-B handshape, palm up, with the left fingers moving from together to spread during the contact.\nStatement 2: Both hands form claw-5 handshapes with palms facing inward toward the chest at the collarbone area, and each hand makes a small downward/inward press on the respective shoulder without lateral movement.\nStatement 3: touch",
+    "ground_truth": "It's almost has a feathery like posture to it.",
+    "statements": {
+      "statement1": "Right hand in 1-handshape (index extended, other fingers curled), palm facing left/down at mid-chest, moves in short forward taps to contact the center of the left hand held in a flat-B handshape, palm up, with the left fingers moving from together to spread during the contact.",
+      "statement2": "Both hands form claw-5 handshapes with palms facing inward toward the chest at the collarbone area, and each hand makes a small downward/inward press on the respective shoulder without lateral movement.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat-B handshape (fingers straight and together, thumb aligned along the side), palm down at upper chest center, and moves leftward in a horizontal brushing path across the back of the stationary left flat-B hand held horizontally at chest level with palm down and fingers straight and together.\nStatement 2: Both hands form spread-5 handshapes (fingers splayed, thumbs extended), palms forward and slightly outward at shoulder level, and each hand lifts upward and outward in a small arc while maintaining fully extended fingers.\nStatement 3: touch",
+    "ground_truth": "And so, it's used in architecture as a decorative element in architecture on columns and so on, and it's also used a great deal in illumination.",
+    "statements": {
+      "statement1": "The right hand forms a flat-B handshape (fingers straight and together, thumb aligned along the side), palm down at upper chest center, and moves leftward in a horizontal brushing path across the back of the stationary left flat-B hand held horizontally at chest level with palm down and fingers straight and together.",
+      "statement2": "Both hands form spread-5 handshapes (fingers splayed, thumbs extended), palms forward and slightly outward at shoulder level, and each hand lifts upward and outward in a small arc while maintaining fully extended fingers.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 5-handshapes with fingers spread and thumbs extended, palms facing outward near the sides of the head, and move upward then downward in short symmetrical arcs.\nStatement 2: The left hand forms a flat B-handshape with fingers together and thumb alongside, palm down at mid-chest, while the right hand forms a flat B-handshape, palm down, and moves inward from the right to stack directly on top of the back of the left hand at mid-chest.\nStatement 3: touch",
+    "ground_truth": "And so what's happened with the idea of acanthus leaf, is that it has is taken on all these different creative looks.",
+    "statements": {
+      "statement1": "Both hands form 5-handshapes with fingers spread and thumbs extended, palms facing outward near the sides of the head, and move upward then downward in short symmetrical arcs.",
+      "statement2": "The left hand forms a flat B-handshape with fingers together and thumb alongside, palm down at mid-chest, while the right hand forms a flat B-handshape, palm down, and moves inward from the right to stack directly on top of the back of the left hand at mid-chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_8-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form cupped 5-handshapes with fingers together and slightly curved, palms facing up and slightly inward at mid-chest, moving toward each other until the fingertips and thumbs of both hands make contact and then holding with minimal motion.\nStatement 2: The left hand holds a flat-B handshape with palm up at lower chest, while the right hand holds a 1-handshape with the index finger extended and other fingers curled, palm facing left; the right index fingertip touches the center of the left palm and traces a short path toward the left hand’s fingertips.\nStatement 3: touch",
+    "ground_truth": "And it has been wildly colored so you can look at some an acanthus leaf and you can start with the idea of a black and white drawing.",
+    "statements": {
+      "statement1": "Both hands form cupped 5-handshapes with fingers together and slightly curved, palms facing up and slightly inward at mid-chest, moving toward each other until the fingertips and thumbs of both hands make contact and then holding with minimal motion.",
+      "statement2": "The left hand holds a flat-B handshape with palm up at lower chest, while the right hand holds a 1-handshape with the index finger extended and other fingers curled, palm facing left; the right index fingertip touches the center of the left palm and traces a short path toward the left hand’s fingertips.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--7E2sU6zP4_9-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in 1-handshape (index extended, other fingers closed, thumb resting), palm facing left and slightly inward, moves upward from mid-chest while tracing along the vertical left 5-hand (fingers together, palm facing right), maintaining contact from the base of the left palm up toward the mouth area.\nStatement 2: Both hands in 1-handshape at chest level with palms facing each other; the left index is held vertical and stationary while the right index, oriented horizontally, makes short tapping contacts on the tip and side of the left index.\nStatement 3: touch",
+    "ground_truth": "Here, actually, I have some samples of traced acanthus leaves from different illuminated manuscripts.",
+    "statements": {
+      "statement1": "Right hand in 1-handshape (index extended, other fingers closed, thumb resting), palm facing left and slightly inward, moves upward from mid-chest while tracing along the vertical left 5-hand (fingers together, palm facing right), maintaining contact from the base of the left palm up toward the mouth area.",
+      "statement2": "Both hands in 1-handshape at chest level with palms facing each other; the left index is held vertical and stationary while the right index, oriented horizontally, makes short tapping contacts on the tip and side of the left index.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "--8pSDeC-fg_0-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand holds a 5-handshape (fingers extended and slightly spread, thumb extended), palm facing left and slightly inward, located near the right cheek, and makes small repeated side-to-side oscillations at cheek level.\nStatement 2: The right hand then moves diagonally downward from the right cheek to the upper chest, maintaining an open 5-handshape with fingers extended and mostly together, palm turning to face inward and slightly down, while the left hand rests on the lap with a relaxed handshape, palm down, fingers loosely curved.\nStatement 3: not touch",
+    "ground_truth": "Hi.",
+    "statements": {
+      "statement1": "The right hand holds a 5-handshape (fingers extended and slightly spread, thumb extended), palm facing left and slightly inward, located near the right cheek, and makes small repeated side-to-side oscillations at cheek level.",
+      "statement2": "The right hand then moves diagonally downward from the right cheek to the upper chest, maintaining an open 5-handshape with fingers extended and mostly together, palm turning to face inward and slightly down, while the left hand rests on the lap with a relaxed handshape, palm down, fingers loosely curved.",
+      "statement3": "not touch"
+    }
+  }
+]
