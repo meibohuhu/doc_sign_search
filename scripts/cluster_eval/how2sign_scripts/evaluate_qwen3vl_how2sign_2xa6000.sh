@@ -26,15 +26,19 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # Set CHECKPOINT_PATH to empty string or unset to use base model only
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
 CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"
-MODEL_BASE="${MODEL_BASE:-Qwen/Qwen3-VL-2B-Instruct}"
+MODEL_BASE="${MODEL_BASE:-Qwen/Qwen3-VL-4B-Instruct}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/}"
 QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.sample120.json}"
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/qwen3vl_eval/}"
+### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/1L0GSTIb9Vs_4-5-rgb_front.mp4
+### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/1Tix6cnQko4_11-5-rgb_front.mp4
+### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/0rsdwK7sHjE_18-5-rgb_front.mp4
+### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/1L0GSTIb9Vs_4-5-rgb_front.mp4
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-3}  # Set to a number to limit samples, empty for full evaluation
-MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-9000}
-VIDEO_FPS=${VIDEO_FPS:-12}  # Optional: FPS for video processing
+MAX_SAMPLES=${MAX_SAMPLES:-1}  # Set to a number to limit samples, empty for full evaluation
+MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-1028}
+VIDEO_FPS=${VIDEO_FPS:-1}  # Optional: FPS for video processing
 USE_FRAMES=${USE_FRAMES:-false}  # Set to true to extract frames and use as images
 NUM_FRAMES=${NUM_FRAMES:-}  # Optional: Number of frames to extract (if empty, use fps-based sampling)
 SAVE_FRAMES=${SAVE_FRAMES:-false}  # Set to true to save extracted frames to disk

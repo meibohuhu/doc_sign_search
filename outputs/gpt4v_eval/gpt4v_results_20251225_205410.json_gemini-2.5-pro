@@ -1,0 +1,17 @@
+[
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, in a Y-handshape with the palm facing left, moves downward from the right side of the face and transitions into a fist with the thumb extended.\nStatement 2: Both hands, starting as loose fists with palms facing each other in front of the chest, move forward and apart while opening into bent 5-handshapes with palms facing up.\nStatement 3: The two hands do not touch each other.",
+    "ground_truth": "That's basically the explanation of a nap."
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands, with fingers spread and bent in a claw-like shape and palms facing each other, move from the sides towards the center of the chest.\nStatement 2: The right hand, with the index finger extended and other fingers in a fist, moves up and touches the tip of the index finger to the right side of the nose.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function."
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, with its index finger extended and slightly bent, repeatedly taps the upward-facing palm of the stationary left hand, which is held in a relaxed 5-handshape in front of the chest.\nStatement 2: Both hands, with palms facing each other and fingers spread and slightly bent, move from a central position outward and then back inward while the fingers wiggle.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay."
+  }
+]

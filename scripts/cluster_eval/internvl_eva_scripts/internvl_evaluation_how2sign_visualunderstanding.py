@@ -546,34 +546,15 @@ def eval_model(args):
             data_dict = json.load(f)
         elif first_line.startswith('{'):
             # Could be JSON object (meta config) or JSONL format
-            # Try to parse as JSON object first
-            try:
-                meta_data = json.load(f)
-                # Check if it's a meta config file (has 'how2sign' key with 'annotation' field)
-                if isinstance(meta_data, dict) and 'how2sign' in meta_data:
-                    annotation_file = meta_data['how2sign'].get('annotation')
-                    if annotation_file and os.path.exists(annotation_file):
-                        print(f"   Detected meta config file, loading annotation from: {annotation_file}")
-                        # Load the actual JSONL file
-                        with open(annotation_file, 'r', encoding='utf-8') as ann_f:
-                            for line in ann_f:
-                                line = line.strip()
-                                if line:
-                                    try:
-                                        data_dict.append(json.loads(line))
-                                    except json.JSONDecodeError as e:
-                                        print(f"⚠️  Warning: Failed to parse line: {line[:100]}... Error: {e}")
-                                        continue
-                    else:
-                        print(f"⚠️  Warning: Annotation file not found or not specified in meta config")
-                        print(f"   Meta data: {meta_data}")
-                else:
-                    # Not a meta config, treat as single JSON object (unlikely for evaluation)
-                    print(f"⚠️  Warning: File is a JSON object but not a meta config. Expected JSONL or JSON array.")
-            except json.JSONDecodeError:
-                # Not valid JSON, treat as JSONL format
-                f.seek(0)
-                for line in f:
+            # First, try to read all lines to check if it's JSONL format
+            f.seek(0)
+            all_lines = f.readlines()
+            f.seek(0)
+            
+            # Check if multiple lines exist (likely JSONL)
+            if len(all_lines) > 1:
+                # Multiple lines, treat as JSONL format
+                for line in all_lines:
                     line = line.strip()
                     if line:
                         try:
@@ -581,6 +562,43 @@ def eval_model(args):
                         except json.JSONDecodeError as e:
                             print(f"⚠️  Warning: Failed to parse line: {line[:100]}... Error: {e}")
                             continue
+            else:
+                # Single line starting with '{', try to parse as JSON object first (meta config)
+                try:
+                    meta_data = json.load(f)
+                    # Check if it's a meta config file (has 'how2sign' key with 'annotation' field)
+                    if isinstance(meta_data, dict) and 'how2sign' in meta_data:
+                        annotation_file = meta_data['how2sign'].get('annotation')
+                        if annotation_file and os.path.exists(annotation_file):
+                            print(f"   Detected meta config file, loading annotation from: {annotation_file}")
+                            # Load the actual JSONL file
+                            with open(annotation_file, 'r', encoding='utf-8') as ann_f:
+                                for line in ann_f:
+                                    line = line.strip()
+                                    if line:
+                                        try:
+                                            data_dict.append(json.loads(line))
+                                        except json.JSONDecodeError as e:
+                                            print(f"⚠️  Warning: Failed to parse line: {line[:100]}... Error: {e}")
+                                            continue
+                        else:
+                            print(f"⚠️  Warning: Annotation file not found or not specified in meta config")
+                            print(f"   Meta data: {meta_data}")
+                    else:
+                        # Not a meta config, treat as single JSON object (add it as a sample)
+                        print(f"ℹ️  Single JSON object detected (not meta config), treating as single sample")
+                        data_dict.append(meta_data)
+                except json.JSONDecodeError:
+                    # Not valid JSON, try JSONL format anyway
+                    f.seek(0)
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            try:
+                                data_dict.append(json.loads(line))
+                            except json.JSONDecodeError as e:
+                                print(f"⚠️  Warning: Failed to parse line: {line[:100]}... Error: {e}")
+                                continue
         else:
             # JSONL format (InternVL style) - each line is a JSON object
             for line in f:
@@ -633,7 +651,8 @@ def eval_model(args):
             
             # Use default prompt template (will be formatted with actual frame count after loading)
             # fq = "Translate the American Sign Language in this video to English."
-            fq = "How many people are in the video"
+            # fq = "What's the color of the background in the video?"
+            fq = "What's the positions of person's hands in the video?"
             
             # Extract ground truth from conversations or source
             conversations = source.get('conversations', [])
