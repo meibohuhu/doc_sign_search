@@ -17,7 +17,7 @@ cd /local1/mhu/sign_language_llm
 
 # Configuration
 CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Not used for API, but kept for compatibility
-API_TYPE="${API_TYPE:-gemini}"  # Options: openai, gemini
+API_TYPE="${API_TYPE:-openai}"  # Options: openai, gemini
 
 # Set model based on API type, ensuring consistency
 if [ "$API_TYPE" = "gemini" ]; then
@@ -31,10 +31,10 @@ if [ "$API_TYPE" = "gemini" ]; then
     fi
 else
     # For OpenAI, use OpenAI model
-    MODEL="${MODEL:-gpt-4o}"
+    MODEL="${MODEL:-gpt-5}"
 fi
-VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224}"
-QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
+VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224}"
+QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl.jsonl}"
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/gpt4v_eval/}"
 
 
@@ -45,14 +45,14 @@ OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/gpt4v_eval/}"
 # g3kFAmcBpFc_13-3-rgb_front.mp4
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-10}  # Set to a number to limit samples, empty for full evaluation
+MAX_SAMPLES=${MAX_SAMPLES:-5}  # Set to a number to limit samples, empty for full evaluation
 NUM_FRAMES=${NUM_FRAMES:-32}  # Number of frames to extract from video
 VIDEO_FPS=${VIDEO_FPS:-}  # Target FPS for frame extraction (if empty, uses num-frames)
 IMAGE_DETAIL=${IMAGE_DETAIL:-low}  # Image detail level: low, high, auto
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-10240}
 TEMPERATURE=${TEMPERATURE:-0.7}
 SAVE_FRAMES=${SAVE_FRAMES:-false}  # Set to "true" to enable frame saving
-MAX_WORKERS=${MAX_WORKERS:-4}  # Number of concurrent threads for Gemini API (default: 5)
+MAX_WORKERS=${MAX_WORKERS:-1}  # Number of concurrent threads for Gemini API (default: 5)
 
 echo "🎬 GPT-4 Vision / Gemini How2Sign Evaluation"
 echo "=============================================="
