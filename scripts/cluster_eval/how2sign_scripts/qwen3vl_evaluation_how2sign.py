@@ -190,27 +190,54 @@ def eval_model(args):
             # fq= "Observe this ASL video and describe in detail how the person's hand gestures change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. Only describe the physical movements you can see - do not include background information, interpretations, or speculations."
             # fq = "Observe this ASL video and describe in detail how the person's hand gestures change. For each change you observe, describe: (1) which hand is moving, (2) the specific finger positions (which fingers are extended, curled, or touching), (3) the hand shape and orientation, (4) the hand location relative to the body, (5) the movement direction and how it transitions. Describe all visible changes frame by frame. CRITICAL RULES: (1) Only describe the physical movements you can directly observe. (2) Use factual, objective language only. (3) FORBIDDEN WORDS AND PHRASES - DO NOT USE: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that', or any other interpretive or speculative language. (4) Describe ONLY what you see: hand positions, finger states, movements, locations, and transitions. Do NOT describe what the gestures might mean, what they could represent, or what they seem to indicate."
             # fq = "Describe concisely. Format:\n\nRight hand: [position, finger states, palm orientation]\nLeft hand: [position, finger states, palm orientation]\nFace: [expression]\n\nBe brief and factual. No interpretations."
+            
+#             fq = """You must answer based on the entire video clip,
+# Base your judgment only on visible hand motion and spatial position, not on sign language meaning.
+# Choose the answer strictly from the provided options.
+# If the condition never occurs in the video, choose the corresponding "none" option.
+
+# Considering the entire video, did the left and right hands touch each other?
+
+
+# Answer with one word only:
+# yes or no
+# """
+            
+            # fq = """
+            # You are an ASL motion-description annotator.
+
+            # Describe each distinct action/movement in the video. For EACH action, provide:
+
+            # Action X:
+            # - Right hand: handshape, palm orientation, location, movement path, finger positions
+            # - Left hand: handshape, palm orientation, location, movement path, finger positions
+            # - Hand interaction: contact, relative position, synchrony
+
+            # Rules:
+            # - Describe EVERY distinct action/movement you observe.
+            # - DO NOT infer meaning; only describe observable motion.
+            # - Capture all movement transitions and changes.
+            # - Be detailed and precise for each action.
+            # - Use factual, objective language only.
+            # - FORBIDDEN WORDS: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that'.
+            # """
+
             fq = """
-You are an ASL motion-description annotator.
+            You are an ASL motion-description annotator.
 
-Describe each distinct action/movement in the video. For EACH action, provide:
+            Describe the most important hand movements in the video using exactly TWO statements.
 
-Action X:
-- Frame range: [start_frame, end_frame]
-- Right hand: handshape, palm orientation, location, movement path, finger positions
-- Left hand: handshape, palm orientation, location, movement path, finger positions
-- Hand interaction: contact, relative position, synchrony
-- Movement details: direction, speed, repetition, transitions
-- Face/NMM: eyebrows, mouth shape, head movement, body posture
+            Format:
+            Statement 1: [Describe the most significant hand movement, including handshape, palm orientation, location, movement path, and finger positions for both hands if relevant]
+            Statement 2: [Describe the second most important hand movement or interaction, including handshape, palm orientation, location, movement path, and hand interaction if relevant]
 
-Rules:
-- Describe EVERY distinct action/movement you observe.
-- DO NOT infer meaning; only describe observable motion.
-- Capture all movement transitions and changes.
-- Be detailed and precise for each action.
-- Use factual, objective language only.
-- FORBIDDEN WORDS: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that'.
-"""
+            Rules:
+            - Focus on the TWO most important/distinctive movements in the video.
+            - DO NOT infer meaning; only describe observable motion.
+            - Use factual, objective language only.
+            - Each statement should be a complete sentence describing one movement.
+            - FORBIDDEN WORDS: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that'.
+            """
 
 
 

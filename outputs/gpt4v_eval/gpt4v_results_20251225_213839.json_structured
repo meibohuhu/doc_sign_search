@@ -1,0 +1,52 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 'A' handshapes with thumbs extended; the right hand starts below the stationary left hand and moves upward in an arc, brushing against the left hand as it rises.\nStatement 2: Both hands, in a clawed-5 handshape with palms facing each other, are positioned on either side of the head and move up and down in an alternating motion.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.",
+    "statements": {
+      "statement1": "Both hands form 'A' handshapes with thumbs extended; the right hand starts below the stationary left hand and moves upward in an arc, brushing against the left hand as it rises.",
+      "statement2": "Both hands, in a clawed-5 handshape with palms facing each other, are positioned on either side of the head and move up and down in an alternating motion.",
+      "statement3": "The two hands touch each other."
+    }
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, starting in a Y-handshape with the palm facing left near the right shoulder, moves downward while the pinky finger closes to form a fist with the thumb on the side.\nStatement 2: Subsequently, both hands, with fingers bent, move in an alternating pattern in front of the chest; the left hand with palm up moves in an upward scooping motion while the right hand with palm down moves in a downward motion.\nStatement 3: The two hands do not touch each other.",
+    "ground_truth": "That's basically the explanation of a nap.",
+    "statements": {
+      "statement1": "The right hand, starting in a Y-handshape with the palm facing left near the right shoulder, moves downward while the pinky finger closes to form a fist with the thumb on the side.",
+      "statement2": "Subsequently, both hands, with fingers bent, move in an alternating pattern in front of the chest; the left hand with palm up moves in an upward scooping motion while the right hand with palm down moves in a downward motion.",
+      "statement3": "The two hands do not touch each other."
+    }
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands, with fingers spread and palms facing inward, move upward from the chest to the sides of the head, after which the index fingers and thumbs of both hands extend to touch at the tips in front of the face.\nStatement 2: The right hand, changing into a fist with the palm facing left, starts near the right temple and moves forward, while the left hand remains stationary with its index finger extended to the right.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "You need to think about your horse's temperament.",
+    "statements": {
+      "statement1": "Both hands, with fingers spread and palms facing inward, move upward from the chest to the sides of the head, after which the index fingers and thumbs of both hands extend to touch at the tips in front of the face.",
+      "statement2": "The right hand, changing into a fist with the palm facing left, starts near the right temple and moves forward, while the left hand remains stationary with its index finger extended to the right.",
+      "statement3": "The two hands touch each other."
+    }
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands, with fingers spread and bent into a claw shape and palms facing each other, move back and forth in an alternating pattern in front of the torso.\nStatement 2: The right hand, with a flat handshape and palm down, is placed on top of the left hand, which has a similar handshape with the palm up, and the right hand slides forward over the left hand's fingertips.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.",
+    "statements": {
+      "statement1": "Both hands, with fingers spread and bent into a claw shape and palms facing each other, move back and forth in an alternating pattern in front of the torso.",
+      "statement2": "The right hand, with a flat handshape and palm down, is placed on top of the left hand, which has a similar handshape with the palm up, and the right hand slides forward over the left hand's fingertips.",
+      "statement3": "The two hands touch each other."
+    }
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, with only the index finger extended and palm facing left, moves its fingertip down to sequentially tap the tips of the middle finger, index finger, and thumb of the stationary left hand, which is held in an open-5 handshape with the palm facing right.\nStatement 2: The right hand, in a flat B-handshape with the palm facing left, slides down the back of the stationary left hand, which is also in a flat B-handshape with the palm facing down, moving from the wrist towards the fingertips.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay.",
+    "statements": {
+      "statement1": "The right hand, with only the index finger extended and palm facing left, moves its fingertip down to sequentially tap the tips of the middle finger, index finger, and thumb of the stationary left hand, which is held in an open-5 handshape with the palm facing right.",
+      "statement2": "The right hand, in a flat B-handshape with the palm facing left, slides down the back of the stationary left hand, which is also in a flat B-handshape with the palm facing down, moving from the wrist towards the fingertips.",
+      "statement3": "The two hands touch each other."
+    }
+  }
+]

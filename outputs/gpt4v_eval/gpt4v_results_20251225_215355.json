@@ -1,0 +1,102 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form fists with thumbs extended upwards and palms facing each other in front of the chest, and then the right hand moves upwards and outwards to the right while the left hand remains stationary.\nStatement 2: Both hands, with fingers spread and bent in a claw shape and palms facing each other, are placed on either side of the head and wiggle slightly.\nStatement 3: The two hands do not touch each other.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.",
+    "statements": {
+      "statement1": "Both hands form fists with thumbs extended upwards and palms facing each other in front of the chest, and then the right hand moves upwards and outwards to the right while the left hand remains stationary.",
+      "statement2": "Both hands, with fingers spread and bent in a claw shape and palms facing each other, are placed on either side of the head and wiggle slightly.",
+      "statement3": "The two hands do not touch each other."
+    }
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, in a Y-handshape with the palm facing left, moves downward in a short arc from the right shoulder area.\nStatement 2: Both hands, with palms facing up and fingers spread, move alternately forward and backward in front of the torso.\nStatement 3: The two hands do not touch each other.",
+    "ground_truth": "That's basically the explanation of a nap.",
+    "statements": {
+      "statement1": "The right hand, in a Y-handshape with the palm facing left, moves downward in a short arc from the right shoulder area.",
+      "statement2": "Both hands, with palms facing up and fingers spread, move alternately forward and backward in front of the torso.",
+      "statement3": "The two hands do not touch each other."
+    }
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands move from in front of the chest up to the sides of the head, opening from closed fists into clawed '5' handshapes with palms facing each other, then move slightly inwards as they close back into fists.\nStatement 2: The right hand, with thumb and index finger extended parallel to each other and palm facing left, moves in a short downward arc in front of the chest.\nStatement 3: The two hands do not touch each other.",
+    "ground_truth": "You need to think about your horse's temperament.",
+    "statements": {
+      "statement1": "Both hands move from in front of the chest up to the sides of the head, opening from closed fists into clawed '5' handshapes with palms facing each other, then move slightly inwards as they close back into fists.",
+      "statement2": "The right hand, with thumb and index finger extended parallel to each other and palm facing left, moves in a short downward arc in front of the chest.",
+      "statement3": "The two hands do not touch each other."
+    }
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands, with fingers spread and bent in a claw-like shape and palms facing each other, move inward from the sides of the torso until the fingers cross over and interlace in front of the chest.\nStatement 2: The right hand, with the index finger extended and the other fingers in a fist, touches the right cheek before both hands come together in front of the chest, with the flat fingers of the right hand covering the back of the flat fingers of the left hand.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.",
+    "statements": {
+      "statement1": "Both hands, with fingers spread and bent in a claw-like shape and palms facing each other, move inward from the sides of the torso until the fingers cross over and interlace in front of the chest.",
+      "statement2": "The right hand, with the index finger extended and the other fingers in a fist, touches the right cheek before both hands come together in front of the chest, with the flat fingers of the right hand covering the back of the flat fingers of the left hand.",
+      "statement3": "The two hands touch each other."
+    }
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands, with fingers spread and slightly bent and palms facing each other, are brought together in front of the chest, where the fingers interlace and wiggle.\nStatement 2: The right hand, in a '1' handshape with the palm facing left, moves up so the tip of the index finger touches the chin.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay.",
+    "statements": {
+      "statement1": "Both hands, with fingers spread and slightly bent and palms facing each other, are brought together in front of the chest, where the fingers interlace and wiggle.",
+      "statement2": "The right hand, in a '1' handshape with the palm facing left, moves up so the tip of the index finger touches the chin.",
+      "statement3": "The two hands touch each other."
+    }
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, in a flat B-handshape with the palm facing left, moves repeatedly back and forth in a short horizontal path in front of the right shoulder, while the left hand remains stationary below it with the index finger extended and pointing to the right.\nStatement 2: The right hand then changes to a 1-handshape with the index finger pointing up and moves slightly upward from its position near the right shoulder.\nStatement 3: The two hands do not touch each other.",
+    "ground_truth": "Clean tools.",
+    "statements": {
+      "statement1": "The right hand, in a flat B-handshape with the palm facing left, moves repeatedly back and forth in a short horizontal path in front of the right shoulder, while the left hand remains stationary below it with the index finger extended and pointing to the right.",
+      "statement2": "The right hand then changes to a 1-handshape with the index finger pointing up and moves slightly upward from its position near the right shoulder.",
+      "statement3": "The two hands do not touch each other."
+    }
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, in a 1-handshape with the palm oriented to the left, moves up and down twice in front of the chest, above the stationary left hand which is held palm-up.\nStatement 2: Both hands, with the index fingers and thumbs forming flattened circles and palms facing each other, move inwards and outwards simultaneously in front of the upper chest.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook.",
+    "statements": {
+      "statement1": "The right hand, in a 1-handshape with the palm oriented to the left, moves up and down twice in front of the chest, above the stationary left hand which is held palm-up.",
+      "statement2": "Both hands, with the index fingers and thumbs forming flattened circles and palms facing each other, move inwards and outwards simultaneously in front of the upper chest.",
+      "statement3": "The two hands touch each other."
+    }
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, with the thumb, index, and middle fingers extended and spread apart, palm facing left, is held stationary near the right shoulder, while the left hand, with only the index finger extended, points at the right hand.\nStatement 2: The right hand transitions into a flattened 'O' handshape, then extends the index finger straight up before moving forward and crooking the index finger.\nStatement 3: The two hands do not touch each other.",
+    "ground_truth": "We're going to do two ounces of gin.",
+    "statements": {
+      "statement1": "The right hand, with the thumb, index, and middle fingers extended and spread apart, palm facing left, is held stationary near the right shoulder, while the left hand, with only the index finger extended, points at the right hand.",
+      "statement2": "The right hand transitions into a flattened 'O' handshape, then extends the index finger straight up before moving forward and crooking the index finger.",
+      "statement3": "The two hands do not touch each other."
+    }
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand, with a flat handshape and palm facing up, moves horizontally from right to left, sliding the back of its fingers across the palm of the stationary, open-palmed left hand.\nStatement 2: Both hands transition into S-handshapes with palms facing down and are held parallel to each other in front of the chest, after which the right hand changes to a 1-handshape, pointing upwards.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "And again taking them up and down.",
+    "statements": {
+      "statement1": "The right hand, with a flat handshape and palm facing up, moves horizontally from right to left, sliding the back of its fingers across the palm of the stationary, open-palmed left hand.",
+      "statement2": "Both hands transition into S-handshapes with palms facing down and are held parallel to each other in front of the chest, after which the right hand changes to a 1-handshape, pointing upwards.",
+      "statement3": "The two hands touch each other."
+    }
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands, in a \"G\" handshape with the index finger and thumb pinched together and palms facing each other, move from a separated position in front of the chest towards each other and then slightly upward and apart in a repeated motion.\nStatement 2: While the right hand remains stationary in a \"G\" handshape, the left hand, in a flat \"B\" handshape with the palm facing right, sweeps in an arc up and over the right hand from left to right.\nStatement 3: The two hands touch each other.",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue.",
+    "statements": {
+      "statement1": "Both hands, in a \"G\" handshape with the index finger and thumb pinched together and palms facing each other, move from a separated position in front of the chest towards each other and then slightly upward and apart in a repeated motion.",
+      "statement2": "While the right hand remains stationary in a \"G\" handshape, the left hand, in a flat \"B\" handshape with the palm facing right, sweeps in an arc up and over the right hand from left to right.",
+      "statement3": "The two hands touch each other."
+    }
+  }
+]
