@@ -11,7 +11,7 @@ MAX_SAMPLES=${2:-""}  # Default to empty (use script default or full evaluation)
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="/code/doc_sign_search"
-EVAL_SCRIPT="$SCRIPT_DIR/evaluate_internvl2_5_how2sign_2xa6000_1_121610.sh"
+EVAL_SCRIPT="$SCRIPT_DIR/evaluate_internvl2_5_how2sign_2xa6000_0_121610.sh"
 
 # Generate nohup output filename with timestamp
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
