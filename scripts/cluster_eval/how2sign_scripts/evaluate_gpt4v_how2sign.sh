@@ -40,7 +40,7 @@ OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/gpt4v_eval/}"
 
 ### /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/G3k86AVFwVs_6-5-rgb_front.mp4
 ### /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/FZLxEwsoc1c_8-8-rgb_front.mp4
-### /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/f_zna_wG3zo_2-10-rgb_front.mp4
+### /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/G3CyVk6dizw_0-5-rgb_front.mp4
 
 # g3kFAmcBpFc_13-3-rgb_front.mp4
 

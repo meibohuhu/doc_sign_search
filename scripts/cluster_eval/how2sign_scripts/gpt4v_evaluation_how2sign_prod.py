@@ -517,13 +517,13 @@ def call_gemini_api(
 
 def parse_model_output_to_json(model_output):
     """
-    Parse model output text into JSON format with statement1, statement2, statement3.
+    Parse model output text into JSON format with statement1, statement2, statement3, statement4.
     
     Args:
         model_output: Raw text output from the model
     
     Returns:
-        dict: Parsed JSON with keys statement1, statement2, statement3, or None if parsing fails
+        dict: Parsed JSON with keys statement1, statement2, statement3, statement4, or None if parsing fails
         str: Error message if parsing fails, None otherwise
     """
     if not model_output or model_output.startswith("ERROR"):
@@ -534,19 +534,22 @@ def parse_model_output_to_json(model_output):
         try:
             parsed = json.loads(model_output)
             if isinstance(parsed, dict) and "statement1" in parsed and "statement2" in parsed:
-                # Ensure statement3 exists
+                # Ensure statement3 and statement4 exist
                 if "statement3" not in parsed:
                     parsed["statement3"] = ""
+                if "statement4" not in parsed:
+                    parsed["statement4"] = ""
                 return parsed, None
         except json.JSONDecodeError:
             pass  # Not JSON, continue with text parsing
         
-        # Parse text format - look for Statement 1, Statement 2, Statement 3
+        # Parse text format - look for Statement 1, Statement 2, Statement 3, Statement 4
         # Handle various formats: Statement1, Statement 1, statement1, statement 1, etc.
         result = {
             "statement1": "",
             "statement2": "",
-            "statement3": ""
+            "statement3": "",
+            "statement4": ""
         }
         
         # Try different patterns - handle case-insensitive matching
@@ -554,9 +557,10 @@ def parse_model_output_to_json(model_output):
         # Also handles with or without colon and spaces
         patterns = [
             # Match Statement1 or Statement 1 (with optional space, colon, and spaces)
-            (r"(?i)statement\s*1\s*:?\s*(.+?)(?=(?i)statement\s*[23]|$)", "statement1"),
-            (r"(?i)statement\s*2\s*:?\s*(.+?)(?=(?i)statement\s*3|$)", "statement2"),
-            (r"(?i)statement\s*3\s*:?\s*(.+?)(?=(?i)statement\s*[123]|$)", "statement3"),
+            (r"(?i)statement\s*1\s*:?\s*(.+?)(?=(?i)statement\s*[234]|$)", "statement1"),
+            (r"(?i)statement\s*2\s*:?\s*(.+?)(?=(?i)statement\s*[34]|$)", "statement2"),
+            (r"(?i)statement\s*3\s*:?\s*(.+?)(?=(?i)statement\s*4|$)", "statement3"),
+            (r"(?i)statement\s*4\s*:?\s*(.+?)(?=(?i)statement\s*[1234]|$)", "statement4"),
         ]
         
         for pattern, key in patterns:
@@ -607,7 +611,8 @@ def process_single_sample(args, source, idx, total_samples, api_key, question_pr
                 "statements": {
                     "statement1": "",
                     "statement2": "",
-                    "statement3": ""
+                    "statement3": "",
+                    "statement4": ""
                 },
                 "parse_error": "Video not found"
             }
@@ -644,7 +649,8 @@ def process_single_sample(args, source, idx, total_samples, api_key, question_pr
                 "statements": {
                     "statement1": "",
                     "statement2": "",
-                    "statement3": ""
+                    "statement3": "",
+                    "statement4": ""
                 },
                 "parse_error": f"Frame extraction failed: {str(e)}"
             }
@@ -695,7 +701,8 @@ def process_single_sample(args, source, idx, total_samples, api_key, question_pr
             result["statements"] = {
                 "statement1": "",
                 "statement2": "",
-                "statement3": ""
+                "statement3": "",
+                "statement4": ""
             }
             result["parse_error"] = parse_error or "Failed to parse output"
             # Print warning but don't stop
@@ -718,7 +725,8 @@ def process_single_sample(args, source, idx, total_samples, api_key, question_pr
             "statements": {
                 "statement1": "",
                 "statement2": "",
-                "statement3": ""
+                "statement3": "",
+                "statement4": ""
             },
             "parse_error": f"Processing error: {str(e)}"
         }
@@ -930,18 +938,19 @@ def eval_model(args):
     question_prompt = """
             You are an ASL motion-description annotator.
 
-            Describe the most important hand movements in the video using exactly THREE statements.
+            Describe the most important hand movements in the video using exactly FOUR statements.
 
             Format:
             Statement 1: [Describe the most significant hand movement, including handshape, palm orientation, location, movement path, and finger positions for both hands if relevant]
             Statement 2: [Describe the second most important hand movement or interaction, including handshape, palm orientation, location, movement path, and hand interaction if relevant]
             Statement 3: [Answer only "touch" or "not touch" - whether two hands visibly touch each other or not]
+            Statement 4: [Describe body posture and facial expression, including body orientation, head position, facial movements, and overall body stance]
 
             Rules:
             - Focus on the TWO most important/distinctive movements in the video.
             - DO NOT infer meaning; only describe observable motion.
             - Use factual, objective language only.
-            - Each statement should be a complete sentence describing one movement.
+            - Each statement should be a complete sentence describing one movement or aspect.
             - FORBIDDEN WORDS: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that'.
             """
     
@@ -995,7 +1004,8 @@ def eval_model(args):
                         "statements": {
                             "statement1": "",
                             "statement2": "",
-                            "statement3": ""
+                            "statement3": "",
+                            "statement4": ""
                         },
                         "parse_error": f"Thread error: {str(e)}"
                     }
@@ -1140,7 +1150,8 @@ def eval_model(args):
                         "statements": {
                             "statement1": "",
                             "statement2": "",
-                            "statement3": ""
+                            "statement3": "",
+                            "statement4": ""
                         },
                         "parse_error": "Video not found"
                     })
@@ -1185,7 +1196,8 @@ def eval_model(args):
                         "statements": {
                             "statement1": "",
                             "statement2": "",
-                            "statement3": ""
+                            "statement3": "",
+                            "statement4": ""
                         },
                         "parse_error": f"Frame extraction failed: {str(e)}"
                     })
@@ -1241,7 +1253,8 @@ def eval_model(args):
                     result_dict["statements"] = {
                         "statement1": "",
                         "statement2": "",
-                        "statement3": ""
+                        "statement3": "",
+                        "statement4": ""
                     }
                     result_dict["parse_error"] = parse_error or "Failed to parse output"
                     # Print warning but don't stop
@@ -1295,7 +1308,8 @@ def eval_model(args):
                     "statements": {
                         "statement1": "",
                         "statement2": "",
-                        "statement3": ""
+                        "statement3": "",
+                        "statement4": ""
                     },
                     "parse_error": f"Processing error: {str(e)}"
                 })
