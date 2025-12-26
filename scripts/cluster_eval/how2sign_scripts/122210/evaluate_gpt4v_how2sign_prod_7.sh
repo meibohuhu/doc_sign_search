@@ -19,9 +19,9 @@ cd /code/doc_sign_search
 MODEL="${MODEL:-gpt-5}"  # Azure deployment model name
 VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/train_crop_videos_224}"
 # VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/how2sign_test_videos_224x224}"
-QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/gpt/122210/gpt_how2sign_internvl_10_8.jsonl}"
+QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/gpt/122210/gpt_how2sign_internvl_10_7.jsonl}"
 # QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
-OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/gpt5_eval/122210/122210_8}"
+OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/gpt5_eval/122210/122210_7}"
 
 # Azure OpenAI Configuration
 AZURE_ENDPOINT="${AZURE_OPENAI_ENDPOINT:-https://dil-research-3.openai.azure.com/}"
