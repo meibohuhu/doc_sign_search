@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-GPT-4 Vision / Gemini Evaluation Script for How2Sign
-Uses OpenAI GPT-4 Vision API or Google Gemini API to process video frames and answer questions
+GPT-5 Vision / Gemini Evaluation Script for How2Sign
+Uses OpenAI GPT-5 Vision API or Google Gemini API to process video frames and answer questions
 """
 
 import os
@@ -131,26 +131,30 @@ def encode_image_to_base64(image, max_size=1024):
     return img_base64
 
 
-def call_gpt4_vision_api(
+def call_gpt5_vision_api(
     frames,
     prompt,
     api_key,
-    model="gpt-4o",
+    model="gpt-5",
     max_tokens=10240,
     temperature=0.7,
-    detail="low"
+    detail="low",
+    verbosity=None,
+    reasoning_effort=None
 ):
     """
-    Call GPT-4 Vision API with multiple frames.
+    Call GPT-5 Vision API with multiple frames.
     
     Args:
         frames: List of PIL Image objects
         prompt: Text prompt/question
         api_key: OpenAI API key
-        model: Model to use (default: gpt-4o)
+        model: Model to use (default: gpt-5)
         max_tokens: Maximum tokens to generate
         temperature: Sampling temperature
         detail: Image detail level ("low", "high", or "auto")
+        verbosity: Response verbosity level (optional, GPT-5 specific)
+        reasoning_effort: Reasoning effort level (optional, GPT-5 specific)
     
     Returns:
         Response text from the model
@@ -201,37 +205,46 @@ def call_gpt4_vision_api(
     ]
     
     try:
+        # Prepare API call parameters
+        api_params = {
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "temperature": temperature
+        }
+        
+        # Add GPT-5 specific parameters if provided
+        if verbosity is not None:
+            api_params["verbosity"] = verbosity
+        if reasoning_effort is not None:
+            api_params["reasoning_effort"] = reasoning_effort
+        
         # Call API
-        response = client.chat.completions.create(
-            model=model,
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature
-        )
+        response = client.chat.completions.create(**api_params)
         
         # Extract text response
         if response.choices and response.choices[0].message.content:
             return response.choices[0].message.content.strip()
         else:
-            raise Exception("No text response received from GPT-4 Vision API")
+            raise Exception("No text response received from GPT-5 Vision API")
     
     except Exception as e:
         error_msg = str(e)
         # Provide more helpful error messages for common issues (similar to Gemini)
         if "401" in error_msg or "credentials" in error_msg.lower() or "authentication" in error_msg.lower():
             raise Exception(
-                f"❌ GPT-4 Vision API authentication failed: {error_msg}\n\n"
+                f"❌ GPT-5 Vision API authentication failed: {error_msg}\n\n"
                 f"Please verify:\n"
                 f"1. ✅ Your API key is correct and active\n"
                 f"2. ✅ Get a valid API key from: https://platform.openai.com/api-keys\n"
                 f"3. ⚠️  Make sure it's a valid OpenAI API key"
             )
         elif "429" in error_msg or "rate limit" in error_msg.lower():
-            raise Exception(f"GPT-4 Vision API rate limit exceeded: {error_msg}")
+            raise Exception(f"GPT-5 Vision API rate limit exceeded: {error_msg}")
         elif "quota" in error_msg.lower():
-            raise Exception(f"GPT-4 Vision API quota exceeded: {error_msg}")
+            raise Exception(f"GPT-5 Vision API quota exceeded: {error_msg}")
         else:
-            raise Exception(f"GPT-4 Vision API call failed: {error_msg}")
+            raise Exception(f"GPT-5 Vision API call failed: {error_msg}")
 
 
 def call_gemini_api(
@@ -306,7 +319,7 @@ def call_gemini_api(
     for frame in frames:
         # Resize if too large (Gemini has limits on image size)
         width, height = frame.size
-        max_size = 2048  # Gemini supports larger images than GPT-4
+        max_size = 2048  # Gemini supports larger images than GPT-5
         if max(width, height) > max_size:
             if width > height:
                 new_width = max_size
@@ -407,9 +420,10 @@ def call_gemini_api(
         except:
             pass  # Types not available, use dict format
         
-        # Generate content with rate limit retry logic
-        max_retries = 3
-        retry_delay = 30  # Wait 30 seconds on rate limit
+        # Generate content with rate limit retry logic (exponential backoff)
+        max_retries = 3  # Increased retries
+        base_delay = 90  # Start with 90 seconds
+        max_delay = 600  # Maximum 10 minutes wait
         
         for attempt in range(max_retries):
             try:
@@ -431,14 +445,16 @@ def call_gemini_api(
             
             except Exception as e:
                 error_msg = str(e)
-                # Check for rate limit error (429)
-                if "429" in error_msg or "rate limit" in error_msg.lower():
+                # Check for rate limit error (429) or quota exhausted
+                if "429" in error_msg or "rate limit" in error_msg.lower() or "quota" in error_msg.lower() or "exhausted" in error_msg.lower():
                     if attempt < max_retries - 1:
-                        print(f"⚠️  Rate limit detected, waiting {retry_delay} seconds before retry {attempt + 2}/{max_retries}...")
+                        # Exponential backoff: 60s, 120s, 240s, 480s, 600s (capped)
+                        retry_delay = min(base_delay * (2 ** attempt), max_delay)
+                        print(f"⚠️  Rate limit/quota detected (attempt {attempt + 1}/{max_retries}), waiting {retry_delay} seconds before retry...")
                         time.sleep(retry_delay)
                         continue
                     else:
-                        raise Exception(f"Gemini API rate limit exceeded after {max_retries} attempts: {error_msg}")
+                        raise Exception(f"Gemini API rate limit/quota exceeded after {max_retries} attempts: {error_msg}")
                 else:
                     # For other errors, raise immediately
                     raise
@@ -609,7 +625,7 @@ def process_single_sample(args, source, idx, total_samples, api_key, question_pr
                 "parse_error": f"Frame extraction failed: {str(e)}"
             }
         
-        # Call API (GPT-4 or Gemini)
+        # Call API (GPT-5 or Gemini)
         try:
             if use_gemini:
                 output = call_gemini_api(
@@ -621,7 +637,7 @@ def process_single_sample(args, source, idx, total_samples, api_key, question_pr
                     temperature=args.temperature
                 )
             else:
-                output = call_gpt4_vision_api(
+                output = call_gpt5_vision_api(
                     frames=frames,
                     prompt=question_prompt,
                     api_key=api_key,
@@ -681,6 +697,42 @@ def process_single_sample(args, source, idx, total_samples, api_key, question_pr
         }
 
 
+def load_existing_results(output_dir):
+    """
+    Load existing results from JSON files in the output directory.
+    
+    Args:
+        output_dir: Directory containing result files
+    
+    Returns:
+        dict: Dictionary mapping video file names to their results
+    """
+    existing_results = {}
+    
+    if not os.path.exists(output_dir):
+        return existing_results
+    
+    # Look for all result JSON files
+    for filename in os.listdir(output_dir):
+        if filename.startswith("gpt4v_results_") and filename.endswith(".json"):
+            filepath = os.path.join(output_dir, filename)
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    file_results = json.load(f)
+                    if isinstance(file_results, list):
+                        for result in file_results:
+                            video_name = result.get("video")
+                            if video_name:
+                                # Only keep if it's a successful result (not an error)
+                                if not result.get("model_output", "").startswith("ERROR"):
+                                    existing_results[video_name] = result
+            except Exception as e:
+                # Skip corrupted files
+                continue
+    
+    return existing_results
+
+
 def save_results_to_file(results, output_path, lock=None):
     """
     Save results to JSON file in a thread-safe manner.
@@ -729,7 +781,11 @@ def eval_model(args):
         print(f"🔑 Using OpenAI API key: {api_key[:10]}...")
     
     print(f"🤖 API Type: {args.api_type or 'OpenAI'}")
-    print(f"🤖 Model: {args.model}\n")
+    print(f"🤖 Model: {args.model}")
+    if not use_gemini and args.model.startswith("gpt-5"):
+        print(f"   Using GPT-5 Vision API format\n")
+    else:
+        print()
     
     # Load test data
     print(f"📂 Loading test data from: {args.question_file}")
@@ -765,39 +821,77 @@ def eval_model(args):
     
     os.makedirs(args.out_dir, exist_ok=True)
     
+    # Load existing results to skip already processed samples
+    print(f"📂 Loading existing results from: {args.out_dir}")
+    existing_results = load_existing_results(args.out_dir)
+    skipped_count = 0
+    
+    if existing_results:
+        print(f"   Found {len(existing_results)} already processed samples")
+        # Filter out already processed samples
+        original_count = len(data_dict)
+        data_dict = [item for item in data_dict if item.get("video") not in existing_results]
+        skipped_count = original_count - len(data_dict)
+        if skipped_count > 0:
+            print(f"   ⏭️  Skipping {skipped_count} already processed samples")
+            print(f"   📝 Remaining samples to process: {len(data_dict)}\n")
+    
+    if len(data_dict) == 0:
+        print("✅ All samples have already been processed!")
+        # Save final results from existing results
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_file = f"gpt4v_results_{timestamp}_complete.json"
+        output_path = os.path.join(args.out_dir, output_file)
+        with open(output_path, "w", encoding='utf-8') as f:
+            json.dump(list(existing_results.values()), f, indent=2, ensure_ascii=False)
+        print(f"✅ Results saved: {output_path}")
+        print(f"   Total samples: {len(existing_results)}")
+        return
+    
     # Create output file path early for periodic saving
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_file = f"gpt4v_results_{timestamp}.json"
     output_path = os.path.join(args.out_dir, output_file)
     
+    # Initialize results with existing ones
     results = []
     references = []
     predictions = []
+    
+    # Add existing results to the lists
+    for video_name, result in existing_results.items():
+        results.append(result)
+        references.append(result.get("ground_truth", ""))
+        predictions.append(result.get("model_output", ""))
     
     # Lock for thread-safe file writing
     file_write_lock = threading.Lock()
     
     # Batch save interval (save every N samples)
-    save_interval = 10  # Save every 5 samples
+    save_interval = 10  # Save every 10 samples
     
     print(f"🎬 Starting evaluation...")
     print(f"💾 Results will be saved periodically to: {output_path}")
-    print(f"   (Saving every {save_interval} samples to prevent data loss)\n")
+    print(f"   (Saving every {save_interval} samples to prevent data loss)")
+    if skipped_count > 0:
+        print(f"   (Including {skipped_count} previously processed samples)\n")
+    else:
+        print()
     print(f"{'='*70}\n")
     
     # Define prompt/question
     # question_prompt = """You must answer based on the entire video clip,
-    # Base your judgment only on visible hand motion and spatial position, not on sign language meaning.
-    # Choose the answer strictly from the provided options.
-    # If the condition never occurs in the video, choose the corresponding "none" option.
+# Base your judgment only on visible hand motion and spatial position, not on sign language meaning.
+# Choose the answer strictly from the provided options.
+# If the condition never occurs in the video, choose the corresponding "none" option.
 
-    # Considering the entire video, did any hand move to a position higher than the shoulder level?
+# Considering the entire video, did any hand move to a position higher than the shoulder level?
 
-    # Definition: a hand is above the shoulder if it is visibly higher than the shoulder line for a short continuous period.
+# Definition: a hand is above the shoulder if it is visibly higher than the shoulder line for a short continuous period.
 
-    # Answer with one option only, no other words:
-    # none / left / right / both
-    # """
+# Answer with one option only, no other words:
+# none / left / right / both
+# """
     question_prompt = """
             You are an ASL motion-description annotator.
 
@@ -807,7 +901,7 @@ def eval_model(args):
             Statement 1: [Describe the most significant hand movement, including handshape, palm orientation, location, movement path, and finger positions for both hands if relevant]
             Statement 2: [Describe the second most important hand movement or interaction, including handshape, palm orientation, location, movement path, and hand interaction if relevant]
             Statement 3: [Describe if two hands touch each other or not]
-            
+
             Rules:
             - Focus on the TWO most important/distinctive movements in the video.
             - DO NOT infer meaning; only describe observable motion.
@@ -824,7 +918,7 @@ def eval_model(args):
     # Thread-safe lock for results
     results_lock = threading.Lock()
     
-    # Process samples - use multithreading for Gemini, sequential for GPT-4
+    # Process samples - use multithreading for Gemini, sequential for GPT-5
     if use_gemini:
         # Use multithreading for Gemini API
         # Get max_workers from args, default to 5 if not specified
@@ -833,7 +927,7 @@ def eval_model(args):
         else:
             max_workers = min(5, len(data_dict))  # Default: 5 concurrent threads
         print(f"🚀 Using multithreading with {max_workers} workers for Gemini API")
-        print(f"   Rate limit handling: Auto-wait 30s on 429 errors\n")
+        print(f"   Rate limit handling: Exponential backoff (60s-600s) on 429/quota errors\n")
         
         # Prepare sample data with indices
         sample_data = [(args, source, idx + 1, len(data_dict), api_key, question_prompt, use_gemini, results_lock) 
@@ -903,13 +997,31 @@ def eval_model(args):
                             
                             current_results.append(result_dict)
                         
-                        # Update global lists (replace, not append, to avoid duplicates)
+                        # Update global lists: combine existing results with new ones
+                        # Start with existing results, then add new ones
+                        combined_results = []
+                        combined_references = []
+                        combined_predictions = []
+                        
+                        # Add existing results first
+                        for video_name in sorted(existing_results.keys()):
+                            result = existing_results[video_name]
+                            combined_results.append(result)
+                            combined_references.append(result.get("ground_truth", ""))
+                            combined_predictions.append(result.get("model_output", ""))
+                        
+                        # Add new results
+                        combined_results.extend(current_results)
+                        combined_references.extend(current_references)
+                        combined_predictions.extend(current_predictions)
+                        
+                        # Update global lists
                         results.clear()
-                        results.extend(current_results)
+                        results.extend(combined_results)
                         references.clear()
-                        references.extend(current_references)
+                        references.extend(combined_references)
                         predictions.clear()
-                        predictions.extend(current_predictions)
+                        predictions.extend(combined_predictions)
                         
                         # Save to file
                         save_results_to_file(results, output_path, None)  # Lock already acquired
@@ -920,10 +1032,19 @@ def eval_model(args):
         # Final processing: ensure all results are in the correct order
         sorted_results = [sample_results[i] for i in sorted(sample_results.keys())]
         
-        # Update final results list
+        # Update final results list: combine existing + new results
         results.clear()
         references.clear()
         predictions.clear()
+        
+        # Add existing results first
+        for video_name in sorted(existing_results.keys()):
+            result = existing_results[video_name]
+            results.append(result)
+            references.append(result.get("ground_truth", ""))
+            predictions.append(result.get("model_output", ""))
+        
+        # Add newly processed results
         for result in sorted_results:
             references.append(result["ground_truth"])
             predictions.append(result["model_output"])
@@ -962,7 +1083,7 @@ def eval_model(args):
                     print(f"⚠️  No obvious match")
     
     else:
-        # Sequential processing for GPT-4 (or other APIs)
+        # Sequential processing for GPT-5 (or other APIs)
         for idx, source in enumerate(tqdm(data_dict, desc="Evaluating"), 1):
             try:
                 video_file = source["video"]
@@ -1035,12 +1156,12 @@ def eval_model(args):
                     })
                     continue
                 
-                # Call API (GPT-4)
+                # Call API (GPT-5)
                 try:
                     if idx <= 3:  # Print for first few samples
-                        print(f"   🤖 Calling GPT-4 Vision API with {len(frames)} frames...")
+                        print(f"   🤖 Calling GPT-5 Vision API with {len(frames)} frames...")
                     
-                    output = call_gpt4_vision_api(
+                    output = call_gpt5_vision_api(
                         frames=frames,
                         prompt=question_prompt,
                         api_key=api_key,
@@ -1091,9 +1212,16 @@ def eval_model(args):
                 
                 results.append(result_dict)
                 
-                # Periodic save to prevent data loss
+                # Periodic save to prevent data loss (include existing results)
                 if idx % save_interval == 0 or idx == len(data_dict):
-                    save_results_to_file(results, output_path, file_write_lock)
+                    # Combine existing + new results for saving
+                    combined_results = []
+                    # Add existing results first
+                    for video_name in sorted(existing_results.keys()):
+                        combined_results.append(existing_results[video_name])
+                    # Add new results
+                    combined_results.extend(results[len(existing_results):])
+                    save_results_to_file(combined_results, output_path, file_write_lock)
                     if idx % save_interval == 0:
                         print(f"💾 Progress saved: {idx}/{len(data_dict)} samples")
                 
@@ -1164,7 +1292,7 @@ def eval_model(args):
                 from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results
                 
                 eval_results = comprehensive_evaluation(references, predictions)
-                api_name = "Gemini" if use_gemini else "GPT-4 Vision"
+                api_name = "Gemini" if use_gemini else "GPT-5 Vision"
                 print_evaluation_results(eval_results, api_name)
                 
                 # Save metrics
@@ -1211,13 +1339,13 @@ def eval_model(args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate GPT-4 Vision or Gemini on How2Sign test set")
+    parser = argparse.ArgumentParser(description="Evaluate GPT-5 Vision or Gemini on How2Sign test set")
     parser.add_argument("--api-type", type=str, default="openai", choices=["openai", "gemini"],
                        help="API type to use: 'openai' or 'gemini' (default: openai)")
     parser.add_argument("--api-key", type=str, default=None,
                        help="API key (or set OPENAI_API_KEY/GEMINI_API_KEY env var)")
-    parser.add_argument("--model", type=str, default="gpt-4o",
-                       help="Model to use. OpenAI: gpt-4o, gpt-4-vision-preview. Gemini: gemini-1.5-pro, gemini-1.5-flash (default: gpt-4o)")
+    parser.add_argument("--model", type=str, default="gpt-5",
+                       help="Model to use. OpenAI: gpt-5, gpt-4o, gpt-4-vision-preview. Gemini: gemini-1.5-pro, gemini-1.5-flash (default: gpt-5)")
     parser.add_argument("--video-folder", type=str, required=True,
                        help="Folder containing test videos")
     parser.add_argument("--question-file", type=str, required=True,
@@ -1236,7 +1364,7 @@ def main():
                        help="Number of frames to extract from video (default: 6)")
     parser.add_argument("--image-detail", type=str, default="low",
                        choices=["low", "high", "auto"],
-                       help="Image detail level for GPT-4 Vision (default: low, 'high' costs more)")
+                       help="Image detail level for GPT-5 Vision (default: low, 'high' costs more)")
     parser.add_argument("--save-frames", action="store_true",
                        help="Save extracted frames to disk")
     parser.add_argument("--prompt", type=str, default=None,
