@@ -1,0 +1,19 @@
+# Requirements for GPT-5 Vision / Azure OpenAI Evaluation Script
+# For running gpt4v_evaluation_how2sign_prod.py on a new cluster
+
+# Core dependencies
+opencv-python>=4.5.0  # For video frame extraction (cv2)
+numpy>=1.19.0  # For numerical operations
+Pillow>=8.0.0  # For image processing (PIL)
+tqdm>=4.60.0  # For progress bars
+openai>=1.0.0  # For Azure OpenAI API (AzureOpenAI)
+
+# Optional: If you need Gemini support (not required for Azure-only setup)
+# google-generativeai>=0.3.0  # Uncomment if using Gemini API
+
+# Note: The following are Python standard library (no installation needed):
+# - os, sys, json, re, base64, io, warnings, argparse, datetime, time
+# - concurrent.futures, threading
+
+
+
