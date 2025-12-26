@@ -25,7 +25,9 @@ MODEL_NAME="OpenGVLab/InternVL2_5-1B"
 OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/"
 # Use local data paths
 # META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
-META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
+# META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
+
+
 IMAGE_ROOT="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
 # Optimized training configuration
