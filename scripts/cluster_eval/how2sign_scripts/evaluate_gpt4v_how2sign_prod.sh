@@ -13,13 +13,15 @@
 export PYTHONUNBUFFERED=1
 
 # Change to project directory
-cd /local1/mhu/sign_language_llm
+cd /code/doc_sign_search
 
 # Configuration
 MODEL="${MODEL:-gpt-5}"  # Azure deployment model name
-VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224}"
-QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl.jsonl}"
-OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/gpt4v_eval/}"
+VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/train_crop_videos_224}"
+# VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/how2sign_test_videos_224x224}"
+QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/train_how2sign_internvl.jsonl}"
+# QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
+OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/gpt5_eval/}"
 
 # Azure OpenAI Configuration
 AZURE_ENDPOINT="${AZURE_OPENAI_ENDPOINT:-https://dil-research-3.openai.azure.com/}"
@@ -27,12 +29,12 @@ AZURE_API_VERSION="${AZURE_OPENAI_API_VERSION:-2024-12-01-preview}"
 AZURE_DEPLOYMENT="${AZURE_OPENAI_DEPLOYMENT:-$MODEL}"  # Default to MODEL if not set
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-5}  # Set to a number to limit samples, empty for full evaluation
+MAX_SAMPLES=${MAX_SAMPLES:-10}  # Set to a number to limit samples, empty for full evaluation
 NUM_FRAMES=${NUM_FRAMES:-32}  # Number of frames to extract from video
 VIDEO_FPS=${VIDEO_FPS:-}  # Target FPS for frame extraction (if empty, uses num-frames)
 IMAGE_DETAIL=${IMAGE_DETAIL:-low}  # Image detail level: low, high, auto
-MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-10240}
-TEMPERATURE=${TEMPERATURE:-0.7}
+MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-16384}
+TEMPERATURE=${TEMPERATURE:-1}
 SAVE_FRAMES=${SAVE_FRAMES:-false}  # Set to "true" to enable frame saving
 
 echo "🎬 Azure GPT-5 Vision How2Sign Evaluation"

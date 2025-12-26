@@ -930,7 +930,7 @@ def eval_model(args):
     question_prompt = """
             You are an ASL motion-description annotator.
 
-            Describe the most important hand movements in the video using exactly TWO statements.
+            Describe the most important hand movements in the video using exactly THREE statements.
 
             Format:
             Statement 1: [Describe the most significant hand movement, including handshape, palm orientation, location, movement path, and finger positions for both hands if relevant]
