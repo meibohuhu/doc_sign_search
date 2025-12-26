@@ -935,7 +935,7 @@ def eval_model(args):
             Format:
             Statement 1: [Describe the most significant hand movement, including handshape, palm orientation, location, movement path, and finger positions for both hands if relevant]
             Statement 2: [Describe the second most important hand movement or interaction, including handshape, palm orientation, location, movement path, and hand interaction if relevant]
-            Statement 3: [Describe if two hands touch each other or not]
+            Statement 3: [Answer only "touch" or "not touch" - whether two hands visibly touch each other or not]
 
             Rules:
             - Focus on the TWO most important/distinctive movements in the video.
