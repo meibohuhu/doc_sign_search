@@ -26,3 +26,10 @@ not touch: 313
 ✓ Sampled 1750 hand selection entries
 ✓ Sampled 250 Yes/No entries
 ✓ Sampled 500 touch entries
+
+
+
+/local1/mhu/sign_language_llm/outputs/gpt5_eval/122240/qa_pairs_122240/qa_pairs_instructional_122240.json
+/local1/mhu/sign_language_llm/outputs/gpt5_eval/122230/qa_pairs_122230/qa_pairs_instructional_122230.json
+/local1/mhu/sign_language_llm/outputs/gpt5_eval/122220/qa_pairs_122220/qa_pairs_instructional_122220.json
+从这三个file里面sample
