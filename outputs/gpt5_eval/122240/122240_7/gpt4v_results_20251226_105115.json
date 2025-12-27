@@ -7099,5 +7099,1295 @@
       "statement2": "Both hands in 5-handshapes (fingers spread), palms facing forward, start near center chest and sweep laterally outward to both sides, then rise to shoulder level in a symmetrical upward path.",
       "statement3": "touch"
     }
+  },
+  {
+    "video": "fFk8oRYSMq0_29-5-rgb_front.mp4",
+    "model_output": "Statement 1: Dominant hand in 1-handshape (index extended, other fingers curled, thumb resting), palm oriented toward the non-dominant hand at mid-chest; non-dominant hand in flat-B handshape (fingers together, thumb tucked), palm oriented toward the dominant side and held vertically near the center; the dominant index slides along the non-dominant palm from the heel/wrist area upward toward the fingertips in a straight, slightly diagonal path.\n\nStatement 2: Both hands in 1-handshape with index fingers upright and other fingers curled, palms facing each other; starting at mid-chest and moving to lower face level, the hands travel upward and inward to center, bringing the index tips close and parallel with a brief, controlled hold.\n\nStatement 3: touch",
+    "ground_truth": "So, have a dialog there.",
+    "statements": {
+      "statement1": "Dominant hand in 1-handshape (index extended, other fingers curled, thumb resting), palm oriented toward the non-dominant hand at mid-chest; non-dominant hand in flat-B handshape (fingers together, thumb tucked), palm oriented toward the dominant side and held vertically near the center; the dominant index slides along the non-dominant palm from the heel/wrist area upward toward the fingertips in a straight, slightly diagonal path.",
+      "statement2": "Both hands in 1-handshape with index fingers upright and other fingers curled, palms facing each other; starting at mid-chest and moving to lower face level, the hands travel upward and inward to center, bringing the index tips close and parallel with a brief, controlled hold.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: At chest level, the left hand holds a 1-hand (index extended horizontally, other fingers closed, palm facing right) while the right hand forms an X-hand (index bent, other fingers closed, palm facing down/inward) that hooks over the left index and makes a short sliding-twisting motion along the left index toward its tip.\nStatement 2: The right hand moves from the right side of the neck in an A-hand (fist with thumb alongside, palm facing left/inward) along a small outward arc to above the stationary left hand, which is a relaxed B-hand palm up at midline, with the right fingers remaining closed during the motion.\nStatement 3: touch",
+    "ground_truth": "So listen carefully as we talk about how do we pamper our wife.",
+    "statements": {
+      "statement1": "At chest level, the left hand holds a 1-hand (index extended horizontally, other fingers closed, palm facing right) while the right hand forms an X-hand (index bent, other fingers closed, palm facing down/inward) that hooks over the left index and makes a short sliding-twisting motion along the left index toward its tip.",
+      "statement2": "The right hand moves from the right side of the neck in an A-hand (fist with thumb alongside, palm facing left/inward) along a small outward arc to above the stationary left hand, which is a relaxed B-hand palm up at midline, with the right fingers remaining closed during the motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_30-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand transitions from a 1-handshape to a spread, slightly curved 5/claw with palm facing left-inward at upper chest level and moves in a broad upward-outward arc toward the upper left, while the left hand holds an S-handshape at mid-chest with palm inward and stays still.\nStatement 2: With the right hand open palm up at lower chest and the left hand flat/curved-5 palm down, the left hand moves forward to contact and slide along the dorsal side of the right forearm toward the right wrist/hand, then both hands close into S-handshapes with palms facing each other and meet at mid-chest.\nStatement 3: touch",
+    "ground_truth": "Be prepared to give, and ultimately you'll receive.",
+    "statements": {
+      "statement1": "The right hand transitions from a 1-handshape to a spread, slightly curved 5/claw with palm facing left-inward at upper chest level and moves in a broad upward-outward arc toward the upper left, while the left hand holds an S-handshape at mid-chest with palm inward and stays still.",
+      "statement2": "With the right hand open palm up at lower chest and the left hand flat/curved-5 palm down, the left hand moves forward to contact and slide along the dorsal side of the right forearm toward the right wrist/hand, then both hands close into S-handshapes with palms facing each other and meet at mid-chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_31-5-rgb_front.mp4",
+    "model_output": "Statement 1: The left hand holds a flat-B handshape with fingers extended together and palm facing down at midline in front of the torso, while the right hand forms a flat-B with fingers extended together and palm facing down and moves in a short lateral sweep across the back of the left hand before sliding off.\nStatement 2: Both hands form open-5 handshapes with fingers spread and palms facing inward toward the upper chest, then move symmetrically outward and slightly upward from the chest toward shoulder width along a brief forward-and-out arc.\nStatement 3: touch",
+    "ground_truth": "Doctor John Gray of the Venus and Mars book series, has a lot of good advice here.",
+    "statements": {
+      "statement1": "The left hand holds a flat-B handshape with fingers extended together and palm facing down at midline in front of the torso, while the right hand forms a flat-B with fingers extended together and palm facing down and moves in a short lateral sweep across the back of the left hand before sliding off.",
+      "statement2": "Both hands form open-5 handshapes with fingers spread and palms facing inward toward the upper chest, then move symmetrically outward and slightly upward from the chest toward shoulder width along a brief forward-and-out arc.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_32-5-rgb_front.mp4",
+    "model_output": "Statement 1: The left hand holds a flat-B handshape with fingers together and extended and palm facing right at mid-chest while the right hand opens to a flat-B handshape with palm facing left, moves in from the right side of center, and makes small side-to-side rubbing motions across the left palm.\nStatement 2: Both hands then form F-handshapes (thumb and index fingertip touching, other fingers extended), palms facing inward at upper chest/shoulder level, and rise together slightly before settling.\nStatement 3: touch",
+    "ground_truth": "There's other things that you can do.",
+    "statements": {
+      "statement1": "The left hand holds a flat-B handshape with fingers together and extended and palm facing right at mid-chest while the right hand opens to a flat-B handshape with palm facing left, moves in from the right side of center, and makes small side-to-side rubbing motions across the left palm.",
+      "statement2": "Both hands then form F-handshapes (thumb and index fingertip touching, other fingers extended), palms facing inward at upper chest/shoulder level, and rise together slightly before settling.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_33-5-rgb_front.mp4",
+    "model_output": "Statement 1: The hand on the left side of the frame begins with an index-extended handshape (other fingers closed), palm facing inward at chest level left of midline, then moves diagonally right toward the center as the index and middle fingers extend together, the wrist rotates slightly, the fingers curl, and the hand closes into a fist.\nStatement 2: The hand on the right side of the frame holds an index-extended handshape (other fingers closed), palm facing inward near center chest, then the fingers close into a fist while both hands shift slightly inward toward the midline with palms oriented inward toward the torso.\nStatement 3: not touch",
+    "ground_truth": "Attend workshops.",
+    "statements": {
+      "statement1": "The hand on the left side of the frame begins with an index-extended handshape (other fingers closed), palm facing inward at chest level left of midline, then moves diagonally right toward the center as the index and middle fingers extend together, the wrist rotates slightly, the fingers curl, and the hand closes into a fist.",
+      "statement2": "The hand on the right side of the frame holds an index-extended handshape (other fingers closed), palm facing inward near center chest, then the fingers close into a fist while both hands shift slightly inward toward the midline with palms oriented inward toward the torso.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_34-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat-B handshape (fingers straight together, thumb alongside), palm facing left, at mouth level and moves from mid-chest upward and inward to lightly tap the lips before retracting slightly outward, while the left hand holds a stationary flat-5 handshape at upper chest with palm facing forward.\nStatement 2: The right hand forms a V-handshape (index and middle fingers extended, other fingers closed), palm facing left, at upper chest and moves diagonally down-left to contact the left hand’s flat-5 palm (palm facing right) at chest level, making a brief sliding motion across the left palm.\nStatement 3: touch",
+    "ground_truth": "But it may be as simple as sitting down and watching TV with her, a TV program.",
+    "statements": {
+      "statement1": "The right hand forms a flat-B handshape (fingers straight together, thumb alongside), palm facing left, at mouth level and moves from mid-chest upward and inward to lightly tap the lips before retracting slightly outward, while the left hand holds a stationary flat-5 handshape at upper chest with palm facing forward.",
+      "statement2": "The right hand forms a V-handshape (index and middle fingers extended, other fingers closed), palm facing left, at upper chest and moves diagonally down-left to contact the left hand’s flat-5 palm (palm facing right) at chest level, making a brief sliding motion across the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_35-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing each other at upper chest level, moving horizontally toward the center until the index fingertips meet.\nStatement 2: The left hand holds a flat B-handshape with palm up at lower chest level while the right hand forms a flat B-handshape with palm down and moves diagonally downward to contact the left palm, after which both hands close into a two-hand clasp with fingers curled and palms inward at the midline.\nStatement 3: touch",
+    "ground_truth": "And I would suggest doing that, except don't watch Desperate Housewives.",
+    "statements": {
+      "statement1": "Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing each other at upper chest level, moving horizontally toward the center until the index fingertips meet.",
+      "statement2": "The left hand holds a flat B-handshape with palm up at lower chest level while the right hand forms a flat B-handshape with palm down and moves diagonally downward to contact the left palm, after which both hands close into a two-hand clasp with fingers curled and palms inward at the midline.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_36-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand in a 1-handshape (index extended, other fingers curled, palm facing slightly left/down) at mid-chest level moves in small, repeated taps across the open left hand in a 5-handshape (palm up, fingers spread), contacting multiple fingertips and areas of the palm in a short lateral path.\nStatement 2: Both hands form curved C-handshapes with fingers together and flexed; the left hand holds at low chest with palm up while the right hand, palm down, moves inward and downward to nest into the left, closing together into a cupped hold with a slight inward closing motion.\nStatement 3: touch",
+    "ground_truth": "So, make sure that you pay attention to your wife, make her feel special.",
+    "statements": {
+      "statement1": "The right hand in a 1-handshape (index extended, other fingers curled, palm facing slightly left/down) at mid-chest level moves in small, repeated taps across the open left hand in a 5-handshape (palm up, fingers spread), contacting multiple fingertips and areas of the palm in a short lateral path.",
+      "statement2": "Both hands form curved C-handshapes with fingers together and flexed; the left hand holds at low chest with palm up while the right hand, palm down, moves inward and downward to nest into the left, closing together into a cupped hold with a slight inward closing motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_37-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-handshape (index extended, other fingers curled, thumb resting), palm inward, located near the upper chest, makes small repeated forward taps while the left hand holds a relaxed 5-handshape with palm up at mid torso without moving.\nStatement 2: Right hand transitions from an ILY-handshape (index and pinky extended with thumb out, middle and ring curled), palm inward near the upper chest, to an open 5-handshape and moves downward to meet the left open 5-handshape with palm up at the midline, then both hands interlace fingers into a centered clasp with palms facing each other.\nStatement 3: touch",
+    "ground_truth": "And that's how you pamper your wife.",
+    "statements": {
+      "statement1": "Right hand in a 1-handshape (index extended, other fingers curled, thumb resting), palm inward, located near the upper chest, makes small repeated forward taps while the left hand holds a relaxed 5-handshape with palm up at mid torso without moving.",
+      "statement2": "Right hand transitions from an ILY-handshape (index and pinky extended with thumb out, middle and ring curled), palm inward near the upper chest, to an open 5-handshape and moves downward to meet the left open 5-handshape with palm up at the midline, then both hands interlace fingers into a centered clasp with palms facing each other.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_38-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 5-handshapes with fingers spread, palms facing each other at midline chest level, then move inward along a short horizontal path and interlace with the fingers of each hand threaded between the other while palms remain slightly inward.\nStatement 2: The left hand holds a relaxed curved 5-hand, palm up at lower chest, while the right hand forms an F-handshape (thumb and index touching, other fingers extended), palm facing left, and moves from near the mouth downward to hover above the left palm with small repeated downward bounces.\nStatement 3: touch",
+    "ground_truth": "I'm Joe Cuenco, with Family Resources, Relationships for Life.",
+    "statements": {
+      "statement1": "Both hands form 5-handshapes with fingers spread, palms facing each other at midline chest level, then move inward along a short horizontal path and interlace with the fingers of each hand threaded between the other while palms remain slightly inward.",
+      "statement2": "The left hand holds a relaxed curved 5-hand, palm up at lower chest, while the right hand forms an F-handshape (thumb and index touching, other fingers extended), palm facing left, and moves from near the mouth downward to hover above the left palm with small repeated downward bounces.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_4-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-handshape (index extended, other fingers curled with thumb resting), palm oriented inward, moves upward from mid-chest neutral space to the mouth area where the index fingertip makes brief contact, then the pinky extends momentarily before the hand returns toward chest-level; left hand remains stationary in a relaxed flat/curved handshape, palm up at midline chest.\nStatement 2: Left hand holds a flat-B handshape, palm up at mid-chest, while the right hand in a loose curved-5 handshape, palm down/inward, repeatedly moves downward along a short path to contact and lightly brush/pat the center of the left palm.\nStatement 3: touch",
+    "ground_truth": "This is really going to be specific to your wife's personality.",
+    "statements": {
+      "statement1": "Right hand in a 1-handshape (index extended, other fingers curled with thumb resting), palm oriented inward, moves upward from mid-chest neutral space to the mouth area where the index fingertip makes brief contact, then the pinky extends momentarily before the hand returns toward chest-level; left hand remains stationary in a relaxed flat/curved handshape, palm up at midline chest.",
+      "statement2": "Left hand holds a flat-B handshape, palm up at mid-chest, while the right hand in a loose curved-5 handshape, palm down/inward, repeatedly moves downward along a short path to contact and lightly brush/pat the center of the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_5-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-hand (index extended, other fingers closed), palm facing down, at mid-chest and makes several short downward taps onto the open left B-hand (palm up, fingers together) held at the midline.\nStatement 2: The left hand forms an S-hand (fist with thumb across the fingers), palm up at lower chest, and performs small repeated inward–outward wrist rotations while the right hand holds a stationary 1-hand upright near the right shoulder with palm facing left.\nStatement 3: touch",
+    "ground_truth": "Each woman has things that are very important to her, and there are things that she doesn't like as well.",
+    "statements": {
+      "statement1": "The right hand forms a 1-hand (index extended, other fingers closed), palm facing down, at mid-chest and makes several short downward taps onto the open left B-hand (palm up, fingers together) held at the midline.",
+      "statement2": "The left hand forms an S-hand (fist with thumb across the fingers), palm up at lower chest, and performs small repeated inward–outward wrist rotations while the right hand holds a stationary 1-hand upright near the right shoulder with palm facing left.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand in a 1-handshape (index extended, other fingers curled, thumb along the side), palm facing down, located in front of the torso, moves in short lateral strokes across the upturned left palm (left hand in a flat-B handshape, palm facing up) from near the wrist toward the fingertips with visible contact.\nStatement 2: Both hands in spread-5 handshapes, palms facing forward and positioned beside the cheeks, move slightly outward in small, even motions with fingers spread and relaxed.\nStatement 3: touch",
+    "ground_truth": "So it's very important that we pay attention to these things.",
+    "statements": {
+      "statement1": "The right hand in a 1-handshape (index extended, other fingers curled, thumb along the side), palm facing down, located in front of the torso, moves in short lateral strokes across the upturned left palm (left hand in a flat-B handshape, palm facing up) from near the wrist toward the fingertips with visible contact.",
+      "statement2": "Both hands in spread-5 handshapes, palms facing forward and positioned beside the cheeks, move slightly outward in small, even motions with fingers spread and relaxed.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-hand (index extended, other fingers curled with the thumb resting across them), palm facing left at upper chest level, moving in short forward-and-back taps and small lateral arcs toward the left hand’s upright 1-hand (index extended, other fingers curled with the thumb resting across), palm facing right and held slightly left of center.\nStatement 2: The left hand makes a tight fist (thumb across the fingers), palm inward at mid-chest, while the right hand forms a flat, slightly curved hand with fingers together, palm down/inward, enclosing the left fist with a brief downward press and a small rocking motion.\nStatement 3: touch",
+    "ground_truth": "But before we pay attention to them, we first have to understand and know what they are.",
+    "statements": {
+      "statement1": "The right hand forms a 1-hand (index extended, other fingers curled with the thumb resting across them), palm facing left at upper chest level, moving in short forward-and-back taps and small lateral arcs toward the left hand’s upright 1-hand (index extended, other fingers curled with the thumb resting across), palm facing right and held slightly left of center.",
+      "statement2": "The left hand makes a tight fist (thumb across the fingers), palm inward at mid-chest, while the right hand forms a flat, slightly curved hand with fingers together, palm down/inward, enclosing the left fist with a brief downward press and a small rocking motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_8-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands in 1-handshape (index extended, other fingers curled), palms facing each other at the centerline in front of the upper chest; the index fingertips cross into an X at midline and then separate slightly in a small horizontal motion while maintaining the same handshapes and orientations.\n\nStatement 2: Both hands form S-fists, palms facing each other at chest center; the fists make contact at the knuckles, then the right hand changes to a 1-handshape (index extended, other fingers curled, palm facing left) and makes small taps on the top of the left S-fist (palm facing right) without changing location.\n\nStatement 3: touch",
+    "ground_truth": "Have a dialog with your wife.",
+    "statements": {
+      "statement1": "Both hands in 1-handshape (index extended, other fingers curled), palms facing each other at the centerline in front of the upper chest; the index fingertips cross into an X at midline and then separate slightly in a small horizontal motion while maintaining the same handshapes and orientations.",
+      "statement2": "Both hands form S-fists, palms facing each other at chest center; the fists make contact at the knuckles, then the right hand changes to a 1-handshape (index extended, other fingers curled, palm facing left) and makes small taps on the top of the left S-fist (palm facing right) without changing location.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFk8oRYSMq0_9-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms an A-handshape with fingers curled and thumb extended upward, palm facing inward/left, held in front of the upper chest, and moves in a short downward path toward the stationary left hand, which is a relaxed open 5-handshape with palm up near mid-torso and fingers slightly spread.\nStatement 2: The right hand transitions to a V-handshape with index and middle fingers extended together (ring and pinky closed, thumb relaxed), palm facing down/inward above the left open palm at midline, and slides diagonally across the left palm from the proximal area toward the fingertips while the left hand remains a steady 5-handshape with palm up.\nStatement 3: touch",
+    "ground_truth": "Ask her what it is that makes her feel special.",
+    "statements": {
+      "statement1": "The right hand forms an A-handshape with fingers curled and thumb extended upward, palm facing inward/left, held in front of the upper chest, and moves in a short downward path toward the stationary left hand, which is a relaxed open 5-handshape with palm up near mid-torso and fingers slightly spread.",
+      "statement2": "The right hand transitions to a V-handshape with index and middle fingers extended together (ring and pinky closed, thumb relaxed), palm facing down/inward above the left open palm at midline, and slides diagonally across the left palm from the proximal area toward the fingertips while the left hand remains a steady 5-handshape with palm up.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFoY25BAiec_1-8-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest, the left hand holds a steady flat-B handshape (fingers extended together, thumb alongside), palm facing up, while the right hand forms a flat-B handshape (fingers extended together, thumb alongside), palm facing down, and moves in a short downward arc to contact the left palm before lifting slightly and repeating a small tapping motion.\nStatement 2: At lower chest level, both hands use a relaxed-5 handshape (fingers spread and gently curved, thumbs extended), palms facing up, and execute small alternating inward–outward circular motions that move slightly toward and away from the midline without contacting each other.\nStatement 3: touch",
+    "ground_truth": "She brought it into the world in 1984 and originally they were in quite big bottles, not the little ones that we have now.",
+    "statements": {
+      "statement1": "At mid-chest, the left hand holds a steady flat-B handshape (fingers extended together, thumb alongside), palm facing up, while the right hand forms a flat-B handshape (fingers extended together, thumb alongside), palm facing down, and moves in a short downward arc to contact the left palm before lifting slightly and repeating a small tapping motion.",
+      "statement2": "At lower chest level, both hands use a relaxed-5 handshape (fingers spread and gently curved, thumbs extended), palms facing up, and execute small alternating inward–outward circular motions that move slightly toward and away from the midline without contacting each other.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFoY25BAiec_2-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a loose fist with fingers curled and thumb tucked, palm facing down at center chest level, and makes two to three small downward pats to contact the stationary left hand, which is a flat hand with fingers together and palm facing up at midline.\nStatement 2: The right hand changes to a 1-handshape (index finger extended, other fingers folded with thumb against the side), palm facing left, held near the right side of the head at temple height, then moves in a short outward-and-downward arc to hover above the left palm at center chest.\nStatement 3: touch",
+    "ground_truth": "And when she first created the she didnÂ´t even know what they were for.",
+    "statements": {
+      "statement1": "The right hand forms a loose fist with fingers curled and thumb tucked, palm facing down at center chest level, and makes two to three small downward pats to contact the stationary left hand, which is a flat hand with fingers together and palm facing up at midline.",
+      "statement2": "The right hand changes to a 1-handshape (index finger extended, other fingers folded with thumb against the side), palm facing left, held near the right side of the head at temple height, then moves in a short outward-and-downward arc to hover above the left palm at center chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFoY25BAiec_3-8-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a relaxed 5-hand with fingers spread and fluttering, palm facing down, and sweeps leftward in a shallow arc above the stationary left hand, which holds a flat-B handshape with fingers together and palm up at lower chest level in front of the torso.\nStatement 2: Both hands take flat-B handshapes with fingers together, palms facing each other at midline in front of the chest, come into firm contact, and make a brief back-and-forth rubbing motion while held horizontally.\nStatement 3: touch",
+    "ground_truth": "She had to learn about to understand what it was that she had brought through.",
+    "statements": {
+      "statement1": "The right hand forms a relaxed 5-hand with fingers spread and fluttering, palm facing down, and sweeps leftward in a shallow arc above the stationary left hand, which holds a flat-B handshape with fingers together and palm up at lower chest level in front of the torso.",
+      "statement2": "Both hands take flat-B handshapes with fingers together, palms facing each other at midline in front of the chest, come into firm contact, and make a brief back-and-forth rubbing motion while held horizontally.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFoY25BAiec_4-8-rgb_front.mp4",
+    "model_output": "Statement 1: Left hand holds a flat-B handshape (fingers together and extended, thumb tucked), palm up at lower chest level while the right hand forms a bent-2 handshape (index and middle fingers extended downward, others closed), palm down, moving in short downward taps/brushes onto the left palm along a small vertical path.\nStatement 2: Both hands form curved claw shapes (fingers spread and flexed), at chest level with palms initially forward then slightly inward, moving toward and away from each other in small alternating arcs while maintaining spacing.\nStatement 3: touch",
+    "ground_truth": "She took them to decorate a stand at an EXPO because she sold beauty cremes and she took the bottles to kind of brighten up the stand and get some attention and she found that people came and were attracted to the bottles and eventually she noticed that they were choosing bottles that matched in their own auric fields.",
+    "statements": {
+      "statement1": "Left hand holds a flat-B handshape (fingers together and extended, thumb tucked), palm up at lower chest level while the right hand forms a bent-2 handshape (index and middle fingers extended downward, others closed), palm down, moving in short downward taps/brushes onto the left palm along a small vertical path.",
+      "statement2": "Both hands form curved claw shapes (fingers spread and flexed), at chest level with palms initially forward then slightly inward, moving toward and away from each other in small alternating arcs while maintaining spacing.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFoY25BAiec_5-8-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand transitions from a 1-hand (index extended, other fingers curled, thumb alongside) with palm facing inward at cheek level to a V-hand (index and middle extended and separated, other fingers curled, thumb tucked) and makes a short downward-and-forward flick from cheek level to in front of the upper chest.\nStatement 2: Left forearm is held horizontal across the torso with the left hand in a relaxed 5-hand, palm down, while the right hand, palm down, travels diagonally down-left from the upper center toward the left shoulder, closes into an S-hand (fist with thumb on the side), and contacts the left forearm near the wrist with a brief small back-and-forth motion.\nStatement 3: touch",
+    "ground_truth": "Because she could see energy.",
+    "statements": {
+      "statement1": "Right hand transitions from a 1-hand (index extended, other fingers curled, thumb alongside) with palm facing inward at cheek level to a V-hand (index and middle extended and separated, other fingers curled, thumb tucked) and makes a short downward-and-forward flick from cheek level to in front of the upper chest.",
+      "statement2": "Left forearm is held horizontal across the torso with the left hand in a relaxed 5-hand, palm down, while the right hand, palm down, travels diagonally down-left from the upper center toward the left shoulder, closes into an S-hand (fist with thumb on the side), and contacts the left forearm near the wrist with a brief small back-and-forth motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFoY25BAiec_6-8-rgb_front.mp4",
+    "model_output": "Statement 1: On the right side of the frame, the hand holds a vertical B-handshape with fingers together and extended, palm facing left at chest level, while the other hand on the left side of the frame forms a 1-hand with the index extended and other fingers curled, palm down, moving a short horizontal path toward and across the space in front of the upright palm.\nStatement 2: Near the end, both hands open to curved-5 handshapes at chest level with palms facing each other at the midline, then move inward as the fingers curl and interlace, ending in a loosely clasped two-hand position.\nStatement 3: touch",
+    "ground_truth": "So she to kind of learn why do they match.",
+    "statements": {
+      "statement1": "On the right side of the frame, the hand holds a vertical B-handshape with fingers together and extended, palm facing left at chest level, while the other hand on the left side of the frame forms a 1-hand with the index extended and other fingers curled, palm down, moving a short horizontal path toward and across the space in front of the upright palm.",
+      "statement2": "Near the end, both hands open to curved-5 handshapes at chest level with palms facing each other at the midline, then move inward as the fingers curl and interlace, ending in a loosely clasped two-hand position.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fFoY25BAiec_7-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form X-handshapes (bent index fingers, other fingers curled, thumbs resting alongside), palms facing each other at chest level, moving toward the midline to hook the bent index fingertips together and making small up-and-down pulses while near the center of the torso.\n\nStatement 2: The left hand holds a flat-B handshape palm-down at mid-torso while the right hand forms a flat-B palm-down and slides along the back of the left hand from fingertips toward wrist in a short forward-and-back path.\n\nStatement 3: touch",
+    "ground_truth": "The Aura Soma is an ongoing, itÂ´s a living system, itÂ´s an ongoing process, a discovery what itÂ´s even about and she has sinced passed on in 91 and Mike Boot is now carrying on her work in England to bring Aura Soma to the entire world and we have practitioners in every contry, just about.",
+    "statements": {
+      "statement1": "Both hands form X-handshapes (bent index fingers, other fingers curled, thumbs resting alongside), palms facing each other at chest level, moving toward the midline to hook the bent index fingertips together and making small up-and-down pulses while near the center of the torso.",
+      "statement2": "The left hand holds a flat-B handshape palm-down at mid-torso while the right hand forms a flat-B palm-down and slides along the back of the left hand from fingertips toward wrist in a short forward-and-back path.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_0-5-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest, the right hand in a 1-handshape (index extended, other fingers curled, palm facing left toward the left hand) places the fingertip onto the center of the left hand held vertically in a flat-B handshape (fingers together and extended, palm facing right toward the right hand) and draws a short straight stroke downward along the left palm toward the wrist.\nStatement 2: At upper chest, both hands form S-handshapes (fists with thumbs resting over the index fingers), palms facing inward, with the knuckles touching at the midline as they make a small continuous circular rubbing motion while maintaining contact.\nStatement 3: touch",
+    "ground_truth": "Now I'm going to show you how to prepare your stones.",
+    "statements": {
+      "statement1": "At mid-chest, the right hand in a 1-handshape (index extended, other fingers curled, palm facing left toward the left hand) places the fingertip onto the center of the left hand held vertically in a flat-B handshape (fingers together and extended, palm facing right toward the right hand) and draws a short straight stroke downward along the left palm toward the wrist.",
+      "statement2": "At upper chest, both hands form S-handshapes (fists with thumbs resting over the index fingers), palms facing inward, with the knuckles touching at the midline as they make a small continuous circular rubbing motion while maintaining contact.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_1-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-handshape (index extended, other fingers closed), palm facing left with the index pointing up, at midline chest height, makes repeated short downward taps onto the top/near-thumb side of the stationary left hand in an S-handshape (fist), palm facing right, held near the chest.\nStatement 2: Left hand forms a flat-B handshape with fingers together and palm facing up at the center chest while the right hand in a relaxed 5-handshape with fingers slightly spread and palm facing down moves in a brief downward-diagonal path to brush across and contact the left palm.\nStatement 3: touch",
+    "ground_truth": "When you get a stone you would receive in a box and it would also come with a nylon scraper.",
+    "statements": {
+      "statement1": "Right hand in a 1-handshape (index extended, other fingers closed), palm facing left with the index pointing up, at midline chest height, makes repeated short downward taps onto the top/near-thumb side of the stationary left hand in an S-handshape (fist), palm facing right, held near the chest.",
+      "statement2": "Left hand forms a flat-B handshape with fingers together and palm facing up at the center chest while the right hand in a relaxed 5-handshape with fingers slightly spread and palm facing down moves in a brief downward-diagonal path to brush across and contact the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_10-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a D-handshape (index extended, other fingers curled, thumb resting on the side), palm inward, moving from mid-chest to the mouth area in a short upward-diagonal path and briefly touching with the fingertip, while the left hand holds a relaxed B-handshape near midline with palm facing right and minimal movement.\nStatement 2: The left hand holds a flat B-handshape, palm up at lower chest level, while the right hand forms a flat B-handshape, palm down, making short repeated forward strokes across the left palm from the wrist area toward the fingertips with continuous contact.\nStatement 3: touch",
+    "ground_truth": "Again we do not recommend any soap.",
+    "statements": {
+      "statement1": "The right hand forms a D-handshape (index extended, other fingers curled, thumb resting on the side), palm inward, moving from mid-chest to the mouth area in a short upward-diagonal path and briefly touching with the fingertip, while the left hand holds a relaxed B-handshape near midline with palm facing right and minimal movement.",
+      "statement2": "The left hand holds a flat B-handshape, palm up at lower chest level, while the right hand forms a flat B-handshape, palm down, making short repeated forward strokes across the left palm from the wrist area toward the fingertips with continuous contact.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_11-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 1-handshapes (index extended, other fingers curled, thumbs resting on the sides), palms oriented inward toward the body at upper chest level, and move from their respective sides toward the midline to cross the index fingers into an X shape with brief contact, then separate slightly while staying near that location.\nStatement 2: The right hand forms a flat B-handshape (fingers together, extended), palm down, at lower chest level, and moves horizontally from right to left gliding across the stationary left hand flat B-handshape, palm up, with the right fingertips and heel traveling over the left palm.\nStatement 3: touch",
+    "ground_truth": "So you would just rinse it and then store it either back in the box or in your oven.",
+    "statements": {
+      "statement1": "Both hands form 1-handshapes (index extended, other fingers curled, thumbs resting on the sides), palms oriented inward toward the body at upper chest level, and move from their respective sides toward the midline to cross the index fingers into an X shape with brief contact, then separate slightly while staying near that location.",
+      "statement2": "The right hand forms a flat B-handshape (fingers together, extended), palm down, at lower chest level, and moves horizontally from right to left gliding across the stationary left hand flat B-handshape, palm up, with the right fingertips and heel traveling over the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand starts in a relaxed 5-handshape with fingers slightly spread and palm inward, touches the upper chest, then sweeps diagonally down-left in a short outward arc to hover above the left hand, while the left hand holds a flat open palm with fingers together, palm up at lower left torso level.\nStatement 2: The right hand forms a 1-handshape with the index finger extended, other fingers curled and thumb relaxed, palm inward, and makes small repeated taps of the index fingertip on the lips.\nStatement 3: not touch",
+    "ground_truth": "It would be a white very white color stone.",
+    "statements": {
+      "statement1": "The right hand starts in a relaxed 5-handshape with fingers slightly spread and palm inward, touches the upper chest, then sweeps diagonally down-left in a short outward arc to hover above the left hand, while the left hand holds a flat open palm with fingers together, palm up at lower left torso level.",
+      "statement2": "The right hand forms a 1-handshape with the index finger extended, other fingers curled and thumb relaxed, palm inward, and makes small repeated taps of the index fingertip on the lips.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form flat-B handshapes with fingers together; the right palm faces left and the left palm faces right at midline in front of the upper chest, the hands touch, and then both open to 5-handshapes and move laterally apart to near shoulder width with palms facing up.\nStatement 2: With both hands in relaxed 5-handshapes (fingers slightly spread and curved), palms facing down at lower chest/upper abdomen level, the hands perform repeated short downward, wiggling movements with slight flexion-extension of the fingers.\nStatement 3: touch",
+    "ground_truth": "The first thing we want to do is rinse it in warm water.",
+    "statements": {
+      "statement1": "Both hands form flat-B handshapes with fingers together; the right palm faces left and the left palm faces right at midline in front of the upper chest, the hands touch, and then both open to 5-handshapes and move laterally apart to near shoulder width with palms facing up.",
+      "statement2": "With both hands in relaxed 5-handshapes (fingers slightly spread and curved), palms facing down at lower chest/upper abdomen level, the hands perform repeated short downward, wiggling movements with slight flexion-extension of the fingers.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_4-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 1‑handshapes (index fingers extended, other fingers curled with thumbs resting on the curled fingers), palms facing inward, positioned at the upper chest near the collarbones; the index fingertips move diagonally inward to meet and touch at the midline, then both hands shift slightly forward.\n\nStatement 2: Both hands change to relaxed 5/claw handshapes, palms up and slightly inward at mid‑torso level; they move laterally outward from the center and slightly forward, then each hand closes into flat‑O handshapes (thumbs contacting fingertips) with a small settling motion.\n\nStatement 3: touch",
+    "ground_truth": "This does not need to be soaked.",
+    "statements": {
+      "statement1": "Both hands form 1‑handshapes (index fingers extended, other fingers curled with thumbs resting on the curled fingers), palms facing inward, positioned at the upper chest near the collarbones; the index fingertips move diagonally inward to meet and touch at the midline, then both hands shift slightly forward.",
+      "statement2": "Both hands change to relaxed 5/claw handshapes, palms up and slightly inward at mid‑torso level; they move laterally outward from the center and slightly forward, then each hand closes into flat‑O handshapes (thumbs contacting fingertips) with a small settling motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_5-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat-B handshape (fingers extended and together, thumb alongside), palm facing down at mid-chest, and makes repeated short downward taps onto the stationary left hand, which holds a flat-B handshape with palm facing up at the center of the chest.\nStatement 2: Both hands form L-handshapes (index and thumb extended at a right angle, other fingers closed), palms facing each other at upper-chest level, and move symmetrically slightly forward and inward toward the midline while maintaining parallel orientation.\nStatement 3: touch",
+    "ground_truth": "We do not recommend suds, soap or detergent, or dish washer for your stone.",
+    "statements": {
+      "statement1": "The right hand forms a flat-B handshape (fingers extended and together, thumb alongside), palm facing down at mid-chest, and makes repeated short downward taps onto the stationary left hand, which holds a flat-B handshape with palm facing up at the center of the chest.",
+      "statement2": "Both hands form L-handshapes (index and thumb extended at a right angle, other fingers closed), palms facing each other at upper-chest level, and move symmetrically slightly forward and inward toward the midline while maintaining parallel orientation.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands in B-handshapes, fingers extended and together with thumbs alongside, palms facing each other in contact at mid-chest, move in small circular rubbing motions against each other.\nStatement 2: The right hand holds a slightly cupped B-handshape palm up at lower chest while the left hand in a flat B-handshape palm down above it moves downward to meet it, then both hands shift into opposing C-handshapes facing each other at mid-chest and hold briefly.\nStatement 3: touch",
+    "ground_truth": "After your first use of your stone, you would use the nylon scraper that comes with 4 different corners to clean your stone.",
+    "statements": {
+      "statement1": "Both hands in B-handshapes, fingers extended and together with thumbs alongside, palms facing each other in contact at mid-chest, move in small circular rubbing motions against each other.",
+      "statement2": "The right hand holds a slightly cupped B-handshape palm up at lower chest while the left hand in a flat B-handshape palm down above it moves downward to meet it, then both hands shift into opposing C-handshapes facing each other at mid-chest and hold briefly.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 5-hand (fingers extended and separated, thumb out), palm facing left, at right chest level, and sweeps forward-left in a semicircular path toward the left hand, which is held as a vertical B-hand (fingers extended and together), palm facing right, at center chest.\nStatement 2: The right hand forms a 1-hand (index extended, other fingers curled), palm facing inward, at center chest level, and moves in short downward taps onto the left hand held near midline first as an S-hand (fingers curled into a fist, palm in) and then as a B-hand (fingers extended and together, palm right or up).\nStatement 3: touch",
+    "ground_truth": "You would simply scrape any excess food from the stone using this scraper.",
+    "statements": {
+      "statement1": "The right hand forms a 5-hand (fingers extended and separated, thumb out), palm facing left, at right chest level, and sweeps forward-left in a semicircular path toward the left hand, which is held as a vertical B-hand (fingers extended and together), palm facing right, at center chest.",
+      "statement2": "The right hand forms a 1-hand (index extended, other fingers curled), palm facing inward, at center chest level, and moves in short downward taps onto the left hand held near midline first as an S-hand (fingers curled into a fist, palm in) and then as a B-hand (fingers extended and together, palm right or up).",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_8-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form flat-B handshapes with fingers extended and together and thumbs relaxed, palms facing each other at mid-chest, moving toward each other and slightly apart in a small, repeated horizontal in–out path.\nStatement 2: The left hand holds a flat-B handshape at mid-chest with palm down while the right hand forms a 1-handshape (index extended, other fingers closed, thumb resting), palm angled downward, and taps then lightly drags the index fingertip across the back of the left hand from near the fingers toward the wrist.\nStatement 3: touch",
+    "ground_truth": "Any of these corners would get in to any corner on type of stone that you have.",
+    "statements": {
+      "statement1": "Both hands form flat-B handshapes with fingers extended and together and thumbs relaxed, palms facing each other at mid-chest, moving toward each other and slightly apart in a small, repeated horizontal in–out path.",
+      "statement2": "The left hand holds a flat-B handshape at mid-chest with palm down while the right hand forms a 1-handshape (index extended, other fingers closed, thumb resting), palm angled downward, and taps then lightly drags the index fingertip across the back of the left hand from near the fingers toward the wrist.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FFwwrRhqSTE_9-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index extended, other fingers closed), palm oriented slightly inward/left, moving from upper chest level to the mouth where the index fingertip touches the lips, while the left hand holds steady at chest level in an A-handshape (fist with thumb extended) with palm facing inward.\nStatement 2: The left hand opens to a flat 5-handshape, palm up at midline near lower chest, while the right hand forms a flat B-handshape (fingers together, thumb tucked), palm facing left to slightly forward, and travels in a short upward arc from just above the left palm toward the right cheek.\nStatement 3: not touch",
+    "ground_truth": "Then you would just simply rinse it with warm water.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index extended, other fingers closed), palm oriented slightly inward/left, moving from upper chest level to the mouth where the index fingertip touches the lips, while the left hand holds steady at chest level in an A-handshape (fist with thumb extended) with palm facing inward.",
+      "statement2": "The left hand opens to a flat 5-handshape, palm up at midline near lower chest, while the right hand forms a flat B-handshape (fingers together, thumb tucked), palm facing left to slightly forward, and travels in a short upward arc from just above the left palm toward the right cheek.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_0-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form F-hands (thumb and index finger touching to make a circle with middle, ring, and pinky extended), palms facing inward at shoulder level in front of the upper torso; they move slightly outward as the three extended fingers spread into 5-hands, then return inward to F-hands in a small repeated outward-inward motion.\nStatement 2: Both hands take A-handshapes with thumbs extended upward (fingers curled in), palms facing each other at chest center, and move toward the midline until the thumbs/knuckles touch with a brief inward press.\nStatement 3: touch",
+    "ground_truth": "Hey my name is Addison from Captain Bills and I'm going to tell you how to buy an outdoor volleyball net.",
+    "statements": {
+      "statement1": "Both hands form F-hands (thumb and index finger touching to make a circle with middle, ring, and pinky extended), palms facing inward at shoulder level in front of the upper torso; they move slightly outward as the three extended fingers spread into 5-hands, then return inward to F-hands in a small repeated outward-inward motion.",
+      "statement2": "Both hands take A-handshapes with thumbs extended upward (fingers curled in), palms facing each other at chest center, and move toward the midline until the thumbs/knuckles touch with a brief inward press.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_1-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index extended, other fingers curled, thumb resting), palm facing inward toward the face at the center of the lower lip/chin, and moves in short upward-and-downward taps with the fingertip while the left hand is held at mid-torso with a relaxed handshape, palm down.\nStatement 2: Both hands form O-handshapes (thumb and index contacting to make a circle, other fingers curved), palms facing inward near cheek level, and each hand opens into a loose claw as the fingers spread while moving slightly downward and outward in a small symmetrical arc away from the face.\nStatement 3: not touch",
+    "ground_truth": "If you are very serious about playing outdoor volleyball you would want to get a very durable net.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index extended, other fingers curled, thumb resting), palm facing inward toward the face at the center of the lower lip/chin, and moves in short upward-and-downward taps with the fingertip while the left hand is held at mid-torso with a relaxed handshape, palm down.",
+      "statement2": "Both hands form O-handshapes (thumb and index contacting to make a circle, other fingers curved), palms facing inward near cheek level, and each hand opens into a loose claw as the fingers spread while moving slightly downward and outward in a small symmetrical arc away from the face.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_10-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a B-hand with fingers together and extended, palm facing left, at mid-chest level, and moves in a straight leftward path while sliding along the left forearm; the left forearm is held across the torso with the left hand in a loose fist (S-hand), palm inward.\nStatement 2: Both hands form relaxed 5-handshapes with slightly curved fingers, palms facing each other at upper chest level, move toward each other to meet so the fingers overlap, and rotate together in a small clockwise circle while maintaining contact.\nStatement 3: touch",
+    "ground_truth": "So if you find a net that says AVP quality or AVP certified that's going to be the most durable net to use when playing outdoor volleyball.",
+    "statements": {
+      "statement1": "The right hand forms a B-hand with fingers together and extended, palm facing left, at mid-chest level, and moves in a straight leftward path while sliding along the left forearm; the left forearm is held across the torso with the left hand in a loose fist (S-hand), palm inward.",
+      "statement2": "Both hands form relaxed 5-handshapes with slightly curved fingers, palms facing each other at upper chest level, move toward each other to meet so the fingers overlap, and rotate together in a small clockwise circle while maintaining contact.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_11_12-3-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-handshape (index extended, other fingers closed, thumb resting), palm angled slightly left and forward at right shoulder level, makes repeated small forward-and-back wrist flicks while the left hand in a 1-handshape points downward at lower chest with palm down and remains still.\nStatement 2: Left hand holds a V-handshape (index and middle extended and separated), palm facing inward at mid-chest, while the right hand in a 1-handshape with palm slightly down/inward makes short tapping contacts on the tips of the left index and middle fingers.\nStatement 3: touch",
+    "ground_truth": "Another thing you need to look for is who you are buying it for. If you are buying it for men's, you are going to need to have a certain height for the net.",
+    "statements": {
+      "statement1": "Right hand in a 1-handshape (index extended, other fingers closed, thumb resting), palm angled slightly left and forward at right shoulder level, makes repeated small forward-and-back wrist flicks while the left hand in a 1-handshape points downward at lower chest with palm down and remains still.",
+      "statement2": "Left hand holds a V-handshape (index and middle extended and separated), palm facing inward at mid-chest, while the right hand in a 1-handshape with palm slightly down/inward makes short tapping contacts on the tips of the left index and middle fingers.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_13-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand starts at the right temple in a 5-handshape (fingers extended and separated, thumb extended), palm oriented left/inward, and moves in a short downward-forward arc to mid-chest level, while the left hand holds a bent-5 handshape with palm down, stationary at the lower torso.\nStatement 2: At shoulder level the right hand forms an ILY handshape (thumb, index, and pinky extended; middle and ring curled), palm forward, performs a slight wrist rotation while moving a small distance forward toward center, then transitions to a U-handshape (index and middle extended together, other fingers folded) with palm left at chest height; the left hand remains still.\nStatement 3: not touch",
+    "ground_truth": "The men's height is seven feet eleven inches.",
+    "statements": {
+      "statement1": "The right hand starts at the right temple in a 5-handshape (fingers extended and separated, thumb extended), palm oriented left/inward, and moves in a short downward-forward arc to mid-chest level, while the left hand holds a bent-5 handshape with palm down, stationary at the lower torso.",
+      "statement2": "At shoulder level the right hand forms an ILY handshape (thumb, index, and pinky extended; middle and ring curled), palm forward, performs a slight wrist rotation while moving a small distance forward toward center, then transitions to a U-handshape (index and middle extended together, other fingers folded) with palm left at chest height; the left hand remains still.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_14-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms an open 5-hand with fingers spread and palm facing inward, moving from the lower face/neck area diagonally down to the upper chest and contacting the chest flat, while the left hand remains still near the lower torso in a relaxed curved shape with palm down.\nStatement 2: The right hand forms a V-hand (index and middle extended together, ring and pinky closed, thumb in), palm facing inward, positioned at the center front and making a small downward tap against the chin, while the left hand stays stationary near the abdomen with palm down.\nStatement 3: not touch",
+    "ground_truth": "And the women's height is seven feet four inches.",
+    "statements": {
+      "statement1": "The right hand forms an open 5-hand with fingers spread and palm facing inward, moving from the lower face/neck area diagonally down to the upper chest and contacting the chest flat, while the left hand remains still near the lower torso in a relaxed curved shape with palm down.",
+      "statement2": "The right hand forms a V-hand (index and middle extended together, ring and pinky closed, thumb in), palm facing inward, positioned at the center front and making a small downward tap against the chin, while the left hand stays stationary near the abdomen with palm down.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_15-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a V-handshape (index and middle extended, ring and pinky tucked), palm facing inward toward the neck, located at the right side of the neck, moving in a short upward-downward arc from collarbone to jaw while the left hand stays at lower torso in a relaxed fist with palm down.\nStatement 2: At chest level, both hands raise with index fingers extended and other fingers closed, palms facing inward, and move toward the center along a short horizontal path until the index fingertips meet, then transition into a two-hand clasp with both palms inward at the midline.\nStatement 3: touch",
+    "ground_truth": "Women's height can also be used for juniors or kids.",
+    "statements": {
+      "statement1": "The right hand forms a V-handshape (index and middle extended, ring and pinky tucked), palm facing inward toward the neck, located at the right side of the neck, moving in a short upward-downward arc from collarbone to jaw while the left hand stays at lower torso in a relaxed fist with palm down.",
+      "statement2": "At chest level, both hands raise with index fingers extended and other fingers closed, palms facing inward, and move toward the center along a short horizontal path until the index fingertips meet, then transition into a two-hand clasp with both palms inward at the midline.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_16-3-rgb_front.mp4",
+    "model_output": "Statement 1: Left hand in a B-handshape with fingers together and thumb extended, palm up at mid-torso center; right hand in a B-handshape, palm down above the left palm, sliding in a straight forward path from the left wrist area toward the fingertips across the left palm. \nStatement 2: Left hand maintains a B-handshape, palm up at mid-torso; right hand transitions to a 1-handshape with the index finger extended and other fingers curled, palm angled downward/inward, making a brief downward tap onto the center of the left palm. \nStatement 3: touch",
+    "ground_truth": "Also the width and the length of the volleyball court is thirty feet by sixty feet so you want to make sure that you get lines that fulfill those requirements for the volleyball net.",
+    "statements": {
+      "statement1": "Left hand in a B-handshape with fingers together and thumb extended, palm up at mid-torso center; right hand in a B-handshape, palm down above the left palm, sliding in a straight forward path from the left wrist area toward the fingertips across the left palm.",
+      "statement2": "Left hand maintains a B-handshape, palm up at mid-torso; right hand transitions to a 1-handshape with the index finger extended and other fingers curled, palm angled downward/inward, making a brief downward tap onto the center of the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_17-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands at mid-chest start cupped together with curved-5 handshapes, palms facing each other, then they open into spread 5-handshapes and move laterally outward to right and left in short arcs while the palms rotate to a slightly forward/outward orientation.\nStatement 2: The left hand holds a steady open-B handshape palm-up just below chest while the right hand in a flat-B handshape palm-down makes brisk brushing strokes across the left palm along a short horizontal path from heel toward fingertips and back.\nStatement 3: touch",
+    "ground_truth": "Volleyball lines and that is how to buy a volleyball net.",
+    "statements": {
+      "statement1": "Both hands at mid-chest start cupped together with curved-5 handshapes, palms facing each other, then they open into spread 5-handshapes and move laterally outward to right and left in short arcs while the palms rotate to a slightly forward/outward orientation.",
+      "statement2": "The left hand holds a steady open-B handshape palm-up just below chest while the right hand in a flat-B handshape palm-down makes brisk brushing strokes across the left palm along a short horizontal path from heel toward fingertips and back.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_2-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand starts at mid-torso in an index-extended handshape (index extended, other fingers curled, thumb slightly extended), palm angled down-forward, then travels upward toward the right side of the head while changing to a handshape with index and pinky extended and thumb extended, middle and ring curled, palm facing outward; the left hand holds a curved C-hand, palm inward near the upper chest, largely stationary.\nStatement 2: Both hands form closed fists (thumbs resting on top), palms facing each other at midline, and move inward from a wider position to the center of the chest where the knuckles meet and briefly compress together.\nStatement 3: touch",
+    "ground_truth": "One that will last you awhile, those you cannot find in any sporting good stores.",
+    "statements": {
+      "statement1": "The right hand starts at mid-torso in an index-extended handshape (index extended, other fingers curled, thumb slightly extended), palm angled down-forward, then travels upward toward the right side of the head while changing to a handshape with index and pinky extended and thumb extended, middle and ring curled, palm facing outward; the left hand holds a curved C-hand, palm inward near the upper chest, largely stationary.",
+      "statement2": "Both hands form closed fists (thumbs resting on top), palms facing each other at midline, and move inward from a wider position to the center of the chest where the knuckles meet and briefly compress together.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_3-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands start at mid-chest with fingers interlaced and palms facing inward, then separate as each hand opens to a 5-handshape with fingers spread and moves outward in a small upward arc to about shoulder level with palms facing each other.\nStatement 2: The right hand forms a B-hand with fingers together and palm facing left/inward at the right cheek, moving diagonally upward along the cheek from near the jawline toward the cheekbone while the left hand holds a flat B-hand at lower chest with palm down, stationary.\nStatement 3: touch",
+    "ground_truth": "You are going to have to go online, a lot of places in Florida or in California have very durable nets, outdoor volleyball nets that can be used on a day to day basis.",
+    "statements": {
+      "statement1": "Both hands start at mid-chest with fingers interlaced and palms facing inward, then separate as each hand opens to a 5-handshape with fingers spread and moves outward in a small upward arc to about shoulder level with palms facing each other.",
+      "statement2": "The right hand forms a B-hand with fingers together and palm facing left/inward at the right cheek, moving diagonally upward along the cheek from near the jawline toward the cheekbone while the left hand holds a flat B-hand at lower chest with palm down, stationary.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_4-3-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a “1” handshape with index extended and other fingers curled, palm inward at chin level, moves in a small tap to the chin while the left hand holds a relaxed “5” handshape palm down at lower torso.\nStatement 2: Both hands in spread “5” handshapes with fingers separated, palms up at mid-chest, move outward from the center with small oscillating wrist motions and visible finger flutter.\nStatement 3: not touch",
+    "ground_truth": "If you are not serious and just use it for recreational use you can find one a pretty decent one at a sporting good store.",
+    "statements": {
+      "statement1": "Right hand in a “1” handshape with index extended and other fingers curled, palm inward at chin level, moves in a small tap to the chin while the left hand holds a relaxed “5” handshape palm down at lower torso.",
+      "statement2": "Both hands in spread “5” handshapes with fingers separated, palms up at mid-chest, move outward from the center with small oscillating wrist motions and visible finger flutter.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_5-3-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand forms a 1-hand (index finger extended, other fingers curled, thumb resting), palm oriented inward toward the signer’s left, starting at the chin/jawline and moving in short taps then sliding downward along the right side of the neck to the upper chest; left hand stays near mid‑torso in a relaxed curved hand with palm down and minimal motion.\nStatement 2: Both hands form clawed 5‑hands (fingers spread and slightly bent), palms facing inward at upper chest level, moving outward and slightly upward with small alternating shakes and brief wrist rotations, then returning inward toward the center.\nStatement 3: touch",
+    "ground_truth": "It may not last you as long but if you are not using it everyday it would be a perfect fit for just the recreational use.",
+    "statements": {
+      "statement1": "Right hand forms a 1-hand (index finger extended, other fingers curled, thumb resting), palm oriented inward toward the signer’s left, starting at the chin/jawline and moving in short taps then sliding downward along the right side of the neck to the upper chest; left hand stays near mid‑torso in a relaxed curved hand with palm down and minimal motion.",
+      "statement2": "Both hands form clawed 5‑hands (fingers spread and slightly bent), palms facing inward at upper chest level, moving outward and slightly upward with small alternating shakes and brief wrist rotations, then returning inward toward the center.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_6-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands rise to upper-chest level in F-handshapes (thumb and index fingertip contact, other fingers extended), palms facing forward; they then open into clawed 5-handshapes with fingers spread and move laterally outward on both sides with small alternating shaking motions.\nStatement 2: The left hand holds a flat B-handshape, palm up at mid-chest, while the right hand in a 1-handshape (index extended, other fingers curled, palm down) brushes in a straight path along the left palm from the heel toward the fingertips.\nStatement 3: touch",
+    "ground_truth": "So when going to a sporting good store a lot of times you'll find there's badminton and volleyball packages and there are combination packages.",
+    "statements": {
+      "statement1": "Both hands rise to upper-chest level in F-handshapes (thumb and index fingertip contact, other fingers extended), palms facing forward; they then open into clawed 5-handshapes with fingers spread and move laterally outward on both sides with small alternating shaking motions.",
+      "statement2": "The left hand holds a flat B-handshape, palm up at mid-chest, while the right hand in a 1-handshape (index extended, other fingers curled, palm down) brushes in a straight path along the left palm from the heel toward the fingertips.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_7-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form L-handshapes (index fingers extended, thumbs extended, other fingers closed), palms facing inward near the sides of the head; the right hand moves from the right side of the head down to under the chin and then back upward in a short vertical path while the left hand holds position beside the left side of the head.\nStatement 2: The left hand holds a flat-B handshape (fingers together, extended) palm up at upper-chest level while the right hand forms a flat-B handshape palm down, rests on top of the left palm, then lifts slightly and recontacts along a short forward path.\nStatement 3: touch",
+    "ground_truth": "Those may not be regulation, so one thing you can do is look online and if under the volleyball net that you are looking for it says AVP quality or AVP certified.",
+    "statements": {
+      "statement1": "Both hands form L-handshapes (index fingers extended, thumbs extended, other fingers closed), palms facing inward near the sides of the head; the right hand moves from the right side of the head down to under the chin and then back upward in a short vertical path while the left hand holds position beside the left side of the head.",
+      "statement2": "The left hand holds a flat-B handshape (fingers together, extended) palm up at upper-chest level while the right hand forms a flat-B handshape palm down, rests on top of the left palm, then lifts slightly and recontacts along a short forward path.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_8-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form curved-5 handshapes with fingers spread, palms up and slightly inward at mid-torso level, and move symmetrically upward in shallow arcs before settling back down, with fingers remaining extended throughout.\nStatement 2: Starting from both F handshapes (thumb and index forming circles, other fingers extended), palms inward near shoulder height, the hands travel inward toward the centerline and rotate to palms facing each other, then flatten into palm-to-palm contact held vertically at chest level.\nStatement 3: touch",
+    "ground_truth": "AVP is the association of volleyball professionals.",
+    "statements": {
+      "statement1": "Both hands form curved-5 handshapes with fingers spread, palms up and slightly inward at mid-torso level, and move symmetrically upward in shallow arcs before settling back down, with fingers remaining extended throughout.",
+      "statement2": "Starting from both F handshapes (thumb and index forming circles, other fingers extended), palms inward near shoulder height, the hands travel inward toward the centerline and rotate to palms facing each other, then flatten into palm-to-palm contact held vertically at chest level.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGcgX2F_Epc_9-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands move to the midline in front of the chest in loose curved-5 handshapes (fingers together, slightly bent), palms facing each other; they contact and the right hand slides horizontally across the front of the left fingers and palm.\nStatement 2: The left hand holds a stationary S-handshape at mid-chest with knuckles up, while the right hand forms a D-handshape (index extended, other fingers closed, thumb along the side), palm facing left; the right hand travels in a small downward curving path from shoulder level to just above the left hand and then retracts.\nStatement 3: touch",
+    "ground_truth": "So that is what the professional volleyball players use.",
+    "statements": {
+      "statement1": "Both hands move to the midline in front of the chest in loose curved-5 handshapes (fingers together, slightly bent), palms facing each other; they contact and the right hand slides horizontally across the front of the left fingers and palm.",
+      "statement2": "The left hand holds a stationary S-handshape at mid-chest with knuckles up, while the right hand forms a D-handshape (index extended, other fingers closed, thumb along the side), palm facing left; the right hand travels in a small downward curving path from shoulder level to just above the left hand and then retracts.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_0-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-handshape (index finger extended, other fingers curled, thumb resting against the curled fingers), palm facing left, starting near the mouth and moving in a short straight downward path to the upper chest.\nStatement 2: Both hands in fists with thumbs extended upward (thumbs-up), palms facing each other at upper chest level, moving toward each other until the thumb sides meet and remain in contact briefly.\nStatement 3: touch",
+    "ground_truth": "Okay so you know, we want to make sure that we understand how you play the war segment of the war game.",
+    "statements": {
+      "statement1": "Right hand in a 1-handshape (index finger extended, other fingers curled, thumb resting against the curled fingers), palm facing left, starting near the mouth and moving in a short straight downward path to the upper chest.",
+      "statement2": "Both hands in fists with thumbs extended upward (thumbs-up), palms facing each other at upper chest level, moving toward each other until the thumb sides meet and remain in contact briefly.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_1-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 5-hand with fingers spread and palm facing left-inward at upper chest level and moves on a smooth upward-diagonal path toward the lower face near the mouth, while the left hand holds a stationary relaxed curved C-hand with palm up at mid-chest and fingers loosely together. \nStatement 2: Both hands start near the upper chest/under-chin area as flat O-handshapes (thumb and index touching, other fingers curled) with palms facing each other, then simultaneously open into flat B-hands with fingers together and thumbs alongside and travel horizontally apart to about shoulder width. \nStatement 3: touch",
+    "ground_truth": "So, you know, we each throw out a king and there are a number of ways to do this because it's a common game and people learn from their parents or their friends.",
+    "statements": {
+      "statement1": "The right hand forms a 5-hand with fingers spread and palm facing left-inward at upper chest level and moves on a smooth upward-diagonal path toward the lower face near the mouth, while the left hand holds a stationary relaxed curved C-hand with palm up at mid-chest and fingers loosely together.",
+      "statement2": "Both hands start near the upper chest/under-chin area as flat O-handshapes (thumb and index touching, other fingers curled) with palms facing each other, then simultaneously open into flat B-hands with fingers together and thumbs alongside and travel horizontally apart to about shoulder width.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_10-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-hand (index finger extended, other fingers curled, thumb resting), palm inward toward the body, starting at mid-chest and moving in a short straight upward path to near the right side of the face. \nStatement 2: Both hands form pinched shapes (thumb pad to index pad with remaining fingers loosely curled), palms facing each other at chest level, and move toward the midline with slight inward rotation and small forward-back oscillations. \nStatement 3: not touch",
+    "ground_truth": "That's one way to do it.",
+    "statements": {
+      "statement1": "The right hand forms a 1-hand (index finger extended, other fingers curled, thumb resting), palm inward toward the body, starting at mid-chest and moving in a short straight upward path to near the right side of the face.",
+      "statement2": "Both hands form pinched shapes (thumb pad to index pad with remaining fingers loosely curled), palms facing each other at chest level, and move toward the midline with slight inward rotation and small forward-back oscillations.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing inward at upper chest level; they move symmetrically toward the midline until the index fingertips meet to form a pointed angle, then separate slightly.\n\nStatement 2: Both hands form flat-B handshapes (fingers together, thumbs along the sides), palms facing each other at midline chest level; they move inward to full palm-to-palm contact, hold briefly, and then pull apart.\n\nStatement 3: touch",
+    "ground_truth": "It's not exactly like Hoyle has released a whole book on how to play war.",
+    "statements": {
+      "statement1": "Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing inward at upper chest level; they move symmetrically toward the midline until the index fingertips meet to form a pointed angle, then separate slightly.",
+      "statement2": "Both hands form flat-B handshapes (fingers together, thumbs along the sides), palms facing each other at midline chest level; they move inward to full palm-to-palm contact, hold briefly, and then pull apart.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a “1” handshape (index finger extended, other fingers curled, thumb resting), palm-in, and moves upward from mid-chest to the lower face where the fingertip briefly taps the side of the nose while the left hand remains at the lower torso in a flat hand, palm-down, stationary position.\nStatement 2: The left hand forms a flat “B” hand, palm-up, held at midline near the upper abdomen, while the right hand forms a flat “B” hand, palm-down, and slides forward and back across the left palm in small repeated strokes, maintaining contact centered over the left palm.\nStatement 3: touch",
+    "ground_truth": "It's not a very segmented, or it's not a very involved game.",
+    "statements": {
+      "statement1": "The right hand forms a “1” handshape (index finger extended, other fingers curled, thumb resting), palm-in, and moves upward from mid-chest to the lower face where the fingertip briefly taps the side of the nose while the left hand remains at the lower torso in a flat hand, palm-down, stationary position.",
+      "statement2": "The left hand forms a flat “B” hand, palm-up, held at midline near the upper abdomen, while the right hand forms a flat “B” hand, palm-down, and slides forward and back across the left palm in small repeated strokes, maintaining contact centered over the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_4-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting against the curled fingers), palm facing inward at the right cheek near face level, and the index fingertip contacts and moves straight downward along the cheek while the left hand stays at mid-chest in a relaxed fist with palm inward.\nStatement 2: Both hands form closed fists with thumbs extended upward, palms facing each other at mid-chest, and the right thumb makes a short horizontal slide across the upper surface of the left thumb while all non-thumb fingers remain curled.\nStatement 3: touch",
+    "ground_truth": "But let's make sure we know how to do this.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting against the curled fingers), palm facing inward at the right cheek near face level, and the index fingertip contacts and moves straight downward along the cheek while the left hand stays at mid-chest in a relaxed fist with palm inward.",
+      "statement2": "Both hands form closed fists with thumbs extended upward, palms facing each other at mid-chest, and the right thumb makes a short horizontal slide across the upper surface of the left thumb while all non-thumb fingers remain curled.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_5-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 5-handshapes with fingers spread, palms facing inward toward the torso at mid-chest level, and move simultaneously in short, repeated circular motions near the centerline while maintaining parallel paths.\nStatement 2: The right hand in a 1-handshape (index extended, other fingers closed), palm facing left at upper chest, moves diagonally down and inward to the midline to meet the left hand in a 1-handshape (index extended, palm facing right) at mid-chest, with the index fingertips aligned and briefly contacting.\nStatement 3: touch",
+    "ground_truth": "So one way to do it is to say one, two, three, four, I declare war.",
+    "statements": {
+      "statement1": "Both hands form 5-handshapes with fingers spread, palms facing inward toward the torso at mid-chest level, and move simultaneously in short, repeated circular motions near the centerline while maintaining parallel paths.",
+      "statement2": "The right hand in a 1-handshape (index extended, other fingers closed), palm facing left at upper chest, moves diagonally down and inward to the midline to meet the left hand in a 1-handshape (index extended, palm facing right) at mid-chest, with the index fingertips aligned and briefly contacting.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand with fingers extended together and thumb relaxed, palm down, at midline in front of the lower chest repeatedly slides in short lateral strokes across the left hand, while the left hand is held open with fingers together and palm up at chest level.\nStatement 2: Both hands are held at chest level as fists with only the pinky fingers extended, palms facing inward toward each other, and they make small synchronized upward–downward pulses in place.\nStatement 3: touch",
+    "ground_truth": "Let's do that again.",
+    "statements": {
+      "statement1": "Right hand with fingers extended together and thumb relaxed, palm down, at midline in front of the lower chest repeatedly slides in short lateral strokes across the left hand, while the left hand is held open with fingers together and palm up at chest level.",
+      "statement2": "Both hands are held at chest level as fists with only the pinky fingers extended, palms facing inward toward each other, and they make small synchronized upward–downward pulses in place.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-hand (index finger extended, other fingers and thumb curled), palm inward at the chin area, then rotates slightly to a more outward diagonal while changing to a V-hand (index and middle extended, other fingers curled) and moves in a short forward-upward arc away from the chin.\nStatement 2: Both hands rise to upper chest level with index fingers extended (1-hands), palms facing each other, then transition to 5-hands with fingers spread and slightly curved, palms roughly facing each other/forward, moving symmetrically outward with small wrist oscillations while maintaining space between the hands.\nStatement 3: not touch",
+    "ground_truth": "One, two, three, four, I declare war.",
+    "statements": {
+      "statement1": "The right hand forms a 1-hand (index finger extended, other fingers and thumb curled), palm inward at the chin area, then rotates slightly to a more outward diagonal while changing to a V-hand (index and middle extended, other fingers curled) and moves in a short forward-upward arc away from the chin.",
+      "statement2": "Both hands rise to upper chest level with index fingers extended (1-hands), palms facing each other, then transition to 5-hands with fingers spread and slightly curved, palms roughly facing each other/forward, moving symmetrically outward with small wrist oscillations while maintaining space between the hands.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_8-5-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest level, the right hand forms an S (fist) with palm facing left-front and moves in short downward-upward repetitions to tap the left hand held as a flat B with palm up and fingers together, contacting the left palm before lifting slightly.\nStatement 2: Both hands form curved claw-5 shapes with fingers spread and slightly bent, palms facing inward toward each other near upper chest, and rise upward and slightly outward simultaneously in a smooth lift.\nStatement 3: touch",
+    "ground_truth": "Well, you won.",
+    "statements": {
+      "statement1": "At mid-chest level, the right hand forms an S (fist) with palm facing left-front and moves in short downward-upward repetitions to tap the left hand held as a flat B with palm up and fingers together, contacting the left palm before lifting slightly.",
+      "statement2": "Both hands form curved claw-5 shapes with fingers spread and slightly bent, palms facing inward toward each other near upper chest, and rise upward and slightly outward simultaneously in a smooth lift.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGfPccy3juw_9-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat-B hand (fingers together and extended, thumb tucked), palm facing in at the upper chest, then moves in a linear forward path away from the body while rotating to palm up at midline; the left hand remains low at the waist in a relaxed 5-hand with fingers slightly curved, palm up, stationary.\n\nStatement 2: Both hands are relaxed 5-hands with fingers slightly separated and curved, palms up at mid-torso, performing alternating small upward-forward arcs (right hand rises and falls, then left hand rises and falls) while returning to the starting position between arcs.\n\nStatement 3: not touch",
+    "ground_truth": "Your ace beats my two there.",
+    "statements": {
+      "statement1": "The right hand forms a flat-B hand (fingers together and extended, thumb tucked), palm facing in at the upper chest, then moves in a linear forward path away from the body while rotating to palm up at midline; the left hand remains low at the waist in a relaxed 5-hand with fingers slightly curved, palm up, stationary.",
+      "statement2": "Both hands are relaxed 5-hands with fingers slightly separated and curved, palms up at mid-torso, performing alternating small upward-forward arcs (right hand rises and falls, then left hand rises and falls) while returning to the starting position between arcs.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "FgGpmFW4vvk_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat-B handshape with fingers extended and together, palm down at mid-chest, and makes short lateral brushing strokes leftward across the left hand, which holds a flat-B handshape with fingers extended and together, palm up just below the right hand. \nStatement 2: The right hand forms a 1-handshape with the index finger extended and other fingers curled, palm oriented slightly left in front of the chest, and moves in a brief straight forward-outward jab while the left hand stays near lower chest in a relaxed open handshape, palm up, without significant movement. \nStatement 3: touch",
+    "ground_truth": "But having a good--a high quality casing for whatever type of gun you're shooting is extremely important as casings that are overly re-manufactured can cause jams and it can also fail on you in the field.",
+    "statements": {
+      "statement1": "The right hand forms a flat-B handshape with fingers extended and together, palm down at mid-chest, and makes short lateral brushing strokes leftward across the left hand, which holds a flat-B handshape with fingers extended and together, palm up just below the right hand.",
+      "statement2": "The right hand forms a 1-handshape with the index finger extended and other fingers curled, palm oriented slightly left in front of the chest, and moves in a brief straight forward-outward jab while the left hand stays near lower chest in a relaxed open handshape, palm up, without significant movement.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_1-3-rgb_front.mp4",
+    "model_output": "Statement 1: The dominant hand starts in a flat-B handshape with fingers together and extended, palm facing outward at the side of the head, then curls into a fist while moving in a smooth downward arc to mid-chest, ending with knuckles facing forward.\nStatement 2: The non-dominant hand holds a flat-B handshape at chest level with palm up while the dominant hand, in a flat-B handshape with palm down, moves downward and forward to contact and slide across the non-dominant palm toward the fingertips.\nStatement 3: touch",
+    "ground_truth": "In this clip I will tell you how to know a color of a diamond.",
+    "statements": {
+      "statement1": "The dominant hand starts in a flat-B handshape with fingers together and extended, palm facing outward at the side of the head, then curls into a fist while moving in a smooth downward arc to mid-chest, ending with knuckles facing forward.",
+      "statement2": "The non-dominant hand holds a flat-B handshape at chest level with palm up while the dominant hand, in a flat-B handshape with palm down, moves downward and forward to contact and slide across the non-dominant palm toward the fingertips.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_10-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand holds a 1-hand (index finger extended upright, other fingers curled with thumb resting), palm oriented inward toward the chest at midline, while the left hand forms an X-hand (index bent at the first joint, other fingers curled, palm down) near upper-chest level and moves downward in a short arc to cross and contact the right index finger, briefly sliding along it.\nStatement 2: The right hand, starting as a 1-hand near the right cheek with palm facing outward, moves slightly upward and inward toward the face, then rotates into a B-hand (fingers extended and together, thumb alongside) with palm facing in and places the fingertips against the underside of the chin with a small settling motion.\nStatement 3: touch",
+    "ground_truth": "This diamond is D in color.",
+    "statements": {
+      "statement1": "The right hand holds a 1-hand (index finger extended upright, other fingers curled with thumb resting), palm oriented inward toward the chest at midline, while the left hand forms an X-hand (index bent at the first joint, other fingers curled, palm down) near upper-chest level and moves downward in a short arc to cross and contact the right index finger, briefly sliding along it.",
+      "statement2": "The right hand, starting as a 1-hand near the right cheek with palm facing outward, moves slightly upward and inward toward the face, then rotates into a B-hand (fingers extended and together, thumb alongside) with palm facing in and places the fingertips against the underside of the chin with a small settling motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_11-3-rgb_front.mp4",
+    "model_output": "Statement 1: The left hand holds an upright open 5-handshape at center chest with fingers extended and slightly spread, palm facing right, while the right hand forms a 1-handshape with palm down and moves its extended index finger in a short upward stroke along the left palm and toward the left fingertips with visible contact.\nStatement 2: The right hand moves from a thumbs-up (A-handshape with thumb extended upward) at mid-chest to an F-handshape near the right shoulder, palm facing forward-right, then executes a small wrist rotation with a slight side-to-side motion; in the F-handshape the thumb and index form a circle while the other fingers are extended.\nStatement 3: touch",
+    "ground_truth": "Now, I show you the other piece, now I show you the other piece, this piece is J in color.",
+    "statements": {
+      "statement1": "The left hand holds an upright open 5-handshape at center chest with fingers extended and slightly spread, palm facing right, while the right hand forms a 1-handshape with palm down and moves its extended index finger in a short upward stroke along the left palm and toward the left fingertips with visible contact.",
+      "statement2": "The right hand moves from a thumbs-up (A-handshape with thumb extended upward) at mid-chest to an F-handshape near the right shoulder, palm facing forward-right, then executes a small wrist rotation with a slight side-to-side motion; in the F-handshape the thumb and index form a circle while the other fingers are extended.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_12-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands at upper chest level form loose claw-5 handshapes (fingers spread and slightly curved), palms diagonally up and slightly facing each other, and execute short repeated outward-and-upward flicks with small wrist rotations before returning inward, maintaining the fingers extended and curved throughout.\nStatement 2: At mid-chest, the left hand forms a “1” hand (index extended, other fingers curled), palm down, while the right hand also forms a “1” hand, palm inward, and moves from the right toward center to cross over and hook its index on top of the left index near the knuckles, with the non-index fingers of both hands remaining curled.\nStatement 3: touch",
+    "ground_truth": "Now if you compare these two stones you will get to know the difference in the color of a diamond.",
+    "statements": {
+      "statement1": "Both hands at upper chest level form loose claw-5 handshapes (fingers spread and slightly curved), palms diagonally up and slightly facing each other, and execute short repeated outward-and-upward flicks with small wrist rotations before returning inward, maintaining the fingers extended and curved throughout.",
+      "statement2": "At mid-chest, the left hand forms a “1” hand (index extended, other fingers curled), palm down, while the right hand also forms a “1” hand, palm inward, and moves from the right toward center to cross over and hook its index on top of the left index near the knuckles, with the non-index fingers of both hands remaining curled.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_13-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form C-handshapes with fingers curved and thumbs opposed, palms facing inward; starting at upper chest level, they move upward in parallel paths to the sides of the head at temple height.\nStatement 2: The right hand forms a 1-handshape with index finger extended and other fingers curled, palm facing left, located near the right side of the head and moving upward in a short arc to above eye level, while the left hand forms a 1-handshape with palm down near mid-torso pointing downward and remains stationary.\nStatement 3: not touch",
+    "ground_truth": "So as the color goes up, up till D, the prices goes up, and as the color comes down to the slightly tinted yellow the prices will come down.",
+    "statements": {
+      "statement1": "Both hands form C-handshapes with fingers curved and thumbs opposed, palms facing inward; starting at upper chest level, they move upward in parallel paths to the sides of the head at temple height.",
+      "statement2": "The right hand forms a 1-handshape with index finger extended and other fingers curled, palm facing left, located near the right side of the head and moving upward in a short arc to above eye level, while the left hand forms a 1-handshape with palm down near mid-torso pointing downward and remains stationary.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_14-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands start in Y-handshapes (thumb and pinky extended, other fingers curled), palms facing inward at upper chest height, then move downward while rotating to palms-down and change into 1-handshapes with index fingers extended pointing forward at lower chest.\nStatement 2: The left hand holds a vertical B-hand (fingers together and extended, palm facing right) near the chest midline while the right hand in a 1-handshape (index extended, other fingers curled, palm facing left) moves in to make two small taps on the center of the left palm.\nStatement 3: touch",
+    "ground_truth": "So you can see the difference, the shade and the prices are identically proportion to each other.",
+    "statements": {
+      "statement1": "Both hands start in Y-handshapes (thumb and pinky extended, other fingers curled), palms facing inward at upper chest height, then move downward while rotating to palms-down and change into 1-handshapes with index fingers extended pointing forward at lower chest.",
+      "statement2": "The left hand holds a vertical B-hand (fingers together and extended, palm facing right) near the chest midline while the right hand in a 1-handshape (index extended, other fingers curled, palm facing left) moves in to make two small taps on the center of the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_15-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form Y-handshapes (thumb and pinky extended, other fingers curled), palms inward toward the torso at upper chest level, and move with small lateral shifts outward and inward with slight wrist rotations while maintaining the handshapes.\nStatement 2: The right hand forms a U-handshape (index and middle fingers extended together, ring and pinky curled, thumb tucked), palm downward at midline, moves down to tap the upturned left flat-5 hand (palm up) near the lower chest, then arcs upward to the mouth/chin area while maintaining the U-handshape.\nStatement 3: touch",
+    "ground_truth": "So now I hope you know how to choose the color of a diamond.",
+    "statements": {
+      "statement1": "Both hands form Y-handshapes (thumb and pinky extended, other fingers curled), palms inward toward the torso at upper chest level, and move with small lateral shifts outward and inward with slight wrist rotations while maintaining the handshapes.",
+      "statement2": "The right hand forms a U-handshape (index and middle fingers extended together, ring and pinky curled, thumb tucked), palm downward at midline, moves down to tap the upturned left flat-5 hand (palm up) near the lower chest, then arcs upward to the mouth/chin area while maintaining the U-handshape.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_16-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand rests at the chin with the thumb extended contacting the chin, the index finger loosely raised and the remaining fingers curled, palm facing inward, while the left hand holds in front of the torso with fingers spread and thumb extended, palm facing inward; then both hands travel downward in a short arc to mid-torso while rotating to palm-up, slightly cupped shapes.\n\nStatement 2: From the palm-up position at lower chest, both hands move toward the midline and close into stacked fists with palms facing each other, making contact and settling centered near the lap.\n\nStatement 3: touch",
+    "ground_truth": "Thank you.",
+    "statements": {
+      "statement1": "The right hand rests at the chin with the thumb extended contacting the chin, the index finger loosely raised and the remaining fingers curled, palm facing inward, while the left hand holds in front of the torso with fingers spread and thumb extended, palm facing inward; then both hands travel downward in a short arc to mid-torso while rotating to palm-up, slightly cupped shapes.",
+      "statement2": "From the palm-up position at lower chest, both hands move toward the midline and close into stacked fists with palms facing each other, making contact and settling centered near the lap.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_2-3-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 5-handshapes with fingers spread, palms facing inward near the lower face/upper chest, moving symmetrically outward and slightly forward along short arcs and then returning inward to the starting position.\nStatement 2: One hand forms a flat-B handshape with fingers together and palm down at upper chest level positioned directly above the other hand, which is also a flat-B palm down, and the upper hand makes two short downward taps onto the back of the lower hand while the lower hand remains still.\nStatement 3: touch",
+    "ground_truth": "A color of a diamond is basically the shade of a diamond.",
+    "statements": {
+      "statement1": "Both hands form 5-handshapes with fingers spread, palms facing inward near the lower face/upper chest, moving symmetrically outward and slightly forward along short arcs and then returning inward to the starting position.",
+      "statement2": "One hand forms a flat-B handshape with fingers together and palm down at upper chest level positioned directly above the other hand, which is also a flat-B palm down, and the upper hand makes two short downward taps onto the back of the lower hand while the lower hand remains still.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_3-3-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest, the right hand in a 1-handshape (index extended, other fingers curled, palm facing left) moves in a short downward tap onto the top of the left hand’s 1-handshape (index extended horizontally pointing right, other fingers curled, palm facing down) and then lifts back up.\n\nStatement 2: In front of the torso, the left hand holds a vertical B-handshape (fingers together, palm facing the signer’s right) while the right hand in an A-handshape (fist with thumb alongside, palm facing left) slides downward along the left palm from near the fingertips toward the base.\n\nStatement 3: touch",
+    "ground_truth": "The shades are described in alphabetical order starting from D. Now here if you look at the design, there are D, E, F, G, H, I, J, and it goes up to Zed.",
+    "statements": {
+      "statement1": "At mid-chest, the right hand in a 1-handshape (index extended, other fingers curled, palm facing left) moves in a short downward tap onto the top of the left hand’s 1-handshape (index extended horizontally pointing right, other fingers curled, palm facing down) and then lifts back up.",
+      "statement2": "In front of the torso, the left hand holds a vertical B-handshape (fingers together, palm facing the signer’s right) while the right hand in an A-handshape (fist with thumb alongside, palm facing left) slides downward along the left palm from near the fingertips toward the base.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_4-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand starts with the thumb contacting the middle fingertip while the index, ring, and pinky are extended, palm facing forward at cheek level; it then opens to a spread 5-hand, palm forward, and moves in a short outward-and-downward arc to the upper chest, ending flat on the chest with fingers splayed and palm inward, while the left hand rests near mid-torso with palm down.\nStatement 2: The left hand holds a flat handshape, palm up, horizontal at mid-chest; the right hand forms a 1-hand with the index finger extended and palm down, moves downward to the left palm, and makes a small forward slide along the surface of the left hand.\nStatement 3: touch",
+    "ground_truth": "D, E, F, are considered to be white diamonds.",
+    "statements": {
+      "statement1": "The right hand starts with the thumb contacting the middle fingertip while the index, ring, and pinky are extended, palm facing forward at cheek level; it then opens to a spread 5-hand, palm forward, and moves in a short outward-and-downward arc to the upper chest, ending flat on the chest with fingers splayed and palm inward, while the left hand rests near mid-torso with palm down.",
+      "statement2": "The left hand holds a flat handshape, palm up, horizontal at mid-chest; the right hand forms a 1-hand with the index finger extended and palm down, moves downward to the left palm, and makes a small forward slide along the surface of the left hand.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_5-3-rgb_front.mp4",
+    "model_output": "Statement 1: The dominant hand forms a 1-handshape (index extended, other fingers curled, thumb across) with palm facing left near the dominant-side mouth, then moves downward and slightly toward the midline to upper abdomen level while rotating so the palm faces inward and the index points downward beside the non-dominant hand, which holds a stationary 1-handshape with index pointing downward at lower chest and palm facing inward.\nStatement 2: The dominant hand transitions to a 2-handshape (index and middle extended together, other fingers closed, thumb tucked) with palm facing left and fingers pointing horizontally toward the non-dominant side, then makes a small forward arc and retracts to the upper chest while rotating to a palm-in orientation.\nStatement 3: not touch",
+    "ground_truth": "And as we go down to G, H, they are slightly tinted white.",
+    "statements": {
+      "statement1": "The dominant hand forms a 1-handshape (index extended, other fingers curled, thumb across) with palm facing left near the dominant-side mouth, then moves downward and slightly toward the midline to upper abdomen level while rotating so the palm faces inward and the index points downward beside the non-dominant hand, which holds a stationary 1-handshape with index pointing downward at lower chest and palm facing inward.",
+      "statement2": "The dominant hand transitions to a 2-handshape (index and middle extended together, other fingers closed, thumb tucked) with palm facing left and fingers pointing horizontally toward the non-dominant side, then makes a small forward arc and retracts to the upper chest while rotating to a palm-in orientation.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_6-3-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index finger extended, other fingers closed), palm down at chest level near the midline, while the left hand holds a 1-handshape with the index extended horizontally, palm down at chest level; the right index moves in a short lateral path across the tip of the left index from left to right.\nStatement 2: The right hand transitions from a curved C-hand near the right side of the head (palm inward) down to chest level, changes to a fist with a single finger extended upward (palm inward), then closes into a compact O-hand (palm left) and moves diagonally upward toward the mouth area, ending with the pinky extended while the other fingers remain closed (palm left), while the left hand remains static in a 1-handshape at chest level with palm down.\nStatement 3: not touch",
+    "ground_truth": "And when we go to I, J, they are slightly tinted yellow.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index finger extended, other fingers closed), palm down at chest level near the midline, while the left hand holds a 1-handshape with the index extended horizontally, palm down at chest level; the right index moves in a short lateral path across the tip of the left index from left to right.",
+      "statement2": "The right hand transitions from a curved C-hand near the right side of the head (palm inward) down to chest level, changes to a fist with a single finger extended upward (palm inward), then closes into a compact O-hand (palm left) and moves diagonally upward toward the mouth area, ending with the pinky extended while the other fingers remain closed (palm left), while the left hand remains static in a 1-handshape at chest level with palm down.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_7-3-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in 1-handshape (index extended, other fingers closed, palm down) at mid-chest makes repeated small downward taps onto the back of the left hand, which holds a horizontal B-handshape (fingers extended together, thumb tucked, palm down) in front of the chest.\nStatement 2: Left hand in vertical B-handshape (fingers extended together, palm right) at upper chest maintains contact with the right hand in horizontal B-handshape (palm down) and slides downward along it as both hands lower from upper to lower chest.\nStatement 3: touch",
+    "ground_truth": "And as we keep on going down the shades keep on decreasing.",
+    "statements": {
+      "statement1": "Right hand in 1-handshape (index extended, other fingers closed, palm down) at mid-chest makes repeated small downward taps onto the back of the left hand, which holds a horizontal B-handshape (fingers extended together, thumb tucked, palm down) in front of the chest.",
+      "statement2": "Left hand in vertical B-handshape (fingers extended together, palm right) at upper chest maintains contact with the right hand in horizontal B-handshape (palm down) and slides downward along it as both hands lower from upper to lower chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_8-3-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest level, the left hand is a flat B-handshape with fingers together and extended, palm facing forward, while the right hand is a 1-handshape with index extended and other fingers curled, palm angled down-left, and the index tip makes repeated short downward taps onto the center of the left palm.\nStatement 2: Both hands in 5-handshapes with fingers spread and thumbs relaxed, palms facing forward at chest level, move simultaneously forward and slightly outward in a straight path away from the torso.\nStatement 3: touch",
+    "ground_truth": "Now, I show you just to give you a brief example, I show you the two diamonds just to know the difference between the colors.",
+    "statements": {
+      "statement1": "At mid-chest level, the left hand is a flat B-handshape with fingers together and extended, palm facing forward, while the right hand is a 1-handshape with index extended and other fingers curled, palm angled down-left, and the index tip makes repeated short downward taps onto the center of the left palm.",
+      "statement2": "Both hands in 5-handshapes with fingers spread and thumbs relaxed, palms facing forward at chest level, move simultaneously forward and slightly outward in a straight path away from the torso.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGOgdMxbrbk_9-3-rgb_front.mp4",
+    "model_output": "Statement 1: The left hand holds a flat B-handshape, palm down, at mid-chest while the right hand transitions from a 1-handshape (index extended, other fingers curled, thumb in, palm facing down and slightly inward) to an open B-handshape and glides in a short forward stroke across the back of the left hand from near the wrist toward the fingertips in front of the torso.\nStatement 2: The right hand forms a 1-handshape with palm facing inward and index finger vertical, moving upward from chest level to touch the right cheek, while the left hand stays near the lower chest in a relaxed fist with palm down.\nStatement 3: touch",
+    "ground_truth": "Here, I have one piece which is a white diamond.",
+    "statements": {
+      "statement1": "The left hand holds a flat B-handshape, palm down, at mid-chest while the right hand transitions from a 1-handshape (index extended, other fingers curled, thumb in, palm facing down and slightly inward) to an open B-handshape and glides in a short forward stroke across the back of the left hand from near the wrist toward the fingertips in front of the torso.",
+      "statement2": "The right hand forms a 1-handshape with palm facing inward and index finger vertical, moving upward from chest level to touch the right cheek, while the left hand stays near the lower chest in a relaxed fist with palm down.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGpZTRPFf9Y_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-hand (index extended, other fingers curled, thumb resting) with palm down at the center-front of the torso, moving in short downward taps and small forward arcs onto the back of the left hand, while the left hand holds a flat B-hand (fingers together, palm down) steady horizontally at chest level.\nStatement 2: From separate positions, both hands travel inward to the midline and close into S-hands (fists, thumbs outside) with palms inward; the right hand clasps over the left hand at upper torso level in a single closing motion.\nStatement 3: touch",
+    "ground_truth": "Another one is English muffin pizza's which are fun and the kids will love them and they love to make them and then you just might have a half of loaf bread laying around.",
+    "statements": {
+      "statement1": "The right hand forms a 1-hand (index extended, other fingers curled, thumb resting) with palm down at the center-front of the torso, moving in short downward taps and small forward arcs onto the back of the left hand, while the left hand holds a flat B-hand (fingers together, palm down) steady horizontally at chest level.",
+      "statement2": "From separate positions, both hands travel inward to the midline and close into S-hands (fists, thumbs outside) with palms inward; the right hand clasps over the left hand at upper torso level in a single closing motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGpZTRPFf9Y_4-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index extended, other fingers curled), palm facing left at mid-chest level, and makes repeated small taps and short lateral slides across the back of the stationary left hand, which is held in a relaxed fist with palm facing right and knuckles up.\nStatement 2: Both hands form F-handshapes (thumb and index touching to make small circles, other fingers extended), palms facing each other near the upper chest, and move toward each other to touch the circles together briefly before holding.\nStatement 3: touch",
+    "ground_truth": "That's the third way I'm going to show you today how to make your going to take a half of loaf french bread and show you how to make a pizza on this.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index extended, other fingers curled), palm facing left at mid-chest level, and makes repeated small taps and short lateral slides across the back of the stationary left hand, which is held in a relaxed fist with palm facing right and knuckles up.",
+      "statement2": "Both hands form F-handshapes (thumb and index touching to make small circles, other fingers extended), palms facing each other near the upper chest, and move toward each other to touch the circles together briefly before holding.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGpZTRPFf9Y_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat B-hand with fingers together and palm down at mid-torso, sliding straight forward across the upturned left flat B-hand (left palm up) from the base of the left palm toward its fingertips.\nStatement 2: Both hands move toward each other at mid-torso with fingers extended and slightly curved, palms inward, then interlock the fingers as the hands come together in a clasp.\nStatement 3: touch",
+    "ground_truth": "Soon as that garlic bread comes out you add some sauce add some shredded cheese put it back in the oven 350 so the cheese is melted you got a great pizza on your garlic bread.",
+    "statements": {
+      "statement1": "The right hand forms a flat B-hand with fingers together and palm down at mid-torso, sliding straight forward across the upturned left flat B-hand (left palm up) from the base of the left palm toward its fingertips.",
+      "statement2": "Both hands move toward each other at mid-torso with fingers extended and slightly curved, palms inward, then interlock the fingers as the hands come together in a clasp.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fGpZTRPFf9Y_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: The left hand holds a flat-B handshape, palm up, at mid-chest while the right hand in a flat-B handshape, palm down, glides in a straight horizontal path across the left palm from the left hand’s fingertips toward its wrist, with fingers extended and together on both hands.\nStatement 2: Both hands interlace fingers with palms facing inward at upper chest, and the interlocked hands make a small circular rotation while maintaining contact, with thumbs resting over the interlaced fingers.\nStatement 3: touch",
+    "ground_truth": "I'm not going to show you today I'm just going to tell you when I come back were going to start making some pizza your hungry I am.",
+    "statements": {
+      "statement1": "The left hand holds a flat-B handshape, palm up, at mid-chest while the right hand in a flat-B handshape, palm down, glides in a straight horizontal path across the left palm from the left hand’s fingertips toward its wrist, with fingers extended and together on both hands.",
+      "statement2": "Both hands interlace fingers with palms facing inward at upper chest, and the interlocked hands make a small circular rotation while maintaining contact, with thumbs resting over the interlaced fingers.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGRuEn1-V4U_1-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form open flat hands with fingers together, palms facing each other at upper chest level, and move toward each other to make contact and then away to separate in repeated, even clapping motions.\nStatement 2: The left hand holds a flat handshape with palm up at mid-chest while the right hand forms a 1-hand (index finger extended, other fingers curled, thumb resting), palm angled down, and the right index fingertip makes short downward taps onto the left palm.\nStatement 3: touch",
+    "ground_truth": "In this video clip we'll planing end grain.",
+    "statements": {
+      "statement1": "Both hands form open flat hands with fingers together, palms facing each other at upper chest level, and move toward each other to make contact and then away to separate in repeated, even clapping motions.",
+      "statement2": "The left hand holds a flat handshape with palm up at mid-chest while the right hand forms a 1-hand (index finger extended, other fingers curled, thumb resting), palm angled down, and the right index fingertip makes short downward taps onto the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGRuEn1-V4U_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-hand (index finger extended, other fingers curled; palm angled downward) at upper-chest height and moves in a short downward path to tap the stationary left hand, which is a flat B-hand (fingers together extended; palm up) held at mid-chest near the midline.\nStatement 2: Both hands form A-hands (closed fists with thumbs resting over curled fingers), palms facing each other at center chest, and move toward each other until the knuckles meet with a slight inward press, holding briefly at that contact point.\nStatement 3: touch",
+    "ground_truth": "Now if you have a project or component of your project where you have end grain that needs to be plane on the block plane is probably the best tool to use for this.",
+    "statements": {
+      "statement1": "The right hand forms a 1-hand (index finger extended, other fingers curled; palm angled downward) at upper-chest height and moves in a short downward path to tap the stationary left hand, which is a flat B-hand (fingers together extended; palm up) held at mid-chest near the midline.",
+      "statement2": "Both hands form A-hands (closed fists with thumbs resting over curled fingers), palms facing each other at center chest, and move toward each other until the knuckles meet with a slight inward press, holding briefly at that contact point.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGRuEn1-V4U_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand in a 1-handshape (index extended, other fingers closed), palm facing left/down, moves from the right side of the signing space diagonally down to mid-chest to contact the center of the left hand held in a flat B-handshape (fingers together and extended with thumb alongside, palm facing right), then draws a short downward stroke on the left palm. \nStatement 2: Both hands form F-handshapes (thumb and index touching to make a circle with the other fingers extended), palms facing each other at chest level, making small alternating up-and-down movements. \nStatement 3: touch",
+    "ground_truth": "Now if I were just to come in here with my block plane and just start planing I would blow out this end of my project and it would just chip off and splinter and it would look real bad.",
+    "statements": {
+      "statement1": "The right hand in a 1-handshape (index extended, other fingers closed), palm facing left/down, moves from the right side of the signing space diagonally down to mid-chest to contact the center of the left hand held in a flat B-handshape (fingers together and extended with thumb alongside, palm facing right), then draws a short downward stroke on the left palm.",
+      "statement2": "Both hands form F-handshapes (thumb and index touching to make a circle with the other fingers extended), palms facing each other at chest level, making small alternating up-and-down movements.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGRuEn1-V4U_4-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index extended, other fingers curled, thumb resting), palm facing inward at mid-chest, while the left hand forms a 1-handshape held horizontally with palm inward at mid-chest; the right index contacts the top of the left index and slides along it in short forward-and-back strokes from the base toward the tip.\nStatement 2: The left forearm is held horizontally across the torso with the left hand relaxed palm down, while the right hand with curved fingers and palm down contacts the left forearm near the inner elbow and slides back and forth along the forearm in a short linear path.\nStatement 3: touch",
+    "ground_truth": "What we're going to do is we're going to use our block plane and we're going to plane this way about to where we reach half way point and then we're going to come around the other side and plane the other way.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index extended, other fingers curled, thumb resting), palm facing inward at mid-chest, while the left hand forms a 1-handshape held horizontally with palm inward at mid-chest; the right index contacts the top of the left index and slides along it in short forward-and-back strokes from the base toward the tip.",
+      "statement2": "The left forearm is held horizontally across the torso with the left hand relaxed palm down, while the right hand with curved fingers and palm down contacts the left forearm near the inner elbow and slides back and forth along the forearm in a short linear path.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGRuEn1-V4U_5-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in 1-handshape (index extended, other fingers curled), palm facing left and slightly inward, located at upper chest near midline, moves in a small circular path with brief taps around and onto the tip and side of the left thumb; left hand in A-handshape (fist with thumb extended up), palm facing right, held steady at upper chest.\nStatement 2: Left hand in flat B-handshape (fingers together, palm up) at mid-chest while the right hand in open 5-handshape (fingers spread, palm down) slides diagonally across the left palm from the fingertips toward the wrist in short repeated strokes, lifting slightly between strokes.\nStatement 3: touch",
+    "ground_truth": "This is going to ensure that we don't blow out the end of our project.",
+    "statements": {
+      "statement1": "Right hand in 1-handshape (index extended, other fingers curled), palm facing left and slightly inward, located at upper chest near midline, moves in a small circular path with brief taps around and onto the tip and side of the left thumb; left hand in A-handshape (fist with thumb extended up), palm facing right, held steady at upper chest.",
+      "statement2": "Left hand in flat B-handshape (fingers together, palm up) at mid-chest while the right hand in open 5-handshape (fingers spread, palm down) slides diagonally across the left palm from the fingertips toward the wrist in short repeated strokes, lifting slightly between strokes.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FGRuEn1-V4U_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a B-hand (fingers extended and together, thumb tucked), palm down, at chest level and sweeps laterally across the stationary left B-hand, palm up, at the midline, with sliding contact along the left palm.\nStatement 2: Both hands form 1-handshapes (index fingers extended, other fingers tucked), palms inward, at chest level; the left index is held vertical near the midline while the right index moves in short horizontal taps from the right side toward the midline, making brief contact with the left index.\nStatement 3: touch",
+    "ground_truth": "Now planing end grains can be a bit more time consuming and a bit more aggravating but if you take your time you will get a real nice end result.",
+    "statements": {
+      "statement1": "The right hand forms a B-hand (fingers extended and together, thumb tucked), palm down, at chest level and sweeps laterally across the stationary left B-hand, palm up, at the midline, with sliding contact along the left palm.",
+      "statement2": "Both hands form 1-handshapes (index fingers extended, other fingers tucked), palms inward, at chest level; the left index is held vertical near the midline while the right index moves in short horizontal taps from the right side toward the midline, making brief contact with the left index.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FgY0hTUDhsw_0-5-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest level, both hands form 1-handshapes (index fingers extended, other fingers tucked), with the left palm facing right and the right palm facing left, and the right index moves leftward to contact and lightly brush back-and-forth across the tip/side of the stationary left index in a small horizontal motion.\nStatement 2: At mid-chest, the left hand forms an S-hand (fist) with palm down while the right hand forms a 1-hand with palm down above it, the right index moves downward to tap the top of the left fist, and then both hands change to S-hands with palms facing each other and move inward to meet at the center.\nStatement 3: touch",
+    "ground_truth": "Next let's talk about socks.",
+    "statements": {
+      "statement1": "At mid-chest level, both hands form 1-handshapes (index fingers extended, other fingers tucked), with the left palm facing right and the right palm facing left, and the right index moves leftward to contact and lightly brush back-and-forth across the tip/side of the stationary left index in a small horizontal motion.",
+      "statement2": "At mid-chest, the left hand forms an S-hand (fist) with palm down while the right hand forms a 1-hand with palm down above it, the right index moves downward to tap the top of the left fist, and then both hands change to S-hands with palms facing each other and move inward to meet at the center.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FgY0hTUDhsw_1-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index extended, other fingers closed, thumb tucked), palm initially down as it taps the top of the left S-handshape (fist, palm down, knuckles up) held at mid-chest, then the right index moves in a short upward arc to touch the right temple with the fingertip as the palm turns inward.\nStatement 2: The right hand closes into an S-handshape (fist), palm facing inward at chest level, and travels straight forward to arm’s length at shoulder height, then draws back to touch the mouth with the near-side knuckles, while the left hand remains in an S-handshape near mid-chest without moving.\nStatement 3: touch",
+    "ground_truth": "Socks for fencing are high.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index extended, other fingers closed, thumb tucked), palm initially down as it taps the top of the left S-handshape (fist, palm down, knuckles up) held at mid-chest, then the right index moves in a short upward arc to touch the right temple with the fingertip as the palm turns inward.",
+      "statement2": "The right hand closes into an S-handshape (fist), palm facing inward at chest level, and travels straight forward to arm’s length at shoulder height, then draws back to touch the mouth with the near-side knuckles, while the left hand remains in an S-handshape near mid-chest without moving.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FgY0hTUDhsw_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing inward at the upper chest/clavicle area; both hands move inward toward the center and slightly upward toward the base of the neck/chin, where the right index finger crosses over and contacts the left index finger at midline.\nStatement 2: The left hand holds an S-handshape (fist with thumb across), palm down at mid-chest, while the right hand forms a 5-handshape (fingers spread), palm down above the left hand and performs repeated lateral brushing motions from right to left across the back of the left wrist/forearm in front of the chest.\nStatement 3: touch",
+    "ground_truth": "They have to cover your entire shin.",
+    "statements": {
+      "statement1": "Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing inward at the upper chest/clavicle area; both hands move inward toward the center and slightly upward toward the base of the neck/chin, where the right index finger crosses over and contacts the left index finger at midline.",
+      "statement2": "The left hand holds an S-handshape (fist with thumb across), palm down at mid-chest, while the right hand forms a 5-handshape (fingers spread), palm down above the left hand and performs repeated lateral brushing motions from right to left across the back of the left wrist/forearm in front of the chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FgY0hTUDhsw_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest, both hands use index-extended handshapes (other fingers curled, thumbs relaxed), palms angled slightly downward and toward each other, and the index fingertips cross to form an X while making small back-and-forth twisting motions at the center.\nStatement 2: The right hand holds an index-extended handshape with palm angled downward and slightly left above the left hand (left hand flat with fingers together, palm down) at lower-chest level, and the right index makes a small circular motion over the left hand while the left hand remains steady.\nStatement 3: touch",
+    "ground_truth": "They are for protection.",
+    "statements": {
+      "statement1": "At mid-chest, both hands use index-extended handshapes (other fingers curled, thumbs relaxed), palms angled slightly downward and toward each other, and the index fingertips cross to form an X while making small back-and-forth twisting motions at the center.",
+      "statement2": "The right hand holds an index-extended handshape with palm angled downward and slightly left above the left hand (left hand flat with fingers together, palm down) at lower-chest level, and the right index makes a small circular motion over the left hand while the left hand remains steady.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FgY0hTUDhsw_8-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a flat-B handshape (fingers together and extended), palm angled slightly up and forward at the mouth, and the fingertips contact the lips then move outward and slightly downward in a short arc, repeated.\nStatement 2: The right hand forms a 1-handshape (index extended, other fingers curled), palm facing left in front of the torso, while the left hand is a flat-B handshape with fingers together and palm facing toward the right hand at mid-chest, and the right index moves to contact and tap the center of the left palm.\nStatement 3: touch",
+    "ground_truth": "Any solid-colored sock is permissible.",
+    "statements": {
+      "statement1": "The right hand forms a flat-B handshape (fingers together and extended), palm angled slightly up and forward at the mouth, and the fingertips contact the lips then move outward and slightly downward in a short arc, repeated.",
+      "statement2": "The right hand forms a 1-handshape (index extended, other fingers curled), palm facing left in front of the torso, while the left hand is a flat-B handshape with fingers together and palm facing toward the right hand at mid-chest, and the right index moves to contact and tap the center of the left palm.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "FgY0hTUDhsw_9-5-rgb_front.mp4",
+    "model_output": "Statement 1: At chest level, both hands use 1-handshapes (index fingers extended, other fingers curled, thumbs relaxed), palms facing each other; the right index moves to contact the left index fingertip and then traces a small clockwise arc around it while the left index remains mostly still.\n\nStatement 2: The left hand holds a flat-B handshape, palm up, at mid-torso, while the right hand in a flat-B handshape, palm down, moves in a short diagonal and circular path across the left palm from near the wrist toward the fingertips with continuous contact, fingers straight and together on both hands.\n\nStatement 3: touch",
+    "ground_truth": "And you want to select a sock that is thick enough to offer you a little bit of protection.",
+    "statements": {
+      "statement1": "At chest level, both hands use 1-handshapes (index fingers extended, other fingers curled, thumbs relaxed), palms facing each other; the right index moves to contact the left index fingertip and then traces a small clockwise arc around it while the left index remains mostly still.",
+      "statement2": "The left hand holds a flat-B handshape, palm up, at mid-torso, while the right hand in a flat-B handshape, palm down, moves in a short diagonal and circular path across the left palm from near the wrist toward the fingertips with continuous contact, fingers straight and together on both hands.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_1-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index extended, other fingers curled, thumb resting), palm down at mid-torso, and contacts the left hand in a flat-B handshape (palm up at mid-torso) while the right index fingertip traces a short horizontal path across the left palm.\nStatement 2: Both hands form Y-handshapes (thumb and pinky extended, index/middle/ring curled), palms facing each other at upper chest level, and move upward and slightly outward in parallel paths.\nStatement 3: touch",
+    "ground_truth": "Alright, so you've decided to shop for jeans online.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index extended, other fingers curled, thumb resting), palm down at mid-torso, and contacts the left hand in a flat-B handshape (palm up at mid-torso) while the right index fingertip traces a short horizontal path across the left palm.",
+      "statement2": "Both hands form Y-handshapes (thumb and pinky extended, index/middle/ring curled), palms facing each other at upper chest level, and move upward and slightly outward in parallel paths.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_10-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand forms an X-hand (index finger bent and hooked, other fingers curled with thumb resting), palm angled down toward the left, located in front of mid-chest, making repeated short downward taps onto the back of the left hand, while the left hand holds a flat B-hand palm down and remains steady.\nStatement 2: Left hand holds a flat B-hand palm up at mid-chest, while the right hand forms an A-hand (fist with thumb against the index), palm down, landing on the left palm and making small circular and brief down-up rubbing motions before lifting slightly and recontacting.\nStatement 3: touch",
+    "ground_truth": "Maybe you just want the cleanest, nicest denim you can find.",
+    "statements": {
+      "statement1": "Right hand forms an X-hand (index finger bent and hooked, other fingers curled with thumb resting), palm angled down toward the left, located in front of mid-chest, making repeated short downward taps onto the back of the left hand, while the left hand holds a flat B-hand palm down and remains steady.",
+      "statement2": "Left hand holds a flat B-hand palm up at mid-chest, while the right hand forms an A-hand (fist with thumb against the index), palm down, landing on the left palm and making small circular and brief down-up rubbing motions before lifting slightly and recontacting.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_11-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form relaxed 5-handshapes with fingers spread, palms up at mid-chest, moving outward in parallel arcs and pausing with hands held apart.\nStatement 2: The left hand holds a flat B-handshape at upper chest with palm facing inward toward the body, while the right hand forms a 1-handshape (index extended, other fingers curled, palm slightly down) and slides its fingertip downward along the front surface of the left palm from higher to lower chest.\nStatement 3: touch",
+    "ground_truth": "Go ahead and type in as specific as you can when you're looking.",
+    "statements": {
+      "statement1": "Both hands form relaxed 5-handshapes with fingers spread, palms up at mid-chest, moving outward in parallel arcs and pausing with hands held apart.",
+      "statement2": "The left hand holds a flat B-handshape at upper chest with palm facing inward toward the body, while the right hand forms a 1-handshape (index extended, other fingers curled, palm slightly down) and slides its fingertip downward along the front surface of the left palm from higher to lower chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_12-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form fists (fingers curled, thumbs resting), palms facing down at mid-chest; the right fist is placed directly on top of the left fist and moves in small clockwise circles while maintaining contact with the left fist.\nStatement 2: The left hand holds an open-B handshape (fingers together, palm facing forward) at center chest while the right hand forms a 1-hand (index extended, other fingers curled, palm facing left/down) and taps the center of the left palm twice in a short downward-and-up path.\nStatement 3: touch",
+    "ground_truth": "The closer you know to exactly what type of jean you want, the better result you're going to get when you're looking online.",
+    "statements": {
+      "statement1": "Both hands form fists (fingers curled, thumbs resting), palms facing down at mid-chest; the right fist is placed directly on top of the left fist and moves in small clockwise circles while maintaining contact with the left fist.",
+      "statement2": "The left hand holds an open-B handshape (fingers together, palm facing forward) at center chest while the right hand forms a 1-hand (index extended, other fingers curled, palm facing left/down) and taps the center of the left palm twice in a short downward-and-up path.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_13-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand with index finger extended and other fingers curled, palm facing down, moves at mid-chest to make two small downward taps onto the center of the left hand, which is held as a flat open hand with fingers together and palm facing up.\nStatement 2: Both hands with index fingers extended and other fingers curled, palms facing inward at mid-chest; the right index moves diagonally downward to cross over the left index, forming an X shape with brief contact before separating.\nStatement 3: touch",
+    "ground_truth": "Some people need jeans for working, maybe a carpenter jean or something like that as an example.",
+    "statements": {
+      "statement1": "Right hand with index finger extended and other fingers curled, palm facing down, moves at mid-chest to make two small downward taps onto the center of the left hand, which is held as a flat open hand with fingers together and palm facing up.",
+      "statement2": "Both hands with index fingers extended and other fingers curled, palms facing inward at mid-chest; the right index moves diagonally downward to cross over the left index, forming an X shape with brief contact before separating.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_14-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting), palm facing left/down at mid-chest, and the right index taps and slides in short linear motions along the left hand, which is held in a flat-B handshape (fingers together, palm facing up/right) with contact across the palm and fingertips.\nStatement 2: Both hands move to the midline and interlace into a clasp with fingers woven together, palms facing inward/down at upper chest, followed by a slight inward squeezing that holds the hands together.\nStatement 3: touch",
+    "ground_truth": "Go ahead and again type in the exact type of jean you're looking for.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting), palm facing left/down at mid-chest, and the right index taps and slides in short linear motions along the left hand, which is held in a flat-B handshape (fingers together, palm facing up/right) with contact across the palm and fingertips.",
+      "statement2": "Both hands move to the midline and interlace into a clasp with fingers woven together, palms facing inward/down at upper chest, followed by a slight inward squeezing that holds the hands together.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_15_16-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-hand (index extended, other fingers closed; palm down toward the left palm) at mid-chest contacts the left hand in a B-hand (flat hand, palm up) and makes repeated short strokes across the left palm.\nStatement 2: Both hands in 1-hands with palms inward at mid-chest cross the index fingers, with the right index moving over and contacting the left index to form an X with a small lateral motion.\nStatement 3: touch",
+    "ground_truth": "Type in carpenter jean. Type in the purpose of the jean you're looking for and you will get much nicer results, that way when you need some sort of working jean you're going to get something more like this sturdier denim, than something that like that has been pre-worn just so it has a nice, fun designer look to it.",
+    "statements": {
+      "statement1": "Right hand in a 1-hand (index extended, other fingers closed; palm down toward the left palm) at mid-chest contacts the left hand in a B-hand (flat hand, palm up) and makes repeated short strokes across the left palm.",
+      "statement2": "Both hands in 1-hands with palms inward at mid-chest cross the index fingers, with the right index moving over and contacting the left index to form an X with a small lateral motion.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands rise from mid-chest to face level and open into 5-handshapes with fingers spread and relaxed thumbs, palms facing each other near the cheeks, then move laterally away from each other and slightly downward while maintaining the 5-handshapes.\nStatement 2: The stationary hand holds a 1-handshape at mid-chest (index extended, other fingers curled, thumb resting) with the palm oriented laterally toward the moving hand, while the moving hand forms a 9/F-handshape (thumb to index), palm oriented laterally toward the stationary hand, and travels a short inward path to make brief contact on the side/tip of the stationary index finger.\nStatement 3: touch",
+    "ground_truth": "The next step is deciding what sort of jean you're looking for.",
+    "statements": {
+      "statement1": "Both hands rise from mid-chest to face level and open into 5-handshapes with fingers spread and relaxed thumbs, palms facing each other near the cheeks, then move laterally away from each other and slightly downward while maintaining the 5-handshapes.",
+      "statement2": "The stationary hand holds a 1-handshape at mid-chest (index extended, other fingers curled, thumb resting) with the palm oriented laterally toward the moving hand, while the moving hand forms a 9/F-handshape (thumb to index), palm oriented laterally toward the stationary hand, and travels a short inward path to make brief contact on the side/tip of the stationary index finger.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-handshape (index extended, other fingers curled, thumb tucked), palm facing left; at mid-chest the right index contacts the left hand in a 5-handshape (fingers spread, palm facing up/right) and slides across the left palm, then travels upward along the left index finger from its base toward the fingertip.\nStatement 2: Right hand maintains a 1-handshape, palm facing left; near mid-chest the right index makes short, repeated downward taps along the inside edge of the left index finger while the left hand holds a 2-handshape (index and middle extended together, other fingers curled), palm facing right.\nStatement 3: touch",
+    "ground_truth": "What's the purpose of the jeans?",
+    "statements": {
+      "statement1": "Right hand in a 1-handshape (index extended, other fingers curled, thumb tucked), palm facing left; at mid-chest the right index contacts the left hand in a 5-handshape (fingers spread, palm facing up/right) and slides across the left palm, then travels upward along the left index finger from its base toward the fingertip.",
+      "statement2": "Right hand maintains a 1-handshape, palm facing left; near mid-chest the right index makes short, repeated downward taps along the inside edge of the left index finger while the left hand holds a 2-handshape (index and middle extended together, other fingers curled), palm facing right.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_4-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-hand (index extended, other fingers curled, thumb resting along the side), palm facing slightly inward/left, located at the right cheek, moving in a short upward arc that touches the cheek and then holds with the index upright near the cheek.\nStatement 2: The left hand holds a flat-B handshape (fingers together, thumb relaxed), palm facing right at upper chest level, while the right hand changes to a flat-B with palm down and moves from center to meet the left palm, then slides downward along the left palm’s surface toward the left side.\nStatement 3: touch",
+    "ground_truth": "Are you looking for something designer?",
+    "statements": {
+      "statement1": "The right hand forms a 1-hand (index extended, other fingers curled, thumb resting along the side), palm facing slightly inward/left, located at the right cheek, moving in a short upward arc that touches the cheek and then holds with the index upright near the cheek.",
+      "statement2": "The left hand holds a flat-B handshape (fingers together, thumb relaxed), palm facing right at upper chest level, while the right hand changes to a flat-B with palm down and moves from center to meet the left palm, then slides downward along the left palm’s surface toward the left side.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_5-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a Y-handshape (thumb and pinky extended, index/middle/ring closed), palm facing left, held at the corner of the mouth and making two small forward-and-back taps, while the left hand rests near the lower torso with fingers loosely curled and palm down. \nStatement 2: Both hands take relaxed 5-handshapes with fingers loosely spread, palms facing down at chest level, moving in small parallel side-to-side sweeps with slight wrist flexion. \nStatement 3: not touch",
+    "ground_truth": "Or something just casual and every day?",
+    "statements": {
+      "statement1": "The right hand forms a Y-handshape (thumb and pinky extended, index/middle/ring closed), palm facing left, held at the corner of the mouth and making two small forward-and-back taps, while the left hand rests near the lower torso with fingers loosely curled and palm down.",
+      "statement2": "Both hands take relaxed 5-handshapes with fingers loosely spread, palms facing down at chest level, moving in small parallel side-to-side sweeps with slight wrist flexion.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms an F-handshape (thumb and index fingertip touching, other fingers extended), palm facing left and slightly inward at mid-chest, and makes repeated short tapping and slight sliding motions onto the left hand, which holds a flat B-handshape (fingers extended together), palm up and steady near the center of the torso.\nStatement 2: Both hands open into relaxed 5-handshapes with palms up near the lower chest and move in a smooth upward and slightly outward arc while maintaining spread, extended fingers.\nStatement 3: touch",
+    "ground_truth": "For instance, if you want something with a more designer look to it, maybe some nice whiskers along the side, or some nice wear and tear along the pant leg, you can go ahead and just type in designer jeans or maybe even the specific type of design you want.",
+    "statements": {
+      "statement1": "The right hand forms an F-handshape (thumb and index fingertip touching, other fingers extended), palm facing left and slightly inward at mid-chest, and makes repeated short tapping and slight sliding motions onto the left hand, which holds a flat B-handshape (fingers extended together), palm up and steady near the center of the torso.",
+      "statement2": "Both hands open into relaxed 5-handshapes with palms up near the lower chest and move in a smooth upward and slightly outward arc while maintaining spread, extended fingers.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in a 1-handshape (index extended, other fingers curled with thumb against the side), palm down at mid-chest, contacts the center of the left flat B-hand (palm facing right) and slides downward along the left palm into lower neutral space.\nStatement 2: Both hands form F-handshapes (index and thumb making a circle, other fingers extended), palms facing each other at upper chest, move toward the midline until the circular fingertips align and briefly hold in place.\nStatement 3: touch",
+    "ground_truth": "type in jeans with whiskers.",
+    "statements": {
+      "statement1": "Right hand in a 1-handshape (index extended, other fingers curled with thumb against the side), palm down at mid-chest, contacts the center of the left flat B-hand (palm facing right) and slides downward along the left palm into lower neutral space.",
+      "statement2": "Both hands form F-handshapes (index and thumb making a circle, other fingers extended), palms facing each other at upper chest, move toward the midline until the circular fingertips align and briefly hold in place.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_8-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form 1-handshapes with the index fingers extended and other fingers curled, palms facing inward at mid-chest level, moving in parallel short vertical downward pulses with the right hand slightly higher than the left.\nStatement 2: The right hand forms an H-handshape (index and middle fingers extended together, other fingers curled, thumb resting against the ring finger), palm oriented inward, moving in a small upward-forward path from mid-chest to the mouth to touch the lips while the left hand remains at lower chest in a relaxed curved 5-handshape with palm angled slightly upward.\nStatement 3: not touch",
+    "ground_truth": "You're going to get a lot better search results.",
+    "statements": {
+      "statement1": "Both hands form 1-handshapes with the index fingers extended and other fingers curled, palms facing inward at mid-chest level, moving in parallel short vertical downward pulses with the right hand slightly higher than the left.",
+      "statement2": "The right hand forms an H-handshape (index and middle fingers extended together, other fingers curled, thumb resting against the ring finger), palm oriented inward, moving in a small upward-forward path from mid-chest to the mouth to touch the lips while the left hand remains at lower chest in a relaxed curved 5-handshape with palm angled slightly upward.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fH5XOSfcoIk_9-5-rgb_front.mp4",
+    "model_output": "Statement 1: The non-dominant hand holds a flat B-handshape with fingers together and palm up at mid-torso, while the dominant hand forms a bent-O/curved handshape (fingertips gathered, palm down) in the same area and moves in small circular rubbing motions on the center of the non-dominant palm.\nStatement 2: The non-dominant hand holds a vertical B-hand with fingertips up and palm facing across toward the dominant hand in front of the chest, while the dominant hand forms a 1-hand (index extended, other fingers closed, palm toward the non-dominant hand) and moves the index fingertip from the base of the non-dominant palm upward along the palm toward the fingertips with brief contact.\nStatement 3: touch",
+    "ground_truth": "Additionally, you look for various sorts of wear or wash, such as an acid wash jean or perhaps a non prewash jean.",
+    "statements": {
+      "statement1": "The non-dominant hand holds a flat B-handshape with fingers together and palm up at mid-torso, while the dominant hand forms a bent-O/curved handshape (fingertips gathered, palm down) in the same area and moves in small circular rubbing motions on the center of the non-dominant palm.",
+      "statement2": "The non-dominant hand holds a vertical B-hand with fingertips up and palm facing across toward the dominant hand in front of the chest, while the dominant hand forms a 1-hand (index extended, other fingers closed, palm toward the non-dominant hand) and moves the index fingertip from the base of the non-dominant palm upward along the palm toward the fingertips with brief contact.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_0-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand in an F-handshape (thumb and index forming a circle; middle, ring, and pinky extended), palm facing left, located at the right side of the upper face, moves slightly upward then arcs diagonally down toward the right chest while opening into a relaxed 5-handshape and rotating the palm to face down.\nStatement 2: Right hand transitions to a 1-handshape (index extended, other fingers curled with thumb resting), palm facing left-down at mid-chest center, and makes small forward-and-down pulses with a slight wrist bend.\nStatement 3: not touch",
+    "ground_truth": "Hi, my name's Tim Cole.",
+    "statements": {
+      "statement1": "Right hand in an F-handshape (thumb and index forming a circle; middle, ring, and pinky extended), palm facing left, located at the right side of the upper face, moves slightly upward then arcs diagonally down toward the right chest while opening into a relaxed 5-handshape and rotating the palm to face down.",
+      "statement2": "Right hand transitions to a 1-handshape (index extended, other fingers curled with thumb resting), palm facing left-down at mid-chest center, and makes small forward-and-down pulses with a slight wrist bend.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_1-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form S-handshapes (fists with thumbs resting across curled fingers), palms facing each other at midline chest level, moving inward from slightly apart to the center where the knuckles make brief contact and hold. \nStatement 2: The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting against the side of the middle finger), palm facing in toward the chest at upper chest level, moving in a short downward path and then resetting to the starting spot. \nStatement 3: touch",
+    "ground_truth": "I'm with the Austin Reptile Service.",
+    "statements": {
+      "statement1": "Both hands form S-handshapes (fists with thumbs resting across curled fingers), palms facing each other at midline chest level, moving inward from slightly apart to the center where the knuckles make brief contact and hold.",
+      "statement2": "The right hand forms a 1-handshape (index finger extended, other fingers curled, thumb resting against the side of the middle finger), palm facing in toward the chest at upper chest level, moving in a short downward path and then resetting to the starting spot.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_10-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands hold open, slightly curved 5-handshapes with fingers spread, palms facing inward toward each other, positioned at upper chest level, moving in small simultaneous inward–outward motions. \nStatement 2: The right hand forms an index-finger-extended handshape with the remaining fingers curled and the thumb resting against the side of the fingers, palm facing inward, starting in front of the upper chest and traveling upward in a straight path to a high position at the right side of the head. \nStatement 3: not touch",
+    "ground_truth": "It sounds like a cricket.",
+    "statements": {
+      "statement1": "Both hands hold open, slightly curved 5-handshapes with fingers spread, palms facing inward toward each other, positioned at upper chest level, moving in small simultaneous inward–outward motions.",
+      "statement2": "The right hand forms an index-finger-extended handshape with the remaining fingers curled and the thumb resting against the side of the fingers, palm facing inward, starting in front of the upper chest and traveling upward in a straight path to a high position at the right side of the head.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_11-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands move into 5-handshapes with palms forward at around shoulder-to-head height, fingers spread wide, and perform repeated small lateral shakes with visible finger wiggling while staying near the same location.\nStatement 2: Starting from both hands in 1-handshapes (index fingers extended, other fingers curled, palms inward) at upper chest level, the right hand opens to a 5-handshape and travels diagonally upward as its palm rotates to forward while the left hand holds an O-handshape (fingertips meeting thumb, palm inward) stationary near the upper chest.\nStatement 3: not touch",
+    "ground_truth": "They can be rather noisy.",
+    "statements": {
+      "statement1": "Both hands move into 5-handshapes with palms forward at around shoulder-to-head height, fingers spread wide, and perform repeated small lateral shakes with visible finger wiggling while staying near the same location.",
+      "statement2": "Starting from both hands in 1-handshapes (index fingers extended, other fingers curled, palms inward) at upper chest level, the right hand opens to a 5-handshape and travels diagonally upward as its palm rotates to forward while the left hand holds an O-handshape (fingertips meeting thumb, palm inward) stationary near the upper chest.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_12-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand forms an S-hand (fist) with palm facing down at upper chest center and moves straight downward to tap twice on the knuckles of the stationary left S-hand (fist) held at mid-chest with palm facing inward and knuckles horizontal.\nStatement 2: Right hand changes to a 1-hand (index finger extended, other fingers curled, thumb resting alongside) with palm facing inward and travels in a short upward arc from in front of the chest to touch the signer’s right cheek near the jawline, while the left hand remains in a small fist near mid-chest.\nStatement 3: touch",
+    "ground_truth": "Fishermen like to use cricket frogs for bait.",
+    "statements": {
+      "statement1": "Right hand forms an S-hand (fist) with palm facing down at upper chest center and moves straight downward to tap twice on the knuckles of the stationary left S-hand (fist) held at mid-chest with palm facing inward and knuckles horizontal.",
+      "statement2": "Right hand changes to a 1-hand (index finger extended, other fingers curled, thumb resting alongside) with palm facing inward and travels in a short upward arc from in front of the chest to touch the signer’s right cheek near the jawline, while the left hand remains in a small fist near mid-chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_13-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand begins as a 1-hand (index finger extended, other fingers curled), palm facing in toward the right cheek, then moves away from the cheek and arcs downward in front of the right side of the torso while opening into a relaxed 5-hand with palm facing down; left hand stays near mid-torso with fingers loosely curled and palm up.\nStatement 2: Left hand holds a 1-hand (index extended, other fingers curled), palm facing right at chest level, while the right hand forms a 1-hand with palm down and moves from the right side toward the tip of the left index in a short forward-and-down path across the center chest area.\nStatement 3: touch",
+    "ground_truth": "I once saw somebody pick up a little cricket frog and throw him out in the pond, they said this was a bass test.",
+    "statements": {
+      "statement1": "Right hand begins as a 1-hand (index finger extended, other fingers curled), palm facing in toward the right cheek, then moves away from the cheek and arcs downward in front of the right side of the torso while opening into a relaxed 5-hand with palm facing down; left hand stays near mid-torso with fingers loosely curled and palm up.",
+      "statement2": "Left hand holds a 1-hand (index extended, other fingers curled), palm facing right at chest level, while the right hand forms a 1-hand with palm down and moves from the right side toward the tip of the left index in a short forward-and-down path across the center chest area.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_14-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands move from contacting closed fists at mid-chest upward and outward along an arcing path to near head level while opening into spread 5-handshapes, palms facing inward toward each other, with all fingers fully extended and separated and thumbs extended.\nStatement 2: On the left side of the frame, the hand forms a 1-hand with palm inward at lower face level, makes a short inward tap with the index fingertip at the corner of the mouth, then briefly changes to a V-handshape (index and middle extended and separated) near the same spot before returning to a single index, while the opposite hand remains relatively still near mid-chest in a relaxed curved hand with palm inward.\ntouch",
+    "ground_truth": "And the water erupted, and that frog was eaten pretty quickly by a big bass.",
+    "statements": {
+      "statement1": "Both hands move from contacting closed fists at mid-chest upward and outward along an arcing path to near head level while opening into spread 5-handshapes, palms facing inward toward each other, with all fingers fully extended and separated and thumbs extended.",
+      "statement2": "On the left side of the frame, the hand forms a 1-hand with palm inward at lower face level, makes a short inward tap with the index fingertip at the corner of the mouth, then briefly changes to a V-handshape (index and middle extended and separated) near the same spot before returning to a single index, while the opposite hand remains relatively still near mid-chest in a relaxed curved hand with palm inward.",
+      "statement3": ""
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_15-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index extended, other fingers curled, thumb relaxed), palm facing down at mid-chest, and makes small repeated vertical taps with the right index onto the center of the left hand, which is an open B-hand (palm up, fingers together) held steady near the midline.\nStatement 2: Both hands form 1-handshapes (index extended, other fingers curled), palms facing inward at mid-chest, and the index fingertips contact pad-to-pad and execute a short, repeated horizontal slide against each other while staying parallel.\nStatement 3: touch",
+    "ground_truth": "So obviously, they like to eat 'em.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index extended, other fingers curled, thumb relaxed), palm facing down at mid-chest, and makes small repeated vertical taps with the right index onto the center of the left hand, which is an open B-hand (palm up, fingers together) held steady near the midline.",
+      "statement2": "Both hands form 1-handshapes (index extended, other fingers curled), palms facing inward at mid-chest, and the index fingertips contact pad-to-pad and execute a short, repeated horizontal slide against each other while staying parallel.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_16-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape with the index finger extended and other fingers closed, palm facing inward toward the left, starting at the mouth and moving downward in a short straight path to mid-chest to tap the stationary left hand, which is an open B-hand with palm up and fingers together. \nStatement 2: Both hands form 5-handshapes with fingers spread, palms facing forward and slightly outward at cheek level, and they make small outward-and-inward fluttering motions with slight vertical bobbing while the fingers visibly wiggle. \nStatement 3: touch",
+    "ground_truth": "But they're very quick frogs, live in the water's edge, hop around in the mud close to the water where it's wet, and in the springtime they can be rather noisy if you're in an area where they're calling.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape with the index finger extended and other fingers closed, palm facing inward toward the left, starting at the mouth and moving downward in a short straight path to mid-chest to tap the stationary left hand, which is an open B-hand with palm up and fingers together.",
+      "statement2": "Both hands form 5-handshapes with fingers spread, palms facing forward and slightly outward at cheek level, and they make small outward-and-inward fluttering motions with slight vertical bobbing while the fingers visibly wiggle.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_2-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands form closed fists (fingers curled) with palms facing each other at mid-torso center, moving inward from shoulder-width toward the midline to make knuckle-to-knuckle contact and pressing slightly downward together.\nStatement 2: The left hand holds a flat-B handshape, palm down, stationary at mid-torso center while the right hand holds a spread-5 handshape, palm down, hovering a few inches above the left palm and sweeping forward in two short, smooth arcs.\nStatement 3: touch",
+    "ground_truth": "I've been keeping reptiles and amphibians for over forty years.",
+    "statements": {
+      "statement1": "Both hands form closed fists (fingers curled) with palms facing each other at mid-torso center, moving inward from shoulder-width toward the midline to make knuckle-to-knuckle contact and pressing slightly downward together.",
+      "statement2": "The left hand holds a flat-B handshape, palm down, stationary at mid-torso center while the right hand holds a spread-5 handshape, palm down, hovering a few inches above the left palm and sweeping forward in two short, smooth arcs.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_3-5-rgb_front.mp4",
+    "model_output": "Statement 1: At mid-chest, the left hand forms a 1-hand with the index finger extended horizontally and palm facing right while the right hand forms a 1-hand with the index finger extended vertically and palm facing left; the right index makes short, repeated forward taps onto the middle section of the left index, with all non-index fingers on both hands curled.\n\nStatement 2: At mid-chest, the left hand holds a relaxed 5-hand with palm facing up while the right hand forms a 5-hand with palm facing left; the right hand moves rapidly side-to-side in a small arc above and slightly forward of the left hand, with fingers spread on both hands.\n\nStatement 3: touch",
+    "ground_truth": "I'm here to talk to you about southern cricket frogs.",
+    "statements": {
+      "statement1": "At mid-chest, the left hand forms a 1-hand with the index finger extended horizontally and palm facing right while the right hand forms a 1-hand with the index finger extended vertically and palm facing left; the right index makes short, repeated forward taps onto the middle section of the left index, with all non-index fingers on both hands curled.",
+      "statement2": "At mid-chest, the left hand holds a relaxed 5-hand with palm facing up while the right hand forms a 5-hand with palm facing left; the right hand moves rapidly side-to-side in a small arc above and slightly forward of the left hand, with fingers spread on both hands.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_4-5-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands in flat-B handshapes with fingers together; the left hand is held palm up at mid-chest center while the right hand, palm down, is placed directly on top and slides slightly side-to-side over the left hand, maintaining contact throughout.\nStatement 2: Left hand in a relaxed flat-B handshape held across the torso with palm down and fingers together; the right hand forms a 1-handshape (index extended, other fingers closed, palm inward) and the index finger moves along the back of the left hand from near the wrist toward the fingertips.\nStatement 3: touch",
+    "ground_truth": "This is a very small frog, about that big, that occurs in the southern United States, and they actually look kind of like toads, because their skin is bumpy or granular.",
+    "statements": {
+      "statement1": "Both hands in flat-B handshapes with fingers together; the left hand is held palm up at mid-chest center while the right hand, palm down, is placed directly on top and slides slightly side-to-side over the left hand, maintaining contact throughout.",
+      "statement2": "Left hand in a relaxed flat-B handshape held across the torso with palm down and fingers together; the right hand forms a 1-handshape (index extended, other fingers closed, palm inward) and the index finger moves along the back of the left hand from near the wrist toward the fingertips.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_5-5-rgb_front.mp4",
+    "model_output": "Statement 1: One hand forms a 1-handshape (index extended, other fingers closed, thumb resting along the side), palm oriented toward the other hand, at upper chest level, and makes repeated small downward taps onto the tip of the other hand’s horizontal 1-handshape, which is held steady with palm down in front of the chest.\nStatement 2: Both hands form S-handshapes (fists with thumbs across the fingers), palms facing each other at mid-chest in neutral space, and execute small simultaneous forward-and-back rotational motions while maintaining parallel spacing.\nStatement 3: touch",
+    "ground_truth": "And they can come in a variety of patterns.",
+    "statements": {
+      "statement1": "One hand forms a 1-handshape (index extended, other fingers closed, thumb resting along the side), palm oriented toward the other hand, at upper chest level, and makes repeated small downward taps onto the tip of the other hand’s horizontal 1-handshape, which is held steady with palm down in front of the chest.",
+      "statement2": "Both hands form S-handshapes (fists with thumbs across the fingers), palms facing each other at mid-chest in neutral space, and execute small simultaneous forward-and-back rotational motions while maintaining parallel spacing.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_6-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand with index finger extended and other fingers curled (1-hand), palm facing left, moves in a short straight path inward to touch the lips and then slightly away at the mouth level; left hand rests low near the torso in a relaxed position without participating.\nStatement 2: Left hand held as a flat-B upright near center chest with palm facing right while the right hand forms a flat-B with fingers extended and together, palm facing left, and makes brief tapping/brush strokes across the center of the left palm in small horizontal motions.\nStatement 3: touch",
+    "ground_truth": "Some of them have stripes on them that can be green, some of them have a reddish stripe.",
+    "statements": {
+      "statement1": "Right hand with index finger extended and other fingers curled (1-hand), palm facing left, moves in a short straight path inward to touch the lips and then slightly away at the mouth level; left hand rests low near the torso in a relaxed position without participating.",
+      "statement2": "Left hand held as a flat-B upright near center chest with palm facing right while the right hand forms a flat-B with fingers extended and together, palm facing left, and makes brief tapping/brush strokes across the center of the left palm in small horizontal motions.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_7-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 1-handshape (index finger extended, other fingers curled with thumb resting), palm facing left, starting near the mouth and moving forward along a short straight path to front-center chest level; the left hand holds a flat B-hand (fingers together, extended) at mid-chest with palm up, remaining still.\n\nStatement 2: Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing each other at chest level, and the index fingertips come together to touch at center, followed by a small synchronized up-and-down bounce while maintaining fingertip contact.\n\nStatement 3: touch",
+    "ground_truth": "And these are very small frogs that occur in, usually permanent bodies of water.",
+    "statements": {
+      "statement1": "The right hand forms a 1-handshape (index finger extended, other fingers curled with thumb resting), palm facing left, starting near the mouth and moving forward along a short straight path to front-center chest level; the left hand holds a flat B-hand (fingers together, extended) at mid-chest with palm up, remaining still.",
+      "statement2": "Both hands form 1-handshapes (index fingers extended, other fingers curled), palms facing each other at chest level, and the index fingertips come together to touch at center, followed by a small synchronized up-and-down bounce while maintaining fingertip contact.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_8-5-rgb_front.mp4",
+    "model_output": "Statement 1: The right hand forms a 5-hand with fingers extended and slightly spread, palm rotating from down to up, moving in a short forward-and-down arc at center chest; the left hand stays near lower chest in a relaxed bent hand with palm inward.\nStatement 2: The right hand changes to a 1-hand with index finger extended and other fingers curled, palm inward at center chest, making small horizontal taps/presses onto the left hand’s extended index and middle fingers as the left hand holds a 2-hand with palm inward near center chest.\nStatement 3: touch",
+    "ground_truth": "Your area creeks, lakes or swamps.",
+    "statements": {
+      "statement1": "The right hand forms a 5-hand with fingers extended and slightly spread, palm rotating from down to up, moving in a short forward-and-down arc at center chest; the left hand stays near lower chest in a relaxed bent hand with palm inward.",
+      "statement2": "The right hand changes to a 1-hand with index finger extended and other fingers curled, palm inward at center chest, making small horizontal taps/presses onto the left hand’s extended index and middle fingers as the left hand holds a 2-hand with palm inward near center chest.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "fHPQ0WYfLmI_9-5-rgb_front.mp4",
+    "model_output": "Statement 1: Right hand forms a 1-hand (index extended, other fingers closed), palm facing inward, at lower face level; it moves from in front of the lips to briefly touch under the nose, then arcs slightly right toward the cheek before retracting, while the left hand stays near mid-torso in a relaxed bent hand, palm down.\nStatement 2: Both hands form 5-hands with fingers spread, palms facing inward near mid-face; they move simultaneously outward and slightly downward away from the face along short paths while maintaining spread fingers and parallel spacing.\nStatement 3: touch",
+    "ground_truth": "They get their name cricket frog because of their call.",
+    "statements": {
+      "statement1": "Right hand forms a 1-hand (index extended, other fingers closed), palm facing inward, at lower face level; it moves from in front of the lips to briefly touch under the nose, then arcs slightly right toward the cheek before retracting, while the left hand stays near mid-torso in a relaxed bent hand, palm down.",
+      "statement2": "Both hands form 5-hands with fingers spread, palms facing inward near mid-face; they move simultaneously outward and slightly downward away from the face along short paths while maintaining spread fingers and parallel spacing.",
+      "statement3": "touch"
+    }
   }
 ]
