@@ -27,7 +27,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_16fps_1130/checkpoint-8499}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_16fps_1207_lowlr/checkpoint-2548}"
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1220_addlogits_mean/checkpoint-3058}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_openasl_2b_1224/checkpoint-4937}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399}"
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2874}"
@@ -40,15 +40,17 @@ MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-1B}"
 # VIDEO_FOLDER="${VIDEO_FOLDER:-}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/how2sign_test_videos_224x224}"
 
-# QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
-# QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/openasl/test_openasl_internvl.jsonl}"
-QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl}"
+# VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/openasl_test_videos}"
+
+QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
+# QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/openasl/test_openasl_internvl.jsonl}"
+# QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl}"
 
 OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/internvl_eval/}"
 
 # Evaluation parameters
 # MAX_SAMPLES=${MAX_SAMPLES:-20}  # Set to a number to limit samples, empty for full evaluation
-MAX_SAMPLES=${MAX_SAMPLES:-55}
+MAX_SAMPLES=${MAX_SAMPLES:-5502337}
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}  # Minimum number of frames (set to 6 to ensure 6 frames)
 MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-130}  # Maximum number of frames (set to 6 to fix at 6 frames)
 SAMPLING_METHOD=${SAMPLING_METHOD:-fps16.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling

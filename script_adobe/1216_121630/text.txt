@@ -3,6 +3,11 @@ cd /code/doc_sign_search/script_adobe/1216_30
 bash finetune_internvl2_5_how2sign_1b_elementgate_1216.sh
 bash finetune_internvl2_5_how2sign_4b_elementgate_1216.sh
 
+python3 download_and_extract_videos_from_hf.py \
+    --mode dataset \
+    --dataset_name PhoenixHu/openasl_test_videos \
+    --output_dir /mnt/localssd/doc_sign_search/openasl_test_videos
+
 
 export HF_TOKEN=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
 python3 upload_videos_to_hf.py --mode checkpoint \
@@ -32,9 +37,9 @@ python3 /code/doc_sign_search/download_and_extract_videos_from_hf.py \
 
 python3 /code/doc_sign_search/download_and_extract_videos_from_hf.py \
     --mode checkpoint \
-    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1218 \
-    --output_dir /code/doc_sign_search/InternVL/checkpoints/finetune_internvl2_5_how2sign_2b_1218 \
-    --checkpoint_subdir checkpoint-2039
+    --model_name PhoenixHu/finetune_internvl2_5_openasl_1B_1216_121640 \
+    --output_dir /code/doc_sign_search/InternVL/checkpoints/finetune_internvl2_5_openasl_1B_1216_121640 \
+    --checkpoint_subdir checkpoint-6374
 
 
     python3 upload_videos_to_hf.py --mode checkpoint \
@@ -53,3 +58,12 @@ python3 upload_videos_to_hf.py --mode checkpoint \
     --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1220_addlogits_sum_121630 \
     --upload_subdirs
 
+python3 download_and_extract_videos_from_hf.py \
+    --mode dataset \
+    --dataset_name PhoenixHu/sign_mllm_openasl_videos \
+    --output_dir /mnt/localssd/sign_mllm_openasl_videos
+
+    python3 download_and_extract_videos_from_hf.py \
+    --mode dataset \
+    --dataset_name PhoenixHu/sign_mllm_how_448_train_val \
+    --output_dir /mnt/localssd/doc_sign_search/sign_mllm_how_448_train_val
