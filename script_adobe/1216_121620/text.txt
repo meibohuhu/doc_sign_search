@@ -30,3 +30,6 @@ python3 upload_videos_to_hf.py --mode checkpoint \
     --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_1218 \
     --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_16fps_1218_121630 \
     --upload_subdirs
+
+
+     pip install opencv-python Pillow tqdm openai

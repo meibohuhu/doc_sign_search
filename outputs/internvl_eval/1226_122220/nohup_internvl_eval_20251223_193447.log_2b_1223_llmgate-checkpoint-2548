@@ -1,0 +1,428 @@
+✅ Conda environment activated: internvl
+🎬 InternVL2.5-2B How2Sign Evaluation on 2×A6000
+==================================================
+Checkpoint: /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1223_llmgate/checkpoint-2548
+Model Base: OpenGVLab/InternVL2_5-2B
+Video Folder: /mnt/localssd/doc_sign_search/how2sign_test_videos_224x224
+Question File: /code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl
+Output Dir: /code/doc_sign_search/outputs/internvl_eval/
+GPU IDs: 7 (CUDA_VISIBLE_DEVICES: 7)
+Number of GPUs: 1
+Min Num Frames: 32
+Max Num Frames: 160
+Sampling Method: fps16.0
+Image Size: 224
+Max New Tokens: 128
+Max Samples (limited): 55
+Export Frames: Disabled
+
+📁 Output directory: /code/doc_sign_search/outputs/internvl_eval/
+
+📝 Log file: /code/doc_sign_search/outputs/internvl_eval//evaluation_20251223_193448.log
+
+🚀 Starting evaluation...
+
+Using conda python: /home/colligo/anaconda3/envs/internvl/bin/python
+
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+✅ GPU: NVIDIA A100-SXM4-80GB
+💾 Memory: 85.1GB
+
+🔒 Gradient computation disabled globally for memory optimization
+🚀 Loading InternVL model from checkpoint...
+   Checkpoint: /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1223_llmgate/checkpoint-2548
+
+1️⃣ Loading base model config...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+   ✅ Config loaded
+
+2️⃣ Loading model from checkpoint...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
+[PATH 2] language_model is None, creating new one with architecture: InternLM2ForCausalLM
+trainable params: 15,728,640 || all params: 1,904,875,520 || trainable%: 0.8257043483870274
+Some weights of the model checkpoint at /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1223_llmgate/checkpoint-2548 were not used when initializing InternVLChatModel: ['language_model.base_model.model.model.layers.0.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.1.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.10.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.11.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.12.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.13.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.14.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.15.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.16.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.17.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.18.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.19.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.2.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.20.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.21.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.22.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.23.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.3.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.4.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.5.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.6.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.7.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.8.attention.gate_proj.weight', 'language_model.base_model.model.model.layers.9.attention.gate_proj.weight']
+- This IS expected if you are initializing InternVLChatModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing InternVLChatModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+   ✅ Model loaded from checkpoint
+
+3️⃣ Loading tokenizer...
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+   ✅ Tokenizer loaded (model_max_length: 12288)
+
+4️⃣ Moving model to GPU...
+   ✅ Model moved to cuda:0
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+
+🔒 All model parameters set to requires_grad=False
+📂 Loading test data from: /code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl
+   Limited to 55 samples
+   Total samples: 55
+
+🎬 Starting evaluation...
+======================================================================
+
+Evaluating:   0%|          | 0/55 [00:00<?, ?it/s]
+📹 [1/55] Loading video: g2SdWBPoXZ0_8-3-rgb_front.mp4
+   📊 Sampled 102 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152] (video total: 153, fps: 24.00)
+   ✅ Loaded 102 frames
+
+──────────────────────────────────────────────────────────────────────
+[1/55] g2SdWBPoXZ0_8-3-rgb_front.mp4
+Ground truth: Now of course there are a million different tricks you can do, and a million different ways you can link them all together.
+Prediction:   Now, the normal, the usual, and the different things that you can do, sometimes you want to connect with each other, with each other.
+✅ Partial match (has some words)
+Evaluating:   2%|▏         | 1/55 [00:03<03:29,  3.89s/it]
+📹 [2/55] Loading video: G3IJAoK0uSE_10-5-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 4, 8, 13, 17, 20, 25, 29, 34, 37, 41, 46, 50, 55, 58, 62, 67, 71, 74, 79, 83, 88, 92, 95, 100, 104, 109, 112, 116, 121, 125, 128, 133, 137, 142, 146, 149, 154, 158, 163, 166, 170, 175, 179, 184, 187, 191, 196, 200, 203, 208, 212, 217, 221, 224, 229, 233, 238, 241, 245, 250, 254, 257, 262, 266, 271, 275, 278, 283, 287, 292, 295, 299, 304, 308, 313, 316, 320, 325, 329, 332, 337, 341, 346, 349, 353, 358, 362, 367, 370, 374, 379, 383, 386, 391, 395, 400, 404, 407, 412, 416, 421, 424, 428, 433, 437, 442, 445, 449, 454, 458, 461, 466, 470, 475, 478, 482, 487, 491, 496, 499, 503, 508, 512, 515, 520, 524, 529, 533, 536, 541, 545, 550, 553, 557, 562, 566, 569, 574, 578, 583, 587, 590, 595, 599, 604, 607, 611, 616, 620, 625, 628, 632, 637, 641, 644, 649, 653, 658, 662] (video total: 664, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [2/55] Reduced frames to 153 (from original) to fit sequence length
+
+──────────────────────────────────────────────────────────────────────
+[2/55] G3IJAoK0uSE_10-5-rgb_front.mp4
+Ground truth: I've continued the design on my front panel using the same napkin for decoupage and more animal stickers.
+Prediction:   I'm going to keep it designating on my front, front panel, and I'm going to use the same design for the deck and more have it attached.
+✅ Partial match (has some words)
+Evaluating:   4%|▎         | 2/55 [00:08<03:49,  4.33s/it]
+📹 [3/55] Loading video: G2kVb4gINSI_9-10-rgb_front.mp4
+   📊 Sampled 82 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122] (video total: 124, fps: 24.00)
+   ✅ Loaded 82 frames
+
+──────────────────────────────────────────────────────────────────────
+[3/55] G2kVb4gINSI_9-10-rgb_front.mp4
+Ground truth: Down and up.
+Prediction:   Now, we're going to go to the end of the board and we're just going to do the same thing.
+✅ Partial match (has some words)
+Evaluating:   5%|▌         | 3/55 [00:12<03:33,  4.11s/it]
+📹 [4/55] Loading video: G0Q6AlvH96I_26-2-rgb_front.mp4
+   📊 Sampled 101 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151] (video total: 152, fps: 24.00)
+   ✅ Loaded 101 frames
+
+──────────────────────────────────────────────────────────────────────
+[4/55] G0Q6AlvH96I_26-2-rgb_front.mp4
+Ground truth: If it's woman attacked by a three hundred pound guy got to aim to the throat.
+Prediction:   So, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+⚠️  No obvious match
+Evaluating:   7%|▋         | 4/55 [00:20<04:53,  5.76s/it]
+📹 [5/55] Loading video: g2wUCRRni28_6-3-rgb_front.mp4
+   📊 Sampled 80 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119] (video total: 121, fps: 24.00)
+   ✅ Loaded 80 frames
+
+──────────────────────────────────────────────────────────────────────
+[5/55] g2wUCRRni28_6-3-rgb_front.mp4
+Ground truth: These are also great for parting and keeping your hair going that way.
+Prediction:   Also, also, wonderful door room, door room, helps you keep the hair, hair, and the hair, the hair, in the process.
+✅ Partial match (has some words)
+Evaluating:   9%|▉         | 5/55 [00:23<03:54,  4.69s/it]
+📹 [6/55] Loading video: G3RvsnzQrXQ_0-5-rgb_front.mp4
+   📊 Sampled 75 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112] (video total: 113, fps: 24.00)
+   ✅ Loaded 75 frames
+
+──────────────────────────────────────────────────────────────────────
+[6/55] G3RvsnzQrXQ_0-5-rgb_front.mp4
+Ground truth: Now we're ready to make the body of our spider.
+Prediction:   So, now, ready to make the body of our boat?
+✅ Partial match (has some words)
+Evaluating:  11%|█         | 6/55 [00:25<03:04,  3.76s/it]
+📹 [7/55] Loading video: fzueHkUDyhE_1-8-rgb_front.mp4
+   📊 Sampled 110 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164] (video total: 166, fps: 24.00)
+   ✅ Loaded 110 frames
+
+──────────────────────────────────────────────────────────────────────
+[7/55] fzueHkUDyhE_1-8-rgb_front.mp4
+Ground truth: We had a banked track the actually had to take from arena to arena set it up and tear it down.
+Prediction:   So we are going to have our arms spread out, and we can let them go all the way, all the way to the horizon.
+✅ Partial match (has some words)
+Evaluating:  13%|█▎        | 7/55 [00:30<03:21,  4.20s/it]
+📹 [8/55] Loading video: G19uBylwQww_13-2-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 5, 8, 10, 13, 16, 17, 20, 23, 25, 28, 31, 32, 35, 38, 40, 43, 46, 47, 50, 53, 55, 58, 61, 62, 65, 68, 70, 73, 76, 77, 80, 83, 85, 88, 91, 92, 95, 98, 100, 103, 106, 107, 110, 113, 115, 118, 121, 122, 125, 128, 130, 133, 136, 137, 140, 143, 145, 148, 151, 152, 155, 158, 160, 163, 166, 167, 170, 173, 175, 178, 181, 182, 185, 188, 190, 193, 196, 197, 200, 203, 205, 208, 211, 212, 215, 218, 220, 223, 226, 227, 230, 233, 235, 238, 241, 242, 245, 248, 250, 253, 256, 257, 260, 263, 265, 268, 271, 272, 275, 278, 280, 283, 286, 287, 290, 293, 295, 298, 301, 302, 305, 308, 310, 313, 316, 317, 320, 323, 325, 328, 331, 332, 335, 338, 340, 343, 346, 347, 350, 353, 355, 358, 361, 362, 365, 368, 370, 373, 376, 377, 380, 383, 385, 388, 391, 392, 395, 398] (video total: 400, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [8/55] Reduced frames to 153 (from original) to fit sequence length
+
+──────────────────────────────────────────────────────────────────────
+[8/55] G19uBylwQww_13-2-rgb_front.mp4
+Ground truth: "Oops, let's get our tip right".
+Prediction:   So, good diabetes, good diabetes control, good diabetes management, good diabetes prevention, good diabetes treatment, good diabetes care, good diabetes education, good diabetes support, good diabetes advocacy, good diabetes research, good diabetes policy, good diabetes regulation.
+⚠️  No obvious match
+Evaluating:  15%|█▍        | 8/55 [00:35<03:36,  4.60s/it]
+📹 [9/55] Loading video: g3jQ5ecjGz8_8-3-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 5, 8, 11, 13, 16, 19, 22, 25, 26, 29, 32, 35, 37, 40, 43, 46, 49, 50, 53, 56, 59, 61, 64, 67, 70, 73, 74, 77, 80, 83, 85, 88, 91, 94, 97, 98, 101, 104, 107, 109, 112, 115, 118, 121, 122, 125, 128, 131, 133, 136, 139, 142, 145, 146, 149, 152, 155, 158, 160, 163, 166, 169, 170, 173, 176, 179, 182, 184, 187, 190, 193, 194, 197, 200, 203, 206, 208, 211, 214, 217, 218, 221, 224, 227, 230, 232, 235, 238, 241, 242, 245, 248, 251, 254, 256, 259, 262, 265, 266, 269, 272, 275, 278, 280, 283, 286, 289, 292, 293, 296, 299, 302, 304, 307, 310, 313, 316, 317, 320, 323, 326, 328, 331, 334, 337, 340, 341, 344, 347, 350, 352, 355, 358, 361, 364, 365, 368, 371, 374, 376, 379, 382, 385, 388, 389, 392, 395, 398, 400, 403, 406, 409, 412, 413, 416, 419, 422, 425] (video total: 426, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [9/55] Reduced frames to 153 (from original) to fit sequence length
+
+──────────────────────────────────────────────────────────────────────
+[9/55] g3jQ5ecjGz8_8-3-rgb_front.mp4
+Ground truth: So I've shot him, and now I'm supposed to take his keycard and his clothes, and the keycard's here on the ground, so I'll pick that up, and then, go over here to the chemist, and you can see that the B button says "Suit Chemist."
+Prediction:   Now, you're going to give them a chance to sign up, give them the chance to check out the different types of clothes that they're going to be buying, and then when you're trying to convince them that BBB clothes are the clothes that BBB are, BBB say BBB clothes, BBB is the clothes that are BBB, BBB are the BBB.
+✅ Partial match (has some words)
+Evaluating:  16%|█▋        | 9/55 [00:43<04:12,  5.48s/it]
+📹 [10/55] Loading video: FzOQMA-CVPc_2-2-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 5, 8, 10, 11, 13, 16, 17, 19, 20, 23, 25, 26, 28, 31, 32, 34, 35, 38, 40, 41, 43, 46, 47, 49, 50, 53, 55, 56, 58, 61, 62, 64, 67, 68, 70, 71, 74, 76, 77, 79, 82, 83, 85, 86, 89, 91, 92, 94, 97, 98, 100, 101, 104, 106, 107, 109, 112, 113, 115, 116, 119, 121, 122, 125, 127, 128, 130, 133, 134, 136, 137, 140, 142, 143, 145, 148, 149, 151, 152, 155, 157, 158, 160, 163, 164, 166, 167, 170, 172, 173, 175, 178, 179, 181, 184, 185, 187, 188, 191, 193, 194, 196, 199, 200, 202, 203, 206, 208, 209, 211, 214, 215, 217, 218, 221, 223, 224, 226, 229, 230, 232, 233, 236, 238, 239, 242, 244, 245, 247, 250, 251, 253, 254, 257, 259, 260, 262, 265, 266, 268, 269, 272, 274, 275, 277, 280, 281, 283, 284, 287, 289, 290, 292, 295, 296, 298, 301] (video total: 302, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [10/55] Reduced frames to 153 (from original) to fit sequence length
+
+──────────────────────────────────────────────────────────────────────
+[10/55] FzOQMA-CVPc_2-2-rgb_front.mp4
+Ground truth: So just be relaxed and have, just do whatever you need to do to make your guest have a good time.
+Prediction:   And then you're going to have to do it again, and then you're still going to be doing it, and you're still still doing it, until you make your half an inch have a good time.
+✅ Partial match (has some words)
+Evaluating:  18%|█▊        | 10/55 [00:48<04:04,  5.44s/it]
+📹 [11/55] Loading video: G2hnUeetWcc_20-5-rgb_front.mp4
+   📊 Sampled 119 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178] (video total: 179, fps: 24.00)
+   ✅ Loaded 119 frames
+Evaluating:  20%|██        | 11/55 [00:52<03:31,  4.80s/it]
+📹 [12/55] Loading video: g0t4Wz5qsT8_13-8-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 5, 7, 10, 11, 13, 14, 16, 19, 20, 22, 23, 25, 28, 29, 31, 32, 34, 37, 38, 40, 41, 43, 46, 47, 49, 50, 53, 55, 56, 58, 59, 62, 64, 65, 67, 68, 71, 73, 74, 76, 77, 80, 82, 83, 85, 86, 89, 91, 92, 94, 97, 98, 100, 101, 103, 106, 107, 109, 110, 112, 115, 116, 118, 119, 121, 124, 125, 127, 128, 130, 133, 134, 136, 137, 139, 142, 143, 145, 146, 149, 151, 152, 154, 155, 158, 160, 161, 163, 164, 167, 169, 170, 172, 173, 176, 178, 179, 181, 182, 185, 187, 188, 190, 193, 194, 196, 197, 199, 202, 203, 205, 206, 208, 211, 212, 214, 215, 217, 220, 221, 223, 224, 226, 229, 230, 232, 233, 235, 238, 239, 241, 242, 245, 247, 248, 250, 251, 254, 256, 257, 259, 260, 263, 265, 266, 268, 269, 272, 274, 275, 277, 278, 281, 283, 284, 286, 289] (video total: 290, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [12/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  22%|██▏       | 12/55 [01:00<04:16,  5.97s/it]
+📹 [13/55] Loading video: g1xdqxCZxTg_11-3-rgb_front.mp4
+   📊 Sampled 32 frames: [0, 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 45] (video total: 46, fps: 24.00)
+   ✅ Loaded 32 frames
+Evaluating:  24%|██▎       | 13/55 [01:02<03:11,  4.55s/it]
+📹 [14/55] Loading video: FZd8Iv9ACVw_7-8-rgb_front.mp4
+   📊 Sampled 78 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116] (video total: 118, fps: 24.00)
+   ✅ Loaded 78 frames
+Evaluating:  25%|██▌       | 14/55 [01:04<02:46,  4.07s/it]
+📹 [15/55] Loading video: g0fgci8L_rc_2-8-rgb_front.mp4
+   📊 Sampled 53 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79] (video total: 80, fps: 24.00)
+   ✅ Loaded 53 frames
+Evaluating:  27%|██▋       | 15/55 [01:06<02:17,  3.44s/it]
+📹 [16/55] Loading video: g2o-GFdGOJE_6-3-rgb_front.mp4
+   📊 Sampled 76 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113] (video total: 115, fps: 24.00)
+   ✅ Loaded 76 frames
+Evaluating:  29%|██▉       | 16/55 [01:11<02:23,  3.69s/it]
+📹 [17/55] Loading video: G1lNlhjWC1I_16_17-8-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 59, 64, 68, 73, 77, 82, 86, 91, 95, 100, 104, 109, 113, 118, 122, 127, 131, 136, 140, 145, 149, 154, 158, 163, 167, 172, 176, 181, 185, 190, 194, 199, 203, 208, 212, 217, 221, 226, 230, 235, 239, 244, 248, 253, 257, 262, 266, 271, 275, 280, 284, 289, 293, 298, 302, 307, 311, 316, 320, 325, 329, 334, 338, 343, 347, 352, 356, 362, 367, 371, 376, 380, 385, 389, 394, 398, 403, 407, 412, 416, 421, 425, 430, 434, 439, 443, 448, 452, 457, 461, 466, 470, 475, 479, 484, 488, 493, 497, 502, 506, 511, 515, 520, 524, 529, 533, 538, 542, 547, 551, 556, 560, 565, 569, 574, 578, 583, 587, 592, 596, 601, 605, 610, 614, 619, 623, 628, 632, 637, 641, 646, 650, 655, 659, 664, 668, 673, 677, 682, 686, 691, 695, 700, 704, 709, 713, 719] (video total: 720, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [17/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  31%|███       | 17/55 [01:19<03:12,  5.07s/it]
+📹 [18/55] Loading video: fzOH00UZg84_31-8-rgb_front.mp4
+   📊 Sampled 100 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149] (video total: 151, fps: 24.00)
+   ✅ Loaded 100 frames
+Evaluating:  33%|███▎      | 18/55 [01:23<02:59,  4.86s/it]
+📹 [19/55] Loading video: fzQ2E3_xBZA_7-5-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 5, 7, 8, 11, 13, 14, 16, 17, 20, 22, 23, 25, 26, 29, 31, 32, 34, 35, 37, 40, 41, 43, 44, 46, 49, 50, 52, 53, 55, 58, 59, 61, 62, 64, 65, 68, 70, 71, 73, 74, 77, 79, 80, 82, 83, 86, 88, 89, 91, 92, 95, 97, 98, 100, 101, 103, 106, 107, 109, 110, 112, 115, 116, 118, 119, 121, 124, 125, 127, 128, 130, 131, 134, 136, 137, 139, 140, 143, 145, 146, 148, 149, 152, 154, 155, 157, 158, 160, 163, 164, 166, 167, 169, 172, 173, 175, 176, 178, 181, 182, 184, 185, 187, 190, 191, 193, 194, 196, 197, 200, 202, 203, 205, 206, 209, 211, 212, 214, 215, 218, 220, 221, 223, 224, 226, 229, 230, 232, 233, 235, 238, 239, 241, 242, 244, 247, 248, 250, 251, 253, 254, 257, 259, 260, 262, 263, 266, 268, 269, 271, 272, 275, 277, 278, 280, 281, 284] (video total: 285, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [19/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  35%|███▍      | 19/55 [01:28<02:48,  4.68s/it]
+📹 [20/55] Loading video: G06Irzcwxiw_7-1-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 7, 8, 11, 13, 16, 17, 20, 22, 23, 26, 28, 31, 32, 35, 37, 40, 41, 44, 46, 47, 50, 52, 55, 56, 59, 61, 64, 65, 68, 70, 71, 74, 76, 79, 80, 83, 85, 88, 89, 92, 94, 95, 98, 100, 103, 104, 107, 109, 112, 113, 116, 118, 119, 122, 124, 127, 128, 131, 133, 136, 137, 139, 142, 143, 146, 148, 151, 152, 155, 157, 160, 161, 163, 166, 167, 170, 172, 175, 176, 179, 181, 184, 185, 187, 190, 191, 194, 196, 199, 200, 203, 205, 208, 209, 211, 214, 215, 218, 220, 223, 224, 227, 229, 232, 233, 235, 238, 239, 242, 244, 247, 248, 251, 253, 254, 257, 259, 262, 263, 266, 268, 271, 272, 275, 277, 278, 281, 283, 286, 287, 290, 292, 295, 296, 299, 301, 302, 305, 307, 310, 311, 314, 316, 319, 320, 323, 325, 326, 329, 331, 334, 335, 338, 340, 343, 344, 347] (video total: 349, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [20/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  36%|███▋      | 20/55 [01:34<03:03,  5.24s/it]
+📹 [21/55] Loading video: fzOH00UZg84_16-8-rgb_front.mp4
+   📊 Sampled 154 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190, 191, 193, 194, 196, 197, 199, 200, 202, 203, 205, 206, 208, 209, 211, 212, 214, 215, 217, 218, 220, 221, 223, 224, 226, 227, 229, 230] (video total: 231, fps: 24.00)
+   ✅ Loaded 154 frames
+
+⚠️  [21/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  38%|███▊      | 21/55 [01:44<03:44,  6.59s/it]
+📹 [22/55] Loading video: G19uBylwQww_0-2-rgb_front.mp4
+   📊 Sampled 130 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190, 191, 193, 194] (video total: 196, fps: 24.00)
+   ✅ Loaded 130 frames
+Evaluating:  40%|████      | 22/55 [01:48<03:14,  5.90s/it]
+📹 [23/55] Loading video: fzrJBu2qsM8_5-10-rgb_front.mp4
+   📊 Sampled 11 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16] (video total: 17, fps: 24.00)
+   ✅ Loaded 11 frames
+Evaluating:  42%|████▏     | 23/55 [01:50<02:27,  4.60s/it]
+📹 [24/55] Loading video: G0Q6AlvH96I_1-2-rgb_front.mp4
+   📊 Sampled 105 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157] (video total: 158, fps: 24.00)
+   ✅ Loaded 105 frames
+Evaluating:  44%|████▎     | 24/55 [01:53<02:13,  4.30s/it]
+📹 [25/55] Loading video: G0peUY2cfeE_0-2-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 7, 8, 11, 13, 14, 17, 19, 22, 23, 25, 28, 29, 32, 34, 35, 38, 40, 43, 44, 46, 49, 50, 53, 55, 56, 59, 61, 64, 65, 67, 70, 71, 74, 76, 77, 80, 82, 85, 86, 88, 91, 92, 95, 97, 98, 101, 103, 106, 107, 109, 112, 113, 116, 118, 119, 122, 124, 127, 128, 130, 133, 134, 137, 139, 140, 143, 145, 148, 149, 151, 154, 155, 158, 160, 161, 164, 166, 169, 170, 173, 175, 176, 179, 181, 184, 185, 187, 190, 191, 194, 196, 197, 200, 202, 205, 206, 208, 211, 212, 215, 217, 218, 221, 223, 226, 227, 229, 232, 233, 236, 238, 239, 242, 244, 247, 248, 250, 253, 254, 257, 259, 260, 263, 265, 268, 269, 271, 274, 275, 278, 280, 281, 284, 286, 289, 290, 292, 295, 296, 299, 301, 302, 305, 307, 310, 311, 313, 316, 317, 320, 322, 323, 326, 328, 331, 332, 335] (video total: 337, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [25/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  45%|████▌     | 25/55 [01:58<02:09,  4.31s/it]
+📹 [26/55] Loading video: fzDHRCKr7wU_12-5-rgb_front.mp4
+   📊 Sampled 94 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140] (video total: 141, fps: 24.00)
+   ✅ Loaded 94 frames
+Evaluating:  47%|████▋     | 26/55 [02:01<01:52,  3.89s/it]
+📹 [27/55] Loading video: fzrJBu2qsM8_3-8-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 5, 8, 10, 11, 13, 16, 17, 19, 20, 23, 25, 26, 28, 31, 32, 34, 35, 38, 40, 41, 43, 46, 47, 49, 50, 53, 55, 56, 58, 61, 62, 64, 67, 68, 70, 71, 74, 76, 77, 79, 82, 83, 85, 86, 89, 91, 92, 94, 97, 98, 100, 101, 104, 106, 107, 109, 112, 113, 115, 116, 119, 121, 122, 125, 127, 128, 130, 133, 134, 136, 137, 140, 142, 143, 145, 148, 149, 151, 152, 155, 157, 158, 160, 163, 164, 166, 167, 170, 172, 173, 175, 178, 179, 181, 184, 185, 187, 188, 191, 193, 194, 196, 199, 200, 202, 203, 206, 208, 209, 211, 214, 215, 217, 218, 221, 223, 224, 226, 229, 230, 232, 233, 236, 238, 239, 242, 244, 245, 247, 250, 251, 253, 254, 257, 259, 260, 262, 265, 266, 268, 269, 272, 274, 275, 277, 280, 281, 283, 284, 287, 289, 290, 292, 295, 296, 298, 301] (video total: 302, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [27/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  49%|████▉     | 27/55 [02:09<02:27,  5.27s/it]
+📹 [28/55] Loading video: -g0iPSnQt6w_15-1-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 5, 7, 10, 11, 13, 14, 16, 19, 20, 22, 23, 25, 28, 29, 31, 32, 34, 37, 38, 40, 41, 43, 46, 47, 49, 50, 53, 55, 56, 58, 59, 62, 64, 65, 67, 68, 71, 73, 74, 76, 77, 80, 82, 83, 85, 86, 89, 91, 92, 94, 97, 98, 100, 101, 103, 106, 107, 109, 110, 112, 115, 116, 118, 119, 121, 124, 125, 127, 128, 130, 133, 134, 136, 137, 139, 142, 143, 145, 146, 149, 151, 152, 154, 155, 158, 160, 161, 163, 164, 167, 169, 170, 172, 173, 176, 178, 179, 181, 182, 185, 187, 188, 190, 193, 194, 196, 197, 199, 202, 203, 205, 206, 208, 211, 212, 214, 215, 217, 220, 221, 223, 224, 226, 229, 230, 232, 233, 235, 238, 239, 241, 242, 245, 247, 248, 250, 251, 254, 256, 257, 259, 260, 263, 265, 266, 268, 269, 272, 274, 275, 277, 278, 281, 283, 284, 286, 289] (video total: 290, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [28/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  51%|█████     | 28/55 [02:14<02:16,  5.06s/it]
+📹 [29/55] Loading video: g0UUmEkoT1w_7-10-rgb_front.mp4
+   📊 Sampled 73 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109] (video total: 110, fps: 24.00)
+   ✅ Loaded 73 frames
+Evaluating:  53%|█████▎    | 29/55 [02:17<01:58,  4.57s/it]
+📹 [30/55] Loading video: G2VAlFdgof4_5-5-rgb_front.mp4
+   📊 Sampled 146 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190, 191, 193, 194, 196, 197, 199, 200, 202, 203, 205, 206, 208, 209, 211, 212, 214, 215, 217, 218] (video total: 220, fps: 24.00)
+   ✅ Loaded 146 frames
+Evaluating:  55%|█████▍    | 30/55 [02:21<01:51,  4.45s/it]
+📹 [31/55] Loading video: g2v-M6EXcUE_18-3-rgb_front.mp4
+   📊 Sampled 120 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179] (video total: 181, fps: 24.00)
+   ✅ Loaded 120 frames
+Evaluating:  56%|█████▋    | 31/55 [02:30<02:14,  5.59s/it]
+📹 [32/55] Loading video: fzQ2E3_xBZA_10-5-rgb_front.mp4
+   📊 Sampled 85 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127] (video total: 128, fps: 24.00)
+   ✅ Loaded 85 frames
+Evaluating:  58%|█████▊    | 32/55 [02:32<01:45,  4.57s/it]
+📹 [33/55] Loading video: Fz-N1S0swh8_7-8-rgb_front.mp4
+   📊 Sampled 82 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122] (video total: 124, fps: 24.00)
+   ✅ Loaded 82 frames
+Evaluating:  60%|██████    | 33/55 [02:35<01:31,  4.15s/it]
+📹 [34/55] Loading video: G095RWKQ39g_6-1-rgb_front.mp4
+   📊 Sampled 142 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190, 191, 193, 194, 196, 197, 199, 200, 202, 203, 205, 206, 208, 209, 211, 212] (video total: 213, fps: 24.00)
+   ✅ Loaded 142 frames
+Evaluating:  62%|██████▏   | 34/55 [02:44<01:59,  5.70s/it]
+📹 [35/55] Loading video: G3g0-BeFN3c_17-5-rgb_front.mp4
+   📊 Sampled 39 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58] (video total: 59, fps: 24.00)
+   ✅ Loaded 39 frames
+Evaluating:  64%|██████▎   | 35/55 [02:46<01:29,  4.46s/it]
+📹 [36/55] Loading video: G3FhmHz_7hs_4-5-rgb_front.mp4
+   📊 Sampled 82 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122] (video total: 123, fps: 24.00)
+   ✅ Loaded 82 frames
+Evaluating:  65%|██████▌   | 36/55 [02:48<01:14,  3.94s/it]
+📹 [37/55] Loading video: G3VM7etNABI_4-10-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 5, 7, 10, 11, 14, 16, 19, 20, 23, 25, 28, 29, 32, 34, 37, 38, 41, 43, 46, 47, 50, 52, 55, 56, 59, 61, 64, 65, 68, 70, 73, 74, 77, 79, 82, 83, 86, 88, 91, 92, 95, 97, 100, 101, 104, 106, 109, 110, 113, 115, 118, 119, 122, 124, 127, 128, 131, 133, 136, 137, 140, 142, 145, 146, 149, 151, 154, 155, 158, 160, 163, 164, 167, 169, 172, 173, 176, 178, 181, 182, 185, 187, 190, 191, 194, 196, 199, 200, 203, 205, 208, 209, 212, 214, 217, 218, 221, 223, 226, 227, 230, 232, 235, 236, 239, 241, 244, 245, 248, 250, 253, 254, 257, 259, 262, 263, 266, 268, 271, 272, 275, 277, 280, 281, 284, 286, 289, 290, 293, 295, 298, 299, 302, 304, 307, 308, 311, 313, 316, 317, 320, 322, 325, 326, 329, 331, 334, 335, 338, 340, 343, 344, 347, 349, 352, 353, 356, 359] (video total: 360, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [37/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  67%|██████▋   | 37/55 [02:59<01:48,  6.01s/it]
+📹 [38/55] Loading video: g3pXM5X3_Xw_7-3-rgb_front.mp4
+   📊 Sampled 68 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101] (video total: 103, fps: 24.00)
+   ✅ Loaded 68 frames
+Evaluating:  69%|██████▉   | 38/55 [03:01<01:21,  4.82s/it]
+📹 [39/55] Loading video: fzDHRCKr7wU_0-5-rgb_front.mp4
+   📊 Sampled 4 frames: [1, 2, 4, 5] (video total: 7, fps: 24.00)
+   ✅ Loaded 4 frames
+Evaluating:  71%|███████   | 39/55 [03:02<00:56,  3.55s/it]
+📹 [40/55] Loading video: G1LiGqM3FhM_11-8-rgb_front.mp4
+   📊 Sampled 38 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56] (video total: 57, fps: 24.00)
+   ✅ Loaded 38 frames
+Evaluating:  73%|███████▎  | 40/55 [03:03<00:43,  2.91s/it]
+📹 [41/55] Loading video: FzUdcaxw_vs_5-2-rgb_front.mp4
+   📊 Sampled 106 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158] (video total: 159, fps: 24.00)
+   ✅ Loaded 106 frames
+Evaluating:  75%|███████▍  | 41/55 [03:07<00:44,  3.21s/it]
+📹 [42/55] Loading video: g1HvmBOR7Y4_11-3-rgb_front.mp4
+   📊 Sampled 6 frames: [1, 2, 4, 5, 7, 8] (video total: 9, fps: 24.00)
+   ✅ Loaded 6 frames
+Evaluating:  76%|███████▋  | 42/55 [03:08<00:32,  2.48s/it]
+📹 [43/55] Loading video: FZd8Iv9ACVw_2-8-rgb_front.mp4
+   📊 Sampled 107 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160] (video total: 161, fps: 24.00)
+   ✅ Loaded 107 frames
+Evaluating:  78%|███████▊  | 43/55 [03:12<00:34,  2.91s/it]
+📹 [44/55] Loading video: G25fic3QxDk_9-5-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 4, 7, 10, 13, 16, 19, 22, 25, 29, 32, 35, 38, 41, 44, 47, 50, 53, 58, 61, 64, 67, 70, 73, 76, 79, 82, 86, 89, 92, 95, 98, 101, 104, 107, 110, 115, 118, 121, 124, 127, 130, 133, 136, 139, 143, 146, 149, 152, 155, 158, 161, 164, 169, 172, 175, 178, 181, 184, 187, 190, 193, 197, 200, 203, 206, 209, 212, 215, 218, 221, 226, 229, 232, 235, 238, 241, 244, 247, 250, 254, 257, 260, 263, 266, 269, 272, 275, 278, 283, 286, 289, 292, 295, 298, 301, 304, 307, 311, 314, 317, 320, 323, 326, 329, 332, 337, 340, 343, 346, 349, 352, 355, 358, 361, 365, 368, 371, 374, 377, 380, 383, 386, 389, 394, 397, 400, 403, 406, 409, 412, 415, 418, 422, 425, 428, 431, 434, 437, 440, 443, 446, 451, 454, 457, 460, 463, 466, 469, 472, 475, 479, 482, 485, 488, 491, 494, 497, 500, 505] (video total: 506, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [44/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  80%|████████  | 44/55 [03:19<00:44,  4.01s/it]
+📹 [45/55] Loading video: FZNuNG9UBnw_0-1-rgb_front.mp4
+   📊 Sampled 148 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190, 191, 193, 194, 196, 197, 199, 200, 202, 203, 205, 206, 208, 209, 211, 212, 214, 215, 217, 218, 220, 221] (video total: 222, fps: 24.00)
+   ✅ Loaded 148 frames
+Evaluating:  82%|████████▏ | 45/55 [03:24<00:44,  4.47s/it]
+📹 [46/55] Loading video: FzOQMA-CVPc_10-2-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 2, 4, 5, 8, 10, 11, 14, 16, 17, 20, 22, 23, 25, 28, 29, 31, 34, 35, 37, 40, 41, 43, 44, 47, 49, 50, 53, 55, 56, 59, 61, 62, 64, 67, 68, 70, 73, 74, 76, 79, 80, 82, 83, 86, 88, 89, 92, 94, 95, 98, 100, 101, 104, 106, 107, 109, 112, 113, 115, 118, 119, 121, 124, 125, 127, 128, 131, 133, 134, 137, 139, 140, 143, 145, 146, 148, 151, 152, 154, 157, 158, 160, 163, 164, 166, 167, 170, 172, 173, 176, 178, 179, 182, 184, 185, 187, 190, 191, 193, 196, 197, 199, 202, 203, 205, 208, 209, 211, 212, 215, 217, 218, 221, 223, 224, 227, 229, 230, 232, 235, 236, 238, 241, 242, 244, 247, 248, 250, 251, 254, 256, 257, 260, 262, 263, 266, 268, 269, 271, 274, 275, 277, 280, 281, 283, 286, 287, 289, 290, 293, 295, 296, 299, 301, 302, 305, 307, 308, 311] (video total: 313, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [46/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  84%|████████▎ | 46/55 [03:30<00:45,  5.02s/it]
+📹 [47/55] Loading video: g1HXoDkax5A_1-3-rgb_front.mp4
+   📊 Sampled 43 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64] (video total: 65, fps: 24.00)
+   ✅ Loaded 43 frames
+Evaluating:  85%|████████▌ | 47/55 [03:34<00:36,  4.61s/it]
+📹 [48/55] Loading video: f_zna_wG3zo_6-5-rgb_front.mp4
+   📊 Sampled 127 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190] (video total: 191, fps: 24.00)
+   ✅ Loaded 127 frames
+Evaluating:  87%|████████▋ | 48/55 [03:43<00:41,  5.95s/it]
+📹 [49/55] Loading video: g3kFAmcBpFc_0_1_3-3-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 4, 8, 11, 16, 19, 23, 28, 31, 35, 38, 43, 47, 50, 55, 58, 62, 65, 70, 74, 77, 82, 85, 89, 94, 97, 101, 104, 109, 112, 116, 121, 124, 128, 131, 136, 140, 143, 148, 151, 155, 158, 163, 167, 170, 175, 178, 182, 187, 190, 194, 197, 202, 206, 209, 214, 217, 221, 224, 229, 233, 236, 241, 244, 248, 253, 256, 260, 263, 268, 271, 275, 280, 283, 287, 290, 295, 299, 302, 307, 310, 314, 317, 322, 326, 329, 334, 337, 341, 346, 349, 353, 356, 361, 364, 368, 373, 376, 380, 383, 388, 392, 395, 400, 403, 407, 412, 415, 419, 422, 427, 430, 434, 439, 442, 446, 449, 454, 458, 461, 466, 469, 473, 476, 481, 485, 488, 493, 496, 500, 505, 508, 512, 515, 520, 523, 527, 532, 535, 539, 542, 547, 551, 554, 559, 562, 566, 569, 574, 578, 581, 586, 589, 593, 598, 601, 605, 608, 613, 617] (video total: 618, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [49/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  89%|████████▉ | 49/55 [03:53<00:43,  7.23s/it]
+📹 [50/55] Loading video: -fZc293MpJk_2-1-rgb_front.mp4
+   📊 Sampled 160 frames: [1, 4, 8, 13, 16, 20, 25, 29, 32, 37, 41, 44, 49, 53, 58, 61, 65, 70, 74, 77, 82, 86, 89, 94, 98, 103, 106, 110, 115, 118, 122, 127, 131, 134, 139, 143, 148, 151, 155, 160, 163, 167, 172, 176, 179, 184, 188, 191, 196, 200, 205, 208, 212, 217, 221, 224, 229, 233, 236, 241, 245, 250, 253, 257, 262, 266, 269, 274, 278, 281, 286, 290, 295, 298, 302, 307, 310, 314, 319, 323, 326, 331, 335, 340, 343, 347, 352, 355, 359, 364, 368, 371, 376, 380, 383, 388, 392, 397, 400, 404, 409, 413, 416, 421, 425, 428, 433, 437, 442, 445, 449, 454, 458, 461, 466, 470, 473, 478, 482, 487, 490, 494, 499, 502, 506, 511, 515, 518, 523, 527, 532, 535, 539, 544, 547, 551, 556, 560, 563, 568, 572, 575, 580, 584, 589, 592, 596, 601, 605, 608, 613, 617, 620, 625, 629, 634, 637, 641, 646, 650] (video total: 652, fps: 24.00)
+   ✅ Loaded 160 frames
+
+⚠️  [50/55] Reduced frames to 153 (from original) to fit sequence length
+Evaluating:  91%|█████████ | 50/55 [04:02<00:38,  7.69s/it]
+📹 [51/55] Loading video: G1GUMky8kWc_9-2-rgb_front.mp4
+   📊 Sampled 32 frames: [0, 1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 42, 43, 44] (video total: 45, fps: 24.00)
+   ✅ Loaded 32 frames
+Evaluating:  93%|█████████▎| 51/55 [04:03<00:22,  5.70s/it]
+📹 [52/55] Loading video: G2VzB5-JkRA_5-5-rgb_front.mp4
+   📊 Sampled 134 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190, 191, 193, 194, 196, 197, 199, 200] (video total: 201, fps: 24.00)
+   ✅ Loaded 134 frames
+Evaluating:  95%|█████████▍| 52/55 [04:09<00:17,  5.80s/it]
+📹 [53/55] Loading video: G06Irzcwxiw_17-1-rgb_front.mp4
+   📊 Sampled 74 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110] (video total: 112, fps: 24.00)
+   ✅ Loaded 74 frames
+Evaluating:  96%|█████████▋| 53/55 [04:13<00:10,  5.26s/it]
+📹 [54/55] Loading video: G3EYpadwqck_4-5-rgb_front.mp4
+   📊 Sampled 106 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158] (video total: 160, fps: 24.00)
+   ✅ Loaded 106 frames
+Evaluating:  98%|█████████▊| 54/55 [04:16<00:04,  4.62s/it]
+📹 [55/55] Loading video: G0MjvzT_UqM_9-2-rgb_front.mp4
+   📊 Sampled 119 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178] (video total: 179, fps: 24.00)
+   ✅ Loaded 119 frames
+Evaluating: 100%|██████████| 55/55 [04:21<00:00,  4.68s/it]Evaluating: 100%|██████████| 55/55 [04:21<00:00,  4.76s/it]
+
+======================================================================
+✅ Results saved: /code/doc_sign_search/outputs/internvl_eval/internvl_results_20251223_193916.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+Warning: evaluate (HuggingFace) not available. Some metrics will be skipped.
+
+============================================================
+EVALUATION RESULTS - InternVL (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.0000
+  F1 Score:         0.2272
+  Precision:        0.2169
+  Recall:           0.2559
+  ROUGE-L F1:       0.0000
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.1837
+  BLEU2: 0.0886
+  BLEU3: 0.0451
+  BLEU4: 0.0254
+
+📋 Summary:
+  Total Samples:    55
+============================================================
+
+📊 Metrics saved: /code/doc_sign_search/outputs/internvl_eval/metrics_20251223_193916.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 55
+   Successful: 55
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+
+
+✅ Evaluation completed successfully!
+📁 Results saved to: /code/doc_sign_search/outputs/internvl_eval/
+📝 Log file: /code/doc_sign_search/outputs/internvl_eval//evaluation_20251223_193448.log
