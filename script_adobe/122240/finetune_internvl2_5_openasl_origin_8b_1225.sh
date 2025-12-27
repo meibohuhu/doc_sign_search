@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# InternVL2.5-1B How2Sign Fine-Tuning on 4*A100
+# InternVL2.5-2B How2Sign Fine-Tuning on 4*A100
 # Set up conda environment - matches setup_internvl_auto.txt
 # Anaconda is installed at $HOME/anaconda3 by setup script
 # Environment name: internvl
@@ -27,10 +27,10 @@ export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
-MODEL_NAME="OpenGVLab/InternVL2_5-2B"
-OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1223_unfreeze12"
-META_PATH="/code/doc_sign_search/script_adobe/train_how2sign_meta.json"
-IMAGE_ROOT="/mnt/localssd/doc_sign_search/train_crop_videos_224"
+MODEL_NAME="OpenGVLab/InternVL2_5-8B"
+OUTPUT_DIR="/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_openasl_origin_8b_1225"
+META_PATH="/code/doc_sign_search/script_adobe/train_openasl_meta_original.json"
+IMAGE_ROOT="/mnt/localssd/sign_mllm_openasl_videos"
 
 # Optimized training configuration
 # Note: NUM_DEVICES is automatically calculated from GPU_IDS above
@@ -49,7 +49,7 @@ MAX_NUM_FRAME=${MAX_NUM_FRAME:-160}
 # Video frame sampling method
 SAMPLING_METHOD='fps16.0'
 
-echo "🚀 Starting InternVL2.5-1B How2Sign Training on 4*A100"
+echo "🚀 Starting InternVL2.5-8B How2Sign Training on 4*A100"
 echo "======================================================"
 echo "Model: $MODEL_NAME"
 echo "Output Dir: $OUTPUT_DIR"
@@ -69,7 +69,7 @@ echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
 
 # Check if model is already cached
-MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B"
+MODEL_CACHE_DIR="$HOME/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-8B"
 if [ -d "$MODEL_CACHE_DIR" ]; then
     echo "✅ Model found in cache: $MODEL_CACHE_DIR"
     echo "📊 Cache size: $(du -sh "$MODEL_CACHE_DIR" 2>/dev/null | cut -f1 || echo 'N/A')"
@@ -107,7 +107,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --conv_style internvl2_5 \
     --use_fast_tokenizer False \
     --do_train True \
-    --num_train_epochs 10 \
+    --num_train_epochs 7 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --learning_rate 5e-5 \
@@ -119,8 +119,8 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --drop_path_rate 0.0 \
     --freeze_llm True \
     --freeze_backbone False \
-    --freeze_mlp False \
-    --unfreeze_vit_layers 4 \
+    --freeze_mlp True \
+    --unfreeze_vit_layers 0 \
     --use_llm_lora 16 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
