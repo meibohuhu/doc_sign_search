@@ -1,0 +1,32 @@
+[
+  {
+    "video": "CzXICdEaWaY_10-8-rgb_front.mp4",
+    "model_output": "Statement 1: With the left hand in a fist (S-hand) with thumb extended upward at mid-chest, palm facing inward, the right hand starts near the right side of the chest with a relaxed curved hand and moves inward in a short arc while closing to a fist, palm facing down and slightly leftward, ending directly above the left fist. \nStatement 2: The right hand forms an F-hand (thumb and index touching, other fingers extended), palm facing forward and slightly right, at upper-chest level, and makes a small downward dip with a slight bounce before holding steady, while the left hand remains lowered. \nStatement 3: touch",
+    "ground_truth": "Then you are going to drop down the pitcher so that the tip of the steam wand is just right at or right above the surface of the milk.",
+    "statements": {
+      "statement1": "With the left hand in a fist (S-hand) with thumb extended upward at mid-chest, palm facing inward, the right hand starts near the right side of the chest with a relaxed curved hand and moves inward in a short arc while closing to a fist, palm facing down and slightly leftward, ending directly above the left fist.",
+      "statement2": "The right hand forms an F-hand (thumb and index touching, other fingers extended), palm facing forward and slightly right, at upper-chest level, and makes a small downward dip with a slight bounce before holding steady, while the left hand remains lowered.",
+      "statement3": "touch"
+    }
+  },
+  {
+    "video": "CzXICdEaWaY_11-8-rgb_front.mp4",
+    "model_output": "Statement 1: Both hands lift from resting near the lap to mid-chest, each with the thumb pad touching the index fingertip forming a small circle while the middle, ring, and little fingers are extended and relaxed, with palms oriented inward toward the torso and slightly toward each other on a short upward path with small controlled bounce.\nStatement 2: The right hand at the midline changes from the index–thumb circle to a crossed-index-and-middle configuration (index crossing over middle, ring and little fingers curled, thumb tucked), palm facing forward and slightly left, moving a brief upward-forward path while the left hand holds the index–thumb circle at lower chest with palm inward.\nStatement 3: not touch",
+    "ground_truth": "You are going to hear air start to being introduced into the milk, and what you are doing is creating foam at that point.",
+    "statements": {
+      "statement1": "Both hands lift from resting near the lap to mid-chest, each with the thumb pad touching the index fingertip forming a small circle while the middle, ring, and little fingers are extended and relaxed, with palms oriented inward toward the torso and slightly toward each other on a short upward path with small controlled bounce.",
+      "statement2": "The right hand at the midline changes from the index–thumb circle to a crossed-index-and-middle configuration (index crossing over middle, ring and little fingers curled, thumb tucked), palm facing forward and slightly left, moving a brief upward-forward path while the left hand holds the index–thumb circle at lower chest with palm inward.",
+      "statement3": "not touch"
+    }
+  },
+  {
+    "video": "CzXICdEaWaY_12-8-rgb_front.mp4",
+    "model_output": "Statement 1: The dominant right hand forms a 1-hand (index extended, other fingers curled with the thumb resting against the side of the hand), palm facing inward toward the face, located at the right cheek, and makes two small tapping motions against the cheek while the left hand stays low near the torso.\nStatement 2: At upper chest level, the non-dominant left hand holds a vertical B-hand (fingers together and extended, thumb tucked) with palm facing right, while the dominant right hand forms a V-hand (index and middle extended and separated, other fingers curled, thumb relaxed), palm facing slightly down/left, and moves in small repeated left-to-right arcs across the space in front of the left palm.\nStatement 3: not touch",
+    "ground_truth": "And with breve, since it contains more fat, we are going to want to stretch it for longer.",
+    "statements": {
+      "statement1": "The dominant right hand forms a 1-hand (index extended, other fingers curled with the thumb resting against the side of the hand), palm facing inward toward the face, located at the right cheek, and makes two small tapping motions against the cheek while the left hand stays low near the torso.",
+      "statement2": "At upper chest level, the non-dominant left hand holds a vertical B-hand (fingers together and extended, thumb tucked) with palm facing right, while the dominant right hand forms a V-hand (index and middle extended and separated, other fingers curled, thumb relaxed), palm facing slightly down/left, and moves in small repeated left-to-right arcs across the space in front of the left palm.",
+      "statement3": "not touch"
+    }
+  }
+]

@@ -42,7 +42,8 @@ OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/gpt4v_eval/}"
 ### /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/FZLxEwsoc1c_8-8-rgb_front.mp4
 ### /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/G3CyVk6dizw_0-5-rgb_front.mp4
 
-# g3kFAmcBpFc_13-3-rgb_front.mp4
+### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/CzXICdEaWaY_11-8-rgb_front.mp4
+# CzXICdEaWaY_12-8-rgb_front.mp4
 
 # Evaluation parameters
 MAX_SAMPLES=${MAX_SAMPLES:-5}  # Set to a number to limit samples, empty for full evaluation
