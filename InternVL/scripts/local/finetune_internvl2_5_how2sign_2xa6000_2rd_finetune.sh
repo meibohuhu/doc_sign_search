@@ -25,10 +25,11 @@ MODEL_NAME="OpenGVLab/InternVL2_5-1B"
 OUTPUT_DIR="/local1/mhu/sign_language_llm/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/"
 # Use local data paths
 # META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
-META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_meta_local.json"
+META_PATH="/local1/mhu/sign_language_llm/InternVL/data/how2sign/val_how2sign_meta.json"
 
 
-IMAGE_ROOT="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
+IMAGE_ROOT="/local1/mhu/sign_language_llm/how2sign/video/how2sign_val_segment_clips_stable_448x448"
+# IMAGE_ROOT="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
 # Optimized training configuration
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-4}
@@ -37,10 +38,12 @@ GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * 
 
 # Memory envelopes (from internvl2_5_2b_dynamic_res_2nd_finetune_lora)
 DEEPSPEED_CONFIG="internvl_chat/zero_stage1_config.json"
-MAX_SEQ_LENGTH=${MAX_SEQ_LENGTH:-8192}
+# Increase max_seq_length to accommodate more video frames with force_image_size=448
+# With 96 frames * 256 tokens/frame = 24576 tokens, plus text tokens, we need at least 32768
+MAX_SEQ_LENGTH=${MAX_SEQ_LENGTH:-32768}
 MAX_BUFFER_SIZE=${MAX_BUFFER_SIZE:-20}
-NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-96}
-MAX_NUM_FRAME=${MAX_NUM_FRAME:-96}
+NUM_IMAGES_EXPECTED=${NUM_IMAGES_EXPECTED:-64}
+MAX_NUM_FRAME=${MAX_NUM_FRAME:-64}
 
 # Video frame sampling method
 SAMPLING_METHOD='fps10.0'
@@ -94,7 +97,7 @@ echo ""
 # with ZeRO Stage 2/3. DeepSpeed launcher handles gradient accumulation correctly.
 # Note: CUDA_VISIBLE_DEVICES is already set above, so deepspeed will use the specified GPUs
 deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
-    internvl_chat/internvl/train/internvl_chat_finetune_gate_vit.py \
+    internvl_chat/internvl/train/internvl_chat_finetune_448.py \
     --model_name_or_path "$MODEL_NAME" \
     --output_dir "$OUTPUT_DIR" \
     --overwrite_output_dir \
@@ -107,14 +110,14 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --learning_rate 2e-5 \
     --vision_select_layer -1 \
-    --force_image_size 224 \
+    --force_image_size 448 \
     --max_dynamic_patch 6 \
-    --dynamic_image_size True \
+    --dynamic_image_size True  \
     --down_sample_ratio 0.5 \
     --drop_path_rate 0.0 \
     --freeze_llm True \
     --freeze_backbone False \
-    --freeze_mlp False \
+    --freeze_mlp True \
     --unfreeze_vit_layers 0 \
     --use_llm_lora 16 \
     --bf16 True \
@@ -137,8 +140,6 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --min_num_frame 32 \
     --max_num_frame $MAX_NUM_FRAME \
     --sampling_method "$SAMPLING_METHOD" \
-    --use_vit_gate True \
-    --vit_gate_type headwise \
     --warmup_ratio 0.03 \
     --weight_decay 0.01 \
     --lr_scheduler_type cosine \
