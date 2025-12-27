@@ -1,0 +1,125 @@
+[
+  {
+    "video": "CzXICdEaWaY_10-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand is held at mid-chest in a fist with thumb extended upward, palm inward, while the other arcs inward to end above it?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the left hand is in a fist at mid-chest with palm inward while the right hand arcs to end above it"
+        }
+      },
+      {
+        "question": "Which hand forms an F-hand at upper-chest level and makes a small downward dip with a slight bounce while the other stays lowered?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the right hand forms an F-hand at upper-chest level and dips, with the left hand lowered"
+        }
+      },
+      {
+        "question": "During the small downward dip at upper-chest level, is the palm facing upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the palm is facing forward and slightly right during the dip, not upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states \"touch,\" indicating the hands visibly touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CzXICdEaWaY_11-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which side changes from the index–thumb circle to a crossed index-over-middle shape while moving briefly upward-forward with the palm facing forward?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies \"The right hand ... changes ... palm facing forward ... moving a brief upward-forward path.\""
+        }
+      },
+      {
+        "question": "Which side maintains the index–thumb circle at lower chest with the palm oriented inward during the other's change?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says \"the left hand holds the index–thumb circle at lower chest with palm inward.\""
+        }
+      },
+      {
+        "question": "At any time, are both palms facing forward simultaneously?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 has both palms inward; Statement 2 has only the right palm facing forward while the left remains inward, so never both forward simultaneously"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "not touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states \"not touch,\" and no touching is described in Statements 1 or 2"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CzXICdEaWaY_12-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand performs two small taps against the cheek?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the dominant right hand makes two small tapping motions against the cheek, while the left hand stays low"
+        }
+      },
+      {
+        "question": "Which hand maintains a vertical flat shape at upper chest level while the other moves in small arcs nearby?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the non-dominant left hand holds a vertical B-hand at upper chest level while the right hand moves in small arcs nearby"
+        }
+      },
+      {
+        "question": "Is the palm of the cheek‑tapping hand facing outward away from the face?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the palm of the cheek-tapping hand is facing inward toward the face, not outward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "not touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 describes movement in front of the left palm without contact, Statement 1 keeps the hands separate, and Statement 3 explicitly says \"not touch\""
+        }
+      }
+    ]
+  }
+]

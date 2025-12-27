@@ -1,0 +1,1606 @@
+[
+  {
+    "video": "CnycvXFq8H4_12-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which limb starts near the lower face with palm oriented inward, moves forward a short distance, then drops straight down to mid-chest, ending with the index finger pointing downward?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says “The right hand forms a 1-handshape near the lower face… moves forward… and drops straight down to mid-chest… ending with the index finger pointing downward.”"
+        }
+      },
+      {
+        "question": "In the movement where one limb starts near the lower face, moves forward, then drops to mid-chest, which limb remains low near the torso in a relaxed open hand?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies “the left hand stays low near the torso in a relaxed open hand.”"
+        }
+      },
+      {
+        "question": "At the end of the movement where a limb drops straight down to mid-chest from near the lower face, is the index finger oriented upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the movement ends “with the index finger pointing downward,” so it is not oriented upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "not touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states “not touch.”"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_13-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand makes small repeated taps on the chin with an extended index finger?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says “The right hand … making small repeated taps on the chin.”"
+        }
+      },
+      {
+        "question": "Which hand stays relaxed near the torso during the chin tapping?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 states “the left hand remains relaxed near the torso.”"
+        }
+      },
+      {
+        "question": "Are the palms oriented away from each other when the fingers are interlaced at chest level?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies “palms facing inward toward each other,” not away"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 indicates “fingers interlaced,” which means the hands touch (also supported by Statement 3: “touch”)"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_14-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand moves downward to contact and rest on top of the other at the midline above the upper chest?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the left hand moves downward to contact and rest on top of the right palm"
+        }
+      },
+      {
+        "question": "Which hand forms a cupped C-shape with palm facing upward and remains underneath during the settling?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the right hand forms a cupped C-handshape with palm up and the left hand rests on top of it, so the right hand remains underneath during the settling"
+        }
+      },
+      {
+        "question": "During the temple-level tapping, are the palms facing outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the palms are facing inward at temple level, not outward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the left hand contacts and rests on top of the right palm, indicating the hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_15-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand has the extended index that is traced downward from tip toward base by the other fingertip?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the right index fingertip moves downward along the left index from tip toward base, so the left hand’s extended index is the one being traced"
+        }
+      },
+      {
+        "question": "Which hand performs the downward sliding motion with its index fingertip along the other index, maintaining contact?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 explicitly states the right hand moves its index fingertip straight downward along the left index, maintaining contact"
+        }
+      },
+      {
+        "question": "Are the palms at eye level oriented outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the palms are facing inward at eye level, not outward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 mentions “maintaining contact,” and Statement 3 states “touch,” indicating the hands do touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_16-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which is forming spread 5-shapes at cheek level and pulsing away from and back toward the face?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Both hands",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says “Both hands form 5-hand shapes... moving symmetrically,” matching “Both hands.”"
+        }
+      },
+      {
+        "question": "Is the tapping hand’s palm oriented upward during contact with the cupped palm?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the tapping D-hand is “palm down,” so it is not oriented upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states “touch,” indicating the hands do touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_17-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which side touches the cheek below the eye and then moves forward into a small pinch near face level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand touches the right cheek below the eye and moves forward into a small pinch"
+        }
+      },
+      {
+        "question": "Which side stays at shoulder level in an S-handshape without moving?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 states the left hand remains at shoulder level in an S-handshape, stationary"
+        }
+      },
+      {
+        "question": "When the fists meet in front of the torso, are the palms oriented downward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the palms are facing each other, not downward, when the fists meet"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the fists meet and clasp together briefly, indicating hand-to-hand contact"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_2-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "During the curl into a pinch at chest level, which hand is executing the motion?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Both hands",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states “both hands move… then each hand executes a small inward curling motion,” indicating both hands perform the pinch"
+        }
+      },
+      {
+        "question": "Is the palm of the tapping hand oriented upward during the repeated taps onto the upturned palm?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the tapping hand’s palm is “angled downward/inward,” not upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly says “touch,” indicating the hands do touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_3-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand holds a flat horizontal shape with the palm facing down while the other moves over it?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the left hand “holds a B-hand (flat) horizontally with palm-down” while the right hand moves over it"
+        }
+      },
+      {
+        "question": "Which hand traces tight clockwise circles and makes short forward taps along the back of the other hand?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the right hand “moves in tight clockwise circles and short forward taps along the back of the left hand.”"
+        }
+      },
+      {
+        "question": "Are the circular movements made by the moving index finger counterclockwise?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 explicitly states “tight clockwise circles,” so the movements are not counterclockwise"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 describes tapping onto the left fist and Statement 2 describes taps along the back of the left hand; Statement 3 is “touch,” confirming contact"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_4-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "In the first action, which hand performs the tapping motion across the back of the other?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says “the right hand … moves in short repeated taps across the back of the stationary left hand.”"
+        }
+      },
+      {
+        "question": "In the first action, is the palm of the moving hand angled upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the moving hand’s “palm angled downward,” so it is not angled upward"
+        }
+      },
+      {
+        "question": "In the first action, which hand remains still as a closed fist with palm down?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 states “the stationary left hand [is] held as a closed fist with palm down.”"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the index fingertips “meet and make brief contact,” indicating touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_5-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "In the interaction where two index fingers meet and one briefly slides along the other toward the fingertip, which hand performs the sliding motion?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says \"the right index ... makes a brief slide along [the left index],\" so the right hand performs the sliding"
+        }
+      },
+      {
+        "question": "During the index-to-index contact described, are the palms facing up?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the right palm faces left and the left palm faces right, not up"
+        }
+      },
+      {
+        "question": "In the motion where a hand is placed on the upper chest and then lowers to the abdomen, which hand does this?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states \"the left hand ... placed on the upper chest and then lowering to the abdomen.\""
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right index \"moves ... to contact the left index,\" indicating the hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_6-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand maintains a flat-B with the surface facing upward at mid-chest while the other makes a short vertical down–up path contacting and sliding along it?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says “The left hand holds a flat-B handshape at mid-chest with palm up” while the right hand slides along it"
+        }
+      },
+      {
+        "question": "During the symmetric movement at the chest with spread 5-shapes, are the thumbs folded in against the palms?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies “thumbs extended,” so they are not folded in against the palms"
+        }
+      },
+      {
+        "question": "Which hand changes to an ILY configuration and moves slightly forward from center?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states “the right hand … changes … to an ILY-hand … while moving slightly forward from center.”"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 describes the right hand “contacting and sliding along the left palm,” indicating the hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_7-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which forms the vertical flat shape serving as the contact surface at mid-chest level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the “left hand [is] held as a vertical flat-B with palm facing right,” serving as the contact surface"
+        }
+      },
+      {
+        "question": "Which carries the extended index from chest to chin and then to the temple?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the “Right hand… moves from in front of the chest up to touch the chin and then… tap the right temple.”"
+        }
+      },
+      {
+        "question": "Is the palm used as the contact surface facing upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the palm is “facing right,” not upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand “moves to contact the center of the left hand” and then draws along the palm, indicating touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_8-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand holds a flat-B, palm up at mid-chest, while the counterpart in a flat-B, palm down, contacts and slides on it?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says, \"The left hand holds a flat-B handshape, palm up at mid-chest,\" while the right hand slides on it"
+        }
+      },
+      {
+        "question": "Which hand moves from near the shoulder to the mouth along a gentle upward curve, changing from a V-handshape to a small pinch with fingertips near the lips?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states, \"The right hand moves from in front of the shoulder to the mouth area... changing from a V-handshape to a small pinch.\""
+        }
+      },
+      {
+        "question": "Do the two palms share an upward orientation during the sliding contact described?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies opposite orientations: left palm up and right palm down, so they do not share an upward orientation"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand \"contacts the left palm and slides,\" and Statement 3 is \"touch.\""
+        }
+      }
+    ]
+  },
+  {
+    "video": "CnycvXFq8H4_9-5-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand starts near the face with the fingertip on the cheek and moves in a short downward-diagonal arc to the chin?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand starts with the fingertip on the right cheek and moves to the chin"
+        }
+      },
+      {
+        "question": "Which hand is underneath when the other descends to rest on it and then shifts slightly forward while maintaining contact at mid-chest?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the right hand moves downward to rest on the back of the left hand, making the left hand underneath"
+        }
+      },
+      {
+        "question": "During the two-hand contact at mid-chest, are the palms oriented upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the palms are facing down at mid-chest, so they are not upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 describes the right hand resting on the back of the left hand and maintaining contact; Statement 3 also states \"touch.\""
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_0-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand performs the repeated straight taps toward the center of the flat palm?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Incorrect",
+          "reason": "The description does not specify left or right; it only states “the other hand forms a ‘1’ … moves in short, repeated straight taps,” so identifying it as the right hand is unsupported"
+        }
+      },
+      {
+        "question": "Is the stationary flat palm oriented downward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "The stationary flat palm is described as “facing slightly inward/up,” which is not downward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "The action involves repeated taps toward the center of the flat palm, indicating contact, and Statement 3 explicitly states “touch.”"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_1-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand moves upward in a short arc to the chin before retracting as a fist with the thumb extended?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says, “The right hand ... moves upward in a short arc to the chin before retracting ... as a fist with the thumb extended.”"
+        }
+      },
+      {
+        "question": "At the start, do the hands move outward away from the center?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the hands “move inward toward the center,” not outward"
+        }
+      },
+      {
+        "question": "Which hand is touched by the index–thumb pinch at the end of the first movement?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand’s pinch “makes contact with the left hand’s ... fingertips,” so the left hand is touched"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 notes the hands “make contact,” and Statement 3 explicitly states “touch.”"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_10-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand points with only one finger and moves upward to the mouth area?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the right hand forms an index handshape and moves upward to the mouth area"
+        }
+      },
+      {
+        "question": "Is the palm of the pointing hand facing away from the body during its rise?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the palm is oriented inward toward the body, not away"
+        }
+      },
+      {
+        "question": "Which hand keeps a five-spread shape near mid-chest without traveling to the mouth area?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 has both hands in spread-5 at mid-chest, and Statement 2 only moves the right hand to the mouth; the left remains in the five-spread near mid-chest"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly indicates \"touch.\""
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_11-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand travels in a short arc upward and inward to the lower cheek while holding an index-extended shape with other fingers curled?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand, in a 1-hand shape, moves in a short arc to the right lower cheek"
+        }
+      },
+      {
+        "question": "Which hand stays mostly still at mid-chest while holding a closed fist with the thumb up?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the left hand holds an A-hand at mid-chest and remains mostly still"
+        }
+      },
+      {
+        "question": "During the simultaneous forward motion with spread fingers near the upper chest, are the palms oriented away from each other?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the palms are facing each other, not away from each other"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "not touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states \"not touch\""
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_2-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which side executes the repeated horizontal taps on the extended thumb at chest level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand \"makes small repeated horizontal taps\" on the left thumb"
+        }
+      },
+      {
+        "question": "During the upward movement to just in front of the mouth with fingertips gathered, is the palm facing outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the palm is \"facing inward,\" so it is not outward"
+        }
+      },
+      {
+        "question": "Which side holds the thumbs-up shape with the palm inward at chest level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 notes the \"left hand’s extended thumb\" is in a thumbs-up handshape with the left palm inward at chest level"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 describes the right hand tapping the left thumb tip, indicating contact; Statement 3 also states \"touch.\""
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_3-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand performs the small tapping motion at the mouth/chin area?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand makes small taps at the mouth/chin area"
+        }
+      },
+      {
+        "question": "Is the palm of the hand that slides along the forearm oriented upward during the movement?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the right hand’s palm is down while sliding, not upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 states \"touch,\" and Statement 2 describes the right hand sliding along the left forearm, indicating contact"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_4-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which side performs small outward-and-upward arcs along the jawline, starting with the fingertip contacting the chin?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says “The right hand … moves in small outward-and-upward arcs along the jawline … with the index fingertip contacting the chin.”"
+        }
+      },
+      {
+        "question": "During the tap-and-slide contact, which side holds a cupped shape with palm up at mid-chest?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says “The left hand forms a cupped 5/C-handshape with palm up at mid-chest,” during the tap-and-slide contact"
+        }
+      },
+      {
+        "question": "Is the relaxed hand at lower chest making active motion?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies “the left hand remains relaxed at lower chest without active motion.”"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the right hand “makes contact by tapping and then sliding … across the center of the left palm,” indicating the hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_5-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "For the movement rising from lower torso to near the mouth with an upright index, which side performs it?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says, \"Right hand ... moving upward from lower torso to the lower face near the mouth,\" indicating the right hand performs the movement"
+        }
+      },
+      {
+        "question": "For the curved C shape held with palm up at mid-chest, which side displays it?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies, \"Left hand forms a C-hand, palm up at mid-chest,\" showing the left hand displays the C shape"
+        }
+      },
+      {
+        "question": "Is the palm of the hand that moves upward oriented away from the body?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 notes the palm is \"inward toward self,\" so it is not oriented away from the body"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "not touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states \"not touch,\" indicating the hands do not visibly touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_6-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand makes short lateral sweeps and taps across the opposite palm at chest level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1: “the right hand … makes short lateral sweeps and taps across the left palm.”"
+        }
+      },
+      {
+        "question": "Which hand is the fist with thumb over curled fingers, palm inward, at mid-chest while it is being tapped?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2: “the left hand is an S-handshape (fist with thumb … palm inward)” while the right hand taps it"
+        }
+      },
+      {
+        "question": "Is the palm of the index-extended hand oriented upward during its motion?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the 1-handshape is “palm down” and Statement 2 says “palm inward,” not upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 describes taps across the left palm and Statement 2 describes taps on the left fist; both indicate contact (touch)"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_7-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand executes the bent-5/claw motion in a downward arc across the front of the other hand?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says “the dominant hand forms a bent-5/claw hand … and moves in a smooth downward arc,” and by convention the dominant hand is the right hand"
+        }
+      },
+      {
+        "question": "Which hand maintains the vertical B-hand at mid-chest?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies “the non-dominant hand holds a vertical B-hand,” which by convention is the left hand"
+        }
+      },
+      {
+        "question": "During the chin contact, is the C-hand’s palm oriented outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the C-hand’s “palm facing inward,” so it is not oriented outward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "not touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly says “not touch,” and Statement 1 describes movement across the front plane without indicating contact"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_8-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand performs short downward tapping motions onto the index fingertip?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the “right hand … makes short downward tapping motions onto the left index fingertip.”"
+        }
+      },
+      {
+        "question": "Which hand holds the index extended horizontally at mid-chest with the palm facing up?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the “Left hand … with the index extended horizontally at mid-chest, palm up.”"
+        }
+      },
+      {
+        "question": "Is the tapping hand’s palm facing up?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the tapping right hand is “palm down,” so it is not facing up"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 describes the right hand tapping onto the left index fingertip, indicating the hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "COKcDItUTA8_9-8-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which performs the short straight upward motion from upper chest level toward the mouth while shaped as a pinched-O?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand in a pinched-O moves in a short straight upward path toward the mouth"
+        }
+      },
+      {
+        "question": "During the approach toward the mouth, is the moving pinched-O oriented facing outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the palm is facing inward/up during the approach, not outward"
+        }
+      },
+      {
+        "question": "Which is the flat hand with fingers together and palm up at mid-chest that is briefly contacted?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 describes the left hand as a flat hand with fingers together and palm up at mid-chest that is briefly contacted"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the right hand makes brief contact on the left hand, and Statement 3 explicitly says \"touch\""
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_1-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand changes from a relaxed fist near the chest into a “1” shape and moves diagonally to touch the chin?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand changes into a “1” handshape and moves diagonally to contact the chin; the left hand remains inactive"
+        }
+      },
+      {
+        "question": "Which hand holds a flat-B shape at midline with palm up while the other hand traces across it?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the left hand holds a flat‑B handshape with palm up while the right hand traces across it"
+        }
+      },
+      {
+        "question": "During the chin contact, is the palm orientation facing outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the palm is facing inward/left during the chin contact, not outward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 describes the right index tapping/tracing across the left palm, indicating the two hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_10-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand is held steady at mid-chest as an open, fingers-together hand with the palm up when it is contacted?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says “left hand is an open, fingers-together hand with palm up held steady at mid-chest,” and the right hand “moves…downward to contact the left palm.”"
+        }
+      },
+      {
+        "question": "Which hand begins near the side of the head with thumb and little finger extended and then travels in a small downward arc to chest level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies “Right hand…starts near the right side of the head and travels in a small downward arc to chest level.”"
+        }
+      },
+      {
+        "question": "Does the palm of the hand that begins near the side of the head face upward during its motion?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 notes the right hand’s “palm angled left-forward,” not upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 indicates the right hand “moves…to contact the left palm,” and Statement 3 explicitly says “touch.”"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_11-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which side performs a downward diagonal movement from near the chin and makes repeated contacts on the other index finger?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand moves diagonally downward from near the chin and taps the left index finger with small up-down repetitions"
+        }
+      },
+      {
+        "question": "During the moment when index fingertips and thumb tips meet to form a triangle, are the palms oriented upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the palms are facing each other, not upward, when the index fingertips and thumb tips meet to form a triangle"
+        }
+      },
+      {
+        "question": "Which side holds a vertical 1-hand at midline chest while being tapped?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 states the left hand holds a vertical 1-hand at midline chest while being tapped"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 describes the right hand tapping the left index finger, and Statement 2 mentions the fingertips and thumb tips meeting, both indicating touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_12-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand makes a short lateral stroke across the other palm with an extended index finger before moving outward?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand’s index fingertip contacts the left palm with a short lateral stroke before the right hand moves outward"
+        }
+      },
+      {
+        "question": "Which hand stays near midline while the other arcs upward toward the center chest?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the right hand arcs upward while the left hand remains steady near midline"
+        }
+      },
+      {
+        "question": "Are the palms facing down at lower chest when the hands open into relaxed 5-shapes?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies “palms up at lower chest,” so they are not facing down"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 notes the index fingertip contacts the left hand, indicating the hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_13-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand holds an L-handshape with index extended horizontally and thumb up, palm forward, at mid-chest?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the left hand holds an L-handshape with palm facing forward at mid-chest"
+        }
+      },
+      {
+        "question": "Which hand forms a 1-handshape with palm down, touches the top side of the extended index, and slides a short distance toward its fingertip?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand forms a 1-handshape with palm down, touches the top of the left index, and slides toward its fingertip"
+        }
+      },
+      {
+        "question": "At lower chest level during the diagonal brushing motion across the open palm, is the moving hand’s palm facing upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the moving right hand’s palm is facing down during the brushing motion, not up"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 mentions the right hand moves to touch the left index, and Statement 2 describes brushing/sliding across the left palm; Statement 3 also says \"touch\""
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_14-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which performs the tracing along the other palm with a 1-hand at chest level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand forms a 1-hand and traces along the left palm at chest level"
+        }
+      },
+      {
+        "question": "Which holds an L-hand, palm up near the torso, staying stationary underneath the moving one without contact?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the left hand holds an L-hand, palm up near the torso, remaining stationary beneath the right hand without contact"
+        }
+      },
+      {
+        "question": "Is the hand that moves from the centerline to the side oriented with the palm facing up?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 notes the moving right hand’s palm is down, not up, as it moves from the centerline to the right"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states “touch.”"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_15-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which side performs the motion from mid-chest to contact the chin and then drops slightly forward?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand moves from mid-chest to contact the chin and then drops slightly forward; the left hand stays at mid-chest"
+        }
+      },
+      {
+        "question": "When contacting the chin, is the palm of the pointing hand facing outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the right hand’s palm is inward when contacting the chin, not outward"
+        }
+      },
+      {
+        "question": "Which side stays at mid-chest as a relaxed curved hand with palm inward?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 states the left hand stays at mid-chest as a relaxed curved hand with palm inward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly states “touch,” supporting the answer “touch.”"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_16-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "During the action where a flat‑O moves in small clockwise circles on the back of the other at chest level, which performs the circling?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the right hand forms a flat‑O and \"executes small clockwise circles\" on the back of the left hand"
+        }
+      },
+      {
+        "question": "During that sequence, which holds a fist (S‑hand) as the contact surface at chest level?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies \"The left hand holds an S-hand (fist) at chest level,\" serving as the contact surface"
+        }
+      },
+      {
+        "question": "When the fingers interlace into a clasp at the upper abdomen, are the palms oriented downward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 notes the fingers interlace \"with palms facing each other,\" not downward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 indicates the motion is \"in contact on the back of the left hand,\" and Statement 1 describes an interlaced clasp, both showing the hands touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_17-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which is performing a short diagonal movement from in front of the upper chest to the cheek just below the eye, with the palm oriented inward and brief contact?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 explicitly says the right hand moves from in front of the upper chest to the right cheek with the palm inward, making brief contact"
+        }
+      },
+      {
+        "question": "Which remains near the upper chest in a relaxed S-handshape without movement during the diagonal motion?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 states the left hand remains near the chest in a relaxed S-handshape without movement"
+        }
+      },
+      {
+        "question": "During the simultaneous outward movement at upper-chest level, are the palms facing upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the palms are facing down during the simultaneous outward movement, so they are not facing upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Incorrect",
+          "reason": "Neither Statement 1 nor Statement 2 describes the two hands touching each other; Statement 1 has the right hand touching the cheek and Statement 2 shows separate parallel movements, so the hands do not touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_18-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand forms a 1-hand at chin level, making short forward-and-back movements a few centimeters from the chin?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies the right hand forms a 1-hand at chin level and makes short forward-and-back movements"
+        }
+      },
+      {
+        "question": "Which hand holds a relaxed S-hand near the sternum without moving?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the left hand holds a relaxed S-hand near the sternum without moving"
+        }
+      },
+      {
+        "question": "During the simultaneous downward movement from near the lower face to mid-chest, are the palms facing away from each other?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the palms are facing inward toward each other, so they are not facing away from each other"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Incorrect",
+          "reason": "Statement 1 describes the hands as parallel and separated, and Statement 2 places the hands at different locations (chin and sternum), indicating they do not touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_19-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which is performing the short repeated downward taps onto the stationary open, slightly curved palm-up hand at mid-chest?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says “The right hand … moves in short repeated downward taps onto the left hand,” indicating the right hand is doing the tapping"
+        }
+      },
+      {
+        "question": "Which remains stationary at mid-chest as a closed fist with thumb extended upward, palm inward, while the other makes a small up-and-down touch at the front of the neck/chin?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 specifies “the left hand remains at mid-chest as a closed fist with thumb extended upward, palm inward, stationary,” while the right hand touches the neck/chin"
+        }
+      },
+      {
+        "question": "During the short repeated downward taps at mid-chest, is the thumb of the tapping 1-hand tucked?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "In Statement 1, the right hand’s 1-hand has the “thumb relaxed,” not tucked, during the taps"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 describes the right hand tapping “onto the left hand,” so the two hands visibly touch"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_2-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which performs a short motion from the side toward center to tap the upright index near its tip?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the left hand moves from the left toward center on a short path to tap the right index near the tip"
+        }
+      },
+      {
+        "question": "Which keeps an upright index at chest midline and stays still while being tapped?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the right hand holds an upright index at chest midline while the left hand moves to tap it, indicating the right hand stays still"
+        }
+      },
+      {
+        "question": "During the initial open shapes, are the palms facing outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies palms inward during the initial open shapes, not outward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 mentions interlacing fingers into a clasp and Statement 2 describes tapping the right index; both indicate the hands touch, consistent with Statement 3 (\"touch\")"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_20-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand moves from a fist at mid-chest up to the cheek and then slides downward along the face?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says the right hand moves from a fist at mid-chest to the right cheek and then slides downward toward the lips"
+        }
+      },
+      {
+        "question": "Which hand stays resting at upper-chest center without moving while the other separates and rises?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the left hand rests at upper-chest center and remains stationary while the right hand moves upward"
+        }
+      },
+      {
+        "question": "During the rise, is the palm orientation facing outward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies the palm is oriented inward during the rise, not outward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 says the left hand initially rests on top of the right fist, and Statement 3 states \"touch,\" confirming contact"
+        }
+      }
+    ]
+  },
+  {
+    "video": "coP58P_n38I_21-1-rgb_front.mp4",
+    "qa_pairs": [
+      {
+        "question": "Which hand forms a 1-hand at the corner of the mouth and moves straight outward to touch the other index?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Left hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 says, \"The left hand forms a 1-hand ... at the corner of the mouth, then moves straight outward ... touching index to index,\" indicating the left hand performs this action"
+        }
+      },
+      {
+        "question": "During the index-to-index contact in neutral space, which hand is upright in a 1-hand shape with palm oriented inward?",
+        "options": "Left hand / Right hand / Both hands",
+        "answer": "Right hand",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 1 specifies \"the upright right hand 1-hand (index extended, palm oriented inward),\" so the right hand is upright during the contact"
+        }
+      },
+      {
+        "question": "While the flat-O slides across the other palm, is the sliding palm facing upward?",
+        "options": "Yes / No",
+        "answer": "No",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 2 states the left hand (the sliding flat-O) has \"palm down\" while sliding; thus the sliding palm is not facing upward"
+        }
+      },
+      {
+        "question": "Answer only \"touch\" or \"not touch\" - whether two hands visibly touch each other or not",
+        "options": "touch / not touch",
+        "answer": "touch",
+        "evaluation": {
+          "judgment": "Correct",
+          "reason": "Statement 3 explicitly says \"touch,\" indicating the hands do make contact"
+        }
+      }
+    ]
+  }
+]
