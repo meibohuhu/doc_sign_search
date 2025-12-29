@@ -74,6 +74,8 @@ python3 upload_videos_to_hf.py --mode checkpoint \
     --upload_subdirs
 
 python3 upload_videos_to_hf.py --mode checkpoint \
-    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
-    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1224_unfreeze18 \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1224_unfreeze18 \
     --upload_subdirs
+
+

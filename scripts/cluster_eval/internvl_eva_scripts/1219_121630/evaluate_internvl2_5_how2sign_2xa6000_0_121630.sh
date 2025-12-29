@@ -27,7 +27,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_16fps_1130/checkpoint-8499}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_8b_16fps_1209/checkpoint-2548}"
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample15000_notag/checkpoint-2976}"  ## 2744
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample15000_notag/checkpoint-3720}"  ## 2744
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399}"
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2874}"
@@ -48,7 +48,7 @@ OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/internvl_eval/}"
 
 # Evaluation parameters
 # MAX_SAMPLES=${MAX_SAMPLES:-20}  # Set to a number to limit samples, empty for full evaluation
-MAX_SAMPLES=${MAX_SAMPLES:-55}
+MAX_SAMPLES=${MAX_SAMPLES:-550}
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}  # Minimum number of frames (set to 6 to ensure 6 frames)
 MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-150}  # Maximum number of frames (set to 6 to fix at 6 frames)
 SAMPLING_METHOD=${SAMPLING_METHOD:-fps16.0}  # Sampling method: 'fpsX.X' or 'uniform' for uniform sampling
