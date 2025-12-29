@@ -892,23 +892,24 @@ def eval_model(args):
 # Answer with one option only, no other words:
 # none / left / right / both
 # """
-    question_prompt = """
-            You are an ASL motion-description annotator.
+    question_prompt = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
+    # question_prompt = """
+    #         You are an ASL motion-description annotator.
 
-            Describe the most important hand movements in the video using exactly TWO statements.
+    #         Describe the most important hand movements in the video using exactly TWO statements.
 
-            Format:
-            Statement 1: [Describe the most significant hand movement, including handshape, palm orientation, location, movement path, and finger positions for both hands if relevant]
-            Statement 2: [Describe the second most important hand movement or interaction, including handshape, palm orientation, location, movement path, and hand interaction if relevant]
-            Statement 3: [Describe if two hands touch each other or not]
+    #         Format:
+    #         Statement 1: [Describe the most significant hand movement, including handshape, palm orientation, location, movement path, and finger positions for both hands if relevant]
+    #         Statement 2: [Describe the second most important hand movement or interaction, including handshape, palm orientation, location, movement path, and hand interaction if relevant]
+    #         Statement 3: [Describe if two hands touch each other or not]
 
-            Rules:
-            - Focus on the TWO most important/distinctive movements in the video.
-            - DO NOT infer meaning; only describe observable motion.
-            - Use factual, objective language only.
-            - Each statement should be a complete sentence describing one movement.
-            - FORBIDDEN WORDS: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that'.
-            """
+    #         Rules:
+    #         - Focus on the TWO most important/distinctive movements in the video.
+    #         - DO NOT infer meaning; only describe observable motion.
+    #         - Use factual, objective language only.
+    #         - Each statement should be a complete sentence describing one movement.
+    #         - FORBIDDEN WORDS: 'indicate', 'suggests', 'seems', 'appears', 'may', 'might', 'could', 'possibly', 'probably', 'likely', 'represents', 'signifies', 'means', 'communicates', 'expresses', 'implies', 'conveys', 'shows that', 'demonstrates that'.
+    #         """
     
     
     # Allow custom prompt override
@@ -1345,7 +1346,7 @@ def main():
     parser.add_argument("--api-key", type=str, default=None,
                        help="API key (or set OPENAI_API_KEY/GEMINI_API_KEY env var)")
     parser.add_argument("--model", type=str, default="gpt-5",
-                       help="Model to use. OpenAI: gpt-5, gpt-4o, gpt-4-vision-preview. Gemini: gemini-1.5-pro, gemini-1.5-flash (default: gpt-5)")
+                       help="Model to use. OpenAI: gpt-5, gpt-4o, gpt-4-vision-preview. Gemini: gemini-2.0-flash-exp, gemini-1.5-pro, gemini-1.5-flash (default: gpt-5)")
     parser.add_argument("--video-folder", type=str, required=True,
                        help="Folder containing test videos")
     parser.add_argument("--question-file", type=str, required=True,

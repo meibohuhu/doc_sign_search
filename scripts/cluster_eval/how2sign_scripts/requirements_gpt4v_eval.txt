@@ -15,5 +15,5 @@ openai>=1.0.0  # For Azure OpenAI API (AzureOpenAI)
 # - os, sys, json, re, base64, io, warnings, argparse, datetime, time
 # - concurrent.futures, threading
 
-
-
+⚠️  Evaluation metrics error: No module named 'bleurt'
+pip install git+https://github.com/google-research/bleurt.git

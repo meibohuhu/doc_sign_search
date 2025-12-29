@@ -1,0 +1,57 @@
+[
+  {
+    "video": "Mci9oyb5V2E-00_00_05.333-00_00_11.166.mp4",
+    "model_output": "Hello, my name is Ed, I am 75 years old and I am an ASL teacher.",
+    "ground_truth": "I am Ed Bosson, and I am 67 years old and now retired.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "uXdL5njDiBU-00_00_25.566-00_00_31.200.mp4",
+    "model_output": "If the new law at Gallaudet is vetoed, it is called Title III.",
+    "ground_truth": "The suit was filed under Title II of the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "352fd8KUcD4-00_00_48.133-00_00_51.466.mp4",
+    "model_output": "This story of peace for all is inspiring.",
+    "ground_truth": "I just toured through the Ali museum and it is inspiring!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_22.733-00_03_28.733.mp4",
+    "model_output": "My name is Melanie, and the community topic is who can join YJZ.",
+    "ground_truth": "The demands are not like a big city, they don't share the same issues.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_32.033-00_03_37.233.mp4",
+    "model_output": "The community doesn't use just one, but a variety.",
+    "ground_truth": "The community isn’t used to something different.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  }
+]

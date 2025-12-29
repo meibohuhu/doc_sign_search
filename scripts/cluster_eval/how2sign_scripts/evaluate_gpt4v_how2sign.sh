@@ -17,24 +17,30 @@ cd /local1/mhu/sign_language_llm
 
 # Configuration
 CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Not used for API, but kept for compatibility
-API_TYPE="${API_TYPE:-openai}"  # Options: openai, gemini
+API_TYPE="${API_TYPE:-gemini}"  # Options: openai, gemini
 
 # Set model based on API type, ensuring consistency
 if [ "$API_TYPE" = "gemini" ]; then
     # For Gemini, ensure we use a gemini model
     # If MODEL env var is set but not a gemini model, override it
     if [[ -n "$MODEL" ]] && [[ ! "$MODEL" =~ ^gemini ]]; then
-        echo "⚠️  Warning: MODEL=$MODEL is not a Gemini model. Overriding to gemini-2.5-flash"
+        echo "⚠️  Warning: MODEL=$MODEL is not a Gemini model. Overriding to gemini-2.0-flash-exp"
+        # MODEL="gemini-1.5-pro"
         MODEL="gemini-2.5-pro"
     else
         MODEL="${MODEL:-gemini-2.5-pro}"  # Default if not set
     fi
 else
     # For OpenAI, use OpenAI model
-    MODEL="${MODEL:-gpt-5}"
+    MODEL="${MODEL:-gpt-4o}"
 fi
-VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224}"
-QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl.jsonl}"
+# VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224}"
+# QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/how2sign/train_how2sign_internvl.jsonl}"
+VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/openasl_test_videos/}"
+# VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/}"
+QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/InternVL/data/openasl/test_openasl_internvl.jsonl}"
+# QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.json}"
+
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/gpt4v_eval/}"
 
 

@@ -286,7 +286,7 @@ def eval_model(args):
     for source in tqdm(data_dict, desc="Processing videos"):
         try:
             # Prepare the prompt for ASL translation (same as reference)
-            fq = "Translate the American Sign Language in this video to English."
+            fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
             # fq = "Provide the English translation of this ASL video"
             if 'video' in source:
                 video_file = source["video"]
