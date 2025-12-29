@@ -1,0 +1,112 @@
+[
+  {
+    "video": "Mci9oyb5V2E-00_00_05.333-00_00_11.166.mp4",
+    "model_output": "Hello, I'm Eddie, an older person who thinks OSDIP is important.",
+    "ground_truth": "I am Ed Bosson, and I am 67 years old and now retired.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "uXdL5njDiBU-00_00_25.566-00_00_31.200.mp4",
+    "model_output": "Vote against laws that discriminate against gay people.",
+    "ground_truth": "The suit was filed under Title II of the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "352fd8KUcD4-00_00_48.133-00_00_51.466.mp4",
+    "model_output": "He is deaf, just like you and me, and his story is about a special and inspiring life experience.",
+    "ground_truth": "I just toured through the Ali museum and it is inspiring!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_22.733-00_03_28.733.mp4",
+    "model_output": "Montana Big Sky communities who don't have phone and internet access.",
+    "ground_truth": "The demands are not like a big city, they don't share the same issues.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_32.033-00_03_37.233.mp4",
+    "model_output": "Some in the community do not use one sign, but different ones.",
+    "ground_truth": "The community isn’t used to something different.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "YwHni5MhlAc-00_01_21.400-00_01_28.733.mp4",
+    "model_output": "On Monday, a state law became the first in the country to almost require captioning in hospitals, with limited exceptions.",
+    "ground_truth": "There may be state laws that apply to employers with less than 15 employees, watch out for that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_04.700-00_01_17.200.mp4",
+    "model_output": "When donating money, don't feel pressured, but instead focus on supporting local organizations that you care about.",
+    "ground_truth": "If you or your family cannot help, don’t worry, there may be caregivers in your area to provide support to the family member with needs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_50.333-00_01_59.500.mp4",
+    "model_output": "It's important to take care; you know, if you are hospitalized for something serious and need legal counsel for your job, good luck.",
+    "ground_truth": "It is important to let the caregiver know what the patient truly needs, so the caregiver can adapt and do their job well.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "QBlOz5OjdRE-00_00_36.666-00_00_39.366.mp4",
+    "model_output": "An old Delta, a famous graduate of 1987.",
+    "ground_truth": "NAD finally approved 2018.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "00ADU7t7IWI-00_00_08.666-00_00_13.733.mp4",
+    "model_output": "We stay home for ourselves and save the world together.",
+    "ground_truth": "I've been staying home in self-quarantine and practicing social distancing.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  }
+]

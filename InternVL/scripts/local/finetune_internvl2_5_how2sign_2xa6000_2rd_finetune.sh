@@ -97,7 +97,7 @@ echo ""
 # with ZeRO Stage 2/3. DeepSpeed launcher handles gradient accumulation correctly.
 # Note: CUDA_VISIBLE_DEVICES is already set above, so deepspeed will use the specified GPUs
 deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
-    internvl_chat/internvl/train/internvl_chat_finetune_448.py \
+    internvl_chat/internvl/train/internvl_chat_finetune_local.py \
     --model_name_or_path "$MODEL_NAME" \
     --output_dir "$OUTPUT_DIR" \
     --overwrite_output_dir \
@@ -110,16 +110,17 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --learning_rate 2e-5 \
     --vision_select_layer -1 \
-    --force_image_size 448 \
+    --force_image_size 224 \
     --max_dynamic_patch 6 \
     --dynamic_image_size True  \
     --down_sample_ratio 0.5 \
     --drop_path_rate 0.0 \
     --freeze_llm True \
-    --freeze_backbone False \
+    --freeze_backbone True \
+    --use_backbone_lora 16 \
     --freeze_mlp True \
     --unfreeze_vit_layers 0 \
-    --use_llm_lora 16 \
+    --use_llm_lora 4 \
     --bf16 True \
     --max_seq_length $MAX_SEQ_LENGTH \
     --save_strategy epoch \

@@ -18,7 +18,7 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /local1/mhu/sign_language_llm
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"1"}  # Default: use GPU 0 and 1
+GPU_IDS=${GPU_IDS:-"0"}  # Default: use GPU 0 and 1
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
@@ -27,8 +27,11 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
 CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"
 MODEL_BASE="${MODEL_BASE:-Qwen/Qwen3-VL-4B-Instruct}"
-VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/}"
-QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.sample120.json}"
+VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/}"
+# VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/openasl_test_videos/}"
+## /local1/mhu/sign_language_llm/how2sign/video/openasl_test_videos
+QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.json}"
+# QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/test_openasl_internvl_converted.json}"
 OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/qwen3vl_eval/}"
 ### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/1L0GSTIb9Vs_4-5-rgb_front.mp4
 ### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/1Tix6cnQko4_11-5-rgb_front.mp4
@@ -36,9 +39,9 @@ OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/qwen3vl_eval/}"
 ### /local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224/1L0GSTIb9Vs_4-5-rgb_front.mp4
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-1}  # Set to a number to limit samples, empty for full evaluation
-MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-1028}
-VIDEO_FPS=${VIDEO_FPS:-1}  # Optional: FPS for video processing
+MAX_SAMPLES=${MAX_SAMPLES:-3000}  # Set to a number to limit samples, empty for full evaluation
+MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
+VIDEO_FPS=${VIDEO_FPS:-16}  # Optional: FPS for video processing
 USE_FRAMES=${USE_FRAMES:-false}  # Set to true to extract frames and use as images
 NUM_FRAMES=${NUM_FRAMES:-}  # Optional: Number of frames to extract (if empty, use fps-based sampling)
 SAVE_FRAMES=${SAVE_FRAMES:-false}  # Set to true to save extracted frames to disk

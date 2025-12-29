@@ -607,6 +607,10 @@ class ModelArguments:
         default=0,
         metadata={'help': 'Set the LoRA adapter rank for the LLM. Default is 0.'}
     )
+    freeze_llm_lora: bool = field(       ##### mh1229 add freeze llm lora
+        default=False,
+        metadata={'help': 'Set to True to freeze LLM LoRA parameters (only train ViT). Default is False.'},
+    )
     unfreeze_lm_head: bool = field(
         default=False,
         metadata={'help': 'Set to True to unfreeze the head of LLM. Default is False.'},
@@ -1548,6 +1552,16 @@ def main():
     if model_args.use_llm_lora:
         model.wrap_llm_lora(r=model_args.use_llm_lora, lora_alpha=2 * model_args.use_llm_lora)
         model.config.use_llm_lora = model_args.use_llm_lora
+        
+        # Freeze LLM LoRA parameters if requested (for ViT-only training) ##### mh1229 add freeze llm lora
+        if model_args.freeze_llm_lora:
+            frozen_count = 0
+            for name, param in model.language_model.named_parameters():
+                if 'lora' in name.lower():
+                    param.requires_grad = False
+                    frozen_count += 1
+            if dist.get_rank() == 0:
+                logger.info(f'✅ Frozen {frozen_count} LLM LoRA parameters (only ViT will be trained)')
 
     if model_args.freeze_mlp:
         _freeze_params(model.mlp1)
