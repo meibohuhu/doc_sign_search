@@ -27,7 +27,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_16fps_1130/checkpoint-8499}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_1b_headgate_1220/checkpoint-3058}"
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_openasl_1b_1224/checkpoint-5925}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag/checkpoint-3808}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399}"
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2874}"
@@ -160,7 +160,7 @@ else
 fi
 echo ""
 
-$CONDA_PYTHON scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_query_gate.py \
+$CONDA_PYTHON scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_nogate.py \
     "${EVAL_ARGS[@]}" \
     2>&1 | tee "$LOG_FILE"
 

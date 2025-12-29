@@ -22,6 +22,10 @@ python3 download_and_extract_videos_from_hf.py \
     --dataset_name PhoenixHu/how2sign_test_videos_224x224 \
     --output_dir /mnt/localssd/doc_sign_search/how2sign_test_videos_224x224
 
+python3 upload_videos_to_hf.py --mode checkpoint \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
+    --upload_subdirs
 
             python3 upload_videos_to_hf.py --mode checkpoint \
     --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_1220 \
