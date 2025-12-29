@@ -26,8 +26,8 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Empty by default - will use base model
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_16fps_1130/checkpoint-8499}"
 
-# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2B_elementgate_1216/checkpoint-3054}"
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1224_freeze/checkpoint-3058}"
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_16fps_1207_lowlr/checkpoint-3054}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1223_vitgate/checkpoint-2548}"
 
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1130/checkpoint-2399}"
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_20fps/checkpoint-2874}"
