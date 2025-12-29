@@ -31,9 +31,9 @@ python3 /code/doc_sign_search/download_and_extract_videos_from_hf.py \
 
 python3 /code/doc_sign_search/download_and_extract_videos_from_hf.py \
     --mode checkpoint \
-    --model_name PhoenixHu/finetune_internvl2_5_how2sign_8b_1220_121620 \
-    --output_dir /code/doc_sign_search/InternVL/checkpoints/finetune_internvl2_5_how2sign_8b_1220_121620 \
-    --checkpoint_subdir checkpoint-2039
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
+    --output_dir /code/doc_sign_search/InternVL/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
+    --checkpoint_subdir checkpoint-2539
 
 python3 /code/doc_sign_search/download_and_extract_videos_from_hf.py \
     --mode checkpoint \
@@ -67,3 +67,13 @@ python3 download_and_extract_videos_from_hf.py \
     --mode dataset \
     --dataset_name PhoenixHu/sign_mllm_how_448_train_val \
     --output_dir /mnt/localssd/doc_sign_search/sign_mllm_how_448_train_val
+
+python3 upload_videos_to_hf.py --mode checkpoint \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample2500_tag \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1227_sample2500_tag \
+    --upload_subdirs
+
+python3 upload_videos_to_hf.py --mode checkpoint \
+    --checkpoint_dir /code/doc_sign_search/script_adobe/checkpoints/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_2b_1227_sample8000_tag \
+    --upload_subdirs
