@@ -632,8 +632,8 @@ def eval_model(args):
             video_path = os.path.join(args.video_folder, video_file)
             
             # Use default prompt template (will be formatted with actual frame count after loading)
-            # fq = "Translate the American Sign Language in this video to English."
-            fq = "How many people are in the video"
+            # fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
+            # fq = "How many people are in the video"
             
             # Extract ground truth from conversations or source
             conversations = source.get('conversations', [])
