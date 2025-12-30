@@ -54,7 +54,7 @@ OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/gpt4v_eval/}"
 # cwXQVmfKj48_21-5-rgb_front.mp4
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-5}  # Set to a number to limit samples, empty for full evaluation
+MAX_SAMPLES=${MAX_SAMPLES:-1000}  # Set to a number to limit samples, empty for full evaluation
 NUM_FRAMES=${NUM_FRAMES:-32}  # Number of frames to extract from video
 VIDEO_FPS=${VIDEO_FPS:-}  # Target FPS for frame extraction (if empty, uses num-frames)
 IMAGE_DETAIL=${IMAGE_DETAIL:-low}  # Image detail level: low, high, auto

@@ -65,12 +65,12 @@ else
 fi
 
 
-DATA_PATH="/local1/mhu/sign_language_llm/how2sign/video/segmented_train_videos_corrupted_removed.json"
+DATA_PATH="/local1/mhu/sign_language_llm/how2sign/video/segmented_train_val_combined.json"
 IMAGE_FOLDER="/local1/mhu/sign_language_llm/how2sign/video/train_crop_videos_224"
 
 
 # Create output directory
-OUTPUT_DIR="/local1/mhu/sign_language_llm/qwenvl/outputs/qwen2vl_how2sign_2xa6000_top2_debug"
+OUTPUT_DIR="/local1/mhu/sign_language_llm/qwenvl/outputs/qwen2vl_how2sign_2xa6000"
 mkdir -p "$OUTPUT_DIR"
 echo "📁 Output directory: $OUTPUT_DIR"
 echo ""
