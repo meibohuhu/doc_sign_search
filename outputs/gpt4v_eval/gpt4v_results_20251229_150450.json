@@ -1,0 +1,387 @@
+[
+  {
+    "video": "352fd8KUcD4-00_00_48.133-00_00_51.466.mp4",
+    "model_output": "This story of peace for all is inspiring.",
+    "ground_truth": "I just toured through the Ali museum and it is inspiring!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_22.733-00_03_28.733.mp4",
+    "model_output": "My name is Melanie, and the community topic is who can join YJZ.",
+    "ground_truth": "The demands are not like a big city, they don't share the same issues.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "5dttR4Yq-2k-00_03_32.033-00_03_37.233.mp4",
+    "model_output": "The community doesn't use just one, but a variety.",
+    "ground_truth": "The community isn’t used to something different.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "Mci9oyb5V2E-00_00_05.333-00_00_11.166.mp4",
+    "model_output": "Hello, my name is Ed, I am 75 years old and I am an ASL teacher.",
+    "ground_truth": "I am Ed Bosson, and I am 67 years old and now retired.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "uXdL5njDiBU-00_00_25.566-00_00_31.200.mp4",
+    "model_output": "If the new law at Gallaudet is vetoed, it is called Title III.",
+    "ground_truth": "The suit was filed under Title II of the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "YwHni5MhlAc-00_01_21.400-00_01_28.733.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "There may be state laws that apply to employers with less than 15 employees, watch out for that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_04.700-00_01_17.200.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "If you or your family cannot help, don’t worry, there may be caregivers in your area to provide support to the family member with needs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FaELOA6h-ec-00_01_50.333-00_01_59.500.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "It is important to let the caregiver know what the patient truly needs, so the caregiver can adapt and do their job well.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "QBlOz5OjdRE-00_00_36.666-00_00_39.366.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "NAD finally approved 2018.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "00ADU7t7IWI-00_00_08.666-00_00_13.733.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "I've been staying home in self-quarantine and practicing social distancing.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "Ln3MaRp0Dvc-00_00_59.266-00_01_01.366.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "So, yes, I want you to join us in Phoenix!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "ohbo2X3bQoc-00_01_52.666-00_01_58.566.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "A lot of the State and National Associations are hosting conferences.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "tUnOjApclYI-00_00_00.000-00_00_10.700.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "One of my role models -- Mike Rowe, the “Dirty Jobs” TV show host, once said, “It’s okay to not go to college.” That stuck with me.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "tUnOjApclYI-00_01_54.366-00_01_57.033.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Once I saw there was a job opening and applied.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "cddgTAQLy_4-00_05_32.700-00_05_41.400.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "In a per-user system, I was concerned that VRS companies may lose money, so I thought it best to make more calls and was quickly discouraged to do so.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "cddgTAQLy_4-00_08_12.666-00_08_36.733.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Submit your comments at www.fcc.gov/comments. Enter your information on the FCC form, then select 'Telecommunications Relay Services in the drop-down menu, and enter your comments, then submit your comments.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "ubC82N6N1bQ-00_00_39.300-00_00_43.066.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "I transferred to Ohio state school and stayed there for two years.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "ubC82N6N1bQ-00_01_05.100-00_01_07.033.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Try my best and if I fail, I'll find something else to do!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "ubC82N6N1bQ-00_01_52.033-00_01_54.233.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "If it's rainy with rough weather, I don’t go out.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "GTlMzp0KVqk-00_00_08.133-00_00_09.266.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Stress.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "CnBZlJ39ESQ-00_03_54.433-00_05_08.366.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "The emergency bag can include: Paper and pens; whiteboard and markers, plugs and chargers for your smartphone, laptop, or tablets, a cellular hotspot in case the hospital WiFi is not working, an extension cord or power strip in case your bed is far from an outlet, extra eyewear supplies you might need, such as reading glasses to read the speech to text on a phone app, extra batteries for your hearing aid, cochlear implant, or assistive listening device, if you have an advance medical directive, please put a copy of this in your bag.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "EwTCXTgehpU-00_00_49.433-00_00_51.766.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Use good soil.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "IsEzvnueFQk-00_00_33.000-00_00_39.366.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "NLTC is incredible because without this opportunity, we can’t learn.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "rgE2ZZ9bHKA-00_00_32.066-00_00_37.366.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "The House of Representatives has a different number of representatives per state, depending on the size of your state’s population.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "rgE2ZZ9bHKA-00_01_46.600-00_01_51.200.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Receiving services, there is a lot of information that comes with strong opinions on speech and auditory therapy services.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "rgE2ZZ9bHKA-00_04_40.300-00_04_43.766.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "You can help - submit your letters!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "r7FVWOs--Nw-00_02_35.000-00_02_38.766.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Usually my clients prefer me at night because most of them work during the day.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "r7FVWOs--Nw-00_03_11.466-00_03_12.366.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "You may be surprised.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "6rMNK9JX0nc-00_00_11.733-00_00_16.066.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "But what if the person you are calling refuses to accept your VRS call?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "UoHKrFL9g0g-00_00_03.733-00_00_06.300.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Recently, on March 6th, it was Deaf Youth Day!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "1-bCws7TnBs-00_00_29.000-00_00_33.533.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "They might think that lipreading or writing is effective when it isn’t.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "2MnvFrB5ljQ-00_01_53.066-00_01_58.233.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "Hello, I’m Alicia and I’ve been working with the Outreach committee.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "2MnvFrB5ljQ-00_02_10.666-00_02_16.766.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "The purpose of the data is to help develop recommendations for the NAD board and headquarters.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "udAa5hSHH_s-00_03_50.766-00_03_58.666.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "This means you need to encourage the delegates to pass your proposed priority that will become the work of the NAD.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "udAa5hSHH_s-00_03_59.000-00_04_07.066.mp4",
+    "model_output": "ERROR: API call failed: Google Generative AI SDK not installed. Please install with: pip install google-generativeai",
+    "ground_truth": "You need to invest your time and passion to assist delegates to understand why this topic is important to ensure your proposed priority successfully ranks.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  }
+]
