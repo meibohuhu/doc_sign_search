@@ -36,6 +36,7 @@ IMAGE_DETAIL=${IMAGE_DETAIL:-low}  # Image detail level: low, high, auto
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-16384}
 TEMPERATURE=${TEMPERATURE:-1}
 SAVE_FRAMES=${SAVE_FRAMES:-false}  # Set to "true" to enable frame saving
+MAX_WORKERS=${MAX_WORKERS:-}  # Number of worker threads for parallel processing (default: 5, empty to use default)
 
 echo "🎬 Azure GPT-5 Vision How2Sign Evaluation"
 echo "=========================================="
@@ -64,6 +65,11 @@ if [ "$SAVE_FRAMES" = "true" ]; then
     echo "Save Frames: Enabled (frames will be saved to $OUT_DIR/extracted_frames/)"
 else
     echo "Save Frames: Disabled"
+fi
+if [ -n "$MAX_WORKERS" ]; then
+    echo "Max Workers: $MAX_WORKERS"
+else
+    echo "Max Workers: 5 (default)"
 fi
 echo ""
 
@@ -131,6 +137,11 @@ fi
 # Add save-frames if enabled
 if [ "$SAVE_FRAMES" = "true" ]; then
     EVAL_ARGS+=(--save-frames)
+fi
+
+# Add max-workers if specified
+if [ -n "$MAX_WORKERS" ]; then
+    EVAL_ARGS+=(--max-workers "$MAX_WORKERS")
 fi
 
 # Get python path (use system python or conda python)
