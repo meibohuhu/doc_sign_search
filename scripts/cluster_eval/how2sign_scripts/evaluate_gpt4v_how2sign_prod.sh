@@ -151,7 +151,7 @@ echo ""
 echo "🚀 Starting evaluation..."
 echo ""
 
-$PYTHON_CMD scripts/cluster_eval/how2sign_scripts/gpt4v_evaluation_how2sign_prod.py \
+$PYTHON_CMD scripts/cluster_eval/how2sign_scripts/gpt4v_evaluation_how2sign_multiworker.py \
     "${EVAL_ARGS[@]}" \
     2>&1 | tee "$LOG_FILE"
 
