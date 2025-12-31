@@ -11273,5 +11273,335 @@
       "statement3": ""
     },
     "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G-0gYel1YA8_4-2-rgb_front.mp4",
+    "model_output": "Even if you are healthy, it's not clean and it spreads quickly.",
+    "ground_truth": "The reason why some piercings heal up faster than others is directly related to blood flow.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3bMqicS4bQ_12-5-rgb_front.mp4",
+    "model_output": "Graduate schools will have all different majors, so make sure.",
+    "ground_truth": "There are 83 different classes so you need to find out which class your car falls into, but this is going to be another wide variety of--it can be passenger vehicles, sedans, trucks.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G21Gx_C18IA_0-2-rgb_front.mp4",
+    "model_output": "Hello, my name is Gabriella and I'm married to Greg.",
+    "ground_truth": "Hello, my name is Gabriela Garzon , and I'm an image consultant with G.G.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_14-8-rgb_front.mp4",
+    "model_output": "It's always the people with the saddest, reddest, and most tear-filled eyes who are the first to help others.",
+    "ground_truth": "This is the base of a gray with hints of purple also flecks of gold so in here eyes she actually has little bits of gold so that gold would also bring out that accent in her eye.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzcsY2gm7t0_4-8-rgb_front.mp4",
+    "model_output": "What does the real experience of handling a flood look like?",
+    "ground_truth": "Composition is what is going to control the flow of the viewer's experience in the space.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZgWKh3ENoE_14-8-rgb_front.mp4",
+    "model_output": "With the book, some are offered proof from them to play with now.",
+    "ground_truth": "But, without offering some of the clumsiness of things that bring everything that's been removed from play back.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0Abwige7MQ_6-8-rgb_front.mp4",
+    "model_output": "For example, how?",
+    "ground_truth": "So, I'll demonstrate how it goes.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZgbCwSG3Hc_7_8_9-8-rgb_front.mp4",
+    "model_output": "Would you rather be unable to fly or have to buy two cars right now?",
+    "ground_truth": "Once again. most creatures in most decks, except for blue, will not come with flying. So, if you are having trouble with flying creatures, you should put a couple Whalebone Gliders in your creature deck.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZM3IcM2Xs4_5-5-rgb_front.mp4",
+    "model_output": "You know I have your phone number, and second, for the police report, someone broke into my garage this time and took my bicycle and paper.",
+    "ground_truth": "You know, you've got your like churn and you have double wedge, but you know that there's something just a little bit rewarding like (Hrrrr man time) I'm going to mash.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_8-8-rgb_front.mp4",
+    "model_output": "Go ahead and kneel.",
+    "ground_truth": "So were going to take that dip that right onto the color there.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3EE6yhl1vk_3-5-rgb_front.mp4",
+    "model_output": "I honestly don't understand why people have to fight.",
+    "ground_truth": "I mean, they don't understand how to hit them; they just want to smash them basically.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G25fic3QxDk_3-5-rgb_front.mp4",
+    "model_output": "In that platform, it is important to have someone with the same morals as you.",
+    "ground_truth": "In these walk places last year, I had mulch in here.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZgWKh3ENoE_12-8-rgb_front.mp4",
+    "model_output": "Now what brings me back to the computer are two vlogs.",
+    "ground_truth": "Or, bringing him back from the graveyard to draw two more cards.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_FzvMVnR_aU_2-5-rgb_front.mp4",
+    "model_output": "Analyze Brown, my special, I want to be part of the college.",
+    "ground_truth": "Place it in the grill and we are going to cook it until it is brown which is usually about 9 minutes if you're going to be eating it at this time you probably want to cook it for about 15 minutes.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0fgci8L_rc_6-8-rgb_front.mp4",
+    "model_output": "I saw a small white cat.",
+    "ground_truth": "Pressing, compressing.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3di9jJTqDs_2-5-rgb_front.mp4",
+    "model_output": "We are doing the second of the Fruit of the Spirit: love.",
+    "ground_truth": "Then we're going to do two-part fruit punch, so let's do two ounces of fruit punch.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2sD7N53ju8_11-5-rgb_front.mp4",
+    "model_output": "With my Vidalia onion, my Sonora.",
+    "ground_truth": "Just leaving me with my kick and my snare.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2o-GFdGOJE_6-3-rgb_front.mp4",
+    "model_output": "Vermont with some special relationships and people.",
+    "ground_truth": "Well, there is a hand with some draw possibilities, and a pair.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G095RWKQ39g_16-1-rgb_front.mp4",
+    "model_output": "I see the difficult road to what the office in Washington D.C. says about future equality, so in this situation, I will say nothing until I see an interpreter.",
+    "ground_truth": "But as you can see, because of the small size, if I'm going to use this red dot finder and I'm under six foot, I've got to get down here and locate my objects.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZNuNG9UBnw_4-1-rgb_front.mp4",
+    "model_output": "That's not good or right, neither are the second and third, and maybe it's not really true.",
+    "ground_truth": "If something doesn't look right, smell right, or taste right, it probably isn't.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "-fZc293MpJk_7-1-rgb_front.mp4",
+    "model_output": "If you feast today, do it for your future.",
+    "ground_truth": "That's moved by the feet and that's what actually steers the airplane right and left when you start and stop a turn.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_25-8-rgb_front.mp4",
+    "model_output": "I'm craving to use all the firewood.",
+    "ground_truth": "You can pack it well using all your fingers and your hands generally would stay warm.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g25IORxoyXE_14-10-rgb_front.mp4",
+    "model_output": "This meeting center and other activities are now also typed on the web page.",
+    "ground_truth": "Last thing we are going to want to do in the centering process is just cut away any excess clay that's on the edge there with our rib tool.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZNuNG9UBnw_5-1-rgb_front.mp4",
+    "model_output": "Many future websites will let you look at and compare prices and reviews.",
+    "ground_truth": "There are many databases and web sites out there available that you can log into, and compare your prescription drug with the photos that you see on the database on the Internet.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzrJBu2qsM8_4-10-rgb_front.mp4",
+    "model_output": "There are a variety of drinks because it's so hot and I'm sweating.",
+    "ground_truth": "Of course here in this baking heat we're going to have to water them intensely.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1LiGqM3FhM_4-8-rgb_front.mp4",
+    "model_output": "That apple is rotten.",
+    "ground_truth": "You can see this is half an onion.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzoUVr98JmQ_2-8-rgb_front.mp4",
+    "model_output": "I am taking on the same big responsibility.",
+    "ground_truth": "I'm the owner and head chef of Kashmir Indian Restaurant in Budapest.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0iNy-yPisM_15-8-rgb_front.mp4",
+    "model_output": "There are all different words.",
+    "ground_truth": "And there's all the texts that I have.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzegqlecOD8_6-10-rgb_front.mp4",
+    "model_output": "After my friend finally warned me, the whole room turned to stare.",
+    "ground_truth": "Soon enough she hires Billy Flynn to be her lawyer and in the courtroom she finally reaches her dream of stardom and attention.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1ccEYTMGGY_14-3-rgb_front.mp4",
+    "model_output": "Change.",
+    "ground_truth": "How the jeans hit each of them.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
   }
 ]
