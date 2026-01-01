@@ -806,7 +806,7 @@ def eval_model(args):
             print("   Please provide --api-key or set OPENAI_API_KEY environment variable")
             return
         print(f"🔑 Using Azure OpenAI API key: {api_key[:10]}...")
-        
+    
         # Display Azure configuration
         endpoint = args.azure_endpoint or os.getenv('AZURE_OPENAI_ENDPOINT', 'https://dil-research-3.openai.azure.com/')
         api_ver = args.azure_api_version or os.getenv('AZURE_OPENAI_API_VERSION', '2024-12-01-preview')
@@ -955,11 +955,11 @@ def eval_model(args):
     results_lock = threading.Lock()
     
     # Process samples - use multithreading for both Gemini and GPT-5
-    # Get max_workers from args, default to 5 if not specified
-    if args.max_workers is not None:
-        max_workers = min(args.max_workers, len(data_dict))
-    else:
-        max_workers = min(5, len(data_dict))  # Default: 5 concurrent threads
+        # Get max_workers from args, default to 5 if not specified
+        if args.max_workers is not None:
+            max_workers = min(args.max_workers, len(data_dict))
+        else:
+            max_workers = min(5, len(data_dict))  # Default: 5 concurrent threads
     
     if use_gemini:
         print(f"🚀 Using multithreading with {max_workers} workers for Gemini API")
@@ -967,159 +967,159 @@ def eval_model(args):
     else:
         print(f"🚀 Using multithreading with {max_workers} workers for Azure GPT-5 Vision API")
         print(f"   Note: Rate limiting handled automatically by API\n")
-    
-    # Prepare sample data with indices
-    sample_data = [(args, source, idx + 1, len(data_dict), api_key, question_prompt, use_gemini, results_lock) 
-                  for idx, source in enumerate(data_dict)]
-    
+        
+        # Prepare sample data with indices
+        sample_data = [(args, source, idx + 1, len(data_dict), api_key, question_prompt, use_gemini, results_lock) 
+                      for idx, source in enumerate(data_dict)]
+        
     # Process samples in parallel (for both Gemini and GPT-5)
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        # Submit all tasks
-        future_to_sample = {
-            executor.submit(process_single_sample, *sample_args): sample_args[2] 
-            for sample_args in sample_data
-        }
-        
-        # Collect results as they complete and save periodically
-        sample_results = {}
-        completed_count = 0
-        
-        for future in tqdm(as_completed(future_to_sample), total=len(data_dict), desc="Evaluating"):
-            idx = future_to_sample[future]
-            try:
-                result = future.result()
-                sample_results[idx] = result
-            except Exception as e:
-                print(f"\n⚠️  [{idx}/{len(data_dict)}] Thread error: {e}")
-                sample_results[idx] = {
-                    "video": "unknown",
-                    "model_output": f"ERROR: Thread error: {str(e)}",
-                    "ground_truth": "unknown",
-                    "idx": idx,
-                    "statements": {
-                        "statement1": "",
-                        "statement2": "",
-                        "statement3": ""
-                    },
-                    "parse_error": f"Thread error: {str(e)}"
-                }
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            future_to_sample = {
+                executor.submit(process_single_sample, *sample_args): sample_args[2] 
+                for sample_args in sample_data
+            }
             
-            completed_count += 1
+            # Collect results as they complete and save periodically
+            sample_results = {}
+            completed_count = 0
             
-            # Periodic save as results come in (save every N completed samples)
-            if completed_count % save_interval == 0 or completed_count == len(data_dict):
-                # Build current results in order (thread-safe)
-                with file_write_lock:
-                    # Rebuild results list from all completed samples
-                    sorted_indices = sorted([i for i in sample_results.keys()])
-                    current_results = []
-                    current_references = []
-                    current_predictions = []
-                    
-                    for sorted_idx in sorted_indices:
-                        result = sample_results[sorted_idx]
-                        current_references.append(result["ground_truth"])
-                        current_predictions.append(result["model_output"])
-                        
-                        # Build result dict with parsed statements
-                        result_dict = {
-                            "video": result["video"],
-                            "model_output": result["model_output"],
-                            "ground_truth": result["ground_truth"]
-                        }
-                        
-                        # Add parsed statements if available
-                        if "statements" in result:
-                            result_dict["statements"] = result["statements"]
-                        if "parse_error" in result:
-                            result_dict["parse_error"] = result["parse_error"]
-                        
-                        current_results.append(result_dict)
-                    
-                    # Update global lists: combine existing results with new ones
-                    # Start with existing results, then add new ones
-                    combined_results = []
-                    combined_references = []
-                    combined_predictions = []
-                    
-                    # Add existing results first
-                    for video_name in sorted(existing_results.keys()):
-                        result = existing_results[video_name]
-                        combined_results.append(result)
-                        combined_references.append(result.get("ground_truth", ""))
-                        combined_predictions.append(result.get("model_output", ""))
-                    
-                    # Add new results
-                    combined_results.extend(current_results)
-                    combined_references.extend(current_references)
-                    combined_predictions.extend(current_predictions)
-                    
-                    # Update global lists
-                    results.clear()
-                    results.extend(combined_results)
-                    references.clear()
-                    references.extend(combined_references)
-                    predictions.clear()
-                    predictions.extend(combined_predictions)
-                    
-                    # Save to file
-                    save_results_to_file(results, output_path, None)  # Lock already acquired
+            for future in tqdm(as_completed(future_to_sample), total=len(data_dict), desc="Evaluating"):
+                idx = future_to_sample[future]
+                try:
+                    result = future.result()
+                    sample_results[idx] = result
+                except Exception as e:
+                    print(f"\n⚠️  [{idx}/{len(data_dict)}] Thread error: {e}")
+                    sample_results[idx] = {
+                        "video": "unknown",
+                        "model_output": f"ERROR: Thread error: {str(e)}",
+                        "ground_truth": "unknown",
+                        "idx": idx,
+                        "statements": {
+                            "statement1": "",
+                            "statement2": "",
+                            "statement3": ""
+                        },
+                        "parse_error": f"Thread error: {str(e)}"
+                    }
                 
-                if completed_count % save_interval == 0:
-                    print(f"\n💾 Progress saved: {completed_count}/{len(data_dict)} samples to {output_path}")
-    
-    # Final processing: ensure all results are in the correct order
-    sorted_results = [sample_results[i] for i in sorted(sample_results.keys())]
-    
-    # Update final results list: combine existing + new results
-    results.clear()
-    references.clear()
-    predictions.clear()
-    
-    # Add existing results first
-    for video_name in sorted(existing_results.keys()):
-        result = existing_results[video_name]
-        results.append(result)
-        references.append(result.get("ground_truth", ""))
-        predictions.append(result.get("model_output", ""))
-    
-    # Add newly processed results
-    for result in sorted_results:
-        references.append(result["ground_truth"])
-        predictions.append(result["model_output"])
+                completed_count += 1
+                
+                # Periodic save as results come in (save every N completed samples)
+                if completed_count % save_interval == 0 or completed_count == len(data_dict):
+                    # Build current results in order (thread-safe)
+                    with file_write_lock:
+                        # Rebuild results list from all completed samples
+                        sorted_indices = sorted([i for i in sample_results.keys()])
+                        current_results = []
+                        current_references = []
+                        current_predictions = []
+                        
+                        for sorted_idx in sorted_indices:
+                            result = sample_results[sorted_idx]
+                            current_references.append(result["ground_truth"])
+                            current_predictions.append(result["model_output"])
+                            
+                            # Build result dict with parsed statements
+                            result_dict = {
+                                "video": result["video"],
+                                "model_output": result["model_output"],
+                                "ground_truth": result["ground_truth"]
+                            }
+                            
+                            # Add parsed statements if available
+                            if "statements" in result:
+                                result_dict["statements"] = result["statements"]
+                            if "parse_error" in result:
+                                result_dict["parse_error"] = result["parse_error"]
+                            
+                            current_results.append(result_dict)
+                        
+                        # Update global lists: combine existing results with new ones
+                        # Start with existing results, then add new ones
+                        combined_results = []
+                        combined_references = []
+                        combined_predictions = []
+                        
+                        # Add existing results first
+                        for video_name in sorted(existing_results.keys()):
+                            result = existing_results[video_name]
+                            combined_results.append(result)
+                            combined_references.append(result.get("ground_truth", ""))
+                            combined_predictions.append(result.get("model_output", ""))
+                        
+                        # Add new results
+                        combined_results.extend(current_results)
+                        combined_references.extend(current_references)
+                        combined_predictions.extend(current_predictions)
+                        
+                        # Update global lists
+                        results.clear()
+                        results.extend(combined_results)
+                        references.clear()
+                        references.extend(combined_references)
+                        predictions.clear()
+                        predictions.extend(combined_predictions)
+                        
+                        # Save to file
+                        save_results_to_file(results, output_path, None)  # Lock already acquired
+                    
+                    if completed_count % save_interval == 0:
+                        print(f"\n💾 Progress saved: {completed_count}/{len(data_dict)} samples to {output_path}")
         
-        # Build result dict with parsed statements
-        result_dict = {
-            "video": result["video"],
-            "model_output": result["model_output"],
-            "ground_truth": result["ground_truth"]
-        }
+        # Final processing: ensure all results are in the correct order
+        sorted_results = [sample_results[i] for i in sorted(sample_results.keys())]
         
-        # Add parsed statements if available
-        if "statements" in result:
-            result_dict["statements"] = result["statements"]
-        if "parse_error" in result:
-            result_dict["parse_error"] = result["parse_error"]
+        # Update final results list: combine existing + new results
+        results.clear()
+        references.clear()
+        predictions.clear()
         
-        results.append(result_dict)
+        # Add existing results first
+        for video_name in sorted(existing_results.keys()):
+            result = existing_results[video_name]
+            results.append(result)
+            references.append(result.get("ground_truth", ""))
+            predictions.append(result.get("model_output", ""))
         
-        # Print first 10 examples
-        idx = result.get("idx", 0)
-        if idx <= 10:
-            print(f"\n{'─'*70}")
-            print(f"[{idx}/{len(data_dict)}] {result['video']}")
-            print(f"Ground truth: {result['ground_truth']}")
-            print(f"Prediction:   {result['model_output']}")
+        # Add newly processed results
+        for result in sorted_results:
+            references.append(result["ground_truth"])
+            predictions.append(result["model_output"])
             
-            # Check if it's learning
-            output = result['model_output']
-            gt = result['ground_truth']
-            if output.lower() == gt.lower():
-                print(f"✅ EXACT MATCH!")
-            elif any(word in output.lower() for word in gt.lower().split()):
-                print(f"✅ Partial match (has some words)")
-            else:
-                print(f"⚠️  No obvious match")
+            # Build result dict with parsed statements
+            result_dict = {
+                "video": result["video"],
+                "model_output": result["model_output"],
+                "ground_truth": result["ground_truth"]
+            }
+            
+            # Add parsed statements if available
+            if "statements" in result:
+                result_dict["statements"] = result["statements"]
+            if "parse_error" in result:
+                result_dict["parse_error"] = result["parse_error"]
+            
+            results.append(result_dict)
+            
+            # Print first 10 examples
+            idx = result.get("idx", 0)
+            if idx <= 10:
+                print(f"\n{'─'*70}")
+                print(f"[{idx}/{len(data_dict)}] {result['video']}")
+                print(f"Ground truth: {result['ground_truth']}")
+                print(f"Prediction:   {result['model_output']}")
+                
+                # Check if it's learning
+                output = result['model_output']
+                gt = result['ground_truth']
+                if output.lower() == gt.lower():
+                    print(f"✅ EXACT MATCH!")
+                elif any(word in output.lower() for word in gt.lower().split()):
+                    print(f"✅ Partial match (has some words)")
+                else:
+                    print(f"⚠️  No obvious match")
     
     # Wrap final operations in try-finally to ensure results are saved
     try:
