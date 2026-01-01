@@ -92,7 +92,7 @@ echo ""
 # with ZeRO Stage 2/3. DeepSpeed launcher handles gradient accumulation correctly.
 # Note: CUDA_VISIBLE_DEVICES is already set above, so deepspeed will use the specified GPUs
 deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
-    internvl_chat/internvl/train/internvl_chat_finetune_gate_regularization.py \
+    internvl_chat/internvl/train/internvl_chat_finetune_gate.py \
     --model_name_or_path "$MODEL_NAME" \
     --output_dir "$OUTPUT_DIR" \
     --overwrite_output_dir \
@@ -139,10 +139,6 @@ deepspeed --num_gpus=$NUM_DEVICES --master_port=$MASTER_PORT \
     --weight_decay 0.01 \
     --lr_scheduler_type cosine \
     --elementwise_attn_output_gate  True \
-    --gate_reg_type beta_loglikelihood \
-    --gate_reg_lambda 0.1 \
-    --gate_reg_beta_alpha 0.5 \
-    --gate_reg_beta_beta 0.5 \
     2>&1 | tee "$LOG_FILE"
 
 TRAINING_EXIT_CODE=${PIPESTATUS[0]}

@@ -774,8 +774,11 @@ class InternLM2FlashAttention2(InternLM2Attention):
             if torch.isnan(attn_output_before_gating).any() or torch.isinf(attn_output_before_gating).any():
                 logger.error(f"[Gated Attention - Flash] ERROR: attn_output contains NaN/Inf before gating!")
             
-            attn_output = attn_output * gate_sigmoid
-            
+            # attn_output = attn_output * gate_sigmoid
+            attn_output = attn_output * (2.0 * gate_sigmoid)
+            # attn_output = attn_output * (gate_sigmoid + 0.5)
+            # attn_output = attn_output * (gate_sigmoid + 0.5)
+
             # Check for NaN or Inf after gating
             if torch.isnan(attn_output).any() or torch.isinf(attn_output).any():
                 logger.error(f"[Gated Attention - Flash] ERROR: attn_output contains NaN/Inf after gating!")

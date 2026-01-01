@@ -15,17 +15,17 @@ Usage:
 
     python internlm2/internvl2_evaluation_attention.py \
         --model-path OpenGVLab/InternVL2_5-2B \
-        --video-path /local1/mhu/sign_language_llm/internlm2/3999622-uhd_3840_2160_24fps.mp4 \
+        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/fZM3IcM2Xs4_2-5-rgb_front.mp4\
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
         --save-attention \
         --image-size 224 \
-        --num-segments 2
+        --num-segments 6
 
     # Using local LoRA checkpoint:
     python internlm2/internvl2_evaluation_attention.py \
         --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1203/checkpoint-2550 \
         --base-model-name OpenGVLab/InternVL2_5-2B \
-        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/_fZbAxSSbX4_24-5-rgb_front.mp4\
+        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/fZM3IcM2Xs4_2-5-rgb_front.mp4\
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
         --save-attention \
         --image-size 224 \
@@ -265,6 +265,134 @@ def visualize_per_layer_visual_attention(layer_attn_1d, layer_idx, output_path, 
     print(f"   ✅ Saved layer {layer_idx} visual attention: {output_path}")
 
 
+def visualize_frame_attention_grid(frame_attn, frame_idx, num_patches_h, num_patches_w,
+                                    video_file, output_dir):
+    """
+    Visualize a single frame's aggregated attention as a grid heatmap.
+    
+    Args:
+        frame_attn: 1D array of attention values for a single frame [patches_per_frame]
+        frame_idx: Original frame index in video
+        num_patches_h: Number of patches in height dimension
+        num_patches_w: Number of patches in width dimension
+        video_file: Video filename (without extension)
+        output_dir: Output directory
+    """
+    import matplotlib.pyplot as plt
+    
+    # Convert to numpy if needed
+    if isinstance(frame_attn, torch.Tensor):
+        frame_attn = frame_attn.float().cpu().numpy()
+    
+    # Ensure it's 1D
+    if len(frame_attn.shape) > 1:
+        frame_attn = frame_attn.flatten()
+    
+    # Normalize attention
+    frame_attn_norm = minmax_01(frame_attn)
+    
+    # Reshape to 2D grid: [num_patches_h, num_patches_w]
+    frame_attn_2d = frame_attn_norm.reshape(num_patches_h, num_patches_w)
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(8, 8))
+    
+    # Plot heatmap
+    im = ax.imshow(frame_attn_2d, cmap='hot', aspect='auto', interpolation='nearest')
+    
+    # Add colorbar
+    cbar = plt.colorbar(im, ax=ax)
+    cbar.set_label('Attention Weight', rotation=270, labelpad=20)
+    
+    # Set labels
+    ax.set_xlabel('Patches (Width)', fontsize=12)
+    ax.set_ylabel('Patches (Height)', fontsize=12)
+    ax.set_title(f'Frame {frame_idx:04d} Aggregated Attention\n{video_file}', 
+                 fontsize=14, fontweight='bold')
+    
+    # Add grid for better readability
+    ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+    
+    # Save figure
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, f"{video_file}_frame_{frame_idx:04d}_attention_grid.png")
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    print(f"   ✅ Saved frame {frame_idx} attention grid: {output_path}")
+
+
+def visualize_attention_distribution(frame_attn, frame_idx, video_file, output_dir):
+    """
+    Visualize the distribution of attention values as a histogram.
+    
+    Args:
+        frame_attn: 1D array of attention values for a single frame [patches_per_frame]
+        frame_idx: Original frame index in video
+        video_file: Video filename (without extension)
+        output_dir: Output directory
+    """
+    import matplotlib.pyplot as plt
+    
+    # Convert to numpy if needed
+    if isinstance(frame_attn, torch.Tensor):
+        frame_attn = frame_attn.float().cpu().numpy()
+    
+    # Ensure it's 1D
+    if len(frame_attn.shape) > 1:
+        frame_attn = frame_attn.flatten()
+    
+    # Normalize attention to [0, 1]
+    frame_attn_norm = minmax_01(frame_attn)
+    
+    # Create figure
+    fig, ax = plt.subplots(figsize=(10, 6))
+    
+    # Plot histogram
+    n_bins = 50  # Number of bins for histogram
+    counts, bins, patches = ax.hist(frame_attn_norm, bins=n_bins, range=(0, 1), 
+                                     edgecolor='black', alpha=0.7, color='steelblue')
+    
+    # Color bars based on attention value (similar to heatmap colormap)
+    # Apply hot colormap to histogram bars
+    for i, (count, bin_left, patch) in enumerate(zip(counts, bins[:-1], patches)):
+        # Normalize bin center to [0, 1] for colormap
+        bin_center = (bin_left + bins[i+1]) / 2
+        # Get color from hot colormap
+        color = plt.cm.hot(bin_center)
+        patch.set_facecolor(color)
+    
+    # Set labels and title
+    ax.set_xlabel('Attention Value', fontsize=12)
+    ax.set_ylabel('Frequency', fontsize=12)
+    ax.set_title(f'Frame {frame_idx:04d} Attention Distribution\n{video_file}', 
+                 fontsize=14, fontweight='bold')
+    ax.set_xlim(0, 1)
+    ax.grid(True, alpha=0.3, linestyle='--', axis='y')
+    
+    # Add statistics text
+    mean_attn = frame_attn_norm.mean()
+    std_attn = frame_attn_norm.std()
+    median_attn = np.median(frame_attn_norm)
+    min_attn = frame_attn_norm.min()
+    max_attn = frame_attn_norm.max()
+    
+    stats_text = f'Mean: {mean_attn:.4f}\nStd: {std_attn:.4f}\nMedian: {median_attn:.4f}\nMin: {min_attn:.4f}\nMax: {max_attn:.4f}'
+    ax.text(0.98, 0.98, stats_text, transform=ax.transAxes,
+            fontsize=10, verticalalignment='top', horizontalalignment='right',
+            bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
+    
+    # Save figure
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, f"{video_file}_frame_{frame_idx:04d}_attention_distribution.png")
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    plt.close()
+    
+    print(f"   ✅ Saved frame {frame_idx} attention distribution: {output_path}")
+
+
 def visualize_frame_across_layers(per_layer_attention, frame_idx, frame_idx_in_segments, 
                                   patches_per_frame, num_patches_h, num_patches_w,
                                   video_file, output_dir):
@@ -356,10 +484,10 @@ def visualize_frame_across_layers(per_layer_attention, frame_idx, frame_idx_in_s
                  fontsize=14, fontweight='bold', y=0.995)
     plt.tight_layout()
     
-    # Save figure
-    frame_output_dir = os.path.join(output_dir, 'per_frame_layers')
-    os.makedirs(frame_output_dir, exist_ok=True)
-    output_path = os.path.join(frame_output_dir, f"{video_file}_frame_{frame_idx:04d}_all_layers.png")
+    # Save figure directly to output_dir (should be frame_attention directory)
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, f"{video_file}_frame_{frame_idx:04d}_all_layers.png")
+    
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
     plt.close()
     
@@ -865,8 +993,97 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
                 original_frame_path = os.path.join(frame_attention_dir, f"{video_file}_frame_{frame_idx:04d}_original.png")
                 Image.fromarray(frame_rgb).save(original_frame_path)
                 print(f"   ✅ Saved frame {frame_idx} original: {original_frame_path}")
+                
+                # Generate grid heatmap for this frame's aggregated attention
+                visualize_frame_attention_grid(
+                    frame_attn,
+                    frame_idx,
+                    num_patches_h,
+                    num_patches_w,
+                    video_file,
+                    frame_attention_dir
+                )
+                
+                # Generate attention distribution histogram
+                visualize_attention_distribution(
+                    frame_attn,
+                    frame_idx,
+                    video_file,
+                    frame_attention_dir
+                )
+                
+                # Generate grid heatmap (all layers) for this frame if per_layer_attention is available
+                if per_layer_attention is not None and len(per_layer_attention) > 0:
+                    visualize_frame_across_layers(
+                        per_layer_attention,
+                        frame_idx,
+                        frame_idx_in_segments,
+                        patches_per_frame,
+                        num_patches_h,
+                        num_patches_w,
+                        video_file,
+                        frame_attention_dir
+                    )
             
             cap.release()
+    
+    # Generate grid heatmap (all layers) for each frame in frame_attention directory
+    # This is done separately to ensure grid heatmaps are generated even if aggregated_attention is None
+    if per_layer_attention is not None and len(per_layer_attention) > 0 and args.save_attention:
+        # Check if we already generated these in the aggregated_attention block
+        if aggregated_attention is None:
+            # Only generate if aggregated_attention was None (otherwise already generated above)
+            # Create frame_attention directory if it doesn't exist
+            frame_attention_dir = os.path.join(output_dir, 'frame_attention')
+            os.makedirs(frame_attention_dir, exist_ok=True)
+            
+            # Calculate patches_per_frame from per_layer_attention
+            first_layer_attn = per_layer_attention[0]
+            if isinstance(first_layer_attn, torch.Tensor):
+                first_layer_attn = first_layer_attn.float().cpu().numpy()
+            if len(first_layer_attn.shape) > 1:
+                first_layer_attn = first_layer_attn.flatten()
+            total_visual_tokens = len(first_layer_attn)
+            num_frames = len(num_patches_list)
+            patches_per_frame = total_visual_tokens // num_frames if num_frames > 0 else total_visual_tokens
+            num_patches_h = num_patches_w = int(np.sqrt(patches_per_frame))
+            
+            # Use frame_indices from load_video if not specified by user
+            frames_to_visualize = args.frame_indices if args.frame_indices else frame_indices.tolist()
+            
+            print(f"   🎨 Generating grid heatmaps for all frames in frame_attention directory...")
+            print(f"   📐 Calculated from per_layer_attention: patches_per_frame={patches_per_frame}, grid={num_patches_h}x{num_patches_w}")
+            
+            for frame_idx in frames_to_visualize:
+                # Find corresponding frame index in segments
+                frame_idx_in_segments = None
+                if args.frame_indices:
+                    # User specified frames: need to find closest match
+                    for i, orig_idx in enumerate(frame_indices):
+                        if abs(orig_idx - frame_idx) < 5:
+                            frame_idx_in_segments = i
+                            break
+                else:
+                    # Using sampled frames: direct mapping
+                    for i, orig_idx in enumerate(frame_indices):
+                        if orig_idx == frame_idx:
+                            frame_idx_in_segments = i
+                            break
+                
+                if frame_idx_in_segments is None:
+                    continue
+                
+                # Generate grid heatmap for this frame (all layers)
+                visualize_frame_across_layers(
+                    per_layer_attention,
+                    frame_idx,
+                    frame_idx_in_segments,
+                    patches_per_frame,
+                    num_patches_h,
+                    num_patches_w,
+                    video_file,
+                    frame_attention_dir
+                )
     
     # Visualize per-layer text-to-visual attention heatmaps
     if per_layer_attention is not None and args.save_attention:
@@ -979,47 +1196,6 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
             plt.close()
             
             print(f"   ✅ Saved combined heatmap: {combined_path}")
-        
-        # Generate per-frame across all layers visualizations
-        if per_layer_attention is not None and len(per_layer_attention) > 0:
-            print(f"   🎨 Generating per-frame across all layers visualizations...")
-            
-            # Use frame_indices from load_video
-            frames_to_visualize = args.frame_indices if args.frame_indices else frame_indices.tolist()
-            
-            if frames_to_visualize:
-                patches_per_frame = visual_tokens_per_frame
-                num_patches_h = num_patches_w = int(np.sqrt(patches_per_frame)) if patches_per_frame > 0 else 8
-                
-                for frame_idx in frames_to_visualize:
-                    # Find corresponding frame index in segments
-                    frame_idx_in_segments = None
-                    if args.frame_indices:
-                        # User specified frames: need to find closest match
-                        for i, orig_idx in enumerate(frame_indices):
-                            if abs(orig_idx - frame_idx) < 5:
-                                frame_idx_in_segments = i
-                                break
-                    else:
-                        # Using sampled frames: direct mapping
-                        for i, orig_idx in enumerate(frame_indices):
-                            if orig_idx == frame_idx:
-                                frame_idx_in_segments = i
-                                break
-                    
-                    if frame_idx_in_segments is None:
-                        continue
-                    
-                    visualize_frame_across_layers(
-                        per_layer_attention,
-                        frame_idx,
-                        frame_idx_in_segments,
-                        patches_per_frame,
-                        num_patches_h,
-                        num_patches_w,
-                        video_file,
-                        output_dir
-                    )
     
     return generated_text, aggregated_attention, per_layer_attention
 
