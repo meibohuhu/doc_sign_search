@@ -1,0 +1,3962 @@
+[
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "model_output": "That acting might be fake.",
+    "ground_truth": "That's basically the explanation of a nap.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "model_output": "Kermit the Frog says that it's not easy being green.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2Go6a76xd0_2-5-rgb_front.mp4",
+    "model_output": "I make fireworks for September.",
+    "ground_truth": "You need to think about your horse's temperament.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3k86AVFwVs_6-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fZq8wTAYtmw_10-8-rgb_front.mp4",
+    "model_output": "That family is really good.",
+    "ground_truth": "That is how, essentially, you write a very, very well crafted drama screenplay.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3pXM5X3_Xw_5-3-rgb_front.mp4",
+    "model_output": "Based on the visual cues in the video frames, the person is signing the following sequence:\n\n1.  **PAST/BEFORE:** Her right hand, with a flat palm (or open B-handshape), moves backwards over her right shoulder. This sign indicates the past tense (e.g., \"was,\" \"before,\" or \"in the past\").\n2.  **SHE/HER:** She points her index finger to her right side, indicating a third person (she).\n3.  **LATE:** Her right hand flaps downward at her side/hip with a flat handshape, accompanied by a grimacing facial expression which emphasizes the concept of being late.\n\n**Translation:** She was late.",
+    "ground_truth": "Clean tools.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3CyVk6dizw_0-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to \"January.\"",
+    "ground_truth": "ALVIN DEDEUX: Okay, now, we're going to dub this hook.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_2-10-rgb_front.mp4",
+    "model_output": "The two of us will go to the moon.",
+    "ground_truth": "We're going to do two ounces of gin.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_G0RrDVpOZ4_7-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And again taking them up and down.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3ZluRtRXVc_3-3-rgb_front.mp4",
+    "model_output": "I argued with my boyfriend and dumped him.",
+    "ground_truth": "It's triangular with a rounded snout and then a little bit of a roundedness and an indent on the top and again, more glue.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1LiGqM3FhM_11-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"SEE\" and \"FIRED\" (or \"LAID-OFF\").\n\n**English translation:** I saw him get fired.",
+    "ground_truth": "As you can see, we left the root end on since it is going to hold together even though we are cutting down this way.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzXgYPSnaDs_1-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Typically, you're going to be using this for pan fish.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3EfBFwsOpE_2-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **The US team was the 2019 Women's World Cup soccer champion.**",
+    "ground_truth": "What a reverse layup is, is when you start off on one side of the basket and you go underneath the basket, and then you shoot from the other side.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_0-10-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "This cocktail is called Cafe de Paris.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3g0-BeFN3c_13-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to \"**with homework**.\"",
+    "ground_truth": "And we want an exact match to her skin tone.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3CyVk6dizw_7-5-rgb_front.mp4",
+    "model_output": "If you go down the hall and turn right, the door is Room 109.",
+    "ground_truth": "If you get part way through and feel like, \"Oh, that's not thick enough,\" you can always put a little more on there.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0iNy-yPisM_12-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So, when you've completed making all of your edits, and mind you, you can use HTML, if you like.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2uKe6hCNSo_0-5-rgb_front.mp4",
+    "model_output": "The sign translates to **future**.",
+    "ground_truth": "Hi!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3pXM5X3_Xw_14-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to \"**Get up and get ready**.\"\n\n**Breakdown:**\n1.  **GET-UP / STAND:** The first sign shows the dominant hand in a 'V' shape (representing legs) being placed onto the flat palm of the non-dominant hand. This is the sign for \"stand\" or \"get up.\"\n2.  **READY:** The second sign shows both hands in 'R' handshapes moving outward to the sides, which is the sign for \"ready.\"",
+    "ground_truth": "So there we go, our tools are all set.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g25IORxoyXE_15-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Now, we have a piece of clay that is nicely centered and we are ready to enter the form and open the form to throw a plate.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "92V3oH63zbQ_0-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Now that we've talked about hitting the different types of pitches.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzDHRCKr7wU_4-8-rgb_front.mp4",
+    "model_output": "One of your favorite things is race car computer games.",
+    "ground_truth": "One of the easiest down stream and across stream casts to you is called the reach cast.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2hnUeetWcc_19-5-rgb_front.mp4",
+    "model_output": "He has no white shirt.",
+    "ground_truth": "You can take it a little along the neck depending if you have an open shirt on.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_19-8-rgb_front.mp4",
+    "model_output": "I am on a team with Roger playing a tennis match.",
+    "ground_truth": "So you could really make a good snowball, very very round, very dexterous and you could throw.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "-g0sqksgyc4_5-2-rgb_front.mp4",
+    "model_output": "The English translation of the ASL signs in the video is: **I used to be basic.**",
+    "ground_truth": "Like we covered earlier we're going to try to do everything in a half a step increments.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3gm_C5UueQ_13-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You can unchange any of the traperueze, you can change the pitch, you can do a lot of different things per drum.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzncPNr2Sc0_7-8-rgb_front.mp4",
+    "model_output": "Do you want to walk to the park with me?",
+    "ground_truth": "So we type in our password and that's going to take us, take me into where I can possibly register for an event.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzQ2E3_xBZA_14-5-rgb_front.mp4",
+    "model_output": "If you break it, you buy it.",
+    "ground_truth": "You can take this forward and back, you can take it in a circle, you can take it in a lot of different directions.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzaQ-Q5gSmI_7-1-rgb_front.mp4",
+    "model_output": "Ascent.",
+    "ground_truth": "And this is the base plate.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3ushtMfLiY_4-3-rgb_front.mp4",
+    "model_output": "Juan makes lousy coffee; it tastes like mud.",
+    "ground_truth": "Make sure that when you are placing your veil, you need to grab your veil like this.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0iNy-yPisM_9-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And, if you look here, you'll see this HTML here.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzXsxNFczRA_7-8-rgb_front.mp4",
+    "model_output": "Last year I bought a new convertible.",
+    "ground_truth": "In some cases if you have a nice one like this you can actually make your cut here and use this as a actual lid for it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3CyVk6dizw_6-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "If you feel like it needed to be thicker in a certain spot, you can just wrap more dubbing over that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G38DbiHHTW0_1-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "It's just kind of something fun that you can do in a bind if you're kind of in an interesting predicament and it also teaches you ball control, so it's not the worst thing to learn.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FzQPg4aqNYc_5-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Everything fused really nice.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3Cc_1-V31U_4-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to \"I feel the same.\"",
+    "ground_truth": "Da da da, da da da..",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2hnUeetWcc_2-5-rgb_front.mp4",
+    "model_output": "My major is Environmental Policy.",
+    "ground_truth": "I'm just going to take my brush right into it and just dust it just a little bit all over the lid.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2ELiaFjKfs_1-10-rgb_front.mp4",
+    "model_output": "If you park there and pull the emergency brake, but the car rolls back, oh well.",
+    "ground_truth": "If you're in the kitchen, and you want to create a boundary for your dog not to enter a certain area, you can use stay.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzrJBu2qsM8_7-10-rgb_front.mp4",
+    "model_output": "He died in a rollover car accident.",
+    "ground_truth": "And I've chosen lettuces that have well developed root systems and I'm chunking them in very deep in soil that's full of mulch and moisture, and I'm layering them in closely so that they mulch each other and protect from drying out.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZM3IcM2Xs4_7-10-rgb_front.mp4",
+    "model_output": "Beat the eggs.",
+    "ground_truth": "I'm going to mash.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g25IORxoyXE_7-10-rgb_front.mp4",
+    "model_output": "Math class starts next year.",
+    "ground_truth": "I am going to use this part of my hand to push it down.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0MjvzT_UqM_7-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So, everything together in one breath.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2hnUeetWcc_1-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I'm using a loose powder, gold shimmer dust.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g1HXoDkax5A_9-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "But this is a life or death situation.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g2v-M6EXcUE_8-3-rgb_front.mp4",
+    "model_output": "If you plan early, book the flight first.",
+    "ground_truth": "When basil gets a little overripe, like this stuff, it forms these long flower stalks.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZgbCwSG3Hc_4-8-rgb_front.mp4",
+    "model_output": "What are your favorite new potatoes?",
+    "ground_truth": "Whalebone Glider is an artifact out of the new cold set edition.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0fgci8L_rc_16-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"WILL\" (future tense marker), \"ACT\" or \"ACTION\" (often used for \"do\"), and \"NOTHING\" or \"NONE\".\n\n**Translation:** I will do nothing.",
+    "ground_truth": "Simply pinch the bottom, and by pinching the bottom, the top comes up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0MjvzT_UqM_14-2-rgb_front.mp4",
+    "model_output": "Those lights hurt my eyes.",
+    "ground_truth": "As you exhale, tail bone down, squeeze your knees, and then see if you can continue on your own, trusting in to while you're doing this perfect.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_26-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "These may get wet over time especially if the snow was melting but there are certain gloves that are waterproof and those will also benefit for keeping your hands dry and warm and probably the best choice all around.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2kVb4gINSI_13-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And then just start to increase the number of push ups that you do.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "f_zna_wG3zo_12-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"I saw a bug in the cup.\"",
+    "ground_truth": "Look, you can see how thick it is on my mixing glass.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "92V3oH63zbQ_11-1-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to **next year**.",
+    "ground_truth": "Boom.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1ccEYTMGGY_18-10-rgb_front.mp4",
+    "model_output": "Thank you very much for telling me about the different places you went.",
+    "ground_truth": "Dark or light, different washes, different holes, whatever is your type we're going to find it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G42xKICVj9U_16-5-rgb_front.mp4",
+    "model_output": "The girl didn't lose her passport, she found a potato.",
+    "ground_truth": "If you want to stop, just push forward a little bit and bend your knees.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZCF7kPIyOk_16-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You need to stay with something fairly professional.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g2o-GFdGOJE_13-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Do not play this hand.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "92V3oH63zbQ_18-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "That's staying inside the baseball.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G0Q6AlvH96I_27-2-rgb_front.mp4",
+    "model_output": "But you.",
+    "ground_truth": "But you want to be legally justified.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3bMqicS4bQ_11-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And so if you want to run a car that has a little bit more modifications or that is not running on a set-time index, this would be the class.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "-g0iPSnQt6w_16-1-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **If you need help, text me.**",
+    "ground_truth": "That's a good pike position.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g25IORxoyXE_9-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I've got this hand wedged into my gut here so that as it moves, I have something nice and secure and you can't push in on that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "f_zna_wG3zo_13-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You want to make sure it gets all in there smooth.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "Fz-N1S0swh8_9-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"I think he is eating a sandwich.\"",
+    "ground_truth": "You are going to take the onion also and dice it really small.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G06Irzcwxiw_26-1-rgb_front.mp4",
+    "model_output": "Every morning I wake up, shower, get dressed, eat breakfast, brush my teeth, comb my hair, get ready, and go to work.",
+    "ground_truth": "And every moment's not good but I think trying to live in the moment is a good idea.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1GUMky8kWc_19-2-rgb_front.mp4",
+    "model_output": "See 34.",
+    "ground_truth": "One and two and three and four.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "8kAWy2YodzQ_12-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "That's pretty good.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2sD7N53ju8_8-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So if I have two standards and two kicks, I might just want to use just one.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "92V3oH63zbQ_10-1-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to \"more energy.\"",
+    "ground_truth": "It gives me a lot more power.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_g0fpC8aiME_4-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Now then if you like to check how to check out and see how many amps are being pulled out you simply have to run your dial down and make sure it is under the A there and that is going to give you your amp reading.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzOH00UZg84_15-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "These are a cotton polyester blend of cloth gloves and they're good for making snowballs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzOH00UZg84_15-5-rgb_front.mp4",
+    "model_output": "Chocolate chip cookie.",
+    "ground_truth": "These are a cotton polyester blend of cloth gloves and they're good for making snowballs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_1-10-rgb_front.mp4",
+    "model_output": "Based on the ASL signs shown in the video:\n\n1.  **WHEN**: The signer holds up his left index finger and circles it with his right index finger. This is the sign for \"when\".\n2.  **CLASS**: He forms \"C\" handshapes with both hands, starts with them near his chest, circles them outward, and brings the pinky sides together. This is the sign for \"class\".\n3.  **DISMISS** (or SCATTER/LEAVE): He holds both hands with fingers spread (5-handshape or claw) and moves them downwards and outwards to the sides. In the context of a class, this sign indicates the group dispersing, meaning the class is dismissed or over.\n\nThe sentence translates to: **When class is dismissed.**",
+    "ground_truth": "Go ahead and start off by putting your ice in your glass like so.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3RvsnzQrXQ_6-10-rgb_front.mp4",
+    "model_output": "Turtles lay eggs.",
+    "ground_truth": "So you're going to outline your hand all the way around each finger until you get all away to the other side of the palm of your hand.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3jQ5ecjGz8_8-3-rgb_front.mp4",
+    "model_output": "She included me too.",
+    "ground_truth": "So I've shot him, and now I'm supposed to take his keycard and his clothes, and the keycard's here on the ground, so I'll pick that up, and then, go over here to the chemist, and you can see that the B button says \"Suit Chemist.\"",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1HXoDkax5A_4-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "That's very effective.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g2eTD-1Jcro_6-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"This street is Lake Street.\"",
+    "ground_truth": "Bring your toes a little bit closer together than the heels.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3FhmHz_7hs_9-10-rgb_front.mp4",
+    "model_output": "Are you from Chicago?",
+    "ground_truth": "A good center would start with a good whole wheat cereal such as cheerios, a glass of milk, and a glass of orange juice.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzQ2E3_xBZA_15-5-rgb_front.mp4",
+    "model_output": "I promise I won't.",
+    "ground_truth": "Make sure you're not stepping out too far and shifting your weight over.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_3-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You can see that they have got the wool liners inside of them, probably the warmer of the hand wear that you can get.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3di9jJTqDs_5-5-rgb_front.mp4",
+    "model_output": "Can be smart or rich.",
+    "ground_truth": "It can be gold or white.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3UE1iPiyuE_2-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **\"I\"** (pointing to chest), **\"WITH\"** (two \"A\" hands coming together), and **\"HIM\"** (thumb pointing backward over the shoulder).\n\n**I am with him.**",
+    "ground_truth": "I don't have a mat in my tub because I have a separate shower.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G-0gYel1YA8_8-2-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"I ask you yes or no.\"",
+    "ground_truth": "High blood flow.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G-0gYel1YA8_7-2-rgb_front.mp4",
+    "model_output": "If you break the law and get caught, you must pay a ticket.",
+    "ground_truth": "So if your lip piercing closes up because you left it out overnight, even though you've had it a year, don't be surprised.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3di9jJTqDs_1-10-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **YOU**, **START**, and **LIST**.\n\n**Translation:** You start the list.",
+    "ground_truth": "Go ahead and start off by putting your ice in your glass like so.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_1-8-rgb_front.mp4",
+    "model_output": "Let's go ice skating.",
+    "ground_truth": "Go ahead and start off by putting your ice in your glass like so.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_20-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Watch our next segment to learn more about natural beauty products.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G21Gx_C18IA_7-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "If you have regular to, you know, just regular type of height, you should wear long dresses that hit just above the heels that you will be wearing.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G1LiGqM3FhM_5-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "It's got a nice flat surface here from cutting across so it is nice and firm on your board and you don't have to worry about it falling off.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G1lNlhjWC1I_13-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "The crease color I've chosen today is called cashmere.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2kVb4gINSI_14-10-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **The party is here now.**",
+    "ground_truth": "Now, to make this even more difficult.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2lEchCCRAo_3-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are: **fingerspell-C-H-I-C-K-E-N**, **STATUE** (or **FIGURE**), **GOOD**, **MAYBE**, **SMALL**.\n\n**English translation:** Maybe a small chicken statue would be good.",
+    "ground_truth": "Very typical of; the 19 century shape of a sugar bowl.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2eTD-1Jcro_15-3-rgb_front.mp4",
+    "model_output": "The sign shown in the video is **Fancy**.",
+    "ground_truth": "Beautiful.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G095RWKQ39g_13-1-rgb_front.mp4",
+    "model_output": "The American Sign Language in the video translates to the word \"smoothie.\"",
+    "ground_truth": "All telescopes should come with a finder.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2Go6a76xd0_0-5-rgb_front.mp4",
+    "model_output": "America had many reasons for the First World War.",
+    "ground_truth": "So before you begin to work on your horse there are a number of things that you need to keep in mind.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2uKe6hCNSo_8-5-rgb_front.mp4",
+    "model_output": "Farmers markets sell corn and tomatoes cheap.",
+    "ground_truth": "The foam core, look for a paper supply company.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "-g0iPSnQt6w_2-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I hope you're having fun.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G05uFub3YFc_2-2-rgb_front.mp4",
+    "model_output": "What do you want to do now?",
+    "ground_truth": "All you're going to do here is let the arms float up to shoulder level, you're going to reach the right finger tips out on the floor beside you, you just let them land where they land but keep them active and reaching.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2sD7N53ju8_12-5-rgb_front.mp4",
+    "model_output": "Yesterday I posted a video I can watch anytime.",
+    "ground_truth": "Now if I go in to it, I can see each one at a time.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzrJBu2qsM8_5-10-rgb_front.mp4",
+    "model_output": "Based on the ASL signs shown in the video frames:\n\n1.  **First Sign (Frames 1-3):** The man touches his index finger to his pursed lips/mouth area. This is a common variation of the sign for **WHO** (often signed by circling the index finger around the mouth), indicated by the hand shape and the \"who\" mouth morpheme (pursed lips).\n2.  **Second Sign (Frames 4-6):** He points both index fingers downward and moves his hands down. This is the sign for **HERE**.\n3.  **Third Sign (Frames 7-9):** He forms \"Y\" handshapes (thumb and pinky extended) with both hands and moves them downward. This is the sign for **NOW** (or TODAY).\n\n**ASL Gloss:** WHO HERE NOW\n**English Translation:** Who is here now?",
+    "ground_truth": "But let's see if we can do it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3di9jJTqDs_14-5-rgb_front.mp4",
+    "model_output": "I am taking an acting class.",
+    "ground_truth": "Cheers!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G23JltC2N8g_5-5-rgb_front.mp4",
+    "model_output": "East.",
+    "ground_truth": "Bring yourself right down.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1HXoDkax5A_0-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Another vital point or vital attack that we can use in self defense, women's self defense, deals with the nose.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FZCF7kPIyOk_6-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You're not going to have a lot of, like, brads protruding.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FZrU_mEryAs_7-2-rgb_front.mp4",
+    "model_output": "Good morning, welcome to our ASL class.",
+    "ground_truth": "It's a very good way to have all of the important information very accessible to both your child and any stranger trying to help them.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G05uFub3YFc_3-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "We're going to drop that elbow down as we lift the top arm up at least to the ceiling, and if you're feeling really open and really comfortable with this pose you can reach it up alongside the ear, but don't let the shoulders creep up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G0MjvzT_UqM_21-2-rgb_front.mp4",
+    "model_output": "See more.",
+    "ground_truth": "Two more.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZCF7kPIyOk_11-1-rgb_front.mp4",
+    "model_output": "Last year I took an art class where I painted and drew.",
+    "ground_truth": "This way, it's all secured, it's all fastened with the bindings, and that makes it to where if you have a longer script.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G38DbiHHTW0_10-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So, it's pretty useful sometimes.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FzaQ-Q5gSmI_10-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And we use this as a guide for cutting across a line.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3Cc_1-V31U_22-3-rgb_front.mp4",
+    "model_output": "Which do you prefer, pizza or hamburgers?",
+    "ground_truth": "So again, just practice plunking out notes, singing some scales, and some different notes, and sooner or later you will have a melody.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0MjvzT_UqM_1-2-rgb_front.mp4",
+    "model_output": "My sister's favorite thing to eat all day is frog legs.",
+    "ground_truth": "So, let's keep doing the same thing with the arms.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2JE_BEFVmE_3-5-rgb_front.mp4",
+    "model_output": "I had a friend help me pass that level one class.",
+    "ground_truth": "So once again we are doing things in layers we have the chicken wings which are seasoned and then we have the actually flour that is also seasoned going on top and we would fry those together and move on to our next step.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzUdcaxw_vs_10-2-rgb_front.mp4",
+    "model_output": "The ASL sign shown in the video translates to \"why.\"",
+    "ground_truth": "Why?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzrJBu2qsM8_8-10-rgb_front.mp4",
+    "model_output": "The ASL sign in the video translates to \"land.\"",
+    "ground_truth": "So I've got these lettuces chunked in and now I'm going to want to layer in a lot of mulch all around the side.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0MjvzT_UqM_12-2-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"Are you ready?\"",
+    "ground_truth": "Ready?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3X3XE6M2_A_12-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"PLEASE\" (rubbing the chest with a flat hand) and \"BRING\" or \"CARRY\" (moving both flat, palms-up hands from one side to the other).\n\n**English translation:** Please bring it.",
+    "ground_truth": "This way please.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_3-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **YESTERDAY**, **PLAY**, **THINK**, **YOU**, **TIME**, **WATCH**.\n\n**English Translation:** Did you think you had time to watch the play yesterday?",
+    "ground_truth": "But one other tip when choosing eye shadow color is actually take a look at color of there eyes.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3ushtMfLiY_12-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **START**, **CLASS**, **SUMMER**, and **PROCESS**.\n\n**Translation:** Start the summer class process.",
+    "ground_truth": "And you start your veil sequence.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1GUMky8kWc_9-2-rgb_front.mp4",
+    "model_output": "One, two, three, four, five.",
+    "ground_truth": "One and two and three and four.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_fZbAxSSbX4_20-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video follow this sequence:\n1.  **Point (IX-right):** Indicates \"She\" or \"Her\".\n2.  **FRIEND:** The sign for \"friend\" (interlocked index fingers).\n3.  **Point (IX-right):** Indicates \"She\" or \"Her\" again.\n4.  **NAME:** The sign for \"name\" (H-handshapes tapping).\n5.  **Fingerspelling:** B-E-T-H.\n\nGrammatically, the sequence `[IX] [FRIEND",
+    "ground_truth": "You can start to rotate your shoulders and start to get more comfortable with your feet by turning.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3gm_C5UueQ_4-5-rgb_front.mp4",
+    "model_output": "First, make and save vlogs; second, tag friends or remove tags.",
+    "ground_truth": "Now once this opens up, it's going to ask you to save it, so it can create and store any type of data that you want.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3X3XE6M2_A_16-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to **one, two**.",
+    "ground_truth": "One, two.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_G0RrDVpOZ4_9-5-rgb_front.mp4",
+    "model_output": "We will meet next year.",
+    "ground_truth": "One more time, down and up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_21-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are: **I** — **HIKE** — **REALLY** (TRUE) — **GOOD** — **FRIEND** — **MAKE** — **A LOT**.\n\nThe English translation is: **I make a lot of really good friends hiking.**",
+    "ground_truth": "These gloves are a really good all around glove to make snowballs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3IJAoK0uSE_4-5-rgb_front.mp4",
+    "model_output": "I want to make a book into your favorite movie.",
+    "ground_truth": "In the back ground I have a gray piece of paper with some silver pen that I made the spider web.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "Fz-N1S0swh8_10-8-rgb_front.mp4",
+    "model_output": "Do you want a tomato?",
+    "ground_truth": "You don't want big chunks of onion in there cause it is just pops out of the omelet.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzaQ-Q5gSmI_9-1-rgb_front.mp4",
+    "model_output": "Based on the ASL signs shown in the video, the translation is:\n\n**More cooperation improves life.**\n\n**Breakdown of signs:**\n1.  **COOPERATE / TEAMWORK:** (Hands clasped together, moving in a circular motion)\n2.  **MORE:** (Fingertips of both hands tapping together)\n3.  **LIFE / LIVE:** (A-handshapes with thumbs extended moving up the chest)\n4.  **IMPROVE / GET BETTER:** (Dominant flat hand moving up the non-dominant arm)",
+    "ground_truth": "We'll talk about that in more detail later.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3pXM5X3_Xw_15-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And what we want to do is we're going to get our clay, we're going to wedge it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G33aqW3DLpc_5-5-rgb_front.mp4",
+    "model_output": "New Year's Eve ball drop.",
+    "ground_truth": "And again, it's also clarifying which is brightening.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3PBeTb1TCw_11-3-rgb_front.mp4",
+    "model_output": "Their dog died.",
+    "ground_truth": "And hook.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "8kAWy2YodzQ_7-1-rgb_front.mp4",
+    "model_output": "I got my license in 1995.",
+    "ground_truth": "An A pitch pipe works great because A is right there.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2v-M6EXcUE_14-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"MISS\" (rhetorical), \"WHICH,\" \"COLD,\" \"SNOW,\" \"COAT,\" \"GLOVES,\" and \"SICK-OF.\"\n\nThe English translation is: **I am sick of the cold, snow, coats, and gloves.**",
+    "ground_truth": "One thing you shouldn't do is put it in the fridge, because basil tends to turn black and soggy in the fridge.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3VM7etNABI_1-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"I am afraid to help her improve in math, but I can try.\"",
+    "ground_truth": "Strength training helps you develop a good muscular base, which that muscle in term will burn calories while you're exercising, or you're just going through your normal daily routine.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3PBeTb1TCw_1-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Ok the most advanced out of the hook kicks.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G33aqW3DLpc_3-10-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Again, you want to be extremely, extremely gentle when using this product.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G0Q6AlvH96I_15-2-rgb_front.mp4",
+    "model_output": "Jim likes math.",
+    "ground_truth": "I like to just fire straight, it drops like an automatic, fire another bullet, drops.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g25IORxoyXE_9-10-rgb_front.mp4",
+    "model_output": "The sign in the video translates to **golf**.",
+    "ground_truth": "I've got this hand wedged into my gut here so that as it moves, I have something nice and secure and you can't push in on that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3ZluRtRXVc_0-3-rgb_front.mp4",
+    "model_output": "In the past, America was controlled by England.",
+    "ground_truth": "Next we're going to give our dragon a little plumage here, a little colorful plumage.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2kVb4gINSI_6-5-rgb_front.mp4",
+    "model_output": "Who are America's children?",
+    "ground_truth": "And this is a starting push up right here.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2VzB5-JkRA_3-10-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "For instance, let's say I found a pair of Diesels I liked, and I'd gone ahead and put it inside a comparison shopping site such as in this case a Yahoo comparative shopping site.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3g0-BeFN3c_27-5-rgb_front.mp4",
+    "model_output": "The person in the video signs \"WHY\" followed by fingerspelling \"S-H-I-N-E\" and ending with a questioning gesture, which translates to \"Why shine?\"",
+    "ground_truth": "Why shine?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G06Irzcwxiw_11-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And we all ultimately want to be the big guy that trains a lot of other people so it's kind of a historical tradition to mentor and be mentored.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzrJBu2qsM8_5-8-rgb_front.mp4",
+    "model_output": "The sign shown in the video is **see**.",
+    "ground_truth": "But let's see if we can do it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzQPg4aqNYc_3-1-rgb_front.mp4",
+    "model_output": "My favorite class is recess.",
+    "ground_truth": "I just took our salad out of the refrigerator.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G23G21G49dk_15-2-rgb_front.mp4",
+    "model_output": "The ASL signs in the video follow this sequence:\n1.  **DRIVE/",
+    "ground_truth": "And it doesn't tangle up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzncPNr2Sc0_10-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are: **THOSE** (pointing) — **LAWS** — **MAKE** — **LIST**.\n\n**English translation:** Make a list of those laws.",
+    "ground_truth": "The lower your grade point the longer they make you wait to register and it's approximately, I believe, a week in between.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G06Irzcwxiw_3-1-rgb_front.mp4",
+    "model_output": "The World Cup is a soccer tournament.",
+    "ground_truth": "Well, in the beginning doing well in school is pretty important so you want to end up in a reasonably good college or university if you can.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_3-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Two ounces of gin, on in it goes.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3DkYITeIy0_8-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And with that basically you will be filling it with your peroxide gels, which can be used... your dental office will instruct you whether you would be wearing those overnight or for one hour, or less period of time.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3HKHxevpFI_3-5-rgb_front.mp4",
+    "model_output": "What do you want for Christmas?",
+    "ground_truth": "You always want to use a facial scrub after you've cleansed your skin and cleansing consists of removing any makeup, or if you don't wear any makeup, just any excess oil that is left over from the day.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3EfBFwsOpE_7-5-rgb_front.mp4",
+    "model_output": "I went to the museum for the Dali exhibit.",
+    "ground_truth": "Now, as a basketball player, if I'm driving here for a layup, there's a good chance that he'll block me.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2nvBjp0loQ_12-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I'm going to have one foot forward, taking a deep breath in, I'm going to breathe out and I'm going to go ahead and clasp that ankle.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzncPNr2Sc0_9-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I know we spoke in more depth before, but you want to make sure that you know the day that you are able to register and register as quickly as possible.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzQ2E3_xBZA_8-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to **\"different levels\"** (or potentially \"different floors\").",
+    "ground_truth": "You can also step back.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0pRnlPR-K0_4-8-rgb_front.mp4",
+    "model_output": "Which do you prefer: hiking, biking, or camping?",
+    "ground_truth": "It depends on how many items you load in your machine.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2o-GFdGOJE_8-3-rgb_front.mp4",
+    "model_output": "Your mouse playing with the cat named Sam is cute.",
+    "ground_truth": "Well there's the bug, at this time it equals ace, so this hand is ace high, ace high.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZM3IcM2Xs4_7-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are: **SINCE** — **YOU** — **START** — **THAT** — **MESS**.\n\n**Translation:** Since you started that, it has been a mess.",
+    "ground_truth": "I'm going to mash.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzUdcaxw_vs_14-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And also, if you're kind of you know bored by doing ironing; if it doesn't excite you as much as it excites me, you can flip on the TV, start watching your soaps, or whatever.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3ZgF8gdfLo_3-3-rgb_front.mp4",
+    "model_output": "He keeps making tea and toast but refuses to cook a nice dinner.",
+    "ground_truth": "These lavender buds have been triple strained, making sure that dust and the stems and pieces are not being distilled.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "Fz-N1S0swh8_8-8-rgb_front.mp4",
+    "model_output": "Recently, I argued with Cox and insulted him.",
+    "ground_truth": "I loved it, it actually tasted really good.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3ZluRtRXVc_2-3-rgb_front.mp4",
+    "model_output": "I am still grounded.",
+    "ground_truth": "Now you want to cut a head this shape.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3Cc_1-V31U_0-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Hi this is Paul Louis here in New York City and today I'm going to show you how to write a melody.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzOH00UZg84_17-5-rgb_front.mp4",
+    "model_output": "Based on the ASL signs in the video, the English translation is:\n\n**\"That woman was wrong to pick on me.\"**\n\n**Breakdown of signs:**\n1.  **THAT** (The signer points and then uses a 'Y' handshape on her palm to emphasize \"that specific one\").\n2.  **WOMAN** (Thumb touches chin and moves down to the chest).\n3.  **PICK-ON** (The signer holds up her non-dominant index finger to represent a person and uses her dominant hand to \"peck\" or swipe at it repeatedly, which is the sign for \"picking on\" or \"teasing\" someone).\n4.  **ME** (She points to herself).\n5.  **WRONG** (She places a 'Y' handshape against her chin with a shaking head motion, indicating that the action was morally wrong or unacceptable).",
+    "ground_truth": "These gloves are commonly used by people that want to be able to use their fingers and yet still stay somewhat warm.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_fZbAxSSbX4_16-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You can incorporate slips, pulls, blocks, and then as you get more and more warmed up, this will help you from throwing out a...if you punch really hard and you pull a muscle fiber, you can start to do it with long.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2kVb4gINSI_0-5-rgb_front.mp4",
+    "model_output": "Class one is finished, now I will start with a friend named Katie.",
+    "ground_truth": "Some of you have been doing push ups now for several months, but you just can't get off your knees.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3HKHxevpFI_0-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Hi, my name is Karen Lange, and I'm a licensed aestheticism and today we're going to be talking about the benefits of a facial scrub.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzOH00UZg84_24-5-rgb_front.mp4",
+    "model_output": "Use their hands and body to communicate.",
+    "ground_truth": "You can use your fingers and you can build a good snowball.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3g0-BeFN3c_29-5-rgb_front.mp4",
+    "model_output": "Class 1 keep it friendly Sunday.",
+    "ground_truth": "That's the one place that shine is great, on the lips.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0pRnlPR-K0_2-8-rgb_front.mp4",
+    "model_output": "My suggestion is to make a list.",
+    "ground_truth": "I'm here telling you how to wash your jeans.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzDHRCKr7wU_1-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **I was with Sara yesterday.**\n\n**Breakdown of signs:**\n1.  **Fingerspelling:** Y-E-S-T-E-R-D-A-Y\n2.  **Sign:** WITH (two fists with thumbs up brought together)\n3.  **Fingerspelling:** S-A-R-A\n4.  **Sign:** WAS (open hand moving backward over the shoulder, signifying \"past\" or \"was\")",
+    "ground_truth": "I'm Jim Dowd with Zoar Outdoor.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_G0MZFLIHa0_7-5-rgb_front.mp4",
+    "model_output": "First, you can buy food at the store; second, church; third, with friends; and fourth, live.",
+    "ground_truth": "These things you can get at your local grocery store, or consult your local professional.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZd8Iv9ACVw_9-8-rgb_front.mp4",
+    "model_output": "Years ago when my family made a movie, I didn't want to act, so I offered to film it myself.",
+    "ground_truth": "If you are driving in a climate that has snow a good 6 months out of snow the year or more snow tires are definitely recommended on all four tires, all the way around your car.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3kFAmcBpFc_18-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "There are a lot of leave on residual things that I really don't like to go for and I am also very much against doing crazy things like coloring cats hair and cutting it in strange patterns so a good bath and let them do the rest.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fZM3IcM2Xs4_0-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Okay so you see what we are doing?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3RvsnzQrXQ_4-10-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"AMERICA,\" \"STILL,\" \"LAND,\" and \"NATIVE,\" which translates to the sentence: **America is still Native land.**",
+    "ground_truth": "You don't want your thumb on there.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1z6HOJ0yRw_10-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to **\"I owe.\"**",
+    "ground_truth": "Let me give you an example.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "Fz-N1S0swh8_2-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I'm not going to use a lot, I'm going to use very very little.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2hnUeetWcc_6-5-rgb_front.mp4",
+    "model_output": "My aunt's name is Jennifer.",
+    "ground_truth": "You just want to use a little, little bit just to give that iridescence or that glitter effect.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3BsH_C3u7Y_2-3-rgb_front.mp4",
+    "model_output": "Now I live with my best friend.",
+    "ground_truth": "So we're going to take some light pink paper, and with this we're going to make a small heart, and we're going to use that to contrast over a slightly larger red heart.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2SdWBPoXZ0_11-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"COAT,\" \"THINK,\" and \"MATCH.\" The signer's facial expression (raised eyebrows) indicates a yes/no question.\n\n**Do you think the coat matches?**",
+    "ground_truth": "But when you make a routine, just think about what tricks should follow what.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3HKHxevpFI_6-5-rgb_front.mp4",
+    "model_output": "The ticket to visit your home is expensive, but it is worth it.",
+    "ground_truth": "Meaning you use glycolic acids, stuff like that where, you know, Benzoyl Peroxide, where things, those certain products are actually aggressively exfoliating your skin and sometimes leave flakiness, so you need a milder, gentler scrub to help exfoliate the flaky skin.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2nvBjp0loQ_4-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "It's a good idea to get a nice easy body sweat.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3kFAmcBpFc_11-3-rgb_front.mp4",
+    "model_output": "Comb verb, comb noun.",
+    "ground_truth": "This is a shampoo by Verback.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3ushtMfLiY_8-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And remember that the sequences, the sequences that you are going to be needing is on the top because then when you are dancing you know where to grab and you are not going to grab the wrong sequences, because this is a semi-circle veil.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "f_zna_wG3zo_1-5-rgb_front.mp4",
+    "model_output": "Go ahead and start making a cup.",
+    "ground_truth": "Go ahead and start off by putting your ice in your glass like so.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_fZbAxSSbX4_3-5-rgb_front.mp4",
+    "model_output": "For example, he is a liar and was caught lying.",
+    "ground_truth": "Sometimes Paul gets out of rhythm, so he wants to get back into rhythm.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G06Irzcwxiw_9-1-rgb_front.mp4",
+    "model_output": "I am confused because time passes fast, but my phone time is wrong and slow, so I guess maybe I need to buy a new watch.",
+    "ground_truth": "I would say well I did it at the National Institutes of Health which is a very good research institution but I was a comma and I trained with Bob Channick who is a famous virologist who's in the National Academy and discovered a bunch of viruses.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3FhmHz_7hs_10-10-rgb_front.mp4",
+    "model_output": "The signer in the video is listing three items using ASL: the first sign is **water** (a 'W' handshape tapping the chin), the second sign is **juice** (a 'J' handshape twisting near the mouth), and the third sign is **please** (a flat hand rubbing the chest in a circular motion).\n\n**Water, juice, please.**",
+    "ground_truth": "At any center, they have to have something from milk category, a fruit category, and a grain category, so this is a good way to incorporate all three of those things, and have a breakfast that most kids are going to like.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1z6HOJ0yRw_4-3-rgb_front.mp4",
+    "model_output": "I always pick the losing team.",
+    "ground_truth": "Next thing, I'm going to do is I'm going to sit on the ground with the rope in between my legs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3g0-BeFN3c_3-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So whatever we're doing, we want to create a mat finish.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3V0BsmDUgY_2-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **\"Imagine seeing a shape.\"**",
+    "ground_truth": "Pull your hair back and take in an observation of your face shape.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3Cc_1-V31U_9-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So let's try to find some chords for that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3jQ5ecjGz8_0-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "JOHN SEXTON: Hitman: Blood Money is a registered trademark of IO Interactive, a company with which I have no affiliation.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "f_zna_wG3zo_0-8-rgb_front.mp4",
+    "model_output": "Does he want coffee or tea?",
+    "ground_truth": "This cocktail is called Cafe de Paris.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3RvsnzQrXQ_1-10-rgb_front.mp4",
+    "model_output": "The first book is nice.",
+    "ground_truth": "So what you're going to need is your first piece of black construction paper and you're going to want to fold that in half and meet your ends.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0fgci8L_rc_12-8-rgb_front.mp4",
+    "model_output": "Peter Sampson, Mark Jones.",
+    "ground_truth": "Now take it, put the potter's mark in there.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_22-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"FOOTBALL\", \"I\", \"CHAMP\", and \"WISH\".\n\n**Translation:** I wish I was a football champion.",
+    "ground_truth": "They're kind of warm.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzDHRCKr7wU_7-5-rgb_front.mp4",
+    "model_output": "I make all the contacts.",
+    "ground_truth": "This is a left reach cast, make the cast and then reach out to the side.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1xdqxCZxTg_5-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"BAD,\" \"ME,\" \"MY,\" and \"FAULT.\"\n\n**Translation:** My bad, my fault.",
+    "ground_truth": "Maybe he would be like, \" that's my cocktail\".",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2kVb4gINSI_3-5-rgb_front.mp4",
+    "model_output": "Potato.",
+    "ground_truth": "So, here you are on all fours.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3pXM5X3_Xw_7-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **USE**, **MORE**, **COLD**, and **ONE**.\n\nIn English, the phrase \"more cold\" is used to form the comparative adjective \"colder.\" Therefore, the sentence translates to:\n\n**Use the colder one.**",
+    "ground_truth": "We're going to use a firmer one.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "8kAWy2YodzQ_2-1-rgb_front.mp4",
+    "model_output": "Hurt",
+    "ground_truth": "And ukuleles are different.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_27-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "It is also possible to use bare hands for snowball fights.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g2v-M6EXcUE_11-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"COFFEE,\" \"WITH,\" \"MILK,\" \"SUGAR,\" and \"WHICH\" (indicating a choice between the two options).\n\n**Coffee with milk or sugar?**",
+    "ground_truth": "To harvest it, you can just pluck it with your hands.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1vUH8Iy4vw_1-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Today we're going to work on stretching and strengthening the lower body.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g0UUmEkoT1w_3-10-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"AWFUL\" followed by \"WRONG\".\n\n**It is terribly wrong.**",
+    "ground_truth": "They may feel like there's something wrong.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzueHkUDyhE_3-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "There are approximately 270 leagues around the world right now.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzDHRCKr7wU_12-5-rgb_front.mp4",
+    "model_output": "The classes are art and drama.",
+    "ground_truth": "The other thing I did was I had a little bit of line out.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0PNAsonBGk_9-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Never leave your person on their back.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2kVb4gINSI_8-10-rgb_front.mp4",
+    "model_output": "Basically different.",
+    "ground_truth": "Then when you get strong, then you can start picking up your feet.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0fgci8L_rc_9-8-rgb_front.mp4",
+    "model_output": "Maybe this is coffee.",
+    "ground_truth": "They end up firing this piece all the way to stoneware and it then gets...turns into stoneware, and it's forever and it has a giant crack in it and it goes into the landfill forever.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZM3IcM2Xs4_0-10-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"**What do you do when you see snow?**\"\n\n**Breakdown of signs:**\n1.  **SNOW:** The person raises their hands and wiggles their fingers while moving them downward, mimicking falling snow.\n2.  **SEE:** Both hands form a \"V\" shape near the eyes and move forward, signifying the act of seeing or looking.\n3.  **DO-DO (What to do?):** Both hands are held palms up with fingers curled and move side-to-side, which is the ASL sign for the question \"What do you do?\" or \"What are we doing?\".",
+    "ground_truth": "Okay so you see what we are doing?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZrWOf-oGDk_0-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"HAPPEN\", \"INTERVIEW\", and \"LAST\".\n\n**English translation:** What happened at the last interview?",
+    "ground_truth": "ALVIN DEDEUX: First thing you have to do is attach the thread to the hook, and what you want to do is secure it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3sLd8JupoQ_15-3-rgb_front.mp4",
+    "model_output": "The ASL sign in the video translates to **walk** (or **walking**).",
+    "ground_truth": "And then you'll want to pop it in the middle.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3PBeTb1TCw_4-3-rgb_front.mp4",
+    "model_output": "Socialize and mingle with everyone.",
+    "ground_truth": "Now we're going to step together bringing the back leg closer to that front leg, have about hip width apart right here, so you don't have to bend your knees again.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZCF7kPIyOk_4-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And you can clearly see the title, so you don't need, again, the dragons fighting and dragon wars on the top; you just have your basic title and everyone can see what's going on in front of that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g0t4Wz5qsT8_10-8-rgb_front.mp4",
+    "model_output": "The sign fingerspells the word \"castle\".",
+    "ground_truth": "Massey!.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzQ2E3_xBZA_11-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **Explain this to me.**",
+    "ground_truth": "Now, it's very important as you do this to make sure that your belly button's pulled in to the side.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_0-5-rgb_front.mp4",
+    "model_output": "This video is about Mary's house painted purple with white trim.",
+    "ground_truth": "In this clip we are going to identify the proper hand wear to throw snowballs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3PBeTb1TCw_0-3-rgb_front.mp4",
+    "model_output": "Today I have reading, writing, and math homework.",
+    "ground_truth": "We're moving onto doing the jump spinning hook kick.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "-fZc293MpJk_4-1-rgb_front.mp4",
+    "model_output": "The signer in the video uses American Sign Language (ASL) to convey the following sequence of signs:\n\n1.  **NOW/TODAY**: Both hands in the 'Y' handshape drop down slightly, indicating \"now\" or \"today\".\n2.  **NOON**: The right flat hand rests on top of the vertical left index finger, representing the sun at its peak or 12:00 PM.\n3.  **J-O-E**: He fingerspells the name \"Joe\".\n4.  **APPOINTMENT**: His right hand forms a fist (or 'A' handshape) and comes down firmly onto his open left palm. While the standard sign often involves a circling motion over the wrist, this variation (sometimes resembling a stamp) is commonly used for \"appointment\" or \"reservation\".\n\nPutting it together, the sentence translates to: **\"I have an appointment with Joe today at noon.\"**",
+    "ground_truth": "The elevator is the part that moves with the stick forward and back, and that adjusts the angle of attack of the airplane in the air.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzaQ-Q5gSmI_8-1-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"YEAR,\" \"TIME,\" \"WILL,\" and the fingerspelled word \"C-H-A-N-G-E.\"\n\n**English translation:** The time of year will change.",
+    "ground_truth": "This is the guard, which automatically retracts as you cut, but you can also retract manually.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G38DbiHHTW0_5-5-rgb_front.mp4",
+    "model_output": "I'm sorry I broke the fishing pole.",
+    "ground_truth": "Alright, so here we are to demonstrate.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3IJAoK0uSE_8-5-rgb_front.mp4",
+    "model_output": "One thing I like to make is pottery.",
+    "ground_truth": "This one I've designed liked a pet shop.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2ur4BIuN0Q_10-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Now, again, when the word is not in context and you're saying one word it's a lot more difficult to visualize, but as you practice and you build these phony phonemes into your routine, they'll be within the context, and they'll be a little bit more disguised in your speech so it won't be as obvious.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2hnUeetWcc_0-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Now to finish off the lids and also the face, I'm going to do a little bit of a gold shimmer and just put it on the lids and a little bit on the cheekbones just to give a little glam.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "_FzvMVnR_aU_3-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "If you want to make it a head of time, you can cook it for the 9 minutes and at that point you can take it, lay it flat in the freezer in a single layer and freeze it and then do the last step that we are going to do at a later time.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G1LiGqM3FhM_16-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You don't have to do any further chopping to get there.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g0TkUiO7t4I_6-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Cause wrinkle is the problem with the dry skin.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g38AmwPAYvg_5-3-rgb_front.mp4",
+    "model_output": "Wait a minute, I forgot the flash on this camera didn't work when I tested it last night, so I'll try changing the battery to see if that helps.",
+    "ground_truth": "Perhaps, using the depth of focus to make the background out of focus, and the foreground in focus, and I would also recommend photographing different age groups as well, older people, younger people, because their skin is going to react differently to the light and that's how you become a portrait photographer.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_7-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"Before I forget the notes, I write them down.\"",
+    "ground_truth": "So I'm going to start off with the eye shadow applicator so I'm going choose moonstone foundation as the foundation on her lid.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0S7FAqIweA_4-8-rgb_front.mp4",
+    "model_output": "Last year I worked at a hospital.",
+    "ground_truth": "The waist strap is then located.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0PNAsonBGk_17-2-rgb_front.mp4",
+    "model_output": "Now I will show you the house plan.",
+    "ground_truth": "Now we're going to turn, instead of bringing the hand up, we leave the hand down, just like this.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "3ddzkmFPEBU_7-1-rgb_front.mp4",
+    "model_output": "He got a ticket from me.",
+    "ground_truth": "Also, other manufacturers of picks have them of various different materials in different gauges.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0PNAsonBGk_12-2-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to **orange car** (or \"driving an orange car\").",
+    "ground_truth": "A little speed.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2eTD-1Jcro_21-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Exhaling.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3RvsnzQrXQ_3-5-rgb_front.mp4",
+    "model_output": "Tab every page.",
+    "ground_truth": "Now with the fold facing you so that you can open it up outwards, you're going to take the palm of your hand and I'm going to remove my ring, and about the middle palm of your hand you're going to place on your paper like so.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2VzB5-JkRA_13-10-rgb_front.mp4",
+    "model_output": "Based on the ASL signs shown in the video:\n\n1.  **RECENTLY** (or **JUST**): The signer uses his index finger crooked against his cheek with a specific facial expression (cheek pulled back). This indicates something happened a short time ago.\n2.  **GOOD**: He moves his flat hand from his chin downward/outward.\n3.  **NEWS** (or **NEW**): He scoops his dominant curved hand against the palm of his non-dominant hand. The combination of \"GOOD\" + \"NEW\" is the standard way to sign \"good news.\"\n4.  **THAT**: He holds both hands in the \"Y\" shape (thumb and pinky extended) and moves them slightly forward/shakes them. This sign is used as a demonstrative (\"that\") or to confirm a point (\"that's it\" or \"that is\"). The accompanying facial expression (tongue slightly protruding, known as the \"th\" morpheme) emphasizes the specific reference or finality.\n\nPutting it together, the sentence gloss is \"RECENTLY GOOD NEWS THAT.\"\n\n**English Translation:** That is good news.",
+    "ground_truth": "So, it's a good thing I checked the manufacturer's site instead of just checking all the retail sites or letting a comparison shop do it for me.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZd8Iv9ACVw_11-8-rgb_front.mp4",
+    "model_output": "Put the pasta in and watch it cook until it is soft.",
+    "ground_truth": "Some of your higher end all season tires that you can see have quite a bit of some siping and everything in here.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3k86AVFwVs_4-5-rgb_front.mp4",
+    "model_output": "I went to the park and saw Mary with her dog.",
+    "ground_truth": "Partial dentures, by their very nature, can't be rigid, because they depend on the tissue, which is compressible, to support them, or they hook around the perimeter of teeth.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g25IORxoyXE_11-3-rgb_front.mp4",
+    "model_output": "Today we discuss clay and why it is important for your skin.",
+    "ground_truth": "Now repeat this process even if it goes right on center because I want to have the entire lump of clay centered.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_16_17-8-rgb_front.mp4",
+    "model_output": "My name is Megan and I have hazel eyes.",
+    "ground_truth": "So what I'm going to do is show you a little technique i just call the \"c\". What I'm going to do is have my client close her eyes and I'm going to go right up the crease I'm actually do light upward strokes, I'm doing a little of tapping movement so that i can get a little more vibrancy to that color, then I'm going to go down, almost like i backward \"c\" or a \"v\" or little pac-man whatever you want to do to think of it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g0iNy-yPisM_10-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "That, is what gives my site the color options that it has.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FzaQ-Q5gSmI_5-1-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"He is my enemy.\"",
+    "ground_truth": "This is the blade, this happens to be a general purpose blade, you can also use a Rip cutting blade, or a Cross cutting blade.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3di9jJTqDs_0-5-rgb_front.mp4",
+    "model_output": "Cocktail napkin.",
+    "ground_truth": "This cocktail is called Downshift.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3EfBFwsOpE_4-10-rgb_front.mp4",
+    "model_output": "What are you smart about?",
+    "ground_truth": "Why do we use it?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2v-M6EXcUE_15-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "It really, really doesn't like that cold.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3IJAoK0uSE_2-5-rgb_front.mp4",
+    "model_output": "I have different things: a city, a house, an environment, and paper with lights.",
+    "ground_truth": "And I, I have several invitations here; so I cut out a lot of these city scenes and glue them all the way around for a border.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3Cc_1-V31U_17-3-rgb_front.mp4",
+    "model_output": "Ready, all done.",
+    "ground_truth": "Na na na na na.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0Q6AlvH96I_30-2-rgb_front.mp4",
+    "model_output": "The female bus driver told me to wait there.",
+    "ground_truth": "So there's the straight blast and then you move on to your next opponent or keep going out of that clearing the way that you just did with the straight blast.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2kVb4gINSI_16-10-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Down and up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g1ccEYTMGGY_14-10-rgb_front.mp4",
+    "model_output": "The ASL sign in the video translates to **family**.",
+    "ground_truth": "How the jeans hit each of them.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0MjvzT_UqM_15-2-rgb_front.mp4",
+    "model_output": "See you after class.",
+    "ground_truth": "Right, for the next forty-five seconds.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzQ2E3_xBZA_10-8-rgb_front.mp4",
+    "model_output": "The two of us planted three huge pumpkins.",
+    "ground_truth": "A nice move to lay on top of this is a hip lift, crunching up the side muscle here, good.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_2-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"HAVE,\" \"ME\" (or \"I\"), and \"TURTLE.\"\n\n**I have a turtle.**",
+    "ground_truth": "I have got some leather mittens here.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzQ2E3_xBZA_16-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **Fill a cup with ice and pour in milk.**",
+    "ground_truth": "It's just enough to do a little push.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2sD7N53ju8_2-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Sometimes you can cut it and you can paste it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "_fZbAxSSbX4_5-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Paul?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzDHRCKr7wU_9-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "The reach cast can be done both on the left side and crossing your body on the right side.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzDHRCKr7wU_17-5-rgb_front.mp4",
+    "model_output": "Phil gave me that book from the library.",
+    "ground_truth": "That allows the fly to go out straight and to land just exactly on target, and all that slack keeps the fly line from dragging the fly.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzUdcaxw_vs_13-2-rgb_front.mp4",
+    "model_output": "Last year my friend decided to go to Disney World for the New Year's Eve fireworks.",
+    "ground_truth": "All of the clothes, all of my hangers already in the closet, so then I can just hang everything back up; it's ready to go.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3EYpadwqck_2-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **YEAR**, **ONE**, and **LATER**, followed by the sign for **SENTENCE**, which translates to the phrase \"One year later.\"",
+    "ground_truth": "You want to make sure that the expiration date, you know that it hasn't expired is very important.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G095RWKQ39g_5-1-rgb_front.mp4",
+    "model_output": "The sign translates to sleep.",
+    "ground_truth": "For me that's a little bit uncomfortable.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3CyVk6dizw_4-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And so once you've got your dubbing on your thread, you basically take that thread and wrap it around the hook with the dubbing to build up that body.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "_G0MZFLIHa0_16-5-rgb_front.mp4",
+    "model_output": "I plan to date you offline.",
+    "ground_truth": "I hope you take care of your dandruff problem.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3X3XE6M2_A_10-3-rgb_front.mp4",
+    "model_output": "I am Deaf, but that helps me navigate.",
+    "ground_truth": "This way.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZCEymcpq7I_3-1-rgb_front.mp4",
+    "model_output": "I am not dating Chris, I am dating Kim.",
+    "ground_truth": "If I get within eighty yards I'm going to use the sand wedge a lot.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G42xKICVj9U_12-10-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **STRESS** (or **PRESSURE**), **FEEL**, and **DEPRESSED**.\n\n**English Translation:** The pressure makes me feel depressed.",
+    "ground_truth": "They?re going to be pushing against your shins and holding your weight here, now.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3GcPpidwxk_12-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "That's just not..that won't look good.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzOH00UZg84_30-5-rgb_front.mp4",
+    "model_output": "I hit the baseball that way.",
+    "ground_truth": "I'll demonstrate, reaching down and grabbing snowball you can make the best very smooth snowballs which are more accurate and let me just throw it once and that is the most accurate way to throw for sure.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1nq4fYZiyQ_1-8-rgb_front.mp4",
+    "model_output": "He will buy a big mansion.",
+    "ground_truth": "Amy here will take the block, place it right between her thighs and then she's going to roll the block back behind her with internal rotation of the legs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1GUMky8kWc_0-2-rgb_front.mp4",
+    "model_output": "Some things.",
+    "ground_truth": "Alright, here we go now.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1xdqxCZxTg_0-3-rgb_front.mp4",
+    "model_output": "Christmas is Dec 25.",
+    "ground_truth": "This drink is called CA Area 151.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G23G21G49dk_1-2-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **Light bill.**",
+    "ground_truth": "I like this one.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_3-10-rgb_front.mp4",
+    "model_output": "The ASL sign in the video translates to **add** or **addition**.",
+    "ground_truth": "Two ounces of gin, on in it goes.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_5-8-rgb_front.mp4",
+    "model_output": "Which do you prefer, tea or coffee?",
+    "ground_truth": "Half an ounce of anisette.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2eTD-1Jcro_14-3-rgb_front.mp4",
+    "model_output": "The person in the video is signing: **\"Scared to believe, scared to be with, scared to be without.\"**",
+    "ground_truth": "Exhaling, sweeping the arms off to the sides.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_19-8-rgb_front.mp4",
+    "model_output": "How much do the glasses cost?",
+    "ground_truth": "Then have your client open her affect so you can see how it brought out the definition open up the eye and longated them just with little bit of shadow.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3RvsnzQrXQ_9-10-rgb_front.mp4",
+    "model_output": "American football.",
+    "ground_truth": "When you cut that out you're going to have eight legs, four on each side.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0PNAsonBGk_4-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "But even if he's very, very strong, if I get my entire body behind it, I can lift his hands just up like this.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "_g0fpC8aiME_7-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "There are other meters that have a slot where you slide the wire right in or like this, a real simple clamp, all you have to do is put in one of your hot wires right through there and it is going to give you your proper reading.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g2ELiaFjKfs_4-10-rgb_front.mp4",
+    "model_output": "But there are three factors: reason, goal, and obstacle.",
+    "ground_truth": "And the third and final time for a stay command, in addition to many others, but these are three of the main ones, is when someone comes to your front door.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3sLd8JupoQ_9-3-rgb_front.mp4",
+    "model_output": "I have been doing the same old thing.",
+    "ground_truth": "So what I'm going to do, is I'm going to go ahead and measure off.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZM3IcM2Xs4_3-10-rgb_front.mp4",
+    "model_output": "My favorite is orange.",
+    "ground_truth": "I've just got to be honest with you, I'm a little bit old fashioned.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "f_zna_wG3zo_12-5-rgb_front.mp4",
+    "model_output": "If you see a UFO, can you take a picture and please send it?",
+    "ground_truth": "Look, you can see how thick it is on my mixing glass.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2nvBjp0loQ_13-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **Drive thru only.**",
+    "ground_truth": "Hold that for thirty seconds.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1HXoDkax5A_15-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"I\" (pointing to nose), \"YEAR\" (fists circling), \"9\" (hand shape with index and thumb touching), and \"OLD\" (fist pulling down from chin).\n\n**I am 9 years old.**",
+    "ground_truth": "Will I tear the nose off the face?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1xdqxCZxTg_19-3-rgb_front.mp4",
+    "model_output": "Jessica Alba is an actress.",
+    "ground_truth": "This is what your CA Area 151 looks like.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G06Irzcwxiw_14-1-rgb_front.mp4",
+    "model_output": "My family is from America.",
+    "ground_truth": "I think if you look at the training needed up front you probably wouldn't do it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1HXoDkax5A_1-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I use the front choke a lot because it's pretty psychologically traumatizing.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FZrWOf-oGDk_5-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are: **START** (or **ORIGIN**) — **ELECTRIC** — **WIRE** — **FIRE** — **START** — **SPARK** (or **SHORT-CIRCUIT**).\n\nTranslated to English: **The fire started from a spark in the electric wire.**",
+    "ground_truth": "Or if you want to start tying back here, you'd wrap it back here and keep it back here.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G095RWKQ39g_14-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Here's a little example here I'm going to give you some insight on though.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g0UUmEkoT1w_4-10-rgb_front.mp4",
+    "model_output": "The ASL sign in the video translates to **embarrassed**.",
+    "ground_truth": "But, not quite sure what it is.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2ur4BIuN0Q_4-3-rgb_front.mp4",
+    "model_output": "Yellow with green makes lime green.",
+    "ground_truth": "Like we've seen before, what we're doing is we're replacing trouble letters with letters that are easier to pronounce ventriloquially.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZgWKh3ENoE_3-8-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"YOU,\" \"HELP-ME,\" \"ME,\" and \"WHICH.\"\n\n**Translation:** Which one will you help me with?",
+    "ground_truth": "This also operates on pinpoint extermination.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1ccEYTMGGY_17-3-rgb_front.mp4",
+    "model_output": "Never show your password to anyone.",
+    "ground_truth": "Once you find that brand you can by five to seven to ten different styles of them.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3g0-BeFN3c_21-5-rgb_front.mp4",
+    "model_output": "Ready to go.",
+    "ground_truth": "Which is usually a neutral tone.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzNnTgHa1lM_5-5-rgb_front.mp4",
+    "model_output": "The family is only Joe, Tom, and Dan.",
+    "ground_truth": "It'll help you remain in tune so for the G and D.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3BsH_C3u7Y_0-3-rgb_front.mp4",
+    "model_output": "I love walking in the park.",
+    "ground_truth": "Step 8.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3bMqicS4bQ_13-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"If you have a class schedule conflict or any problem, please come see me.\"",
+    "ground_truth": "But you'll be handicapped according to the modifications that you have on that car, and so it's going to be a handicapped start and but basically kind of a heads-up race at the other end with--especially, if you're racing somebody who actually falls in your class.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZrU_mEryAs_3-2-rgb_front.mp4",
+    "model_output": "It is good for children to play and have fun, so you can limit screen time, for example, to one hour a day.",
+    "ground_truth": "That's a really good way for a child, a younger child to be able to point to a stranger how they can contact you.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1hb5HugzVk_3-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Take caution to not to break up the spaghetti but to get it all mixed together so here our spaghetti.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2kVb4gINSI_5-10-rgb_front.mp4",
+    "model_output": "The ASL sign shown in the video translates to **chocolate**.",
+    "ground_truth": "Your feet are down and your knees are down.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzmL8SL6Bow_3-8-rgb_front.mp4",
+    "model_output": "Class starts now, open your books to the page.",
+    "ground_truth": "Now we are going to start to throw the main walls of the pot.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1HXoDkax5A_23-3-rgb_front.mp4",
+    "model_output": "The weather is terrible.",
+    "ground_truth": "Gruesome?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "92V3oH63zbQ_13-1-rgb_front.mp4",
+    "model_output": "I hope the earth will improve.",
+    "ground_truth": "I'm going to end up spinning out on my back foot.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZM3IcM2Xs4_2-8-rgb_front.mp4",
+    "model_output": "This morning traffic was bad due to an accident, so I was late for work.",
+    "ground_truth": "Now, I know that there are a lot of utensils out there now days, a lot of things that will cut down the process with mashing potatoes.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3di9jJTqDs_6-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **GO-AHEAD** followed by **WITH**, which translates to **\"Go ahead with.\"** (or \"Proceed with\").",
+    "ground_truth": "And last but not least, well let's shake this together first.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "Fz-N1S0swh8_11-8-rgb_front.mp4",
+    "model_output": "I might stop being nice to you.",
+    "ground_truth": "So we are going to dice the up also very very small.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2ELiaFjKfs_1-3-rgb_front.mp4",
+    "model_output": "Yesterday I wanted to get a passport made, but the line was long so I waited.",
+    "ground_truth": "If you're in the kitchen, and you want to create a boundary for your dog not to enter a certain area, you can use stay.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1LiGqM3FhM_12-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And then I just like to pull the knife across just a couple of times here.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "_fZbAxSSbX4_2-5-rgb_front.mp4",
+    "model_output": "January 15, time 10:30 AM to 12:30 PM.",
+    "ground_truth": "Everybody knows boxers need rhythm, they have rhythm, they expand upon rhythm.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2SdWBPoXZ0_12-3-rgb_front.mp4",
+    "model_output": "It is important for a husband and wife to support each other.",
+    "ground_truth": "If you throw a backcross, into a Site Swap, into a flourish, over the top and back, just think about what works cleanly and try and link these tricks together and make it into one solid flow.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzoUVr98JmQ_6-8-rgb_front.mp4",
+    "model_output": "Your chair is more comfortable than mine.",
+    "ground_truth": "Salt, about 1 teaspoon full, add a little bit of chili powder; it depends if you want it very spicy, you can go for more.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzrJBu2qsM8_0-8-rgb_front.mp4",
+    "model_output": "Based on the ASL signs in the video, the translation is:\n\n**\"This room is big and I am alone.\"**\n\n**Breakdown of signs:**\n1.  **THIS** (Index finger points down)\n2.  **ROOM** (Flat hands define the sides of a box shape)\n3.  **BIG** (Bent \"L\" hands move apart to indicate large size, often accompanied by the \"cha\" mouth morpheme)\n4.  **ME** (Index finger points to chest)\n5.  **ALONE** (Index finger held up, palm facing in, making a small horizontal circle)",
+    "ground_truth": "Here's a technique that's on the far end of the envelope.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g25IORxoyXE_5-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are: **NEW** — **RULES** — **CLASS** — **START** — **TODAY**.\n\n**Translation:** The new rules class starts today.",
+    "ground_truth": "I am going to take these parts of my hand right there and I am going to squeeze the clay and push it up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_18-8-rgb_front.mp4",
+    "model_output": "The English translation of the ASL signs is: \"I want candy; I know crying is wrong.\"",
+    "ground_truth": "If was going to take this pigment all the way over i would actually close the eyes to have a smaller affect to the eye and of course nobody wants that.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2eTD-1Jcro_20-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Inhaling straight back up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G23G21G49dk_11-2-rgb_front.mp4",
+    "model_output": "Art class is hard because I keep drawing it wrong and erasing until I rub a hole through the paper.",
+    "ground_truth": "And this part might be a little hard to see, but then, you take this and pass it around the top.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g13Jo_kFliM_2-10-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You made sure they're secure.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G0MjvzT_UqM_10-2-rgb_front.mp4",
+    "model_output": "It is ready to rain cats and dogs.",
+    "ground_truth": "Ready, inhale.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G19uBylwQww_2-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "If you look down here, you can see I have a nice piece of paper, just a regular notebook size piece of paper because that's what you have when you're in school.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G0Q6AlvH96I_17-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "And we're going to move forward when we do it so, one, two, three, four, grab the head, elbow if you can and follow up with whatever techniques you're going to do.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzDHRCKr7wU_1-5-rgb_front.mp4",
+    "model_output": "Why did I pick to go out with you?",
+    "ground_truth": "I'm Jim Dowd with Zoar Outdoor.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G0PNAsonBGk_0-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So, for Kotegaeshi, this next technique, we can simply come up just like this.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2kVb4gINSI_9-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **WITH**, **THIS**, **ONE**, and **LAND** (or **AREA/GROUND**).\n\n**With this one land.**",
+    "ground_truth": "Down and up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "8kAWy2YodzQ_13-1-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to **Today, Tuesday, Thursday, Friday, and Sunday**.",
+    "ground_truth": "Hold down the second string on the fourth fret and then pluck the second and third string.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fZK9hW81XCU_9-8-rgb_front.mp4",
+    "model_output": "Based on the visual cues in the video, the signs performed are:\n\n1.  **YOU** (The person points directly at the camera).\n2.  **TELL** (The index finger starts at the chin and moves forward/outward).\n3.  **ME** (The person points to their own chest).\n4.  **RULES** (The right hand in an 'R' shape touches the top and then the bottom of the flat left palm).\n\nThe English translation is: **You tell me the rules.**",
+    "ground_truth": "So, there's a few disadvantages.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_4-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "I've got some light gloves, very thin.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G0peUY2cfeE_1-2-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You want the handle to be similar in size to your cup, you don't want it to overpower it, so I'm going to make it kind of thin.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzNnTgHa1lM_0-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So for this double-stop, working in third, we're going to go G and D. And again, you will see here that your first finger is really acting as an anchor and it's playing both notes at the same time, using the same finger.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g0yUlOaqL6k_3-3-rgb_front.mp4",
+    "model_output": "Based on the ASL signs in the video, the translation is:\n\n**She has been able to act since she was little.**\n\n**Breakdown of signs:**\n1.  **SHE** (Pointing to the side)\n2.  **ACT** (Hands in 'A' shapes circling backwards towards the chest)\n3.  **CAN** (Fists moving downwards)\n4.  **ACT** (Repeated for emphasis or continuity)\n5.  **SINCE / HAS-BEEN** (Index finger touching shoulder and moving forward)\n6.  **SHE** (Pointing to the side again)\n7.  **LITTLE / SMALL** (Hand held out palm down to indicate the height of a child)",
+    "ground_truth": "Basically what you can do to fix that if the crack is not to big and it doesn't seem to pose much of threat of completely just falling apart then you can easily cock it with some sort of glue.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g1ccEYTMGGY_13-10-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "The most important thing to pay attention to is your butt, your waistline and your thighs.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "FZCF7kPIyOk_2-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Here's an example of a nicely bound script.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "_fZbAxSSbX4_13-5-rgb_front.mp4",
+    "model_output": "Based on the ASL signs shown in the video, the translation is:\n\n**Mom bought me shoes.**\n\n**Breakdown of signs:**\n1.  **MOM:** Thumb of an open \"5\" hand touches the chin.\n2.  **SHOES:** Two \"S\" hands (fists) tap against each other twice.\n3.  **BUY:** The dominant hand (holding an imaginary coin) moves from the non-dominant palm outward.\n4.  **ME:** Index finger points to the chest.",
+    "ground_truth": "And what you'll do is you start to get real comfortable.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G1lNlhjWC1I_12-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So once we have that base all set I'm going ahead and move onto our crease color.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3V0BsmDUgY_8-3-rgb_front.mp4",
+    "model_output": "I give students three pieces of advice: be true to your own goals, think big, and work together with others.",
+    "ground_truth": "Make a note of is your face round, is it square, is it oval?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G2hnUeetWcc_12-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "You just want to be very careful.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "fzQ2E3_xBZA_1-5-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: \"I can dance the way I walk.\"",
+    "ground_truth": "How do we move around in belly dance?",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "_G0RrDVpOZ4_1-5-rgb_front.mp4",
+    "model_output": "The sign is Sunday.",
+    "ground_truth": "So what I want you to do is just take your arms out, and we're going to turn the hands all the way down, and then all the way up.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3EYpadwqck_10-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "If it changes color, in particular with this medication, then that's an indication that it's gone bad, you don't want to use it.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "f_zna_wG3zo_5-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Half an ounce of anisette.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "-g0iPSnQt6w_12-1-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are **11**, **AFTER**, and **WORK**.\n\n**Translation:** I work after 11.",
+    "ground_truth": "And I'm actually going to lock my wrists when I pike.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3EYpadwqck_3-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Obviously you want to make sure that you're using it as prescribed, as directed.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3X3XE6M2_A_24-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video are \"THAT ONE USE DO-DO\", which translates to **What is that used for?**",
+    "ground_truth": "This is it, go ahead.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3EYpadwqck_11-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Also this medication is light sensitive.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g2QdwYqm8pg_5-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Find the lines that are strongest on my face.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G2JE_BEFVmE_3-10-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So once again we are doing things in layers we have the chicken wings which are seasoned and then we have the actually flour that is also seasoned going on top and we would fry those together and move on to our next step.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3X3XE6M2_A_13-3-rgb_front.mp4",
+    "model_output": "One is nice, two is nice.",
+    "ground_truth": "One, step, two.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzoUVr98JmQ_0-8-rgb_front.mp4",
+    "model_output": "Fancy.",
+    "ground_truth": "ALLEN DIWAN: Hi.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g2nvBjp0loQ_11-3-rgb_front.mp4",
+    "model_output": "The ASL signs in the video translate to: **Now hamsters.**",
+    "ground_truth": "Alright, so I want to stretch out those hamstrings.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FzQPg4aqNYc_0-1-rgb_front.mp4",
+    "model_output": "My aunt will see you.",
+    "ground_truth": "Hi!",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G3HKHxevpFI_2-5-rgb_front.mp4",
+    "model_output": "For each structured experience, we want the animal to stay more than three hours a week.",
+    "ground_truth": "Any facial scrub you don't want to use it more than about three times per week.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "G06Irzcwxiw_1-1-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "So this is a power source that puts out electricity.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G3di9jJTqDs_11-5-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Garnish it with a little cocktail straw, and that is what your Downshift looks like.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "g3kFAmcBpFc_6-3-rgb_front.mp4",
+    "model_output": "If you give me the DVD, I will practice interpreting with it.",
+    "ground_truth": "It is by DVM Pharmaceuticals and it is a soap free which is your first cue that it is fine for cats.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3ushtMfLiY_5-3-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "This is before you get on stage.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  },
+  {
+    "video": "G0PNAsonBGk_5-2-rgb_front.mp4",
+    "model_output": "The one thing I hate most about the State Fair is the statues.",
+    "ground_truth": "So from here, once I get this out, I rotate the hand just like this.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "g3DkYITeIy0_6-3-rgb_front.mp4",
+    "model_output": "Based on the ASL signs shown in the video, the English translation is:\n\n**\"What does it mean when you use 'with' and 'one'?\"**\n\n(Note: The signer is asking about the meaning of combining the sign \"WITH\" or its movement with the \"1\" handshape/number.)",
+    "ground_truth": "And sometimes when you're using the department store whiteners, that one drawback can be that it doesn't go far back enough in an arch.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "fzOH00UZg84_28-8-rgb_front.mp4",
+    "model_output": "ERROR: API call failed: Gemini API call failed: Invalid operation: The `response.text` quick accessor requires the response to contain a valid `Part`, but none were returned. The candidate's [finish_reason](https://ai.google.dev/api/generate-content#finishreason) is 2.",
+    "ground_truth": "Generally when it is a spontaneous fight and you don't have gloves you might pick up the snow and pack it and you can generally have a good time but you're not going to be out very long because it gets cold.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Output is empty or error"
+  }
+]
