@@ -18,7 +18,7 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /code/doc_sign_search
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"2"}  # Default: use GPU 0 and 1
+GPU_IDS=${GPU_IDS:-"3"}  # Default: use GPU 0 and 1
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
@@ -26,10 +26,11 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # Set CHECKPOINT_PATH to empty string or unset to use base model only
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
 CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"
-MODEL_BASE="${MODEL_BASE:-Qwen/Qwen3-VL-2B-Instruct}"
-VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/how2sign_test_videos_224x224/}"
+MODEL_BASE="${MODEL_BASE:-Qwen/Qwen3-VL-8B-Instruct}"
+VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/openasl_test_videos}"
 # QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_110_samples.json}"
-QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/how2sign/video/test_raw_videos/segmented_test_videos_filtered_550_samples.json}"
+QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/how2sign/video/test_raw_videos/test_openasl_internvl_converted.json}"
+# QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
 
 OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/qwen2vl_eval/}"
 

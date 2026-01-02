@@ -23,8 +23,8 @@ qwen2vl_path = os.path.join(project_root, 'qwenvl/Qwen2-VL-Finetune/src')
 if os.path.exists(qwen2vl_path):
     sys.path.insert(0, qwen2vl_path)
 # Fallback to hardcoded paths if auto-detection fails
-if '/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src' not in sys.path:
-    sys.path.append('/home/mh2803/projects/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src')
+if '/qwen2vl_evaluation_how2sign_claude_local/qwenvl/Qwen2-VL-Finetune/src' not in sys.path:
+    sys.path.append('/qwen2vl_evaluation_how2sign_claude_local/qwenvl/Qwen2-VL-Finetune/src')
 
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoTokenizer, AutoProcessor
 from peft import PeftModel
@@ -403,8 +403,9 @@ def eval_model(args):
     
     # Speed optimization: Pre-import and prepare common objects
     from qwen_vl_utils import process_vision_info
-    fq_text = "Translate the American Sign Language in this video to English."
-    
+    # fq_text = "Translate the American Sign Language in this video to English. "
+    fq_text = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
+
     # Process samples
     for idx, source in enumerate(tqdm(valid_samples, desc="Evaluating"), 1):
         try:
@@ -550,7 +551,7 @@ def eval_model(args):
             if os.path.exists(eval_path):
                 sys.path.append(eval_path)
             else:
-                sys.path.append('/home/mh2803/projects/sign_language_llm/evaluation')
+                sys.path.append('/qwen2vl_evaluation_how2sign_claude_local/evaluation')
             from ssvp_evaluation import comprehensive_evaluation, print_evaluation_results
             
             eval_results = comprehensive_evaluation(references, predictions)

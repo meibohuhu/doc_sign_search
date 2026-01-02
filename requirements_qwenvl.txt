@@ -1,8 +1,10 @@
 # Core ML/DL libraries
 # NOTE: PyTorch packages with CUDA support require PyTorch's index
 # If you need to install PyTorch (e.g., for a new environment):
-#   pip install torch==2.5.1+cu121 torchvision==0.20.1+cu121 torchaudio==2.5.1+cu121 --index-url https://download.pytorch.org/whl/cu121
 # Current qwenvl environment has: torch==2.5.1+cu121, torchvision==0.20.1+cu121, torchaudio==2.5.1+cu121
+
+### pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu121
+
 transformers @ git+https://github.com/huggingface/transformers@f22cb1e8689905091acb07e238b670aadde1e4ee
 
 # Training and optimization

@@ -17,14 +17,14 @@ cd /code/doc_sign_search
 
 # Configuration
 # GPU configuration - Specify which GPU to use here
-GPU_IDS=${GPU_IDS:-"1"}  # Change this to "0", "1", etc. to use different physical GPU
+GPU_IDS=${GPU_IDS:-"2"}  # Change this to "0", "1", etc. to use different physical GPU
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Set CHECKPOINT_PATH to empty string or unset to use base model only
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
-# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2_5_vl_how2sign_fbcf_1/checkpoint-4800}"  # Empty by default - will use base model
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_qwen2_5_7b/checkpoint-2550}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-}"  # Empty by default - will use base model
+# CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_qwen2_5_7b/checkpoint-2550}"
 MODEL_BASE="${MODEL_BASE:-Qwen/Qwen2.5-VL-7B-Instruct}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/how2sign_test_videos_224x224/}"
 # QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_110_samples.json}"
@@ -33,10 +33,10 @@ QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/how2sign/video/test_raw_vi
 OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/qwen2vl_eval/}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-557}  # Set to a number to limit samples, empty for full evaluation
+MAX_SAMPLES=${MAX_SAMPLES:-5}  # Set to a number to limit samples, empty for full evaluation
 MIN_PIXELS=${MIN_PIXELS:-$((224*224))}  # Match training: 224x224
 MAX_PIXELS=${MAX_PIXELS:-$((224*224))}  # Match training: 224x224
-VIDEO_FPS=${VIDEO_FPS:-12}  # Match training FPS
+VIDEO_FPS=${VIDEO_FPS:-16}  # Match training FPS
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
 
 echo "🎬 Qwen2.5-VL-3B How2Sign Evaluation on 2×A6000"
