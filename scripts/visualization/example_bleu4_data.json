@@ -1,0 +1,11 @@
+{
+  "models": [
+    {"model_size": "QwenVL-3B", "bleu4": 3.12},
+    {"model_size": "QwenVL-7B", "bleu4": 4.23},
+    {"model_size": "InternVL-1B", "bleu4": 7.74},
+    {"model_size": "InternVL-2B", "bleu4": 7.72},
+    {"model_size": "InternVL-4B", "bleu4": 7.12},
+    {"model_size": "InternVL-8B", "bleu4": 8.10}
+  ]
+}
+

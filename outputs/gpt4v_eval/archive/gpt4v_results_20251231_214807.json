@@ -1,0 +1,24 @@
+[
+  {
+    "video": "g3kFAmcBpFc_13-3-rgb_front.mp4",
+    "model_output": "Kermit the Frog says that it's not easy being green.",
+    "ground_truth": "Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  },
+  {
+    "video": "FZLxEwsoc1c_8-8-rgb_front.mp4",
+    "model_output": "That acting might be fake.",
+    "ground_truth": "That's basically the explanation of a nap.",
+    "statements": {
+      "statement1": "",
+      "statement2": "",
+      "statement3": ""
+    },
+    "parse_error": "Could not extract statements from output"
+  }
+]
