@@ -29,7 +29,14 @@ Usage:
         --out-dir /local1/mhu/sign_language_llm/internlm2 \
         --save-attention \
         --image-size 224 \
-        --num-segments 6
+        --num-segments 10
+    python internlm2/internvl2_evaluation_attention.py \
+    --model-path OpenGVLab/InternVL2_5-2B \
+    --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/fZM3IcM2Xs4_2-5-rgb_front.mp4 \
+    --out-dir /local1/mhu/sign_language_llm/internlm2 \
+    --save-attention \
+    --image-size 224 \
+    --num-segments 4
 
     python internlm2/internvl2_evaluation_attention.py \
         --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1203/checkpoint-2550 \
@@ -50,15 +57,10 @@ Usage:
         --image-size 224 \
         --num-segments 6
 
-        
-    python internlm2/internvl2_evaluation_attention.py \
-        --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_2B_elementgate_1218_121620/checkpoint-2548 \
-        --base-model-name OpenGVLab/InternVL2_5-2B \
-        --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/_fZbAxSSbX4_24-5-rgb_front.mp4\
-        --out-dir /local1/mhu/sign_language_llm/internlm2 \
-        --save-attention \
-        --image-size 224 \
-        --num-segments 6
+python internlm2/internvl2_evaluation_attention.py     --model-path /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_how2sign_16fps_1203/checkpoint-2550     --base-model-name OpenGVLab/InternVL2_5-2B     --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/fZM3IcM2Xs4_2-5-rgb_front.mp4     --out-dir /local1/mhu/sign_language_llm/internlm2     --save-attention     --image-size 22^C    
+--num-segments 4
+
+python internlm2/internvl2_evaluation_attention.py  --model-path OpenGVLab/InternVL2_5-2B     --video-path /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/fZM3IcM2Xs4_2-5-rgb_front.mp4     --out-dir /local1/mhu/sign_language_llm/internlm2     --save-attention     --image-size 22    --num-segments 4
 """
 
 import os
@@ -752,25 +754,57 @@ def extract_attention_with_hook(model, tokenizer, pixel_values, num_patches_list
         handle.remove()
     
     # Combine visual and text embeddings
+    if intercepted_text_embeds[0] is None:
+        raise ValueError("Failed to capture text embeddings - hook did not fire")
+    
+    if len(intercepted_visual_embeds) == 0:
+        raise ValueError("Failed to capture visual embeddings - projector hook did not fire. "
+                        "This might happen if the model.chat() call failed before reaching the projector.")
+    
     text_embeds = intercepted_text_embeds[0]
     visual_embeds = intercepted_visual_embeds[-1]
     
-    if text_embeds is None or visual_embeds is None:
-        raise ValueError("Failed to capture text or visual embeddings")
+    if visual_embeds is None:
+        raise ValueError("Visual embeddings is None")
     
     print(f"   📐 Visual embeds shape: {visual_embeds.shape}")
     print(f"   📐 Text embeds shape: {text_embeds.shape}")
+    
+    # Check for invalid shapes (e.g., zero dimensions)
+    if any(dim == 0 for dim in visual_embeds.shape):
+        raise ValueError(f"Visual embeddings has zero dimension in shape {visual_embeds.shape}. "
+                        f"This might be due to incorrect image_size (should be 224 for InternVL2_5-2B) "
+                        f"or num_patches_list configuration. Check that image_size matches the model's expected input size.")
     
     # Reshape visual_embeds if needed and ALWAYS update visual_token_index based on actual shape
     batch_size = text_embeds.shape[0]
     visual_token_start = visual_token_index[0].item()  # Get the start position
     
     # Determine total_visual_tokens from actual visual_embeds shape
-    if len(visual_embeds.shape) == 3:
+    if len(visual_embeds.shape) == 4:
+        # visual_embeds shape: [num_frames, batch, patches_per_frame, hidden_dim] or similar
+        # Check for zero dimensions
+        if visual_embeds.shape[2] == 0:
+            raise ValueError(f"Visual embeddings has zero patches_per_frame in shape {visual_embeds.shape}. "
+                           f"This might be due to incorrect image_size (should be 224 for InternVL2_5-2B, not 22). "
+                           f"Please check your --image-size parameter. Also verify num_patches_list configuration.")
+        
+        # Reshape: [num_frames, batch, patches_per_frame, hidden_dim] -> [batch, num_frames * patches_per_frame, hidden_dim]
+        num_frames, batch_dim, patches_per_frame, hidden_dim = visual_embeds.shape
+        total_visual_tokens = num_frames * patches_per_frame
+        # Flatten frames and patches: [num_frames, batch, patches_per_frame, hidden_dim] -> [batch, num_frames * patches_per_frame, hidden_dim]
+        visual_embeds = visual_embeds.permute(1, 0, 2, 3).contiguous()  # [batch, num_frames, patches_per_frame, hidden_dim]
+        visual_embeds = visual_embeds.view(batch_dim, total_visual_tokens, hidden_dim)
+        print(f"   📐 Reshaped visual_embeds from 4D {visual_embeds.shape[:4]}: {visual_embeds.shape}")
+    elif len(visual_embeds.shape) == 3:
         # visual_embeds shape: [num_frames, patches_per_frame, hidden_dim] or [batch, seq_len, hidden_dim]
         if visual_embeds.shape[0] != batch_size:
             # Reshape from [num_frames, patches_per_frame, hidden_dim] to [batch, total_visual_tokens, hidden_dim]
             num_frames, patches_per_frame, hidden_dim = visual_embeds.shape
+            if patches_per_frame == 0:
+                raise ValueError(f"Visual embeddings has zero patches_per_frame in shape {visual_embeds.shape}. "
+                               f"This might be due to incorrect image_size (should be 224 for InternVL2_5-2B, not 22). "
+                               f"Please check your --image-size parameter. Also verify num_patches_list configuration.")
             total_visual_tokens = num_frames * patches_per_frame
             visual_embeds = visual_embeds.view(1, total_visual_tokens, hidden_dim)
             print(f"   📐 Reshaped visual_embeds from 3D: {visual_embeds.shape}")
@@ -1026,6 +1060,119 @@ def process_video(model, tokenizer, video_path, question, args, output_dir, vide
                     )
             
             cap.release()
+    
+    # Generate per-layer per-frame attention heatmaps (overlay on original frame)
+    # This is done separately to ensure it works even if aggregated_attention is None
+    if per_layer_attention is not None and len(per_layer_attention) > 0 and args.save_attention:
+        print(f"   🎨 Generating per-layer per-frame attention heatmaps (overlay style)...")
+        
+        # Calculate patches_per_frame from per_layer_attention if not already calculated
+        if aggregated_attention is None or 'patches_per_frame' not in locals():
+            # Calculate from per_layer_attention
+            first_layer_attn = per_layer_attention[0]
+            if isinstance(first_layer_attn, torch.Tensor):
+                first_layer_attn = first_layer_attn.float().cpu().numpy()
+            if len(first_layer_attn.shape) > 1:
+                first_layer_attn = first_layer_attn.flatten()
+            total_visual_tokens = len(first_layer_attn)
+            num_frames = len(num_patches_list)
+            patches_per_frame = total_visual_tokens // num_frames if num_frames > 0 else total_visual_tokens
+            num_patches_h = num_patches_w = int(np.sqrt(patches_per_frame))
+            print(f"   📐 Calculated from per_layer_attention: patches_per_frame={patches_per_frame}, grid={num_patches_h}x{num_patches_w}")
+        
+        # Create directory for per-layer per-frame visualizations
+        per_layer_frame_dir = os.path.join(output_dir, 'per_layer_frame_attention')
+        os.makedirs(per_layer_frame_dir, exist_ok=True)
+        
+        # Reopen video to get frames
+        cap = cv2.VideoCapture(video_path)
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        
+        # Use frame_indices from load_video if not specified by user
+        frames_to_visualize = args.frame_indices if args.frame_indices else frame_indices.tolist()
+        
+        for layer_idx, layer_attn in enumerate(per_layer_attention):
+            if layer_attn is None:
+                continue
+            
+            # Convert to numpy if tensor
+            if isinstance(layer_attn, torch.Tensor):
+                layer_attn_np = layer_attn.float().cpu().numpy()
+            else:
+                layer_attn_np = layer_attn
+            
+            # Skip if empty
+            if layer_attn_np.size == 0:
+                continue
+            
+            # Ensure it's 1D
+            if len(layer_attn_np.shape) > 1:
+                layer_attn_np = layer_attn_np.flatten()
+            
+            # Create directory for this layer
+            layer_dir = os.path.join(per_layer_frame_dir, f"layer_{layer_idx:02d}")
+            os.makedirs(layer_dir, exist_ok=True)
+            
+            # Process each frame
+            for frame_idx in frames_to_visualize:
+                if frame_idx >= total_frames:
+                    continue
+                
+                # Find corresponding frame index in segments
+                frame_idx_in_segments = None
+                if args.frame_indices:
+                    # User specified frames: need to find closest match
+                    for i, orig_idx in enumerate(frame_indices):
+                        if abs(orig_idx - frame_idx) < 5:
+                            frame_idx_in_segments = i
+                            break
+                else:
+                    # Using sampled frames: direct mapping
+                    for i, orig_idx in enumerate(frame_indices):
+                        if orig_idx == frame_idx:
+                            frame_idx_in_segments = i
+                            break
+                
+                if frame_idx_in_segments is None:
+                    continue
+                
+                # Extract attention for this frame from this layer
+                start_patch = frame_idx_in_segments * patches_per_frame
+                end_patch = start_patch + patches_per_frame
+                
+                if end_patch > len(layer_attn_np):
+                    print(f"      ⚠️  Layer {layer_idx}, Frame {frame_idx}: end_patch {end_patch} > len {len(layer_attn_np)}, skipping")
+                    continue
+                
+                frame_attn = layer_attn_np[start_patch:end_patch]
+                
+                # Get original frame
+                cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
+                ret, frame = cap.read()
+                if not ret:
+                    print(f"      ⚠️  Layer {layer_idx}, Frame {frame_idx}: Failed to read frame")
+                    continue
+                
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                
+                # Generate attention heatmap overlay
+                output_path = os.path.join(layer_dir, f"{video_file}_layer_{layer_idx:02d}_frame_{frame_idx:04d}_attention.png")
+                try:
+                    visualize(
+                        frame_rgb, frame_attn, output_path,
+                        use_overlay=args.use_overlay,
+                        overlay_threshold=args.overlay_threshold,
+                        num_patches_h=num_patches_h,
+                        num_patches_w=num_patches_w
+                    )
+                    print(f"      ✅ Layer {layer_idx}, Frame {frame_idx}: {output_path}")
+                except Exception as e:
+                    print(f"      ❌ Layer {layer_idx}, Frame {frame_idx}: Failed to visualize - {e}")
+                    import traceback
+                    traceback.print_exc()
+        
+        cap.release()
+        print(f"   ✅ Saved per-layer per-frame attention heatmaps to: {per_layer_frame_dir}")
     
     # Generate grid heatmap (all layers) for each frame in frame_attention directory
     # This is done separately to ensure grid heatmaps are generated even if aggregated_attention is None
