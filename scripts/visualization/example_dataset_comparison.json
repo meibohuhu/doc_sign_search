@@ -1,13 +1,13 @@
 {
   "datasets": [
     {
-      "name": "How2Sign Dataset (Original)",
+      "name": "OpenASL Dataset (Original)",
       "bleu1": 38.84,
       "bleu4": 8.02,
       "rouge": 27.45
     },
     {
-      "name": "Original + 30k",
+      "name": "Original + 40k",
       "bleu1": 38.84,
       "bleu4": 8.72,
       "rouge": 31.45
