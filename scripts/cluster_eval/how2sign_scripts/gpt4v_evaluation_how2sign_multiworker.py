@@ -956,10 +956,10 @@ def eval_model(args):
     
     # Process samples - use multithreading for both Gemini and GPT-5
         # Get max_workers from args, default to 5 if not specified
-        if args.max_workers is not None:
-            max_workers = min(args.max_workers, len(data_dict))
-        else:
-            max_workers = min(5, len(data_dict))  # Default: 5 concurrent threads
+    if args.max_workers is not None:
+        max_workers = min(args.max_workers, len(data_dict))
+    else:
+        max_workers = min(5, len(data_dict))  # Default: 5 concurrent threads
     
     if use_gemini:
         print(f"🚀 Using multithreading with {max_workers} workers for Gemini API")
