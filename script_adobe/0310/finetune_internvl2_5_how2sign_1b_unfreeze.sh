@@ -16,6 +16,16 @@ export TOKENIZERS_PARALLELISM=false
 export PYTHONUNBUFFERED=1
 export PYTORCH_ALLOC_CONF=expandable_segments:True
 
+# NCCL settings for Blackwell GPU compatibility
+export NCCL_DEBUG=INFO
+export NCCL_P2P_DISABLE=1
+export NCCL_NET_GDR_LEVEL=0
+
+# Disable distributed training for single GPU (Blackwell NCCL compatibility)
+export LOCAL_RANK=-1
+export RANK=0
+export WORLD_SIZE=1
+
 # Change to InternVL directory
 cd /home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL
 

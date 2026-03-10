@@ -1,9 +1,0 @@
-{
-  "how2sign": {
-    "root": "/mnt/localssd/doc_sign_search/sign_mllm_how_448_train_val/",
-    "annotation": "/code/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined.jsonl",
-    "data_augment": false,
-    "repeat_time": 1,
-    "length": 24880
-  }
-}

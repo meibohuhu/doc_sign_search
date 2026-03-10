@@ -53,7 +53,17 @@ def _init_dist_pytorch(backend, **kwargs):
         local_rank = rank % num_gpus
     torch.cuda.set_device(local_rank)
     # dist.init_process_group(backend=backend, **kwargs)
-    deepspeed.init_distributed(dist_backend=backend)
+
+    # For single GPU, skip distributed initialization to avoid NCCL issues on unsupported architectures (e.g., Blackwell)
+    world_size = int(os.environ.get('WORLD_SIZE', 1))
+    if world_size > 1:
+        deepspeed.init_distributed(dist_backend=backend)
+    else:
+        # Single GPU - set minimal distributed variables for compatibility
+        os.environ.setdefault('RANK', '0')
+        os.environ.setdefault('WORLD_SIZE', '1')
+        os.environ.setdefault('MASTER_ADDR', 'localhost')
+        os.environ.setdefault('MASTER_PORT', '29500')
 
 
 def _init_dist_mpi(backend, **kwargs):

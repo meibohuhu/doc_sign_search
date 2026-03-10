@@ -1327,7 +1327,9 @@ def main():
     # See all possible arguments in src/transformers/training_args.py
     # If use DeepSpeed zero3, init_dist must before HfArgumentParser
     launcher = os.environ.get('LAUNCHER', 'slurm')
-    init_dist(launcher=launcher, backend='nccl')
+    # Use gloo backend for Blackwell GPU compatibility (NCCL doesn't support sm_120 yet)
+    backend = 'gloo' if torch.cuda.is_available() else 'nccl'
+    init_dist(launcher=launcher, backend=backend)
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments))
     if len(sys.argv) == 2 and sys.argv[1].endswith('.json'):
         # If we pass only one argument to the script, and it's the path to a json file,
