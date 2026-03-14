@@ -309,7 +309,10 @@ class InternVisionEncoder(nn.Module):
         super().__init__()
         self.config = config
         # stochastic depth decay rule
-        dpr = [x.item() for x in torch.linspace(0, config.drop_path_rate, config.num_hidden_layers)]
+        ######### 改动是为了兼容不同的transformers版本，避免 transformers >= 5.x calls __init__() with no args for to_diff_dict 时出错
+        # Use pure Python to avoid meta tensor issues with transformers >= 5.x
+        n = config.num_hidden_layers
+        dpr = [config.drop_path_rate * i / max(n - 1, 1) for i in range(n)]
         self.layers = nn.ModuleList([
             InternVisionEncoderLayer(config, dpr[idx]) for idx in range(config.num_hidden_layers)])
         self.gradient_checkpointing = True

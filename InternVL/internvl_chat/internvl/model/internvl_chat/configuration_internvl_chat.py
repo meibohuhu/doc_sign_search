@@ -58,6 +58,10 @@ class InternVLChatConfig(PretrainedConfig):
             self.llm_config = Phi3Config(**llm_config)
         elif llm_config['architectures'][0] == 'Qwen2ForCausalLM':
             self.llm_config = Qwen2Config(**llm_config)
+        elif llm_config['architectures'][0] == '':######### mh03/13 for GRPO, to avoid error when transformers >= 5.x calls __init__() with no args for to_diff_dict
+            # Default placeholder for when no architecture is specified
+            # (e.g., transformers >= 5.x calls __init__() with no args for to_diff_dict)
+            self.llm_config = LlamaConfig()
         else:
             raise ValueError('Unsupported architecture: {}'.format(llm_config['architectures'][0]))
         self.use_backbone_lora = use_backbone_lora
