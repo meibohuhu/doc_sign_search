@@ -62,6 +62,27 @@ def bleu1_reward(completions: list, ground_truths: list, **kwargs) -> List[float
     return rewards
 
 
+def rouge_reward(completions: list, ground_truths: list, **kwargs) -> List[float]:
+    """ROUGE-L F1 reward using Longest Common Subsequence."""
+    from rouge_score import rouge_scorer
+
+    scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
+    rewards = []
+    for completion, gt in zip(completions, ground_truths):
+        text = completion if isinstance(completion, str) else completion[0]["content"]
+        text = text.strip()
+        gt = gt.strip()
+        if not text:
+            rewards.append(0.0)
+            continue
+        try:
+            score = scorer.score(gt, text)
+            rewards.append(float(score['rougeL'].fmeasure))
+        except Exception:
+            rewards.append(0.0)
+    return rewards
+
+
 def bertscore_reward(completions: list, ground_truths: list, **kwargs) -> List[float]:
     """BERTScore F1 reward for semantic similarity."""
     import bert_score

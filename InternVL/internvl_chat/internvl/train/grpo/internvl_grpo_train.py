@@ -42,7 +42,7 @@ from internvl.train.constants import (
     REF_START_TOKEN,
 )
 from internvl.train.grpo.grpo_dataset import GRPOVideoDataset
-from internvl.train.grpo.reward_functions import bertscore_reward, bleu_reward, bleu1_reward
+from internvl.train.grpo.reward_functions import bertscore_reward, bleu_reward, bleu1_reward, rouge_reward
 from internvl.train.grpo.trainer_grpo import InternVLGRPOTrainer, GRPOTrainingArguments
 
 logger = logging.getLogger(__name__)
@@ -267,7 +267,7 @@ def main():
     )
 
     # ── Build reward functions ──
-    reward_funcs = [bleu_reward, bleu1_reward]########可以修改
+    reward_funcs = [bleu1_reward, rouge_reward, bleu_reward]  # weights: 0.4, 0.4, 0.2
     logger.info(f'Reward functions: {[f.__name__ for f in reward_funcs]}')
     logger.info(f'Reward weights: {training_args.reward_weights}')
 

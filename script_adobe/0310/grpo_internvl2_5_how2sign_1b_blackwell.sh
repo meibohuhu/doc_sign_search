@@ -42,7 +42,7 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # ── Model & Data ──
 MODEL_PATH="/scratch/mh2803/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_1218_121640/checkpoint-2548"
 OUTPUT_DIR="/scratch/mh2803/checkpoints/grpo_internvl2_5_how2sign_1b_firsttry_0313"
-DATA_PATH="/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined.jsonl"
+DATA_PATH="/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined_sampled_10k.jsonl"
 VIDEO_ROOT="/scratch/mh2803/train_crop_videos_224"
 
 # ── GRPO parameters ──
@@ -113,7 +113,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --loss_type grpo \
     --scale_rewards group \
     --num_iterations 1 \
-    --reward_weights_str "0.5,0.5" \
+    --reward_weights_str "0.4,0.4,0.2" \
     --vision_select_layer -1 \
     --force_image_size 224 \
     --down_sample_ratio 0.5 \
