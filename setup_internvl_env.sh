@@ -1,44 +1,24 @@
-
-
-# setup internvl conda environment ###############################################################################
-echo "接受 ToS..."
-$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
-$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-
-echo "正在创建internvl环境..."
-# 检查环境是否已存在
-if conda env list | grep -q "^internvl "; then
-    echo "环境 internvl 已存在，跳过创建"
-else
-    echo "正在创建新环境 internvl..."
-    $HOME/anaconda3/bin/conda create -n internvl python=3.10 -y
-fi
-
-echo "正在进入项目目录..."
-cd /code/doc_sign_search
-
-echo "正在激活internvl环境并安装包..."
-# 激活环境并安装包
+source /home/stu2/s15/mh2803/anaconda3/etc/profile.d/conda.sh
 conda activate internvl
 
-############ 安装包
-echo "正在安装构建依赖（psutil, packaging, ninja）..."
-pip install psutil packaging ninja
+# 安装基础依赖
+/home/stu2/s15/mh2803/anaconda3/envs/internvl/bin/pip install psutil packaging ninja
 
-echo "正在安装PyTorch with CUDA 12.1..."
-pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+# 安装 PyTorch
+/home/stu2/s15/mh2803/anaconda3/envs/internvl/bin/pip install torch==2.4.0 torchvision==0.19.0 torchaudio==2.4.0 --index-url https://download.pytorch.org/whl/cu121
 
-echo "正在安装flash-attn..."
-if pip install flash-attn==2.5.7 --no-build-isolation; then
-    echo "✅ flash-attn 安装成功"
-else
-    echo "⚠️  第一次安装失败，尝试使用 --no-deps 选项..."
-    pip install flash-attn==2.5.7 --no-build-isolation --no-deps || echo "⚠️  flash-attn 安装失败，但可以继续（某些功能可能较慢）"
-fi
 
-echo "正在使用requirements_internvl.txt安装其他依赖..."
-pip install -r /code/doc_sign_search/requirements_internvl.txt
 
-pip cache purge
+# 安装其他依赖（如果 requirements_internvl.txt 存在）
+/home/stu2/s15/mh2803/anaconda3/envs/internvl/bin/pip install -r /home/stu2/s15/mh2803/workspace/doc_sign_search/requirements_internvl.txt
 
+# 安装 flash-attn
+source /home/stu2/s15/mh2803/anaconda3/etc/profile.d/conda.sh
+conda activate internvl
+conda install -c conda-forge cuda-toolkit=13.1
+export CUDA_HOME=$CONDA_PREFIX
+export PATH=$CUDA_HOME/bin:$PATH
+source /home/stu2/s15/mh2803/anaconda3/etc/profile.d/conda.sh && conda activate internvl && /home/stu2/s15/mh2803/anaconda3/envs/internvl/bin/pip install flash-attn --no-build-isolation --no-cache-dir
+##### check flash attention
+python -c "import flash_attn; print(flash_attn.__version__)"
 

@@ -393,101 +393,117 @@ def load_base_model(base_model_name="OpenGVLab/InternVL2_5-2B"):
     
     return model, tokenizer
 
-def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2B"):
+
+######GRPO checkpoint保存的是DeepSpeed格式（PEFT结构，973个key：ViT + LLM base + LoRA A/B + MLP1）。
+######直接 from_pretrained 加载merged的 model.safetensors 在60+帧时会产生乱码，原因不明（权重值完全一致，但inference行为不同）。不merge、保持LoRA动态结构可以正常工作。
+def _find_ds_checkpoint(checkpoint_path):
+    """Return path to mp_rank_00_model_states.pt if this is a DeepSpeed GRPO checkpoint."""
+    import glob
+    # Look for global_stepXXX/mp_rank_00_model_states.pt
+    pattern = os.path.join(checkpoint_path, "global_step*", "mp_rank_00_model_states.pt")
+    matches = sorted(glob.glob(pattern))
+    return matches[-1] if matches else None
+
+
+def load_trained_model(checkpoint_path, base_model_name="OpenGVLab/InternVL2_5-2B", sft_checkpoint=None):
     """
-    Load InternVL trained model from checkpoint
+    Load InternVL trained model from checkpoint.
+
+    For GRPO/DeepSpeed checkpoints (contain global_stepXXX/mp_rank_00_model_states.pt),
+    loads the SFT base (PEFT) model first then overlays the DS weights without merging,
+    which avoids the safetensors-reload bug that breaks long-context inference.
+    sft_checkpoint: path to the SFT checkpoint (PEFT format) used as base for GRPO.
     """
     print("🚀 Loading InternVL model from checkpoint...")
     print(f"   Checkpoint: {checkpoint_path}")
-    
-    # Step 1: Load base model config
-    print("\n1️⃣ Loading base model config...")
-    config = InternVLChatConfig.from_pretrained(base_model_name, trust_remote_code=True)
-    print("   ✅ Config loaded")
-    
-    # Step 2: Load model
-    print(f"\n2️⃣ Loading model from checkpoint...")
-    try:
+
+    ds_ckpt = _find_ds_checkpoint(checkpoint_path)
+
+    if ds_ckpt:
+        # ── GRPO checkpoint: load SFT PEFT base, then overlay DS weights ──
+        print(f"\n   Detected GRPO DeepSpeed checkpoint: {ds_ckpt}")
+        peft_base = sft_checkpoint if sft_checkpoint else base_model_name
+        print(f"   Loading SFT base model from: {peft_base}")
+
+        print("\n1️⃣ Loading SFT base (PEFT) model...")
         model = InternVLChatModel.from_pretrained(
-            checkpoint_path,
+            peft_base,
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
-            device_map="auto"
         )
-        print("   ✅ Model loaded from checkpoint")
-        # Check if num_image_token matches training (should be 64 for 224x224 with ratio 0.5)
-        expected_num_image_token = int((224 // 14) ** 2 * (0.5 ** 2))  # 64
-        if model.num_image_token != expected_num_image_token:
-            print(f"   ⚠️  Warning: num_image_token={model.num_image_token} doesn't match expected {expected_num_image_token}")
-            print(f"   🔧 Updating to match training config...")
-            model.config.force_image_size = 224
-            model.config.downsample_ratio = 0.5
-            model.downsample_ratio = 0.5
-            model.num_image_token = expected_num_image_token
-            print(f"   ✅ Updated num_image_token to {model.num_image_token}")
-    except Exception as e:
-        print(f"   ⚠️  Failed to load from checkpoint, trying base model: {e}")
-        # Fallback to base model if checkpoint loading fails
-        model = InternVLChatModel.from_pretrained(
-            base_model_name,
-            torch_dtype=torch.bfloat16,
-            trust_remote_code=True,
-            device_map="auto"
-        )
-        print("   ✅ Model loaded from base model")
-        # Apply training config to base model
+        print("   ✅ SFT base loaded")
+
+        print("\n2️⃣ Overlaying DeepSpeed weights (no merge)...")
+        ds_state = torch.load(ds_ckpt, map_location="cpu")
+        sd = ds_state.get("module", ds_state)
+        missing, unexpected = model.load_state_dict(sd, strict=False)###### 把GRPO的DS权重覆盖到已经加载好的SFT模型结构里。
+### missing=0 → GRPO的每一个key在SFT模型里都找到了对应位置，全部写入
+###### unexpected=0 → GRPO没有SFT模型结构里不存在的key
+        print(f" GRPO missing={len(missing)}, unexpected={len(unexpected)}")
+        if missing:
+            print(f"   missing[:5]: {missing[:5]}")
+        print("   ✅ GRPO DS weights loaded (LoRA kept unmerged)")
+
+    else:
+        # ── Regular checkpoint (SFT safetensors) ──
+        print(f"\n1️⃣ Loading model from checkpoint directory...")
+        try:
+            model = InternVLChatModel.from_pretrained(
+                checkpoint_path,
+                torch_dtype=torch.bfloat16,
+                trust_remote_code=True,
+                device_map="auto"
+            )
+            print("   ✅ Model loaded from checkpoint")
+        except Exception as e:
+            print(f"   ⚠️  Failed to load from checkpoint, trying base model: {e}")
+            model = InternVLChatModel.from_pretrained(
+                base_model_name,
+                torch_dtype=torch.bfloat16,
+                trust_remote_code=True,
+                device_map="auto"
+            )
+            print("   ✅ Model loaded from base model")
+
         force_image_size = 224
         down_sample_ratio = 0.5
         patch_size = model.patch_size
-        if hasattr(model.config, 'force_image_size') and model.config.force_image_size != force_image_size:
-            model.vision_model.resize_pos_embeddings(
-                old_size=model.config.vision_config.image_size,
-                new_size=force_image_size,
-                patch_size=patch_size
-            )
-            model.config.vision_config.image_size = force_image_size
         model.config.force_image_size = force_image_size
         model.config.downsample_ratio = down_sample_ratio
         model.downsample_ratio = down_sample_ratio
         model.num_image_token = int((force_image_size // patch_size) ** 2 * (down_sample_ratio ** 2))
-        print(f"   🔧 Updated config: num_image_token={model.num_image_token}")
-    
+        print(f"   num_image_token={model.num_image_token}")
+
     # Step 3: Load tokenizer
     print(f"\n3️⃣ Loading tokenizer...")
-    tokenizer = AutoTokenizer.from_pretrained(
-        checkpoint_path if os.path.exists(os.path.join(checkpoint_path, "tokenizer_config.json")) 
-        else base_model_name,
-        trust_remote_code=True,
-        use_fast=False
-    )
-    # Set model_max_length to match training (12288 for InternVL2.5-2B)
-    # This ensures evaluation uses the same sequence length limit as training
-    tokenizer.model_max_length = 12288
+    # 优先用sft_checkpoint（vocab文件完整），其次checkpoint_path，最后base_model_name
+    if sft_checkpoint and os.path.exists(os.path.join(sft_checkpoint, "vocab.json")):
+        tok_path = sft_checkpoint
+    elif os.path.exists(os.path.join(checkpoint_path, "vocab.json")):
+        tok_path = checkpoint_path
+    else:
+        tok_path = base_model_name
+    print(f"   Tokenizer path: {tok_path}")
+    tokenizer = AutoTokenizer.from_pretrained(tok_path, trust_remote_code=True, use_fast=False)
+    tokenizer.model_max_length = 32768
     print(f"   ✅ Tokenizer loaded (model_max_length: {tokenizer.model_max_length})")
-    
+
     model.eval()
-    
-    # Disable gradients for all parameters to save memory
     for param in model.parameters():
         param.requires_grad = False
-    
-    # CRITICAL FIX: Explicitly move model to GPU to ensure all components are on CUDA
-    # device_map="auto" may leave some components on CPU, causing "Input type (CUDABFloat16Type) and weight type (CPUBFloat16Type)" error
+
     print(f"\n4️⃣ Moving model to GPU...")
     if torch.cuda.is_available():
         device = torch.device("cuda:0")
         model = model.to(device)
-        # Explicitly move vision_model to GPU (this is often the problematic component)
-        if hasattr(model, 'vision_model'):
-            model.vision_model = model.vision_model.to(device)
         print(f"   ✅ Model moved to {device}")
     else:
         print(f"   ⚠️  CUDA not available, model remains on CPU")
-    
+
     print(f"\n{'='*70}")
     print(f"✅ COMPLETE MODEL LOADED SUCCESSFULLY!")
     print(f"{'='*70}\n")
-    
+
     return model, tokenizer
 
 def eval_model(args):
@@ -509,8 +525,9 @@ def eval_model(args):
         if args.checkpoint_path and os.path.exists(str(args.checkpoint_path)):
             # Load from checkpoint
             model, tokenizer = load_trained_model(
-                args.checkpoint_path, 
-                args.model_base
+                args.checkpoint_path,
+                args.model_base,
+                sft_checkpoint=getattr(args, 'sft_checkpoint', None),
             )
         else:
             # Load base model only
@@ -632,8 +649,9 @@ def eval_model(args):
             video_path = os.path.join(args.video_folder, video_file)
             
             # Use default prompt template (will be formatted with actual frame count after loading)
-            # fq = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
+            fq = "Translate the American Sign Language in this video to English."
             # fq = "How many people are in the video"
+            # fq = "Translate the American Sign Language in this video to English."
             
             # Extract ground truth from conversations or source
             conversations = source.get('conversations', [])
@@ -907,7 +925,10 @@ def main():
                        help="Image size for processing")
     parser.add_argument("--export-frames", action="store_true",
                        help="Export extracted video frames to folder (saved in out_dir/extracted_frames)")
-    
+    parser.add_argument("--sft-checkpoint", type=str, default=None,
+                       help="Path to SFT (PEFT) checkpoint used as base for GRPO checkpoints. "
+                            "Required when --checkpoint-path is a DeepSpeed GRPO checkpoint.")
+
     args = parser.parse_args()
     
     # Validate paths

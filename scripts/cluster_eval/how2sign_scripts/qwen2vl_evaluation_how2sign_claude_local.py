@@ -403,8 +403,8 @@ def eval_model(args):
     
     # Speed optimization: Pre-import and prepare common objects
     from qwen_vl_utils import process_vision_info
-    # fq_text = "Translate the American Sign Language in this video to English. "
-    fq_text = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
+    fq_text = "Translate the American Sign Language in this video to English. "
+    # fq_text = "Translate the ASL signs in this video to English text. Provide only the English translation without describing the person, gestures, or video content. Answer in one sentence only. If you cannot determine the meaning, RESPOND with nothing."
 
     # Process samples
     for idx, source in enumerate(tqdm(valid_samples, desc="Evaluating"), 1):

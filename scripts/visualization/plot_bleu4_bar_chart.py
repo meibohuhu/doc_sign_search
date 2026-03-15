@@ -488,7 +488,7 @@ def plot_bleu4_bar_chart(
             # Create bars with modern styling
             bars = []
             # Adjust BLEU4 bar positions when BLEU1 and/or ROUGE are present
-            gap = bar_width * 0.05
+            gap = bar_width * 0.01  # Very small gap to make bars tightly packed
             if has_rouge and has_bleu1_right:
                 # Three bars: BLEU1 (left), BLEU4 (middle), ROUGE (right)
                 # BLEU4 should be in the middle
@@ -540,7 +540,7 @@ def plot_bleu4_bar_chart(
         ax2 = ax.twinx()
         
         # Calculate positions for bars: BLEU1 (left), BLEU4 (middle), ROUGE (right)
-        gap = bar_width * 0.05  # Minimal gap between bars
+        gap = bar_width * 0.01  # Very small gap to make bars tightly packed
         if has_rouge and has_bleu1_right:
             # Three bars: BLEU1 (left), BLEU4 (middle), ROUGE (right)
             bleu1_right_x_pos = x_pos  # BLEU1 on the left
@@ -567,16 +567,18 @@ def plot_bleu4_bar_chart(
                 # For PDF compatibility: hatch color is controlled by edgecolor, must be set explicitly
                 # Use a slightly darker shade for better visibility in PDF
                 hatch_edge_color = '#E85A4A'  # Darker red for hatch lines in PDF
-                # Set edgecolor to hatch color, linewidth=0 to hide border but keep hatch visible
+                # Set edgecolor to hatch color, use very small linewidth to minimize border visibility
+                # Hatch lines will still be visible with small linewidth
                 bar = ax2.bar(x, score, width=bar_width, color=color,
-                             edgecolor=hatch_edge_color, linewidth=0, alpha=0.60, hatch='\\',
+                             edgecolor=hatch_edge_color, linewidth=0.01, alpha=0.60, hatch='\\',
                              zorder=2)
                 # Ensure hatch pattern is set - hatch color controlled by edgecolor
                 for patch in bar:
                     patch.set_hatch('\\')
                     # Set hatch line color (edgecolor controls hatch color in matplotlib)
                     patch.set_edgecolor(hatch_edge_color)
-                    patch.set_linewidth(0.4)  # Thinner hatch lines
+                    # Use very small linewidth so border is almost invisible but hatch lines are visible
+                    patch.set_linewidth(0.01)  # Very thin, border almost invisible
                 rouge_bars.append(bar[0])
         
         # Colors for BLEU1 bars - unified color #A9B2C3 for all models
@@ -589,16 +591,18 @@ def plot_bleu4_bar_chart(
             hatch_color = '#1E6FC7'  # Medium blue for hatch lines - visible in PDF
             for i, (x, score, color, edge_col) in enumerate(zip(bleu1_right_x_pos, bleu1_right_scores, bleu1_right_colors, bleu1_right_edge_colors)):
                 # For PDF compatibility: hatch color is controlled by edgecolor, must be set explicitly
-                # Set edgecolor to hatch color, linewidth=0 to hide border but keep hatch visible
+                # Set edgecolor to hatch color, use very small linewidth to minimize border visibility
+                # Hatch lines will still be visible with small linewidth
                 bar = ax2.bar(x, score, width=bar_width, color=color,
-                             edgecolor=hatch_color, linewidth=0, alpha=0.50, hatch='/',
+                             edgecolor=hatch_color, linewidth=0.0, alpha=0.50, hatch='/',
                              zorder=2)
                 # Ensure hatch pattern is set - hatch color controlled by edgecolor
                 for patch in bar:
                     patch.set_hatch('/')
                     # Set hatch line color (edgecolor controls hatch color in matplotlib)
                     patch.set_edgecolor(hatch_color)
-                    patch.set_linewidth(0.4)  # Thinner hatch lines
+                    # Use very small linewidth so border is almost invisible but hatch lines are visible
+                    patch.set_linewidth(0.01)  # Very thin, border almost invisible
                 bleu1_right_bars.append(bar[0])
         
         # Set Y-axis label and limits for right axis (ROUGE/BLEU1)
@@ -608,12 +612,12 @@ def plot_bleu4_bar_chart(
             all_right_scores = list(rouge_scores) + list(bleu1_right_scores)
             y_min = min(all_right_scores) - 1
             y_max = max(all_right_scores) + 1
-            ax2.set_ylabel('ROUGE / BLEU1 Score', fontsize=20, fontweight='normal', color='black')
+            ax2.set_ylabel('ROUGE / BLEU1 Score', fontsize=16, fontweight='normal', color='black')
         elif has_rouge:
-            ax2.set_ylabel('ROUGE Score', fontsize=20, fontweight='normal', color='black')
+            ax2.set_ylabel('ROUGE Score', fontsize=16, fontweight='normal', color='black')
             y_min, y_max = 14, 29
         elif has_bleu1_right:
-            ax2.set_ylabel('BLEU1 Score', fontsize=20, fontweight='normal', color='black')
+            ax2.set_ylabel('BLEU1 Score', fontsize=16, fontweight='normal', color='black')
             y_min = min(bleu1_right_scores) - 1
             y_max = max(bleu1_right_scores) + 1
         
@@ -622,7 +626,7 @@ def plot_bleu4_bar_chart(
         
         # Color the right Y-axis ticks and spine
         ax2.spines['right'].set_color('black')
-        ax2.spines['right'].set_linewidth(2)
+        ax2.spines['right'].set_linewidth(0.5)  # Normal linewidth, not bold
         ax2.spines['top'].set_visible(False)
     
     # Add value labels on top of bars/points
@@ -685,7 +689,7 @@ def plot_bleu4_bar_chart(
     # For grouped bars, x_pos represents the center between the two bars
     # For multiple bars (BLEU1 + BLEU4 + ROUGE), adjust tick position to center at BLEU4 (middle bar)
     if (has_rouge or has_bleu1_right) and not is_grouped:
-        gap = bar_width * 0.05
+        gap = bar_width * 0.01  # Very small gap to match bar spacing
         if has_rouge and has_bleu1_right:
             # Three bars: BLEU1 (left), BLEU4 (middle), ROUGE (right) - center at BLEU4
             center_positions = x_pos + bar_width + gap
@@ -722,7 +726,7 @@ def plot_bleu4_bar_chart(
         # For single bars, padding based on bar width
         # More padding on left to move first bar away from 0
         if has_rouge or has_bleu1_right:
-            gap = bar_width * 0.05
+            gap = bar_width * 0.01  # Very small gap to match bar spacing
             if has_rouge and has_bleu1_right:
                 # Three bars: BLEU1 (left), BLEU4 (middle), ROUGE (right)
                 x_padding_left = bar_width * 1.5
@@ -761,8 +765,8 @@ def plot_bleu4_bar_chart(
     # Remove top and right borders, keep bottom and left axes
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    # Set left Y-axis spine to match right Y-axis thickness
-    ax.spines['left'].set_linewidth(2)
+    # Set left Y-axis spine to normal thickness (not bold)
+    ax.spines['left'].set_linewidth(0.5)  # Normal linewidth, not bold
     ax.spines['left'].set_color('black')
     
     # Add legend in upper left corner when ROUGE or BLEU1 right is present
@@ -845,9 +849,9 @@ def plot_dataset_comparison_bar_chart(
     xlabel: str = "",
     ylabel: str = "BLEU4 Score",
     figsize: Tuple[float, float] = (10, 6),
-    bar_width: float = 0.06,
+    bar_width: float = 0.05,  # Reduced from 0.06 to make bars thinner
     show_values: bool = True,
-    value_fontsize: int = 32,
+    value_fontsize: int = 14,
     ylim: Optional[Tuple[float, float]] = None,
     dpi: int = 300,
 ):
@@ -889,8 +893,8 @@ def plot_dataset_comparison_bar_chart(
     x_pos = np.arange(len(dataset_names)) * spacing + x_offset  # Reduce spacing significantly
     
     # Calculate bar positions: BLEU1 (left), BLEU4 (middle), ROUGE (right)
-    # Make bars tightly packed together (no gap or minimal gap)
-    gap = bar_width * 0.01  # Very small gap, almost touching
+    # Make bars tightly packed together (no gap, touching each other)
+    gap = 0  # No gap, bars touch each other
     # Center the three bars around x_pos
     # BLEU4 center should be at x_pos, so BLEU4 left edge = x_pos - bar_width/2
     # BLEU1 right edge = BLEU4 left edge - gap = x_pos - bar_width/2 - gap
@@ -901,13 +905,16 @@ def plot_dataset_comparison_bar_chart(
     rouge_x = x_pos + bar_width / 2 + gap
     
     # Colors for each metric
-    bleu1_color = '#308BE4'  # Blue
-    bleu4_color = '#7BAB62'  # Green
-    rouge_color = '#fa8072'   # Salmon
+    # bleu1_color = '#308BE4'  # Blue
+    # bleu4_color = '#7BAB62'  # Green
+    # rouge_color = '#fa8072'   # Salmon
+    bleu1_color = '#FF7F0E'  # Blue 1F77B4
+    bleu4_color = '#1F77B4'  # Green FF7F0E
+    rouge_color = '#7F7F7F'   # Salmon 7F7F7F
     
     # Hatch colors
-    bleu1_hatch_color = '#1E6FC7'
-    rouge_hatch_color = '#E85A4A'
+    bleu1_hatch_color = '#C1610C'
+    rouge_hatch_color = '#626262'
     
     # Combine original and enhanced data
     bleu1_scores = [bleu1_original[0], bleu1_enhanced[0]]
@@ -917,8 +924,8 @@ def plot_dataset_comparison_bar_chart(
     # Draw BLEU1 bars (left) - on right Y-axis (same as ROUGE)
     # Match bleu4_chart: alpha=0.50 for BLEU1
     bars_bleu1 = ax2.bar(bleu1_x, bleu1_scores, width=bar_width, 
-                       color=bleu1_color, edgecolor=bleu1_hatch_color, 
-                       linewidth=0, alpha=0.50, hatch='/', zorder=2, label='BLEU1')
+                       color=bleu1_color, edgecolor='none', 
+                       linewidth=0, alpha=0.70, hatch='/', zorder=2, label='BLEU1')
     for patch in bars_bleu1:
         patch.set_hatch('/')
         patch.set_edgecolor(bleu1_hatch_color)
@@ -928,12 +935,12 @@ def plot_dataset_comparison_bar_chart(
     # Match bleu4_chart: alpha=0.65 for BLEU4
     bars_bleu4 = ax.bar(bleu4_x, bleu4_scores, width=bar_width,
                        color=bleu4_color, edgecolor='none', linewidth=0,
-                       alpha=0.65, hatch=None, zorder=2, label='BLEU4')
+                       alpha=0.60, hatch=None, zorder=2, label='BLEU4')
     
     # Draw ROUGE bars (right) - on right Y-axis
     # Match bleu4_chart: alpha=0.60 for ROUGE
     bars_rouge = ax2.bar(rouge_x, rouge_scores, width=bar_width,
-                         color=rouge_color, edgecolor=rouge_hatch_color, linewidth=0,
+                         color=rouge_color, edgecolor='none', linewidth=0,
                          alpha=0.60, hatch='\\', zorder=2, label='ROUGE')
     for patch in bars_rouge:
         patch.set_hatch('\\')
@@ -987,11 +994,11 @@ def plot_dataset_comparison_bar_chart(
     # Set Y-axis limits for right axis (BLEU1 and ROUGE)
     # Set to 25-40 as requested
     ax2.set_ylim(25, 40)
-    ax2.set_ylabel('BLEU1 / ROUGE Score', fontsize=20, fontweight='normal', color='black')
+    ax2.set_ylabel('BLEU1 / ROUGE Score', fontsize=18, fontweight='normal', color='black')  # Match left Y-axis fontsize
     ax2.tick_params(axis='y', labelsize=14, labelcolor='black')
     
     # Set x-axis limits - add more padding to center the chart and move origin away from left edge
-    gap = bar_width * 0.05
+    gap = 0  # No gap between bars, they touch each other
     # Calculate total width of three bars: bar_width * 3 + gap * 2
     total_bar_width = bar_width * 3 + gap * 2
     # Add padding on both sides, centered around x_pos
@@ -1016,12 +1023,12 @@ def plot_dataset_comparison_bar_chart(
     # Remove top and right borders, keep bottom and left axes
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    # Set left Y-axis spine to match right Y-axis thickness
-    ax.spines['left'].set_linewidth(2)
+    # Set left Y-axis spine to normal thickness (not bold)
+    ax.spines['left'].set_linewidth(0.5)  # Normal linewidth, not bold
     ax.spines['left'].set_color('black')
     # Color the right Y-axis ticks and spine
     ax2.spines['right'].set_color('black')
-    ax2.spines['right'].set_linewidth(2)
+    ax2.spines['right'].set_linewidth(0.5)  # Normal linewidth, not bold
     ax2.spines['top'].set_visible(False)
     
     # Add legend - match bleu4_chart legend alpha values
@@ -1126,11 +1133,11 @@ Available hatch patterns: /, \\, x, ., -, |, +, .., xx, none
                        help='Use predefined style preset: paper, striped, professional, academic')
     parser.add_argument('--edgecolor', type=str, help='Edge color for all bars')
     parser.add_argument('--edgecolors', nargs='+', help='Edge colors for each bar')
-    parser.add_argument('--figsize', type=float, nargs=2, default=[10, 6], metavar=('WIDTH', 'HEIGHT'),
+    parser.add_argument('--figsize', type=float, nargs=2, default=[10, 5], metavar=('WIDTH', 'HEIGHT'),
                        help='Figure size (default: 10 6)')
     parser.add_argument('--bar-width', type=float, default=0.12, help='Bar width (0-1, default: 0.12)')
     parser.add_argument('--no-values', action='store_true', help='Hide values on top of bars')
-    parser.add_argument('--value-fontsize', type=int, default=10, help='Font size for values on bars')
+    parser.add_argument('--value-fontsize', type=int, default=14, help='Font size for values on bars')
     parser.add_argument('--rotation', type=int, default=0, help='Rotation angle for x-axis labels (degrees)')
     parser.add_argument('--ylim', type=float, nargs=2, metavar=('MIN', 'MAX'), help='Y-axis limits')
     parser.add_argument('--grid', action='store_true', help='Show grid lines (default: no grid)')

@@ -7,13 +7,13 @@ conda activate qwenvl
 echo "✅ Conda environment activated: qwenvl"
 
 # Essential environment variables
-export PYTHONPATH="/code/doc_sign_search/qwenvl/Qwen2-VL-Finetune/src:${PYTHONPATH:-}"
+export PYTHONPATH="/local1/mhu/sign_language_llm/qwenvl/Qwen2-VL-Finetune/src:${PYTHONPATH:-}"
 export TOKENIZERS_PARALLELISM=false
 export PYTHONUNBUFFERED=1
 export PYTORCH_ALLOC_CONF=expandable_segments:True
 
 # Change to project directory
-cd /code/doc_sign_search
+cd /local1/mhu/sign_language_llm
 
 # Configuration
 # GPU configuration - Specify which GPU to use here
@@ -24,19 +24,19 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 # Set CHECKPOINT_PATH to empty string or unset to use base model only
 # Update checkpoint path to point to your trained checkpoint (or leave empty for base model)
 # CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2_5_vl_how2sign_fbcf_1/checkpoint-4800}"  # Empty by default - will use base model
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/code/doc_sign_search/script_adobe/checkpoints/finetune_qwen2_5_7b/checkpoint-2550}"
-MODEL_BASE="${MODEL_BASE:-Qwen/Qwen2.5-VL-7B-Instruct}"
-VIDEO_FOLDER="${VIDEO_FOLDER:-/mnt/localssd/doc_sign_search/how2sign_test_videos_224x224/}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-4000}"
+MODEL_BASE="${MODEL_BASE:-Qwen/Qwen2.5-VL-3B-Instruct}"
+VIDEO_FOLDER="${VIDEO_FOLDER:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/}"
 # QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_110_samples.json}"
-QUESTION_FILE="${QUESTION_FILE:-/code/doc_sign_search/how2sign/video/test_raw_videos/segmented_test_videos_filtered_550_samples.json}"
+QUESTION_FILE="${QUESTION_FILE:-/local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_550_samples.json}"
 
-OUT_DIR="${OUT_DIR:-/code/doc_sign_search/outputs/qwen2vl_eval/}"
+OUT_DIR="${OUT_DIR:-/local1/mhu/sign_language_llm/outputs/qwen2vl_eval/}"
 
 # Evaluation parameters
 MAX_SAMPLES=${MAX_SAMPLES:-557}  # Set to a number to limit samples, empty for full evaluation
 MIN_PIXELS=${MIN_PIXELS:-$((224*224))}  # Match training: 224x224
 MAX_PIXELS=${MAX_PIXELS:-$((224*224))}  # Match training: 224x224
-VIDEO_FPS=${VIDEO_FPS:-12}  # Match training FPS
+VIDEO_FPS=${VIDEO_FPS:-16}  # Match training FPS
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
 
 echo "🎬 Qwen2.5-VL-3B How2Sign Evaluation on 2×A6000"

@@ -52,8 +52,7 @@ def _init_dist_pytorch(backend, **kwargs):
         num_gpus = torch.cuda.device_count()
         local_rank = rank % num_gpus
     torch.cuda.set_device(local_rank)
-    # dist.init_process_group(backend=backend, **kwargs)
-    deepspeed.init_distributed(dist_backend=backend)
+    deepspeed.init_distributed(dist_backend=backend)#### mh0313 
 
 
 def _init_dist_mpi(backend, **kwargs):

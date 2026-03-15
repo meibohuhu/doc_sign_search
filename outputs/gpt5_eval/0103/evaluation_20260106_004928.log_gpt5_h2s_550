@@ -1,0 +1,1860 @@
+🔑 Using Azure OpenAI API key: daea989a01...
+   Azure Endpoint: https://dil-research-3.openai.azure.com/
+   Azure API Version: 2024-12-01-preview
+   Azure Deployment: gpt-5
+🤖 API Type: openai
+🤖 Model: gpt-5
+   Using Azure GPT-5 Vision API format
+
+📂 Loading test data from: /code/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl_sample550.jsonl
+   Limited to 552 samples
+   Total samples: 552
+
+📂 Loading existing results from: /code/doc_sign_search/outputs/gpt5_eval/
+🎬 Starting evaluation...
+💾 Results will be saved periodically to: /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+   (Saving every 10 samples to prevent data loss)
+
+======================================================================
+
+🚀 Using multithreading with 12 workers for Azure GPT-5 Vision API
+   Note: Rate limiting handled automatically by API
+
+Evaluating:   0%|          | 0/552 [00:00<?, ?it/s]
+⚠️  [12/552] Failed to parse output for g0t4Wz5qsT8_13-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   0%|          | 1/552 [00:19<2:55:10, 19.08s/it]
+⚠️  [2/552] Failed to parse output for G3IJAoK0uSE_10-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   0%|          | 2/552 [00:26<1:49:50, 11.98s/it]
+⚠️  [11/552] Failed to parse output for G2hnUeetWcc_20-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   1%|          | 3/552 [00:26<1:02:22,  6.82s/it]
+⚠️  [7/552] Failed to parse output for fzueHkUDyhE_1-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   1%|          | 4/552 [00:28<43:06,  4.72s/it]  
+⚠️  [4/552] Failed to parse output for G0Q6AlvH96I_26-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you, nice to meet you, goodbye....
+Evaluating:   1%|          | 5/552 [00:35<51:08,  5.61s/it]
+⚠️  [8/552] Failed to parse output for G19uBylwQww_13-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name, nice to meet you....
+Evaluating:   1%|          | 6/552 [00:36<36:06,  3.97s/it]
+⚠️  [6/552] Failed to parse output for G3RvsnzQrXQ_0-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I got engaged....
+Evaluating:   1%|▏         | 7/552 [00:40<36:48,  4.05s/it]
+⚠️  [1/552] Failed to parse output for g2SdWBPoXZ0_8-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's play together tomorrow morning at school and have cookies....
+Evaluating:   1%|▏         | 8/552 [00:41<28:57,  3.19s/it]
+⚠️  [10/552] Failed to parse output for FzOQMA-CVPc_2-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you for your time....
+Evaluating:   2%|▏         | 9/552 [00:42<22:26,  2.48s/it]
+⚠️  [3/552] Failed to parse output for G2kVb4gINSI_9-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's meet at church on Sunday....
+
+💾 Progress saved: 10/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:   2%|▏         | 10/552 [00:43<18:56,  2.10s/it]
+⚠️  [17/552] Failed to parse output for G1lNlhjWC1I_16_17-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   2%|▏         | 11/552 [00:53<39:18,  4.36s/it]
+⚠️  [5/552] Failed to parse output for g2wUCRRni28_6-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's meet at my house, what will we write with—call me and we can talk....
+Evaluating:   2%|▏         | 12/552 [00:55<33:43,  3.75s/it]
+⚠️  [9/552] Failed to parse output for g3jQ5ecjGz8_8-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:   2%|▏         | 13/552 [00:56<25:37,  2.85s/it]
+⚠️  [13/552] Failed to parse output for g1xdqxCZxTg_11-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is the girl's name?...
+Evaluating:   3%|▎         | 14/552 [01:02<32:54,  3.67s/it]
+⚠️  [19/552] Failed to parse output for fzQ2E3_xBZA_7-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   3%|▎         | 15/552 [01:05<32:34,  3.64s/it]
+⚠️  [15/552] Failed to parse output for g0fgci8L_rc_2-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf and have a name sign....
+Evaluating:   3%|▎         | 16/552 [01:09<33:24,  3.74s/it]
+⚠️  [14/552] Failed to parse output for FZd8Iv9ACVw_7-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write it down for me....
+Evaluating:   3%|▎         | 17/552 [01:11<26:54,  3.02s/it]
+⚠️  [16/552] Failed to parse output for g2o-GFdGOJE_6-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:   3%|▎         | 18/552 [01:15<30:08,  3.39s/it]
+⚠️  [18/552] Failed to parse output for fzOH00UZg84_31-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Who teaches you at school?...
+Evaluating:   3%|▎         | 19/552 [01:18<29:36,  3.33s/it]
+⚠️  [23/552] Failed to parse output for fzrJBu2qsM8_5-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: I love everyone here....
+
+💾 Progress saved: 20/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:   4%|▎         | 20/552 [01:21<28:18,  3.19s/it]
+⚠️  [21/552] Failed to parse output for fzOH00UZg84_16-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:   4%|▍         | 21/552 [01:24<28:02,  3.17s/it]
+⚠️  [24/552] Failed to parse output for G0Q6AlvH96I_1-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you, I see you, sorry, I don’t understand, please repeat....
+Evaluating:   4%|▍         | 22/552 [01:24<19:59,  2.26s/it]
+⚠️  [20/552] Failed to parse output for G06Irzcwxiw_7-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am a deaf student teacher working with the class and I love you....
+Evaluating:   4%|▍         | 23/552 [01:25<15:57,  1.81s/it]
+⚠️  [27/552] Failed to parse output for fzrJBu2qsM8_3-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   4%|▍         | 24/552 [01:29<20:48,  2.36s/it]
+⚠️  [25/552] Failed to parse output for G0peUY2cfeE_0-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: My favorite game to play with my family and friends is cards....
+Evaluating:   5%|▍         | 25/552 [01:34<28:48,  3.28s/it]
+⚠️  [26/552] Failed to parse output for fzDHRCKr7wU_12-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   5%|▍         | 26/552 [01:42<42:15,  4.82s/it]
+⚠️  [30/552] Failed to parse output for G2VAlFdgof4_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you for your help; call me, okay?...
+Evaluating:   5%|▍         | 27/552 [01:44<33:21,  3.81s/it]
+⚠️  [22/552] Failed to parse output for G19uBylwQww_0-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:   5%|▌         | 28/552 [01:45<27:17,  3.13s/it]
+⚠️  [28/552] Failed to parse output for -g0iPSnQt6w_15-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   5%|▌         | 29/552 [01:51<34:39,  3.98s/it]
+⚠️  [31/552] Failed to parse output for g2v-M6EXcUE_18-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 30/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:   5%|▌         | 30/552 [01:53<29:12,  3.36s/it]
+⚠️  [34/552] Failed to parse output for G095RWKQ39g_6-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I eat and write in my book....
+Evaluating:   6%|▌         | 31/552 [01:58<33:30,  3.86s/it]
+⚠️  [29/552] Failed to parse output for g0UUmEkoT1w_7-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   6%|▌         | 32/552 [02:00<28:16,  3.26s/it]
+⚠️  [35/552] Failed to parse output for G3g0-BeFN3c_17-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Are you deaf, what is your name?...
+Evaluating:   6%|▌         | 33/552 [02:00<20:34,  2.38s/it]
+⚠️  [32/552] Failed to parse output for fzQ2E3_xBZA_10-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: When it rains, I drive slowly....
+Evaluating:   6%|▌         | 34/552 [02:01<15:27,  1.79s/it]
+⚠️  [39/552] Failed to parse output for fzDHRCKr7wU_0-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello....
+Evaluating:   6%|▋         | 35/552 [02:05<21:19,  2.47s/it]
+⚠️  [37/552] Failed to parse output for G3VM7etNABI_4-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   7%|▋         | 36/552 [02:08<22:59,  2.67s/it]
+⚠️  [36/552] Failed to parse output for G3FhmHz_7hs_4-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   7%|▋         | 37/552 [02:09<17:33,  2.05s/it]
+⚠️  [42/552] Failed to parse output for g1HvmBOR7Y4_11-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want to clean....
+Evaluating:   7%|▋         | 38/552 [02:14<26:31,  3.10s/it]
+⚠️  [40/552] Failed to parse output for G1LiGqM3FhM_11-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I will buy food with money....
+Evaluating:   7%|▋         | 39/552 [02:16<22:58,  2.69s/it]
+⚠️  [33/552] Failed to parse output for Fz-N1S0swh8_7-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I will tell you the time to meet....
+
+💾 Progress saved: 40/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:   7%|▋         | 40/552 [02:17<17:54,  2.10s/it]
+⚠️  [44/552] Failed to parse output for G25fic3QxDk_9-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   7%|▋         | 41/552 [02:23<28:16,  3.32s/it]
+⚠️  [46/552] Failed to parse output for FzOQMA-CVPc_10-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   8%|▊         | 42/552 [02:27<31:39,  3.72s/it]
+⚠️  [43/552] Failed to parse output for FZd8Iv9ACVw_2-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: You two have many different options—first, choose from the list....
+Evaluating:   8%|▊         | 43/552 [02:30<29:40,  3.50s/it]
+⚠️  [41/552] Failed to parse output for FzUdcaxw_vs_5-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am Deaf and I teach....
+Evaluating:   8%|▊         | 44/552 [02:36<34:20,  4.06s/it]
+⚠️  [38/552] Failed to parse output for g3pXM5X3_Xw_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Sit and wait one minute....
+Evaluating:   8%|▊         | 45/552 [02:36<25:38,  3.04s/it]
+⚠️  [51/552] Failed to parse output for G1GUMky8kWc_9-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: One, two, three, four, five....
+Evaluating:   8%|▊         | 46/552 [02:41<29:29,  3.50s/it]
+⚠️  [45/552] Failed to parse output for FZNuNG9UBnw_0-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, nice to meet you....
+Evaluating:   9%|▊         | 47/552 [02:41<21:04,  2.50s/it]
+⚠️  [50/552] Failed to parse output for -fZc293MpJk_2-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I drove to the restaurant, but it started snowing and the road was closed, so I took the train and later typed on my computer....
+Evaluating:   9%|▊         | 48/552 [02:46<26:19,  3.13s/it]
+⚠️  [49/552] Failed to parse output for g3kFAmcBpFc_0_1_3-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:   9%|▉         | 49/552 [02:53<35:32,  4.24s/it]
+⚠️  [54/552] Failed to parse output for G3EYpadwqck_4-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 50/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:   9%|▉         | 50/552 [02:53<26:49,  3.21s/it]
+⚠️  [48/552] Failed to parse output for f_zna_wG3zo_6-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:   9%|▉         | 51/552 [02:55<23:05,  2.77s/it]
+⚠️  [52/552] Failed to parse output for G2VzB5-JkRA_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: We will learn the numbers one through five in sign language....
+Evaluating:   9%|▉         | 52/552 [02:55<16:32,  1.99s/it]
+⚠️  [53/552] Failed to parse output for G06Irzcwxiw_17-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+⚠️  [47/552] Failed to parse output for g1HXoDkax5A_1-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I’m thirsty, I drank, I’m finished, look....
+Evaluating:  10%|▉         | 54/552 [02:59<16:05,  1.94s/it]
+⚠️  [56/552] Failed to parse output for FZrU_mEryAs_7-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Yesterday it rained, so I went to the store and bought cookies....
+Evaluating:  10%|▉         | 55/552 [03:05<23:53,  2.88s/it]
+⚠️  [57/552] Failed to parse output for g0iNy-yPisM_13-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:  10%|█         | 56/552 [03:09<27:25,  3.32s/it]
+⚠️  [60/552] Failed to parse output for G2VAlFdgof4_2-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf; please provide an interpreter when we meet....
+Evaluating:  10%|█         | 57/552 [03:13<28:55,  3.51s/it]
+⚠️  [55/552] Failed to parse output for G0MjvzT_UqM_9-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please explain again, I forgot your name....
+Evaluating:  11%|█         | 58/552 [03:14<23:12,  2.82s/it]
+⚠️  [58/552] Failed to parse output for G23JltC2N8g_3-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your sign name?...
+Evaluating:  11%|█         | 59/552 [03:17<21:34,  2.63s/it]
+⚠️  [65/552] Failed to parse output for G3g0-BeFN3c_2-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 60/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  11%|█         | 60/552 [03:18<19:11,  2.34s/it]
+⚠️  [64/552] Failed to parse output for G3RvsnzQrXQ_10-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am an interpreter and I can help you....
+Evaluating:  11%|█         | 61/552 [03:30<41:32,  5.08s/it]
+⚠️  [66/552] Failed to parse output for g2SdWBPoXZ0_3-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am happy to learn to read and write with your help, I'm finished....
+Evaluating:  11%|█         | 62/552 [03:31<31:07,  3.81s/it]
+⚠️  [62/552] Failed to parse output for g25IORxoyXE_11-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I will read the menu, order food, and pay with cash....
+Evaluating:  11%|█▏        | 63/552 [03:34<28:41,  3.52s/it]
+⚠️  [59/552] Failed to parse output for FzOQMA-CVPc_1-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I love you....
+Evaluating:  12%|█▏        | 64/552 [03:35<24:37,  3.03s/it]
+⚠️  [61/552] Failed to parse output for g0fgci8L_rc_16-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Girlfriend....
+Evaluating:  12%|█▏        | 65/552 [03:39<25:10,  3.10s/it]
+⚠️  [63/552] Failed to parse output for g3pXM5X3_Xw_8-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  12%|█▏        | 66/552 [03:41<22:38,  2.79s/it]
+⚠️  [70/552] Failed to parse output for G3EfBFwsOpE_3-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: School....
+Evaluating:  12%|█▏        | 67/552 [03:47<31:41,  3.92s/it]
+⚠️  [69/552] Failed to parse output for G2dND014Ps4_3-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  12%|█▏        | 68/552 [03:48<23:20,  2.89s/it]
+⚠️  [68/552] Failed to parse output for G1GUMky8kWc_1-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen....
+Evaluating:  12%|█▎        | 69/552 [03:51<23:15,  2.89s/it]
+⚠️  [71/552] Failed to parse output for g1z6HOJ0yRw_5-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Clap your hands....
+
+💾 Progress saved: 70/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  13%|█▎        | 70/552 [03:54<24:59,  3.11s/it]
+⚠️  [67/552] Failed to parse output for G0PNAsonBGk_3-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I waited a long time for my food....
+
+⚠️  [75/552] Failed to parse output for g1xdqxCZxTg_23-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: School....
+Evaluating:  13%|█▎        | 72/552 [03:55<14:26,  1.80s/it]
+⚠️  [72/552] Failed to parse output for G2VAlFdgof4_1-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, nice to meet you....
+Evaluating:  13%|█▎        | 73/552 [03:58<17:54,  2.24s/it]
+⚠️  [76/552] Failed to parse output for g0t4Wz5qsT8_7-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Congratulations, you both did a great job....
+
+⚠️  [74/552] Failed to parse output for FZLxEwsoc1c_8-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  14%|█▎        | 75/552 [04:04<19:25,  2.44s/it]
+⚠️  [78/552] Failed to parse output for G3FhmHz_7hs_10-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  14%|█▍        | 76/552 [04:13<32:10,  4.06s/it]
+⚠️  [84/552] Failed to parse output for G3EE6yhl1vk_9-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  14%|█▍        | 77/552 [04:14<25:45,  3.25s/it]
+⚠️  [77/552] Failed to parse output for G3di9jJTqDs_4-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  14%|█▍        | 78/552 [04:22<34:25,  4.36s/it]
+⚠️  [79/552] Failed to parse output for G1hb5HugzVk_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Pay by check....
+Evaluating:  14%|█▍        | 79/552 [04:23<28:02,  3.56s/it]
+⚠️  [73/552] Failed to parse output for FzaQ-Q5gSmI_10-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you for your help with money and writing at work....
+
+💾 Progress saved: 80/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  14%|█▍        | 80/552 [04:26<25:28,  3.24s/it]
+⚠️  [81/552] Failed to parse output for g25IORxoyXE_4-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I can help interpret....
+
+⚠️  [82/552] Failed to parse output for -g0sqksgyc4_0-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  15%|█▍        | 82/552 [04:26<14:39,  1.87s/it]
+⚠️  [86/552] Failed to parse output for G3di9jJTqDs_6-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  15%|█▌        | 83/552 [04:28<14:57,  1.91s/it]
+⚠️  [83/552] Failed to parse output for G2dND014Ps4_0-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  15%|█▌        | 84/552 [04:28<12:13,  1.57s/it]
+⚠️  [85/552] Failed to parse output for FZCF7kPIyOk_9-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please call me—I want to meet; when is a good time for you, and I can drive....
+Evaluating:  15%|█▌        | 85/552 [04:30<12:36,  1.62s/it]
+⚠️  [80/552] Failed to parse output for g1HvmBOR7Y4_0-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  16%|█▌        | 86/552 [04:38<25:37,  3.30s/it]
+⚠️  [87/552] Failed to parse output for G3RvsnzQrXQ_4-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write your name on the paper....
+Evaluating:  16%|█▌        | 87/552 [04:39<21:38,  2.79s/it]
+⚠️  [89/552] Failed to parse output for g2o-GFdGOJE_23-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can you help me understand what money is?...
+Evaluating:  16%|█▌        | 88/552 [04:44<24:55,  3.22s/it]
+⚠️  [93/552] Failed to parse output for fzDHRCKr7wU_16-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  16%|█▌        | 89/552 [04:52<35:26,  4.59s/it]
+⚠️  [88/552] Failed to parse output for fZM3IcM2Xs4_17-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, my name is, what is your name?...
+
+💾 Progress saved: 90/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  16%|█▋        | 90/552 [04:53<29:11,  3.79s/it]
+⚠️  [90/552] Failed to parse output for G33aqW3DLpc_3-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please wear a mask....
+Evaluating:  16%|█▋        | 91/552 [04:54<21:49,  2.84s/it]
+⚠️  [94/552] Failed to parse output for f_zna_wG3zo_17-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Help....
+Evaluating:  17%|█▋        | 92/552 [04:54<15:32,  2.03s/it]
+⚠️  [95/552] Failed to parse output for g3sLd8JupoQ_7-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  17%|█▋        | 93/552 [04:59<21:01,  2.75s/it]
+⚠️  [91/552] Failed to parse output for g0S7FAqIweA_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Belt....
+Evaluating:  17%|█▋        | 94/552 [04:59<16:28,  2.16s/it]
+⚠️  [92/552] Failed to parse output for g1vUH8Iy4vw_1-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I play the drums....
+Evaluating:  17%|█▋        | 95/552 [05:04<21:53,  2.87s/it]
+⚠️  [96/552] Failed to parse output for g3sLd8JupoQ_5-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What help do you want?...
+Evaluating:  17%|█▋        | 96/552 [05:05<17:40,  2.33s/it]
+⚠️  [100/552] Failed to parse output for g1ccEYTMGGY_16-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  18%|█▊        | 97/552 [05:07<16:07,  2.13s/it]
+⚠️  [97/552] Failed to parse output for g2eTD-1Jcro_22-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Okay, calm down....
+Evaluating:  18%|█▊        | 98/552 [05:07<11:38,  1.54s/it]
+⚠️  [98/552] Failed to parse output for G42xKICVj9U_3-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: We play at school....
+Evaluating:  18%|█▊        | 99/552 [05:08<09:54,  1.31s/it]
+⚠️  [99/552] Failed to parse output for G42xKICVj9U_0-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 100/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  18%|█▊        | 100/552 [05:10<12:41,  1.68s/it]
+⚠️  [104/552] Failed to parse output for G2VzB5-JkRA_10-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  18%|█▊        | 101/552 [05:21<32:21,  4.31s/it]
+⚠️  [105/552] Failed to parse output for g0fgci8L_rc_0-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write your name on the paper....
+Evaluating:  18%|█▊        | 102/552 [05:22<26:14,  3.50s/it]
+⚠️  [102/552] Failed to parse output for G2VzB5-JkRA_6-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  19%|█▊        | 103/552 [05:24<23:01,  3.08s/it]
+⚠️  [110/552] Failed to parse output for fzrJBu2qsM8_2-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  19%|█▉        | 104/552 [05:27<21:44,  2.91s/it]
+⚠️  [101/552] Failed to parse output for _FzvMVnR_aU_2-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, what is your name sign; please write it down....
+Evaluating:  19%|█▉        | 105/552 [05:30<21:15,  2.85s/it]
+⚠️  [106/552] Failed to parse output for g3jQ5ecjGz8_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tomorrow our class will meet after I get my vaccination....
+Evaluating:  19%|█▉        | 106/552 [05:36<29:52,  4.02s/it]
+⚠️  [103/552] Failed to parse output for 92V3oH63zbQ_1-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Call me and let's go on a coffee date....
+
+⚠️  [108/552] Failed to parse output for g3PBeTb1TCw_12-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  20%|█▉        | 108/552 [05:37<17:57,  2.43s/it]
+⚠️  [107/552] Failed to parse output for G19uBylwQww_18-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  20%|█▉        | 109/552 [05:42<21:09,  2.87s/it]
+⚠️  [115/552] Failed to parse output for g2ur4BIuN0Q_2-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 110/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  20%|█▉        | 110/552 [05:43<18:05,  2.46s/it]
+⚠️  [112/552] Failed to parse output for g1xdqxCZxTg_10-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  20%|██        | 111/552 [05:44<15:45,  2.14s/it]
+⚠️  [111/552] Failed to parse output for G3di9jJTqDs_3-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  20%|██        | 112/552 [05:52<26:52,  3.67s/it]
+⚠️  [113/552] Failed to parse output for G3g0-BeFN3c_32-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: If you need help or don't understand, call me....
+Evaluating:  20%|██        | 113/552 [05:55<26:30,  3.62s/it]
+⚠️  [114/552] Failed to parse output for g0yUlOaqL6k_9-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I need coffee....
+Evaluating:  21%|██        | 114/552 [05:59<27:36,  3.78s/it]
+⚠️  [120/552] Failed to parse output for FZCF7kPIyOk_7-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  21%|██        | 115/552 [06:01<21:58,  3.02s/it]
+⚠️  [119/552] Failed to parse output for G2lEchCCRAo_10-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  21%|██        | 116/552 [06:05<25:19,  3.48s/it]
+⚠️  [122/552] Failed to parse output for G2VzB5-JkRA_4-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I love you....
+Evaluating:  21%|██        | 117/552 [06:07<20:30,  2.83s/it]
+⚠️  [121/552] Failed to parse output for FzQPg4aqNYc_6-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  21%|██▏       | 118/552 [06:08<17:57,  2.48s/it]
+⚠️  [116/552] Failed to parse output for g3ZgF8gdfLo_12-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Do you want to meet with me to play a game and then eat together?...
+Evaluating:  22%|██▏       | 119/552 [06:09<14:39,  2.03s/it]
+⚠️  [109/552] Failed to parse output for g1HXoDkax5A_15-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Candy....
+
+💾 Progress saved: 120/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  22%|██▏       | 120/552 [06:12<16:15,  2.26s/it]
+⚠️  [118/552] Failed to parse output for G3OMdQo1zjY_4-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Watch and think; I will show you three things....
+Evaluating:  22%|██▏       | 121/552 [06:16<19:52,  2.77s/it]
+⚠️  [117/552] Failed to parse output for fzDHRCKr7wU_14-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: After school today, we will play together....
+Evaluating:  22%|██▏       | 122/552 [06:18<19:00,  2.65s/it]
+⚠️  [125/552] Failed to parse output for G3GcPpidwxk_19-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you....
+Evaluating:  22%|██▏       | 123/552 [06:21<18:34,  2.60s/it]
+⚠️  [124/552] Failed to parse output for _G0MZFLIHa0_5-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  22%|██▏       | 124/552 [06:22<16:06,  2.26s/it]
+⚠️  [123/552] Failed to parse output for g2eTD-1Jcro_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I understand now....
+Evaluating:  23%|██▎       | 125/552 [06:27<20:56,  2.94s/it]
+⚠️  [129/552] Failed to parse output for G2hnUeetWcc_16-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Deaf people can drive....
+Evaluating:  23%|██▎       | 126/552 [06:36<34:29,  4.86s/it]
+⚠️  [131/552] Failed to parse output for g2ELiaFjKfs_4-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: See you later at Bible study....
+Evaluating:  23%|██▎       | 127/552 [06:39<29:20,  4.14s/it]
+⚠️  [128/552] Failed to parse output for G2kVb4gINSI_11-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Applause....
+Evaluating:  23%|██▎       | 128/552 [06:40<23:33,  3.33s/it]
+⚠️  [126/552] Failed to parse output for g2ur4BIuN0Q_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: It is one o’clock....
+Evaluating:  23%|██▎       | 129/552 [06:41<18:56,  2.69s/it]
+⚠️  [132/552] Failed to parse output for -g45vqccdzI_3-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 130/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  24%|██▎       | 130/552 [06:46<24:17,  3.45s/it]
+⚠️  [133/552] Failed to parse output for g0iNy-yPisM_14-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  24%|██▎       | 131/552 [06:51<26:00,  3.71s/it]
+⚠️  [130/552] Failed to parse output for fzQ2E3_xBZA_12-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Help me....
+Evaluating:  24%|██▍       | 132/552 [06:51<19:32,  2.79s/it]
+⚠️  [137/552] Failed to parse output for G3k86AVFwVs_15-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  24%|██▍       | 133/552 [06:53<16:02,  2.30s/it]
+⚠️  [127/552] Failed to parse output for G3FhmHz_7hs_13-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: About the restaurant....
+Evaluating:  24%|██▍       | 134/552 [06:53<12:01,  1.73s/it]
+⚠️  [135/552] Failed to parse output for f_zna_wG3zo_4-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Call me....
+Evaluating:  24%|██▍       | 135/552 [06:56<13:55,  2.00s/it]
+⚠️  [136/552] Failed to parse output for fzcsY2gm7t0_10-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you, write it on the paper, I love you, goodbye....
+Evaluating:  25%|██▍       | 136/552 [07:02<23:07,  3.34s/it]
+⚠️  [140/552] Failed to parse output for fzQ2E3_xBZA_9-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:  25%|██▍       | 137/552 [07:04<21:04,  3.05s/it]
+⚠️  [139/552] Failed to parse output for G23G21G49dk_2-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+⚠️  [142/552] Failed to parse output for fzrJBu2qsM8_6-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  25%|██▌       | 139/552 [07:05<12:40,  1.84s/it]
+⚠️  [134/552] Failed to parse output for 3ddzkmFPEBU_3-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: My name is [fingerspelled], nice to meet you....
+
+💾 Progress saved: 140/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  25%|██▌       | 140/552 [07:16<27:36,  4.02s/it]
+⚠️  [143/552] Failed to parse output for G42xKICVj9U_14-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write your name here and sign below, thank you....
+Evaluating:  26%|██▌       | 141/552 [07:17<21:36,  3.15s/it]
+⚠️  [144/552] Failed to parse output for g1ccEYTMGGY_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I work as a cleaner, thank you for listening....
+Evaluating:  26%|██▌       | 142/552 [07:17<16:53,  2.47s/it]
+⚠️  [141/552] Failed to parse output for fzQ2E3_xBZA_6-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Basement....
+Evaluating:  26%|██▌       | 143/552 [07:21<18:49,  2.76s/it]
+⚠️  [138/552] Failed to parse output for fzOH00UZg84_30-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: My name is [redacted], nice to meet you....
+Evaluating:  26%|██▌       | 144/552 [07:23<17:55,  2.64s/it]
+⚠️  [146/552] Failed to parse output for G3di9jJTqDs_7-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  26%|██▋       | 145/552 [07:24<14:17,  2.11s/it]
+⚠️  [148/552] Failed to parse output for fzueHkUDyhE_3-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  26%|██▋       | 146/552 [07:29<19:48,  2.93s/it]
+⚠️  [147/552] Failed to parse output for G0PNAsonBGk_14-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's play the game again....
+Evaluating:  27%|██▋       | 147/552 [07:35<26:32,  3.93s/it]
+⚠️  [150/552] Failed to parse output for G05uFub3YFc_4-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  27%|██▋       | 148/552 [07:35<19:19,  2.87s/it]
+⚠️  [154/552] Failed to parse output for G3di9jJTqDs_6-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Do you want to eat together?...
+Evaluating:  27%|██▋       | 149/552 [07:36<14:43,  2.19s/it]
+⚠️  [152/552] Failed to parse output for G05uFub3YFc_3-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 150/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  27%|██▋       | 150/552 [07:39<16:43,  2.50s/it]
+⚠️  [149/552] Failed to parse output for g2eTD-1Jcro_6-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  27%|██▋       | 151/552 [07:42<17:27,  2.61s/it]
+⚠️  [157/552] Failed to parse output for G0PNAsonBGk_21-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: What time do we meet?...
+Evaluating:  28%|██▊       | 152/552 [07:42<12:29,  1.87s/it]
+⚠️  [153/552] Failed to parse output for G0MjvzT_UqM_13-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I'll assign homework, any questions?...
+Evaluating:  28%|██▊       | 153/552 [07:43<09:58,  1.50s/it]
+⚠️  [145/552] Failed to parse output for g3jQ5ecjGz8_4-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  28%|██▊       | 154/552 [07:44<09:09,  1.38s/it]
+⚠️  [156/552] Failed to parse output for G1LiGqM3FhM_16-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  28%|██▊       | 155/552 [07:47<12:38,  1.91s/it]
+⚠️  [151/552] Failed to parse output for G1lNlhjWC1I_11-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  28%|██▊       | 156/552 [07:52<18:23,  2.79s/it]
+⚠️  [158/552] Failed to parse output for f_zna_wG3zo_17-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  28%|██▊       | 157/552 [07:55<18:07,  2.75s/it]
+⚠️  [155/552] Failed to parse output for _G0RrDVpOZ4_7-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Type your name on line one....
+Evaluating:  29%|██▊       | 158/552 [07:56<14:54,  2.27s/it]
+⚠️  [163/552] Failed to parse output for f_zna_wG3zo_3-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Look to the left....
+Evaluating:  29%|██▉       | 159/552 [08:01<21:12,  3.24s/it]
+⚠️  [161/552] Failed to parse output for g1ccEYTMGGY_19-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+
+💾 Progress saved: 160/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  29%|██▉       | 160/552 [08:03<17:27,  2.67s/it]
+⚠️  [160/552] Failed to parse output for g3Cc_1-V31U_15-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  29%|██▉       | 161/552 [08:03<13:11,  2.02s/it]
+⚠️  [159/552] Failed to parse output for _fZbAxSSbX4_19-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  29%|██▉       | 162/552 [08:05<13:01,  2.00s/it]
+⚠️  [167/552] Failed to parse output for fzXsxNFczRA_6-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  30%|██▉       | 163/552 [08:07<12:28,  1.92s/it]
+⚠️  [165/552] Failed to parse output for g3ZluRtRXVc_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: When deaf people meet, they chat and sometimes write....
+Evaluating:  30%|██▉       | 164/552 [08:14<21:44,  3.36s/it]
+⚠️  [166/552] Failed to parse output for G3EfBFwsOpE_1-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  30%|██▉       | 165/552 [08:18<23:27,  3.64s/it]
+⚠️  [170/552] Failed to parse output for FZCF7kPIyOk_12-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please help me....
+Evaluating:  30%|███       | 166/552 [08:19<17:34,  2.73s/it]
+⚠️  [171/552] Failed to parse output for _fZbAxSSbX4_9-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  30%|███       | 167/552 [08:25<25:16,  3.94s/it]
+⚠️  [173/552] Failed to parse output for -g45vqccdzI_2-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Sorry, what is your name?...
+Evaluating:  30%|███       | 168/552 [08:26<18:20,  2.87s/it]
+⚠️  [162/552] Failed to parse output for G0Q6AlvH96I_14-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: At school, students learn to read and write....
+Evaluating:  31%|███       | 169/552 [08:42<43:54,  6.88s/it]
+⚠️  [169/552] Failed to parse output for _G0RrDVpOZ4_2-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 170/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  31%|███       | 170/552 [08:43<32:25,  5.09s/it]
+⚠️  [177/552] Failed to parse output for G1LiGqM3FhM_8-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please text me or call me now, thank you....
+Evaluating:  31%|███       | 171/552 [08:44<25:13,  3.97s/it]
+⚠️  [174/552] Failed to parse output for 92V3oH63zbQ_20-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, I am deaf, are you hearing?...
+Evaluating:  31%|███       | 172/552 [08:44<17:56,  2.83s/it]
+⚠️  [168/552] Failed to parse output for g2o-GFdGOJE_0-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: My friend and I are going to the store to buy items from the list, thank you....
+Evaluating:  31%|███▏      | 173/552 [08:46<15:35,  2.47s/it]
+⚠️  [176/552] Failed to parse output for G3FhmHz_7hs_12-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tell me what happened and write it down....
+
+⚠️  [172/552] Failed to parse output for FZrWOf-oGDk_2-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  32%|███▏      | 175/552 [08:49<13:16,  2.11s/it]
+⚠️  [175/552] Failed to parse output for G1QiXuldOxM_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: After driving, I washed the car....
+Evaluating:  32%|███▏      | 176/552 [08:50<10:22,  1.65s/it]
+⚠️  [164/552] Failed to parse output for G0MjvzT_UqM_1-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  32%|███▏      | 177/552 [08:59<22:26,  3.59s/it]
+⚠️  [181/552] Failed to parse output for G2kVb4gINSI_4-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Turn on the lights....
+Evaluating:  32%|███▏      | 178/552 [09:01<20:28,  3.29s/it]
+⚠️  [180/552] Failed to parse output for fzDHRCKr7wU_16-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  32%|███▏      | 179/552 [09:02<15:39,  2.52s/it]
+⚠️  [185/552] Failed to parse output for -fZc293MpJk_5-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I love you....
+
+💾 Progress saved: 180/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  33%|███▎      | 180/552 [09:07<20:45,  3.35s/it]
+⚠️  [179/552] Failed to parse output for G3k86AVFwVs_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can you help me learn sign language?...
+Evaluating:  33%|███▎      | 181/552 [09:07<14:57,  2.42s/it]
+⚠️  [178/552] Failed to parse output for G2JE_BEFVmE_1-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, I am deaf, married, have children, and I work....
+Evaluating:  33%|███▎      | 182/552 [09:09<12:51,  2.09s/it]
+⚠️  [188/552] Failed to parse output for G2VzB5-JkRA_9-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  33%|███▎      | 183/552 [09:12<15:25,  2.51s/it]
+⚠️  [183/552] Failed to parse output for G2JE_BEFVmE_3-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  33%|███▎      | 184/552 [09:12<11:29,  1.87s/it]
+⚠️  [182/552] Failed to parse output for g0TkUiO7t4I_4-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: It’s time to eat cookies....
+Evaluating:  34%|███▎      | 185/552 [09:13<08:35,  1.41s/it]
+⚠️  [184/552] Failed to parse output for g0TkUiO7t4I_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I have a deaf friend....
+Evaluating:  34%|███▎      | 186/552 [09:14<07:37,  1.25s/it]
+⚠️  [186/552] Failed to parse output for g2nvBjp0loQ_14-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  34%|███▍      | 187/552 [09:30<35:48,  5.89s/it]
+⚠️  [187/552] Failed to parse output for g3kFAmcBpFc_12-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  34%|███▍      | 188/552 [09:31<25:42,  4.24s/it]
+⚠️  [192/552] Failed to parse output for g0UUmEkoT1w_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want to drink soda....
+Evaluating:  34%|███▍      | 189/552 [09:31<18:28,  3.05s/it]
+⚠️  [190/552] Failed to parse output for fzrJBu2qsM8_9-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: I will show you how to make pancakes and serve them....
+
+💾 Progress saved: 190/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  34%|███▍      | 190/552 [09:35<20:34,  3.41s/it]
+⚠️  [189/552] Failed to parse output for G1lNlhjWC1I_13-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Do you know where your girlfriend is?...
+Evaluating:  35%|███▍      | 191/552 [09:40<22:30,  3.74s/it]
+⚠️  [197/552] Failed to parse output for g2nvBjp0loQ_8-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  35%|███▍      | 192/552 [09:40<16:12,  2.70s/it]
+⚠️  [194/552] Failed to parse output for g0Abwige7MQ_2-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's meet at school at one o'clock....
+Evaluating:  35%|███▍      | 193/552 [09:41<12:25,  2.08s/it]
+⚠️  [191/552] Failed to parse output for G21Gx_C18IA_6-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  35%|███▌      | 194/552 [09:47<19:10,  3.21s/it]
+⚠️  [193/552] Failed to parse output for G3GcPpidwxk_7-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, what is your name?...
+Evaluating:  35%|███▌      | 195/552 [09:48<16:22,  2.75s/it]
+⚠️  [198/552] Failed to parse output for fzOH00UZg84_14-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  36%|███▌      | 196/552 [09:53<19:44,  3.33s/it]
+⚠️  [195/552] Failed to parse output for -g0sqksgyc4_8-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I work at a school helping children....
+Evaluating:  36%|███▌      | 197/552 [09:54<16:31,  2.79s/it]
+⚠️  [196/552] Failed to parse output for G2dND014Ps4_9-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: The children in my family are playing....
+Evaluating:  36%|███▌      | 198/552 [09:55<12:04,  2.05s/it]
+⚠️  [200/552] Failed to parse output for FzUdcaxw_vs_9-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I write at school....
+Evaluating:  36%|███▌      | 199/552 [10:00<18:15,  3.10s/it]
+⚠️  [199/552] Failed to parse output for fZM3IcM2Xs4_17-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Call me this weekend....
+
+💾 Progress saved: 200/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  36%|███▌      | 200/552 [10:02<15:14,  2.60s/it]
+⚠️  [205/552] Failed to parse output for G1lNlhjWC1I_14-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  36%|███▋      | 201/552 [10:03<12:24,  2.12s/it]
+⚠️  [206/552] Failed to parse output for fZM3IcM2Xs4_7-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Explain....
+Evaluating:  37%|███▋      | 202/552 [10:08<18:37,  3.19s/it]
+⚠️  [207/552] Failed to parse output for g0UUmEkoT1w_3-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I like music....
+Evaluating:  37%|███▋      | 203/552 [10:13<21:31,  3.70s/it]
+⚠️  [201/552] Failed to parse output for G19uBylwQww_19-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: My friend is deaf and I work....
+Evaluating:  37%|███▋      | 204/552 [10:16<19:33,  3.37s/it]
+⚠️  [203/552] Failed to parse output for g2ELiaFjKfs_1-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  37%|███▋      | 205/552 [10:19<18:43,  3.24s/it]
+⚠️  [209/552] Failed to parse output for G3di9jJTqDs_8-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: My name is Holly....
+Evaluating:  37%|███▋      | 206/552 [10:25<24:14,  4.20s/it]
+⚠️  [204/552] Failed to parse output for g1HvmBOR7Y4_6-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I need help....
+
+⚠️  [202/552] Failed to parse output for g2NA_eBUcH8_24-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please help me clean....
+Evaluating:  38%|███▊      | 208/552 [10:29<17:15,  3.01s/it]
+⚠️  [213/552] Failed to parse output for G1GUMky8kWc_23-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  38%|███▊      | 209/552 [10:30<14:27,  2.53s/it]
+⚠️  [212/552] Failed to parse output for Fz-N1S0swh8_3-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can you help here?...
+
+💾 Progress saved: 210/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  38%|███▊      | 210/552 [10:33<15:33,  2.73s/it]
+⚠️  [211/552] Failed to parse output for fzOH00UZg84_25-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  38%|███▊      | 211/552 [10:36<15:54,  2.80s/it]
+⚠️  [210/552] Failed to parse output for g2v-M6EXcUE_15-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Which class?...
+Evaluating:  38%|███▊      | 212/552 [10:37<13:31,  2.39s/it]
+⚠️  [222/552] Failed to parse output for G1nq4fYZiyQ_4-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  39%|███▊      | 213/552 [10:53<35:00,  6.20s/it]
+⚠️  [208/552] Failed to parse output for g1ccEYTMGGY_4-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  39%|███▉      | 214/552 [10:53<24:58,  4.43s/it]
+⚠️  [216/552] Failed to parse output for g2nvBjp0loQ_4-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  39%|███▉      | 215/552 [11:02<31:43,  5.65s/it]
+⚠️  [221/552] Failed to parse output for g0pRnlPR-K0_3-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want to play, but I need time and money—what’s the name of the candy you want?...
+Evaluating:  39%|███▉      | 216/552 [11:03<23:48,  4.25s/it]
+⚠️  [220/552] Failed to parse output for G3EYpadwqck_7-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can we meet a deaf person?...
+Evaluating:  39%|███▉      | 217/552 [11:04<19:22,  3.47s/it]
+⚠️  [219/552] Failed to parse output for g0UUmEkoT1w_6-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  39%|███▉      | 218/552 [11:07<17:59,  3.23s/it]
+⚠️  [215/552] Failed to parse output for g0Abwige7MQ_0-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I need to write a paper....
+Evaluating:  40%|███▉      | 219/552 [11:10<17:41,  3.19s/it]
+⚠️  [214/552] Failed to parse output for g3sLd8JupoQ_14-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Start the car, drive, then play, and then wash your hands....
+
+💾 Progress saved: 220/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  40%|███▉      | 220/552 [11:15<21:21,  3.86s/it]
+⚠️  [226/552] Failed to parse output for _G0RrDVpOZ4_15-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  40%|████      | 221/552 [11:28<35:02,  6.35s/it]
+⚠️  [218/552] Failed to parse output for G0PNAsonBGk_8-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want coffee....
+Evaluating:  40%|████      | 222/552 [11:29<27:32,  5.01s/it]
+⚠️  [224/552] Failed to parse output for G06Irzcwxiw_16-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  40%|████      | 223/552 [11:31<22:25,  4.09s/it]
+⚠️  [228/552] Failed to parse output for g3ZluRtRXVc_3-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  41%|████      | 224/552 [11:40<30:12,  5.53s/it]
+⚠️  [230/552] Failed to parse output for G3FhmHz_7hs_16-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  41%|████      | 225/552 [11:41<22:26,  4.12s/it]
+⚠️  [223/552] Failed to parse output for G2kVb4gINSI_12-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Interpreters work with people at home....
+Evaluating:  41%|████      | 226/552 [11:42<17:47,  3.27s/it]
+⚠️  [234/552] Failed to parse output for fzOH00UZg84_16-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  41%|████      | 227/552 [11:45<16:43,  3.09s/it]
+⚠️  [227/552] Failed to parse output for G0peUY2cfeE_1-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Coffee or tea, play, eat, sorry, thank you....
+
+⚠️  [225/552] Failed to parse output for G06Irzcwxiw_21-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: My name is....
+Evaluating:  41%|████▏     | 229/552 [11:51<16:36,  3.08s/it]
+⚠️  [232/552] Failed to parse output for G0MjvzT_UqM_7-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am happy....
+
+💾 Progress saved: 230/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  42%|████▏     | 230/552 [11:51<12:44,  2.37s/it]
+⚠️  [231/552] Failed to parse output for fZgWKh3ENoE_12-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Where do you live?...
+Evaluating:  42%|████▏     | 231/552 [11:57<17:24,  3.25s/it]
+⚠️  [229/552] Failed to parse output for FzAIlhumvMA_7-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  42%|████▏     | 232/552 [11:57<12:53,  2.42s/it]
+⚠️  [235/552] Failed to parse output for g0uGWjwdOIw_1-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  42%|████▏     | 233/552 [12:00<13:15,  2.50s/it]
+⚠️  [233/552] Failed to parse output for FzQPg4aqNYc_7-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Who will buy?...
+Evaluating:  42%|████▏     | 234/552 [12:03<14:30,  2.74s/it]
+⚠️  [237/552] Failed to parse output for -g0iPSnQt6w_8-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you, nice to meet you....
+Evaluating:  43%|████▎     | 235/552 [12:05<13:10,  2.49s/it]
+⚠️  [236/552] Failed to parse output for f_zna_wG3zo_6-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I finished school; where will we meet and how many people?...
+Evaluating:  43%|████▎     | 236/552 [12:12<20:00,  3.80s/it]
+⚠️  [239/552] Failed to parse output for G3qZW-hZXaQ_4-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  43%|████▎     | 237/552 [12:17<21:15,  4.05s/it]
+⚠️  [240/552] Failed to parse output for g3X3XE6M2_A_21-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name; thank you for your help, please help me again....
+Evaluating:  43%|████▎     | 238/552 [12:22<22:18,  4.26s/it]
+⚠️  [247/552] Failed to parse output for g1xdqxCZxTg_16-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please repeat that more slowly....
+Evaluating:  43%|████▎     | 239/552 [12:23<17:50,  3.42s/it]
+⚠️  [238/552] Failed to parse output for G2kVb4gINSI_15-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: What time is your appointment, what is your name, please write it and wait calmly....
+
+💾 Progress saved: 240/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  43%|████▎     | 240/552 [12:25<15:55,  3.06s/it]
+⚠️  [241/552] Failed to parse output for 8kAWy2YodzQ_13-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  44%|████▎     | 241/552 [12:26<12:43,  2.46s/it]
+⚠️  [242/552] Failed to parse output for g1ccEYTMGGY_18-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please explain what is different when driving....
+Evaluating:  44%|████▍     | 242/552 [12:27<09:23,  1.82s/it]
+⚠️  [217/552] Failed to parse output for G3FhmHz_7hs_17-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Good morning, I am Deaf....
+Evaluating:  44%|████▍     | 243/552 [12:29<10:54,  2.12s/it]
+⚠️  [246/552] Failed to parse output for G1GUMky8kWc_15-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: There are three deaf people....
+Evaluating:  44%|████▍     | 244/552 [12:31<10:13,  1.99s/it]
+⚠️  [243/552] Failed to parse output for g0TkUiO7t4I_7-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I study at a deaf school....
+
+⚠️  [245/552] Failed to parse output for G1GUMky8kWc_19-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Which restaurant?...
+Evaluating:  45%|████▍     | 246/552 [12:38<14:06,  2.77s/it]
+⚠️  [249/552] Failed to parse output for g1xdqxCZxTg_12-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Play....
+Evaluating:  45%|████▍     | 247/552 [12:39<11:28,  2.26s/it]
+⚠️  [248/552] Failed to parse output for G42xKICVj9U_5-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am married and have children....
+Evaluating:  45%|████▍     | 248/552 [12:49<21:15,  4.20s/it]
+⚠️  [254/552] Failed to parse output for G42xKICVj9U_3-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  45%|████▌     | 249/552 [12:49<15:42,  3.11s/it]
+⚠️  [250/552] Failed to parse output for G3OMdQo1zjY_1-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 250/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  45%|████▌     | 250/552 [12:50<12:09,  2.41s/it]
+⚠️  [244/552] Failed to parse output for G3RvsnzQrXQ_5-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's play a card game together....
+Evaluating:  45%|████▌     | 251/552 [12:51<10:49,  2.16s/it]
+⚠️  [251/552] Failed to parse output for g2NA_eBUcH8_21-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: One, two, three, four, five, six, seven, eight, nine, ten....
+Evaluating:  46%|████▌     | 252/552 [12:55<13:31,  2.71s/it]
+⚠️  [257/552] Failed to parse output for g3X3XE6M2_A_4-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Pay when you finish work....
+Evaluating:  46%|████▌     | 253/552 [12:57<12:03,  2.42s/it]
+⚠️  [253/552] Failed to parse output for G3EfBFwsOpE_4-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Call me tomorrow....
+Evaluating:  46%|████▌     | 254/552 [13:01<14:05,  2.84s/it]
+⚠️  [252/552] Failed to parse output for g2SdWBPoXZ0_0-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your address?...
+Evaluating:  46%|████▌     | 255/552 [13:10<23:12,  4.69s/it]
+⚠️  [256/552] Failed to parse output for G-0gYel1YA8_0-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, I love you, thank you....
+Evaluating:  46%|████▋     | 256/552 [13:12<19:13,  3.90s/it]
+⚠️  [264/552] Failed to parse output for G06Irzcwxiw_18-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  47%|████▋     | 257/552 [13:14<16:18,  3.32s/it]
+⚠️  [259/552] Failed to parse output for g1uA0f9I0Sg_2-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can I buy a train ticket here?...
+Evaluating:  47%|████▋     | 258/552 [13:17<15:45,  3.22s/it]
+⚠️  [261/552] Failed to parse output for _fZbAxSSbX4_15-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  47%|████▋     | 259/552 [13:19<14:06,  2.89s/it]
+⚠️  [255/552] Failed to parse output for G2kVb4gINSI_17-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: My girlfriend wrote me a letter, and I waited all day but nothing came....
+
+💾 Progress saved: 260/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  47%|████▋     | 260/552 [13:20<10:45,  2.21s/it]
+⚠️  [258/552] Failed to parse output for fzOH00UZg84_19-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  47%|████▋     | 261/552 [13:20<07:52,  1.62s/it]
+⚠️  [263/552] Failed to parse output for 37ZtKNf6Yd8_5-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  47%|████▋     | 262/552 [13:23<10:41,  2.21s/it]
+⚠️  [262/552] Failed to parse output for g3pXM5X3_Xw_9-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Alone....
+Evaluating:  48%|████▊     | 263/552 [13:27<13:07,  2.73s/it]
+⚠️  [266/552] Failed to parse output for G3gm_C5UueQ_4-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  48%|████▊     | 264/552 [13:29<11:22,  2.37s/it]
+⚠️  [265/552] Failed to parse output for g1vUH8Iy4vw_23-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I feel nervous....
+Evaluating:  48%|████▊     | 265/552 [13:34<15:39,  3.27s/it]
+⚠️  [268/552] Failed to parse output for G3VM7etNABI_7-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  48%|████▊     | 266/552 [13:37<14:48,  3.11s/it]
+⚠️  [267/552] Failed to parse output for G3k86AVFwVs_9-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  48%|████▊     | 267/552 [13:39<12:48,  2.70s/it]
+⚠️  [273/552] Failed to parse output for G0PNAsonBGk_15-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you, nice to meet you; what is your name?...
+Evaluating:  49%|████▊     | 268/552 [13:48<21:22,  4.52s/it]
+⚠️  [275/552] Failed to parse output for g2ELiaFjKfs_3-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  49%|████▊     | 269/552 [13:49<16:30,  3.50s/it]
+⚠️  [269/552] Failed to parse output for FzAIlhumvMA_3-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: My friend and I went to a restaurant, ordered food and drinks, talked, and I paid....
+
+💾 Progress saved: 270/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  49%|████▉     | 270/552 [13:51<14:45,  3.14s/it]
+⚠️  [271/552] Failed to parse output for G42xKICVj9U_19-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Don't panic, calm down....
+Evaluating:  49%|████▉     | 271/552 [13:54<14:15,  3.04s/it]
+⚠️  [260/552] Failed to parse output for g0TkUiO7t4I_2-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  49%|████▉     | 272/552 [13:57<13:54,  2.98s/it]
+⚠️  [270/552] Failed to parse output for g3X3XE6M2_A_17-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want help with school, thank you....
+Evaluating:  49%|████▉     | 273/552 [13:59<12:41,  2.73s/it]
+⚠️  [272/552] Failed to parse output for fZM3IcM2Xs4_10_11_12_13-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write your name and sign when we meet....
+Evaluating:  50%|████▉     | 274/552 [14:04<16:29,  3.56s/it]
+⚠️  [274/552] Failed to parse output for G06Irzcwxiw_24-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf and I am learning sign language to communicate....
+Evaluating:  50%|████▉     | 275/552 [14:06<14:15,  3.09s/it]
+⚠️  [278/552] Failed to parse output for _G0MZFLIHa0_9-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write your name on the paper and give it to me, thank you....
+Evaluating:  50%|█████     | 276/552 [14:07<10:29,  2.28s/it]
+⚠️  [276/552] Failed to parse output for G3FhmHz_7hs_3-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  50%|█████     | 277/552 [14:16<19:53,  4.34s/it]
+⚠️  [282/552] Failed to parse output for G3bMqicS4bQ_14-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  50%|█████     | 278/552 [14:16<14:46,  3.23s/it]
+⚠️  [284/552] Failed to parse output for G25fic3QxDk_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am hearing and I am learning sign language....
+Evaluating:  51%|█████     | 279/552 [14:20<15:39,  3.44s/it]
+⚠️  [280/552] Failed to parse output for g1HvmBOR7Y4_10-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf, I work at a school cafeteria, and I am married with two children....
+
+💾 Progress saved: 280/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  51%|█████     | 280/552 [14:22<13:33,  2.99s/it]
+⚠️  [281/552] Failed to parse output for g2QdwYqm8pg_5-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf....
+Evaluating:  51%|█████     | 281/552 [14:24<12:09,  2.69s/it]
+⚠️  [288/552] Failed to parse output for g2eTD-1Jcro_13-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Pray....
+Evaluating:  51%|█████     | 282/552 [14:25<09:21,  2.08s/it]
+⚠️  [277/552] Failed to parse output for g2ur4BIuN0Q_8-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: The doctor helps deaf people....
+
+⚠️  [279/552] Failed to parse output for G06Irzcwxiw_6-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  51%|█████▏    | 284/552 [14:28<08:22,  1.88s/it]
+⚠️  [287/552] Failed to parse output for G2uKe6hCNSo_15-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I can help you....
+Evaluating:  52%|█████▏    | 285/552 [14:32<10:42,  2.41s/it]
+⚠️  [289/552] Failed to parse output for G1GUMky8kWc_22-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I love you....
+Evaluating:  52%|█████▏    | 286/552 [14:37<13:46,  3.11s/it]
+⚠️  [283/552] Failed to parse output for fzDHRCKr7wU_1-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you....
+Evaluating:  52%|█████▏    | 287/552 [14:46<20:39,  4.68s/it]
+⚠️  [286/552] Failed to parse output for -g0iPSnQt6w_14-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I read two books....
+Evaluating:  52%|█████▏    | 288/552 [14:48<16:35,  3.77s/it]
+⚠️  [293/552] Failed to parse output for g2iFC1st7zQ_4-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What was that again?...
+Evaluating:  52%|█████▏    | 289/552 [14:50<15:19,  3.50s/it]
+⚠️  [294/552] Failed to parse output for fzrJBu2qsM8_11-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please help me, thank you, I love you....
+
+💾 Progress saved: 290/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  53%|█████▎    | 290/552 [14:55<16:52,  3.86s/it]
+⚠️  [290/552] Failed to parse output for g2NA_eBUcH8_1-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Play and read more....
+Evaluating:  53%|█████▎    | 291/552 [14:57<14:29,  3.33s/it]
+⚠️  [298/552] Failed to parse output for f_zna_wG3zo_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Dog....
+Evaluating:  53%|█████▎    | 292/552 [14:58<11:17,  2.61s/it]
+⚠️  [291/552] Failed to parse output for g1ccEYTMGGY_7-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  53%|█████▎    | 293/552 [15:01<11:26,  2.65s/it]
+⚠️  [297/552] Failed to parse output for G23G21G49dk_14-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you for sharing your ideas; when we work together, we are strong....
+Evaluating:  53%|█████▎    | 294/552 [15:01<08:11,  1.90s/it]
+⚠️  [285/552] Failed to parse output for g3PBeTb1TCw_2-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Write your name and think back to the past....
+Evaluating:  53%|█████▎    | 295/552 [15:04<09:03,  2.11s/it]
+⚠️  [292/552] Failed to parse output for G25fic3QxDk_10-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Pay me exact change....
+Evaluating:  54%|█████▎    | 296/552 [15:04<06:57,  1.63s/it]
+⚠️  [296/552] Failed to parse output for g2ur4BIuN0Q_10-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tell me when we meet and help me finish the paper....
+Evaluating:  54%|█████▍    | 297/552 [15:08<10:07,  2.38s/it]
+⚠️  [295/552] Failed to parse output for g2o-GFdGOJE_5-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Who will buy what and when?...
+Evaluating:  54%|█████▍    | 298/552 [15:11<10:18,  2.43s/it]
+⚠️  [300/552] Failed to parse output for G3FhmHz_7hs_19-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  54%|█████▍    | 299/552 [15:17<15:03,  3.57s/it]
+⚠️  [305/552] Failed to parse output for FzAIlhumvMA_2-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: What time do we meet at school?...
+
+💾 Progress saved: 300/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  54%|█████▍    | 300/552 [15:28<24:35,  5.85s/it]
+⚠️  [309/552] Failed to parse output for fzOH00UZg84_26-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  55%|█████▍    | 301/552 [15:30<18:50,  4.50s/it]
+⚠️  [306/552] Failed to parse output for G2dND014Ps4_2-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  55%|█████▍    | 302/552 [15:31<14:47,  3.55s/it]
+⚠️  [299/552] Failed to parse output for G3FhmHz_7hs_17-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want to tell you and explain with two examples....
+Evaluating:  55%|█████▍    | 303/552 [15:32<11:39,  2.81s/it]
+⚠️  [307/552] Failed to parse output for fZM3IcM2Xs4_7-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: You are beautiful....
+
+⚠️  [308/552] Failed to parse output for -g0iPSnQt6w_3-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  55%|█████▌    | 305/552 [15:33<07:39,  1.86s/it]
+⚠️  [304/552] Failed to parse output for fzNnTgHa1lM_4-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, thank you....
+Evaluating:  55%|█████▌    | 306/552 [15:34<06:33,  1.60s/it]
+⚠️  [301/552] Failed to parse output for G42xKICVj9U_13-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Look, everyone is equal; calm down....
+Evaluating:  56%|█████▌    | 307/552 [15:35<05:41,  1.40s/it]
+⚠️  [302/552] Failed to parse output for fzDHRCKr7wU_15-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  56%|█████▌    | 308/552 [15:40<09:09,  2.25s/it]
+⚠️  [303/552] Failed to parse output for g1xdqxCZxTg_2-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: My wife and I went to a restaurant; we’re done—thank you, it was good, and we want more....
+Evaluating:  56%|█████▌    | 309/552 [15:40<07:24,  1.83s/it]
+⚠️  [310/552] Failed to parse output for g0UUmEkoT1w_7-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please help me, thank you....
+
+💾 Progress saved: 310/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  56%|█████▌    | 310/552 [15:47<13:17,  3.30s/it]
+⚠️  [311/552] Failed to parse output for g0t4Wz5qsT8_12-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's meet at the school at two o'clock....
+Evaluating:  56%|█████▋    | 311/552 [15:52<14:44,  3.67s/it]
+⚠️  [314/552] Failed to parse output for g3ZgF8gdfLo_1-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Cookie....
+Evaluating:  57%|█████▋    | 312/552 [15:56<15:06,  3.78s/it]
+⚠️  [317/552] Failed to parse output for G38DbiHHTW0_7-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  57%|█████▋    | 313/552 [15:57<11:26,  2.87s/it]
+⚠️  [313/552] Failed to parse output for g1ccEYTMGGY_13-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  57%|█████▋    | 314/552 [16:00<11:36,  2.93s/it]
+⚠️  [316/552] Failed to parse output for 37ZtKNf6Yd8_0-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  57%|█████▋    | 315/552 [16:02<11:21,  2.88s/it]
+⚠️  [315/552] Failed to parse output for G3GcPpidwxk_12-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: My mother works....
+Evaluating:  57%|█████▋    | 316/552 [16:04<09:50,  2.50s/it]
+⚠️  [312/552] Failed to parse output for g1HXoDkax5A_8-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I already put on my shirt....
+Evaluating:  57%|█████▋    | 317/552 [16:13<17:04,  4.36s/it]
+⚠️  [321/552] Failed to parse output for G06Irzcwxiw_2-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: What time should we meet tomorrow?...
+Evaluating:  58%|█████▊    | 318/552 [16:14<13:16,  3.41s/it]
+⚠️  [320/552] Failed to parse output for FzUdcaxw_vs_18-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is one example?...
+Evaluating:  58%|█████▊    | 319/552 [16:21<17:25,  4.49s/it]
+⚠️  [318/552] Failed to parse output for g2o-GFdGOJE_21-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: After work, we will meet to talk and eat together....
+
+💾 Progress saved: 320/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  58%|█████▊    | 320/552 [16:25<17:11,  4.45s/it]
+⚠️  [327/552] Failed to parse output for G3bMqicS4bQ_2-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please wash your hands with soap and water for at least 20 seconds....
+Evaluating:  58%|█████▊    | 321/552 [16:30<17:33,  4.56s/it]
+⚠️  [326/552] Failed to parse output for fzDHRCKr7wU_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I think we should meet at the restaurant over there....
+Evaluating:  58%|█████▊    | 322/552 [16:32<14:50,  3.87s/it]
+⚠️  [334/552] Failed to parse output for 8kAWy2YodzQ_19-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: Error code: 400 - {'error': {'inner_error': {'code': 'ResponsibleAIPolicyViolation', 'content_filter_results': {'sexual': {'filtered': True,...
+Evaluating:  59%|█████▊    | 323/552 [16:34<11:35,  3.04s/it]
+⚠️  [329/552] Failed to parse output for FZCF7kPIyOk_18-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I need help driving....
+Evaluating:  59%|█████▊    | 324/552 [16:36<10:33,  2.78s/it]
+⚠️  [319/552] Failed to parse output for g3DkYITeIy0_5-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name, and I like to eat candy and drink coffee....
+Evaluating:  59%|█████▉    | 325/552 [16:39<10:43,  2.83s/it]
+⚠️  [322/552] Failed to parse output for G3FhmHz_7hs_7-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: What helps when meeting with an interpreter again?...
+Evaluating:  59%|█████▉    | 326/552 [16:40<09:08,  2.43s/it]
+⚠️  [328/552] Failed to parse output for g3BsH_C3u7Y_1-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's meet tomorrow afternoon and chat; text me....
+Evaluating:  59%|█████▉    | 327/552 [16:41<06:55,  1.85s/it]
+⚠️  [324/552] Failed to parse output for g2eTD-1Jcro_19-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Today I am learning sign language....
+Evaluating:  59%|█████▉    | 328/552 [16:53<18:46,  5.03s/it]
+⚠️  [323/552] Failed to parse output for G0MjvzT_UqM_14-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf, what is your name sign?...
+Evaluating:  60%|█████▉    | 329/552 [16:54<13:47,  3.71s/it]
+⚠️  [325/552] Failed to parse output for fzQ2E3_xBZA_12-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write your name....
+
+💾 Progress saved: 330/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  60%|█████▉    | 330/552 [16:55<10:34,  2.86s/it]
+⚠️  [331/552] Failed to parse output for G0MjvzT_UqM_21-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Eat vegetables....
+Evaluating:  60%|█████▉    | 331/552 [17:04<18:15,  4.96s/it]
+⚠️  [333/552] Failed to parse output for G3FhmHz_7hs_6-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  60%|██████    | 332/552 [17:05<13:20,  3.64s/it]
+⚠️  [338/552] Failed to parse output for fzegqlecOD8_5-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  60%|██████    | 333/552 [17:06<10:19,  2.83s/it]
+⚠️  [330/552] Failed to parse output for g3ZluRtRXVc_1-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Do you know the school's phone number; write it down and then we can go play....
+Evaluating:  61%|██████    | 334/552 [17:09<10:29,  2.89s/it]
+⚠️  [337/552] Failed to parse output for 92V3oH63zbQ_17-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's meet to finalize the workout schedule and I'll text you....
+Evaluating:  61%|██████    | 335/552 [17:11<09:59,  2.76s/it]
+⚠️  [336/552] Failed to parse output for g0fgci8L_rc_18-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: In class, write and tell me when you're finished....
+Evaluating:  61%|██████    | 336/552 [17:19<14:57,  4.15s/it]
+⚠️  [339/552] Failed to parse output for _g0fpC8aiME_3-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  61%|██████    | 337/552 [17:19<10:32,  2.94s/it]
+⚠️  [332/552] Failed to parse output for g13Jo_kFliM_0-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's work together to help....
+Evaluating:  61%|██████    | 338/552 [17:22<10:15,  2.88s/it]
+⚠️  [335/552] Failed to parse output for G2kVb4gINSI_16-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: The week is over....
+Evaluating:  61%|██████▏   | 339/552 [17:23<08:42,  2.45s/it]
+⚠️  [342/552] Failed to parse output for g2o-GFdGOJE_18-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: How can I help you?...
+
+💾 Progress saved: 340/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  62%|██████▏   | 340/552 [17:24<06:27,  1.83s/it]
+⚠️  [340/552] Failed to parse output for fzegqlecOD8_1-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  62%|██████▏   | 341/552 [17:25<05:56,  1.69s/it]
+⚠️  [341/552] Failed to parse output for G1hb5HugzVk_4-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Write your phone number here....
+Evaluating:  62%|██████▏   | 342/552 [17:28<06:57,  1.99s/it]
+⚠️  [343/552] Failed to parse output for fzDHRCKr7wU_11-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Write it down on paper....
+Evaluating:  62%|██████▏   | 343/552 [17:34<11:05,  3.19s/it]
+⚠️  [344/552] Failed to parse output for g3ZgF8gdfLo_0-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  62%|██████▏   | 344/552 [17:40<14:24,  4.16s/it]
+⚠️  [345/552] Failed to parse output for g1ccEYTMGGY_12-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Text me and let's hang out....
+Evaluating:  62%|██████▎   | 345/552 [17:41<10:38,  3.08s/it]
+⚠️  [347/552] Failed to parse output for Fzj3jz2Imf0_0-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's play for money—where should we meet?...
+Evaluating:  63%|██████▎   | 346/552 [17:43<09:58,  2.90s/it]
+⚠️  [348/552] Failed to parse output for G19uBylwQww_10-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Pay here....
+
+⚠️  [346/552] Failed to parse output for G0MjvzT_UqM_2-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  63%|██████▎   | 348/552 [17:46<07:14,  2.13s/it]
+⚠️  [350/552] Failed to parse output for g1vUH8Iy4vw_22-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf and need help to play....
+Evaluating:  63%|██████▎   | 349/552 [17:51<09:45,  2.88s/it]
+⚠️  [354/552] Failed to parse output for fZM3IcM2Xs4_8-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 350/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  63%|██████▎   | 350/552 [17:52<07:54,  2.35s/it]
+⚠️  [353/552] Failed to parse output for fzOH00UZg84_1-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  64%|██████▎   | 351/552 [17:55<08:36,  2.57s/it]
+⚠️  [352/552] Failed to parse output for g0yUlOaqL6k_11-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I'm deaf....
+Evaluating:  64%|██████▍   | 352/552 [17:59<10:26,  3.13s/it]
+⚠️  [351/552] Failed to parse output for G23G21G49dk_9-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am a hearing interpreter who works with Deaf people....
+Evaluating:  64%|██████▍   | 353/552 [18:05<12:22,  3.73s/it]
+⚠️  [349/552] Failed to parse output for G1lNlhjWC1I_4-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Where shall we meet to eat at two?...
+Evaluating:  64%|██████▍   | 354/552 [18:08<12:02,  3.65s/it]
+⚠️  [360/552] Failed to parse output for G3IJAoK0uSE_7-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  64%|██████▍   | 355/552 [18:09<09:47,  2.98s/it]
+⚠️  [355/552] Failed to parse output for G0PNAsonBGk_17-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I play here at school and read books, and I am Deaf and use sign language....
+Evaluating:  64%|██████▍   | 356/552 [18:10<07:53,  2.42s/it]
+⚠️  [358/552] Failed to parse output for fzrJBu2qsM8_8-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  65%|██████▍   | 357/552 [18:14<09:03,  2.79s/it]
+⚠️  [356/552] Failed to parse output for fzOH00UZg84_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Write your name on the list....
+Evaluating:  65%|██████▍   | 358/552 [18:16<08:21,  2.59s/it]
+⚠️  [363/552] Failed to parse output for G1QiXuldOxM_1-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: You play with the ball here, and I read a book at school....
+
+⚠️  [361/552] Failed to parse output for G0PNAsonBGk_0-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 360/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  65%|██████▌   | 360/552 [18:17<04:50,  1.51s/it]
+⚠️  [359/552] Failed to parse output for G3IJAoK0uSE_1-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  65%|██████▌   | 361/552 [18:17<03:49,  1.20s/it]
+⚠️  [362/552] Failed to parse output for FzAIlhumvMA_8-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you; what is your name—please write it below....
+Evaluating:  66%|██████▌   | 362/552 [18:22<07:10,  2.27s/it]
+⚠️  [357/552] Failed to parse output for g2iFC1st7zQ_2-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:  66%|██████▌   | 363/552 [18:23<05:30,  1.75s/it]
+⚠️  [364/552] Failed to parse output for FZrU_mEryAs_2-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  66%|██████▌   | 364/552 [18:26<06:53,  2.20s/it]
+⚠️  [365/552] Failed to parse output for _FzvMVnR_aU_1-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  66%|██████▌   | 365/552 [18:32<09:52,  3.17s/it]
+⚠️  [372/552] Failed to parse output for G2kVb4gINSI_16-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: One month....
+Evaluating:  66%|██████▋   | 366/552 [18:38<12:35,  4.06s/it]
+⚠️  [368/552] Failed to parse output for fzNnTgHa1lM_3-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  66%|██████▋   | 367/552 [18:47<17:24,  5.65s/it]
+⚠️  [373/552] Failed to parse output for G2dND014Ps4_4-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Family....
+Evaluating:  67%|██████▋   | 368/552 [18:48<12:43,  4.15s/it]
+⚠️  [369/552] Failed to parse output for _fZbAxSSbX4_22-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Repeat so everyone understands....
+Evaluating:  67%|██████▋   | 369/552 [18:52<12:29,  4.10s/it]
+⚠️  [370/552] Failed to parse output for g2ur4BIuN0Q_4-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am hearing and want to learn to be an interpreter for Deaf people....
+
+💾 Progress saved: 370/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  67%|██████▋   | 370/552 [18:54<10:41,  3.52s/it]
+⚠️  [371/552] Failed to parse output for g25IORxoyXE_16-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can you help me with the paperwork?...
+Evaluating:  67%|██████▋   | 371/552 [18:54<07:41,  2.55s/it]
+⚠️  [374/552] Failed to parse output for G2hnUeetWcc_2-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please write on the paper, then help by telling me what you see....
+Evaluating:  67%|██████▋   | 372/552 [18:57<07:52,  2.63s/it]
+⚠️  [367/552] Failed to parse output for g3Cc_1-V31U_1-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I have two books and paper....
+Evaluating:  68%|██████▊   | 373/552 [18:58<06:39,  2.23s/it]
+⚠️  [375/552] Failed to parse output for FzaQ-Q5gSmI_0-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  68%|██████▊   | 374/552 [18:59<04:52,  1.65s/it]
+⚠️  [366/552] Failed to parse output for G2kVb4gINSI_2-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's meet for coffee later, see you....
+Evaluating:  68%|██████▊   | 375/552 [18:59<03:34,  1.21s/it]
+⚠️  [377/552] Failed to parse output for g2eTD-1Jcro_10-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want to go shopping at the store....
+Evaluating:  68%|██████▊   | 376/552 [19:00<03:36,  1.23s/it]
+⚠️  [376/552] Failed to parse output for G3gm_C5UueQ_2-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  68%|██████▊   | 377/552 [19:03<04:46,  1.64s/it]
+⚠️  [378/552] Failed to parse output for FzmL8SL6Bow_3-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  68%|██████▊   | 378/552 [19:11<10:09,  3.51s/it]
+⚠️  [381/552] Failed to parse output for fzOH00UZg84_23-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: We will meet and drive there....
+Evaluating:  69%|██████▊   | 379/552 [19:16<11:37,  4.03s/it]
+⚠️  [385/552] Failed to parse output for G2uKe6hCNSo_2-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 380/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  69%|██████▉   | 380/552 [19:25<16:09,  5.64s/it]
+⚠️  [386/552] Failed to parse output for fzrJBu2qsM8_10-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  69%|██████▉   | 381/552 [19:26<12:16,  4.31s/it]
+⚠️  [383/552] Failed to parse output for G3di9jJTqDs_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I'm fine....
+Evaluating:  69%|██████▉   | 382/552 [19:27<08:48,  3.11s/it]
+⚠️  [379/552] Failed to parse output for g3kFAmcBpFc_15-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  69%|██████▉   | 383/552 [19:29<08:29,  3.01s/it]
+⚠️  [380/552] Failed to parse output for G2dND014Ps4_6-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: My friend is deaf....
+Evaluating:  70%|██████▉   | 384/552 [19:33<08:54,  3.18s/it]
+⚠️  [387/552] Failed to parse output for fzrJBu2qsM8_0-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: The classroom is over there....
+Evaluating:  70%|██████▉   | 385/552 [19:36<08:17,  2.98s/it]
+⚠️  [382/552] Failed to parse output for g0UUmEkoT1w_2-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf and I work at a school, thank you....
+Evaluating:  70%|██████▉   | 386/552 [19:36<05:55,  2.14s/it]
+⚠️  [388/552] Failed to parse output for g1HXoDkax5A_6-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Could you help me close the door?...
+Evaluating:  70%|███████   | 387/552 [19:45<11:40,  4.24s/it]
+⚠️  [384/552] Failed to parse output for G3FhmHz_7hs_3-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf; what is your name, please, and where are you from?...
+Evaluating:  70%|███████   | 388/552 [19:48<10:56,  4.01s/it]
+⚠️  [389/552] Failed to parse output for G2dND014Ps4_12-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  70%|███████   | 389/552 [19:49<07:58,  2.94s/it]
+⚠️  [391/552] Failed to parse output for f_zna_wG3zo_14-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Do you understand; do you need help; I can explain....
+
+💾 Progress saved: 390/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  71%|███████   | 390/552 [19:52<07:48,  2.89s/it]
+⚠️  [390/552] Failed to parse output for fZM3IcM2Xs4_1-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, I am deaf....
+Evaluating:  71%|███████   | 391/552 [20:03<14:33,  5.43s/it]
+⚠️  [394/552] Failed to parse output for g1HXoDkax5A_9-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Friends help each other....
+Evaluating:  71%|███████   | 392/552 [20:04<10:54,  4.09s/it]
+⚠️  [396/552] Failed to parse output for fZM3IcM2Xs4_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf, I know a little sign, I work, and I will see you later—I'm finished....
+Evaluating:  71%|███████   | 393/552 [20:05<08:29,  3.21s/it]
+⚠️  [393/552] Failed to parse output for G3gm_C5UueQ_14-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Deaf people use different languages....
+Evaluating:  71%|███████▏  | 394/552 [20:08<08:28,  3.22s/it]
+⚠️  [392/552] Failed to parse output for fzDHRCKr7wU_14-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  72%|███████▏  | 395/552 [20:08<06:00,  2.30s/it]
+⚠️  [395/552] Failed to parse output for g0S7FAqIweA_6-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can you help me decide what to wear?...
+Evaluating:  72%|███████▏  | 396/552 [20:17<11:06,  4.28s/it]
+⚠️  [399/552] Failed to parse output for G1GUMky8kWc_11-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  72%|███████▏  | 397/552 [20:19<08:54,  3.45s/it]
+⚠️  [398/552] Failed to parse output for G42xKICVj9U_16-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I'm deaf; please write it down....
+Evaluating:  72%|███████▏  | 398/552 [20:20<06:56,  2.71s/it]
+⚠️  [397/552] Failed to parse output for fzOH00UZg84_18-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's eat together....
+Evaluating:  72%|███████▏  | 399/552 [20:24<08:15,  3.24s/it]
+⚠️  [401/552] Failed to parse output for g3V0BsmDUgY_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I forgot and then suddenly I remembered....
+
+💾 Progress saved: 400/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  72%|███████▏  | 400/552 [20:27<08:06,  3.20s/it]
+⚠️  [400/552] Failed to parse output for fzQ2E3_xBZA_14-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name, where are you from, do you sign American Sign Language?...
+Evaluating:  73%|███████▎  | 401/552 [20:31<08:28,  3.37s/it]
+⚠️  [403/552] Failed to parse output for g2v-M6EXcUE_17-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  73%|███████▎  | 402/552 [20:33<06:56,  2.77s/it]
+⚠️  [410/552] Failed to parse output for g1HXoDkax5A_13-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Take medicine....
+Evaluating:  73%|███████▎  | 403/552 [20:43<12:16,  4.94s/it]
+⚠️  [407/552] Failed to parse output for FZCEymcpq7I_11-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I work at a school....
+Evaluating:  73%|███████▎  | 404/552 [20:43<08:54,  3.61s/it]
+⚠️  [402/552] Failed to parse output for G2Go6a76xd0_4-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am an interpreter....
+Evaluating:  73%|███████▎  | 405/552 [20:45<07:30,  3.06s/it]
+⚠️  [404/552] Failed to parse output for G2hnUeetWcc_11-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: When can we meet?...
+Evaluating:  74%|███████▎  | 406/552 [20:48<07:23,  3.04s/it]
+⚠️  [408/552] Failed to parse output for G3g0-BeFN3c_12-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  74%|███████▎  | 407/552 [20:48<05:15,  2.18s/it]
+⚠️  [405/552] Failed to parse output for fzncPNr2Sc0_6-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please call me....
+Evaluating:  74%|███████▍  | 408/552 [20:48<03:53,  1.62s/it]
+⚠️  [406/552] Failed to parse output for g2NA_eBUcH8_14-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your favorite playlist and what is your phone number?...
+Evaluating:  74%|███████▍  | 409/552 [20:49<03:28,  1.46s/it]
+⚠️  [409/552] Failed to parse output for g3jQ5ecjGz8_9-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Call me, I'm happy to drive....
+
+💾 Progress saved: 410/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  74%|███████▍  | 410/552 [20:58<08:25,  3.56s/it]
+⚠️  [412/552] Failed to parse output for G3FhmHz_7hs_19-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  74%|███████▍  | 411/552 [20:59<06:50,  2.91s/it]
+⚠️  [415/552] Failed to parse output for G2kVb4gINSI_13-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name again?...
+Evaluating:  75%|███████▍  | 412/552 [21:05<08:40,  3.72s/it]
+⚠️  [414/552] Failed to parse output for -g0sqksgyc4_4-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Clean the table....
+Evaluating:  75%|███████▍  | 413/552 [21:06<07:10,  3.09s/it]
+⚠️  [413/552] Failed to parse output for g3BsH_C3u7Y_2-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, thank you....
+Evaluating:  75%|███████▌  | 414/552 [21:07<05:28,  2.38s/it]
+⚠️  [417/552] Failed to parse output for g0UUmEkoT1w_0-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  75%|███████▌  | 415/552 [21:12<06:55,  3.03s/it]
+⚠️  [411/552] Failed to parse output for g2o-GFdGOJE_4-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Who wants to meet here?...
+Evaluating:  75%|███████▌  | 416/552 [21:13<05:48,  2.56s/it]
+⚠️  [421/552] Failed to parse output for G3gm_C5UueQ_5-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  76%|███████▌  | 417/552 [21:14<04:44,  2.11s/it]
+⚠️  [423/552] Failed to parse output for g2ELiaFjKfs_0-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  76%|███████▌  | 418/552 [21:18<05:52,  2.63s/it]
+⚠️  [419/552] Failed to parse output for g2eTD-1Jcro_8-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Relax your shoulders and take a deep breath....
+Evaluating:  76%|███████▌  | 419/552 [21:20<05:05,  2.29s/it]
+⚠️  [420/552] Failed to parse output for fzQ2E3_xBZA_11-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 420/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  76%|███████▌  | 420/552 [21:21<04:41,  2.13s/it]
+⚠️  [416/552] Failed to parse output for G0peUY2cfeE_2-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: The coffee here is good....
+Evaluating:  76%|███████▋  | 421/552 [21:24<05:09,  2.36s/it]
+⚠️  [430/552] Failed to parse output for fzegqlecOD8_0-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  76%|███████▋  | 422/552 [21:27<05:22,  2.48s/it]
+⚠️  [418/552] Failed to parse output for G3EYpadwqck_12-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tell me your phone number....
+Evaluating:  77%|███████▋  | 423/552 [21:30<05:35,  2.60s/it]
+⚠️  [429/552] Failed to parse output for g0TkUiO7t4I_12-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I wear glasses and I’m deaf....
+Evaluating:  77%|███████▋  | 424/552 [21:31<04:48,  2.25s/it]
+⚠️  [426/552] Failed to parse output for G2sD7N53ju8_15-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  77%|███████▋  | 425/552 [21:33<04:10,  1.98s/it]
+⚠️  [422/552] Failed to parse output for G3RvsnzQrXQ_0-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  77%|███████▋  | 426/552 [21:34<03:29,  1.67s/it]
+⚠️  [428/552] Failed to parse output for G2VzB5-JkRA_9-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  77%|███████▋  | 427/552 [21:35<03:32,  1.70s/it]
+⚠️  [431/552] Failed to parse output for fzQ2E3_xBZA_5-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  78%|███████▊  | 428/552 [21:41<05:47,  2.81s/it]
+⚠️  [427/552] Failed to parse output for G2VzB5-JkRA_15-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  78%|███████▊  | 429/552 [21:43<05:30,  2.69s/it]
+⚠️  [424/552] Failed to parse output for G2VzB5-JkRA_12-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 430/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  78%|███████▊  | 430/552 [21:44<04:04,  2.00s/it]
+⚠️  [425/552] Failed to parse output for g0yUlOaqL6k_15-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  78%|███████▊  | 431/552 [21:45<03:42,  1.84s/it]
+⚠️  [439/552] Failed to parse output for 92V3oH63zbQ_23-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I drove to the hospital to see the doctor....
+Evaluating:  78%|███████▊  | 432/552 [22:00<11:32,  5.77s/it]
+⚠️  [433/552] Failed to parse output for G3OMdQo1zjY_1-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  78%|███████▊  | 433/552 [22:02<09:14,  4.66s/it]
+⚠️  [442/552] Failed to parse output for g05yGRoZE10_9-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: It’s clean....
+Evaluating:  79%|███████▊  | 434/552 [22:05<08:08,  4.14s/it]
+⚠️  [435/552] Failed to parse output for G0PNAsonBGk_11-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:  79%|███████▉  | 435/552 [22:06<06:30,  3.33s/it]
+⚠️  [434/552] Failed to parse output for G3OMdQo1zjY_3-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+
+⚠️  [432/552] Failed to parse output for G3g0-BeFN3c_16-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf, I went to a deaf school, I got engaged, and I wear glasses....
+Evaluating:  79%|███████▉  | 437/552 [22:11<05:29,  2.87s/it]
+⚠️  [438/552] Failed to parse output for fzOH00UZg84_2-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf, help me practice....
+Evaluating:  79%|███████▉  | 438/552 [22:11<04:15,  2.24s/it]
+⚠️  [440/552] Failed to parse output for fzQ2E3_xBZA_17-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I love you....
+Evaluating:  80%|███████▉  | 439/552 [22:17<06:02,  3.21s/it]
+⚠️  [443/552] Failed to parse output for G06Irzcwxiw_20-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I want chocolate....
+
+💾 Progress saved: 440/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  80%|███████▉  | 440/552 [22:20<05:26,  2.92s/it]
+⚠️  [444/552] Failed to parse output for g05yGRoZE10_5-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  80%|███████▉  | 441/552 [22:21<04:34,  2.47s/it]
+⚠️  [441/552] Failed to parse output for g2eTD-1Jcro_14-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+⚠️  [436/552] Failed to parse output for G1QiXuldOxM_8-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: My favorite cookie is Oreo....
+Evaluating:  80%|████████  | 443/552 [22:30<06:11,  3.41s/it]
+⚠️  [451/552] Failed to parse output for g1HXoDkax5A_20-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Meet....
+Evaluating:  80%|████████  | 444/552 [22:35<06:55,  3.85s/it]
+⚠️  [447/552] Failed to parse output for G1jsDl1mVvk_4-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  81%|████████  | 445/552 [22:40<07:15,  4.07s/it]
+⚠️  [437/552] Failed to parse output for G3GcPpidwxk_13-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Recently, we started meeting once a week for a month to learn sign language....
+Evaluating:  81%|████████  | 446/552 [22:41<05:34,  3.15s/it]
+⚠️  [454/552] Failed to parse output for G1lNlhjWC1I_2-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  81%|████████  | 447/552 [22:44<05:40,  3.25s/it]
+⚠️  [449/552] Failed to parse output for -g0sqksgyc4_7-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I practice playing the piano....
+Evaluating:  81%|████████  | 448/552 [22:45<04:15,  2.46s/it]
+⚠️  [446/552] Failed to parse output for g25IORxoyXE_1-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  81%|████████▏ | 449/552 [22:50<05:45,  3.35s/it]
+⚠️  [453/552] Failed to parse output for fZM3IcM2Xs4_14_15_16-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please pray for me; I am an interpreter....
+
+💾 Progress saved: 450/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  82%|████████▏ | 450/552 [22:58<07:57,  4.68s/it]
+⚠️  [448/552] Failed to parse output for G3EE6yhl1vk_7-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  82%|████████▏ | 451/552 [22:59<05:50,  3.47s/it]
+⚠️  [450/552] Failed to parse output for g0UUmEkoT1w_8-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  82%|████████▏ | 452/552 [23:00<04:49,  2.89s/it]
+⚠️  [458/552] Failed to parse output for fzQ2E3_xBZA_13-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: We will meet in three weeks....
+Evaluating:  82%|████████▏ | 453/552 [23:03<04:47,  2.91s/it]
+⚠️  [445/552] Failed to parse output for fzrJBu2qsM8_8-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Drink....
+Evaluating:  82%|████████▏ | 454/552 [23:04<03:58,  2.43s/it]
+⚠️  [452/552] Failed to parse output for G3GcPpidwxk_15-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you....
+Evaluating:  82%|████████▏ | 455/552 [23:11<05:58,  3.69s/it]
+⚠️  [456/552] Failed to parse output for g3X3XE6M2_A_9-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am Deaf; what is your name?...
+Evaluating:  83%|████████▎ | 456/552 [23:13<05:04,  3.17s/it]
+⚠️  [455/552] Failed to parse output for FzoUVr98JmQ_1-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you, I love you....
+Evaluating:  83%|████████▎ | 457/552 [23:17<05:30,  3.48s/it]
+⚠️  [457/552] Failed to parse output for g2QdwYqm8pg_13-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet everyone, I'm Deaf....
+Evaluating:  83%|████████▎ | 458/552 [23:17<03:55,  2.50s/it]
+⚠️  [459/552] Failed to parse output for g1z6HOJ0yRw_8-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Sign your name....
+Evaluating:  83%|████████▎ | 459/552 [23:18<02:46,  1.79s/it]
+⚠️  [461/552] Failed to parse output for G2dND014Ps4_17-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 460/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  83%|████████▎ | 460/552 [23:19<02:40,  1.74s/it]
+⚠️  [465/552] Failed to parse output for g0pRnlPR-K0_6-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  84%|████████▎ | 461/552 [23:23<03:38,  2.40s/it]
+⚠️  [460/552] Failed to parse output for g1ccEYTMGGY_10-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: The doctor explained what food to eat and what medicine to take every day....
+Evaluating:  84%|████████▎ | 462/552 [23:25<03:34,  2.39s/it]
+⚠️  [463/552] Failed to parse output for G2dND014Ps4_11-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Write it down....
+Evaluating:  84%|████████▍ | 463/552 [23:36<07:16,  4.90s/it]
+⚠️  [462/552] Failed to parse output for G3bMqicS4bQ_11-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf; what time can we meet?...
+Evaluating:  84%|████████▍ | 464/552 [23:38<05:53,  4.01s/it]
+⚠️  [466/552] Failed to parse output for G0Q6AlvH96I_0-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:  84%|████████▍ | 465/552 [23:41<05:12,  3.60s/it]
+⚠️  [464/552] Failed to parse output for G3EE6yhl1vk_1-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is sign language?...
+Evaluating:  84%|████████▍ | 466/552 [23:42<04:20,  3.03s/it]
+⚠️  [472/552] Failed to parse output for G0Q6AlvH96I_17-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  85%|████████▍ | 467/552 [23:43<03:18,  2.34s/it]
+⚠️  [474/552] Failed to parse output for G3IJAoK0uSE_3-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  85%|████████▍ | 468/552 [23:45<03:07,  2.23s/it]
+⚠️  [470/552] Failed to parse output for g3pXM5X3_Xw_10-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: My birthday is on the 20th....
+Evaluating:  85%|████████▍ | 469/552 [23:54<05:45,  4.16s/it]
+⚠️  [467/552] Failed to parse output for g0UUmEkoT1w_8-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tomorrow I will call my family....
+
+💾 Progress saved: 470/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  85%|████████▌ | 470/552 [23:55<04:25,  3.24s/it]
+⚠️  [471/552] Failed to parse output for 92V3oH63zbQ_14-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: My aunt is single....
+Evaluating:  85%|████████▌ | 471/552 [23:56<03:26,  2.54s/it]
+⚠️  [469/552] Failed to parse output for G06Irzcwxiw_0-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name; I am deaf; nice to meet you....
+Evaluating:  86%|████████▌ | 472/552 [24:02<04:49,  3.62s/it]
+⚠️  [468/552] Failed to parse output for g1ccEYTMGGY_11-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:  86%|████████▌ | 473/552 [24:03<03:51,  2.93s/it]
+⚠️  [478/552] Failed to parse output for g0Abwige7MQ_10-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Candy....
+Evaluating:  86%|████████▌ | 474/552 [24:05<03:18,  2.55s/it]
+⚠️  [479/552] Failed to parse output for fzQ2E3_xBZA_8-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Write your name....
+Evaluating:  86%|████████▌ | 475/552 [24:10<04:07,  3.21s/it]
+⚠️  [475/552] Failed to parse output for G1nq4fYZiyQ_5-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: It’s time to call....
+Evaluating:  86%|████████▌ | 476/552 [24:19<06:21,  5.02s/it]
+⚠️  [473/552] Failed to parse output for g2NA_eBUcH8_3-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf and use sign language; call me....
+Evaluating:  86%|████████▋ | 477/552 [24:21<05:14,  4.19s/it]
+⚠️  [483/552] Failed to parse output for fzXgYPSnaDs_2-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  87%|████████▋ | 478/552 [24:22<03:49,  3.11s/it]
+⚠️  [476/552] Failed to parse output for G2Go6a76xd0_7-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am deaf; nice to meet you....
+Evaluating:  87%|████████▋ | 479/552 [24:24<03:19,  2.73s/it]
+⚠️  [480/552] Failed to parse output for g1ccEYTMGGY_5-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: We can collect money....
+
+💾 Progress saved: 480/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  87%|████████▋ | 480/552 [24:25<02:52,  2.39s/it]
+⚠️  [485/552] Failed to parse output for G095RWKQ39g_2-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: See you tomorrow....
+Evaluating:  87%|████████▋ | 481/552 [24:28<02:59,  2.53s/it]
+⚠️  [481/552] Failed to parse output for g2NA_eBUcH8_4-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  87%|████████▋ | 482/552 [24:29<02:20,  2.01s/it]
+⚠️  [477/552] Failed to parse output for G06Irzcwxiw_4-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  88%|████████▊ | 483/552 [24:30<02:01,  1.76s/it]
+⚠️  [482/552] Failed to parse output for g3sLd8JupoQ_0-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  88%|████████▊ | 484/552 [24:32<02:02,  1.81s/it]
+⚠️  [486/552] Failed to parse output for G3IJAoK0uSE_9-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I understand who will pay me, thank you....
+Evaluating:  88%|████████▊ | 485/552 [24:34<02:11,  1.96s/it]
+⚠️  [487/552] Failed to parse output for G1GUMky8kWc_8-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: My second marriage....
+Evaluating:  88%|████████▊ | 486/552 [24:41<03:35,  3.26s/it]
+⚠️  [484/552] Failed to parse output for fZgWKh3ENoE_2-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I walk to school, go to the classroom, then type on the computer, write, and read....
+Evaluating:  88%|████████▊ | 487/552 [24:49<05:17,  4.89s/it]
+⚠️  [491/552] Failed to parse output for FzAIlhumvMA_4-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Can you help me write, and when can we meet?...
+Evaluating:  88%|████████▊ | 488/552 [24:52<04:21,  4.09s/it]
+⚠️  [494/552] Failed to parse output for f_zna_wG3zo_1-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Explain it again....
+Evaluating:  89%|████████▊ | 489/552 [24:55<04:10,  3.97s/it]
+⚠️  [495/552] Failed to parse output for G3k86AVFwVs_4-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 490/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  89%|████████▉ | 490/552 [24:57<03:31,  3.42s/it]
+⚠️  [489/552] Failed to parse output for G0zQm6X8uiQ_4-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I looked at the book, wrote, drank, thought, and understood....
+Evaluating:  89%|████████▉ | 491/552 [24:59<03:04,  3.03s/it]
+⚠️  [488/552] Failed to parse output for g1HXoDkax5A_17-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Sister....
+Evaluating:  89%|████████▉ | 492/552 [25:00<02:21,  2.36s/it]
+⚠️  [492/552] Failed to parse output for G2sD7N53ju8_5-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  89%|████████▉ | 493/552 [25:05<02:59,  3.04s/it]
+⚠️  [493/552] Failed to parse output for g1z6HOJ0yRw_7-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name; I am deaf....
+Evaluating:  89%|████████▉ | 494/552 [25:07<02:38,  2.73s/it]
+⚠️  [490/552] Failed to parse output for g3ushtMfLiY_9-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: I work at the store; what are you buying?...
+Evaluating:  90%|████████▉ | 495/552 [25:08<02:12,  2.32s/it]
+⚠️  [498/552] Failed to parse output for G0PNAsonBGk_18-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tea....
+Evaluating:  90%|████████▉ | 496/552 [25:09<01:44,  1.86s/it]
+⚠️  [497/552] Failed to parse output for g0yUlOaqL6k_8-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  90%|█████████ | 497/552 [25:16<03:00,  3.28s/it]
+⚠️  [499/552] Failed to parse output for g2eTD-1Jcro_5-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let's write together....
+Evaluating:  90%|█████████ | 498/552 [25:19<03:01,  3.36s/it]
+⚠️  [506/552] Failed to parse output for G06Irzcwxiw_13-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  90%|█████████ | 499/552 [25:21<02:32,  2.88s/it]
+⚠️  [496/552] Failed to parse output for 92V3oH63zbQ_3-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: I need your phone number to pay....
+
+💾 Progress saved: 500/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  91%|█████████ | 500/552 [25:25<02:46,  3.20s/it]
+⚠️  [501/552] Failed to parse output for G1lNlhjWC1I_10-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  91%|█████████ | 501/552 [25:25<02:00,  2.37s/it]
+⚠️  [505/552] Failed to parse output for FzUdcaxw_vs_16-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, I am Deaf and I use American Sign Language....
+Evaluating:  91%|█████████ | 502/552 [25:36<04:03,  4.87s/it]
+⚠️  [500/552] Failed to parse output for G3bMqicS4bQ_18-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you; I am learning from books....
+Evaluating:  91%|█████████ | 503/552 [25:38<03:14,  3.96s/it]
+⚠️  [507/552] Failed to parse output for G2VzB5-JkRA_15-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  91%|█████████▏| 504/552 [25:40<02:48,  3.51s/it]
+⚠️  [509/552] Failed to parse output for fZM3IcM2Xs4_8-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: I like to play with my friends and write....
+Evaluating:  91%|█████████▏| 505/552 [25:42<02:14,  2.85s/it]
+⚠️  [504/552] Failed to parse output for g2o-GFdGOJE_2-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  92%|█████████▏| 506/552 [25:45<02:14,  2.92s/it]
+⚠️  [517/552] Failed to parse output for g0fgci8L_rc_19-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  92%|█████████▏| 507/552 [25:49<02:32,  3.39s/it]
+⚠️  [503/552] Failed to parse output for G0Q6AlvH96I_18-2-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  92%|█████████▏| 508/552 [25:50<01:53,  2.58s/it]
+⚠️  [502/552] Failed to parse output for g3sLd8JupoQ_2-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name?...
+Evaluating:  92%|█████████▏| 509/552 [25:53<01:54,  2.66s/it]
+⚠️  [508/552] Failed to parse output for G095RWKQ39g_11-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 510/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  92%|█████████▏| 510/552 [25:53<01:26,  2.05s/it]
+⚠️  [512/552] Failed to parse output for g3X3XE6M2_A_19-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you; what is your name and where do you work?...
+Evaluating:  93%|█████████▎| 511/552 [25:54<01:04,  1.57s/it]
+⚠️  [511/552] Failed to parse output for FzOQMA-CVPc_5-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am cold; can you help me with food and drink, thank you....
+Evaluating:  93%|█████████▎| 512/552 [25:55<00:58,  1.46s/it]
+⚠️  [510/552] Failed to parse output for g2nvBjp0loQ_6-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  93%|█████████▎| 513/552 [25:59<01:28,  2.26s/it]
+⚠️  [514/552] Failed to parse output for g0Abwige7MQ_11-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please say that again....
+Evaluating:  93%|█████████▎| 514/552 [26:00<01:11,  1.87s/it]
+⚠️  [515/552] Failed to parse output for FZCEymcpq7I_13-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: Bathroom....
+Evaluating:  93%|█████████▎| 515/552 [26:04<01:32,  2.50s/it]
+⚠️  [516/552] Failed to parse output for -g45vqccdzI_1-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  93%|█████████▎| 516/552 [26:09<02:01,  3.36s/it]
+⚠️  [518/552] Failed to parse output for g3V0BsmDUgY_0-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, I am Deaf, please text me instead of calling, thank you....
+Evaluating:  94%|█████████▎| 517/552 [26:14<02:14,  3.83s/it]
+⚠️  [520/552] Failed to parse output for G06Irzcwxiw_11-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  94%|█████████▍| 518/552 [26:18<02:08,  3.79s/it]
+⚠️  [519/552] Failed to parse output for G3g0-BeFN3c_0-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name; nice to meet you....
+Evaluating:  94%|█████████▍| 519/552 [26:21<01:58,  3.60s/it]
+⚠️  [513/552] Failed to parse output for FzaQ-Q5gSmI_4-1-rgb_front.mp4: Could not extract statements from output
+   Raw output: You must write more papers....
+
+💾 Progress saved: 520/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  94%|█████████▍| 520/552 [26:22<01:25,  2.68s/it]
+⚠️  [526/552] Failed to parse output for fzQ2E3_xBZA_17-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  94%|█████████▍| 521/552 [26:23<01:06,  2.16s/it]
+⚠️  [524/552] Failed to parse output for _fZbAxSSbX4_23-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  95%|█████████▍| 522/552 [26:27<01:24,  2.83s/it]
+⚠️  [525/552] Failed to parse output for G1jsDl1mVvk_1-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  95%|█████████▍| 523/552 [26:29<01:09,  2.41s/it]
+⚠️  [521/552] Failed to parse output for g0Abwige7MQ_12-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  95%|█████████▍| 524/552 [26:30<01:00,  2.17s/it]
+⚠️  [523/552] Failed to parse output for g25IORxoyXE_12-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Let me explain with an example in detail....
+Evaluating:  95%|█████████▌| 525/552 [26:37<01:36,  3.58s/it]
+⚠️  [528/552] Failed to parse output for FzWvE__PamM_4-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I am a deaf interpreter, thank you....
+Evaluating:  95%|█████████▌| 526/552 [26:38<01:14,  2.88s/it]
+⚠️  [529/552] Failed to parse output for _G0RrDVpOZ4_1-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: It will rain....
+Evaluating:  95%|█████████▌| 527/552 [26:45<01:39,  3.98s/it]
+⚠️  [527/552] Failed to parse output for G05uFub3YFc_10-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, nice to meet you; I am a student and I want to become a doctor....
+Evaluating:  96%|█████████▌| 528/552 [26:47<01:20,  3.37s/it]
+⚠️  [533/552] Failed to parse output for g25IORxoyXE_5-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  96%|█████████▌| 529/552 [26:51<01:25,  3.73s/it]
+⚠️  [522/552] Failed to parse output for FzWvE__PamM_6-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: I like to play and watch movies when it snows....
+
+💾 Progress saved: 530/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  96%|█████████▌| 530/552 [26:53<01:05,  2.98s/it]
+⚠️  [530/552] Failed to parse output for G3bMqicS4bQ_8-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  96%|█████████▌| 531/552 [26:53<00:47,  2.27s/it]
+⚠️  [534/552] Failed to parse output for f_zna_wG3zo_7-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tell me your name, and I will explain....
+Evaluating:  96%|█████████▋| 532/552 [26:59<01:07,  3.38s/it]
+⚠️  [536/552] Failed to parse output for fzQ2E3_xBZA_0-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: The woman wants paper....
+Evaluating:  97%|█████████▋| 533/552 [27:00<00:49,  2.62s/it]
+⚠️  [535/552] Failed to parse output for g2NA_eBUcH8_0-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, what is your name?...
+Evaluating:  97%|█████████▋| 534/552 [27:02<00:44,  2.49s/it]
+⚠️  [537/552] Failed to parse output for _G0RrDVpOZ4_9-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Number one....
+Evaluating:  97%|█████████▋| 535/552 [27:03<00:33,  1.95s/it]
+⚠️  [531/552] Failed to parse output for fzcsY2gm7t0_6-8-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  97%|█████████▋| 536/552 [27:04<00:26,  1.64s/it]
+⚠️  [538/552] Failed to parse output for g0yUlOaqL6k_12-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Please help me understand what you are explaining....
+Evaluating:  97%|█████████▋| 537/552 [27:09<00:40,  2.72s/it]
+⚠️  [532/552] Failed to parse output for g1xdqxCZxTg_18-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Meet about money....
+Evaluating:  97%|█████████▋| 538/552 [27:11<00:35,  2.51s/it]
+⚠️  [542/552] Failed to parse output for _fZbAxSSbX4_26-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  98%|█████████▊| 539/552 [27:13<00:31,  2.42s/it]
+⚠️  [539/552] Failed to parse output for G2Go6a76xd0_6-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 540/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating:  98%|█████████▊| 540/552 [27:17<00:32,  2.71s/it]
+⚠️  [541/552] Failed to parse output for g2ELiaFjKfs_5-10-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating:  98%|█████████▊| 541/552 [27:24<00:45,  4.13s/it]
+⚠️  [544/552] Failed to parse output for G3RvsnzQrXQ_6-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Sign on the line....
+Evaluating:  98%|█████████▊| 542/552 [27:27<00:37,  3.74s/it]
+⚠️  [548/552] Failed to parse output for G1LiGqM3FhM_12-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: I need help with money....
+Evaluating:  98%|█████████▊| 543/552 [27:28<00:26,  2.99s/it]
+⚠️  [540/552] Failed to parse output for g0UUmEkoT1w_0-8-rgb_front.mp4: Could not extract statements from output
+   Raw output: Nice to meet you, thank you....
+Evaluating:  99%|█████████▊| 544/552 [27:28<00:17,  2.16s/it]
+⚠️  [547/552] Failed to parse output for G33aqW3DLpc_5-10-rgb_front.mp4: Could not extract statements from output
+   Raw output: What is your name, are you deaf or hearing, and do you use sign language?...
+Evaluating:  99%|█████████▊| 545/552 [27:31<00:15,  2.15s/it]
+⚠️  [549/552] Failed to parse output for g1xdqxCZxTg_3-3-rgb_front.mp4: Could not extract statements from output
+   Raw output: Thank you for your help....
+Evaluating:  99%|█████████▉| 546/552 [27:32<00:10,  1.82s/it]
+⚠️  [546/552] Failed to parse output for _G0MZFLIHa0_7-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Tell me when you need to pay and explain it, then write it down....
+Evaluating:  99%|█████████▉| 547/552 [27:37<00:15,  3.05s/it]
+⚠️  [545/552] Failed to parse output for G1GUMky8kWc_7-2-rgb_front.mp4: Could not extract statements from output
+   Raw output: Call me now....
+Evaluating:  99%|█████████▉| 548/552 [27:39<00:10,  2.52s/it]
+⚠️  [543/552] Failed to parse output for f_zna_wG3zo_9-5-rgb_front.mp4: Could not extract statements from output
+   Raw output: Hello, how are you, I'm fine, thank you, what's your name?...
+Evaluating:  99%|█████████▉| 549/552 [27:41<00:07,  2.47s/it]
+⚠️  [551/552] Failed to parse output for g3ZluRtRXVc_5-3-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+
+💾 Progress saved: 550/552 samples to /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+Evaluating: 100%|█████████▉| 550/552 [27:45<00:05,  2.87s/it]
+⚠️  [552/552] Failed to parse output for G2T2WCuU39Y_5-5-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating: 100%|█████████▉| 551/552 [27:49<00:03,  3.27s/it]
+⚠️  [550/552] Failed to parse output for FZCF7kPIyOk_1-1-rgb_front.mp4: Output is empty or error
+   Raw output: ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API...
+Evaluating: 100%|██████████| 552/552 [28:00<00:00,  5.51s/it]Evaluating: 100%|██████████| 552/552 [28:00<00:00,  3.04s/it]
+
+──────────────────────────────────────────────────────────────────────
+[1/552] g2SdWBPoXZ0_8-3-rgb_front.mp4
+Ground truth: Now of course there are a million different tricks you can do, and a million different ways you can link them all together.
+Prediction:   Let's play together tomorrow morning at school and have cookies.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[2/552] G3IJAoK0uSE_10-5-rgb_front.mp4
+Ground truth: I've continued the design on my front panel using the same napkin for decoupage and more animal stickers.
+Prediction:   ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[3/552] G2kVb4gINSI_9-10-rgb_front.mp4
+Ground truth: Down and up.
+Prediction:   Let's meet at church on Sunday.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[4/552] G0Q6AlvH96I_26-2-rgb_front.mp4
+Ground truth: If it's woman attacked by a three hundred pound guy got to aim to the throat.
+Prediction:   Thank you, nice to meet you, goodbye.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[5/552] g2wUCRRni28_6-3-rgb_front.mp4
+Ground truth: These are also great for parting and keeping your hair going that way.
+Prediction:   Let's meet at my house, what will we write with—call me and we can talk.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[6/552] G3RvsnzQrXQ_0-5-rgb_front.mp4
+Ground truth: Now we're ready to make the body of our spider.
+Prediction:   I got engaged.
+⚠️  No obvious match
+
+──────────────────────────────────────────────────────────────────────
+[7/552] fzueHkUDyhE_1-8-rgb_front.mp4
+Ground truth: We had a banked track the actually had to take from arena to arena set it up and tear it down.
+Prediction:   ERROR: API call failed: Azure GPT-5 Vision API call failed: No text response received from Azure GPT-5 Vision API
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[8/552] G19uBylwQww_13-2-rgb_front.mp4
+Ground truth: "Oops, let's get our tip right".
+Prediction:   What is your name, nice to meet you.
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[9/552] g3jQ5ecjGz8_8-3-rgb_front.mp4
+Ground truth: So I've shot him, and now I'm supposed to take his keycard and his clothes, and the keycard's here on the ground, so I'll pick that up, and then, go over here to the chemist, and you can see that the B button says "Suit Chemist."
+Prediction:   What is your name?
+✅ Partial match (has some words)
+
+──────────────────────────────────────────────────────────────────────
+[10/552] FzOQMA-CVPc_2-2-rgb_front.mp4
+Ground truth: So just be relaxed and have, just do whatever you need to do to make your guest have a good time.
+Prediction:   Thank you for your time.
+✅ Partial match (has some words)
+
+======================================================================
+✅ Final results saved: /code/doc_sign_search/outputs/gpt5_eval/gpt4v_results_20260106_004928.json
+   Total samples: 552
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+2026-01-06 01:17:31.526547: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Attempting to load BLEURT-20 metric...

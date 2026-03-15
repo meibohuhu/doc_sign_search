@@ -1,0 +1,18 @@
+Loaded DS weights: missing=0, unexpected=0
+type(language_model): PeftModelForCausalLM
+PEFT (unmerged) 64 frames: "My name is Glenn and I'm the guardian of the green."
+PEFT (unmerged) 80 frames: "My name is Glenn and I'm the guardian of the greenery in the house."
+PEFT (unmerged) 100 frames: "My name is Glenn and I'm the guardian of the greenery and I think you'll find th"
+PEFT (unmerged) 130 frames: "My name is Glenn and I'm a yoga instructor and teacher for the Green Earth Yoga "
+
+
+on-the-fly merge正常
+
+是的。load_state_dict 是in-place覆盖，调用之后模型里所有匹配的参数都被替换成DS里的值。
+可以从打印确认：
+
+missing=0, unexpected=0
+missing=0 → 模型里每一个参数都在DS checkpoint里找到了对应的值，全部被覆盖
+unexpected=0 → DS checkpoint没有多余的key
+
+所以推理时用的完全是GRPO训练后的权重，SFT base只是提供了初始结构（空壳）。
