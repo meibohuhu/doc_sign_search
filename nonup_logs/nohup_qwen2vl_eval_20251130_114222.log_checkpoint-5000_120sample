@@ -1,255 +1,0 @@
-✅ Conda environment activated: qwenvl
-🎬 Qwen2.5-VL-3B How2Sign Evaluation on 2×A6000
-==================================================
-Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
-Model Base: Qwen/Qwen2.5-VL-3B-Instruct
-Video Folder: /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
-Question File: /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
-Output Dir: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/
-GPU IDs: 1 (CUDA_VISIBLE_DEVICES: 1)
-Number of GPUs: 1
-Min Pixels: 50176
-Max Pixels: 50176
-Video FPS: 18
-Max New Tokens: 128
-Max Samples (limited): 110
-
-📁 Output directory: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/
-
-📝 Log file: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval//evaluation_20251130_114222.log
-
-🚀 Starting evaluation...
-
-Using conda python: /home/ztao/anaconda3/envs/qwenvl/bin/python
-
-✅ Available GPUs: 1
-   GPU 0: NVIDIA RTX A6000 (50.9GB)
-
-📌 Using device: cuda:0
-🚀 Loading model from checkpoint...
-   Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
-   Device: cuda:0
-
-1️⃣ Loading base model...
-`torch_dtype` is deprecated! Use `dtype` instead!
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.09s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.09it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.06it/s]
-The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
-   ✅ Base model loaded
-
-2️⃣ Loading vision tower + merger...
-   File size: 6.99 GB
-   🔄 Loading checkpoint (this may take 30-60 seconds)...
-   ✅ Loaded 824 keys from disk
-
-   🔧 Cleaning key prefixes...
-   ✅ Cleaned 824 keys
-
-   📝 Sample cleaned keys:
-      - model.visual.patch_embed.proj.weight
-      - model.visual.blocks.0.norm1.weight
-      - model.visual.blocks.0.norm2.weight
-      - model.visual.blocks.0.attn.qkv.weight
-      - model.visual.blocks.0.attn.qkv.bias
-
-   📊 Components in checkpoint:
-      Vision tower: 390 keys
-      Merger: 5 keys
-      Total: 824 keys
-
-   ✅ Full vision tower found in checkpoint!
-
-   🔄 Loading weights into model...
-      ✅ Loaded: 462/824 parameters
-      Missing: 362 (normal for LoRA)
-      Unexpected: 361
-
-   📊 Vision parameters in model: 668,684,288
-      ✅ Full vision tower present (668,684,288 params)
-
-3️⃣ Loading LoRA weights (LLM)...
-   ✅ LoRA loaded
-
-4️⃣ Loading processor...
-   ✅ Processor loaded
-
-🚀 Compiling model for faster inference...
-   ✅ Model compiled successfully
-
-======================================================================
-✅ COMPLETE MODEL LOADED SUCCESSFULLY!
-======================================================================
-   🎯 Vision tower: FULLY TRAINED
-   🎯 Merger: TRAINED (from checkpoint) ✅
-   🎯 LLM: TRAINED (via LoRA) ✅
-======================================================================
-
-📂 Loading test data from: /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered.sample120.json
-   Limited to 110 samples
-   Total samples: 110
-
-🔍 Pre-validating video paths...
-   ✅ Valid videos: 110
-   ❌ Missing videos: 0
-
-🎬 Starting evaluation...
-======================================================================
-
-Evaluating:   0%|          | 0/110 [00:00<?, ?it/s]qwen-vl-utils using decord to read video.
-
-──────────────────────────────────────────────────────────────────────
-[1/110] fzncPNr2Sc0_4-8-rgb_front.mp4
-Ground truth: You'll click on that and then they'll want you to sign in and the first time that you try to do it, there's a process of signing in, and creating a password.
-Prediction:   So, if you want to be a professional photographer, you're going to have to go back to school and get a degree in photography.
-✅ Partial match (has some words)
-Evaluating:   1%|          | 1/110 [00:37<1:07:23, 37.10s/it]
-──────────────────────────────────────────────────────────────────────
-[2/110] g1vUH8Iy4vw_0-3-rgb_front.mp4
-Ground truth: Hi I'm Jan Kain with another wonderful Chi Gong exercise for you.
-Prediction:   Hi!
-✅ Partial match (has some words)
-Evaluating:   2%|▏         | 2/110 [00:56<48:29, 26.94s/it]  
-──────────────────────────────────────────────────────────────────────
-[3/110] g2QdwYqm8pg_11-3-rgb_front.mp4
-Ground truth: That is why of course they call it a white face clown.
-Prediction:   That's the same on the opposite side, so I'm just going to go ahead and do one side and then I'll come back and do the other side.
-✅ Partial match (has some words)
-Evaluating:   3%|▎         | 3/110 [01:08<35:23, 19.85s/it]
-──────────────────────────────────────────────────────────────────────
-[4/110] g1xdqxCZxTg_5-3-rgb_front.mp4
-Ground truth: Maybe he would be like, " that's my cocktail".
-Prediction:   I may feel like it's not there, but it's still there.
-✅ Partial match (has some words)
-Evaluating:   4%|▎         | 4/110 [01:12<24:02, 13.61s/it]
-──────────────────────────────────────────────────────────────────────
-[5/110] G3bMqicS4bQ_13-5-rgb_front.mp4
-Ground truth: But you'll be handicapped according to the modifications that you have on that car, and so it's going to be a handicapped start and but basically kind of a heads-up race at the other end with--especially, if you're racing somebody who actually falls in your class.
-Prediction:   So, if you're having a party and you want to serve hors d'oeuvres, this is a great way to do it.
-✅ Partial match (has some words)
-Evaluating:   5%|▍         | 5/110 [02:55<1:20:06, 45.77s/it]
-──────────────────────────────────────────────────────────────────────
-[6/110] _G0MZFLIHa0_5-5-rgb_front.mp4
-Ground truth: So first thing's first.
-Prediction:   So, first of all, let's talk about things that you can do before you even get to the race.
-✅ Partial match (has some words)
-Evaluating:   5%|▌         | 6/110 [03:06<59:11, 34.15s/it]  
-──────────────────────────────────────────────────────────────────────
-[7/110] g1z6HOJ0yRw_12-3-rgb_front.mp4
-Ground truth: They're just supporting me.
-Prediction:   And that's how you dribble a soccer ball.
-⚠️  No obvious match
-Evaluating:   6%|▋         | 7/110 [03:09<40:56, 23.85s/it]
-──────────────────────────────────────────────────────────────────────
-[8/110] g0yUlOaqL6k_4-3-rgb_front.mp4
-Ground truth: You can most likely pick up at your local pet store if they carry aquariums supplies.
-Prediction:   So, what you want to do is you want to keep your body centered over the ball.
-✅ Partial match (has some words)
-Evaluating:   7%|▋         | 8/110 [03:30<38:57, 22.92s/it]
-──────────────────────────────────────────────────────────────────────
-[9/110] FZd8Iv9ACVw_11-8-rgb_front.mp4
-Ground truth: Some of your higher end all season tires that you can see have quite a bit of some siping and everything in here.
-Prediction:   So, some of the things that you can see here, there's a little car, there's everything else that's in here.
-✅ Partial match (has some words)
-Evaluating:   8%|▊         | 9/110 [03:52<37:58, 22.56s/it]
-──────────────────────────────────────────────────────────────────────
-[10/110] G3di9jJTqDs_11-10-rgb_front.mp4
-Ground truth: Garnish it with a little cocktail straw, and that is what your Downshift looks like.
-Prediction:   So, you're going to go up, up, and then you're just going to come down.
-✅ Partial match (has some words)
-Evaluating:   9%|▉         | 10/110 [03:59<30:02, 18.03s/it]Evaluating:  10%|█         | 11/110 [05:50<1:16:39, 46.46s/it]Evaluating:  11%|█         | 12/110 [05:55<55:08, 33.76s/it]  Evaluating:  12%|█▏        | 13/110 [06:33<56:23, 34.89s/it]Evaluating:  13%|█▎        | 14/110 [06:41<42:54, 26.82s/it]Evaluating:  14%|█▎        | 15/110 [07:13<45:11, 28.55s/it]Evaluating:  15%|█▍        | 16/110 [07:21<34:43, 22.16s/it]Evaluating:  15%|█▌        | 17/110 [07:35<30:38, 19.77s/it]Evaluating:  16%|█▋        | 18/110 [08:03<33:58, 22.15s/it]Evaluating:  17%|█▋        | 19/110 [08:44<42:24, 27.96s/it]Evaluating:  18%|█▊        | 20/110 [08:46<30:19, 20.21s/it]Evaluating:  19%|█▉        | 21/110 [08:55<25:01, 16.87s/it]Evaluating:  20%|██        | 22/110 [09:01<19:49, 13.51s/it]Evaluating:  21%|██        | 23/110 [09:05<15:16, 10.54s/it]Evaluating:  22%|██▏       | 24/110 [09:15<14:53, 10.39s/it]Evaluating:  23%|██▎       | 25/110 [09:19<12:05,  8.54s/it]Evaluating:  24%|██▎       | 26/110 [09:20<08:45,  6.25s/it]Evaluating:  25%|██▍       | 27/110 [09:30<10:27,  7.56s/it]Evaluating:  25%|██▌       | 28/110 [09:38<10:12,  7.47s/it]Evaluating:  26%|██▋       | 29/110 [09:45<10:09,  7.52s/it]Evaluating:  27%|██▋       | 30/110 [09:49<08:23,  6.30s/it]Evaluating:  28%|██▊       | 31/110 [11:18<41:12, 31.29s/it]Evaluating:  29%|██▉       | 32/110 [11:39<36:41, 28.23s/it]Evaluating:  30%|███       | 33/110 [11:40<25:40, 20.01s/it]Evaluating:  31%|███       | 34/110 [11:46<20:02, 15.82s/it]Evaluating:  32%|███▏      | 35/110 [11:51<15:38, 12.51s/it]Evaluating:  33%|███▎      | 36/110 [12:23<22:41, 18.39s/it]Evaluating:  34%|███▎      | 37/110 [12:32<18:59, 15.61s/it]Evaluating:  35%|███▍      | 38/110 [12:45<17:30, 14.59s/it]Evaluating:  35%|███▌      | 39/110 [13:52<35:55, 30.36s/it]Evaluating:  36%|███▋      | 40/110 [14:21<34:59, 29.99s/it]Evaluating:  37%|███▋      | 41/110 [14:54<35:31, 30.89s/it]Evaluating:  38%|███▊      | 42/110 [14:59<26:07, 23.05s/it]Evaluating:  39%|███▉      | 43/110 [15:16<24:01, 21.51s/it]Evaluating:  40%|████      | 44/110 [15:24<18:56, 17.22s/it]Evaluating:  41%|████      | 45/110 [16:48<40:19, 37.23s/it]Evaluating:  42%|████▏     | 46/110 [16:58<31:11, 29.25s/it]Evaluating:  43%|████▎     | 47/110 [17:05<23:32, 22.42s/it]Evaluating:  44%|████▎     | 48/110 [17:08<17:07, 16.57s/it]Evaluating:  45%|████▍     | 49/110 [18:24<35:00, 34.43s/it]Evaluating:  45%|████▌     | 50/110 [18:39<28:33, 28.56s/it]Evaluating:  46%|████▋     | 51/110 [19:06<27:36, 28.08s/it]Evaluating:  47%|████▋     | 52/110 [19:11<20:35, 21.29s/it]Evaluating:  48%|████▊     | 53/110 [19:34<20:39, 21.74s/it]Evaluating:  49%|████▉     | 54/110 [19:56<20:33, 22.02s/it]Evaluating:  50%|█████     | 55/110 [20:21<20:46, 22.67s/it]Evaluating:  51%|█████     | 56/110 [20:29<16:28, 18.30s/it]Evaluating:  52%|█████▏    | 57/110 [20:56<18:37, 21.09s/it]Evaluating:  53%|█████▎    | 58/110 [21:40<24:02, 27.74s/it]Evaluating:  54%|█████▎    | 59/110 [22:22<27:25, 32.27s/it]Evaluating:  55%|█████▍    | 60/110 [22:28<20:14, 24.30s/it]Evaluating:  55%|█████▌    | 61/110 [22:57<20:50, 25.51s/it]Evaluating:  56%|█████▋    | 62/110 [23:05<16:13, 20.28s/it]Evaluating:  57%|█████▋    | 63/110 [25:09<40:20, 51.50s/it]Evaluating:  58%|█████▊    | 64/110 [26:22<44:28, 58.02s/it]Evaluating:  59%|█████▉    | 65/110 [26:25<31:05, 41.44s/it]Evaluating:  60%|██████    | 66/110 [27:22<33:53, 46.22s/it]Evaluating:  61%|██████    | 67/110 [27:27<24:07, 33.66s/it]Evaluating:  62%|██████▏   | 68/110 [31:02<1:01:42, 88.15s/it]Evaluating:  63%|██████▎   | 69/110 [31:28<47:30, 69.52s/it]  Evaluating:  64%|██████▎   | 70/110 [31:39<34:41, 52.03s/it]Evaluating:  65%|██████▍   | 71/110 [32:01<27:50, 42.84s/it]Evaluating:  65%|██████▌   | 72/110 [32:08<20:25, 32.24s/it]Evaluating:  66%|██████▋   | 73/110 [32:16<15:26, 25.04s/it]Evaluating:  67%|██████▋   | 74/110 [32:23<11:41, 19.48s/it]Evaluating:  68%|██████▊   | 75/110 [32:30<09:16, 15.89s/it]Evaluating:  69%|██████▉   | 76/110 [32:45<08:50, 15.61s/it]Evaluating:  70%|███████   | 77/110 [32:59<08:12, 14.92s/it]Evaluating:  71%|███████   | 78/110 [33:00<05:47, 10.86s/it]Evaluating:  72%|███████▏  | 79/110 [33:32<08:53, 17.20s/it]Evaluating:  73%|███████▎  | 80/110 [33:55<09:30, 19.01s/it]Evaluating:  74%|███████▎  | 81/110 [34:15<09:15, 19.15s/it]Evaluating:  75%|███████▍  | 82/110 [34:26<07:53, 16.92s/it]Evaluating:  75%|███████▌  | 83/110 [34:36<06:36, 14.70s/it]Evaluating:  76%|███████▋  | 84/110 [34:45<05:41, 13.13s/it]Evaluating:  77%|███████▋  | 85/110 [34:56<05:12, 12.51s/it]Evaluating:  78%|███████▊  | 86/110 [35:20<06:22, 15.94s/it]Evaluating:  79%|███████▉  | 87/110 [35:31<05:27, 14.22s/it]Evaluating:  80%|████████  | 88/110 [35:48<05:34, 15.21s/it]Evaluating:  81%|████████  | 89/110 [35:58<04:45, 13.57s/it]Evaluating:  82%|████████▏ | 90/110 [36:16<04:59, 14.96s/it]Evaluating:  83%|████████▎ | 91/110 [36:31<04:44, 15.00s/it]Evaluating:  84%|████████▎ | 92/110 [36:35<03:28, 11.58s/it]Evaluating:  85%|████████▍ | 93/110 [37:27<06:42, 23.67s/it]Evaluating:  85%|████████▌ | 94/110 [37:55<06:42, 25.17s/it]Evaluating:  86%|████████▋ | 95/110 [38:23<06:27, 25.86s/it]Evaluating:  87%|████████▋ | 96/110 [40:38<13:41, 58.71s/it]Evaluating:  88%|████████▊ | 97/110 [40:56<10:03, 46.41s/it]Evaluating:  89%|████████▉ | 98/110 [41:04<06:58, 34.90s/it]
-❌ Error on sample 99: CUDA out of memory. Tried to allocate 3.75 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.30 GiB is free. Including non-PyTorch memory, this process has 45.46 GiB memory in use. Of the allocated memory 39.08 GiB is allocated by PyTorch, and 6.06 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.75 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.30 GiB is free. Including non-PyTorch memory, this process has 45.46 GiB memory in use. Of the allocated memory 39.08 GiB is allocated by PyTorch, and 6.06 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  90%|█████████ | 99/110 [41:06<04:34, 24.93s/it]Evaluating:  91%|█████████ | 100/110 [42:22<06:44, 40.44s/it]Evaluating:  92%|█████████▏| 101/110 [43:32<07:23, 49.31s/it]Evaluating:  93%|█████████▎| 102/110 [43:38<04:50, 36.29s/it]Evaluating:  94%|█████████▎| 103/110 [44:19<04:23, 37.68s/it]Evaluating:  95%|█████████▍| 104/110 [45:18<04:23, 43.92s/it]Evaluating:  95%|█████████▌| 105/110 [45:44<03:13, 38.60s/it]Evaluating:  96%|█████████▋| 106/110 [47:11<03:32, 53.12s/it]Evaluating:  97%|█████████▋| 107/110 [47:22<02:01, 40.56s/it]Evaluating:  98%|█████████▊| 108/110 [47:46<01:11, 35.60s/it]Evaluating:  99%|█████████▉| 109/110 [47:48<00:25, 25.48s/it]Evaluating: 100%|██████████| 110/110 [48:03<00:00, 22.49s/it]Evaluating: 100%|██████████| 110/110 [48:03<00:00, 26.22s/it]
-
-======================================================================
-✅ Results saved: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/checkpoint4000_results_20251130_123044.json
-======================================================================
-
-📊 Calculating evaluation metrics...
-
-
-============================================================
-EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
-============================================================
-
-📊 Overall Metrics:
-  Exact Match Score: 0.0000
-  F1 Score:         0.1577
-  Precision:        0.1661
-  Recall:           0.1652
-  ROUGE-L F1:       0.1583
-  BLEURT-20 Score:  0.0000
-
-📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
-  BLEU1: 0.2197
-  BLEU2: 0.0940
-  BLEU3: 0.0536
-  BLEU4: 0.0337
-
-📋 Summary:
-  Total Samples:    109
-============================================================
-
-📊 Metrics saved: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/metrics_20251130_123044.json
-
-======================================================================
-🎯 EVALUATION SUMMARY
-======================================================================
-   Total samples: 110
-   Successful: 109
-   Failed: 1
-   Success rate: 99.1%
-======================================================================
-
-
-✅ Evaluation completed successfully!
-📁 Results saved to: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/
-📝 Log file: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval//evaluation_20251130_114222.log

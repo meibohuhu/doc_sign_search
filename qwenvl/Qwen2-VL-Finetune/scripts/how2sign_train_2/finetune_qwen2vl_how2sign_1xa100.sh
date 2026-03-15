@@ -10,7 +10,7 @@
 #SBATCH --ntasks 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
-#SBATCH --time=02:00:00
+#SBATCH --time=00:30:00
 #SBATCH --gpus-per-node=a100:1
 #SBATCH --partition tier3
 #SBATCH --mem=64g

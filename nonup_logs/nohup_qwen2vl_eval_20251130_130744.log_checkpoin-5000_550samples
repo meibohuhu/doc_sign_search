@@ -1,931 +1,0 @@
-✅ Conda environment activated: qwenvl
-🎬 Qwen2.5-VL-3B How2Sign Evaluation on 2×A6000
-==================================================
-Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
-Model Base: Qwen/Qwen2.5-VL-3B-Instruct
-Video Folder: /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_clips_stable_224x224/
-Question File: /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_550_samples.json
-Output Dir: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/
-GPU IDs: 1 (CUDA_VISIBLE_DEVICES: 1)
-Number of GPUs: 1
-Min Pixels: 50176
-Max Pixels: 50176
-Video FPS: 18
-Max New Tokens: 128
-Max Samples (limited): 550
-
-📁 Output directory: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/
-
-📝 Log file: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval//evaluation_20251130_130744.log
-
-🚀 Starting evaluation...
-
-Using conda python: /home/ztao/anaconda3/envs/qwenvl/bin/python
-
-✅ Available GPUs: 1
-   GPU 0: NVIDIA RTX A6000 (50.9GB)
-
-📌 Using device: cuda:0
-🚀 Loading model from checkpoint...
-   Checkpoint: /local1/mhu/sign_language_llm/InternVL/checkpoints/qwen2vl_how2sign_4xa100_filtered_32batchsize_robust/checkpoint-5000
-   Device: cuda:0
-
-1️⃣ Loading base model...
-`torch_dtype` is deprecated! Use `dtype` instead!
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.17it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.14it/s]
-The module name Qwen/Qwen2_dot_5_hyphen_VL_hyphen_3B_hyphen_Instruct (originally Qwen/Qwen2.5-VL-3B-Instruct) is not a valid Python identifier. Please rename the original module to avoid import issues.
-   ✅ Base model loaded
-
-2️⃣ Loading vision tower + merger...
-   File size: 6.99 GB
-   🔄 Loading checkpoint (this may take 30-60 seconds)...
-   ✅ Loaded 824 keys from disk
-
-   🔧 Cleaning key prefixes...
-   ✅ Cleaned 824 keys
-
-   📝 Sample cleaned keys:
-      - model.visual.patch_embed.proj.weight
-      - model.visual.blocks.0.norm1.weight
-      - model.visual.blocks.0.norm2.weight
-      - model.visual.blocks.0.attn.qkv.weight
-      - model.visual.blocks.0.attn.qkv.bias
-
-   📊 Components in checkpoint:
-      Vision tower: 390 keys
-      Merger: 5 keys
-      Total: 824 keys
-
-   ✅ Full vision tower found in checkpoint!
-
-   🔄 Loading weights into model...
-      ✅ Loaded: 462/824 parameters
-      Missing: 362 (normal for LoRA)
-      Unexpected: 361
-
-   📊 Vision parameters in model: 668,684,288
-      ✅ Full vision tower present (668,684,288 params)
-
-3️⃣ Loading LoRA weights (LLM)...
-   ✅ LoRA loaded
-
-4️⃣ Loading processor...
-   ✅ Processor loaded
-
-🚀 Compiling model for faster inference...
-   ✅ Model compiled successfully
-
-======================================================================
-✅ COMPLETE MODEL LOADED SUCCESSFULLY!
-======================================================================
-   🎯 Vision tower: FULLY TRAINED
-   🎯 Merger: TRAINED (from checkpoint) ✅
-   🎯 LLM: TRAINED (via LoRA) ✅
-======================================================================
-
-📂 Loading test data from: /local1/mhu/sign_language_llm/how2sign/video/test_raw_videos/segmented_test_videos_filtered_550_samples.json
-   Limited to 550 samples
-   Total samples: 550
-
-🔍 Pre-validating video paths...
-   ✅ Valid videos: 550
-   ❌ Missing videos: 0
-
-🎬 Starting evaluation...
-======================================================================
-
-Evaluating:   0%|          | 0/550 [00:00<?, ?it/s]qwen-vl-utils using decord to read video.
-
-──────────────────────────────────────────────────────────────────────
-[1/550] g2SdWBPoXZ0_8-3-rgb_front.mp4
-Ground truth: Now of course there are a million different tricks you can do, and a million different ways you can link them all together.
-Prediction:   Now, when you're cutting out these different things, you can cut them out in any order that you want to.
-✅ Partial match (has some words)
-Evaluating:   0%|          | 1/550 [00:20<3:07:59, 20.55s/it]
-❌ Error on sample 2: CUDA out of memory. Tried to allocate 3.42 GiB. GPU 0 has a total capacity of 47.41 GiB of which 872.38 MiB is free. Including non-PyTorch memory, this process has 45.90 GiB memory in use. Of the allocated memory 39.70 GiB is allocated by PyTorch, and 5.89 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 138, in apply_rotary_pos_emb_vision
-    k_embed = (k * cos) + (rotate_half(k) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.42 GiB. GPU 0 has a total capacity of 47.41 GiB of which 872.38 MiB is free. Including non-PyTorch memory, this process has 45.90 GiB memory in use. Of the allocated memory 39.70 GiB is allocated by PyTorch, and 5.89 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:   0%|          | 2/550 [00:22<1:25:22,  9.35s/it]
-──────────────────────────────────────────────────────────────────────
-[3/550] G2kVb4gINSI_9-10-rgb_front.mp4
-Ground truth: Down and up.
-Prediction:   Point the toe down,挤压 the ball, point the toe up, and then挤压 the ball.
-✅ Partial match (has some words)
-Evaluating:   1%|          | 3/550 [00:36<1:47:04, 11.75s/it]
-──────────────────────────────────────────────────────────────────────
-[4/550] G0Q6AlvH96I_26-2-rgb_front.mp4
-Ground truth: If it's woman attacked by a three hundred pound guy got to aim to the throat.
-Prediction:   Hi, this is John Stewart, and this has been how to remove a broken ball joint from a vehicle.
-✅ Partial match (has some words)
-Evaluating:   1%|          | 4/550 [00:56<2:15:56, 14.94s/it]
-──────────────────────────────────────────────────────────────────────
-[5/550] g2wUCRRni28_6-3-rgb_front.mp4
-Ground truth: These are also great for parting and keeping your hair going that way.
-Prediction:   Also, it's a great way to open the door and say hey, I'm here.
-✅ Partial match (has some words)
-Evaluating:   1%|          | 5/550 [01:10<2:13:20, 14.68s/it]
-──────────────────────────────────────────────────────────────────────
-[6/550] G3RvsnzQrXQ_0-5-rgb_front.mp4
-Ground truth: Now we're ready to make the body of our spider.
-Prediction:   Now we're going to do the same thing to the other side.
-✅ Partial match (has some words)
-Evaluating:   1%|          | 6/550 [01:25<2:12:00, 14.56s/it]
-──────────────────────────────────────────────────────────────────────
-[7/550] fzueHkUDyhE_1-8-rgb_front.mp4
-Ground truth: We had a banked track the actually had to take from arena to arena set it up and tear it down.
-Prediction:   We're going to have her reach forward and we're going to take her hand and bring it all the way around to the other side.
-✅ Partial match (has some words)
-Evaluating:   1%|▏         | 7/550 [01:50<2:43:08, 18.03s/it]
-──────────────────────────────────────────────────────────────────────
-[8/550] G19uBylwQww_13-2-rgb_front.mp4
-Ground truth: "Oops, let's get our tip right".
-Prediction:   So, I'm going to go ahead and cut this out and then we're going to glue it on here.
-⚠️  No obvious match
-Evaluating:   1%|▏         | 8/550 [03:21<6:13:43, 41.37s/it]
-──────────────────────────────────────────────────────────────────────
-[9/550] g3jQ5ecjGz8_8-3-rgb_front.mp4
-Ground truth: So I've shot him, and now I'm supposed to take his keycard and his clothes, and the keycard's here on the ground, so I'll pick that up, and then, go over here to the chemist, and you can see that the B button says "Suit Chemist."
-Prediction:   Okay, so now that you've learned how to dribble the soccer ball, the next thing you're going to want to do is learn how to pass the soccer ball.
-✅ Partial match (has some words)
-Evaluating:   2%|▏         | 9/550 [05:21<9:53:06, 65.78s/it]
-──────────────────────────────────────────────────────────────────────
-[10/550] FzOQMA-CVPc_2-2-rgb_front.mp4
-Ground truth: So just be relaxed and have, just do whatever you need to do to make your guest have a good time.
-Prediction:   And that's how you relax and de-stress before your high school graduation party.
-✅ Partial match (has some words)
-Evaluating:   2%|▏         | 10/550 [06:05<8:54:01, 59.34s/it]Evaluating:   2%|▏         | 11/550 [06:27<7:09:05, 47.77s/it]Evaluating:   2%|▏         | 12/550 [07:26<7:39:04, 51.20s/it]Evaluating:   2%|▏         | 13/550 [07:31<5:32:59, 37.21s/it]Evaluating:   3%|▎         | 14/550 [07:45<4:30:40, 30.30s/it]Evaluating:   3%|▎         | 15/550 [07:54<3:32:52, 23.87s/it]Evaluating:   3%|▎         | 16/550 [08:10<3:10:12, 21.37s/it]
-❌ Error on sample 17: CUDA out of memory. Tried to allocate 3.71 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.67 GiB is free. Including non-PyTorch memory, this process has 45.09 GiB memory in use. Of the allocated memory 38.72 GiB is allocated by PyTorch, and 6.05 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.71 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.67 GiB is free. Including non-PyTorch memory, this process has 45.09 GiB memory in use. Of the allocated memory 38.72 GiB is allocated by PyTorch, and 6.05 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:   3%|▎         | 17/550 [08:11<2:16:58, 15.42s/it]Evaluating:   3%|▎         | 18/550 [08:35<2:38:13, 17.85s/it]Evaluating:   3%|▎         | 19/550 [09:19<3:47:54, 25.75s/it]Evaluating:   4%|▎         | 20/550 [10:33<5:54:39, 40.15s/it]Evaluating:   4%|▍         | 21/550 [11:16<6:02:05, 41.07s/it]Evaluating:   4%|▍         | 22/550 [11:42<5:20:31, 36.42s/it]Evaluating:   4%|▍         | 23/550 [11:44<3:49:18, 26.11s/it]Evaluating:   4%|▍         | 24/550 [12:07<3:40:17, 25.13s/it]Evaluating:   5%|▍         | 25/550 [13:02<5:00:33, 34.35s/it]Evaluating:   5%|▍         | 26/550 [13:16<4:06:30, 28.23s/it]Evaluating:   5%|▍         | 27/550 [14:40<6:31:10, 44.88s/it]Evaluating:   5%|▌         | 28/550 [15:45<7:21:32, 50.75s/it]Evaluating:   5%|▌         | 29/550 [15:59<5:45:45, 39.82s/it]Evaluating:   5%|▌         | 30/550 [16:33<5:29:32, 38.02s/it]Evaluating:   6%|▌         | 31/550 [17:04<5:12:00, 36.07s/it]Evaluating:   6%|▌         | 32/550 [17:21<4:20:54, 30.22s/it]Evaluating:   6%|▌         | 33/550 [17:39<3:48:12, 26.48s/it]Evaluating:   6%|▌         | 34/550 [18:14<4:11:50, 29.28s/it]Evaluating:   6%|▋         | 35/550 [18:20<3:11:13, 22.28s/it]Evaluating:   7%|▋         | 36/550 [18:35<2:51:47, 20.05s/it]Evaluating:   7%|▋         | 37/550 [20:19<6:26:29, 45.20s/it]Evaluating:   7%|▋         | 38/550 [20:30<4:57:41, 34.89s/it]Evaluating:   7%|▋         | 39/550 [20:31<3:29:54, 24.65s/it]Evaluating:   7%|▋         | 40/550 [20:37<2:43:10, 19.20s/it]Evaluating:   7%|▋         | 41/550 [21:00<2:52:08, 20.29s/it]Evaluating:   8%|▊         | 42/550 [21:01<2:03:33, 14.59s/it]Evaluating:   8%|▊         | 43/550 [21:20<2:14:56, 15.97s/it]Evaluating:   8%|▊         | 44/550 [24:33<9:41:05, 68.90s/it]Evaluating:   8%|▊         | 45/550 [25:13<8:27:44, 60.32s/it]Evaluating:   8%|▊         | 46/550 [26:14<8:28:09, 60.50s/it]Evaluating:   9%|▊         | 47/550 [26:21<6:12:51, 44.48s/it]Evaluating:   9%|▊         | 48/550 [26:47<5:26:28, 39.02s/it]
-❌ Error on sample 49: CUDA out of memory. Tried to allocate 3.17 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.89 GiB is free. Including non-PyTorch memory, this process has 43.86 GiB memory in use. Of the allocated memory 37.35 GiB is allocated by PyTorch, and 6.20 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 138, in apply_rotary_pos_emb_vision
-    k_embed = (k * cos) + (rotate_half(k) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.17 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.89 GiB is free. Including non-PyTorch memory, this process has 43.86 GiB memory in use. Of the allocated memory 37.35 GiB is allocated by PyTorch, and 6.20 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:   9%|▉         | 49/550 [26:50<3:55:30, 28.21s/it]
-❌ Error on sample 50: CUDA out of memory. Tried to allocate 3.35 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.15 GiB is free. Including non-PyTorch memory, this process has 45.60 GiB memory in use. Of the allocated memory 37.37 GiB is allocated by PyTorch, and 7.91 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 138, in apply_rotary_pos_emb_vision
-    k_embed = (k * cos) + (rotate_half(k) * sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 127, in rotate_half
-    return torch.cat((-x2, x1), dim=-1)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.35 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.15 GiB is free. Including non-PyTorch memory, this process has 45.60 GiB memory in use. Of the allocated memory 37.37 GiB is allocated by PyTorch, and 7.91 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:   9%|▉         | 50/550 [26:53<2:49:59, 20.40s/it]Evaluating:   9%|▉         | 51/550 [26:57<2:10:42, 15.72s/it]Evaluating:   9%|▉         | 52/550 [27:26<2:43:43, 19.73s/it]Evaluating:  10%|▉         | 53/550 [27:40<2:29:15, 18.02s/it]Evaluating:  10%|▉         | 54/550 [28:01<2:34:42, 18.71s/it]Evaluating:  10%|█         | 55/550 [28:28<2:55:14, 21.24s/it]Evaluating:  10%|█         | 56/550 [28:56<3:12:09, 23.34s/it]Evaluating:  10%|█         | 57/550 [29:11<2:52:00, 20.93s/it]Evaluating:  11%|█         | 58/550 [29:49<3:33:12, 26.00s/it]Evaluating:  11%|█         | 59/550 [30:03<3:01:21, 22.16s/it]Evaluating:  11%|█         | 60/550 [31:39<6:03:28, 44.51s/it]Evaluating:  11%|█         | 61/550 [31:51<4:42:42, 34.69s/it]Evaluating:  11%|█▏        | 62/550 [32:26<4:42:46, 34.77s/it]Evaluating:  11%|█▏        | 63/550 [32:31<3:30:47, 25.97s/it]Evaluating:  12%|█▏        | 64/550 [32:38<2:44:13, 20.27s/it]Evaluating:  12%|█▏        | 65/550 [32:49<2:20:57, 17.44s/it]Evaluating:  12%|█▏        | 66/550 [33:24<3:03:42, 22.77s/it]Evaluating:  12%|█▏        | 67/550 [33:49<3:08:52, 23.46s/it]Evaluating:  12%|█▏        | 68/550 [34:16<3:15:50, 24.38s/it]Evaluating:  13%|█▎        | 69/550 [35:01<4:04:38, 30.52s/it]Evaluating:  13%|█▎        | 70/550 [35:07<3:04:37, 23.08s/it]Evaluating:  13%|█▎        | 71/550 [35:09<2:15:49, 17.01s/it]Evaluating:  13%|█▎        | 72/550 [36:11<4:01:55, 30.37s/it]Evaluating:  13%|█▎        | 73/550 [36:34<3:44:40, 28.26s/it]Evaluating:  13%|█▎        | 74/550 [36:39<2:47:29, 21.11s/it]Evaluating:  14%|█▎        | 75/550 [36:41<2:01:26, 15.34s/it]Evaluating:  14%|█▍        | 76/550 [36:49<1:46:03, 13.42s/it]Evaluating:  14%|█▍        | 77/550 [37:13<2:10:25, 16.54s/it]Evaluating:  14%|█▍        | 78/550 [38:59<5:40:56, 43.34s/it]Evaluating:  14%|█▍        | 79/550 [39:10<4:24:25, 33.68s/it]Evaluating:  15%|█▍        | 80/550 [39:30<3:51:04, 29.50s/it]Evaluating:  15%|█▍        | 81/550 [39:35<2:53:04, 22.14s/it]Evaluating:  15%|█▍        | 82/550 [39:52<2:41:32, 20.71s/it]Evaluating:  15%|█▌        | 83/550 [39:59<2:07:24, 16.37s/it]Evaluating:  15%|█▌        | 84/550 [42:18<6:52:37, 53.13s/it]Evaluating:  15%|█▌        | 85/550 [42:38<5:35:34, 43.30s/it]Evaluating:  16%|█▌        | 86/550 [42:50<4:22:37, 33.96s/it]Evaluating:  16%|█▌        | 87/550 [42:58<3:21:44, 26.14s/it]Evaluating:  16%|█▌        | 88/550 [43:08<2:45:07, 21.44s/it]Evaluating:  16%|█▌        | 89/550 [43:31<2:46:53, 21.72s/it]Evaluating:  16%|█▋        | 90/550 [43:42<2:23:12, 18.68s/it]Evaluating:  17%|█▋        | 91/550 [43:57<2:13:29, 17.45s/it]Evaluating:  17%|█▋        | 92/550 [44:08<1:57:31, 15.40s/it]Evaluating:  17%|█▋        | 93/550 [44:18<1:46:56, 14.04s/it]Evaluating:  17%|█▋        | 94/550 [44:20<1:19:07, 10.41s/it]Evaluating:  17%|█▋        | 95/550 [44:42<1:45:27, 13.91s/it]Evaluating:  17%|█▋        | 96/550 [44:47<1:24:29, 11.17s/it]Evaluating:  18%|█▊        | 97/550 [44:57<1:21:33, 10.80s/it]Evaluating:  18%|█▊        | 98/550 [45:04<1:11:36,  9.51s/it]Evaluating:  18%|█▊        | 99/550 [45:43<2:18:47, 18.46s/it]Evaluating:  18%|█▊        | 100/550 [45:53<1:59:56, 15.99s/it]
-❌ Error on sample 101: CUDA out of memory. Tried to allocate 5.27 GiB. GPU 0 has a total capacity of 47.41 GiB of which 752.38 MiB is free. Including non-PyTorch memory, this process has 46.02 GiB memory in use. Of the allocated memory 41.46 GiB is allocated by PyTorch, and 4.24 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.27 GiB. GPU 0 has a total capacity of 47.41 GiB of which 752.38 MiB is free. Including non-PyTorch memory, this process has 46.02 GiB memory in use. Of the allocated memory 41.46 GiB is allocated by PyTorch, and 4.24 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  18%|█▊        | 101/550 [45:56<1:30:02, 12.03s/it]Evaluating:  19%|█▊        | 102/550 [45:58<1:07:13,  9.00s/it]Evaluating:  19%|█▊        | 103/550 [46:03<58:58,  7.92s/it]  Evaluating:  19%|█▉        | 104/550 [46:08<51:06,  6.88s/it]Evaluating:  19%|█▉        | 105/550 [46:52<2:13:46, 18.04s/it]Evaluating:  19%|█▉        | 106/550 [47:11<2:15:54, 18.37s/it]Evaluating:  19%|█▉        | 107/550 [47:19<1:52:34, 15.25s/it]Evaluating:  20%|█▉        | 108/550 [47:58<2:45:10, 22.42s/it]Evaluating:  20%|█▉        | 109/550 [48:01<2:01:10, 16.49s/it]Evaluating:  20%|██        | 110/550 [48:10<1:44:40, 14.27s/it]Evaluating:  20%|██        | 111/550 [48:35<2:07:41, 17.45s/it]Evaluating:  20%|██        | 112/550 [48:46<1:54:19, 15.66s/it]Evaluating:  21%|██        | 113/550 [48:50<1:27:43, 12.04s/it]Evaluating:  21%|██        | 114/550 [48:54<1:10:07,  9.65s/it]Evaluating:  21%|██        | 115/550 [49:13<1:29:52, 12.40s/it]Evaluating:  21%|██        | 116/550 [49:36<1:52:27, 15.55s/it]Evaluating:  21%|██▏       | 117/550 [49:40<1:27:08, 12.08s/it]Evaluating:  21%|██▏       | 118/550 [49:48<1:19:24, 11.03s/it]Evaluating:  22%|██▏       | 119/550 [51:02<3:35:17, 29.97s/it]Evaluating:  22%|██▏       | 120/550 [51:10<2:46:39, 23.25s/it]Evaluating:  22%|██▏       | 121/550 [51:16<2:08:47, 18.01s/it]Evaluating:  22%|██▏       | 122/550 [51:37<2:14:37, 18.87s/it]Evaluating:  22%|██▏       | 123/550 [51:46<1:53:02, 15.89s/it]Evaluating:  23%|██▎       | 124/550 [51:57<1:42:33, 14.44s/it]Evaluating:  23%|██▎       | 125/550 [52:49<3:03:08, 25.85s/it]Evaluating:  23%|██▎       | 126/550 [52:57<2:24:08, 20.40s/it]Evaluating:  23%|██▎       | 127/550 [53:05<1:59:05, 16.89s/it]Evaluating:  23%|██▎       | 128/550 [53:08<1:29:31, 12.73s/it]Evaluating:  23%|██▎       | 129/550 [53:17<1:20:16, 11.44s/it]Evaluating:  24%|██▎       | 130/550 [53:29<1:21:51, 11.69s/it]Evaluating:  24%|██▍       | 131/550 [54:50<3:47:07, 32.52s/it]Evaluating:  24%|██▍       | 132/550 [55:01<3:01:23, 26.04s/it]Evaluating:  24%|██▍       | 133/550 [55:35<3:16:41, 28.30s/it]Evaluating:  24%|██▍       | 134/550 [55:59<3:06:53, 26.96s/it]Evaluating:  25%|██▍       | 135/550 [56:16<2:47:02, 24.15s/it]Evaluating:  25%|██▍       | 136/550 [56:44<2:53:34, 25.16s/it]Evaluating:  25%|██▍       | 137/550 [59:25<7:34:18, 66.00s/it]
-❌ Error on sample 138: CUDA out of memory. Tried to allocate 3.59 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.78 GiB is free. Including non-PyTorch memory, this process has 43.98 GiB memory in use. Of the allocated memory 37.67 GiB is allocated by PyTorch, and 5.99 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.59 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.78 GiB is free. Including non-PyTorch memory, this process has 43.98 GiB memory in use. Of the allocated memory 37.67 GiB is allocated by PyTorch, and 5.99 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  25%|██▌       | 138/550 [59:27<5:20:34, 46.68s/it]Evaluating:  25%|██▌       | 139/550 [1:00:11<5:14:06, 45.85s/it]Evaluating:  25%|██▌       | 140/550 [1:00:14<3:45:27, 32.99s/it]Evaluating:  26%|██▌       | 141/550 [1:00:19<2:49:19, 24.84s/it]Evaluating:  26%|██▌       | 142/550 [1:00:51<3:02:29, 26.84s/it]Evaluating:  26%|██▌       | 143/550 [1:03:11<6:53:12, 60.91s/it]Evaluating:  26%|██▌       | 144/550 [1:03:18<5:01:38, 44.58s/it]Evaluating:  26%|██▋       | 145/550 [1:03:28<3:51:52, 34.35s/it]Evaluating:  27%|██▋       | 146/550 [1:03:35<2:55:07, 26.01s/it]Evaluating:  27%|██▋       | 147/550 [1:03:44<2:20:33, 20.93s/it]Evaluating:  27%|██▋       | 148/550 [1:03:54<1:58:30, 17.69s/it]Evaluating:  27%|██▋       | 149/550 [1:04:01<1:37:10, 14.54s/it]Evaluating:  27%|██▋       | 150/550 [1:04:22<1:48:43, 16.31s/it]Evaluating:  27%|██▋       | 151/550 [1:04:38<1:48:37, 16.34s/it]Evaluating:  28%|██▊       | 152/550 [1:07:55<7:47:53, 70.54s/it]Evaluating:  28%|██▊       | 153/550 [1:08:06<5:48:50, 52.72s/it]Evaluating:  28%|██▊       | 154/550 [1:08:14<4:18:35, 39.18s/it]Evaluating:  28%|██▊       | 155/550 [1:08:30<3:31:56, 32.19s/it]Evaluating:  28%|██▊       | 156/550 [1:08:34<2:35:55, 23.74s/it]Evaluating:  29%|██▊       | 157/550 [1:08:40<2:00:50, 18.45s/it]Evaluating:  29%|██▊       | 158/550 [1:08:41<1:27:20, 13.37s/it]Evaluating:  29%|██▉       | 159/550 [1:08:54<1:26:26, 13.27s/it]Evaluating:  29%|██▉       | 160/550 [1:09:12<1:34:05, 14.47s/it]Evaluating:  29%|██▉       | 161/550 [1:09:37<1:54:28, 17.66s/it]Evaluating:  29%|██▉       | 162/550 [1:09:45<1:35:56, 14.84s/it]Evaluating:  30%|██▉       | 163/550 [1:09:48<1:12:01, 11.17s/it]Evaluating:  30%|██▉       | 164/550 [1:10:02<1:18:14, 12.16s/it]Evaluating:  30%|███       | 165/550 [1:10:52<2:31:03, 23.54s/it]Evaluating:  30%|███       | 166/550 [1:11:01<2:03:00, 19.22s/it]Evaluating:  30%|███       | 167/550 [1:11:57<3:13:22, 30.29s/it]Evaluating:  31%|███       | 168/550 [1:13:04<4:21:19, 41.04s/it]Evaluating:  31%|███       | 169/550 [1:13:19<3:31:08, 33.25s/it]Evaluating:  31%|███       | 170/550 [1:13:35<2:59:26, 28.33s/it]Evaluating:  31%|███       | 171/550 [1:14:07<3:05:31, 29.37s/it]Evaluating:  31%|███▏      | 172/550 [1:15:15<4:17:04, 40.81s/it]Evaluating:  31%|███▏      | 173/550 [1:15:21<3:11:15, 30.44s/it]Evaluating:  32%|███▏      | 174/550 [1:16:05<3:37:04, 34.64s/it]Evaluating:  32%|███▏      | 175/550 [1:16:44<3:44:19, 35.89s/it]Evaluating:  32%|███▏      | 176/550 [1:16:59<3:04:28, 29.60s/it]Evaluating:  32%|███▏      | 177/550 [1:17:11<2:31:33, 24.38s/it]
-❌ Error on sample 178: CUDA out of memory. Tried to allocate 3.42 GiB. GPU 0 has a total capacity of 47.41 GiB of which 872.38 MiB is free. Including non-PyTorch memory, this process has 45.90 GiB memory in use. Of the allocated memory 39.70 GiB is allocated by PyTorch, and 5.89 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 138, in apply_rotary_pos_emb_vision
-    k_embed = (k * cos) + (rotate_half(k) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.42 GiB. GPU 0 has a total capacity of 47.41 GiB of which 872.38 MiB is free. Including non-PyTorch memory, this process has 45.90 GiB memory in use. Of the allocated memory 39.70 GiB is allocated by PyTorch, and 5.89 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  32%|███▏      | 178/550 [1:17:13<1:48:36, 17.52s/it]Evaluating:  33%|███▎      | 179/550 [1:17:39<2:03:33, 19.98s/it]Evaluating:  33%|███▎      | 180/550 [1:17:44<1:36:30, 15.65s/it]Evaluating:  33%|███▎      | 181/550 [1:17:45<1:08:42, 11.17s/it]Evaluating:  33%|███▎      | 182/550 [1:18:46<2:40:56, 26.24s/it]
-❌ Error on sample 183: CUDA out of memory. Tried to allocate 4.09 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.29 GiB is free. Including non-PyTorch memory, this process has 44.46 GiB memory in use. Of the allocated memory 39.94 GiB is allocated by PyTorch, and 4.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 127, in rotate_half
-    return torch.cat((-x2, x1), dim=-1)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.09 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.29 GiB is free. Including non-PyTorch memory, this process has 44.46 GiB memory in use. Of the allocated memory 39.94 GiB is allocated by PyTorch, and 4.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  33%|███▎      | 183/550 [1:18:48<1:55:30, 18.88s/it]Evaluating:  33%|███▎      | 184/550 [1:19:28<2:33:52, 25.22s/it]Evaluating:  34%|███▎      | 185/550 [1:20:21<3:23:48, 33.50s/it]Evaluating:  34%|███▍      | 186/550 [1:20:53<3:20:27, 33.04s/it]Evaluating:  34%|███▍      | 187/550 [1:21:13<2:55:58, 29.09s/it]Evaluating:  34%|███▍      | 188/550 [1:22:06<3:39:23, 36.36s/it]Evaluating:  34%|███▍      | 189/550 [1:22:13<2:45:44, 27.55s/it]Evaluating:  35%|███▍      | 190/550 [1:22:41<2:45:56, 27.66s/it]Evaluating:  35%|███▍      | 191/550 [1:23:18<3:02:24, 30.49s/it]Evaluating:  35%|███▍      | 192/550 [1:23:23<2:15:54, 22.78s/it]Evaluating:  35%|███▌      | 193/550 [1:23:49<2:21:29, 23.78s/it]Evaluating:  35%|███▌      | 194/550 [1:24:05<2:07:35, 21.51s/it]Evaluating:  35%|███▌      | 195/550 [1:24:23<2:00:09, 20.31s/it]Evaluating:  36%|███▌      | 196/550 [1:24:27<1:30:54, 15.41s/it]Evaluating:  36%|███▌      | 197/550 [1:25:07<2:14:40, 22.89s/it]Evaluating:  36%|███▌      | 198/550 [1:25:21<1:58:33, 20.21s/it]Evaluating:  36%|███▌      | 199/550 [1:25:26<1:32:28, 15.81s/it]Evaluating:  36%|███▋      | 200/550 [1:25:33<1:16:20, 13.09s/it]Evaluating:  37%|███▋      | 201/550 [1:25:43<1:10:23, 12.10s/it]Evaluating:  37%|███▋      | 202/550 [1:25:57<1:13:05, 12.60s/it]Evaluating:  37%|███▋      | 203/550 [1:26:25<1:39:32, 17.21s/it]Evaluating:  37%|███▋      | 204/550 [1:26:30<1:18:31, 13.62s/it]Evaluating:  37%|███▋      | 205/550 [1:27:11<2:06:28, 22.00s/it]Evaluating:  37%|███▋      | 206/550 [1:27:24<1:49:00, 19.01s/it]Evaluating:  38%|███▊      | 207/550 [1:27:26<1:20:30, 14.08s/it]Evaluating:  38%|███▊      | 208/550 [1:27:46<1:29:23, 15.68s/it]Evaluating:  38%|███▊      | 209/550 [1:27:57<1:21:10, 14.28s/it]Evaluating:  38%|███▊      | 210/550 [1:28:03<1:07:34, 11.93s/it]Evaluating:  38%|███▊      | 211/550 [1:28:54<2:14:15, 23.76s/it]Evaluating:  39%|███▊      | 212/550 [1:28:57<1:39:03, 17.58s/it]Evaluating:  39%|███▊      | 213/550 [1:29:07<1:24:21, 15.02s/it]Evaluating:  39%|███▉      | 214/550 [1:29:30<1:37:51, 17.47s/it]Evaluating:  39%|███▉      | 215/550 [1:29:41<1:26:42, 15.53s/it]Evaluating:  39%|███▉      | 216/550 [1:29:55<1:23:42, 15.04s/it]Evaluating:  39%|███▉      | 217/550 [1:30:28<1:54:46, 20.68s/it]Evaluating:  40%|███▉      | 218/550 [1:31:11<2:31:09, 27.32s/it]Evaluating:  40%|███▉      | 219/550 [1:31:30<2:17:16, 24.88s/it]Evaluating:  40%|████      | 220/550 [1:31:35<1:43:08, 18.75s/it]Evaluating:  40%|████      | 221/550 [1:31:42<1:23:20, 15.20s/it]Evaluating:  40%|████      | 222/550 [1:32:12<1:47:51, 19.73s/it]Evaluating:  41%|████      | 223/550 [1:32:23<1:33:33, 17.17s/it]Evaluating:  41%|████      | 224/550 [1:32:54<1:55:17, 21.22s/it]Evaluating:  41%|████      | 225/550 [1:33:03<1:35:52, 17.70s/it]Evaluating:  41%|████      | 226/550 [1:33:15<1:25:18, 15.80s/it]Evaluating:  41%|████▏     | 227/550 [1:34:10<2:28:13, 27.53s/it]Evaluating:  41%|████▏     | 228/550 [1:35:11<3:22:39, 37.76s/it]Evaluating:  42%|████▏     | 229/550 [1:35:46<3:16:58, 36.82s/it]Evaluating:  42%|████▏     | 230/550 [1:35:56<2:33:18, 28.74s/it]Evaluating:  42%|████▏     | 231/550 [1:36:10<2:09:53, 24.43s/it]Evaluating:  42%|████▏     | 232/550 [1:36:17<1:40:39, 18.99s/it]Evaluating:  42%|████▏     | 233/550 [1:36:25<1:22:58, 15.70s/it]Evaluating:  43%|████▎     | 234/550 [1:37:52<3:16:15, 37.27s/it]Evaluating:  43%|████▎     | 235/550 [1:38:04<2:34:59, 29.52s/it]Evaluating:  43%|████▎     | 236/550 [1:38:28<2:26:55, 28.08s/it]Evaluating:  43%|████▎     | 237/550 [1:38:47<2:11:39, 25.24s/it]Evaluating:  43%|████▎     | 238/550 [1:39:43<2:59:31, 34.53s/it]Evaluating:  43%|████▎     | 239/550 [1:40:00<2:30:59, 29.13s/it]Evaluating:  44%|████▎     | 240/550 [1:40:08<1:58:28, 22.93s/it]Evaluating:  44%|████▍     | 241/550 [1:41:03<2:47:40, 32.56s/it]Evaluating:  44%|████▍     | 242/550 [1:41:12<2:10:04, 25.34s/it]Evaluating:  44%|████▍     | 243/550 [1:41:19<1:41:21, 19.81s/it]Evaluating:  44%|████▍     | 244/550 [1:41:26<1:22:48, 16.24s/it]Evaluating:  45%|████▍     | 245/550 [1:41:33<1:08:09, 13.41s/it]Evaluating:  45%|████▍     | 246/550 [1:41:44<1:03:11, 12.47s/it]Evaluating:  45%|████▍     | 247/550 [1:41:51<55:49, 11.06s/it]  Evaluating:  45%|████▌     | 248/550 [1:42:08<1:04:36, 12.83s/it]Evaluating:  45%|████▌     | 249/550 [1:42:09<46:13,  9.21s/it]  Evaluating:  45%|████▌     | 250/550 [1:42:12<37:16,  7.45s/it]Evaluating:  46%|████▌     | 251/550 [1:42:31<53:54, 10.82s/it]Evaluating:  46%|████▌     | 252/550 [1:42:50<1:05:21, 13.16s/it]Evaluating:  46%|████▌     | 253/550 [1:42:56<54:45, 11.06s/it]  Evaluating:  46%|████▌     | 254/550 [1:43:03<48:45,  9.88s/it]Evaluating:  46%|████▋     | 255/550 [1:43:36<1:22:04, 16.69s/it]Evaluating:  47%|████▋     | 256/550 [1:43:50<1:18:43, 16.07s/it]Evaluating:  47%|████▋     | 257/550 [1:43:53<58:53, 12.06s/it]  Evaluating:  47%|████▋     | 258/550 [1:44:11<1:07:28, 13.86s/it]Evaluating:  47%|████▋     | 259/550 [1:44:39<1:27:34, 18.06s/it]Evaluating:  47%|████▋     | 260/550 [1:44:56<1:26:41, 17.94s/it]Evaluating:  47%|████▋     | 261/550 [1:45:09<1:17:56, 16.18s/it]Evaluating:  48%|████▊     | 262/550 [1:45:14<1:02:29, 13.02s/it]Evaluating:  48%|████▊     | 263/550 [1:45:56<1:43:37, 21.66s/it]Evaluating:  48%|████▊     | 264/550 [1:46:05<1:25:08, 17.86s/it]Evaluating:  48%|████▊     | 265/550 [1:46:12<1:08:44, 14.47s/it]Evaluating:  48%|████▊     | 266/550 [1:46:29<1:12:49, 15.39s/it]Evaluating:  49%|████▊     | 267/550 [1:46:57<1:29:54, 19.06s/it]Evaluating:  49%|████▊     | 268/550 [1:47:56<2:25:56, 31.05s/it]Evaluating:  49%|████▉     | 269/550 [1:50:04<4:41:44, 60.16s/it]Evaluating:  49%|████▉     | 270/550 [1:50:08<3:21:37, 43.21s/it]Evaluating:  49%|████▉     | 271/550 [1:50:18<2:35:25, 33.42s/it]Evaluating:  49%|████▉     | 272/550 [1:53:04<5:39:20, 73.24s/it]Evaluating:  50%|████▉     | 273/550 [1:53:46<4:53:57, 63.67s/it]Evaluating:  50%|████▉     | 274/550 [1:54:17<4:08:01, 53.92s/it]Evaluating:  50%|█████     | 275/550 [1:54:46<3:33:51, 46.66s/it]Evaluating:  50%|█████     | 276/550 [1:55:00<2:48:16, 36.85s/it]Evaluating:  50%|█████     | 277/550 [1:55:27<2:33:12, 33.67s/it]
-❌ Error on sample 278: CUDA out of memory. Tried to allocate 5.27 GiB. GPU 0 has a total capacity of 47.41 GiB of which 760.56 MiB is free. Including non-PyTorch memory, this process has 46.02 GiB memory in use. Of the allocated memory 41.46 GiB is allocated by PyTorch, and 4.24 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.27 GiB. GPU 0 has a total capacity of 47.41 GiB of which 760.56 MiB is free. Including non-PyTorch memory, this process has 46.02 GiB memory in use. Of the allocated memory 41.46 GiB is allocated by PyTorch, and 4.24 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  51%|█████     | 278/550 [1:55:29<1:50:15, 24.32s/it]Evaluating:  51%|█████     | 279/550 [1:56:42<2:55:49, 38.93s/it]Evaluating:  51%|█████     | 280/550 [1:57:28<3:03:53, 40.87s/it]Evaluating:  51%|█████     | 281/550 [1:57:34<2:16:20, 30.41s/it]Evaluating:  51%|█████▏    | 282/550 [1:59:19<3:55:40, 52.76s/it]Evaluating:  51%|█████▏    | 283/550 [1:59:27<2:55:50, 39.51s/it]Evaluating:  52%|█████▏    | 284/550 [2:00:02<2:49:35, 38.25s/it]Evaluating:  52%|█████▏    | 285/550 [2:00:14<2:13:41, 30.27s/it]Evaluating:  52%|█████▏    | 286/550 [2:00:36<2:01:48, 27.68s/it]Evaluating:  52%|█████▏    | 287/550 [2:00:47<1:39:10, 22.63s/it]Evaluating:  52%|█████▏    | 288/550 [2:00:50<1:13:01, 16.72s/it]Evaluating:  53%|█████▎    | 289/550 [2:00:58<1:01:32, 14.15s/it]Evaluating:  53%|█████▎    | 290/550 [2:01:04<50:49, 11.73s/it]  Evaluating:  53%|█████▎    | 291/550 [2:01:08<40:34,  9.40s/it]Evaluating:  53%|█████▎    | 292/550 [2:01:26<51:53, 12.07s/it]Evaluating:  53%|█████▎    | 293/550 [2:01:28<38:18,  8.94s/it]Evaluating:  53%|█████▎    | 294/550 [2:01:36<36:55,  8.65s/it]Evaluating:  54%|█████▎    | 295/550 [2:01:47<40:23,  9.50s/it]Evaluating:  54%|█████▍    | 296/550 [2:03:16<2:21:21, 33.39s/it]Evaluating:  54%|█████▍    | 297/550 [2:05:50<4:52:53, 69.46s/it]Evaluating:  54%|█████▍    | 298/550 [2:05:52<3:26:32, 49.18s/it]Evaluating:  54%|█████▍    | 299/550 [2:07:04<3:54:13, 55.99s/it]Evaluating:  55%|█████▍    | 300/550 [2:07:58<3:51:02, 55.45s/it]Evaluating:  55%|█████▍    | 301/550 [2:08:17<3:05:06, 44.60s/it]Evaluating:  55%|█████▍    | 302/550 [2:08:26<2:19:55, 33.85s/it]Evaluating:  55%|█████▌    | 303/550 [2:08:33<1:46:55, 25.98s/it]Evaluating:  55%|█████▌    | 304/550 [2:08:55<1:40:40, 24.55s/it]Evaluating:  55%|█████▌    | 305/550 [2:09:18<1:38:58, 24.24s/it]Evaluating:  56%|█████▌    | 306/550 [2:09:27<1:19:29, 19.55s/it]Evaluating:  56%|█████▌    | 307/550 [2:09:30<59:07, 14.60s/it]  Evaluating:  56%|█████▌    | 308/550 [2:09:33<44:55, 11.14s/it]Evaluating:  56%|█████▌    | 309/550 [2:10:40<1:52:14, 27.94s/it]Evaluating:  56%|█████▋    | 310/550 [2:11:04<1:47:25, 26.86s/it]Evaluating:  57%|█████▋    | 311/550 [2:11:12<1:24:12, 21.14s/it]Evaluating:  57%|█████▋    | 312/550 [2:11:18<1:05:59, 16.64s/it]Evaluating:  57%|█████▋    | 313/550 [2:11:44<1:16:38, 19.40s/it]Evaluating:  57%|█████▋    | 314/550 [2:11:53<1:03:28, 16.14s/it]Evaluating:  57%|█████▋    | 315/550 [2:12:03<56:07, 14.33s/it]  Evaluating:  57%|█████▋    | 316/550 [2:12:54<1:38:43, 25.32s/it]Evaluating:  58%|█████▊    | 317/550 [2:13:04<1:21:13, 20.92s/it]Evaluating:  58%|█████▊    | 318/550 [2:13:30<1:26:23, 22.34s/it]Evaluating:  58%|█████▊    | 319/550 [2:13:51<1:24:52, 22.05s/it]Evaluating:  58%|█████▊    | 320/550 [2:13:57<1:06:00, 17.22s/it]Evaluating:  58%|█████▊    | 321/550 [2:14:54<1:50:52, 29.05s/it]Evaluating:  59%|█████▊    | 322/550 [2:15:05<1:29:20, 23.51s/it]Evaluating:  59%|█████▊    | 323/550 [2:16:39<2:49:29, 44.80s/it]Evaluating:  59%|█████▉    | 324/550 [2:16:46<2:06:15, 33.52s/it]Evaluating:  59%|█████▉    | 325/550 [2:16:58<1:41:20, 27.02s/it]Evaluating:  59%|█████▉    | 326/550 [2:17:34<1:51:12, 29.79s/it]Evaluating:  59%|█████▉    | 327/550 [2:17:43<1:27:31, 23.55s/it]Evaluating:  60%|█████▉    | 328/550 [2:18:31<1:53:37, 30.71s/it]Evaluating:  60%|█████▉    | 329/550 [2:18:49<1:39:36, 27.04s/it]Evaluating:  60%|██████    | 330/550 [2:19:36<2:00:17, 32.81s/it]Evaluating:  60%|██████    | 331/550 [2:19:38<1:26:30, 23.70s/it]Evaluating:  60%|██████    | 332/550 [2:19:59<1:23:17, 22.92s/it]Evaluating:  61%|██████    | 333/550 [2:20:10<1:10:11, 19.41s/it]Evaluating:  61%|██████    | 334/550 [2:20:20<59:16, 16.47s/it]  Evaluating:  61%|██████    | 335/550 [2:20:37<59:43, 16.67s/it]Evaluating:  61%|██████    | 336/550 [2:20:41<45:49, 12.85s/it]Evaluating:  61%|██████▏   | 337/550 [2:21:10<1:02:42, 17.67s/it]Evaluating:  61%|██████▏   | 338/550 [2:21:54<1:30:29, 25.61s/it]Evaluating:  62%|██████▏   | 339/550 [2:25:09<4:28:20, 76.30s/it]Evaluating:  62%|██████▏   | 340/550 [2:26:15<4:16:21, 73.24s/it]Evaluating:  62%|██████▏   | 341/550 [2:27:58<4:46:26, 82.23s/it]Evaluating:  62%|██████▏   | 342/550 [2:28:01<3:23:07, 58.59s/it]Evaluating:  62%|██████▏   | 343/550 [2:28:08<2:28:18, 42.99s/it]Evaluating:  63%|██████▎   | 344/550 [2:28:48<2:24:05, 41.97s/it]Evaluating:  63%|██████▎   | 345/550 [2:28:56<1:49:31, 32.06s/it]Evaluating:  63%|██████▎   | 346/550 [2:29:15<1:35:03, 27.96s/it]Evaluating:  63%|██████▎   | 347/550 [2:29:48<1:39:56, 29.54s/it]Evaluating:  63%|██████▎   | 348/550 [2:29:53<1:14:52, 22.24s/it]Evaluating:  63%|██████▎   | 349/550 [2:30:13<1:11:26, 21.33s/it]Evaluating:  64%|██████▎   | 350/550 [2:30:21<58:20, 17.50s/it]  Evaluating:  64%|██████▍   | 351/550 [2:30:50<1:09:02, 20.81s/it]Evaluating:  64%|██████▍   | 352/550 [2:31:31<1:29:11, 27.03s/it]Evaluating:  64%|██████▍   | 353/550 [2:31:59<1:29:41, 27.32s/it]Evaluating:  64%|██████▍   | 354/550 [2:32:27<1:29:55, 27.53s/it]Evaluating:  65%|██████▍   | 355/550 [2:32:56<1:30:35, 27.87s/it]Evaluating:  65%|██████▍   | 356/550 [2:33:11<1:18:06, 24.16s/it]
-❌ Error on sample 357: CUDA out of memory. Tried to allocate 3.38 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.27 GiB is free. Including non-PyTorch memory, this process has 45.49 GiB memory in use. Of the allocated memory 39.31 GiB is allocated by PyTorch, and 5.87 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 138, in apply_rotary_pos_emb_vision
-    k_embed = (k * cos) + (rotate_half(k) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.38 GiB. GPU 0 has a total capacity of 47.41 GiB of which 1.27 GiB is free. Including non-PyTorch memory, this process has 45.49 GiB memory in use. Of the allocated memory 39.31 GiB is allocated by PyTorch, and 5.87 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  65%|██████▍   | 357/550 [2:33:13<55:39, 17.30s/it]  Evaluating:  65%|██████▌   | 358/550 [2:34:14<1:37:16, 30.40s/it]
-❌ Error on sample 359: CUDA out of memory. Tried to allocate 3.23 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.83 GiB is free. Including non-PyTorch memory, this process has 43.94 GiB memory in use. Of the allocated memory 37.87 GiB is allocated by PyTorch, and 5.75 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 138, in apply_rotary_pos_emb_vision
-    k_embed = (k * cos) + (rotate_half(k) * sin)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.23 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.83 GiB is free. Including non-PyTorch memory, this process has 43.94 GiB memory in use. Of the allocated memory 37.87 GiB is allocated by PyTorch, and 5.75 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  65%|██████▌   | 359/550 [2:34:15<1:09:04, 21.70s/it]Evaluating:  65%|██████▌   | 360/550 [2:34:53<1:24:24, 26.65s/it]Evaluating:  66%|██████▌   | 361/550 [2:35:17<1:21:06, 25.75s/it]Evaluating:  66%|██████▌   | 362/550 [2:35:51<1:28:18, 28.18s/it]Evaluating:  66%|██████▌   | 363/550 [2:36:06<1:15:45, 24.31s/it]Evaluating:  66%|██████▌   | 364/550 [2:36:39<1:23:27, 26.92s/it]
-❌ Error on sample 365: CUDA out of memory. Tried to allocate 4.16 GiB. GPU 0 has a total capacity of 47.41 GiB of which 3.83 GiB is free. Including non-PyTorch memory, this process has 42.93 GiB memory in use. Of the allocated memory 40.49 GiB is allocated by PyTorch, and 2.13 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 127, in rotate_half
-    return torch.cat((-x2, x1), dim=-1)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.16 GiB. GPU 0 has a total capacity of 47.41 GiB of which 3.83 GiB is free. Including non-PyTorch memory, this process has 42.93 GiB memory in use. Of the allocated memory 40.49 GiB is allocated by PyTorch, and 2.13 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  66%|██████▋   | 365/550 [2:36:41<59:53, 19.42s/it]  Evaluating:  67%|██████▋   | 366/550 [2:37:01<59:56, 19.55s/it]Evaluating:  67%|██████▋   | 367/550 [2:37:06<46:21, 15.20s/it]Evaluating:  67%|██████▋   | 368/550 [2:38:26<1:45:36, 34.82s/it]Evaluating:  67%|██████▋   | 369/550 [2:38:32<1:19:00, 26.19s/it]Evaluating:  67%|██████▋   | 370/550 [2:38:50<1:10:26, 23.48s/it]Evaluating:  67%|██████▋   | 371/550 [2:38:54<52:32, 17.61s/it]  Evaluating:  68%|██████▊   | 372/550 [2:38:56<39:00, 13.15s/it]Evaluating:  68%|██████▊   | 373/550 [2:39:03<33:15, 11.27s/it]Evaluating:  68%|██████▊   | 374/550 [2:39:42<57:13, 19.51s/it]Evaluating:  68%|██████▊   | 375/550 [2:41:23<2:07:55, 43.86s/it]Evaluating:  68%|██████▊   | 376/550 [2:41:33<1:38:06, 33.83s/it]Evaluating:  69%|██████▊   | 377/550 [2:41:38<1:12:14, 25.05s/it]Evaluating:  69%|██████▊   | 378/550 [2:41:42<53:38, 18.71s/it]  Evaluating:  69%|██████▉   | 379/550 [2:42:48<1:34:17, 33.09s/it]Evaluating:  69%|██████▉   | 380/550 [2:42:53<1:09:57, 24.69s/it]Evaluating:  69%|██████▉   | 381/550 [2:42:55<50:18, 17.86s/it]  Evaluating:  69%|██████▉   | 382/550 [2:43:04<42:26, 15.16s/it]Evaluating:  70%|██████▉   | 383/550 [2:43:10<34:24, 12.36s/it]Evaluating:  70%|██████▉   | 384/550 [2:43:32<42:29, 15.36s/it]Evaluating:  70%|███████   | 385/550 [2:43:56<48:58, 17.81s/it]Evaluating:  70%|███████   | 386/550 [2:45:34<1:54:40, 41.95s/it]Evaluating:  70%|███████   | 387/550 [2:45:40<1:24:45, 31.20s/it]Evaluating:  71%|███████   | 388/550 [2:45:57<1:12:29, 26.85s/it]Evaluating:  71%|███████   | 389/550 [2:46:01<53:39, 19.99s/it]  Evaluating:  71%|███████   | 390/550 [2:46:02<37:57, 14.24s/it]Evaluating:  71%|███████   | 391/550 [2:46:07<30:25, 11.48s/it]Evaluating:  71%|███████▏  | 392/550 [2:46:14<26:50, 10.20s/it]Evaluating:  71%|███████▏  | 393/550 [2:46:28<29:40, 11.34s/it]Evaluating:  72%|███████▏  | 394/550 [2:46:33<24:18,  9.35s/it]Evaluating:  72%|███████▏  | 395/550 [2:47:14<49:21, 19.11s/it]Evaluating:  72%|███████▏  | 396/550 [2:49:04<1:58:31, 46.18s/it]Evaluating:  72%|███████▏  | 397/550 [2:49:15<1:31:09, 35.75s/it]Evaluating:  72%|███████▏  | 398/550 [2:49:28<1:13:18, 28.94s/it]Evaluating:  73%|███████▎  | 399/550 [2:49:35<56:01, 22.26s/it]  Evaluating:  73%|███████▎  | 400/550 [2:50:05<1:01:23, 24.56s/it]Evaluating:  73%|███████▎  | 401/550 [2:50:28<1:00:11, 24.24s/it]Evaluating:  73%|███████▎  | 402/550 [2:50:46<55:04, 22.32s/it]  Evaluating:  73%|███████▎  | 403/550 [2:52:02<1:33:45, 38.27s/it]Evaluating:  73%|███████▎  | 404/550 [2:52:16<1:15:48, 31.15s/it]Evaluating:  74%|███████▎  | 405/550 [2:52:27<1:00:28, 25.03s/it]Evaluating:  74%|███████▍  | 406/550 [2:52:40<51:21, 21.40s/it]  Evaluating:  74%|███████▍  | 407/550 [2:52:44<38:18, 16.08s/it]Evaluating:  74%|███████▍  | 408/550 [2:52:47<29:16, 12.37s/it]Evaluating:  74%|███████▍  | 409/550 [2:52:55<25:36, 10.89s/it]Evaluating:  75%|███████▍  | 410/550 [2:53:03<23:47, 10.20s/it]Evaluating:  75%|███████▍  | 411/550 [2:53:20<28:28, 12.29s/it]Evaluating:  75%|███████▍  | 412/550 [2:54:44<1:17:38, 33.76s/it]Evaluating:  75%|███████▌  | 413/550 [2:55:59<1:45:04, 46.02s/it]Evaluating:  75%|███████▌  | 414/550 [2:56:05<1:16:50, 33.90s/it]Evaluating:  75%|███████▌  | 415/550 [2:56:08<55:45, 24.78s/it]  Evaluating:  76%|███████▌  | 416/550 [2:58:41<2:21:19, 63.28s/it]Evaluating:  76%|███████▌  | 417/550 [2:59:31<2:11:12, 59.19s/it]Evaluating:  76%|███████▌  | 418/550 [2:59:37<1:34:57, 43.17s/it]Evaluating:  76%|███████▌  | 419/550 [2:59:53<1:16:55, 35.24s/it]Evaluating:  76%|███████▋  | 420/550 [3:00:05<1:00:47, 28.06s/it]Evaluating:  77%|███████▋  | 421/550 [3:00:53<1:13:06, 34.01s/it]Evaluating:  77%|███████▋  | 422/550 [3:01:06<59:26, 27.86s/it]  Evaluating:  77%|███████▋  | 423/550 [3:01:20<49:49, 23.54s/it]Evaluating:  77%|███████▋  | 424/550 [3:02:15<1:09:33, 33.12s/it]Evaluating:  77%|███████▋  | 425/550 [3:02:40<1:03:47, 30.62s/it]Evaluating:  77%|███████▋  | 426/550 [3:03:11<1:03:30, 30.73s/it]Evaluating:  78%|███████▊  | 427/550 [3:03:31<56:40, 27.65s/it]  Evaluating:  78%|███████▊  | 428/550 [3:04:59<1:32:52, 45.68s/it]Evaluating:  78%|███████▊  | 429/550 [3:05:14<1:13:26, 36.42s/it]Evaluating:  78%|███████▊  | 430/550 [3:05:14<51:16, 25.64s/it]  Evaluating:  78%|███████▊  | 431/550 [3:06:47<1:30:56, 45.85s/it]Evaluating:  79%|███████▊  | 432/550 [3:07:03<1:12:29, 36.86s/it]Evaluating:  79%|███████▊  | 433/550 [3:08:05<1:26:46, 44.50s/it]Evaluating:  79%|███████▉  | 434/550 [3:09:30<1:49:16, 56.52s/it]Evaluating:  79%|███████▉  | 435/550 [3:09:49<1:26:46, 45.27s/it]Evaluating:  79%|███████▉  | 436/550 [3:09:53<1:02:40, 32.99s/it]Evaluating:  79%|███████▉  | 437/550 [3:10:18<57:15, 30.41s/it]  Evaluating:  80%|███████▉  | 438/550 [3:10:26<44:04, 23.61s/it]Evaluating:  80%|███████▉  | 439/550 [3:10:54<46:18, 25.03s/it]Evaluating:  80%|████████  | 440/550 [3:11:09<40:30, 22.09s/it]Evaluating:  80%|████████  | 441/550 [3:11:43<46:41, 25.70s/it]Evaluating:  80%|████████  | 442/550 [3:11:47<34:27, 19.15s/it]Evaluating:  81%|████████  | 443/550 [3:12:04<32:59, 18.50s/it]Evaluating:  81%|████████  | 444/550 [3:13:47<1:17:31, 43.88s/it]Evaluating:  81%|████████  | 445/550 [3:14:30<1:16:03, 43.46s/it]Evaluating:  81%|████████  | 446/550 [3:14:58<1:07:18, 38.83s/it]Evaluating:  81%|████████▏ | 447/550 [3:16:21<1:29:18, 52.03s/it]Evaluating:  81%|████████▏ | 448/550 [3:16:28<1:05:56, 38.79s/it]Evaluating:  82%|████████▏ | 449/550 [3:16:35<49:03, 29.15s/it]  Evaluating:  82%|████████▏ | 450/550 [3:16:55<43:47, 26.28s/it]Evaluating:  82%|████████▏ | 451/550 [3:16:57<31:16, 18.95s/it]Evaluating:  82%|████████▏ | 452/550 [3:17:07<26:47, 16.40s/it]Evaluating:  82%|████████▏ | 453/550 [3:19:03<1:14:57, 46.36s/it]Evaluating:  83%|████████▎ | 454/550 [3:19:23<1:01:28, 38.42s/it]Evaluating:  83%|████████▎ | 455/550 [3:19:27<44:22, 28.03s/it]  Evaluating:  83%|████████▎ | 456/550 [3:19:46<39:39, 25.32s/it]Evaluating:  83%|████████▎ | 457/550 [3:20:13<40:15, 25.97s/it]Evaluating:  83%|████████▎ | 458/550 [3:20:20<30:42, 20.03s/it]Evaluating:  83%|████████▎ | 459/550 [3:20:20<21:41, 14.30s/it]Evaluating:  84%|████████▎ | 460/550 [3:20:27<18:03, 12.04s/it]Evaluating:  84%|████████▍ | 461/550 [3:21:03<28:33, 19.25s/it]Evaluating:  84%|████████▍ | 462/550 [3:22:02<45:27, 31.00s/it]Evaluating:  84%|████████▍ | 463/550 [3:23:13<1:02:34, 43.15s/it]Evaluating:  84%|████████▍ | 464/550 [3:23:24<47:46, 33.33s/it]  Evaluating:  85%|████████▍ | 465/550 [3:23:32<36:35, 25.82s/it]Evaluating:  85%|████████▍ | 466/550 [3:24:07<40:12, 28.71s/it]Evaluating:  85%|████████▍ | 467/550 [3:24:21<33:31, 24.23s/it]Evaluating:  85%|████████▌ | 468/550 [3:24:42<31:50, 23.30s/it]Evaluating:  85%|████████▌ | 469/550 [3:25:12<34:09, 25.31s/it]Evaluating:  85%|████████▌ | 470/550 [3:25:23<27:52, 20.91s/it]Evaluating:  86%|████████▌ | 471/550 [3:25:28<21:24, 16.26s/it]Evaluating:  86%|████████▌ | 472/550 [3:26:34<40:14, 30.96s/it]Evaluating:  86%|████████▌ | 473/550 [3:26:43<31:14, 24.34s/it]Evaluating:  86%|████████▌ | 474/550 [3:28:08<54:07, 42.73s/it]Evaluating:  86%|████████▋ | 475/550 [3:28:41<49:44, 39.79s/it]Evaluating:  87%|████████▋ | 476/550 [3:29:04<42:41, 34.61s/it]Evaluating:  87%|████████▋ | 477/550 [3:29:47<45:16, 37.22s/it]Evaluating:  87%|████████▋ | 478/550 [3:29:50<32:15, 26.88s/it]Evaluating:  87%|████████▋ | 479/550 [3:29:54<23:54, 20.20s/it]Evaluating:  87%|████████▋ | 480/550 [3:30:00<18:26, 15.81s/it]Evaluating:  87%|████████▋ | 481/550 [3:30:14<17:39, 15.36s/it]Evaluating:  88%|████████▊ | 482/550 [3:30:48<23:32, 20.77s/it]Evaluating:  88%|████████▊ | 483/550 [3:31:30<30:29, 27.30s/it]Evaluating:  88%|████████▊ | 484/550 [3:31:50<27:31, 25.03s/it]Evaluating:  88%|████████▊ | 485/550 [3:33:13<46:03, 42.51s/it]
-❌ Error on sample 486: CUDA out of memory. Tried to allocate 4.04 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.74 GiB is free. Including non-PyTorch memory, this process has 44.02 GiB memory in use. Of the allocated memory 39.50 GiB is allocated by PyTorch, and 4.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 127, in rotate_half
-    return torch.cat((-x2, x1), dim=-1)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.04 GiB. GPU 0 has a total capacity of 47.41 GiB of which 2.74 GiB is free. Including non-PyTorch memory, this process has 44.02 GiB memory in use. Of the allocated memory 39.50 GiB is allocated by PyTorch, and 4.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  88%|████████▊ | 486/550 [3:33:15<32:15, 30.24s/it]Evaluating:  89%|████████▊ | 487/550 [3:33:17<23:03, 21.97s/it]Evaluating:  89%|████████▊ | 488/550 [3:33:26<18:33, 17.96s/it]Evaluating:  89%|████████▉ | 489/550 [3:34:15<27:40, 27.23s/it]Evaluating:  89%|████████▉ | 490/550 [3:34:36<25:30, 25.51s/it]Evaluating:  89%|████████▉ | 491/550 [3:36:05<43:35, 44.33s/it]Evaluating:  89%|████████▉ | 492/550 [3:36:44<41:25, 42.86s/it]Evaluating:  90%|████████▉ | 493/550 [3:36:56<31:59, 33.68s/it]Evaluating:  90%|████████▉ | 494/550 [3:37:07<24:57, 26.75s/it]Evaluating:  90%|█████████ | 495/550 [3:39:17<52:51, 57.66s/it]Evaluating:  90%|█████████ | 496/550 [3:39:23<37:56, 42.16s/it]Evaluating:  90%|█████████ | 497/550 [3:39:53<34:08, 38.65s/it]Evaluating:  91%|█████████ | 498/550 [3:39:55<24:00, 27.70s/it]Evaluating:  91%|█████████ | 499/550 [3:40:02<18:14, 21.47s/it]Evaluating:  91%|█████████ | 500/550 [3:40:14<15:33, 18.68s/it]Evaluating:  91%|█████████ | 501/550 [3:41:05<23:03, 28.24s/it]Evaluating:  91%|█████████▏| 502/550 [3:41:16<18:30, 23.13s/it]Evaluating:  91%|█████████▏| 503/550 [3:41:23<14:25, 18.41s/it]Evaluating:  92%|█████████▏| 504/550 [3:41:28<10:55, 14.24s/it]Evaluating:  92%|█████████▏| 505/550 [3:41:40<10:08, 13.51s/it]Evaluating:  92%|█████████▏| 506/550 [3:41:48<08:48, 12.02s/it]Evaluating:  92%|█████████▏| 507/550 [3:42:32<15:27, 21.56s/it]Evaluating:  92%|█████████▏| 508/550 [3:42:45<13:16, 18.97s/it]Evaluating:  93%|█████████▎| 509/550 [3:43:28<17:49, 26.07s/it]Evaluating:  93%|█████████▎| 510/550 [3:43:49<16:28, 24.70s/it]Evaluating:  93%|█████████▎| 511/550 [3:44:05<14:22, 22.12s/it]Evaluating:  93%|█████████▎| 512/550 [3:44:45<17:20, 27.39s/it]Evaluating:  93%|█████████▎| 513/550 [3:45:09<16:17, 26.43s/it]Evaluating:  93%|█████████▎| 514/550 [3:45:21<13:14, 22.08s/it]Evaluating:  94%|█████████▎| 515/550 [3:45:24<09:25, 16.16s/it]Evaluating:  94%|█████████▍| 516/550 [3:45:42<09:29, 16.76s/it]Evaluating:  94%|█████████▍| 517/550 [3:45:47<07:15, 13.20s/it]Evaluating:  94%|█████████▍| 518/550 [3:46:16<09:42, 18.19s/it]Evaluating:  94%|█████████▍| 519/550 [3:46:32<09:01, 17.46s/it]Evaluating:  95%|█████████▍| 520/550 [3:48:42<25:32, 51.08s/it]Evaluating:  95%|█████████▍| 521/550 [3:49:13<21:51, 45.21s/it]Evaluating:  95%|█████████▍| 522/550 [3:49:26<16:34, 35.52s/it]Evaluating:  95%|█████████▌| 523/550 [3:49:40<13:05, 29.10s/it]Evaluating:  95%|█████████▌| 524/550 [3:49:58<11:09, 25.77s/it]
-❌ Error on sample 525: CUDA out of memory. Tried to allocate 4.31 GiB. GPU 0 has a total capacity of 47.41 GiB of which 558.56 MiB is free. Including non-PyTorch memory, this process has 46.22 GiB memory in use. Of the allocated memory 41.69 GiB is allocated by PyTorch, and 4.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Traceback (most recent call last):
-  File "/local1/mhu/sign_language_llm/scripts/cluster_eval/how2sign_scripts/qwen2vl_evaluation_how2sign_claude_local.py", line 457, in eval_model
-    output_ids = model.generate(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/peft/peft_model.py", line 817, in generate
-    return self.get_base_model().generate(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
-    return func(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 2542, in generate
-    result = decoding_method(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/generation/utils.py", line 3243, in _beam_search
-    model_outputs = self(**model_inputs, return_dict=True)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/utils/generic.py", line 783, in wrapper
-    output = func(self, *args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1476, in forward
-    outputs = self.model(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1265, in forward
-    video_embeds = self.get_video_features(pixel_values_videos, video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1154, in get_video_features
-    video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 453, in forward
-    hidden_states = blk(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/modeling_layers.py", line 94, in __call__
-    return super().__call__(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 281, in forward
-    hidden_states = hidden_states + self.attn(
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
-    return self._call_impl(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 209, in forward
-    query_states, key_states = apply_rotary_pos_emb_vision(query_states, key_states, cos, sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 137, in apply_rotary_pos_emb_vision
-    q_embed = (q * cos) + (rotate_half(q) * sin)
-  File "/home/ztao/anaconda3/envs/qwenvl/lib/python3.10/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 127, in rotate_half
-    return torch.cat((-x2, x1), dim=-1)
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 4.31 GiB. GPU 0 has a total capacity of 47.41 GiB of which 558.56 MiB is free. Including non-PyTorch memory, this process has 46.22 GiB memory in use. Of the allocated memory 41.69 GiB is allocated by PyTorch, and 4.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-Evaluating:  95%|█████████▌| 525/550 [3:50:00<07:45, 18.62s/it]Evaluating:  96%|█████████▌| 526/550 [3:50:25<08:11, 20.48s/it]Evaluating:  96%|█████████▌| 527/550 [3:50:52<08:35, 22.42s/it]Evaluating:  96%|█████████▌| 528/550 [3:52:17<15:04, 41.10s/it]Evaluating:  96%|█████████▌| 529/550 [3:52:43<12:52, 36.78s/it]Evaluating:  96%|█████████▋| 530/550 [3:52:55<09:45, 29.26s/it]Evaluating:  97%|█████████▋| 531/550 [3:54:18<14:22, 45.41s/it]Evaluating:  97%|█████████▋| 532/550 [3:54:21<09:50, 32.79s/it]Evaluating:  97%|█████████▋| 533/550 [3:54:46<08:33, 30.18s/it]Evaluating:  97%|█████████▋| 534/550 [3:55:07<07:22, 27.66s/it]Evaluating:  97%|█████████▋| 535/550 [3:55:22<05:57, 23.82s/it]Evaluating:  97%|█████████▋| 536/550 [3:55:25<04:06, 17.58s/it]Evaluating:  98%|█████████▊| 537/550 [3:55:29<02:54, 13.40s/it]Evaluating:  98%|█████████▊| 538/550 [3:56:07<04:08, 20.70s/it]Evaluating:  98%|█████████▊| 539/550 [3:58:05<09:10, 50.03s/it]Evaluating:  98%|█████████▊| 540/550 [3:58:19<06:31, 39.18s/it]Evaluating:  98%|█████████▊| 541/550 [3:58:41<05:07, 34.19s/it]Evaluating:  99%|█████████▊| 542/550 [3:59:02<04:00, 30.09s/it]Evaluating:  99%|█████████▊| 543/550 [3:59:15<02:54, 24.91s/it]Evaluating:  99%|█████████▉| 544/550 [3:59:45<02:39, 26.52s/it]Evaluating:  99%|█████████▉| 545/550 [3:59:47<01:36, 19.24s/it]Evaluating:  99%|█████████▉| 546/550 [4:01:07<02:29, 37.42s/it]Evaluating:  99%|█████████▉| 547/550 [4:01:30<01:39, 33.05s/it]Evaluating: 100%|█████████▉| 548/550 [4:01:48<00:56, 28.39s/it]Evaluating: 100%|█████████▉| 549/550 [4:01:50<00:20, 20.65s/it]Evaluating: 100%|██████████| 550/550 [4:02:16<00:00, 22.27s/it]Evaluating: 100%|██████████| 550/550 [4:02:16<00:00, 26.43s/it]
-
-======================================================================
-✅ Results saved: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/checkpoint4000_results_20251130_171014.json
-======================================================================
-
-📊 Calculating evaluation metrics...
-
-
-============================================================
-EVALUATION RESULTS - Checkpoint-4000 (SSVP-SLT Style)
-============================================================
-
-📊 Overall Metrics:
-  Exact Match Score: 0.0019
-  F1 Score:         0.1730
-  Precision:        0.1857
-  Recall:           0.1770
-  ROUGE-L F1:       0.1694
-  BLEURT-20 Score:  0.0000
-
-📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
-  BLEU1: 0.2316
-  BLEU2: 0.1003
-  BLEU3: 0.0552
-  BLEU4: 0.0325
-
-📋 Summary:
-  Total Samples:    536
-============================================================
-
-📊 Metrics saved: /local1/mhu/sign_language_llm/outputs/qwen2vl_eval/metrics_20251130_171014.json
-
-======================================================================
-🎯 EVALUATION SUMMARY
-======================================================================
-   Total samples: 550
-   Successful: 536
-   Failed: 14
-   Success rate: 97.5%
-======================================================================
-

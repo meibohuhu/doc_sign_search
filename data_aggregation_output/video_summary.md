@@ -11,6 +11,7 @@ YouTube 数据集：
 输出文件：data_aggregation_output/youtube_video_texts.json (62 MB)
 
 
+Sign1news
 原始视频数：395
 删除的视频：45（caption_languages 为多语言且 caption_timestamps 有问题）
 total_sentences: 13457
@@ -18,4 +19,6 @@ total_sentences: 13457
 cd /home/mh2803/projects/sign_language_llm/data_aggregation_output
 MAX_VIDEOS=6923
 USE_STRICT=true BATCH_SIZE=20 python stage2_llm_how2sign_filter.py
-www的句子不裁，（）的不裁。**的不裁
+www的句子，（）的不裁。**的不裁
+(expressive gesture), http://, &gt
+ []

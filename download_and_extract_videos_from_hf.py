@@ -29,6 +29,25 @@ python3 /local1/mhu/sign_language_llm/download_and_extract_videos_from_hf.py \
     --output_dir /local1/mhu/sign_language_llm/InternVL/checkpoints/finetune_internvl2_5_openasl_1B_1216_121640 \
     --checkpoint_subdir checkpoint-6374
 
+    python3 download_and_extract_videos_from_hf.py \
+    --mode checkpoint \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_16fps_1203 \
+    --output_dir /shared/rc/llm-gen-agent/mhu/internvl/20260202/finetune_internvl2_5_how2sign_16fps_1203 \
+    --checkpoint_subdir checkpoint-2040
+        
+    python3 download_and_extract_videos_from_hf.py \
+    --mode checkpoint \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_16fps_1203 \
+    --output_dir /shared/rc/llm-gen-agent/mhu/internvl/20260202/finetune_internvl2_5_how2sign_16fps_1203 \
+    --checkpoint_subdir checkpoint-2555
+
+python3 download_and_extract_videos_from_hf.py \
+    --mode checkpoint \
+    --model_name PhoenixHu/finetune_internvl2_5_how2sign_1b_16fps_1205 \
+    --output_dir /shared/rc/llm-gen-agent/mhu/internvl/20260202/finetune_internvl2_5_how2sign_1b_16fps_1205 \
+    --checkpoint_subdir checkpoint-3058
+
+
 
 """
 

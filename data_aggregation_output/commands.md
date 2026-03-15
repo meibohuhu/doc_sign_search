@@ -5,6 +5,9 @@ conda run -n internvl python data_aggregation_output/clip_sign1news_videos.py \
     --output-dir data_aggregation_output/clips_FW1JoDAW8w
 
 du -sh /shared/rc/llm-gen-agent/mhu/videos/youtube_asl/youtube_part1
+find /shared/rc/llm-gen-agent/mhu/videos/youtube_asl/youtube_part1 -type f -name "*.mp4" | wc -l
+find /shared/rc/llm-gen-agent/mhu/videos/youtube_asl/youtube_video_ids_stage2 -type f -name "*.mp4" | wc -l
+
 find /shared/rc/llm-gen-agent/mhu/videos/youtube_asl/youtube_part1_output/clips/ -type f -name "*.mp4" | wc -l
 find /shared/rc/llm-gen-agent/mhu/videos/youtube_asl/youtube_part2_output/clips/ -type f -name "*.mp4" | wc -l
 
