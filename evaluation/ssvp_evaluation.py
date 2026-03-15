@@ -48,10 +48,15 @@ if HF_EVALUATE_AVAILABLE:
     # Try loading BLEURT-20 via HuggingFace evaluate
     # Based on ssvp_slt/translation/engine_translation.py line 349
     # Must specify config_name="BLEURT-20" to use the correct model
-    print("Attempting to load BLEURT-20 metric...")
-    bleurt_metric = hf_evaluate.load("bleurt", module_type="metric", config_name="BLEURT-20")
-    BLEURT_AVAILABLE = True
-    print("✅ BLEURT-20 metric loaded successfully")
+    try:
+        print("Attempting to load BLEURT-20 metric...")
+        bleurt_metric = hf_evaluate.load("bleurt", module_type="metric", config_name="BLEURT-20")
+        BLEURT_AVAILABLE = True
+        print("✅ BLEURT-20 metric loaded successfully")
+    except Exception as e:
+        print(f"⚠️  Warning: BLEURT-20 not available: {e}")
+        BLEURT_AVAILABLE = False
+        bleurt_metric = None
 
 else:
     ROUGE_AVAILABLE = False

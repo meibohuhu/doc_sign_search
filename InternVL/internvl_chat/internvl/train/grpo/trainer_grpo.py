@@ -409,6 +409,12 @@ class InternVLGRPOTrainer(Trainer):
                         self.model, full_ids, attention_mask,
                         pixel_values_exp, image_flags_exp, logits_to_keep,
                     )
+            elif is_peft_model(getattr(self.accelerator.unwrap_model(self.model), "language_model", None)):
+                with self.accelerator.unwrap_model(self.model).language_model.disable_adapter():
+                    ref_per_token_logps = self._get_per_token_logps(
+                        self.model, full_ids, attention_mask,
+                        pixel_values_exp, image_flags_exp, logits_to_keep,
+                    )
             else:
                 ref_per_token_logps = None
 
@@ -560,7 +566,7 @@ class InternVLGRPOTrainer(Trainer):
         is_region_clipped = is_low_clipped | is_high_clipped
         clip_ratio = (is_region_clipped * completion_mask).sum() / completion_mask.sum()
         self._metrics[mode]["clip_ratio"].append(
-            self.accelerator.gather_for_metrics(clip_ratio).nanmean().item()
+            self.accelerator.gather_for_metrics(clip_ratio.detach()).nanmean().item()
         )
 
         return loss
