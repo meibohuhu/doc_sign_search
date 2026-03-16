@@ -749,7 +749,7 @@ def eval_model(args):
             generation_config = dict(
                 num_beams=5,                    # Beam search for better quality
                 do_sample=True,                 # Enable sampling for better diversity
-                temperature=0.7,                # Temperature for generation (0.7 is a good balance)
+                temperature=0.7,            # Temperature for generation (0.7 is a good balance)
                 top_p=0.9,                      # Nucleus sampling
                 top_k=50,                       # Top-k sampling
                 length_penalty=1.0,             # Length penalty (1.0 = neutral)

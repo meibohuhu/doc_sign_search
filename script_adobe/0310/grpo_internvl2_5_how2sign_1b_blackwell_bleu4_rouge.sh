@@ -29,7 +29,7 @@ export NCCL_P2P_DISABLE=1
 # Wandb
 export WANDB_API_KEY="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"
 export WANDB_PROJECT="internvl-grpo-sign-language"
-export WANDB_RUN_NAME="grpo_1b_bleu1_bleu4_$(date +%m%d_%H%M)"
+export WANDB_RUN_NAME="grpo_1b_bleu4_rouge_07_03_$(date +%m%d_%H%M)"
 
 # Change to InternVL directory
 cd /home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL
@@ -41,21 +41,21 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # ── Model & Data ──
 MODEL_PATH="/scratch/mh2803/checkpoints/finetune_internvl2_5_how2sign_1b_16fps_1218_121640/checkpoint-2548"
-OUTPUT_DIR="/scratch/mh2803/checkpoints/grpo_internvl2_5_how2sign_1b_firsttry_0313"
+OUTPUT_DIR="/scratch/mh2803/checkpoints/grpo_internvl2_5_how2sign_1b_blackwell_bleu4_rouge_07_03_0314"
 DATA_PATH="/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined_sampled_10k.jsonl"
 VIDEO_ROOT="/scratch/mh2803/train_crop_videos_224"
 
 # ── GRPO parameters ──
 NUM_GENERATIONS=${NUM_GENERATIONS:-4}
 MAX_COMPLETION_LENGTH=${MAX_COMPLETION_LENGTH:-128}
-TEMPERATURE=${TEMPERATURE:-0.7}
+TEMPERATURE=${TEMPERATURE:-1.0}
 BETA=${BETA:-0.0}
 
 # ── Training parameters ──
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-1}
-GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-4}
+GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-8}
 LEARNING_RATE=${LEARNING_RATE:-1e-6}
-NUM_EPOCHS=${NUM_EPOCHS:-1}
+NUM_EPOCHS=${NUM_EPOCHS:-2}
 MAX_STEPS=${MAX_STEPS:-0}  # 0 = use NUM_EPOCHS; set >0 for smoke test
 
 # ── Video parameters ──
@@ -93,7 +93,7 @@ echo "Log file: $LOG_FILE"
 echo ""
 
 deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
-    internvl_chat/internvl/train/grpo/internvl_grpo_train.py \
+    internvl_chat/internvl/train/grpo/internvl_grpo_train_bleu4_rouge.py \
     --model_name_or_path "$MODEL_PATH" \
     --output_dir "$OUTPUT_DIR" \
     --data_path "$DATA_PATH" \
@@ -113,7 +113,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --loss_type grpo \
     --scale_rewards group \
     --num_iterations 1 \
-    --reward_weights_str "0.5,0.5" \
+    --reward_weights_str "0.7,0.3" \
     --vision_select_layer -1 \
     --force_image_size 224 \
     --down_sample_ratio 0.5 \
@@ -127,8 +127,8 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --min_num_frame $MIN_NUM_FRAME \
     --sampling_method "$SAMPLING_METHOD" \
     --save_strategy steps \
-    --save_steps 500 \
-    --save_total_limit 3 \
+    --save_steps 100 \
+    --save_total_limit 4 \
     --logging_steps 5 \
     --logging_first_step True \
     --report_to wandb \
