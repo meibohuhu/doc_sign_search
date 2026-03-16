@@ -13,6 +13,7 @@ import numpy as np
 import argparse
 from pathlib import Path
 from tqdm import tqdm
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from ultralytics import YOLO
 
 
@@ -156,104 +157,106 @@ def adjust_bbox_for_upper_body(bbox, width, height):
     return [new_x0, new_y0, new_x1, new_y1]
 
 
-def get_bbox_for_clip(video_path, yolo_model_path):
+def get_bbox_for_clip(video_path, yolo_model_path, _model_cache={}):
     """
-    为单个视频 clip 生成 bbox
+    为单个视频 clip 生成 bbox。
+    使用 YOLO-Pose 检测每个人的手腕关键点运动量，选出做手语的人。
+    单人时直接取平均 bbox；多人时选手腕运动量最大的人。
     返回归一化的 bbox [x0, y0, x1, y1]（相对于图像宽高）
     """
+    # COCO pose 关键点索引：9=左手腕, 10=右手腕
+    WRIST_KP = [9, 10]
+
     try:
         cap = cv2.VideoCapture(video_path)
         if not cap.isOpened():
             return None
-        
+
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        
-        # 加载 YOLO 模型
-        model = YOLO(yolo_model_path)
-        
-        bboxes = []
+
+        # 加载 YOLO-Pose 模型（每个进程只加载一次）
+        pose_model_path = yolo_model_path.replace("yolov8n.pt", "yolov8n-pose.pt")
+        if "pose" not in pose_model_path:
+            pose_model_path = "yolov8n-pose.pt"
+        if pose_model_path not in _model_cache:
+            _model_cache[pose_model_path] = YOLO(pose_model_path)
+        model = _model_cache[pose_model_path]
+
         frames = []
-        
-        # 读取所有帧
         while True:
             ret, frame = cap.read()
             if not ret:
                 break
-            
-            # 转换为 RGB（YOLO 需要 RGB）
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            
-            # 运行 YOLO 推理
-            results = model(frame_rgb)
-            
-            # 过滤出 person 类别（COCO 数据集中 class 0）
-            person_bboxes = []
-            for r in results:
-                for box in r.boxes:
-                    if box.cls == 0:  # person class
-                        x1, y1, x2, y2 = box.xyxy[0].tolist()
-                        person_bboxes.append([x1, y1, x2, y2])
-            
-            bboxes.append(person_bboxes)
             frames.append(frame)
-        
         cap.release()
-        
+
         if len(frames) == 0:
             return None
-        
-        # 轻微扩展 bbox 以包含更多上下文（用于跟踪）
-        # 注意：这里只做轻微扩展，主要扩展在后面的 adjust_bbox_for_upper_body 中
-        # 左边留少一些，右边留多一些
-        up_exp, down_exp, left_exp, right_exp = 0.1, 0.1, 0.1, 0.2
-        # 添加小的边界边距
-        margin_x = width * 0.01
-        margin_y = height * 0.01
-        for i in range(len(bboxes)):
-            for j in range(len(bboxes[i])):
-                x0, y0, x1, y1 = bboxes[i][j]
-                w, h = x1 - x0 + 1, y1 - y0 + 1
-                x0, y0, x1, y1 = x0 - w * left_exp, y0 - h * up_exp, x1 + w * right_exp, y1 + h * down_exp
-                # 确保不超出边界，但留出边距
-                x0 = max(margin_x, x0)
-                y0 = max(margin_y, y0)
-                x1 = min(width - margin_x, x1)
-                y1 = min(height - margin_y, y1)
-                bboxes[i][j] = [x0, y0, x1, y1]
-        
-        # 找到目标 bbox - 优先选择最大的人（通常是主要手语者）
-        # 计算每个人的平均面积
-        def get_bbox_area(bbox):
-            return (bbox[2] - bbox[0]) * (bbox[3] - bbox[1])
-        
-        # 如果每帧都只有一个 person，直接取平均
-        if max([len(x) for x in bboxes]) == 1:
-            bboxes = list(filter(lambda x: len(x) == 1, bboxes))
-            if len(bboxes) == 0:
-                return None
-            bbox = np.array(bboxes).mean(axis=0)[0].tolist()
+
+        # 批量推理
+        frames_rgb = [cv2.cvtColor(f, cv2.COLOR_BGR2RGB) for f in frames]
+        batch_results = model(frames_rgb, verbose=False)
+
+        # 收集每帧每个人的 bbox 和手腕坐标
+        # per_person[person_idx] = {'bboxes': [...], 'wrists': [...]}
+        # 用跨帧 track_id 对应同一个人；无 track 时按帧内顺序对应
+        # 简化：取每帧所有人，最后按手腕运动量排名
+        all_frame_data = []  # list of list of (bbox, wrist_pts)
+        for results in batch_results:
+            frame_persons = []
+            if results.keypoints is not None and len(results.boxes) > 0:
+                for i, box in enumerate(results.boxes):
+                    x1, y1, x2, y2 = box.xyxy[0].tolist()
+                    kps = results.keypoints.xy[i]  # shape [17, 2]
+                    wrists = []
+                    for kp_idx in WRIST_KP:
+                        kx, ky = kps[kp_idx].tolist()
+                        if kx > 0 and ky > 0:  # 0,0 表示未检测到
+                            wrists.append((kx, ky))
+                    frame_persons.append(([x1, y1, x2, y2], wrists))
+            all_frame_data.append(frame_persons)
+
+        # 只有一个人时直接取平均
+        max_persons = max((len(fp) for fp in all_frame_data), default=0)
+        if max_persons == 0:
+            return None
+
+        if max_persons == 1:
+            single_bboxes = [fp[0][0] for fp in all_frame_data if len(fp) == 1]
+            bbox = np.array(single_bboxes).mean(axis=0).tolist()
             tubes = []
         else:
-            # 有多个人时，选择面积最大的人
-            # 首先，计算每帧中最大的人
-            max_person_bboxes = []
-            for frame_bboxes in bboxes:
-                if len(frame_bboxes) == 0:
-                    continue
-                # 选择面积最大的人
-                areas = [get_bbox_area(b) for b in frame_bboxes]
-                max_idx = np.argmax(areas)
-                max_person_bboxes.append(frame_bboxes[max_idx])
-            
-            if len(max_person_bboxes) > 0:
-                # 取所有帧中最大的人的平均 bbox
-                bbox = np.array(max_person_bboxes).mean(axis=0).tolist()
-                tubes = []
-            else:
-                # 如果还是没找到，使用光流法跟踪
-                opts = get_optical_flow(frames)
-                bbox, tubes = find_target_bbox(bboxes, opts)
+            # 多人：按手腕运动量选手语者
+            # 策略：对每帧每个人累计手腕位移，选运动量最大的人
+            # 用简单的帧内 index 对应（同一位置的人视为同一人）
+            # 先统计每个"slot"的手腕运动总量
+            num_slots = max_persons
+            slot_wrist_motion = [0.0] * num_slots  # 每个 slot 的手腕运动总量
+            slot_bboxes = [[] for _ in range(num_slots)]
+            prev_wrists = [None] * num_slots
+
+            for frame_persons in all_frame_data:
+                # 按 bbox 面积降序排列，保证 slot 对应稳定
+                frame_persons_sorted = sorted(
+                    frame_persons,
+                    key=lambda x: (x[0][2]-x[0][0])*(x[0][3]-x[0][1]),
+                    reverse=True
+                )
+                for slot_idx, (bbox_p, wrists) in enumerate(frame_persons_sorted[:num_slots]):
+                    slot_bboxes[slot_idx].append(bbox_p)
+                    if wrists and prev_wrists[slot_idx] is not None:
+                        for (cx, cy), (px, py) in zip(wrists, prev_wrists[slot_idx]):
+                            slot_wrist_motion[slot_idx] += np.sqrt((cx-px)**2 + (cy-py)**2)
+                    prev_wrists[slot_idx] = wrists if wrists else prev_wrists[slot_idx]
+
+            # 选手腕运动量最大的 slot
+            best_slot = int(np.argmax(slot_wrist_motion))
+            if not slot_bboxes[best_slot]:
+                # fallback：选面积最大的
+                best_slot = 0
+            bbox = np.array(slot_bboxes[best_slot]).mean(axis=0).tolist()
+            tubes = []
         
         # 如果没找到，尝试从 tubes 中选择面积最大的
         if bbox is None and len(tubes) > 0:
@@ -357,19 +360,21 @@ def main():
     # 生成 bbox
     bbox_dict = {}
     failed_clips = []
-    
-    for video_file in tqdm(video_files, desc="处理视频"):
-        # 获取 clip ID（文件名，不含扩展名）
+
+    def _process(video_file):
         clip_id = video_file.stem
-        
-        # 生成 bbox
         bbox = get_bbox_for_clip(str(video_file), args.yolo_model)
-        
-        if bbox is not None:
-            bbox_dict[clip_id] = bbox
-        else:
-            failed_clips.append(clip_id)
-            print(f"  ⚠ 无法生成 bbox: {clip_id}")
+        return clip_id, bbox
+
+    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+        futures = {executor.submit(_process, vf): vf for vf in video_files}
+        for future in tqdm(as_completed(futures), total=len(futures), desc="处理视频"):
+            clip_id, bbox = future.result()
+            if bbox is not None:
+                bbox_dict[clip_id] = bbox
+            else:
+                failed_clips.append(clip_id)
+                print(f"  ⚠ 无法生成 bbox: {clip_id}")
     
     # 保存结果
     output_path = Path(args.output)

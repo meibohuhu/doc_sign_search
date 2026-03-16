@@ -16,7 +16,7 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /home/stu2/s15/mh2803/workspace/doc_sign_search
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"5"}  # Default: use GPU 0 and 1
+GPU_IDS=${GPU_IDS:-"7"}  # Default: use GPU 0 and 1
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
@@ -41,7 +41,7 @@ VIDEO_FOLDER="${VIDEO_FOLDER:-/scratch/mh2803/how2sign_test_videos_224x224}"
 QUESTION_FILE="${QUESTION_FILE:-/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
 
 
-OUT_DIR="${OUT_DIR:-/home/stu2/s15/mh2803/workspace/doc_sign_search/outputs/blackwell/}"
+OUT_DIR="${OUT_DIR:-/home/stu2/s15/mh2803/workspace/doc_sign_search/outputs/blackwell/evaluate_internvl2_5_how2sign_1b_bleu4_rouge_07_03_0314}"
 
 # Evaluation parameters
 # MAX_SAMPLES=${MAX_SAMPLES:-20}  # Set to a number to limit samples, empty for full evaluation

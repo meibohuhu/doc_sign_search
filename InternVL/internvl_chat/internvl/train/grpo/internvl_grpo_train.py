@@ -267,7 +267,7 @@ def main():
     )
 
     # ── Build reward functions ──
-    reward_funcs = [bleu1_reward, rouge_reward, bleu_reward]  # weights: 0.4, 0.4, 0.2
+    reward_funcs = [bleu1_reward, bleu_reward]  # weights: 0.7, 0.3 上一个是0.5, 0.5
     logger.info(f'Reward functions: {[f.__name__ for f in reward_funcs]}')
     logger.info(f'Reward weights: {training_args.reward_weights}')
 

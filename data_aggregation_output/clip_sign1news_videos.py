@@ -147,10 +147,14 @@ def process_video(video_id, video_info, input_video_path, output_dir, ffmpeg_pat
         if start_time >= end_time:
             continue
         
-        # 生成输出文件名
-        start_str = format_filename_timestamp(start_time)
-        end_str = format_filename_timestamp(end_time)
-        output_filename = f"{video_id}-{start_str}-{end_str}.mp4"
+        # 生成输出文件名：优先用 sentence_id，否则退回时间戳格式
+        sentence_id = timestamp.get("sentence_id", "")
+        if sentence_id:
+            output_filename = f"{sentence_id}.mp4"
+        else:
+            start_str = format_filename_timestamp(start_time)
+            end_str = format_filename_timestamp(end_time)
+            output_filename = f"{video_id}-{start_str}-{end_str}.mp4"
         output_video = os.path.join(output_dir, output_filename)
         
         # 如果文件已存在，跳过
@@ -169,21 +173,55 @@ def process_video(video_id, video_info, input_video_path, output_dir, ffmpeg_pat
 
 def load_metadata_from_csv(csv_path):
     """
-    从 CSV 文件加载 metadata
-    
+    从 CSV 文件加载 metadata。支持两种格式：
+    1. 原始格式（逗号分隔）：video_id, caption_timestamps(JSON), ...
+    2. Clips 格式（制表符分隔）：VIDEO_ID, START_REALIGNED, END_REALIGNED, SENTENCE, ...
+       每行是一个 clip，按 video_id 聚合后生成 caption_timestamps。
+
     Returns:
-        dict: {video_id: {所有字段的字典}}
+        dict: {video_id: {所有字段的字典，包含 caption_timestamps}}
     """
-    # 增加 CSV 字段大小限制（默认是 131072）
     csv.field_size_limit(10 * 1024 * 1024)  # 10MB
-    
-    metadata = {}
+
     with open(csv_path, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            video_id = row['video_id']
-            metadata[video_id] = row
-    return metadata
+        first_line = f.readline()
+
+    # 检测分隔符和格式
+    delimiter = '\t' if '\t' in first_line else ','
+    fieldnames = [h.strip() for h in first_line.split(delimiter)]
+
+    if 'VIDEO_ID' in fieldnames:
+        # Clips 格式：按 VIDEO_ID 聚合，构造 caption_timestamps
+        metadata = {}
+        with open(csv_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f, delimiter='\t')
+            for row in reader:
+                video_id = row['VIDEO_ID'].strip()
+                try:
+                    start = float(row['START_REALIGNED'])
+                    end = float(row['END_REALIGNED'])
+                except (ValueError, KeyError):
+                    continue
+                text = row.get('SENTENCE', '').strip()
+                if video_id not in metadata:
+                    metadata[video_id] = {'video_id': video_id, '_timestamps': []}
+                sentence_id = row.get('SENTENCE_ID', '').strip()
+                metadata[video_id]['_timestamps'].append(
+                    {'start': start, 'end': end, 'text': text, 'sentence_id': sentence_id}
+                )
+        # 将聚合的 timestamps 序列化为 JSON 字符串（process_video 期望的格式）
+        for vid, info in metadata.items():
+            info['caption_timestamps'] = json.dumps(info.pop('_timestamps'))
+        return metadata
+    else:
+        # 原始格式
+        metadata = {}
+        with open(csv_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f, delimiter=delimiter)
+            for row in reader:
+                video_id = row['video_id']
+                metadata[video_id] = row
+        return metadata
 
 
 def main():
