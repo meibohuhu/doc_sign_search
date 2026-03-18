@@ -1,1171 +1,0 @@
-[2025-12-13 08:29:19,455] [WARNING] [runner.py:232:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
-Detected VISIBLE_DEVICES=0,1 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
-[2025-12-13 08:29:19,455] [INFO] [runner.py:630:main] cmd = /home/colligo/anaconda3/envs/internvl/bin/python3.10 -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None --log_level=info internvl_chat/internvl/train/internvl_chat_finetune_gate.py --model_name_or_path OpenGVLab/InternVL2_5-2B --output_dir /code/doc_sign_search/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints --overwrite_output_dir --meta_path /code/doc_sign_search/script_adobe/train_how2sign_meta.json --conv_style internvl2_5 --use_fast_tokenizer False --do_train True --num_train_epochs 5 --per_device_train_batch_size 2 --gradient_accumulation_steps 4 --learning_rate 2e-5 --vision_select_layer -1 --force_image_size 224 --max_dynamic_patch 6 --dynamic_image_size True --down_sample_ratio 0.5 --drop_path_rate 0.0 --freeze_llm True --freeze_backbone False --freeze_mlp False --unfreeze_vit_layers 0 --use_llm_lora 16 --bf16 True --max_seq_length 8192 --save_strategy epoch --save_total_limit 3 --logging_steps 10 --logging_first_step True --evaluation_strategy no --report_to none --grad_checkpoint True --dataloader_num_workers 4 --use_thumbnail True --ps_version v2 --dataloader_pin_memory True --remove_unused_columns False --group_by_length True --use_packed_ds False --deepspeed internvl_chat/zero_stage1_config.json --min_num_frame 32 --max_num_frame 96 --sampling_method fps16.0 --warmup_ratio 0.03 --weight_decay 0.01 --lr_scheduler_type cosine --elementwise_attn_output_gate True
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NV_LIBNCCL_DEV_PACKAGE=libnccl-dev=2.21.5-1+cuda12.4
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NV_LIBNCCL_DEV_PACKAGE_VERSION=2.21.5-1
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NCCL_VERSION=2.21.5-1
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NCCL_SOCKET_IFNAME=eth0
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NV_LIBNCCL_DEV_PACKAGE_NAME=libnccl-dev
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NV_LIBNCCL_PACKAGE=libnccl2=2.21.5-1+cuda12.4
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NV_LIBNCCL_PACKAGE_NAME=libnccl2
-[2025-12-13 08:29:23,953] [INFO] [launch.py:155:main] 0 NV_LIBNCCL_PACKAGE_VERSION=2.21.5-1
-[2025-12-13 08:29:23,953] [INFO] [launch.py:162:main] WORLD INFO DICT: {'localhost': [0, 1]}
-[2025-12-13 08:29:23,953] [INFO] [launch.py:168:main] nnodes=1, num_local_procs=2, node_rank=0
-[2025-12-13 08:29:23,953] [INFO] [launch.py:179:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
-[2025-12-13 08:29:23,953] [INFO] [launch.py:180:main] dist_world_size=2
-[2025-12-13 08:29:23,953] [INFO] [launch.py:184:main] Setting CUDA_VISIBLE_DEVICES=0,1
-[2025-12-13 08:29:23,954] [INFO] [launch.py:272:main] process 4100126 spawned with command: ['/home/colligo/anaconda3/envs/internvl/bin/python3.10', '-u', 'internvl_chat/internvl/train/internvl_chat_finetune_gate.py', '--local_rank=0', '--model_name_or_path', 'OpenGVLab/InternVL2_5-2B', '--output_dir', '/code/doc_sign_search/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints', '--overwrite_output_dir', '--meta_path', '/code/doc_sign_search/script_adobe/train_how2sign_meta.json', '--conv_style', 'internvl2_5', '--use_fast_tokenizer', 'False', '--do_train', 'True', '--num_train_epochs', '5', '--per_device_train_batch_size', '2', '--gradient_accumulation_steps', '4', '--learning_rate', '2e-5', '--vision_select_layer', '-1', '--force_image_size', '224', '--max_dynamic_patch', '6', '--dynamic_image_size', 'True', '--down_sample_ratio', '0.5', '--drop_path_rate', '0.0', '--freeze_llm', 'True', '--freeze_backbone', 'False', '--freeze_mlp', 'False', '--unfreeze_vit_layers', '0', '--use_llm_lora', '16', '--bf16', 'True', '--max_seq_length', '8192', '--save_strategy', 'epoch', '--save_total_limit', '3', '--logging_steps', '10', '--logging_first_step', 'True', '--evaluation_strategy', 'no', '--report_to', 'none', '--grad_checkpoint', 'True', '--dataloader_num_workers', '4', '--use_thumbnail', 'True', '--ps_version', 'v2', '--dataloader_pin_memory', 'True', '--remove_unused_columns', 'False', '--group_by_length', 'True', '--use_packed_ds', 'False', '--deepspeed', 'internvl_chat/zero_stage1_config.json', '--min_num_frame', '32', '--max_num_frame', '96', '--sampling_method', 'fps16.0', '--warmup_ratio', '0.03', '--weight_decay', '0.01', '--lr_scheduler_type', 'cosine', '--elementwise_attn_output_gate', 'True']
-[2025-12-13 08:29:23,955] [INFO] [launch.py:272:main] process 4100127 spawned with command: ['/home/colligo/anaconda3/envs/internvl/bin/python3.10', '-u', 'internvl_chat/internvl/train/internvl_chat_finetune_gate.py', '--local_rank=1', '--model_name_or_path', 'OpenGVLab/InternVL2_5-2B', '--output_dir', '/code/doc_sign_search/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints', '--overwrite_output_dir', '--meta_path', '/code/doc_sign_search/script_adobe/train_how2sign_meta.json', '--conv_style', 'internvl2_5', '--use_fast_tokenizer', 'False', '--do_train', 'True', '--num_train_epochs', '5', '--per_device_train_batch_size', '2', '--gradient_accumulation_steps', '4', '--learning_rate', '2e-5', '--vision_select_layer', '-1', '--force_image_size', '224', '--max_dynamic_patch', '6', '--dynamic_image_size', 'True', '--down_sample_ratio', '0.5', '--drop_path_rate', '0.0', '--freeze_llm', 'True', '--freeze_backbone', 'False', '--freeze_mlp', 'False', '--unfreeze_vit_layers', '0', '--use_llm_lora', '16', '--bf16', 'True', '--max_seq_length', '8192', '--save_strategy', 'epoch', '--save_total_limit', '3', '--logging_steps', '10', '--logging_first_step', 'True', '--evaluation_strategy', 'no', '--report_to', 'none', '--grad_checkpoint', 'True', '--dataloader_num_workers', '4', '--use_thumbnail', 'True', '--ps_version', 'v2', '--dataloader_pin_memory', 'True', '--remove_unused_columns', 'False', '--group_by_length', 'True', '--use_packed_ds', 'False', '--deepspeed', 'internvl_chat/zero_stage1_config.json', '--min_num_frame', '32', '--max_num_frame', '96', '--sampling_method', 'fps16.0', '--warmup_ratio', '0.03', '--weight_decay', '0.01', '--lr_scheduler_type', 'cosine', '--elementwise_attn_output_gate', 'True']
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-12/13/2025 08:29:32 - WARNING - __main__ - Process rank: 1, device: cuda:1, n_gpu: 1distributed training: True, 16-bits training: False
-12/13/2025 08:29:32 - WARNING - __main__ - Process rank: 0, device: cuda:0, n_gpu: 1distributed training: True, 16-bits training: False
-12/13/2025 08:29:32 - INFO - __main__ - Training/evaluation parameters TrainingArguments(
-_n_gpu=1,
-adafactor=False,
-adam_beta1=0.9,
-adam_beta2=0.999,
-adam_epsilon=1e-08,
-auto_find_batch_size=False,
-bf16=True,
-bf16_full_eval=False,
-data_seed=None,
-dataloader_drop_last=False,
-dataloader_num_workers=4,
-dataloader_persistent_workers=False,
-dataloader_pin_memory=True,
-ddp_backend=None,
-ddp_broadcast_buffers=None,
-ddp_bucket_cap_mb=None,
-ddp_find_unused_parameters=None,
-ddp_timeout=1800,
-debug=[],
-deepspeed=internvl_chat/zero_stage1_config.json,
-disable_tqdm=False,
-dispatch_batches=None,
-do_eval=False,
-do_predict=False,
-do_train=True,
-eval_accumulation_steps=None,
-eval_delay=0,
-eval_steps=None,
-evaluation_strategy=no,
-fp16=False,
-fp16_backend=auto,
-fp16_full_eval=False,
-fp16_opt_level=O1,
-fsdp=[],
-fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False},
-fsdp_min_num_params=0,
-fsdp_transformer_layer_cls_to_wrap=None,
-full_determinism=False,
-gradient_accumulation_steps=4,
-gradient_checkpointing=False,
-gradient_checkpointing_kwargs=None,
-greater_is_better=None,
-group_by_length=True,
-half_precision_backend=auto,
-hub_always_push=False,
-hub_model_id=None,
-hub_private_repo=False,
-hub_strategy=every_save,
-hub_token=<HUB_TOKEN>,
-ignore_data_skip=False,
-include_inputs_for_metrics=False,
-include_num_input_tokens_seen=False,
-include_tokens_per_second=False,
-jit_mode_eval=False,
-label_names=None,
-label_smoothing_factor=0.0,
-learning_rate=2e-05,
-length_column_name=length,
-load_best_model_at_end=False,
-local_rank=0,
-log_level=passive,
-log_level_replica=warning,
-log_on_each_node=True,
-logging_dir=/code/doc_sign_search/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints/runs/Dec13_08-29-32_pluto-prod-jiamianw-1209-6-1-0,
-logging_first_step=True,
-logging_nan_inf_filter=True,
-logging_steps=10,
-logging_strategy=steps,
-lr_scheduler_kwargs={},
-lr_scheduler_type=cosine,
-max_grad_norm=1.0,
-max_steps=-1,
-metric_for_best_model=None,
-mp_parameters=,
-neftune_noise_alpha=None,
-no_cuda=False,
-num_train_epochs=5.0,
-optim=adamw_torch,
-optim_args=None,
-output_dir=/code/doc_sign_search/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints,
-overwrite_output_dir=True,
-past_index=-1,
-per_device_eval_batch_size=8,
-per_device_train_batch_size=2,
-prediction_loss_only=False,
-push_to_hub=False,
-push_to_hub_model_id=None,
-push_to_hub_organization=None,
-push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
-ray_scope=last,
-remove_unused_columns=False,
-report_to=[],
-resume_from_checkpoint=None,
-run_name=/code/doc_sign_search/InternVL/output/how2sign/internvl2_5_2B_2xa6000_gate/checkpoints,
-save_on_each_node=False,
-save_only_model=False,
-save_safetensors=True,
-save_steps=500,
-save_strategy=epoch,
-save_total_limit=3,
-seed=42,
-skip_memory_metrics=True,
-split_batches=False,
-tf32=None,
-torch_compile=False,
-torch_compile_backend=None,
-torch_compile_mode=None,
-torchdynamo=None,
-tpu_metrics_debug=False,
-tpu_num_cores=None,
-use_cpu=False,
-use_ipex=False,
-use_legacy_prediction_loop=False,
-use_mps_device=False,
-warmup_ratio=0.03,
-warmup_steps=0,
-weight_decay=0.01,
-)
-12/13/2025 08:29:32 - INFO - __main__ - Loading Tokenizer: OpenGVLab/InternVL2_5-2B
-[INFO|tokenization_utils_base.py:2027] 2025-12-13 08:29:32,675 >> loading file ./tokenizer.model from cache at /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/./tokenizer.model
-[INFO|tokenization_utils_base.py:2027] 2025-12-13 08:29:32,675 >> loading file added_tokens.json from cache at /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/added_tokens.json
-[INFO|tokenization_utils_base.py:2027] 2025-12-13 08:29:32,675 >> loading file special_tokens_map.json from cache at /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/special_tokens_map.json
-[INFO|tokenization_utils_base.py:2027] 2025-12-13 08:29:32,675 >> loading file tokenizer_config.json from cache at /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/tokenizer_config.json
-[INFO|tokenization_utils_base.py:2027] 2025-12-13 08:29:32,675 >> loading file tokenizer.json from cache at None
-[WARNING|logging.py:314] 2025-12-13 08:29:32,845 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
-[WARNING|logging.py:314] 2025-12-13 08:29:32,857 >> Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
-12/13/2025 08:29:32 - INFO - __main__ - petrel_client not installed. Will use local file loading.
-12/13/2025 08:29:32 - INFO - __main__ - Loading InternVLChatModel...
-[INFO|configuration_utils.py:729] 2025-12-13 08:29:33,091 >> loading configuration file config.json from cache at /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/config.json
-[INFO|configuration_utils.py:792] 2025-12-13 08:29:33,092 >> Model config InternVLChatConfig {
-  "_commit_hash": "573169ee54df216786bb9a189e9a32a060a008cf",
-  "architectures": [
-    "InternVLChatModel"
-  ],
-  "auto_map": {
-    "AutoConfig": "OpenGVLab/InternVL2_5-2B--configuration_internvl_chat.InternVLChatConfig",
-    "AutoModel": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel",
-    "AutoModelForCausalLM": "OpenGVLab/InternVL2_5-2B--modeling_internvl_chat.InternVLChatModel"
-  },
-  "downsample_ratio": 0.5,
-  "dynamic_image_size": true,
-  "force_image_size": 448,
-  "hidden_size": 2048,
-  "llm_config": {
-    "_name_or_path": "internlm/internlm2_5-1_8b-chat",
-    "add_cross_attention": false,
-    "architectures": [
-      "InternLM2ForCausalLM"
-    ],
-    "attn_implementation": "flash_attention_2",
-    "auto_map": {
-      "AutoConfig": "configuration_internlm2.InternLM2Config",
-      "AutoModel": "modeling_internlm2.InternLM2ForCausalLM",
-      "AutoModelForCausalLM": "modeling_internlm2.InternLM2ForCausalLM",
-      "AutoModelForSequenceClassification": "modeling_internlm2.InternLM2ForSequenceClassification"
-    },
-    "bad_words_ids": null,
-    "begin_suppress_tokens": null,
-    "bias": false,
-    "bos_token_id": 1,
-    "chunk_size_feed_forward": 0,
-    "cross_attention_hidden_size": null,
-    "decoder_start_token_id": null,
-    "diversity_penalty": 0.0,
-    "do_sample": false,
-    "early_stopping": false,
-    "elementwise_attn_output_gate": false,
-    "encoder_no_repeat_ngram_size": 0,
-    "eos_token_id": 2,
-    "exponential_decay_length_penalty": null,
-    "finetuning_task": null,
-    "forced_bos_token_id": null,
-    "forced_eos_token_id": null,
-    "headwise_attn_output_gate": false,
-    "hidden_act": "silu",
-    "hidden_size": 2048,
-    "id2label": {
-      "0": "LABEL_0",
-      "1": "LABEL_1"
-    },
-    "initializer_range": 0.02,
-    "intermediate_size": 8192,
-    "is_decoder": false,
-    "is_encoder_decoder": false,
-    "label2id": {
-      "LABEL_0": 0,
-      "LABEL_1": 1
-    },
-    "length_penalty": 1.0,
-    "max_length": 20,
-    "max_position_embeddings": 32768,
-    "min_length": 0,
-    "model_type": "internlm2",
-    "no_repeat_ngram_size": 0,
-    "num_attention_heads": 16,
-    "num_beam_groups": 1,
-    "num_beams": 1,
-    "num_hidden_layers": 24,
-    "num_key_value_heads": 8,
-    "num_return_sequences": 1,
-    "output_attentions": false,
-    "output_hidden_states": false,
-    "output_scores": false,
-    "pad_token_id": 2,
-    "prefix": null,
-    "pretraining_tp": 1,
-    "problem_type": null,
-    "pruned_heads": {},
-    "remove_invalid_values": false,
-    "repetition_penalty": 1.0,
-    "return_dict": true,
-    "return_dict_in_generate": false,
-    "rms_norm_eps": 1e-05,
-    "rope_scaling": {
-      "factor": 2.0,
-      "type": "dynamic"
-    },
-    "rope_theta": 1000000,
-    "sep_token_id": null,
-    "suppress_tokens": null,
-    "task_specific_params": null,
-    "temperature": 1.0,
-    "tf_legacy_loss": false,
-    "tie_encoder_decoder": false,
-    "tie_word_embeddings": false,
-    "tokenizer_class": null,
-    "top_k": 50,
-    "top_p": 1.0,
-    "torch_dtype": "bfloat16",
-    "torchscript": false,
-    "transformers_version": "4.37.2",
-    "typical_p": 1.0,
-    "use_bfloat16": true,
-    "use_cache": true,
-    "vocab_size": 92553
-  },
-  "max_dynamic_patch": 12,
-  "min_dynamic_patch": 1,
-  "model_type": "internvl_chat",
-  "pad2square": false,
-  "ps_version": "v2",
-  "select_layer": -1,
-  "template": "internvl2_5",
-  "tie_word_embeddings": false,
-  "torch_dtype": "bfloat16",
-  "transformers_version": null,
-  "use_backbone_lora": 0,
-  "use_llm_lora": 0,
-  "use_thumbnail": true,
-  "vision_config": {
-    "_name_or_path": "",
-    "add_cross_attention": false,
-    "architectures": [
-      "InternVisionModel"
-    ],
-    "attention_dropout": 0.0,
-    "bad_words_ids": null,
-    "begin_suppress_tokens": null,
-    "bos_token_id": null,
-    "chunk_size_feed_forward": 0,
-    "cross_attention_hidden_size": null,
-    "decoder_start_token_id": null,
-    "diversity_penalty": 0.0,
-    "do_sample": false,
-    "drop_path_rate": 0.0,
-    "dropout": 0.0,
-    "early_stopping": false,
-    "encoder_no_repeat_ngram_size": 0,
-    "eos_token_id": null,
-    "exponential_decay_length_penalty": null,
-    "finetuning_task": null,
-    "forced_bos_token_id": null,
-    "forced_eos_token_id": null,
-    "hidden_act": "gelu",
-    "hidden_size": 1024,
-    "id2label": {
-      "0": "LABEL_0",
-      "1": "LABEL_1"
-    },
-    "image_size": 448,
-    "initializer_factor": 1.0,
-    "initializer_range": 0.02,
-    "intermediate_size": 4096,
-    "is_decoder": false,
-    "is_encoder_decoder": false,
-    "label2id": {
-      "LABEL_0": 0,
-      "LABEL_1": 1
-    },
-    "layer_norm_eps": 1e-06,
-    "length_penalty": 1.0,
-    "max_length": 20,
-    "min_length": 0,
-    "model_type": "intern_vit_6b",
-    "no_repeat_ngram_size": 0,
-    "norm_type": "layer_norm",
-    "num_attention_heads": 16,
-    "num_beam_groups": 1,
-    "num_beams": 1,
-    "num_channels": 3,
-    "num_hidden_layers": 24,
-    "num_return_sequences": 1,
-    "output_attentions": false,
-    "output_hidden_states": false,
-    "output_scores": false,
-    "pad_token_id": null,
-    "patch_size": 14,
-    "prefix": null,
-    "problem_type": null,
-    "pruned_heads": {},
-    "qk_normalization": false,
-    "qkv_bias": true,
-    "remove_invalid_values": false,
-    "repetition_penalty": 1.0,
-    "return_dict": true,
-    "return_dict_in_generate": false,
-    "sep_token_id": null,
-    "suppress_tokens": null,
-    "task_specific_params": null,
-    "temperature": 1.0,
-    "tf_legacy_loss": false,
-    "tie_encoder_decoder": false,
-    "tie_word_embeddings": true,
-    "tokenizer_class": null,
-    "top_k": 50,
-    "top_p": 1.0,
-    "torch_dtype": "bfloat16",
-    "torchscript": false,
-    "transformers_version": "4.37.2",
-    "typical_p": 1.0,
-    "use_bfloat16": true,
-    "use_flash_attn": true
-  }
-}
-
-12/13/2025 08:29:33 - INFO - __main__ - Using flash_attention_2 for InternLM
-12/13/2025 08:29:33 - INFO - __main__ - ✅ Enabled elementwise attention output gating
-[INFO|modeling_utils.py:3476] 2025-12-13 08:29:33,094 >> loading weights file model.safetensors from cache at /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
-patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
-[INFO|modeling_utils.py:1426] 2025-12-13 08:29:33,108 >> Instantiating InternVLChatModel model under default dtype torch.bfloat16.
-[INFO|configuration_utils.py:826] 2025-12-13 08:29:33,110 >> Generate config GenerationConfig {}
-
-patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
-[INFO|configuration_utils.py:826] 2025-12-13 08:29:33,154 >> Generate config GenerationConfig {
-  "bos_token_id": 1,
-  "eos_token_id": 2,
-  "pad_token_id": 2
-}
-
-[WARNING|modeling_utils.py:4371] 2025-12-13 08:29:33,970 >> Some weights of InternVLChatModel were not initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B and are newly initialized because the shapes did not match:
-- language_model.model.layers.0.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.1.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.10.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.11.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.12.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.13.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.14.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.15.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.16.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.17.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.18.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.19.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.2.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.20.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.21.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.22.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.23.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.3.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.4.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.5.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.6.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.7.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.8.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.9.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-[INFO|modeling_utils.py:4350] 2025-12-13 08:29:34,358 >> All model checkpoint weights were used when initializing InternVLChatModel.
-
-[WARNING|modeling_utils.py:4371] 2025-12-13 08:29:34,358 >> Some weights of InternVLChatModel were not initialized from the model checkpoint at OpenGVLab/InternVL2_5-2B and are newly initialized because the shapes did not match:
-- language_model.model.layers.0.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.1.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.10.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.11.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.12.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.13.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.14.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.15.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.16.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.17.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.18.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.19.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.2.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.20.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.21.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.22.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.23.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.3.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.4.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.5.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.6.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.7.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.8.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-- language_model.model.layers.9.attention.wqkv.weight: found shape torch.Size([4096, 2048]) in the checkpoint and torch.Size([6144, 2048]) in the model instantiated
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-12/13/2025 08:29:34 - WARNING - __main__ - Layer 0: Gate part was all zeros! Reinitialized.
-[INFO|configuration_utils.py:781] 2025-12-13 08:29:34,476 >> loading configuration file generation_config.json from cache at /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/generation_config.json
-[INFO|configuration_utils.py:826] 2025-12-13 08:29:34,477 >> Generate config GenerationConfig {
-  "eos_token_id": [
-    92542,
-    92543
-  ]
-}
-
-12/13/2025 08:29:34 - INFO - __main__ - Manually loading base QKV weights from pretrained model (ignore_mismatched_sizes was used)...
-12/13/2025 08:29:34 - INFO - __main__ - Found weight file via snapshot_download: /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors
-12/13/2025 08:29:34 - INFO - __main__ - Loading base QKV weights from /mnt/localssd/.cache/huggingface/hub/models--OpenGVLab--InternVL2_5-2B/snapshots/573169ee54df216786bb9a189e9a32a060a008cf/model.safetensors...
-12/13/2025 08:29:34 - WARNING - __main__ - Layer 1: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:34 - WARNING - __main__ - Layer 0: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:34 - WARNING - __main__ - Layer 2: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:34 - WARNING - __main__ - Layer 1: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:34 - WARNING - __main__ - Layer 3: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:34 - WARNING - __main__ - Layer 2: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 4: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 3: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 5: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 4: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 6: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 5: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 7: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 6: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 8: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 7: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 9: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 8: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 10: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 9: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:35 - WARNING - __main__ - Layer 11: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 10: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 12: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 11: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 13: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 12: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 14: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 13: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 15: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 14: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 16: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 15: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 17: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 16: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 18: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:36 - WARNING - __main__ - Layer 17: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 19: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 18: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 20: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 19: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 21: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 20: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 22: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 21: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 23: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 22: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - WARNING - __main__ - Layer 23: Gate part was all zeros! Reinitialized.
-12/13/2025 08:29:37 - INFO - __main__ - ✅ Manually loaded base QKV weights for 24 layers
-12/13/2025 08:29:37 - INFO - __main__ - ✅ Gate parameters will be automatically initialized by _init_weights (same as Qwen3: normal(mean=0.0, std=0.02))
-12/13/2025 08:29:37 - INFO - __main__ - Verifying gate part initialization...
-12/13/2025 08:29:37 - INFO - __main__ - Layer 0: Gate part initialized correctly. mean=0.000033, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 1: Gate part initialized correctly. mean=-0.000002, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 2: Gate part initialized correctly. mean=0.000001, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 3: Gate part initialized correctly. mean=-0.000014, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 4: Gate part initialized correctly. mean=-0.000000, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 5: Gate part initialized correctly. mean=0.000003, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 6: Gate part initialized correctly. mean=0.000002, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 7: Gate part initialized correctly. mean=-0.000010, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 8: Gate part initialized correctly. mean=-0.000007, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 9: Gate part initialized correctly. mean=0.000010, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 10: Gate part initialized correctly. mean=0.000009, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 11: Gate part initialized correctly. mean=0.000002, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 12: Gate part initialized correctly. mean=-0.000004, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 13: Gate part initialized correctly. mean=0.000013, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 14: Gate part initialized correctly. mean=0.000001, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 15: Gate part initialized correctly. mean=-0.000008, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 16: Gate part initialized correctly. mean=-0.000005, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 17: Gate part initialized correctly. mean=0.000010, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 18: Gate part initialized correctly. mean=-0.000009, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 19: Gate part initialized correctly. mean=0.000009, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 20: Gate part initialized correctly. mean=0.000013, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 21: Gate part initialized correctly. mean=-0.000006, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 22: Gate part initialized correctly. mean=-0.000018, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - Layer 23: Gate part initialized correctly. mean=-0.000013, std=0.019897, range=[-0.066406, 0.066406]
-12/13/2025 08:29:37 - INFO - __main__ - ✅ Verified and fixed gate part initialization for 24 layers
-12/13/2025 08:29:37 - INFO - __main__ - Finished
-12/13/2025 08:29:37 - INFO - __main__ - model.config.force_image_size: 448
-12/13/2025 08:29:37 - INFO - __main__ - data_args.force_image_size: 224
-12/13/2025 08:29:37 - INFO - __main__ - model.config.vision_config.image_size: 448
-12/13/2025 08:29:37 - INFO - __main__ - Resizing position embedding from 448 to 224...
-12/13/2025 08:29:37 - INFO - __main__ - [Dataset] num_image_token: 64
-12/13/2025 08:29:37 - INFO - __main__ - [Dataset] dynamic_image_size: True
-12/13/2025 08:29:37 - INFO - __main__ - [Dataset] use_thumbnail: True
-12/13/2025 08:29:37 - INFO - __main__ - [Dataset] min_dynamic_patch: 1, max_dynamic_patch: 6
-12/13/2025 08:29:37 - INFO - __main__ - Formatting inputs...Skip in lazy mode
-12/13/2025 08:29:38 - INFO - __main__ - Add dataset: how2sign with length: 32623
-trainable params: 16,515,072 || all params: 2,006,325,248 || trainable%: 0.8231502851525696
-trainable params: 16,515,072 || all params: 2,006,325,248 || trainable%: 0.8231502851525696
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.embeddings.class_embedding
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.embeddings.position_embedding
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.embeddings.patch_embedding.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.embeddings.patch_embedding.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.0.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.1.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.2.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.3.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.4.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.5.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.6.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.7.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.8.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.9.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.10.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.11.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.12.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.13.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.14.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.15.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.16.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.17.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.18.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.19.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.20.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.21.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.22.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.ls1
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.ls2
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.attn.qkv.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.attn.qkv.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.attn.proj.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.attn.proj.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.mlp.fc2.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.norm1.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.norm1.bias
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.norm2.weight
-12/13/2025 08:29:38 - INFO - __main__ - vision_model.encoder.layers.23.norm2.bias
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.0.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.1.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.2.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.3.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.4.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.5.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.6.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.7.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.8.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.9.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.10.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.11.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.12.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.13.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.14.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.15.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.16.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.17.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.18.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.19.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.20.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.21.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.22.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wqkv.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wqkv.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wo.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.attention.wo.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w1.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w1.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w3.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w3.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w2.lora_A.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - language_model.base_model.model.model.layers.23.feed_forward.w2.lora_B.default.weight
-12/13/2025 08:29:38 - INFO - __main__ - mlp1.0.weight
-12/13/2025 08:29:38 - INFO - __main__ - mlp1.0.bias
-12/13/2025 08:29:38 - INFO - __main__ - mlp1.1.weight
-12/13/2025 08:29:38 - INFO - __main__ - mlp1.1.bias
-12/13/2025 08:29:38 - INFO - __main__ - mlp1.3.weight
-12/13/2025 08:29:38 - INFO - __main__ - mlp1.3.bias
-[INFO|trainer.py:571] 2025-12-13 08:29:38,620 >> Using auto half precision backend
-12/13/2025 08:29:38 - INFO - __main__ - ✅ Patched accelerator.no_sync for DeepSpeed ZeRO Stage 2/3 compatibility
-12/13/2025 08:29:38 - INFO - __main__ - Patching accelerator.no_sync for DeepSpeed ZeRO Stage 2/3 compatibility...
-12/13/2025 08:29:38 - INFO - __main__ - ✅ Successfully patched accelerator.no_sync
-[INFO|trainer.py:1721] 2025-12-13 08:29:42,013 >> ***** Running training *****
-[INFO|trainer.py:1722] 2025-12-13 08:29:42,013 >>   Num examples = 32,623
-[INFO|trainer.py:1723] 2025-12-13 08:29:42,013 >>   Num Epochs = 5
-[INFO|trainer.py:1724] 2025-12-13 08:29:42,013 >>   Instantaneous batch size per device = 2
-[INFO|trainer.py:1727] 2025-12-13 08:29:42,013 >>   Total train batch size (w. parallel, distributed & accumulation) = 16
-[INFO|trainer.py:1728] 2025-12-13 08:29:42,013 >>   Gradient Accumulation steps = 4
-[INFO|trainer.py:1729] 2025-12-13 08:29:42,013 >>   Total optimization steps = 10,195
-[INFO|trainer.py:1730] 2025-12-13 08:29:42,016 >>   Number of trainable parameters = 332,336,128
-  0%|          | 0/10195 [00:00<?, ?it/s]✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-✅ Patched modeling_internvl_chat to use InternLM2ForCausalLM from modeling_internlm2_gate
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
-petrel_client is not installed. Using PIL to load images.
-  0%|          | 1/10195 [00:34<98:35:51, 34.82s/it]                                                    {'loss': 4.8219, 'learning_rate': 6.535947712418302e-08, 'epoch': 0.0}
-  0%|          | 1/10195 [00:34<98:35:51, 34.82s/it]  0%|          | 2/10195 [00:45<58:25:07, 20.63s/it]  0%|          | 3/10195 [00:56<45:36:33, 16.11s/it]  0%|          | 4/10195 [01:07<39:57:09, 14.11s/it]  0%|          | 5/10195 [01:18<37:16:39, 13.17s/it]  0%|          | 6/10195 [01:29<35:12:09, 12.44s/it]  0%|          | 7/10195 [01:40<33:42:01, 11.91s/it]  0%|          | 8/10195 [01:52<33:16:33, 11.76s/it]  0%|          | 9/10195 [02:02<32:28:40, 11.48s/it]  0%|          | 10/10195 [02:14<32:32:35, 11.50s/it]                                                     {'loss': 4.5122, 'learning_rate': 6.535947712418302e-07, 'epoch': 0.0}
-  0%|          | 10/10195 [02:14<32:32:35, 11.50s/it]  0%|          | 11/10195 [02:25<32:26:47, 11.47s/it]  0%|          | 12/10195 [02:36<31:20:16, 11.08s/it]  0%|          | 13/10195 [02:47<31:36:40, 11.18s/it]  0%|          | 14/10195 [02:59<32:10:10, 11.38s/it]  0%|          | 15/10195 [03:10<32:25:50, 11.47s/it]  0%|          | 16/10195 [03:22<32:16:05, 11.41s/it]  0%|          | 17/10195 [03:33<31:44:52, 11.23s/it]  0%|          | 18/10195 [03:43<31:23:56, 11.11s/it]  0%|          | 19/10195 [03:55<31:37:19, 11.19s/it]  0%|          | 20/10195 [04:06<31:56:40, 11.30s/it]                                                     {'loss': 4.7293, 'learning_rate': 1.3071895424836604e-06, 'epoch': 0.01}
-  0%|          | 20/10195 [04:06<31:56:40, 11.30s/it]  0%|          | 21/10195 [04:18<32:11:33, 11.39s/it]  0%|          | 22/10195 [04:29<31:41:09, 11.21s/it]  0%|          | 23/10195 [04:40<31:34:45, 11.18s/it]  0%|          | 24/10195 [04:51<31:14:35, 11.06s/it]  0%|          | 25/10195 [05:01<31:04:40, 11.00s/it]  0%|          | 26/10195 [05:13<31:38:32, 11.20s/it]  0%|          | 27/10195 [05:25<32:05:56, 11.36s/it]  0%|          | 28/10195 [05:36<31:32:31, 11.17s/it]  0%|          | 29/10195 [05:47<31:56:08, 11.31s/it]  0%|          | 30/10195 [05:59<31:57:50, 11.32s/it]                                                     {'loss': 4.5266, 'learning_rate': 1.96078431372549e-06, 'epoch': 0.01}
-  0%|          | 30/10195 [05:59<31:57:50, 11.32s/it]  0%|          | 31/10195 [06:10<31:56:50, 11.32s/it]  0%|          | 32/10195 [06:21<31:42:06, 11.23s/it]  0%|          | 33/10195 [06:30<30:15:21, 10.72s/it]  0%|          | 34/10195 [06:41<30:04:58, 10.66s/it]  0%|          | 35/10195 [06:52<30:17:33, 10.73s/it]  0%|          | 36/10195 [07:03<30:30:19, 10.81s/it]  0%|          | 37/10195 [07:15<31:23:34, 11.13s/it]  0%|          | 38/10195 [07:25<30:35:14, 10.84s/it]  0%|          | 39/10195 [07:36<30:57:19, 10.97s/it]  0%|          | 40/10195 [07:47<30:50:14, 10.93s/it]                                                     {'loss': 4.0921, 'learning_rate': 2.6143790849673208e-06, 'epoch': 0.02}
-  0%|          | 40/10195 [07:47<30:50:14, 10.93s/it]  0%|          | 41/10195 [07:58<30:57:18, 10.97s/it]  0%|          | 42/10195 [08:09<30:37:39, 10.86s/it]  0%|          | 43/10195 [08:20<31:04:38, 11.02s/it]  0%|          | 44/10195 [08:31<31:24:01, 11.14s/it]  0%|          | 45/10195 [08:42<30:58:49, 10.99s/it]  0%|          | 46/10195 [08:54<31:36:15, 11.21s/it]  0%|          | 47/10195 [09:05<31:24:17, 11.14s/it]  0%|          | 48/10195 [09:15<30:58:26, 10.99s/it]  0%|          | 49/10195 [09:26<30:49:00, 10.93s/it]  0%|          | 50/10195 [09:37<30:52:35, 10.96s/it]                                                     {'loss': 3.9714, 'learning_rate': 3.2679738562091506e-06, 'epoch': 0.02}
-  0%|          | 50/10195 [09:37<30:52:35, 10.96s/it]  1%|          | 51/10195 [09:49<31:26:01, 11.16s/it]  1%|          | 52/10195 [10:00<31:37:12, 11.22s/it]  1%|          | 53/10195 [10:12<31:59:58, 11.36s/it]  1%|          | 54/10195 [10:24<32:23:33, 11.50s/it]  1%|          | 55/10195 [10:35<32:26:14, 11.52s/it]  1%|          | 56/10195 [10:46<32:07:10, 11.40s/it]  1%|          | 57/10195 [10:58<32:27:16, 11.52s/it]  1%|          | 58/10195 [11:10<32:26:34, 11.52s/it]  1%|          | 59/10195 [11:21<32:23:32, 11.50s/it]  1%|          | 60/10195 [11:33<32:36:33, 11.58s/it]                                                     {'loss': 3.7863, 'learning_rate': 3.92156862745098e-06, 'epoch': 0.03}
-  1%|          | 60/10195 [11:33<32:36:33, 11.58s/it]  1%|          | 61/10195 [11:44<32:01:49, 11.38s/it]  1%|          | 62/10195 [11:55<31:52:41, 11.33s/it]  1%|          | 63/10195 [12:06<31:29:41, 11.19s/it]  1%|          | 64/10195 [12:17<31:42:24, 11.27s/it]  1%|          | 65/10195 [12:29<32:18:45, 11.48s/it]  1%|          | 66/10195 [12:41<32:11:00, 11.44s/it]  1%|          | 67/10195 [12:52<32:19:12, 11.49s/it]  1%|          | 68/10195 [13:04<32:14:39, 11.46s/it]  1%|          | 69/10195 [13:15<32:13:25, 11.46s/it]  1%|          | 70/10195 [13:25<30:40:04, 10.90s/it]                                                     {'loss': 3.6045, 'learning_rate': 4.5751633986928105e-06, 'epoch': 0.03}
-  1%|          | 70/10195 [13:25<30:40:04, 10.90s/it]  1%|          | 71/10195 [13:35<29:58:19, 10.66s/it]  1%|          | 72/10195 [13:46<30:32:28, 10.86s/it]  1%|          | 73/10195 [13:58<31:18:48, 11.14s/it]  1%|          | 74/10195 [14:09<31:29:32, 11.20s/it]  1%|          | 75/10195 [14:20<30:58:36, 11.02s/it]  1%|          | 76/10195 [14:31<31:01:39, 11.04s/it]  1%|          | 77/10195 [14:41<30:19:19, 10.79s/it]  1%|          | 78/10195 [14:52<30:20:28, 10.80s/it]  1%|          | 79/10195 [15:03<30:40:33, 10.92s/it]  1%|          | 80/10195 [15:14<30:36:59, 10.90s/it]                                                     {'loss': 3.5574, 'learning_rate': 5.2287581699346416e-06, 'epoch': 0.04}
-  1%|          | 80/10195 [15:14<30:36:59, 10.90s/it]  1%|          | 81/10195 [15:25<30:58:55, 11.03s/it]  1%|          | 82/10195 [15:37<31:08:37, 11.09s/it]  1%|          | 83/10195 [15:47<30:53:09, 11.00s/it]  1%|          | 84/10195 [15:59<31:15:17, 11.13s/it]  1%|          | 85/10195 [16:10<31:37:18, 11.26s/it]  1%|          | 86/10195 [16:22<31:25:10, 11.19s/it]  1%|          | 87/10195 [16:32<31:00:43, 11.05s/it]  1%|          | 88/10195 [16:44<31:54:09, 11.36s/it]  1%|          | 89/10195 [16:56<31:54:23, 11.37s/it]  1%|          | 90/10195 [17:07<31:31:40, 11.23s/it]                                                     {'loss': 3.4852, 'learning_rate': 5.882352941176471e-06, 'epoch': 0.04}
-  1%|          | 90/10195 [17:07<31:31:40, 11.23s/it]  1%|          | 91/10195 [17:18<31:29:38, 11.22s/it]  1%|          | 92/10195 [17:29<31:26:31, 11.20s/it]  1%|          | 93/10195 [17:40<31:35:17, 11.26s/it]  1%|          | 94/10195 [17:52<31:55:56, 11.38s/it]  1%|          | 95/10195 [18:03<31:59:40, 11.40s/it]  1%|          | 96/10195 [18:15<31:44:40, 11.32s/it]  1%|          | 97/10195 [18:26<32:00:32, 11.41s/it]  1%|          | 98/10195 [18:37<31:34:21, 11.26s/it]  1%|          | 99/10195 [18:47<30:28:55, 10.87s/it]  1%|          | 100/10195 [18:59<30:55:34, 11.03s/it]                                                      {'loss': 3.5284, 'learning_rate': 6.535947712418301e-06, 'epoch': 0.05}
-  1%|          | 100/10195 [18:59<30:55:34, 11.03s/it]  1%|          | 101/10195 [19:09<30:38:04, 10.93s/it]  1%|          | 102/10195 [19:21<31:01:22, 11.07s/it]  1%|          | 103/10195 [19:32<31:09:17, 11.11s/it]  1%|          | 104/10195 [19:43<31:10:27, 11.12s/it]  1%|          | 105/10195 [19:55<31:33:31, 11.26s/it]  1%|          | 106/10195 [20:06<31:38:00, 11.29s/it]  1%|          | 107/10195 [20:18<31:58:34, 11.41s/it]  1%|          | 108/10195 [20:28<31:32:41, 11.26s/it]  1%|          | 109/10195 [20:40<31:28:50, 11.24s/it]  1%|          | 110/10195 [20:51<31:53:48, 11.39s/it]                                                      {'loss': 3.4328, 'learning_rate': 7.189542483660131e-06, 'epoch': 0.05}
-  1%|          | 110/10195 [20:51<31:53:48, 11.39s/it]  1%|          | 111/10195 [21:03<31:45:01, 11.33s/it]  1%|          | 112/10195 [21:14<31:58:06, 11.41s/it]  1%|          | 113/10195 [21:24<30:59:27, 11.07s/it]  1%|          | 114/10195 [21:36<31:11:19, 11.14s/it]  1%|          | 115/10195 [21:46<30:32:25, 10.91s/it]  1%|          | 116/10195 [21:58<31:09:28, 11.13s/it]  1%|          | 117/10195 [22:09<31:30:06, 11.25s/it]  1%|          | 118/10195 [22:20<31:22:50, 11.21s/it]  1%|          | 119/10195 [22:32<31:38:37, 11.31s/it]  1%|          | 120/10195 [22:43<31:10:44, 11.14s/it]                                                      {'loss': 3.3651, 'learning_rate': 7.84313725490196e-06, 'epoch': 0.06}
-  1%|          | 120/10195 [22:43<31:10:44, 11.14s/it]  1%|          | 121/10195 [22:54<31:30:07, 11.26s/it]  1%|          | 122/10195 [23:05<30:56:11, 11.06s/it]  1%|          | 123/10195 [23:16<30:46:33, 11.00s/it]  1%|          | 124/10195 [23:26<29:58:10, 10.71s/it]  1%|          | 125/10195 [23:37<30:33:11, 10.92s/it]  1%|          | 126/10195 [23:48<30:16:24, 10.82s/it]  1%|          | 127/10195 [23:59<30:49:42, 11.02s/it]  1%|▏         | 128/10195 [24:10<30:45:32, 11.00s/it]  1%|▏         | 129/10195 [24:21<30:41:58, 10.98s/it]  1%|▏         | 130/10195 [24:32<30:56:03, 11.06s/it]                                                      {'loss': 3.3944, 'learning_rate': 8.496732026143791e-06, 'epoch': 0.06}
-  1%|▏         | 130/10195 [24:32<30:56:03, 11.06s/it]  1%|▏         | 131/10195 [24:44<30:59:02, 11.08s/it]  1%|▏         | 132/10195 [24:54<30:52:19, 11.04s/it]  1%|▏         | 133/10195 [25:05<30:50:08, 11.03s/it]  1%|▏         | 134/10195 [25:16<30:36:12, 10.95s/it]  1%|▏         | 135/10195 [25:26<29:41:39, 10.63s/it]  1%|▏         | 136/10195 [25:38<30:25:40, 10.89s/it]  1%|▏         | 137/10195 [25:48<30:25:30, 10.89s/it]  1%|▏         | 138/10195 [26:00<31:03:53, 11.12s/it]  1%|▏         | 139/10195 [26:11<30:50:58, 11.04s/it]  1%|▏         | 140/10195 [26:22<30:31:28, 10.93s/it]                                                      {'loss': 3.3138, 'learning_rate': 9.150326797385621e-06, 'epoch': 0.07}
-  1%|▏         | 140/10195 [26:22<30:31:28, 10.93s/it]  1%|▏         | 141/10195 [26:33<31:13:07, 11.18s/it]  1%|▏         | 142/10195 [26:45<31:08:45, 11.15s/it]  1%|▏         | 143/10195 [26:56<31:07:20, 11.15s/it]  1%|▏         | 144/10195 [27:07<30:56:24, 11.08s/it]  1%|▏         | 145/10195 [27:18<30:52:41, 11.06s/it]  1%|▏         | 146/10195 [27:28<30:33:35, 10.95s/it]  1%|▏         | 147/10195 [27:39<30:23:01, 10.89s/it]  1%|▏         | 148/10195 [27:49<29:50:03, 10.69s/it]  1%|▏         | 149/10195 [28:01<30:40:18, 10.99s/it]  1%|▏         | 150/10195 [28:13<31:23:30, 11.25s/it]                                                      {'loss': 3.3445, 'learning_rate': 9.803921568627451e-06, 'epoch': 0.07}
-  1%|▏         | 150/10195 [28:13<31:23:30, 11.25s/it]  1%|▏         | 151/10195 [28:24<31:05:29, 11.14s/it]  1%|▏         | 152/10195 [28:35<31:06:27, 11.15s/it]  2%|▏         | 153/10195 [28:46<31:03:35, 11.13s/it]  2%|▏         | 154/10195 [28:58<31:45:53, 11.39s/it]  2%|▏         | 155/10195 [29:09<31:52:22, 11.43s/it]  2%|▏         | 156/10195 [29:20<31:05:46, 11.15s/it]  2%|▏         | 157/10195 [29:31<31:03:23, 11.14s/it]  2%|▏         | 158/10195 [29:43<31:26:07, 11.28s/it]  2%|▏         | 159/10195 [29:54<31:13:34, 11.20s/it]  2%|▏         | 160/10195 [30:04<30:08:28, 10.81s/it]                                                      {'loss': 3.4, 'learning_rate': 1.0457516339869283e-05, 'epoch': 0.08}
-  2%|▏         | 160/10195 [30:04<30:08:28, 10.81s/it]  2%|▏         | 161/10195 [30:15<31:00:00, 11.12s/it]  2%|▏         | 162/10195 [30:26<30:43:39, 11.03s/it]  2%|▏         | 163/10195 [30:37<30:34:03, 10.97s/it]  2%|▏         | 164/10195 [30:49<31:13:32, 11.21s/it]  2%|▏         | 165/10195 [31:00<31:10:22, 11.19s/it]  2%|▏         | 166/10195 [31:11<31:02:32, 11.14s/it]  2%|▏         | 167/10195 [31:22<30:52:17, 11.08s/it]  2%|▏         | 168/10195 [31:32<30:16:14, 10.87s/it]  2%|▏         | 169/10195 [31:44<30:37:39, 11.00s/it]  2%|▏         | 170/10195 [31:55<31:12:37, 11.21s/it]                                                      {'loss': 3.3991, 'learning_rate': 1.1111111111111113e-05, 'epoch': 0.08}
-  2%|▏         | 170/10195 [31:55<31:12:37, 11.21s/it]

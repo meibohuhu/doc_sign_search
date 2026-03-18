@@ -402,6 +402,13 @@ def _load_video_locally(
                 seen.add(idx)
                 unique_indices.append(idx)
         frame_indices = unique_indices
+        
+        #         # # Debug info: show video stats and sampling info
+        # if not dist.is_initialized() or dist.get_rank() == 0:
+        #     worker_info = get_worker_info()
+        #     if worker_info is None or worker_info.id == 0:
+        #         print(f'[Video Sampling] path={os.path.basename(video_path)}, '
+        #               f'total_frames={total_frames}, vlen={vlen}, ')
 
         # # # Debug info: show video stats and sampling info
         # if not dist.is_initialized() or dist.get_rank() == 0:
@@ -834,14 +841,25 @@ class LazySupervisedDataset(Dataset):
             logger.warning(f'Failed to read {annotation_path} with utf-8; falling back to latin-1 with replacement.')
             with open(annotation_path, 'r', encoding='latin-1', errors='replace') as f:
                 self.raw_data = f.readlines()
-        ###### 
-            if repeat_time < 1:
-                # If repeat_time is less than 1, select a portion of the data
-                self.raw_data = self.raw_data[:int(len(self.raw_data) * repeat_time)]
-            if repeat_time > 1:
-                assert isinstance(repeat_time, int)
-                # Repeat the list if repeat_time is greater than 1
-                self.raw_data = self.raw_data * repeat_time
+
+        # Apply repeat_time to adjust dataset size
+        if repeat_time < 1:
+            # If repeat_time is less than 1, select a portion of the data
+            self.raw_data = self.raw_data[:int(len(self.raw_data) * repeat_time)]
+        elif repeat_time > 1:
+            # Repeat the list if repeat_time is greater than 1
+            self.raw_data = self.raw_data * int(repeat_time)
+
+        # # Debug: log first batch samples
+        # logger.info(f"Dataset {ds_name}: loaded {len(self.raw_data)} samples (repeat_time={repeat_time})")
+        # logger.info(f"First 5 samples from {ds_name}:")
+        # for idx in range(min(5, len(self.raw_data))):
+        #     try:
+        #         item = json.loads(self.raw_data[idx])
+        #         video_id = item.get('video', 'N/A')
+        #         logger.info(f"  [{idx}] {video_id}")
+        #     except:
+        #         logger.info(f"  [{idx}] <parse error>")
 
         self.rng = np.random.default_rng(seed=random_seed)
         if self.force_shuffle:

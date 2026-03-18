@@ -1,0 +1,16 @@
+{
+  "how2sign": {
+    "root": "/mnt/localssd/train_crop_videos_224/",
+    "annotation": "/mnt/localssd/workspace/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 32622
+  },
+  "openasl": {
+    "root": "/mnt/localssd/sign_mllm_openasl_videos/",
+    "annotation": "/mnt/localssd/workspace/doc_sign_search/InternVL/data/openasl/train_openasl_internvl_merged_original.jsonl",
+    "data_augment": false,
+    "repeat_time": 0.67,
+    "length": 94994
+  }
+}

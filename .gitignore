@@ -132,3 +132,8 @@ output_cluster/
 *.gz
 gated_attention/
 VLM-R1/
+
+# Large JSONL dataset files
+InternVL/data/youtube/train_youtube_asl_clean.jsonl
+InternVL/data/youtube/train_youtube_asl_clean_1.jsonl
+InternVL/data/openasl/train_openasl_internvl_merged_new.jsonl
