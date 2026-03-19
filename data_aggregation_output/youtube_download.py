@@ -165,6 +165,7 @@ def build_cmd(python_exe, youtube_dl_path, url, output_template, cookies_file):
         '--max-sleep-interval','8',
         '--no-abort-on-error',
         '--js-runtimes', 'node',
+        '--remote-components', 'ejs:github',
     ]
 
     if cookies_file and Path(cookies_file).exists():

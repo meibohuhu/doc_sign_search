@@ -1,0 +1,115 @@
+================================================================================================================================================================
+EXPERIMENT RESULTS SUMMARY - All Settings and Runs
+(using median for n>=3, average for n<3)
+================================================================================================================================================================
+
+Setting: 1b
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3284
+    BLEU2:  0.1807
+    BLEU3:  0.1141
+    BLEU4:  0.0769
+    ROUGE:  0.2743
+    Recall: 0.2710
+
+Setting: bleu1_bleu4_05_05
+  Total Runs: 2 (average)
+  Scores:
+    BLEU1:  0.3310
+    BLEU2:  0.1825
+    BLEU3:  0.1149
+    BLEU4:  0.0768
+    ROUGE:  0.2836
+    Recall: 0.2923
+
+Setting: bleu1_bleu4_07_03
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3297
+    BLEU2:  0.1815
+    BLEU3:  0.1144
+    BLEU4:  0.0768
+    ROUGE:  0.2819
+    Recall: 0.2919
+
+Setting: bleu1_bleu4_rouge_04_04_02
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3416
+    BLEU2:  0.1884
+    BLEU3:  0.1185
+    BLEU4:  0.0795
+    ROUGE:  0.2848
+    Recall: 0.2868
+
+Setting: bleu1_bleu4_rouge_04_04_02_alldata_0315_checkpoint1100
+  Total Runs: 2 (average)
+  Scores:
+    BLEU1:  0.3437
+    BLEU2:  0.1893
+    BLEU3:  0.1190
+    BLEU4:  0.0796
+    ROUGE:  0.2898
+    Recall: 0.2875
+
+Setting: bleu1_rouge
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3414
+    BLEU2:  0.1885
+    BLEU3:  0.1190
+    BLEU4:  0.0801
+    ROUGE:  0.2850
+    Recall: 0.2874
+
+Setting: bleu1_rouge_alldata_0315_checkpoint1100
+  Total Runs: 4 (median)
+  Scores:
+    BLEU1:  0.3466
+    BLEU2:  0.1905
+    BLEU3:  0.1200
+    BLEU4:  0.0806
+    ROUGE:  0.2876
+    Recall: 0.2906
+
+Setting: bleu4_rouge_05_05
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3325
+    BLEU2:  0.1841
+    BLEU3:  0.1175
+    BLEU4:  0.0798
+    ROUGE:  0.2862
+    Recall: 0.2769
+
+Setting: bleu4_rouge_07_03
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3345
+    BLEU2:  0.1850
+    BLEU3:  0.1180
+    BLEU4:  0.0806
+    ROUGE:  0.2869
+    Recall: 0.2794
+
+Setting: bleu4_rouge_07_03_checkpoint400
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3349
+    BLEU2:  0.1852
+    BLEU3:  0.1180
+    BLEU4:  0.0802
+    ROUGE:  0.2870
+    Recall: 0.2804
+
+Setting: firsttry
+  Total Runs: 3 (median)
+  Scores:
+    BLEU1:  0.3405
+    BLEU2:  0.1882
+    BLEU3:  0.1193
+    BLEU4:  0.0803
+    ROUGE:  0.2880
+    Recall: 0.2983
+

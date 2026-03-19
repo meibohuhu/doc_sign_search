@@ -80,7 +80,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --conv_style internvl2_5 \
     --use_fast_tokenizer False \
     --do_train True \
-    --num_train_epochs 8 \
+    --num_train_epochs 7 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
     --learning_rate 5e-5 \
