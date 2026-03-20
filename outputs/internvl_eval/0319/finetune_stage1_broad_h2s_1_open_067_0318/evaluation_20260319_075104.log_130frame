@@ -1,0 +1,136 @@
+petrel_client is not installed. If you read data locally instead of from ceph, ignore it.
+✅ GPU: NVIDIA A100-SXM4-80GB
+💾 Memory: 85.1GB
+
+🔒 Gradient computation disabled globally for memory optimization
+🚀 Loading InternVL model from checkpoint...
+   Checkpoint: /mnt/localssd/checkpoints/finetune_stage1_broad_h2s_1_open_067_0318/checkpoint-3760
+
+1️⃣ Loading base model config...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+   ✅ Config loaded
+
+2️⃣ Loading model from checkpoint...
+The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+patch_embedding.weight.shape: torch.Size([1024, 3, 14, 14])
+[PATH 2] language_model is None, creating new one with architecture: Qwen2ForCausalLM
+trainable params: 8,798,208 || all params: 638,496,128 || trainable%: 1.3779579255334184
+   ✅ Model loaded from checkpoint
+
+3️⃣ Loading tokenizer...
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+   ✅ Tokenizer loaded (model_max_length: 12288)
+
+4️⃣ Moving model to GPU...
+   ✅ Model moved to cuda:0
+
+======================================================================
+✅ COMPLETE MODEL LOADED SUCCESSFULLY!
+======================================================================
+
+🔒 All model parameters set to requires_grad=False
+📂 Loading test data from: /mnt/localssd/workspace/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl
+   Limited to 5 samples
+   Total samples: 5
+
+🎬 Starting evaluation...
+======================================================================
+
+Evaluating:   0%|          | 0/5 [00:00<?, ?it/s]
+📹 [1/5] Loading video: G3VM7etNABI_2_3-5-rgb_front.mp4
+   📊 Sampled 130 frames: [1, 8, 16, 23, 31, 38, 47, 55, 62, 70, 77, 85, 94, 101, 109, 116, 124, 131, 140, 148, 155, 163, 170, 178, 187, 194, 202, 209, 217, 224, 233, 241, 248, 256, 263, 271, 280, 287, 295, 302, 310, 317, 326, 334, 341, 349, 356, 365, 373, 380, 388, 395, 403, 412, 419, 427, 434, 442, 449, 458, 466, 473, 481, 488, 496, 505, 512, 520, 527, 535, 542, 551, 559, 566, 574, 581, 589, 598, 605, 613, 620, 628, 635, 644, 652, 659, 667, 674, 683, 691, 698, 706, 713, 721, 730, 737, 745, 752, 760, 767, 776, 784, 791, 799, 806, 814, 823, 830, 838, 845, 853, 860, 869, 877, 884, 892, 899, 907, 916, 923, 931, 938, 946, 953, 962, 970, 977, 985, 992, 1001] (video total: 1003, fps: 24.00)
+   ✅ Loaded 130 frames
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+
+──────────────────────────────────────────────────────────────────────
+[1/5] G3VM7etNABI_2_3-5-rgb_front.mp4
+Ground truth: A proper cardio vascular program should incorporate various aspects of training through intensity, frequency, as well as time. Running is a great exercise that most everyone can do, but in some cases if you have some type of lower extremity injury, and ankle sprain, some type of knee pain, hip pain, that limit your ability to run, stationary bikes are a great exercise, stair steppers also become another method of training, where you're able to move in a stationary position, utilizing the benefits of climbing up and down stairs.
+Prediction:   One of the cardio programs out there that is very effective at reducing the risk of injury, and time to exercise, but most importantly, it can be done in a case where you have low back pain, or knee pain, or any other type of exercise that can be performed in a stationary position.
+✅ Partial match (has some words)
+Evaluating:  20%|██        | 1/5 [00:05<00:21,  5.36s/it]
+📹 [2/5] Loading video: g3kFAmcBpFc_13-3-rgb_front.mp4
+   📊 Sampled 130 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143, 145, 146, 148, 149, 151, 152, 154, 155, 157, 158, 160, 161, 163, 164, 166, 167, 169, 170, 172, 173, 175, 176, 178, 179, 181, 182, 184, 185, 187, 188, 190, 191, 193, 194] (video total: 195, fps: 24.00)
+   ✅ Loaded 130 frames
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+
+──────────────────────────────────────────────────────────────────────
+[2/5] g3kFAmcBpFc_13-3-rgb_front.mp4
+Ground truth: Verback makes mostly things for veterinarians and this one says a shampoo for dogs and cats.
+Prediction:   Vibrant hair is made up of everything for vitamins A, D, E, and K, which are all found in fruits and vegetables.
+✅ Partial match (has some words)
+Evaluating:  40%|████      | 2/5 [00:08<00:11,  4.00s/it]
+📹 [3/5] Loading video: FZLxEwsoc1c_8-8-rgb_front.mp4
+   📊 Sampled 32 frames: [0, 1, 2, 4, 5, 7, 8, 10, 11, 12, 13, 14, 16, 17, 19, 20, 22, 23, 24, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 39, 40, 41] (video total: 42, fps: 24.00)
+   ✅ Loaded 32 frames
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+
+──────────────────────────────────────────────────────────────────────
+[3/5] FZLxEwsoc1c_8-8-rgb_front.mp4
+Ground truth: That's basically the explanation of a nap.
+Prediction:   That's probably the simplest napkin.
+✅ Partial match (has some words)
+Evaluating:  60%|██████    | 3/5 [00:09<00:05,  2.52s/it]
+📹 [4/5] Loading video: G2Go6a76xd0_2-5-rgb_front.mp4
+   📊 Sampled 96 frames: [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29, 31, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47, 49, 50, 52, 53, 55, 56, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 73, 74, 76, 77, 79, 80, 82, 83, 85, 86, 88, 89, 91, 92, 94, 95, 97, 98, 100, 101, 103, 104, 106, 107, 109, 110, 112, 113, 115, 116, 118, 119, 121, 122, 124, 125, 127, 128, 130, 131, 133, 134, 136, 137, 139, 140, 142, 143] (video total: 144, fps: 24.00)
+   ✅ Loaded 96 frames
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+
+──────────────────────────────────────────────────────────────────────
+[4/5] G2Go6a76xd0_2-5-rgb_front.mp4
+Ground truth: You need to think about your horse's temperament.
+Prediction:   You need to think about your horse's temperament.
+✅ EXACT MATCH!
+Evaluating:  80%|████████  | 4/5 [00:10<00:02,  2.11s/it]
+📹 [5/5] Loading video: G3k86AVFwVs_6-5-rgb_front.mp4
+   📊 Sampled 130 frames: [1, 4, 7, 10, 14, 17, 20, 25, 28, 31, 35, 38, 41, 46, 49, 52, 56, 59, 62, 67, 70, 73, 76, 80, 83, 86, 91, 94, 97, 101, 104, 107, 112, 115, 118, 122, 125, 128, 133, 136, 139, 143, 146, 149, 152, 157, 160, 163, 167, 170, 173, 178, 181, 184, 188, 191, 194, 199, 202, 205, 209, 212, 215, 220, 223, 226, 229, 233, 236, 239, 244, 247, 250, 254, 257, 260, 265, 268, 271, 275, 278, 281, 286, 289, 292, 296, 299, 302, 305, 310, 313, 316, 320, 323, 326, 331, 334, 337, 341, 344, 347, 352, 355, 358, 362, 365, 368, 373, 376, 379, 382, 386, 389, 392, 397, 400, 403, 407, 410, 413, 418, 421, 424, 428, 431, 434, 439, 442, 445, 449] (video total: 450, fps: 24.00)
+   ✅ Loaded 130 frames
+Setting `pad_token_id` to `eos_token_id`:151645 for open-end generation.
+
+──────────────────────────────────────────────────────────────────────
+[5/5] G3k86AVFwVs_6-5-rgb_front.mp4
+Ground truth: Usually, if you're partial denture is tight enough that you can't dislodge it, by simply flicking your finger across it, then you're going to be in good shape, in terms of normal function.
+Prediction:   Usually, if you split it, it's not getting enough glue, so you're going to have to reattach it, and then it's going to be a bad shape, in equal parts.
+✅ Partial match (has some words)
+Evaluating: 100%|██████████| 5/5 [00:13<00:00,  2.55s/it]Evaluating: 100%|██████████| 5/5 [00:13<00:00,  2.79s/it]
+
+======================================================================
+✅ Results saved: /mnt/localssd/workspace/doc_sign_search/outputs/internvl_eval/internvl_results_20260319_075124.json
+======================================================================
+
+📊 Calculating evaluation metrics...
+
+Warning: evaluate (HuggingFace) not available. Some metrics will be skipped.
+
+============================================================
+EVALUATION RESULTS - InternVL (SSVP-SLT Style)
+============================================================
+
+📊 Overall Metrics:
+  Exact Match Score: 0.2000
+  F1 Score:         0.4533
+  Precision:        0.4950
+  Recall:           0.4277
+  ROUGE-L F1:       0.0000
+  BLEURT-20 Score:  0.0000
+
+📈 BLEU Scores (SacreBLEU - SSVP-SLT Style):
+  BLEU1: 0.3908
+  BLEU2: 0.2606
+  BLEU3: 0.1830
+  BLEU4: 0.1280
+
+📋 Summary:
+  Total Samples:    5
+============================================================
+
+📊 Metrics saved: /mnt/localssd/workspace/doc_sign_search/outputs/internvl_eval/metrics_20260319_075124.json
+
+======================================================================
+🎯 EVALUATION SUMMARY
+======================================================================
+   Total samples: 5
+   Successful: 5
+   Failed: 0
+   Success rate: 100.0%
+======================================================================
+

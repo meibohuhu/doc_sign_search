@@ -1,0 +1,23 @@
+{
+  "how2sign": {
+    "root": "/mnt/localssd/doc_sign_search/train_crop_videos_224/",
+    "annotation": "/mnt/localssd/workspace/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 32622
+  },
+  "openasl": {
+    "root": "/mnt/localssd/doc_sign_search/sign_mllm_openasl_videos/",
+    "annotation": "/mnt/localssd/workspace/doc_sign_search/InternVL/data/openasl/train_openasl_internvl_merged_new.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 135990
+  },
+  "youtube": {
+    "root": "/mnt/localssd/doc_sign_search/youtube_asl_clips_224/youtube_asl_clips_224/",
+    "annotation": "/mnt/localssd/workspace/doc_sign_search/InternVL/data/youtube/train_youtube_asl_clean.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 258300
+  }
+}
