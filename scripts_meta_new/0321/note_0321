@@ -1,0 +1,95 @@
+####job1
+sbatch script_meta/0321/finetune_stage1_broad_h2s_1_open_1.sh
+sbatch: Job submitted to Partition: a100
+Submitted batch job 47195
+[INFO|trainer.py:1721] 2026-03-20 20:59:58,790 >> ***** Running training *****
+[INFO|trainer.py:1722] 2026-03-20 20:59:58,791 >>   Num examples = 168,613
+[INFO|trainer.py:1723] 2026-03-20 20:59:58,791 >>   Num Epochs = 8
+[INFO|trainer.py:1724] 2026-03-20 20:59:58,791 >>   Instantaneous batch size per device = 2
+[INFO|trainer.py:1727] 2026-03-20 20:59:58,791 >>   Total train batch size (w. parallel, distributed & accumulation) = 128
+[INFO|trainer.py:1728] 2026-03-20 20:59:58,791 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2026-03-20 20:59:58,791 >>   Total optimization steps = 10,536
+[INFO|trainer.py:1730] 2026-03-20 20:59:58,795 >>   Number of trainable parameters = 312,024,064
+[INFO|trainer.py:1721] 2026-03-20 20:59:58,820 >> ***** Running training *****
+[INFO|trainer.py:1722] 2026-03-20 20:59:58,820 >>   Num examples = 168,613
+[INFO|trainer.py:1723] 2026-03-20 20:59:58,820 >>   Num Epochs = 8
+[INFO|trainer.py:1724] 2026-03-20 20:59:58,820 >>   Instantaneous batch size per device = 2
+[INFO|trainer.py:1727] 2026-03-20 20:59:58,820 >>   Total train batch size (w. parallel, distributed & accumulation) = 128
+[INFO|trainer.py:1728] 2026-03-20 20:59:58,820 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2026-03-20 20:59:58,820 >>   Total optimization steps = 10,536
+[INFO|trainer.py:1730] 2026-03-20 20:59:58,825 >>   Number of trainable parameters = 312,024,064
+  0%|          | 10/10536 [03:04<43:44:51, 14.96s/it]
+  0%|          | 11/10536 [03:18<43:18:10, 14.81s/it]
+  0%|          | 12/10536 [03:32<42:37:39, 14.58s/it]
+  0%|          | 13/10536 [03:46<41:38:59, 14.25s/it]
+  0%|          | 14/10536 [04:00<41:25:10, 14.17s/it]
+  0%|         {'loss': 4.4684, 'learning_rate': 3.785488958990536e-06, 'epoch': 0.02}
+
+####job2
+sbatch script_meta/0321/finetune_stage1_broad_h2s_1_openold_1_yt_037.sh
+sbatch: Job submitted to Partition: a100
+Submitted batch job 47204
+[INFO|trainer.py:1721] 2026-03-20 21:08:50,889 >> ***** Running training *****
+[INFO|trainer.py:1722] 2026-03-20 21:08:50,889 >>   Num examples = 220,974
+[INFO|trainer.py:1723] 2026-03-20 21:08:50,889 >>   Num Epochs = 8
+[INFO|trainer.py:1724] 2026-03-20 21:08:50,889 >>   Instantaneous batch size per device = 2
+[INFO|trainer.py:1727] 2026-03-20 21:08:50,889 >>   Total train batch size (w. parallel, distributed & accumulation) = 128
+[INFO|trainer.py:1728] 2026-03-20 21:08:50,889 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2026-03-20 21:08:50,889 >>   Total optimization steps = 13,808
+[INFO|trainer.py:1730] 2026-03-20 21:08:50,893 >>   Number of trainable parameters = 312,024,064
+[INFO|trainer.py:1721] 2026-03-20 21:08:52,232 >> ***** Running training *****
+[INFO|trainer.py:1722] 2026-03-20 21:08:52,232 >>   Num examples = 220,974
+[INFO|trainer.py:1723] 2026-03-20 21:08:52,232 >>   Num Epochs = 8
+  0%|          | 10/13808 [02:56<53:22:58, 13.93s/it]
+  0%|          | 11/13808 [03:10<54:10:55, 14.14s/it]
+  0%|          | 12/13808 [03:25<55:11:39, 14.40s/it]
+  0%|          | 13/13808 [03:38<53:48:06, 14.04s/it]
+  0%|          | 14/13808 [03:52<53:20:17, 13.92s/it]
+  0%|        {'loss': 4.518, 'learning_rate': 2.8915662650602413e-06, 'epoch': 0.01}
+
+
+###job3
+sbatch script_meta/0321/finetune_stage1_broad_h2s_1_open_1_yt_1.sh
+sbatch: Job submitted to Partition: a100
+Submitted batch job 47207
+[INFO|trainer.py:1730] 2026-03-20 21:12:02,043 >>   Number of trainable parameters = 312,024,064
+[INFO|trainer.py:1721] 2026-03-20 21:12:02,572 >> ***** Running training *****
+[INFO|trainer.py:1722] 2026-03-20 21:12:02,572 >>   Num examples = 420,931
+[INFO|trainer.py:1723] 2026-03-20 21:12:02,572 >>   Num Epochs = 8
+[INFO|trainer.py:1724] 2026-03-20 21:12:02,572 >>   Instantaneous batch size per device = 2
+[INFO|trainer.py:1727] 2026-03-20 21:12:02,572 >>   Total train batch size (w. parallel, distributed & accumulation) = 256
+[INFO|trainer.py:1728] 2026-03-20 21:12:02,572 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2026-03-20 21:12:02,572 >>   Total optimization steps = 13,152
+[INFO|trainer.py:1730] 2026-03-20 21:12:02,576 >>   Number of trainable parameters = 312,024,064
+  0%|          | 10/13152 [02:57<49:57:51, 13.69s/it]
+  0%|          | 11/13152 [03:10<49:59:40, 13.70s/it]
+  0%|          | 12/13152 [03:24<50:45:53, 13.91s/it]
+  0%|          | 13/13152 [03:37<49:51:38, 13.66s/it]
+  0%|          | 14/13152 [03:51<50:00:22, 13.70s/it]
+  0%|        {'loss': 4.805, 'learning_rate': 3.037974683544304e-06, 'epoch': 0.01}
+
+###job4
+sbatch script_meta/0321/finetune_stage1_broad_h2s_2_open_1_yt_1.sh
+sbatch: Job submitted to Partition: a100
+Submitted batch job 47212
+[INFO|trainer.py:1730] 2026-03-20 21:20:27,347 >>   Number of trainable parameters = 312,024,064
+[INFO|trainer.py:1721] 2026-03-20 21:20:27,968 >> ***** Running training *****
+[INFO|trainer.py:1722] 2026-03-20 21:20:27,968 >>   Num examples = 453,554
+[INFO|trainer.py:1723] 2026-03-20 21:20:27,969 >>   Num Epochs = 8
+[INFO|trainer.py:1724] 2026-03-20 21:20:27,969 >>   Instantaneous batch size per device = 2
+[INFO|trainer.py:1727] 2026-03-20 21:20:27,969 >>   Total train batch size (w. parallel, distributed & accumulation) = 256
+[INFO|trainer.py:1728] 2026-03-20 21:20:27,969 >>   Gradient Accumulation steps = 4
+[INFO|trainer.py:1729] 2026-03-20 21:20:27,969 >>   Total optimization steps = 14,168
+[INFO|trainer.py:1730] 2026-03-20 21:20:27,973 >>   Number of trainable parameters = 312,024,064
+ 0%|          | 10/14168 [03:04<55:12:44, 14.04s/it]
+  0%|          | 11/14168 [03:17<55:00:01, 13.99s/it]
+  0%|          | 12/14168 [03:30<54:02:27, 13.74s/it]
+  0%|          | 13/14168 [03:44<54:21:58, 13.83s/it]
+  0%|          | 14/14168 [03:57<53:21:46, 13.57s/it]
+  0%|        {'loss': 4.8197, 'learning_rate': 2.8169014084507042e-06, 'epoch': 0.01}
+
+checkpoint:
+/genai/fsx-project/zachsun/checkpoint/doc_sign_search/finetune_stage1_broad_h2s_1_open_1_0321
+/genai/fsx-project/zachsun/checkpoint/doc_sign_search/finetune_stage1_broad_h2s_1_openold_1_yt_037_0321
+/genai/fsx-project/zachsun/checkpoint/doc_sign_search/finetune_stage1_broad_h2s_1_open_1_yt_1_0321
+/genai/fsx-project/zachsun/checkpoint/doc_sign_search/finetune_stage1_broad_h2s_2_open_1_yt_1_0321

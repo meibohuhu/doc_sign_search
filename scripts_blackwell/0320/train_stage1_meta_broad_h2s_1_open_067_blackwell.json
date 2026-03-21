@@ -1,0 +1,16 @@
+{
+  "how2sign": {
+    "root": "/scratch/mh2803/train_crop_videos_224/",
+    "annotation": "/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/how2sign/segmented_train_val_combined.jsonl",
+    "data_augment": false,
+    "repeat_time": 1,
+    "length": 32622
+  },
+  "openasl": {
+    "root": "/scratch/mh2803/sign_mllm_openasl_videos/",
+    "annotation": "/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/openasl/train_openasl_internvl_merged_original.jsonl",
+    "data_augment": false,
+    "repeat_time": 0.67,
+    "length": 94994
+  }
+}
