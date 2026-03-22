@@ -167,7 +167,7 @@ else
 fi
 echo ""
 
-$CONDA_PYTHON scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_nogate_backup.py \
+$CONDA_PYTHON scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_nogate_nogrpo.py \
     "${EVAL_ARGS[@]}" \
     2>&1 | tee "$LOG_FILE"
 

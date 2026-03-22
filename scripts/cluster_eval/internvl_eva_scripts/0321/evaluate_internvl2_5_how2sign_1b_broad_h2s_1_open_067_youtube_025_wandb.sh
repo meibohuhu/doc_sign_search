@@ -10,6 +10,8 @@ export PYTHONPATH="/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/inte
 export TOKENIZERS_PARALLELISM=false
 export PYTHONUNBUFFERED=1
 export PYTORCH_ALLOC_CONF=expandable_segments:True
+export WANDB_API_KEY="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"
+export WANDB_PROJECT="internvl-sign-search-eval"
 
 cd /home/stu2/s15/mh2803/workspace/doc_sign_search
 
@@ -18,16 +20,16 @@ GPU_IDS=${GPU_IDS:-"0"}
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Configuration
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/scratch/mh2803/checkpoints/sft/train_stage1_meta_broad_h2s_1_open_067_blackwell/checkpoint-7520}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/scratch/mh2803/checkpoints/sft/finetune_stage1_broad_h2s_1_open_067_youtube_0_25_0319/checkpoint-6225}"
 MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-1B}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/scratch/mh2803/how2sign_test_videos_224x224}"
 QUESTION_FILE="${QUESTION_FILE:-/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
-OUT_DIR="${OUT_DIR:-/home/stu2/s15/mh2803/workspace/doc_sign_search/outputs/blackwell/train_stage1_meta_broad_h2s_1_open_067_blackwell}"
+OUT_DIR="${OUT_DIR:-/home/stu2/s15/mh2803/workspace/doc_sign_search/outputs/blackwell/finetune_stage1_broad_h2s_1_open_067_youtube_0_25_0319}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-2355}
+MAX_SAMPLES=${MAX_SAMPLES:-2350}
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}
-MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-130}
+MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-150}
 SAMPLING_METHOD=${SAMPLING_METHOD:-fps16.0}
 IMAGE_SIZE=${IMAGE_SIZE:-224}
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
@@ -40,7 +42,7 @@ echo "   Output: $OUT_DIR"
 echo "   Frames: $MIN_NUM_FRAMES-$MAX_NUM_FRAMES, Sampling: $SAMPLING_METHOD"
 echo ""
 
-python scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_nogate_nogrpo.py \
+python scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_nogate_nogrpo_wandb.py \
     --model-base "$MODEL_BASE" \
     --checkpoint-path "$CHECKPOINT_PATH" \
     --video-folder "$VIDEO_FOLDER" \
@@ -52,6 +54,8 @@ python scripts/cluster_eval/internvl_eva_scripts/internvl_evaluation_how2sign_no
     --image-size "$IMAGE_SIZE" \
     --max-new-tokens "$MAX_NEW_TOKENS" \
     --max-samples "$MAX_SAMPLES" \
+    --wandb-run-name "eval_stage1_broad_h2s_1_open_067_youtube_0_25_0319_checkpoint-6225" \
+    --wandb-notes "Blackwell evaluation with wandb logging" \
     2>&1 | tee "$LOG_FILE"
 
 echo ""

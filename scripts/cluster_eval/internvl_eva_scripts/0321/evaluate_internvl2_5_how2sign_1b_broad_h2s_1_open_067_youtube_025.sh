@@ -14,20 +14,20 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /home/stu2/s15/mh2803/workspace/doc_sign_search
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"0"}
+GPU_IDS=${GPU_IDS:-"1"}
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Configuration
-CHECKPOINT_PATH="${CHECKPOINT_PATH:-/scratch/mh2803/checkpoints/sft/train_stage1_meta_broad_h2s_1_open_067_blackwell/checkpoint-7520}"
+CHECKPOINT_PATH="${CHECKPOINT_PATH:-/scratch/mh2803/checkpoints/sft/finetune_stage1_broad_h2s_1_open_067_youtube_0_25_0319/checkpoint-4980}"
 MODEL_BASE="${MODEL_BASE:-OpenGVLab/InternVL2_5-1B}"
 VIDEO_FOLDER="${VIDEO_FOLDER:-/scratch/mh2803/how2sign_test_videos_224x224}"
 QUESTION_FILE="${QUESTION_FILE:-/home/stu2/s15/mh2803/workspace/doc_sign_search/InternVL/data/how2sign/test_how2sign_internvl.jsonl}"
-OUT_DIR="${OUT_DIR:-/home/stu2/s15/mh2803/workspace/doc_sign_search/outputs/blackwell/train_stage1_meta_broad_h2s_1_open_067_blackwell}"
+OUT_DIR="${OUT_DIR:-/home/stu2/s15/mh2803/workspace/doc_sign_search/outputs/blackwell/finetune_stage1_broad_h2s_1_open_067_youtube_0_25_0319}"
 
 # Evaluation parameters
-MAX_SAMPLES=${MAX_SAMPLES:-2355}
+MAX_SAMPLES=${MAX_SAMPLES:-2350}
 MIN_NUM_FRAMES=${MIN_NUM_FRAMES:-32}
-MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-130}
+MAX_NUM_FRAMES=${MAX_NUM_FRAMES:-150}
 SAMPLING_METHOD=${SAMPLING_METHOD:-fps16.0}
 IMAGE_SIZE=${IMAGE_SIZE:-224}
 MAX_NEW_TOKENS=${MAX_NEW_TOKENS:-128}
