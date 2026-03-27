@@ -56,7 +56,7 @@ srun  \
   --conv_style "internvl2_5" \
   --use_fast_tokenizer False \
   --output_dir ${OUTPUT_DIR} \
-  --meta_path "/home/zachsun/doc_sign_search/script_meta_new/0327/train_stage1_meta_broad_h2s_1_open_1_yt_1.json" \
+  --meta_path "/home/zachsun/doc_sign_search/scripts_meta_new/0327/train_stage1_meta_broad_h2s_1_open_1_yt_1.json" \
   --overwrite_output_dir True \
   --force_image_size 224 \
   --down_sample_ratio 0.5 \
