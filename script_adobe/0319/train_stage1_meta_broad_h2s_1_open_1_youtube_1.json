@@ -18,6 +18,6 @@
     "annotation": "/mnt/localssd/workspace/doc_sign_search/InternVL/data/youtube/train_youtube_asl_clean.jsonl",
     "data_augment": false,
     "repeat_time": 1,
-    "length": 258300
+    "length": 252318
   }
 }

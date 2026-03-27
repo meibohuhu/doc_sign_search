@@ -15,21 +15,25 @@ export PYTORCH_ALLOC_CONF=expandable_segments:True
 cd /mnt/localssd/workspace/doc_sign_search/InternVL
 
 # GPU configuration
-GPU_IDS=${GPU_IDS:-"0,1,2,3,4,5,6,7"}
+GPU_IDS=${GPU_IDS:-"4,5,6,7"}
 export CUDA_VISIBLE_DEVICES=$GPU_IDS
 
 # Calculate number of devices from GPU_IDS
 NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
-MODEL_NAME="OpenGVLab/InternVL2_5-1B"
-OUTPUT_DIR="/mnt/localssd/checkpoints/sft/finetune_stage1_broad_h2s_1_open_1_youtube_1_0319"
-META_PATH="/mnt/localssd/workspace/doc_sign_search/script_adobe/0319/train_stage1_meta_broad_h2s_1_open_1_youtube_1.json"
+MODEL_NAME="/mnt/localssd/checkpoints/sft/finetune_stage1_broad_h2s_1_open_1_youtube_1_0319/checkpoint-32886"
+OUTPUT_DIR="/mnt/localssd/checkpoints/sft/finetune_stage2_broad_h2s_1_open_1_youtube_1_checkpoint32886"
+META_PATH="/mnt/localssd/workspace/doc_sign_search/script_adobe/0319/train_stage2_meta_broad_h2s_1.json"
 
 # Optimized training configuration
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-64}
 BATCH_PER_DEVICE=${BATCH_PER_DEVICE:-2}
 GRAD_ACCUM_STEPS=${GRAD_ACCUM_STEPS:-$((GLOBAL_BATCH_SIZE / (BATCH_PER_DEVICE * NUM_DEVICES)))}
+
+# Wandb logging
+export WANDB_API_KEY="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"
+export WANDB_PROJECT="internvl-sign-search-stage2"
 
 # Memory envelopes
 # DEEPSPEED_CONFIG="internvl_chat/zero_stage1_config.json"
@@ -52,7 +56,7 @@ echo ""
 
 # Set launcher
 export LAUNCHER=pytorch
-export MASTER_PORT=29501
+export MASTER_PORT=29503
 
 # Log file
 LOG_FILE="${OUTPUT_DIR}/training_$(date +%Y%m%d_%H%M%S).log"
@@ -72,7 +76,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --num_train_epochs 8 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
-    --learning_rate 5e-5 \
+    --learning_rate 2e-5 \
     --vision_select_layer -1 \
     --force_image_size 224 \
     --max_dynamic_patch 6 \
@@ -90,7 +94,8 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --logging_steps 10 \
     --logging_first_step True \
     --evaluation_strategy no \
-    --report_to none \
+    --report_to wandb \
+    --run_name "finetune_stage2_broad_h2s_1_open_1_youtube_1_checkpoint32886" \
     --grad_checkpoint True \
     --dataloader_num_workers 4 \
     --use_thumbnail True \
