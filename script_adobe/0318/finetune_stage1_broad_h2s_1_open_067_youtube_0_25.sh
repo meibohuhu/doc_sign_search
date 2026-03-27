@@ -23,8 +23,8 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-1B"
-OUTPUT_DIR="/mnt/localssd/checkpoints/sft/finetune_stage1_broad_h2s_1_open_067_0318"
-META_PATH="/mnt/localssd/workspace/doc_sign_search/script_adobe/0318/train_stage1_meta_broad_h2s_1_open_067.json"
+OUTPUT_DIR="/mnt/localssd/checkpoints/sft/finetune_stage1_broad_h2s_1_open_067_youtube_0_25_0319"
+META_PATH="/mnt/localssd/workspace/doc_sign_search/script_adobe/0318/train_stage1_meta_broad_h2s_1_open_067_youtube_0_25.json"
 
 # Optimized training configuration
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}
@@ -72,7 +72,7 @@ deepspeed --include localhost:$GPU_IDS --master_port=$MASTER_PORT \
     --num_train_epochs 8 \
     --per_device_train_batch_size $BATCH_PER_DEVICE \
     --gradient_accumulation_steps $GRAD_ACCUM_STEPS \
-    --learning_rate 6e-5 \
+    --learning_rate 8e-5 \
     --vision_select_layer -1 \
     --force_image_size 224 \
     --max_dynamic_patch 6 \

@@ -23,8 +23,8 @@ NUM_DEVICES=$(echo "$GPU_IDS" | tr ',' '\n' | wc -l)
 
 # Model and data configuration
 MODEL_NAME="OpenGVLab/InternVL2_5-1B"
-OUTPUT_DIR="/mnt/localssd/checkpoints/sft/finetune_stage1_broad_h2s_1_open_067_0318"
-META_PATH="/mnt/localssd/workspace/doc_sign_search/script_adobe/0318/train_stage1_meta_broad_h2s_1_open_067.json"
+OUTPUT_DIR="/mnt/localssd/checkpoints/sft/tttttt"
+META_PATH="/mnt/localssd/workspace/doc_sign_search/script_adobe/0318/train_stage1_meta_broad_h2s_1_youtube_0_25.json"
 
 # Optimized training configuration
 GLOBAL_BATCH_SIZE=${GLOBAL_BATCH_SIZE:-128}

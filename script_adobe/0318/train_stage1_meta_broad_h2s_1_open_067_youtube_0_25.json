@@ -12,5 +12,12 @@
     "data_augment": false,
     "repeat_time": 0.67,
     "length": 94994
+  },
+  "youtube": {
+    "root": "/mnt/localssd/doc_sign_search/youtube_asl_clips_224/youtube_asl_clips_224/",
+    "annotation": "/mnt/localssd/workspace/doc_sign_search/InternVL/data/youtube/train_youtube_asl_clean.jsonl",
+    "data_augment": false,
+    "repeat_time": 0.25,
+    "length": 252318
   }
 }
